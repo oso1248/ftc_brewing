@@ -1,0 +1,129 @@
+:root {
+  --primary: #ddd;
+  --dark: #333;
+  --light: #fff;
+  --shadow: 0 1px 5px rgba(104, 104, 104, 0.8)
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+  color: var(--dark);
+  font-family: helvetica;
+}
+
+body {
+  background: #ccc;
+  padding: 25px;
+  line-height: 1.4;
+}
+
+.container1 {
+  display: grid;
+  grid-gap: 20px;
+}
+
+.logo {
+  max-width: 100px;
+}
+
+header {
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+}
+
+header h1 {
+  font-family: helvetica;
+  font-size: 3rem;
+  text-align: center;
+  text-justify: center;
+}
+
+.main-nav ul {
+  display: grid;
+  grid-gap: 20px;
+  padding: 0;
+  list-style: none;
+  line-height: .5;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.main-nav a {
+  background: var(--primary);
+  display: block;
+  text-decoration: none;
+  color: var(--dark);
+  padding: 0.8rem;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1rem;
+  box-shadow: var(--shadow);  
+}
+
+.spacer {
+  margin-bottom: 40px;
+}
+
+a {
+  background: var(--primary);
+  display: block;
+  text-decoration: none;
+  color: var(--dark);
+  padding: 0.8rem;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.boxes {
+  display: grid;
+  grid-gap: 25px;
+  padding: 25;
+  list-style: none;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.boxes div ul {
+  display: grid;
+  grid-gap: 00px;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.main-nav a:hover {
+  background: var(--dark);
+  color: var(--light);
+}
+
+.boxes a:hover {
+  background: var(--dark);
+  color: var(--light);
+}
+
+@media (max-width: 850px) {
+  .main-nav ul {
+  display: grid;
+  grid-gap: 20px;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(3, 1fr);
+}
+  
+  .boxes {
+  display: grid;
+  grid-gap: 25px;
+  padding: 25;
+  list-style: none;
+  grid-template-columns: repeat(2, 1fr);
+}
+  
+  header h1 {
+  font-family: helvetica;
+  font-size: 1.5rem;
+  text-align: center;

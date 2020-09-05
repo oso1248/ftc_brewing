@@ -1,0 +1,28 @@
+{
+  "name": "ftc_brewing",
+  "version": "1.0.0",
+  "description": "Inventory Management",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "atart": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oso1248/ftc_brewing.git"
+  },
+  "author": "Adam Coulson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oso1248/ftc_brewing/issues"
+  },
+  "homepage": "https://github.com/oso1248/ftc_brewing#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "knex": "^0.21.5",
+    "pg": "^8.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

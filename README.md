@@ -6,5 +6,7 @@
 [X]Setup knexfile.js, migrations and seeds  
 [X]Populate knex migrations and seeds  
 [X]Create CRUDS for mtl_supplier - to be used as template  
-[X]Setup static serve folder with template index.html, css , tabulator dist  
-[] 
+[X]Setup static serve folder with template index.html, css, tabulator dist  
+[X]Setup environment variables  
+[X]Setup dbConfig - dev/production  
+[]

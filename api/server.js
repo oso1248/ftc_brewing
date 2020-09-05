@@ -13,9 +13,7 @@ const supplierRouter = require('./routes/rtsSuppliers')
 server.get('/', (req, res) => res.json({msg: 'I am always watching'}))
 
 
-
 server.use('/api/supplier', supplierRouter)
-
 
 
 

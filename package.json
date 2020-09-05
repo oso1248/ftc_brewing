@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/oso1248/ftc_brewing#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "knex": "^0.21.5",
     "pg": "^8.3.3"

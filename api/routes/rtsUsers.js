@@ -1,11 +1,14 @@
 const express = require('express')
 const db = require('../queries/qryUsers')
+const bcrypt = require('bcryptjs')
 const router = express.Router()
 
 // -> /api/user
 
 router.post('/', (req, res) => {
-  db.add(req.body)
+  const creds = req.body
+  creds.password = bcrypt.hashSync(creds.password, 6)
+  db.add(creds)
     .then(data => {
       res.status(200).json(data)
     })

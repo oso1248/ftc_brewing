@@ -1,21 +1,47 @@
 const express = require('express')
 const path = require('path')
+const session = require('express-session')
 
 const server = express()
 server.use(express.json())
 
 
+const sessionConfig = {
+  name: 'BudApp',
+  secret: process.env.SECRET,
+  cookie: {
+    maxAge: 1000 * 60 * 60,
+    secure: false, // set true for production for https
+    httpOnly: true // no js access
+  },
+  resave: false,
+  saveUnitialized: true, // set to false for prod GDPR laws
+}
 
+
+
+server.use(session(sessionConfig))
+const permissions1 = require('./auth/perm1')
+const permissions5 = require('./auth/perm5')
+
+
+
+const loginRouter = require('./auth/login')
 const userRouter = require('./routes/rtsUsers')
 const supplierRouter = require('./routes/rtsSuppliers')
 const breweryRouter = require('./routes/rtsBrewery')
 
 
-server.use(express.static(path.join(__dirname, '../pages/site')))
-// server.get('/', (req, res) => res.json({msg: 'I am always watching'}))
+
+server.use(express.static(path.join(__dirname, '../pages/login/')))
+server.use('/api/auth', loginRouter)
+server.use('/', permissions1)
+server.use('/pgAdmin/', permissions5)
+server.use(express.static(path.join(__dirname, '../pages/site/')))
 
 
-server.use('/api/user', userRouter)
+
+server.use('/api/user', permissions5, userRouter)
 server.use('/api/supplier', supplierRouter)
 server.use('/api/brewery', breweryRouter)
 

@@ -15,4 +15,6 @@
 [X]cl - heroku run knex seed:run -a bud-ftc  
 [X]Start dev branch  
 [X]Create CURDs, pages for mtl_supplier  
+[X]Setup bcryptjs  
+[]Setup cookie, auth routes  
 []

@@ -3,7 +3,7 @@ function logout() {
   .then(res => res.json())
   .then(data => {
     let { msg } = data
-    location.href = '/login.html'
+    location.href = '/index.html'
   })
 }
 

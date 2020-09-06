@@ -13,4 +13,6 @@
 [X]Add postgres to heroku and configure  
 [X]cl - heroku run knex migrate:latest -a bud-ftc  
 [X]cl - heroku run knex seed:run -a bud-ftc  
+[X]Start dev branch  
+[X]Create CURDs, pages for mtl_supplier  
 []

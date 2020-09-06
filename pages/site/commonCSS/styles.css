@@ -28,12 +28,13 @@ body {
 }
 
 .logo {
-  max-width: 100px;
+  max-width: 75px;
 }
 
 header {
   display: grid;
   grid-template-columns: 10% 80% 10%;
+  margin: 0px;
 }
 
 header h1 {
@@ -65,7 +66,7 @@ header h1 {
 }
 
 .spacer {
-  margin-bottom: 40px;
+  margin-bottom: 5px;
 }
 
 a {
@@ -88,7 +89,15 @@ a {
   grid-template-columns: repeat(4, 1fr);
 }
 
-.boxes div ul {
+.boxes div a{
+  height: 75px;
+}
+
+.box {
+ 
+}
+
+.boxes div {
   display: grid;
   grid-gap: 00px;
   padding: 0;
@@ -127,3 +136,35 @@ a {
   font-family: helvetica;
   font-size: 1.5rem;
   text-align: center;
+  }
+  .logo {
+    max-width: 75px;
+  }
+}
+
+@media (max-width: 700px) {
+  .main-nav ul {
+  display: grid;
+  grid-gap: 20px;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(2, 1fr);
+}
+  
+  .boxes {
+  display: grid;
+  grid-gap: 25px;
+  padding: 25;
+  list-style: none;
+  grid-template-columns: repeat(2, 1fr);
+}
+  
+  header h1 {
+  font-family: helvetica;
+  font-size: 1rem;
+  text-align: center;
+  }
+  .logo {
+    max-width: 50px;
+  }
+}

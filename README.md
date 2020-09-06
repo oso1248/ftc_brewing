@@ -16,5 +16,6 @@
 [X]Start dev branch  
 [X]Create CURDs, pages for mtl_supplier  
 [X]Setup bcryptjs  
-[]Setup cookie, auth routes  
+[X]Setup cookie, auth routes  
+[X]Added supplier front end  
 []

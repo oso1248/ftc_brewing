@@ -9,5 +9,3 @@ function logout() {
 }
 
 document.getElementById('logout').addEventListener('click', logout)
-
-

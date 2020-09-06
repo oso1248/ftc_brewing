@@ -7,7 +7,7 @@ async function add(data) {
 }
 
 function getAll() {
-  return db('mtl_supplier')
+  return db('mtl_supplier').orderBy('company')
 }
 
 function getByName(name) {

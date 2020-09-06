@@ -40,7 +40,6 @@ router.get('/:name', (req, res) => {
 })
 
 router.patch('/:name', (req, res) => {
-  console.log(req)
   db.change(req.params.name, req.body)
     .then(data => {
       if(data) {

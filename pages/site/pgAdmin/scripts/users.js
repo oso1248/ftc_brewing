@@ -1,5 +1,6 @@
 document.getElementById('frmAdd').style.display="none"
 document.getElementById('frmUpdate').style.display="none"
+document.getElementById('frmDelete').style.display="none"
 document.getElementById('list').style.display="none"
 const api = '/api/brewery'
 
@@ -15,6 +16,7 @@ function append(parent, e1) {
 // Views
 function add() {
   document.getElementById('frmUpdate').style.display="none"
+  document.getElementById('frmDelete').style.display="none"
   document.getElementById('list').style.display="none"
   document.getElementById('frmAdd').style.display="block"
   let breweries = document.getElementById('brewery_id')
@@ -35,6 +37,7 @@ function add() {
 }
 function update() {
   document.getElementById('frmAdd').style.display="none"
+  document.getElementById('frmDelete').style.display="none"
   document.getElementById('list').style.display="none"
   document.getElementById('frmUpdate').style.display="block"
   
@@ -71,6 +74,7 @@ function update() {
 }
 function view() {
   document.getElementById('frmAdd').style.display="none"
+  document.getElementById('frmDelete').style.display="none"
   document.getElementById('frmUpdate').style.display="none"
   document.getElementById('list').style.display="block"
   
@@ -95,6 +99,27 @@ function view() {
     })
     .catch(err => console.log(err.detail))
   document.getElementById('list').style.display="block"
+}
+function del() {
+  document.getElementById('frmAdd').style.display="none"
+  document.getElementById('frmUpdate').style.display="none"
+  document.getElementById('frmDelete').style.display="block"
+  document.getElementById('list').style.display="none"
+
+  const users = document.getElementsByName('deleteUsers')[0]
+  users.innerHTML = `<option value="" disabled selected hidden>Select User</option>`
+  axios.get('/api/user')
+  .then(data => {
+    let user = data.data
+    return user.map(listItem => {
+
+      let username = createNode('option')
+      username.innerHTML = listItem.username
+      
+      append(users, username)
+    })
+  })
+  .catch(err => console.log(err.detail))
 }
 
 
@@ -193,9 +218,11 @@ async function sendUpdate(ev){
       .then(data => {
         alert(data.data.username + ' updated')
       })
+      .catch(err => alert(err.detail))
     } else {
       alert(JSON.stringify(fails))
     }
+    
 }
 function validateUpdate(ev){
   let failures = [];
@@ -220,12 +247,35 @@ function validateUpdate(ev){
 }
 
 
+//  routes delete
+function resetDelete(ev){
+  ev.preventDefault();
+  document.getElementById('frmDelete').reset();
+}
+
+function sendDelete(ev) {
+  ev.preventDefault() 
+  ev.stopPropagation()
+
+  const user = document.getElementsByName('deleteUsers')[0].value
+
+  axios.delete('/api/user/' + user)
+    .then(data => alert(data.data.msg))
+  .catch(err => alert(err.detail))
+}
+
+
+
 document.getElementById('btnAddClear').addEventListener('click', resetAdd)
 document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
 
 document.getElementById('btnUpdateClear').addEventListener('click', resetUpdate)
-document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate);
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
+
+document.getElementById('btnDeleteClear').addEventListener('click', resetDelete)
+document.getElementById('btnDeleteSubmit').addEventListener('click', sendDelete)
 
 document.getElementById('add').onclick = add
 document.getElementById('update').onclick = update
 document.getElementById('view').onclick = view
+document.getElementById('delete').onclick = del

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Users</title>
+  <title>Suppliers</title>
   
 
   <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
@@ -11,7 +11,8 @@
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <link rel="stylesheet" href="../../commonCSS/styles.css">
-  <link rel="stylesheet" href="../styles/users.css">
+  <link rel="stylesheet" href="../styles/supplier.css">
+
 
 </head>
 <body>
@@ -28,8 +29,8 @@
         <li><a href="../../index.html">Home</a></li>
         <li><a href="">Brewhouse</a></li>
         <li><a href="">Finishing</a></li>
-        <li><a href="../../pgMaterials/material.html">Materials</a></li>
-        <li><a href="../admin.html">Admin</a></li>
+        <li><a href="../material.html">Materials</a></li>
+        <li><a href="../../pgAdmin/admin.html">Admin</a></li>
         <li><a href="" id="logout">Log Out</a></li>
       </ul>
     </nav>
@@ -41,7 +42,7 @@
     <div class="box" id="add">
       <a style="display: block">  
         <!-- <img src="" alt="">   -->
-        <h3>Add User</h3>
+        <h3>Add Supplier</h3>
         <p></p>
       </a>
     </div>
@@ -50,20 +51,20 @@
     <div class="box" id="update">
       <a style="display: block">  
         <!-- <img src="" alt="">   -->
-        <h3>Update User</h3>
+        <h3>Update Supplier</h3>
         <p></p>
       </a>
     </div>
 
     <div class="box" id="view">
       <a style="display: block">  
-        <h3>View Users</h3>
+        <h3>View Supplier</h3>
       </a>
     </div>
 
     <div class="box" id="delete">
       <a style="display: block">  
-        <h3>Delete User</h3>
+        <h3>Delete Supplier</h3>
       </a>
     </div>
 
@@ -77,34 +78,26 @@
   <div class="container2"><!-- start container2 -->
 
     <form class="form" id="frmAdd" action="">
-      <h1>Add User</h1>
+      <h1>Add Supplier</h1>
       <div class="input">
-        <input type="text"  id="username" Placeholder="username">
+        <input type="text"  id="company" Placeholder="Company">
       </div>
-
       <div class="input">
-        <input type="text" id="email" Placeholder="email">
+        <input type="text" id="contact" Placeholder="Contact">
       </div>
        <div class="input">
-        <input type="text"  id="password" Placeholder="password">
+        <input type="text"  id="email" Placeholder="Email">
       </div>
       <div class="input">
-        <select name="" id="permissions">
-          <option value="" disabled selected hidden>Permission Level</option>
-          <option value=1 >1</option>
-          <option value=2 >2</option>
-          <option value=3 >3</option>
-          <option value=4 >4</option>
-          <option value=5 >5</option>
-        </select>
+        <input type="text"  id="phone" Placeholder="Phone">
       </div>
       <div class="input">
-        <select name="breweryAdd" id="brewery_id">
-          <option value="" disabled selected hidden>Select Brewery</option>
-          <!-- append breweries -->
-        </select>
+        <input type="text"  id="address" Placeholder="Address">
       </div>
-
+      <div class="input">
+        <textarea name="" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+      </div>
+      
       <div class="button">
         <button class="btn" id="btnAddClear">Clear</button>
         <button class="btn" id="btnAddSubmit">Add</button>
@@ -112,31 +105,28 @@
     </form>
     
     <form class="form" id="frmUpdate" action="">
-      <h1>Update User</h1>
+      <h1>Update Supplier</h1>
       <div class="input">
-        <select name="updateUsers" id="username">
-          
-          <!-- users appended here  -->
+        <select name="updateCompany" id="company">
+          <!-- appended here  -->
         </select>
       </div>
       <div class="input">
-        <select name="updatePermissions" id="permissions">
-          <option value="" disabled selected hidden>Permissions</option>
-          <option value="1" >1</option>
-          <option value="2" >2</option>
-          <option value="3" >3</option>
-          <option value="4" >4</option>
-          <option value="5" >5</option>
-        </select>
-      </div> 
+        <input type="text" name="updateContact" id="contact" Placeholder="Contact">
+      </div>
+       <div class="input">
+        <input type="text" name="updateEmail" id="email" Placeholder="Email">
+      </div>
       <div class="input">
-        <select name="updateBreweries" id="brewery_id">
-          
-          <!-- append breweries -->
-        </select>
-      </div>     
-
-
+        <input type="text" name="updatePhone" id="phone" Placeholder="Phone">
+      </div>
+      <div class="input">
+        <input type="text" name="updateAddress" id="address" Placeholder="Address">
+      </div>
+      <div class="input">
+        <textarea name="updateNote" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+      </div>
+      
       <div class="button">
         <button class="btn" id="btnUpdateClear">Clear</button>
         <button class="btn" id="btnUpdateSubmit">Update</button>
@@ -144,11 +134,11 @@
     </form>
 
     <form class="form" id="frmDelete" action="">
-      <h1>Delete User</h1>
+      <h1>Delete Supplier</h1>
       <div class="input">
-        <select name="deleteUsers" id="username">
+        <select name="deleteCompany" id="company">
           
-          <!-- users appended here  -->
+          <!-- appended here  -->
         </select>
       </div>
 
@@ -164,6 +154,6 @@
   </div><!-- end container2 -->
 
   <script src="../../commonJS/index.js"></script>
-  <script src="../scripts/users.js"></script>
+  <script src="../scripts/supplier.js"></script>
 </body>
 </html>

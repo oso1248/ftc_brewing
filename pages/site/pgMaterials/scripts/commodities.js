@@ -329,13 +329,13 @@ async function sendUpdate(ev){
     let name = form.elements[i].value
     data[id] = name
     }
-    
+    console.log(data)
     let name = document.getElementsByName('updateCommodity')[0].value
-    axios.patch('/api/commodity/' + name, data)
-      .then(data => {
-        alert(data.data.commodity + ' updated')
-      })
-      .catch(err => alert(err))
+    // axios.patch('/api/commodity/' + name, data)
+    //   .then(data => {
+    //     alert(data.data.commodity + ' updated')
+    //   })
+    //   .catch(err => alert(err))
     } else {
       let msg = "Problems:\n"
       for(i = 0; i < fails.length; i++) {

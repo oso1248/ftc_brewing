@@ -1,8 +1,8 @@
 const express = require('express')
-const db = require('../queries/qrySuppliers')
+const db = require('../queries/qryContainer')
 const router = express.Router()
 
-// -> /api/supplier
+// -> /api/container
 
 router.post('/', (req, res) => {
   db.add(req.body)
@@ -61,4 +61,3 @@ router.delete('/:name', (req, res) => {
 })
 
 module.exports = router
-

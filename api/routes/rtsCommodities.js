@@ -1,8 +1,8 @@
 const express = require('express')
-const db = require('../queries/qrySuppliers')
+const db = require('../queries/qryCommodities')
 const router = express.Router()
 
-// -> /api/supplier
+// -> /api/commodity
 
 router.post('/', (req, res) => {
   db.add(req.body)
@@ -52,7 +52,7 @@ router.delete('/:name', (req, res) => {
   db.destroy(req.params.name)
     .then(data => {
       if(!data) {
-        res.status(200).json({msg: 'deleted'})
+        res.status(200).json({msg: "deleted"})
       } else {
         res.status(200).json(data)
       }
@@ -61,4 +61,3 @@ router.delete('/:name', (req, res) => {
 })
 
 module.exports = router
-

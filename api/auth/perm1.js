@@ -4,5 +4,4 @@ module.exports = (req, res, next) => {
   } else {
     res.redirect('/login.html')
   }
-  // next()
 }

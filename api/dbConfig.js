@@ -1,5 +1,4 @@
-const { development } = require("../knexfile");
-
+// const { development } = require("../knexfile")
 const dbEngine = process.env.DB_ENVIRONMENT || 'development'
 const config = require('../knexfile')[dbEngine]
 

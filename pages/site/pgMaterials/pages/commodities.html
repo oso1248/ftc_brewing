@@ -11,7 +11,7 @@
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <link rel="stylesheet" href="../../commonCSS/styles.css">
-  <link rel="stylesheet" href="../styles/supplier.css">
+  <link rel="stylesheet" href="../styles/commodities.css">
 
 
 </head>
@@ -28,7 +28,7 @@
       <ul class="">
         <li><a href="../../index.html">Home</a></li>
         <li><a href="">Brewhouse</a></li>
-        <li><a href="">Finishing</a></li>
+        <li><a href="../../pgFinishing/finishing.html">Finishing</a></li>
         <li><a href="../material.html">Materials</a></li>
         <li><a href="../../pgAdmin/admin.html">Admin</a></li>
         <li><a href="" id="logout">Log Out</a></li>
@@ -95,33 +95,33 @@
       <div class="input">
         <select name="" id="inventory">
           <option value="" disabled selected hidden>Select Inventory</option>
-          <option value="Yes">Fin</option>
-          <option value="No">Brw</option>
+          <option value="Fin">Fin</option>
+          <option value="Brw">Brw</option>
         </select>
       </div>
       <div class="input">
         <select name="" id="location_id">
-          <option value="" disabled selected hidden>Select Location</option>   
+             
         </select>
       </div>
       <div class="input">
         <select name="" id="supplier_id">
-          <option value="" disabled selected hidden>Select Supplier</option>   
+             
         </select>
       </div>
       <div class="input">
         <select name="" id="type_id">
-          <option value="" disabled selected hidden>Select Type</option>   
+             
         </select>
       </div>
       <div class="input">
         <select name="" id="container_id">
-          <option value="" disabled selected hidden>Select Container</option>   
+             
         </select>
       </div>
       <div class="input">
         <select name="" id="enviro_id">
-          <option value="" disabled selected hidden>Select Environmental</option>   
+             
         </select>
       </div>
        <div class="input">
@@ -135,7 +135,7 @@
       </div>
       <div class="input">
         <select name="" id="uom_id">
-          <option value="" disabled selected hidden>Select UOM</option>   
+             
         </select>
       </div>
       <div class="input">
@@ -152,69 +152,80 @@
       <h1>Update Commodity</h1>
       <div class="input">
         <select name="updateCommodity" id="commodity">
-          <option value="" disabled selected hidden>Select Commodity</option>
+          
         </select>
       </div>
-      <div class="input">
+      <div class="tooltip input">
         <input type="text" name="updateSap" id="sap" Placeholder="SAP">
+        <span class="tooltiptext">SAP</span>
       </div>
-      <div class="input">
+      <div class="tooltip input">
         <select name="updateActive" id="active">
           <option value="" disabled selected hidden>Select Active</option>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
         </select>
+        <span class="tooltiptext">Active</span>
       </div>
-      <div class="input">
+      <div class="tooltip input">
         <select name="updateInventory" id="inventory">
           <option value="" disabled selected hidden>Select Inventory</option>
-          <option value="Yes">Fin</option>
-          <option value="No">Brw</option>
+          <option id="Fin" value="Yes">Fin</option>
+          <option id="Brw" value="No">Brw</option>
         </select>
+        <span class="tooltiptext">Inventory</span>
       </div>
-      <div class="input">
-        <select name="updateLocation" id="location_id">
-          <option value="" disabled selected hidden>Select Location</option>   
+      <div class="tooltip input">
+        <select name="updateLocation_id" id="location_id">
+             
         </select>
+        <span class="tooltiptext">Location</span>
       </div>
-      <div class="input">
+      <div class="tooltip input">
         <select name="updateSupplier_id" id="supplier_id">
-          <option value="" disabled selected hidden>Select Supplier</option>   
+             
         </select>
+        <span class="tooltiptext">Supplier</span>
       </div>
-      <div class="input">
+      <div class="tooltip input">
         <select name="updateType_id" id="type_id">
-          <option value="" disabled selected hidden>Select Type</option>   
+             
         </select>
+        <span class="tooltiptext">Type</span>
       </div>
-      <div class="input">
+      <div class="tooltip input">
         <select name="updateContainer_id" id="container_id">
-          <option value="" disabled selected hidden>Select Container</option>   
+             
         </select>
+        <span class="tooltiptext">Container</span>
       </div>
-      <div class="input">
+      <div class="tooltip input">
         <select name="updateEnviro_id" id="enviro_id">
-          <option value="" disabled selected hidden>Select Environmental</option>   
+             
         </select>
+        <span class="tooltiptext">Environmental</span>
       </div>
-       <div class="input">
-        <input type="text" name="updateThreshold"  id="threshold" Placeholder="Threshold">
+      <div class="tooltip input">
+        <input type="text" name="updateThreshold" id="threshold" Placeholder="Threshold">
+        <span class="tooltiptext">Threshold</span>
       </div>
-      <div class="input">
+      <div class="tooltip input">
         <input type="text" name="updatePer_pallet" id="per_pallet" Placeholder="Per Pallet">
+        <span class="tooltiptext">Per Pallet</span>
       </div>
-      <div class="input">
+      <div class="tooltip input">
         <input type="text" name="updateUnit_total" id="unit_total" Placeholder="Unit Total">
+        <span class="tooltiptext">Unit Total</span>
       </div>
-      <div class="input">
+      <div class="tooltip input">
         <select name="updateUom_id" id="uom_id">
-          <option value="" disabled selected hidden>Select UOM</option>   
+             
         </select>
+        <span class="tooltiptext">UOM</span>
       </div>
       <div class="input">
         <textarea name="updateNote" id="note" cols="21" rows="5" placeholder="Note"></textarea>
       </div>
-
       <div class="button">
         <button class="btn" id="btnUpdateClear">Clear</button>
         <button class="btn" id="btnUpdateSubmit">Update</button>

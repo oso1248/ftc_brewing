@@ -7,7 +7,7 @@ async function add(data) {
 }
 
 function getAll() {
-  return db('mtl_container').orderBy('container')
+  return db('mtl_container').orderBy('container').orderBy('container')
 }
 
 function getByName(name) {

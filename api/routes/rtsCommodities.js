@@ -9,7 +9,7 @@ router.post('/', (req, res) => {
     .then(data => {
       res.status(200).json(data)
     })
-    .catch(err => res.status(500).json({msg: 'error'}))
+    .catch(err => res.status(500).json({msg: err.detail}))
 })
 
 router.get('/', (req, res) => {
@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
         res.status(200).json({msg: 'null'})
       }
     })
-    .catch(err => res.status(500).json({msg: 'error'}))
+    .catch(err => res.status(500).json({msg: err.detail}))
 })
 
 router.get('/:name', (req, res) => {
@@ -33,7 +33,7 @@ router.get('/:name', (req, res) => {
         res.status(200).json({msg: 'null'})
       }
     })
-    .catch(err => res.status(500).json())
+    .catch(err => res.status(500).json({msg: err.detail}))
 })
 
 router.patch('/:name', (req, res) => {
@@ -45,7 +45,7 @@ router.patch('/:name', (req, res) => {
         res.status(200).json({msg: 'null'})
       }
     })
-    .catch(err => res.status(500).json({msg: 'error'}))
+    .catch(err => res.status(500).json({msg: err.detail}))
 })
 
 router.delete('/:name', (req, res) => {
@@ -57,7 +57,7 @@ router.delete('/:name', (req, res) => {
         res.status(200).json(data)
       }
     })
-    .catch(err => res.status(500).json({msg: "error"}))
+    .catch(err => res.status(500).json({msg: err.detail}))
 })
 
 module.exports = router

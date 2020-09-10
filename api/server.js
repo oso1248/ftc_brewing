@@ -15,10 +15,11 @@ const sessionConfig = {
   cookie: {
     maxAge: 1000 * 60 * 60,
     secure: false, // set true for production for https
-    httpOnly: true // no js access
+    httpOnly: true, // no js access
+    sameSite: true
   },
   resave: false,
-  saveUnitialized: true, // set to false for prod GDPR laws
+  saveUninitialized: true, // set to false for prod GDPR laws
 }
 
 
@@ -44,8 +45,8 @@ const uomRouter = require('./routes/rtsUom')
 
 server.use(express.static(path.join(__dirname, '../pages/login/')))
 server.use('/api/auth', loginRouter)
-server.use('/', permissions1)
-server.use('/pgAdmin/', permissions5)
+// server.use('/', permissions1)
+// server.use('/pgAdmin/', permissions5)
 server.use(express.static(path.join(__dirname, '../pages/site/')))
 
 

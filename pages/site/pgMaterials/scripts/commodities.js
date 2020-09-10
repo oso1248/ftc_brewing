@@ -19,6 +19,22 @@ function createList(api, parent, title) {
     let listItem = elem[title]
     let option = createNode('option')
     option.innerHTML = listItem
+    // option.id = listItem
+    append(parent, option)
+    });
+  })
+  .catch(err => {
+    console.error(err)
+  })
+}
+function createListID(api, parent, title) {
+  axios.get(api)
+  .then(res => {
+    let list = res.data
+    list.forEach((elem) => {
+    let listItem = elem[title]
+    let option = createNode('option')
+    option.innerHTML = listItem
     option.id = listItem
     append(parent, option)
     });
@@ -32,35 +48,35 @@ function commodity(dropDown){
   let title = 'commodity'
   createList(api, dropDown, title)
 }
-function supplier(dropDown){
+function supplier(dropDown, func){
   const api = '/api/supplier'
   let title = 'company'
-  createList(api, dropDown, title)
+  func(api, dropDown, title)
 }
-function locations(dropDown){
+function locations(dropDown, func){
   const api = '/api/location'
   let title = 'location'
-  createList(api, dropDown, title)
+  func(api, dropDown, title)
 }
-function type(dropDown){
+function type(dropDown, func){
   const api = '/api/type'
   let title = 'type'
-  createList(api, dropDown, title)
+  func(api, dropDown, title)
 }
-function container(dropDown){
+function container(dropDown, func){
   const api = '/api/container'
   let title = 'container'
-  createList(api, dropDown, title)
+  func(api, dropDown, title)
 }
-function environmental(dropDown){
+function environmental(dropDown, func){
   const api = '/api/enviro'
   let title = 'enviro'
-  createList(api, dropDown, title)
+  func(api, dropDown, title)
 }
-function uom(dropDown){
+function uom(dropDown, func){
   const api = '/api/uom'
   let title = 'uom'
-  createList(api, dropDown, title)
+  func(api, dropDown, title)
 }
 
 // Views
@@ -72,17 +88,23 @@ function add() {
 
   
   let dropDown = document.getElementById('supplier_id')
-  supplier(dropDown)
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Supplier</option>`
+  supplier(dropDown, createList)
   dropDown = document.getElementById('location_id')
-  // locations()
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Location</option>`
+  locations(dropDown, createList)
   dropDown = document.getElementById('type_id')
-  // type()
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Type</option>`
+  type(dropDown, createList)
   dropDown = document.getElementById('container_id')
-  // container()
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Container</option>`
+  container(dropDown, createList)
   dropDown = document.getElementById('enviro_id')
-  // environmental()
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Environmental</option>`
+  environmental(dropDown, createList)
   dropDown = document.getElementById('uom_id')
-  // uom()
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select UOM</option>`
+  uom(dropDown, createList)
 }
 function update() {
   document.getElementById('frmAdd').style.display="none"
@@ -91,19 +113,26 @@ function update() {
   document.getElementById('frmUpdate').style.display="block"
   
   let dropDown = document.getElementsByName('updateCommodity')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Commodity</option>`
   commodity(dropDown)
   dropDown = document.getElementsByName('updateSupplier_id')[0]
-  supplier(dropDown)
-  // dropDown = document.getElementById('location_id')
-  // locations()
-  // dropDown = document.getElementById('type_id')
-  // type()
-  // dropDown = document.getElementById('container_id')
-  // container()
-  // dropDown = document.getElementById('enviro_id')
-  // environmental()
-  // dropDown = document.getElementById('uom_id')
-  // uom()
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Supplier</option>`
+  supplier(dropDown, createListID)
+  dropDown = document.getElementsByName('updateLocation_id')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Location</option>`
+  locations(dropDown, createListID)
+  dropDown = document.getElementsByName('updateType_id')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Type</option>`
+  type(dropDown, createListID)
+  dropDown = document.getElementsByName('updateContainer_id')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Container</option>`
+  container(dropDown, createListID)
+  dropDown = document.getElementsByName('updateEnviro_id')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Environmental</option>`
+  environmental(dropDown, createListID)
+  dropDown = document.getElementsByName('updateUom_id')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select UOM</option>`
+  uom(dropDown, createListID)
 }
 function view() {
   document.getElementById('frmAdd').style.display="none"
@@ -176,7 +205,7 @@ async function sendAdd(ev){
   ev.stopPropagation()
   
   let fails = await validateAdd()
-  if(fails.length === 0) {
+  if(fails.length === 0) {  
     const form = document.getElementById('frmAdd')
     let data = {}
     let i
@@ -186,51 +215,96 @@ async function sendAdd(ev){
       let name = form.elements[i].value
       data[id] = name
     }
-    axios.post('/api/supplier', data)
+    
+    axios.post('/api/commodity', data)
       .then(data => {
-        alert(data.data.company + ' has been added')
+        alert(data.data.commodity + ' has been added')
       })
       .catch(err => alert(err))
     } else {
-      alert(JSON.stringify(fails))
+      let msg = "Problems:\n"
+      for(i = 0; i < fails.length; i++) {
+        msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
+      }
+      alert(msg)
+      // alert(JSON.stringify(fails))
     }
 }
 async function validateAdd (ev){
-  let failures = [];
-  
-  let company = document.getElementById('company').value
-  // let contact = document.getElementById('contact').value
-  // let email = document.getElementById('email').value
-  // let phone = document.getElementById('phone').value
-  // let address = document.getElementById('address').value
-  // let note = document.getElementById('note').value
+  let failures = []
 
-  let query = '/api/supplier/' + company
+  
+  let commodity = document.getElementById('commodity').value
+  let sap = document.getElementById('sap').value
+  let active = document.getElementById('active').value
+  let inventory = document.getElementById('inventory').value
+  let location = document.getElementById('location_id').value
+  let supplier = document.getElementById('supplier_id').value
+  let type = document.getElementById('type_id').value
+  let container = document.getElementById('container_id').value
+  let enviro = document.getElementById('enviro_id').value
+  let threshold = document.getElementById('threshold').value
+  let pallet = document.getElementById('per_pallet').value
+  let unit = document.getElementById('unit_total').value
+  let uom = document.getElementById('uom_id').value
+  
+
+  let query = '/api/commodity/' + commodity
 
   let res = await axios.get(query)
-  
+
   if(res.data.msg !== 'null') {
     failures.push({input:'name', msg:'Taken'})
   } 
 
-  if(company === ""){
-      failures.push({input:'company', msg:'Required'})
+  if(commodity === ""){
+      failures.push({input:'commodity', msg:'Required'})
   } 
-  // if(contact === ""){
-  //     failures.push({input:'contact', msg:'Required'})
-  // } 
-  // if(email === ""){
-  //     failures.push({input:'email', msg:'Required'})
-  // }
-  // if(phone === ""){
-  //     failures.push({input:'phone', msg:'Requied'})
-  // }
-  // if(address === ""){
-  //   failures.push({input:'address', msg:'Requied'})
-  // }
-  // if(note === ""){
-  //   failures.push({input:'note', msg:'Requied'})
-  // }
+  if(sap === ""){
+      failures.push({input:'sap', msg:'Required'})
+  } 
+  if(active === ""){
+      failures.push({input:'active', msg:'Required'})
+  } 
+  if(inventory === ""){
+      failures.push({input:'inventory', msg:'Required'})
+  } 
+  if(location === ""){
+      failures.push({input:'location', msg:'Required'})
+  } 
+  if(supplier === ""){
+      failures.push({input:'supplier', msg:'Required'})
+  } 
+  if(type === ""){
+      failures.push({input:'type', msg:'Required'})
+  } 
+  if(container === ""){
+      failures.push({input:'container', msg:'Required'})
+  } 
+  if(enviro === ""){
+      failures.push({input:'enviro', msg:'Required'})
+  }
+  if(threshold === ""){
+    failures.push({input:'threshold', msg:'Required'})
+} 
+  if(isNaN(threshold)){
+      failures.push({input:'threshold', msg:'Not A Number'})
+  }
+  if(pallet === ""){
+    failures.push({input:'pallet', msg:'Required'})
+}
+  if(isNaN(pallet)){
+      failures.push({input:'pallet', msg:'Not A Number'})
+  }
+  if(unit === ""){
+    failures.push({input:'unit', msg:'Required'})
+} 
+  if(isNaN(unit)){
+      failures.push({input:'unit', msg:'Not A Number'})
+  } 
+  if(uom === ""){
+      failures.push({input:'uom', msg:'Required'})
+  } 
   return failures
 }
 
@@ -244,9 +318,8 @@ async function sendUpdate(ev){
   ev.preventDefault() 
   ev.stopPropagation()
 
-  // let fails = await validateUpdate()
-
-  if(0 === 0) {
+  let fails = await validateUpdate()
+  if(fails.length === 0) {
     let form = document.getElementById('frmUpdate')
     let data = {}
     let i
@@ -257,63 +330,113 @@ async function sendUpdate(ev){
     data[id] = name
     }
     
-    let name = document.getElementsByName('updateCompany')[0].value
-    axios.patch('/api/supplier/' + name, data)
+    let name = document.getElementsByName('updateCommodity')[0].value
+    axios.patch('/api/commodity/' + name, data)
       .then(data => {
-        alert(data.data.company + ' updated')
+        alert(data.data.commodity + ' updated')
       })
       .catch(err => alert(err))
     } else {
-      alert(JSON.stringify(fails))
+      let msg = "Problems:\n"
+      for(i = 0; i < fails.length; i++) {
+        msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
+      }
+      alert(msg)
+      // alert(JSON.stringify(fails))
     }
     
 }
 function validateUpdate(ev){
   let failures = [];
   
-  let company = document.getElementsByName('updateCompany')[0].value
-  // let contact = document.getElementsByName('updateContact')[0].value
-  // let email = document.getElementsByName('updateEmail')[0].value
-  // let phone = document.getElementsByName('updatePhone')[0].value
-  // let address = document.getElementsByName('updateAddress')[0].value
-  // let note = document.getElementsByName('updateNote')[0].value
+  let commodity = document.getElementsByName('updateCommodity')[0].value
+  let sap = document.getElementsByName('updateSap')[0].value
+  let active = document.getElementsByName('updateActive')[0].value
+  let inventory = document.getElementsByName('updateInventory')[0].value
+  let location = document.getElementsByName('updateLocation_id')[0].value
+  let supplier = document.getElementsByName('updateSupplier_id')[0].value
+  let type = document.getElementsByName('updateType_id')[0].value
+  let container = document.getElementsByName('updateContainer_id')[0].value
+  let enviro = document.getElementsByName('updateEnviro_id')[0].value
+  let threshold = document.getElementsByName('updateThreshold')[0].value
+  let pallet = document.getElementsByName('updatePer_pallet')[0].value
+  let unit = document.getElementsByName('updateUnit_total')[0].value
+  let uom = document.getElementsByName('updateUom_id')[0].value
   
-  // if(company === ""){
-  //   failures.push({input:'company', msg:'Required'})
-  // } 
-  // if(contact === ""){
-  //   failures.push({input:'contact', msg:'Required'})
-  // } 
-  // if(email === ""){
-  //   failures.push({input:'email', msg:'Required'})
-  // }
-  // if(phone === ""){
-  //   failures.push({input:'phone', msg:'Requied'})
-  // }
-  // if(address === ""){
-  //   failures.push({input:'address', msg:'Requied'})
-  // }
-  // if(note === ""){
-  //   failures.push({input:'note', msg:'Requied'})
-  // }
+
+  if(commodity === ""){
+      failures.push({input:'commodity', msg:'Required'})
+  } 
+  if(sap === ""){
+      failures.push({input:'sap', msg:'Required'})
+  } 
+  if(active === ""){
+      failures.push({input:'active', msg:'Required'})
+  } 
+  if(inventory === ""){
+      failures.push({input:'inventory', msg:'Required'})
+  } 
+  if(location === ""){
+      failures.push({input:'location', msg:'Required'})
+  } 
+  if(supplier === ""){
+      failures.push({input:'supplier', msg:'Required'})
+  } 
+  if(type === ""){
+      failures.push({input:'type', msg:'Required'})
+  } 
+  if(container === ""){
+      failures.push({input:'container', msg:'Required'})
+  } 
+  if(enviro === ""){
+      failures.push({input:'enviro', msg:'Required'})
+  }
+  if(threshold === ""){
+    failures.push({input:'threshold', msg:'Required'})
+} 
+  if(isNaN(threshold)){
+      failures.push({input:'threshold', msg:'Not A Number'})
+  }
+  if(pallet === ""){
+    failures.push({input:'pallet', msg:'Required'})
+}
+  if(isNaN(pallet)){
+      failures.push({input:'pallet', msg:'Not A Number'})
+  }
+  if(unit === ""){
+    failures.push({input:'unit', msg:'Required'})
+} 
+  if(isNaN(unit)){
+      failures.push({input:'unit', msg:'Not A Number'})
+  } 
+  if(uom === ""){
+      failures.push({input:'uom', msg:'Required'})
+  } 
+  
+  
+ 
   return failures
 }
-// function selectSupplier(){
-//   let company = document.getElementsByName('updateCompany')[0].value
-//   let contact = document.getElementsByName('updateContact')[0]
-//   let email = document.getElementsByName('updateEmail')[0]
-//   let phone = document.getElementsByName('updatePhone')[0]
-//   let address = document.getElementsByName('updateAddress')[0]
-//   let note = document.getElementsByName('updateNote')[0]
-//   axios.get('/api/supplier/' + company)
-//     .then(data => {
-//       contact.value = data.data.contact
-//       email.value = data.data.email
-//       phone.value = data.data.phone
-//       address.value = data.data.address
-//       note.value = data.data.note
-//     })
-// }
+function selectCommodity(){
+  let commodity = document.getElementsByName('updateCommodity')[0].value
+  
+  axios.get('/api/commodity/' + commodity)
+    .then(data => {
+      document.getElementById(data.data.location).selected = 'selected'
+      document.getElementById(data.data.type).selected = 'selected'
+      document.getElementById(data.data.company).selected = 'selected'
+      document.getElementById(data.data.enviro).selected = 'selected'
+      document.getElementById(data.data.container).selected = 'selected'
+      document.getElementById(data.data.uom).selected = 'selected'
+      document.getElementById(data.data.inventory).selected = 'selected'
+      document.getElementsByName('updateSap')[0].value = data.data.sap
+      document.getElementsByName('updateActive')[0].value = data.data.active
+      document.getElementsByName('updateThreshold')[0].value = data.data.threshold
+      document.getElementsByName('updatePer_pallet')[0].value = data.data.per_pallet
+      document.getElementsByName('updateUnit_total')[0].value = data.data.unit_total
+      document.getElementsByName('updateNote')[0].value = data.data.note
+    })
+}
 
 
 //  routes delete
@@ -325,9 +448,9 @@ function sendDelete(ev) {
   ev.preventDefault() 
   ev.stopPropagation()
 
-  const user = document.getElementsByName('deleteCommodity')[0].value
+  const name = document.getElementsByName('deleteCommodity')[0].value
 
-  axios.delete('/api/commodity/' + user)
+  axios.delete('/api/commodity/' + name)
     .then(data => alert(data.data.msg))
   .catch(err => alert(err))
 }
@@ -339,7 +462,7 @@ document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
 
 document.getElementById('btnUpdateClear').addEventListener('click', resetUpdate)
 document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
-// document.getElementsByName('updateCommodity')[0].addEventListener('change', selectSupplier)
+document.getElementsByName('updateCommodity')[0].addEventListener('change', selectCommodity)
 
 
 

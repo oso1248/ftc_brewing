@@ -120,7 +120,12 @@ async function sendAdd(ev){
       })
       .catch(err => alert(err))
     } else {
-      alert(JSON.stringify(fails))
+      let msg = "Problems:\n"
+      for(i = 0; i < fails.length; i++) {
+        msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
+      }
+      alert(msg)
+      // alert(JSON.stringify(fails))
     }
 }
 async function validateAdd (ev){
@@ -192,7 +197,12 @@ async function sendUpdate(ev){
       })
       .catch(err => alert(err))
     } else {
-      alert(JSON.stringify(fails))
+      let msg = "Problems:\n"
+      for(i = 0; i < fails.length; i++) {
+        msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
+      }
+      alert(msg)
+      // alert(JSON.stringify(fails))
     }
     
 }

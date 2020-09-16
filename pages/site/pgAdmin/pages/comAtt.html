@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commodity Attributes</title>
+  
+
+  <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="../../commonCSS/styles.css">
+  <link rel="stylesheet" href="../styles/comAtt.css">
+
+</head>
+<body>
+  <div class="container1"><! -- Start of Container1 -->
+    <header>
+      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+      <h1>Commodity Attributes</h1>
+      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+       
+    </header>
+    <! -- Navigation -->
+    <nav class="main-nav">
+      <ul class="">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="">Brewhouse</a></li>
+        <li><a href="">Finishing</a></li>
+        <li><a href="../../pgMaterials/material.html">Materials</a></li>
+        <li><a href="../admin.html">Admin</a></li>
+        <li><a href="" id="logout">Log Out</a></li>
+      </ul>
+    </nav>
+  
+   <!-- <div class="spacer"></div> -->
+    
+   <div class="boxes">
+
+    <div class="box" id="add">
+      <a style="display: block"><h3>Add Attributes</h3></a>
+    </div>
+    
+
+    <div class="box" id="update">
+      <a style="display: block"><h3>Update Attributes</h3></a>
+    </div>
+
+    <div class="box" id="view">
+      <a style="display: block"><h3>View Attributes</h3></a>
+    </div>
+
+    <div class="box" id="delete">
+      <a style="display: block"><h3>Delete Attributes</h3></a>
+    </div>
+
+   </div> <!-- End Boxes   -->
+       
+  </div><! -- End of container1 -->
+
+<div class="spacer"></div>
+
+
+  <div class="container2"><!-- start container2 -->
+
+
+    <!-- start of add forms -->
+    <div id="addBoxes" class="boxxes">
+    <div class="formBox">
+      <form class="form" id="frmAddLocation" action="">
+        <h1>Add Location</h1>
+        <div class="input">
+          <input type="text"  id="location" Placeholder="location">
+        </div>
+        <div class="input">
+          <textarea name="noteLocation" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+        </div>
+        <div class="button">
+          <button class="btn" id="btnAddClearLocation">Clear</button>
+          <button class="btn" id="btnAddSubmitLocation">Add</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="formBox">
+      <form class="form" id="frmAddType" action="">
+        <h1>Add Type</h1>
+    <div class="input">
+          <input type="text"  id="type" Placeholder="type">
+        </div>
+        <div class="input">
+          <textarea name="noteType" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+        </div>
+        <div class="button">
+          <button class="btn" id="btnAddClearType">Clear</button>
+          <button class="btn" id="btnAddSubmitType">Add</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="formBox">
+      <form class="form" id="frmAddEnviro" action="">
+        <h1>Add Enviro</h1>
+        <div class="input">
+          <input type="text"  id="enviro" Placeholder="environmental">
+        </div>
+        <div class="input">
+          <textarea name="noteEnviro" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+        </div>
+        <div class="button">
+          <button class="btn" id="btnAddClearEnviro">Clear</button>
+          <button class="btn" id="btnAddSubmitEnviro">Add</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="formBox">
+      <form class="form" id="frmAddContainer" action="">
+        <h1>Add Container</h1>
+        <div class="input">
+          <input type="text"  id="container" Placeholder="container">
+        </div>
+        <div class="input">
+          <textarea name="noteContainer" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+        </div>
+        <div class="button">
+          <button class="btn" id="btnAddClearContainer">Clear</button>
+          <button class="btn" id="btnAddSubmitContainer">Add</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="formBox">
+      <form class="form" id="frmAddUOM" action="">
+        <h1>Add UOM</h1>
+        <div class="input">
+          <input type="text"  id="uom" Placeholder="uom">
+        </div>
+        <div class="input">
+          <textarea name="noteUOM" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+        </div>
+        <div class="button">
+          <button class="btn" id="btnAddClearUOM">Clear</button>
+          <button class="btn" id="btnAddSubmitUOM">Add</button>
+        </div>
+      </form>
+    </div> 
+    </div>
+    <!-- end of add forms -->
+
+
+    <!-- start of update boxes -->
+    <div id="updateBoxes" class="boxxes">
+    <div class="formBox">
+      <form class="form" id="frmUpdateLocation" action="">
+        <h1>Update Location</h1>
+        <div class="input">
+          <select name="updateLocation" id="location"></select>
+          <!-- <input type="text"  id="location" Placeholder="location"> -->
+        </div>
+        <div class="input">
+          <textarea name="updateLocationNote" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+        </div>
+        <div class="button">
+          <button class="btn" id="btnUpdateClearLocation">Clear</button>
+          <button class="btn" id="btnUpdateSubmitLocation">Update</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="formBox">
+      <form class="form" id="frmUpdateType" action="">
+        <h1>Update Type</h1>
+    <div class="input">
+          <select name="updateType" id="type"></select>
+          <!-- <input type="text"  id="type" Placeholder="type"> -->
+        </div>
+        <div class="input">
+          <textarea name="updateTypeNote" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+        </div>
+        <div class="button">
+          <button class="btn" id="btnUpdateClearType">Clear</button>
+          <button class="btn" id="btnUpdateSubmitType">Update</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="formBox">
+      <form class="form" id="frmUpdateEnviro" action="">
+        <h1>Update Enviro</h1>
+        <div class="input">
+          <select name="updateEnviro" id="enviro"></select>
+        </div>
+        <div class="input">
+          <textarea name="updateEnviroNote" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+        </div>
+        <div class="button">
+          <button class="btn" id="btnUpdateClearEnviro">Clear</button>
+          <button class="btn" id="btnUpdateSubmitEnviro">Update</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="formBox">
+      <form class="form" id="frmUpdateContainer" action="">
+        <h1>Update Container</h1>
+        <div class="input">
+          <select name="updateContainer" id="container"></select>
+          <!-- <input type="text"  id="container" Placeholder="container"> -->
+        </div>
+        <div class="input">
+          <textarea name="updateContainerNote" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+        </div>
+        <div class="button">
+          <button class="btn" id="btnUpdateClearContainer">Clear</button>
+          <button class="btn" id="btnUpdateSubmitContainer">Update</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="formBox">
+      <form class="form" id="frmUpdateUOM" action="">
+        <h1>Update UOM</h1>
+        <div class="input">
+          <select name="updateUom" id="uom"></select>
+          <!-- <input type="text"  id="uom" Placeholder="uom"> -->
+        </div>
+        <div class="input">
+          <textarea name="updateUomNote" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+        </div>
+        <div class="button">
+          <button class="btn" id="btnUpdateClearUOM">Clear</button>
+          <button class="btn" id="btnUpdateSubmitUOM">Update</button>
+        </div>
+      </form>
+    </div>
+    </div>
+    <!-- end of update boxes -->
+
+
+    <!-- start of delete boxes -->
+    <div id="deleteBoxes" class="boxxes">
+  
+    <div class="formBox">
+      <form class="form" id="frmDeleteLocation" action="">
+        <h1>Delete Location</h1>
+        <div class="input">
+          <select name="deleteLocation" id="location"></select>
+        </div>
+        <div class="button">
+          <button class="btn" id="btnDeleteClearLocation">Clear</button>
+          <button class="btn" id="btnDeleteSubmitLocation">Delete</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="formBox">
+      <form class="form" id="frmDeleteType" action="">
+        <h1>Delete Type</h1>
+        <div class="input">
+          <select name="deleteType" id="type"></select>
+        </div>
+        <div class="button">
+          <button class="btn" id="btnDeleteClearType">Clear</button>
+          <button class="btn" id="btnDeleteSubmitType">Delete</button>
+        </div>
+      </form>
+    </div>
+    
+    <div class="formBox">
+      <form class="form" id="frmDeleteEnviro" action="">
+        <h1>Delete Enviro</h1>
+        <div class="input">
+          <select name="deleteEnviro" id="enviro"></select>
+        </div>
+        <div class="button">
+          <button class="btn" id="btnDeleteClearEnviro">Clear</button>
+          <button class="btn" id="btnDeleteSubmitEnviro">Delete</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="formBox">
+      <form class="form" id="frmDeleteContainer" action="">
+        <h1>Delete Container</h1>
+        <div class="input">
+          <select name="deleteContainer" id="container"></select>
+        </div>
+        <div class="button">
+          <button class="btn" id="btnDeleteClearContainer">Clear</button>
+          <button class="btn" id="btnDeleteSubmitContainer">Delete</button>
+        </div>
+      </form>
+    </div>
+      
+    <div class="formBox">
+      <form class="form" id="frmDeleteUOM" action="">
+        <h1>Delete UOM</h1>
+        <div class="input">
+          <select name="deleteUOM" id="uom"></select>
+        </div>
+        <div class="button">
+          <button class="btn" id="btnDeleteClearUOM">Clear</button>
+          <button class="btn" id="btnDeleteSubmitUOM">Delete</button>
+        </div>
+      </form>
+    </div>
+
+    </div>
+    <!-- end of delete boxes -->
+
+
+    <div class="boxxes" id="attView">
+      <div id="listLocation"></div>
+      <div id="listType"></div>
+      <div id="listEnviro"></div>
+      <div id="listContainer"></div>
+      <div id="listUOM"></div>
+    </div>
+
+  </div><!-- end container2 -->
+
+  <script src="../../commonJS/index.js"></script>
+  <script src="../scripts/comAtt.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+@host = http://localhost:5000
+
+###Commodities All
+GET {{host}}/api/commodity
+
+###Commodity by name
+GET {{host}}/api/commodity/Cascade
+
+

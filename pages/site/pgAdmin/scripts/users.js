@@ -7,10 +7,10 @@ const api = '/api/brewery'
 
 function createNode(element) {
   return document.createElement(element)
-};
+}
 function append(parent, e1) {
   return parent.appendChild(e1)
-};
+}
 
 
 // Views
@@ -252,7 +252,6 @@ function resetDelete(ev){
   ev.preventDefault();
   document.getElementById('frmDelete').reset();
 }
-
 function sendDelete(ev) {
   ev.preventDefault() 
   ev.stopPropagation()

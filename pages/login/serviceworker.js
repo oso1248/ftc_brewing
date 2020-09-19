@@ -1,8 +1,8 @@
 const staticBudApp = "budApp-v1"
 const assets = [
   "/",
-  "/index.html",
-  "/commonCSS/styles.css",
+  "/login.html",
+  "/login.css",
   "",
   "/contract.png",
   
@@ -17,13 +17,13 @@ if('serviceWorker' in navigator) {
 }
 
 
-// self.addEventListener("install", installEvent => {
-//   installEvent.waitUntil(
-//     caches.open(staticBudApp).then(cache => {
-//       cache.addAll(assets)
-//     })
-//   )
-// })
+self.addEventListener("install", installEvent => {
+  installEvent.waitUntil(
+    caches.open(staticBudApp).then(cache => {
+      cache.addAll(assets)
+    })
+  )
+})
 
 // self.addEventListener("fetch", fetchEvent => {
 //   fetchEvent.respondWith(

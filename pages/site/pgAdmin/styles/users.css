@@ -43,6 +43,10 @@
   background-color: #3e8e41;
 }
 
+.tabulator-print-header, tabulator-print-footer{
+  text-align:center;
+}
+
 
 @media (max-width: 850px) {
   .form input, textarea, select, option {

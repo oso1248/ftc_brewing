@@ -134,6 +134,7 @@ function update() {
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select UOM</option>`
   uom(dropDown, createListID)
 }
+let commodityTable
 function view() {
   document.getElementById('frmAdd').style.display="none"
   document.getElementById('frmDelete').style.display="none"
@@ -144,10 +145,11 @@ function view() {
     .then(res => {
       let tableData = res.data
 
-      var table = new Tabulator("#list", {
+      commodityTable = new Tabulator("#list", {
         height:"330px",
         layout:"fitDataFill",
         responsiveLayout:"collapse",
+        responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
         {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
@@ -167,7 +169,6 @@ function view() {
         {title:"Note", field:"note",hozAlign:"center", width:150, responsive:2},
         ],
       })
-      // sorter:""
     })
     .catch(err => console.log(err))
   document.getElementById('list').style.display="block"
@@ -308,7 +309,6 @@ async function validateAdd (ev){
   return failures
 }
 
-
 // routes update
 function resetUpdate(ev){
   ev.preventDefault();
@@ -438,7 +438,6 @@ function selectCommodity(){
     })
 }
 
-
 //  routes delete
 function resetDelete(ev){
   ev.preventDefault();
@@ -454,7 +453,6 @@ function sendDelete(ev) {
     .then(data => alert(data.data.msg))
   .catch(err => alert(err))
 }
-
 
 
 document.getElementById('btnAddClear').addEventListener('click', resetAdd)
@@ -473,3 +471,11 @@ document.getElementById('add').onclick = add
 document.getElementById('update').onclick = update
 document.getElementById('view').onclick = view
 document.getElementById('delete').onclick = del
+
+// document.getElementById("print-table").addEventListener("click", function(){
+//   commodityTable.print(false, true);
+// });
+
+// document.getElementById("download-xlsx").addEventListener("click", function(){
+//   commodityTable.download("xlsx", "data.xlsx", {sheetName:"My Data"});
+// });

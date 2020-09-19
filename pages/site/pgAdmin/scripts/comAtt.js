@@ -85,6 +85,7 @@ function view() {
         height:"309px",
         layout:"fitDataFill",
         responsiveLayout:"collapse",
+        responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
         {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
@@ -102,6 +103,7 @@ function view() {
         height:"309px",
         layout:"fitDataFill",
         responsiveLayout:"collapse",
+        responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
         {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
@@ -119,6 +121,7 @@ function view() {
         height:"309px",
         layout:"fitDataFill",
         responsiveLayout:"collapse",
+        responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
         {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
@@ -136,6 +139,7 @@ function view() {
         height:"309px",
         layout:"fitDataFill",
         responsiveLayout:"collapse",
+        responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
         {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
@@ -153,6 +157,7 @@ function view() {
         height:"309px",
         layout:"fitDataFill",
         responsiveLayout:"collapse",
+        responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
         {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},

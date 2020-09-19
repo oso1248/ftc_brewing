@@ -72,6 +72,7 @@ function update() {
   })
   .catch(err => console.log(err.detail))
 }
+let userTable
 function view() {
   document.getElementById('frmAdd').style.display="none"
   document.getElementById('frmDelete').style.display="none"
@@ -81,11 +82,12 @@ function view() {
   axios.get('/api/user')
     .then(res => {
       let tableData = res.data
-
-      var table = new Tabulator("#list", {
+      
+      userTable = new Tabulator("#list", {
         height:"309px",
         layout:"fitDataFill",
         responsiveLayout:"collapse",
+        responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
         {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
@@ -95,7 +97,6 @@ function view() {
         {title:"Brewery", field:"brewery",hozAlign:"center", width:150, responsive:2},
         ],
       })
-      // sorter:""
     })
     .catch(err => console.log(err.detail))
   document.getElementById('list').style.display="block"

@@ -45,8 +45,8 @@ const uomRouter = require('./routes/rtsUom')
 
 server.use(express.static(path.join(__dirname, '../pages/login/')))
 server.use('/api/auth', loginRouter)
-server.use('/', permissions1)
-server.use('/pgAdmin/', permissions5)
+// server.use('/', permissions1)
+// server.use('/pgAdmin/', permissions5)
 server.use(express.static(path.join(__dirname, '../pages/site/')))
 
 

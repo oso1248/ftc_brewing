@@ -57,7 +57,7 @@ function getAll() {
     .join('mtl_type as typ', 'com.type_id', '=', 'typ.id')
     .join('mtl_location AS loc', 'com.location_id', 'loc.id' )
     .join('mtl_enviro as env', 'com.enviro_id', '=', 'env.id')
-    .join('mtl_container as con', 'com.enviro_id', '=', 'con.id')
+    .join('mtl_container as con', 'com.container_id', '=', 'con.id')
     .join('mtl_supplier as sup', 'com.supplier_id', '=', 'sup.id')
     .select(
       'com.commodity',
@@ -84,7 +84,7 @@ function getByName(name) {
     .join('mtl_type as typ', 'com.type_id', '=', 'typ.id')
     .join('mtl_location AS loc', 'com.location_id', 'loc.id' )
     .join('mtl_enviro as env', 'com.enviro_id', '=', 'env.id')
-    .join('mtl_container as con', 'com.enviro_id', '=', 'con.id')
+    .join('mtl_container as con', 'com.container_id', '=', 'con.id')
     .join('mtl_supplier as sup', 'com.supplier_id', '=', 'sup.id')
     .select(
       'com.commodity',

@@ -1,18 +1,18 @@
 if('serviceWorker' in navigator) {
   navigator.serviceWorker
     .register('./serviceworker.js')
-    // .then(function() { console.log("Service Worker Registered"); });
+    .then(function() { console.log("Service Worker Registered") })
 }
 
-var CACHE_STATIC_NAME = 'static-v74';
-var CACHE_DYNAMIC_NAME = 'dynamic-v74';
+var CACHE_STATIC_NAME = 'static-v74'
+var CACHE_DYNAMIC_NAME = 'dynamic-v74'
 
 self.addEventListener('install', function (event) {
-  console.log('Installing Service Worker ...', event);
+  console.log('Installing Service Worker ...', event)
   event.waitUntil(
     caches.open(CACHE_STATIC_NAME)
       .then(function (cache) {
-        console.log('Precaching App Shell');
+        console.log('Precaching App Shell')
         cache.addAll([
             '/',
             '/login.html',
@@ -26,14 +26,14 @@ self.addEventListener('install', function (event) {
 })
 
 self.addEventListener('activate', function (event) {
-  console.log('Activating Service Worker ....', event);
+  console.log('Activating Service Worker ....', event)
   event.waitUntil(
     caches.keys()
       .then(function (keyList) {
         return Promise.all(keyList.map(function (key) {
           if (key !== CACHE_STATIC_NAME && key !== CACHE_DYNAMIC_NAME) {
-            console.log('Removing old cache.', key);
-            return caches.delete(key);
+            console.log('Removing old cache.', key)
+            return caches.delete(key)
           }
         }))
       })
@@ -56,12 +56,12 @@ self.addEventListener('fetch', function(event) {
       .catch(function(err) {
           // Fallback to cache
           return caches.match(event.request)
-          .then(function(res){
-            if (res === undefined) { 
-              // get and return the offline page
-            } 
-            return res;
+            .then(function(res){
+              if (res === undefined) { 
+                // get and return the offline page
+              } 
+              return res;
           })
       })
   )
-});
+})

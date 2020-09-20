@@ -25,12 +25,12 @@ self.addEventListener("install", installEvent => {
   )
 })
 
-self.addEventListener("fetch", fetchEvent => {
-  fetchEvent.respondWith(
-    caches.match(fetchEvent.request).then(res => {
-      // fetch(fetchEvent.request)
-      // fetch(fetchEvent.request) || return res 
-      return res || fetch(fetchEvent.request) 
-    })
-  )
-})
+// self.addEventListener("fetch", fetchEvent => {
+//   fetchEvent.respondWith(
+//     caches.match(fetchEvent.request).then(res => {
+//       // fetch(fetchEvent.request)
+//       // fetch(fetchEvent.request) || return res 
+//       return res || fetch(fetchEvent.request) 
+//     })
+//   )
+// })

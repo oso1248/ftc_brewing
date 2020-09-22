@@ -13,7 +13,6 @@ exports.up = function(knex) {
     tbl.string('supr_sac', 10)
       .notNullable()
     tbl.string('type', 10)
-      .notNullable()
     tbl.string('note', 1024)
     tbl.timestamps(true, true)
   })

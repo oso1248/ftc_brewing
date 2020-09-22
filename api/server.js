@@ -40,6 +40,7 @@ const typeRouter = require('./routes/rtsType')
 const containerRouter = require('./routes/rtsContainer')
 const enviroRouter = require('./routes/rtsEnviro')
 const uomRouter = require('./routes/rtsUom')
+const brandRouter = require('./routes/rtsBrands')
 
 
 
@@ -60,6 +61,7 @@ server.use('/api/type', typeRouter)
 server.use('/api/container', containerRouter)
 server.use('/api/enviro', enviroRouter)
 server.use('/api/uom', uomRouter)
+server.use('/api/brand', brandRouter)
 
 
 

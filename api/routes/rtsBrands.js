@@ -11,6 +11,7 @@ router.post('/brw', (req, res) => {
       res.status(200).json(data)
     })
     .catch(err => res.status(500).json({msg: err.detail}))
+    // .catch(err => res.status(500).send(err.detail))
 })
 router.get('/brw', (req, res) => {
   db.getAllBrw()

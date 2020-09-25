@@ -1,11 +1,11 @@
 if('serviceWorker' in navigator) {
   navigator.serviceWorker
     .register('./serviceworker.js')
-    .then(function() { console.log("Service Worker Registered") })
+    .then(function() { console.log('Service Worker Registered') })
 }
 
-var CACHE_STATIC_NAME = 'static-v74'
-var CACHE_DYNAMIC_NAME = 'dynamic-v74'
+var CACHE_STATIC_NAME = 'static-v001'
+var CACHE_DYNAMIC_NAME = 'dynamic-v001'
 
 self.addEventListener('install', function (event) {
   console.log('Installing Service Worker ...', event)
@@ -18,7 +18,7 @@ self.addEventListener('install', function (event) {
             '/login.html',
             '/login.css',
             '',
-            '/contract.png',
+            '/256.png',
             '/offLine.html'
         ])
       })

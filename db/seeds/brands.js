@@ -66,7 +66,7 @@ exports.seed = function(knex) {
       return knex('fin_smpl').insert(data.fin_smpl)
     })
     .then(() => {
-      return knex('fin_params').insert(data.fin_smpl)
+      return knex('fin_params').insert(data.fin_params)
     })
     .then(() => {
       return knex('sch_smpl').insert(data.sch_smpl)

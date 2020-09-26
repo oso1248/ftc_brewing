@@ -315,7 +315,7 @@ exports.up = function(knex) {
       .notNullable()
     tbl.string('inj', 25)
       .notNullable()
-    tbl.string('crtl', 25)
+    tbl.string('ctrl', 25)
       .notNullable()
     tbl.string('note', 1024)
     tbl.timestamps(true, true)

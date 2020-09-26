@@ -6,7 +6,7 @@ async function addBrw(data) {
   return getByNameBrw(brand)
 }
 function getAllBrw() {
-  return db('brnd_brw')
+  return db('brnd_brw').orderBy('brand')
 }
 function getByNameBrw(name) {
   return db('brnd_brw')

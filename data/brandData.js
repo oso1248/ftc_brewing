@@ -24,9 +24,9 @@ const brnd_brw = [
   {brand:"ABN5",fin_id:3,note:""},
   {brand:"NLS5",fin_id:4,note:""},
   {brand:"NTI6",fin_id:5,note:""},
-  {brand:"BLP6",brw_id:6,note:""},
-  {brand:"ES18",brw_id:7,note:""},
-  {brand:"GNX7",brw_id:8,note:""},
+  {brand:"BLP6",fin_id:6,note:""},
+  {brand:"ES18",fin_id:7,note:""},
+  {brand:"GNX7",fin_id:8,note:""},
   ]
    
   const fin_smpl = [
@@ -174,7 +174,7 @@ const brnd_brw = [
   {fin_id:1,pck_id:1,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",ctrl:"Analyzer",note:""},
   {fin_id:2,pck_id:2,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",ctrl:"Analyzer",note:""},
   {fin_id:3,pck_id:3,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",ctrl:"Analyzer",note:""},
-  {fin_id:4,pck_id:4,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"In WIC",tk_dft:"In WIC",recover:"Condensate",ctrl:"",note:"Analyzer"},
+  {fin_id:4,pck_id:4,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"In WIC",tk_dft:"In WIC",recover:"Condensate",ctrl:"Analyzer",note:""},
   {fin_id:5,pck_id:5,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",ctrl:"Analyzer",note:""},
   {fin_id:6,pck_id:6,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"In WIC",tk_dft:"In WIC",recover:"Condensate",ctrl:"Analyzer",note:""},
   {fin_id:7,pck_id:7,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"In WIC",tk_dft:"In WIC",recover:"Condensate",ctrl:"Alcolyzer",note:""},

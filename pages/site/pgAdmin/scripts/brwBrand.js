@@ -165,6 +165,10 @@ async function validateAdd(data){
     failures.push({input:'super sacks', msg:'Required Field'})
     data.supr_sac = null
   }
+  if( data.active === ""){
+    failures.push({input:'active', msg:'Required Field'})
+    data.supr_sac = null
+  }
   return failures
 }
 
@@ -188,7 +192,6 @@ async function sendUpdate(ev){
   let name = form.elements[i].value
   data[id] = name
   }
-  
   let fails = await validateUpdate(data)
   if(fails.length === 0) {
     let brand = document.getElementsByName('updateBrand')[0].value
@@ -229,6 +232,10 @@ async function validateUpdate(data){
     failures.push({input:'super sacks', msg:'Required Field'})
     data.supr_sac = null
   }
+  if( data.active === ""){
+    failures.push({input:'active', msg:'Required Field'})
+    data.supr_sac = null
+  }
   return failures
 }
 function selectBrand(){
@@ -240,6 +247,7 @@ function selectBrand(){
       document.getElementsByName('updateCraft')[0].value = data.data.hop_crft
       document.getElementsByName('updateDry')[0].value = data.data.hop_dry
       document.getElementsByName('updateSuper')[0].value = data.data.supr_sac
+      document.getElementsByName('updateActive')[0].value = data.data.active
       document.getElementsByName('updateNote')[0].value = data.data.note
     })
 }

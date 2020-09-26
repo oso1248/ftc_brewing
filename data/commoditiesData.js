@@ -12,8 +12,9 @@ const mtl_type = [
   {id: 2,type: 'grain' ,note: ''},
   {id: 3,type: 'adjunct' ,note: ''},
   {id: 4,type: 'filter' ,note: ''},
-  {id: 5,type: 'Chemical' ,note: ''},
-  {id: 6,type: 'Malt' ,note: ''}
+  {id: 5,type: 'chemical' ,note: ''},
+  {id: 6,type: 'malt' ,note: ''},
+  {id: 7,type: 'injection' ,note: ''}
 ]
 
 const mtl_location = [
@@ -57,7 +58,7 @@ const mtl_supplier = [
 ]
 
 const mtl_commodidity = [
-  {id: 1,commodity: 'AB 50/10' ,active: 'Yes' ,sap: '1493222' ,inventory: 'Fin' ,threshold: 4 ,per_pallet: 4,unit_total: 605 ,note: '' ,uom_id: 3 ,type_id: 5 ,location_id: 4 ,enviro_id: 4,container_id: 4 ,supplier_id: 2},
+  {id: 1,commodity: 'AB 50 10' ,active: 'Yes' ,sap: '1493222' ,inventory: 'Fin' ,threshold: 4 ,per_pallet: 4,unit_total: 605 ,note: '' ,uom_id: 3 ,type_id: 5 ,location_id: 4 ,enviro_id: 4,container_id: 4 ,supplier_id: 2},
 
   {id: 2,commodity: 'Briess C20 50' ,active: 'Yes' ,sap: '1397607' ,inventory: 'Brw' ,threshold: 200 ,per_pallet: 40,unit_total: 50 ,note: '' ,uom_id: 3 ,type_id: 6 ,location_id: 4 ,enviro_id: 3,container_id: 2 ,supplier_id: 5},
 
@@ -78,6 +79,12 @@ const mtl_commodidity = [
   {id: 10,commodity: 'Tahoma Stab' ,active: 'Yes' ,sap: '1752766' ,inventory: 'Brw' ,threshold: 25 ,per_pallet: 25,unit_total: 44 ,note: '' ,uom_id: 3 ,type_id: 1 ,location_id: 2 ,enviro_id: 2,container_id: 1 ,supplier_id: 1},
 
   {id: 11,commodity: 'Cane Sugar 2000' ,active: 'Yes' ,sap: '1767161' ,inventory: 'Fin' ,threshold: 5 ,per_pallet: 1,unit_total: 2000 ,note: '' ,uom_id: 3 ,type_id: 3 ,location_id: 4 ,enviro_id: 3,container_id: 7 ,supplier_id: 1},
+  
+  {id: 12,commodity: 'Cane Sugar Liquid' ,active: 'Yes' ,sap: '1786708' ,inventory: 'Fin' ,threshold: 5 ,per_pallet: 1,unit_total: 3000 ,note: '' ,uom_id: 3 ,type_id: 7 ,location_id: 7 ,enviro_id: 3,container_id: 3 ,supplier_id: 1},
+  
+  {id: 13,commodity: 'Citric Acid' ,active: 'Yes' ,sap: '1361423' ,inventory: 'Fin' ,threshold: 5 ,per_pallet: 1,unit_total: 275 ,note: '' ,uom_id: 1 ,type_id: 7 ,location_id: 7 ,enviro_id: 3,container_id: 3 ,supplier_id: 1},
+  
+  {id: 14,commodity: 'Strawberry Lemonade' ,active: 'Yes' ,sap: '1823183' ,inventory: 'Fin' ,threshold: 5 ,per_pallet: 1,unit_total: 275 ,note: '' ,uom_id: 1 ,type_id: 7 ,location_id: 7 ,enviro_id: 3,container_id: 3 ,supplier_id: 1},
 ]
 
 module.exports = {

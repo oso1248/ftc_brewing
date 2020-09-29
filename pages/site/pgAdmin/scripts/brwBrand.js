@@ -98,12 +98,12 @@ function del() {
 
 }
 
+
 //Routes Add Clear Form
 function resetAdd(ev){
   ev.preventDefault();
   document.getElementById('frmAdd').reset();
 }
-
 //Routes Add
 async function sendAdd(ev){
   ev.preventDefault() 
@@ -172,12 +172,12 @@ async function validateAdd(data){
   return failures
 }
 
+
 //Routes Update Clear form
 function resetUpdate(ev){
   ev.preventDefault();
   document.getElementById('frmUpdate').reset();
 }
-
 //Routes Update
 async function sendUpdate(ev){
   ev.preventDefault() 
@@ -200,7 +200,6 @@ async function sendUpdate(ev){
         alert(data.data.brand + ' has been updated')
       })
       .catch(err => alert(err))
-      // .catch(err => console.log(err))
   } else {
     let msg = 'Problems:\n'
     for(i = 0; i < fails.length; i++) {
@@ -211,8 +210,8 @@ async function sendUpdate(ev){
 }
 async function validateUpdate(data){
   let failures = []
-  
-  if( data.brand === ""){
+  let brand = document.getElementsByName('updateBrand')[0].value
+  if( brand === ""){
       failures.push({input:'brand', msg:'Required Field'})
       data.brand = null
   }
@@ -258,7 +257,6 @@ function resetDelete(ev){
   ev.preventDefault();
   document.getElementById('frmDelete').reset();
 }
-
 // Routes delete
 async function sendDelete(ev){
   ev.preventDefault() 
@@ -275,7 +273,6 @@ async function sendDelete(ev){
     })
     .catch(err => alert(err.detail))
 }
-
 
 
 //Clear forms add

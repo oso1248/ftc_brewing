@@ -77,184 +77,188 @@
 
   <div class="container2"><!-- start container2 -->
 
-    <form class="form" id="frmAdd" action="">
-      <h1>Add Commodity</h1>
-      <div class="input">
-        <input type="text"  id="commodity" Placeholder="Commodity">
-      </div>
-      <div class="input">
-        <input type="text" id="sap" Placeholder="SAP">
-      </div>
-      <div class="input">
-        <select name="" id="active">
-          <option value="" disabled selected hidden>Select Active</option>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-        </select>
-      </div>
-      <div class="input">
-        <select name="" id="inventory">
-          <option value="" disabled selected hidden>Select Inventory</option>
-          <option value="Fin">Fin</option>
-          <option value="Brw">Brw</option>
-        </select>
-      </div>
-      <div class="input">
-        <select name="" id="location_id">
-             
-        </select>
-      </div>
-      <div class="input">
-        <select name="" id="supplier_id">
-             
-        </select>
-      </div>
-      <div class="input">
-        <select name="" id="type_id">
-             
-        </select>
-      </div>
-      <div class="input">
-        <select name="" id="container_id">
-             
-        </select>
-      </div>
-      <div class="input">
-        <select name="" id="enviro_id">
-             
-        </select>
-      </div>
-       <div class="input">
-        <input type="text"  id="threshold" Placeholder="Threshold">
-      </div>
-      <div class="input">
-        <input type="text"  id="per_pallet" Placeholder="Per Pallet">
-      </div>
-      <div class="input">
-        <input type="text"  id="unit_total" Placeholder="Unit Total">
-      </div>
-      <div class="input">
-        <select name="" id="uom_id">
-             
-        </select>
-      </div>
-      <div class="input">
-        <textarea name="" id="note" cols="21" rows="5" placeholder="Note"></textarea>
-      </div>
-      
-      <div class="button">
-        <button class="btn" id="btnAddClear">Clear</button>
-        <button class="btn" id="btnAddSubmit">Add</button>
-      </div>
-    </form>
-    
-    <form class="form" id="frmUpdate" action="">
-      <h1>Update Commodity</h1>
-      <div class="input">
-        <select name="updateCommodity" id="commodity">
-        </select>
-      </div>
-      <div class="tooltip input">
+    <div id="addBoxes" class="boxxes">
+      <form class="form" id="frmAdd" action="">
+        <h1>Add Commodity</h1>
+        <div class="input">
+          <input type="text"  id="commodity" Placeholder="Commodity">
+        </div>
+        <div class="input">
+          <input type="text" id="sap" Placeholder="SAP">
+        </div>
+        <div class="input">
+          <select name="" id="active">
+            <option value="" disabled selected hidden>Select Active</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <div class="input">
+          <select name="" id="inventory">
+            <option value="" disabled selected hidden>Select Inventory</option>
+            <option value="Fin">Fin</option>
+            <option value="Brw">Brw</option>
+          </select>
+        </div>
+        <div class="input">
+          <select name="" id="location_id">
+              
+          </select>
+        </div>
+        <div class="input">
+          <select name="" id="supplier_id">
+              
+          </select>
+        </div>
+        <div class="input">
+          <select name="" id="type_id">
+              
+          </select>
+        </div>
+        <div class="input">
+          <select name="" id="container_id">
+              
+          </select>
+        </div>
+        <div class="input">
+          <select name="" id="enviro_id">
+              
+          </select>
+        </div>
+        <div class="input">
+          <input type="text"  id="threshold" Placeholder="Threshold">
+        </div>
+        <div class="input">
+          <input type="text"  id="per_pallet" Placeholder="Per Pallet">
+        </div>
+        <div class="input">
+          <input type="text"  id="unit_total" Placeholder="Unit Total">
+        </div>
+        <div class="input">
+          <select name="" id="uom_id">
+              
+          </select>
+        </div>
+        <div class="input">
+          <textarea name="" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+        </div>
         
-        <span class="tooltiptext">SAP</span><input type="text" name="updateSap" id="sap" Placeholder="SAP">
-        
-      </div>
-      <div class="tooltip input">
-        <span class="tooltiptext">Active</span>
-        <select name="updateActive" id="active">
-          <option value="" disabled selected hidden>Select Active</option>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-        </select>
-        
-      </div>
-      <div class="tooltip input">
-        <span class="tooltiptext">Inventory</span>
-        <select name="updateInventory" id="inventory">
-          <option value="" disabled selected hidden>Select Inventory</option>
-          <option id="Fin" value="Fin">Fin</option>
-          <option id="Brw" value="Brw">Brw</option>
-        </select>
-      </div>
-      <div class="tooltip input">
-        <span class="tooltiptext">Location</span>
-        <select name="updateLocation_id" id="location_id">
-             
-        </select>
-      </div>
-      <div class="tooltip input">
-        <span class="tooltiptext">Supplier</span>
-        <select name="updateSupplier_id" id="supplier_id">
-             
-        </select>
-      </div>
-      <div class="tooltip input">
-        <span class="tooltiptext">Type</span>
-        <select name="updateType_id" id="type_id">
-             
-        </select>
-      </div>
-      <div class="tooltip input">
-        <span class="tooltiptext">Container</span>
-        <select name="updateContainer_id" id="container_id">
-             
-        </select>
-      </div>
-      <div class="tooltip input">
-        <span class="tooltiptext">Environmental</span>
-        <select name="updateEnviro_id" id="enviro_id">
-             
-        </select>
-      </div>
-      <div class="tooltip input">
-        <span class="tooltiptext">Threshold</span>
-        <input type="text" name="updateThreshold" id="threshold" Placeholder="Threshold">
-      </div>
-      <div class="tooltip input">
-        <span class="tooltiptext">Per Pallet</span>
-        <input type="text" name="updatePer_pallet" id="per_pallet" Placeholder="Per Pallet">
-      </div>
-      <div class="tooltip input">
-        <span class="tooltiptext">Unit Total</span>
-        <input type="text" name="updateUnit_total" id="unit_total" Placeholder="Unit Total">
-      </div>
-      <div class="tooltip input">
-        <span class="tooltiptext">UOM</span>
-        <select name="updateUom_id" id="uom_id">
-             
-        </select>
-      </div>
-      <div class="input">
-        <textarea name="updateNote" id="note" cols="21" rows="5" placeholder="Note"></textarea>
-      </div>
-      <div class="button">
-        <button class="btn" id="btnUpdateClear">Clear</button>
-        <button class="btn" id="btnUpdateSubmit">Update</button>
-      </div>
-    </form>
-
-    <form class="form" id="frmDelete" action="">
-      <h1>Delete Commodity</h1>
-      <div class="input">
-        <select name="deleteCommodity" id="commodity"></select>
-      </div>
-
-      <div class="button">
-        <button class="btn" id="btnDeleteClear">Clear</button>
-        <button class="btn" id="btnDeleteSubmit">Delete</button>
-      </div>
-    </form>
-
-    <!-- <div id="table">
-      <div>
-        <button class="btn" id="print-table">Print Table</button>
-        <button id="download-xlsx">Download XLSX</button>
-      </div> -->
-
-      <div id="list"></div>
-
-
+        <div class="button">
+          <button class="btn" id="btnAddClear">Clear</button>
+          <button class="btn" id="btnAddSubmit">Add</button>
+        </div>
+      </form>
     </div>
+    
+    <div id="updateBoxes" class="boxxes">
+      <form class="form" id="frmUpdate" action="">
+        <h1>Update Commodity</h1>
+        <div class="input">
+          <select name="updateCommodity" id="commodity">
+          </select>
+        </div>
+        <div class="tooltip input">
+          
+          <span class="tooltiptext">SAP</span><input type="text" name="updateSap" id="sap" Placeholder="SAP">
+          
+        </div>
+        <div class="tooltip input">
+          <span class="tooltiptext">Active</span>
+          <select name="updateActive" id="active">
+            <option value="" disabled selected hidden>Select Active</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+          
+        </div>
+        <div class="tooltip input">
+          <span class="tooltiptext">Inventory</span>
+          <select name="updateInventory" id="inventory">
+            <option value="" disabled selected hidden>Select Inventory</option>
+            <option id="Fin" value="Fin">Fin</option>
+            <option id="Brw" value="Brw">Brw</option>
+          </select>
+        </div>
+        <div class="tooltip input">
+          <span class="tooltiptext">Location</span>
+          <select name="updateLocation_id" id="location_id">
+              
+          </select>
+        </div>
+        <div class="tooltip input">
+          <span class="tooltiptext">Supplier</span>
+          <select name="updateSupplier_id" id="supplier_id">
+              
+          </select>
+        </div>
+        <div class="tooltip input">
+          <span class="tooltiptext">Type</span>
+          <select name="updateType_id" id="type_id">
+              
+          </select>
+        </div>
+        <div class="tooltip input">
+          <span class="tooltiptext">Container</span>
+          <select name="updateContainer_id" id="container_id">
+              
+          </select>
+        </div>
+        <div class="tooltip input">
+          <span class="tooltiptext">Environmental</span>
+          <select name="updateEnviro_id" id="enviro_id">
+              
+          </select>
+        </div>
+        <div class="tooltip input">
+          <span class="tooltiptext">Threshold</span>
+          <input type="text" name="updateThreshold" id="threshold" Placeholder="Threshold">
+        </div>
+        <div class="tooltip input">
+          <span class="tooltiptext">Per Pallet</span>
+          <input type="text" name="updatePer_pallet" id="per_pallet" Placeholder="Per Pallet">
+        </div>
+        <div class="tooltip input">
+          <span class="tooltiptext">Unit Total</span>
+          <input type="text" name="updateUnit_total" id="unit_total" Placeholder="Unit Total">
+        </div>
+        <div class="tooltip input">
+          <span class="tooltiptext">UOM</span>
+          <select name="updateUom_id" id="uom_id">
+              
+          </select>
+        </div>
+        <div class="input">
+          <textarea name="updateNote" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+        </div>
+        <div class="button">
+          <button class="btn" id="btnUpdateClear">Clear</button>
+          <button class="btn" id="btnUpdateSubmit">Update</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="deleteBoxes" class="boxxes">
+      <form class="form" id="frmDelete" action="">
+        <h1>Delete Commodity</h1>
+        <div class="input">
+          <select name="deleteCommodity" id="commodity"></select>
+        </div>
+
+        <div class="button">
+          <button class="btn" id="btnDeleteClear">Clear</button>
+          <button class="btn" id="btnDeleteSubmit">Delete</button>
+        </div>
+      </form>
+    </div>
+    
+    <div class="boxxes" id="attView">
+      <div class="button btnLabel">
+        <button class ="btn" id ="download-xlsx">Save XLSX</button>
+        <button class ="btn" id="print-table">Print Table</button>
+      </div>
+      <div id="list"></div>
+    </div>
+
 
   </div><!-- end container2 -->
 

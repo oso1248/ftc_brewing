@@ -13,7 +13,7 @@ const mtl_type = [
   {id: 3,type: 'adjunct' ,note: ''},
   {id: 4,type: 'filter' ,note: ''},
   {id: 5,type: 'chemical' ,note: ''},
-  {id: 6,type: 'malt' ,note: ''},
+  {id: 6,type: 'malt' ,note: ''}
   {id: 7,type: 'injection' ,note: ''}
 ]
 
@@ -79,7 +79,6 @@ const mtl_commodidity = [
   {id: 10,commodity: 'Tahoma Stab' ,active: 'Yes' ,sap: '1752766' ,inventory: 'Brw' ,threshold: 25 ,per_pallet: 25,unit_total: 44 ,note: '' ,uom_id: 3 ,type_id: 1 ,location_id: 2 ,enviro_id: 2,container_id: 1 ,supplier_id: 1},
 
   {id: 11,commodity: 'Cane Sugar 2000' ,active: 'Yes' ,sap: '1767161' ,inventory: 'Fin' ,threshold: 5 ,per_pallet: 1,unit_total: 2000 ,note: '' ,uom_id: 3 ,type_id: 3 ,location_id: 4 ,enviro_id: 3,container_id: 7 ,supplier_id: 1},
-  
   {id: 12,commodity: 'Cane Sugar Liquid' ,active: 'Yes' ,sap: '1786708' ,inventory: 'Fin' ,threshold: 5 ,per_pallet: 1,unit_total: 3000 ,note: '' ,uom_id: 3 ,type_id: 7 ,location_id: 7 ,enviro_id: 3,container_id: 3 ,supplier_id: 1},
   
   {id: 13,commodity: 'Citric Acid' ,active: 'Yes' ,sap: '1361423' ,inventory: 'Fin' ,threshold: 5 ,per_pallet: 1,unit_total: 275 ,note: '' ,uom_id: 1 ,type_id: 7 ,location_id: 7 ,enviro_id: 3,container_id: 3 ,supplier_id: 1},

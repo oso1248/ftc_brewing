@@ -36,6 +36,7 @@
   cursor: pointer; 
   width: 20%;
   margin: 0px;
+  margin-bottom: 10px;
   border-radius: 10px;
 }
 
@@ -43,6 +44,9 @@
   background-color: #3e8e41;
 }
 
+.btnLabel {
+  width: 60%;
+}
 
 @media (max-width: 850px) {
   .form input, textarea, select, option {

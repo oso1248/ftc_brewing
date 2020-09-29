@@ -5,7 +5,7 @@ if('serviceWorker' in navigator) {
 }
 
 var CACHE_STATIC_NAME = 'static-v001'
-var CACHE_DYNAMIC_NAME = 'dynamic-v001'
+var CACHE_DYNAMIC_NAME = 'dynamic-v002'
 
 self.addEventListener('install', function (event) {
   console.log('Installing Service Worker ...', event)

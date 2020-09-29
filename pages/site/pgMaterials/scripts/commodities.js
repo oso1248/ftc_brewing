@@ -1,8 +1,21 @@
-document.getElementById('frmAdd').style.display="none"
-document.getElementById('frmUpdate').style.display="none"
-document.getElementById('frmDelete').style.display="none"
-document.getElementById('list').style.display="none"
+document.getElementById('addBoxes').style.display="none"
+document.getElementById('updateBoxes').style.display="none"
+document.getElementById('deleteBoxes').style.display="none"
+document.getElementById('attView').style.display="none"
 const api = '/api/brewery'
+
+
+String.prototype.toProperCase = function () {
+  return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + 
+    txt.substr(1).toLowerCase()})
+}
+String.prototype.toNonAlpha = function (spaces) {
+  if(spaces === '') {
+    return this.replace(/[^\w\s]/gi, '').replace(/ +(?= )/g,'')
+  } else {
+    return this.replace(/[^0-9a-z]/gi, '')
+  }
+}
 
 
 function createNode(element) {
@@ -81,11 +94,14 @@ function uom(dropDown, func){
 
 // Views
 function add() {
-  document.getElementById('frmUpdate').style.display="none"
-  document.getElementById('frmDelete').style.display="none"
-  document.getElementById('list').style.display="none"
-  document.getElementById('frmAdd').style.display="block"
-
+  // document.getElementById('frmUpdate').style.display="none"
+  // document.getElementById('frmDelete').style.display="none"
+  // document.getElementById('list').style.display="none"
+  // document.getElementById('frmAdd').style.display="block"
+  document.getElementById('updateBoxes').style.display="none"
+  document.getElementById('deleteBoxes').style.display="none"
+  document.getElementById('attView').style.display="none"
+  document.getElementById('addBoxes').style.display="block"
   
   let dropDown = document.getElementById('supplier_id')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Supplier</option>`
@@ -107,10 +123,10 @@ function add() {
   uom(dropDown, createList)
 }
 function update() {
-  document.getElementById('frmAdd').style.display="none"
-  document.getElementById('frmDelete').style.display="none"
-  document.getElementById('list').style.display="none"
-  document.getElementById('frmUpdate').style.display="block"
+  document.getElementById('deleteBoxes').style.display="none"
+  document.getElementById('attView').style.display="none"
+  document.getElementById('addBoxes').style.display="none"
+  document.getElementById('updateBoxes').style.display="grid"
   
   let dropDown = document.getElementsByName('updateCommodity')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Commodity</option>`
@@ -136,11 +152,15 @@ function update() {
 }
 let commodityTable
 function view() {
-  document.getElementById('frmAdd').style.display="none"
-  document.getElementById('frmDelete').style.display="none"
-  document.getElementById('frmUpdate').style.display="none"
-  document.getElementById('list').style.display="block"
-  
+  // document.getElementById('frmAdd').style.display="none"
+  // document.getElementById('frmDelete').style.display="none"
+  // document.getElementById('frmUpdate').style.display="none"
+  // document.getElementById('list').style.display="block"
+  document.getElementById('updateBoxes').style.display="none"
+  document.getElementById('deleteBoxes').style.display="none"
+  document.getElementById('attView').style.display="block"
+  document.getElementById('addBoxes').style.display="none"
+
   axios.get('/api/commodity')
     .then(res => {
       let tableData = res.data
@@ -148,25 +168,22 @@ function view() {
       commodityTable = new Tabulator("#list", {
         height:"330px",
         layout:"fitDataFill",
-        responsiveLayout:"collapse",
-        responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
-        {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
-        {title:"Commodity", field:"commodity",hozAlign:"center", width:150, responsive:2},
-        {title:"SAP", field:"sap",hozAlign:"center", width:115, responsive:2},
-        {title:"Active", field:"active",hozAlign:"center", width:115, responsive:2},
-        {title:"Inventory", field:"inventory",hozAlign:"center", width:115, responsive:2},
-        {title:"Location", field:"location",hozAlign:"center", width:115, responsive:2},
-        {title:"Company", field:"company",hozAlign:"center", width:115, responsive:2},
-        {title:"Type", field:"type",hozAlign:"center", width:115, responsive:2},
-        {title:"Container", field:"container",hozAlign:"center", width:115, responsive:2},
-        {title:"Environmental", field:"enviro",hozAlign:"center", width:115, responsive:2},
-        {title:"Threshold", field:"threshold",hozAlign:"center", width:115, responsive:2},
-        {title:"Per Pallet", field:"per_pallet",hozAlign:"center", width:115, responsive:2},
-        {title:"Unit Total", field:"unit_total",hozAlign:"center", width:115, responsive:2},
-        {title:"UOM", field:"uom",hozAlign:"center", width:115, responsive:2},
-        {title:"Note", field:"note",hozAlign:"center", width:150, responsive:2},
+        {title:"Commodity", field:"commodity",hozAlign:"center", frozen:true},
+        {title:"SAP", field:"sap",hozAlign:"center"},
+        {title:"Active", field:"active",hozAlign:"center"},
+        {title:"Inventory", field:"inventory",hozAlign:"center"},
+        {title:"Location", field:"location",hozAlign:"center"},
+        {title:"Company", field:"company",hozAlign:"center"},
+        {title:"Type", field:"type",hozAlign:"center"},
+        {title:"Container", field:"container",hozAlign:"center"},
+        {title:"Environmental", field:"enviro",hozAlign:"center"},
+        {title:"Threshold", field:"threshold",hozAlign:"center"},
+        {title:"Per Pallet", field:"per_pallet",hozAlign:"center"},
+        {title:"Unit Total", field:"unit_total",hozAlign:"center"},
+        {title:"UOM", field:"uom",hozAlign:"center"},
+        {title:"Note", field:"note",hozAlign:"center"},
         ],
       })
     })
@@ -174,10 +191,10 @@ function view() {
   document.getElementById('list').style.display="block"
 }
 function del() {
-  document.getElementById('frmAdd').style.display="none"
-  document.getElementById('frmUpdate').style.display="none"
-  document.getElementById('frmDelete').style.display="block"
-  document.getElementById('list').style.display="none"
+  document.getElementById('attView').style.display="none"
+  document.getElementById('addBoxes').style.display="none"
+  document.getElementById('updateBoxes').style.display="none"
+  document.getElementById('deleteBoxes').style.display="block"
 
   const users = document.getElementsByName('deleteCommodity')[0]
   users.innerHTML = `<option value="" disabled selected hidden>Select Commodity</option>`
@@ -204,107 +221,118 @@ function resetAdd(ev){
 async function sendAdd(ev){
   ev.preventDefault() 
   ev.stopPropagation()
-  
-  let fails = await validateAdd()
+
+  const form = document.getElementById('frmAdd')
+  let data = {}
+  let i
+  for (i = 0; i < form.length - 2; i++) {
+    let id = form.elements[i].id
+    let name = form.elements[i].value
+    data[id] = name
+  }
+  let fails = await validateAdd(data)
   if(fails.length === 0) {  
-    const form = document.getElementById('frmAdd')
-    let data = {}
-    let i
-  
-    for (i = 0; i < form.length - 2; i++) {
-      let id = form.elements[i].id
-      let name = form.elements[i].value
-      data[id] = name
-    }
-    
     axios.post('/api/commodity', data)
       .then(data => {
         alert(data.data.commodity + ' has been added')
       })
       .catch(err => alert(err))
-    } else {
-      let msg = "Problems:\n"
-      for(i = 0; i < fails.length; i++) {
-        msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
-      }
-      alert(msg)
-      // alert(JSON.stringify(fails))
+  } else {
+    let msg = "Problems:\n"
+    for(i = 0; i < fails.length; i++) {
+       msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
     }
+    alert(msg)
+  }
 }
-async function validateAdd (ev){
+async function validateAdd (data){
   let failures = []
 
-  
-  let commodity = document.getElementById('commodity').value
-  let sap = document.getElementById('sap').value
-  let active = document.getElementById('active').value
-  let inventory = document.getElementById('inventory').value
-  let location = document.getElementById('location_id').value
-  let supplier = document.getElementById('supplier_id').value
-  let type = document.getElementById('type_id').value
-  let container = document.getElementById('container_id').value
-  let enviro = document.getElementById('enviro_id').value
-  let threshold = document.getElementById('threshold').value
-  let pallet = document.getElementById('per_pallet').value
-  let unit = document.getElementById('unit_total').value
-  let uom = document.getElementById('uom_id').value
-  
-
-  let query = '/api/commodity/' + commodity
-
+  data.commodity = data.commodity.toNonAlpha('').toProperCase()
+  let query = '/api/commodity/' + data.commodity
   let res = await axios.get(query)
 
   if(res.data.msg !== 'null') {
     failures.push({input:'name', msg:'Taken'})
-  } 
+  }
 
-  if(commodity === ""){
+  if(data.commodity === ""){
       failures.push({input:'commodity', msg:'Required'})
-  } 
-  if(sap === ""){
+      data.commodity = null
+  } else {
+    data.commodity = data.commodity.toNonAlpha('').toProperCase()
+  }
+
+  if(data.sap === ""){
       failures.push({input:'sap', msg:'Required'})
-  } 
-  if(active === ""){
-      failures.push({input:'active', msg:'Required'})
-  } 
-  if(inventory === ""){
-      failures.push({input:'inventory', msg:'Required'})
-  } 
-  if(location === ""){
-      failures.push({input:'location', msg:'Required'})
-  } 
-  if(supplier === ""){
-      failures.push({input:'supplier', msg:'Required'})
-  } 
-  if(type === ""){
-      failures.push({input:'type', msg:'Required'})
-  } 
-  if(container === ""){
-      failures.push({input:'container', msg:'Required'})
-  } 
-  if(enviro === ""){
-      failures.push({input:'enviro', msg:'Required'})
+      data.sap = null
+  } else {
+    data.sap = data.sap.toNonAlpha()
   }
-  if(threshold === ""){
+
+  if(data.active === ""){
+    failures.push({input:'active', msg:'Required'})
+    data.active = null
+  }
+
+  if(data.inventory === ""){
+    failures.push({input:'inventory', msg:'Required'})
+    data.inventory = null
+  } 
+  if(data.location_id === ""){
+    failures.push({input:'location', msg:'Required'})
+    data.location_id = null
+  } 
+  if(data.supplier_id === ""){
+    failures.push({input:'supplier', msg:'Required'})
+    data.supplier_id = null
+  } 
+  if(data.type_id === ""){
+    failures.push({input:'type', msg:'Required'})
+    data.type_id = null
+  } 
+  if(data.container_id === ""){
+    failures.push({input:'container', msg:'Required'})
+    data.container_id = null
+  } 
+  if(data.enviro_id === ""){
+    failures.push({input:'enviro', msg:'Required'})
+    data.enviro_id = null
+  }
+
+  if(data.threshold === ""){
     failures.push({input:'threshold', msg:'Required'})
-} 
-  if(isNaN(threshold)){
-      failures.push({input:'threshold', msg:'Not A Number'})
-  }
-  if(pallet === ""){
-    failures.push({input:'pallet', msg:'Required'})
-}
-  if(isNaN(pallet)){
-      failures.push({input:'pallet', msg:'Not A Number'})
-  }
-  if(unit === ""){
-    failures.push({input:'unit', msg:'Required'})
-} 
-  if(isNaN(unit)){
-      failures.push({input:'unit', msg:'Not A Number'})
+    data.threshold = null
+  } else {
+    data.threshold = data.threshold.toNonAlpha()
   } 
-  if(uom === ""){
-      failures.push({input:'uom', msg:'Required'})
+  if(isNaN(data.threshold)){
+    failures.push({input:'threshold', msg:'Not A Number'})
+  }
+
+  if(data.per_pallet === ""){
+    failures.push({input:'pallet', msg:'Required'})
+    data.per_pallet = null
+  } else {
+    data.per_pallet = data.per_pallet.toNonAlpha()
+  }
+  if(isNaN(data.per_pallet)){
+    failures.push({input:'pallet', msg:'Not A Number'})
+  }
+
+  if(data.unit_total === ""){
+    failures.push({input:'unit', msg:'Required'})
+    data.unit_total = null
+  } else {
+    data.unit_total = data.unit_total.toNonAlpha()
+  } 
+  if(isNaN(data.unit_total)){
+    failures.push({input:'unit', msg:'Not A Number'})
+  }
+
+  if(data.uom_id === ""){
+    failures.push({input:'uom', msg:'Required'})
+    data.uom_id = null
   } 
   return failures
 }
@@ -318,18 +346,18 @@ async function sendUpdate(ev){
   ev.preventDefault() 
   ev.stopPropagation()
 
-  let fails = await validateUpdate()
-  if(fails.length === 0) {
-    let form = document.getElementById('frmUpdate')
-    let data = {}
-    let i
-
-    for (i = 1; i < form.length - 2; i++) {
+  let form = document.getElementById('frmUpdate')
+  let data = {}
+  let i
+  for (i = 1; i < form.length - 2; i++) {
     let id = form.elements[i].id
     let name = form.elements[i].value
     data[id] = name
-    }
-    console.log(data)
+  }
+
+  let fails = await validateUpdate(data)
+  if(fails.length === 0) {
+    
     let name = document.getElementsByName('updateCommodity')[0].value
     axios.patch('/api/commodity/' + name, data)
       .then(data => {
@@ -342,79 +370,86 @@ async function sendUpdate(ev){
         msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
       }
       alert(msg)
-      // alert(JSON.stringify(fails))
     }
     
 }
-function validateUpdate(ev){
-  let failures = [];
-  
-  let commodity = document.getElementsByName('updateCommodity')[0].value
-  let sap = document.getElementsByName('updateSap')[0].value
-  let active = document.getElementsByName('updateActive')[0].value
-  let inventory = document.getElementsByName('updateInventory')[0].value
-  let location = document.getElementsByName('updateLocation_id')[0].value
-  let supplier = document.getElementsByName('updateSupplier_id')[0].value
-  let type = document.getElementsByName('updateType_id')[0].value
-  let container = document.getElementsByName('updateContainer_id')[0].value
-  let enviro = document.getElementsByName('updateEnviro_id')[0].value
-  let threshold = document.getElementsByName('updateThreshold')[0].value
-  let pallet = document.getElementsByName('updatePer_pallet')[0].value
-  let unit = document.getElementsByName('updateUnit_total')[0].value
-  let uom = document.getElementsByName('updateUom_id')[0].value
-  
+function validateUpdate(data){
+  let failures = []
 
-  if(commodity === ""){
-      failures.push({input:'commodity', msg:'Required'})
-  } 
-  if(sap === ""){
-      failures.push({input:'sap', msg:'Required'})
-  } 
-  if(active === ""){
-      failures.push({input:'active', msg:'Required'})
-  } 
-  if(inventory === ""){
-      failures.push({input:'inventory', msg:'Required'})
-  } 
-  if(location === ""){
-      failures.push({input:'location', msg:'Required'})
-  } 
-  if(supplier === ""){
-      failures.push({input:'supplier', msg:'Required'})
-  } 
-  if(type === ""){
-      failures.push({input:'type', msg:'Required'})
-  } 
-  if(container === ""){
-      failures.push({input:'container', msg:'Required'})
-  } 
-  if(enviro === ""){
-      failures.push({input:'enviro', msg:'Required'})
+  let name = document.getElementsByName('updateCommodity')[0].value
+  if(name === '') {
+    failures.push({input:'commodity', msg:'Required'})
   }
-  if(threshold === ""){
+    
+  if(data.sap === ''){
+    failures.push({input:'sap', msg:'Required'})
+  } else {
+    data.sap = data.sap.toNonAlpha()
+  }
+
+  if(data.active === ''){
+    failures.push({input:'active', msg:'Required'})
+    data.active = null
+  }
+  if(data.inventory === ''){
+    failures.push({input:'inventory', msg:'Required'})
+    data.inventory = null
+  } 
+  if(data.location_id === ''){
+    failures.push({input:'location', msg:'Required'})
+    data.location_id = null
+  } 
+  if(data.supplier_id === ''){
+    failures.push({input:'supplier', msg:'Required'})
+    data.supplier_id = null
+  } 
+  if(data.type_id === ''){
+    failures.push({input:'type', msg:'Required'})
+    data.type_id = null
+  } 
+  if(data.container_id === ''){
+    failures.push({input:'container', msg:'Required'})
+    data.container_id = null
+  } 
+  if(data.enviro_id === ''){
+    failures.push({input:'enviro', msg:'Required'})
+    data.enviro_id = null
+  }
+
+  if(data.threshold === ''){
     failures.push({input:'threshold', msg:'Required'})
-} 
-  if(isNaN(threshold)){
-      failures.push({input:'threshold', msg:'Not A Number'})
+    data.threshold = null
+  } else {
+    data.threshold = data.threshold.toNonAlpha()
+  } 
+  if(isNaN(data.threshold)){
+    failures.push({input:'threshold', msg:'Not A Number'})
   }
-  if(pallet === ""){
+
+  if(data.per_pallet === ''){
     failures.push({input:'pallet', msg:'Required'})
-}
-  if(isNaN(pallet)){
-      failures.push({input:'pallet', msg:'Not A Number'})
+    data.per_pallet = null
+  } else {
+    data.per_pallet = data.per_pallet.toNonAlpha()
   }
-  if(unit === ""){
+  if(isNaN(data.per_pallet)){
+    failures.push({input:'pallet', msg:'Not A Number'})
+  }
+
+  if(data.unit_total === ''){
     failures.push({input:'unit', msg:'Required'})
-} 
-  if(isNaN(unit)){
-      failures.push({input:'unit', msg:'Not A Number'})
+    data.unit_total = null
+  } else {
+    data.unit_total = data.unit_total.toNonAlpha()
   } 
-  if(uom === ""){
-      failures.push({input:'uom', msg:'Required'})
+  if(isNaN(data.unit_total)){
+    failures.push({input:'unit', msg:'Not A Number'})
+  }
+
+  if(data.uom_id === ''){
+    failures.push({input:'uom', msg:'Required'})
+    data.uom_id = null
   } 
-  
-  
- 
   return failures
 }
 function selectCommodity(){
@@ -472,10 +507,12 @@ document.getElementById('update').onclick = update
 document.getElementById('view').onclick = view
 document.getElementById('delete').onclick = del
 
-// document.getElementById("print-table").addEventListener("click", function(){
-//   commodityTable.print(false, true);
-// });
+document.getElementById('download-xlsx').addEventListener('click', supplierExcel)
+function supplierExcel(){
+  commodityTable.download("xlsx", "commodities.xlsx", {sheetName:"Commodities"})
+}
 
-// document.getElementById("download-xlsx").addEventListener("click", function(){
-//   commodityTable.download("xlsx", "data.xlsx", {sheetName:"My Data"});
-// });
+document.getElementById("print-table").addEventListener('click', supplierPrint)
+function supplierPrint(){
+  commodityTable.print(false, true);
+}

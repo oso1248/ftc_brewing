@@ -8,6 +8,7 @@
 
   <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
   <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
+  <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <link rel="stylesheet" href="../../commonCSS/styles.css">
@@ -77,79 +78,91 @@
 
   <div class="container2"><!-- start container2 -->
 
-    <form class="form" id="frmAdd" action="">
-      <h1>Add Supplier</h1>
-      <div class="input">
-        <input type="text"  id="company" Placeholder="Company">
-      </div>
-      <div class="input">
-        <input type="text" id="contact" Placeholder="Contact">
-      </div>
-       <div class="input">
-        <input type="text"  id="email" Placeholder="Email">
-      </div>
-      <div class="input">
-        <input type="text"  id="phone" Placeholder="Phone">
-      </div>
-      <div class="input">
-        <input type="text"  id="address" Placeholder="Address">
-      </div>
-      <div class="input">
-        <textarea name="" id="note" cols="21" rows="5" placeholder="Note"></textarea>
-      </div>
-      
-      <div class="button">
-        <button class="btn" id="btnAddClear">Clear</button>
-        <button class="btn" id="btnAddSubmit">Add</button>
-      </div>
-    </form>
-    
-    <form class="form" id="frmUpdate" action="">
-      <h1>Update Supplier</h1>
-      <div class="input">
-        <select name="updateCompany" id="company">
-          <!-- appended here  -->
-        </select>
-      </div>
-      <div class="input">
-        <input type="text" name="updateContact" id="contact" Placeholder="Contact">
-      </div>
-       <div class="input">
-        <input type="text" name="updateEmail" id="email" Placeholder="Email">
-      </div>
-      <div class="input">
-        <input type="text" name="updatePhone" id="phone" Placeholder="Phone">
-      </div>
-      <div class="input">
-        <input type="text" name="updateAddress" id="address" Placeholder="Address">
-      </div>
-      <div class="input">
-        <textarea name="updateNote" id="note" cols="21" rows="5" placeholder="Note"></textarea>
-      </div>
-      
-      <div class="button">
-        <button class="btn" id="btnUpdateClear">Clear</button>
-        <button class="btn" id="btnUpdateSubmit">Update</button>
-      </div>
-    </form>
+    <div id="addBoxes" class="boxxes">
+      <form class="form" id="frmAdd" action="">
+        <h1>Add Supplier</h1>
+        <div class="input">
+          <input type="text"  id="company" Placeholder="Company">
+        </div>
+        <div class="input">
+          <input type="text" id="contact" Placeholder="Contact">
+        </div>
+        <div class="input">
+          <input type="text"  id="email" Placeholder="Email">
+        </div>
+        <div class="input">
+          <input type="text"  id="phone" Placeholder="Phone">
+        </div>
+        <div class="input">
+          <input type="text"  id="address" Placeholder="Address">
+        </div>
+        <div class="input">
+          <textarea name="" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+        </div>
+        
+        <div class="button">
+          <button class="btn" id="btnAddClear">Clear</button>
+          <button class="btn" id="btnAddSubmit">Add</button>
+        </div>
+      </form>
+    </div>
 
-    <form class="form" id="frmDelete" action="">
-      <h1>Delete Supplier</h1>
-      <div class="input">
-        <select name="deleteCompany" id="company">
-          
-          <!-- appended here  -->
-        </select>
-      </div>
+    <div id="updateBoxes" class="boxxes">
+      <form class="form" id="frmUpdate" action="">
+        <h1>Update Supplier</h1>
+        <div class="input">
+          <select name="updateCompany" id="company">
+            <!-- appended here  -->
+          </select>
+        </div>
+        <div class="input">
+          <input type="text" name="updateContact" id="contact" Placeholder="Contact">
+        </div>
+        <div class="input">
+          <input type="text" name="updateEmail" id="email" Placeholder="Email">
+        </div>
+        <div class="input">
+          <input type="text" name="updatePhone" id="phone" Placeholder="Phone">
+        </div>
+        <div class="input">
+          <input type="text" name="updateAddress" id="address" Placeholder="Address">
+        </div>
+        <div class="input">
+          <textarea name="updateNote" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+        </div>
+        
+        <div class="button">
+          <button class="btn" id="btnUpdateClear">Clear</button>
+          <button class="btn" id="btnUpdateSubmit">Update</button>
+        </div>
+      </form>
+    </div>
 
-      <div class="button">
-        <button class="btn" id="btnDeleteClear">Clear</button>
-        <button class="btn" id="btnDeleteSubmit">Delete</button>
-      </div>
-    </form>
+    <div id="deleteBoxes" class="boxxes">
+      <form class="form" id="frmDelete" action="">
+        <h1>Delete Supplier</h1>
+        <div class="input">
+          <select name="deleteCompany" id="company">
+            
+            <!-- appended here  -->
+          </select>
+        </div>
 
-    
-    <div id="list"></div>
+        <div class="button">
+          <button class="btn" id="btnDeleteClear">Clear</button>
+          <button class="btn" id="btnDeleteSubmit">Delete</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="boxxes" id="attView">
+      <div class="button btnLabel">
+        <button class ="btn" id ="download-xlsx">Save XLSX</button>
+        <button class ="btn" id="print-table">Print Table</button>
+      </div>
+      <div id="list"></div>
+    </div>
+
   </div><!-- end container2 -->
 
   <script src="../../commonJS/index.js"></script>

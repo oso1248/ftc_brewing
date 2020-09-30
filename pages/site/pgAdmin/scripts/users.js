@@ -86,15 +86,12 @@ function view() {
       userTable = new Tabulator("#list", {
         height:"309px",
         layout:"fitDataFill",
-        responsiveLayout:"collapse",
-        responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
-        {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
-        {title:"Name", field:"username", width:200,hozAlign:"center", responsive:0},
-        {title:"Email", field:"email", hozAlign:"center", width:150},
-        {title:"Permissions", field:"permissions",hozAlign:"center", width:150, responsive:2},
-        {title:"Brewery", field:"brewery",hozAlign:"center", width:150, responsive:2},
+        {title:"Name", field:"username",hozAlign:"center", frozen:true},
+        {title:"Email", field:"email", hozAlign:"center"},
+        {title:"Permissions", field:"permissions",hozAlign:"center"},
+        {title:"Brewery", field:"brewery",hozAlign:"center"},
         ],
       })
     })
@@ -132,59 +129,61 @@ function resetAdd(ev){
 async function sendAdd(ev){
   ev.preventDefault() 
   ev.stopPropagation()
+  let form = document.getElementById('frmAdd')
+  let data = {}
+  let i
+  for (i = 0; i < form.length - 2; i++) {
+    let id = form.elements[i].id
+    let name = form.elements[i].value
+    data[id] = name
+  }
   
-  let fails = await validateAdd()
-  if(fails.length === 0) {
-    var form = document.getElementById('frmAdd')
-    let data = {}
-    let i
-  
-    for (i = 0; i < form.length - 2; i++) {
-      let id = form.elements[i].id
-      let name = form.elements[i].value
-      data[id] = name
-    }
-    data.permissions = parseInt(data.permissions)
-    
+  let fails = await validateAdd(data)
+  if(fails.length === 0) {  
     axios.post('/api/user', data)
       .then(data => {
         alert(data.data.username + ' has been added')
       })
       .catch(err => alert(err.detail))
-    } else {
-      console.log(fails)
-      alert(JSON.stringify(fails))
+  } else {
+    let msg = "Problems:\n"
+    for(i = 0; i < fails.length; i++) {
+      msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
     }
+    alert(msg)
+  }
 }
-async function validateAdd (ev){
-  
+async function validateAdd (data){
   let failures = [];
-  
-  let username = document.getElementById('username').value
-  let email = document.getElementById('email').value
-  let password = document.getElementById('password').value
-  let permissions = document.getElementById('permissions').value
-  let brewery = document.getElementById('brewery_id').value
-
-  let query = '/api/user/' + username
-
+  let query = '/api/user/' + data.username
   let res = await axios.get(query)
   
   if(res.data.msg !== 'null') {
     failures.push({input:'name', msg:'Taken'})
   } 
 
-  if( email === ""){
+  if( data.username === ""){
+    failures.push({input:'username', msg:'Required Field'})
+    data.username = null
+  } 
+
+  if( data.email === ""){
       failures.push({input:'email', msg:'Required Field'})
+      data.email = null
   } 
-  if( password === ""){
-      failures.push({input:'password', msg:'Required Feild'})
+  if( data.password === ""){
+      failures.push({input:'password', msg:'Required Field'})
+      data.password = null
   } 
-  if( permissions === ""){
+  if( data.permissions === ""){
       failures.push({input:'permissions', msg:'Required Field'})
+      data.permissions = null
+  } else {
+    data.permissions = parseInt(data.permissions)
   }
-  if( brewery === ""){
+  if( data.brewery === ""){
       failures.push({input:'brewery', msg:'Required Field'})
+      data.brewery = null
   }
   return failures
 }
@@ -199,52 +198,51 @@ async function sendUpdate(ev){
   ev.preventDefault() 
   ev.stopPropagation()
 
-  let fails = await validateUpdate()
-
-  if(fails.length === 0) {
-    let form = document.getElementById('frmUpdate')
-    let data = {}
-    let i
-
-    for (i = 1; i < form.length - 2; i++) {
+  let form = document.getElementById('frmUpdate')
+  let data = {}
+  let i
+  for (i = 1; i < form.length - 2; i++) {
     let id = form.elements[i].id
     let name = form.elements[i].value
     data[id] = name
-    }
-    data.permissions = parseInt(data.permissions)
-    
+  }
+  let fails = await validateUpdate(data)
+
+  if(fails.length === 0) {    
     let name = document.getElementsByName('updateUsers')[0].value
-    
     axios.patch('/api/user/' + name, data)
       .then(data => {
         alert(data.data.username + ' updated')
       })
       .catch(err => alert(err.detail))
     } else {
-      alert(JSON.stringify(fails))
+      let msg = "Problems:\n"
+      for(i = 0; i < fails.length; i++) {
+        msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
+      }
+      alert(msg)
     }
-    
 }
-function validateUpdate(ev){
+function validateUpdate(data){
   let failures = [];
-  
   let username = document.getElementsByName('updateUsers')[0].value
-  let permissions = document.getElementsByName('updatePermissions')[0].value
-  let brew = document.getElementsByName('updateBreweries')[0].value
   
-
   if( username === ""){
-      failures.push({input:'username', msg:'Required Field'})
-  } 
-  if( permissions === ""){
-      failures.push({input:'permissions', msg:'Required Feild'})
-  } 
-  if( brew === ""){
-      failures.push({input:'brewery', msg:'Required Field'})
+    failures.push({input:'username', msg:'Required Field'})
+  }
+
+  if( data.permissions === ""){
+    failures.push({input:'permissions', msg:'Required Feild'})
+  } else {
+    data.permissions = parseInt(data.permissions)
+  }
+
+  if( data.brewery_id === ""){
+    failures.push({input:'brewery', msg:'Required Field'})
+    data.brewery_id = null
   }
 
   return failures
-
 }
 
 

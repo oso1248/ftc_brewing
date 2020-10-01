@@ -15,4 +15,4 @@ function openQRCamera(node) {
   // reader.readAsDataURL(node.files[0])
 }
 
-document.getElementById('scanner').addEventListener('click', openQRCamera)
+// document.getElementById('scanner').addEventListener('click', openQRCamera)

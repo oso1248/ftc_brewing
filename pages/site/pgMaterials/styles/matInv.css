@@ -28,18 +28,11 @@ input, label {
   height: 40px;
 } */
 
-/* .qrcode-text-btn > input[type=file] {
+.qrcode-text-btn > input[type=file] {
   position:absolute;  
   overflow:hidden; 
   width:1px; 
   height:1px; 
   opacity:0
-} */
+}
 
-/* .boxes {
-  display: grid;
-  grid-gap: 25px;
-  padding: 25;
-  list-style: none;
-  grid-template-columns: repeat(2, 1fr);
-} */

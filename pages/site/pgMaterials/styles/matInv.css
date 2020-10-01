@@ -1,15 +1,13 @@
 .qrhead {
   /* display: grid; */
   /* grid-area: "back input"; */
-  /* width: 60%;
-  margin-right: 20%;
+  /* width: 100%; */
+  /* margin-right: 20%;
   margin-left: 20%; */
 }
-.back {
-  grid-area: back;
-}
-.input {
-  grid-area: input;
+.box {
+  height: 20px;
+  margin-bottom: 50px;
 }
 
 body, input {
@@ -18,10 +16,13 @@ body, input {
 
 input, label {
   vertical-align:middle;
+  width: 98%;
+  height: 50px;
 }
 
 .qrcode-text {
-  padding-right:1.7em; margin-right:0
+  padding-right:1.7em; 
+  margin-right:0
 }
 
 .qrcode-text-btn {
@@ -29,7 +30,8 @@ input, label {
   background:url(//dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg) 50% 50% no-repeat; 
   height:1em; width:1.7em; 
   margin-left:-1.7em; 
-  cursor:pointer
+  cursor:pointer;
+  height: 40px;
 }
 
 .qrcode-text-btn > input[type=file] {
@@ -38,4 +40,5 @@ input, label {
   width:1px; 
   height:1px; 
   opacity:0
+
 }

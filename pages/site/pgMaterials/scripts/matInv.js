@@ -7,7 +7,8 @@ function openQRCamera(node) {
         alert("No QR code found. Please make sure the QR code is within the camera's frame and try again.")
       } else {
         // alert(res)
-        node.parentNode.previousElementSibling.value = res
+        // node.parentNode.previousElementSibling.value = res
+        document.getElementById('commodity').value = res
       }
     }
     qrcode.decode(reader.result)

@@ -16,15 +16,14 @@
   <nav class="main-nav">
     <ul class="">
       <li><a href="../material.html">Back</a></li>
-      <li id="scanner2"><a href="">Scan</a></li>
+      <li><label id="scanner" class=qrcode-text-btn><a>Scan</a><input type=file accept="image/*" capture=environment onchange="openQRCamera(this);" tabindex=-1></label> </li>
     </ul>
   </nav>
   
   
 
   <div class="qrhead">
-    <input type=text size=16 placeholder="Commodity" class=qrcode-text>
-    <label id="scanner" class=qrcode-text-btn><input type=file accept="image/*" capture=environment onchange="openQRCamera(this);" tabindex=-1></label> 
+    <input id="comm" type=text size=16 placeholder="Commodity" class=qrcode-text>
   </div>
 
   <script src="../scripts/matInv.js"></script>

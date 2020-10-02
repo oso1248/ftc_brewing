@@ -7,10 +7,36 @@ function openQRCamera(node) {
         alert("No QR code found. Please make sure the QR code is within the camera's frame and try again.")
       } else {
         // alert(res)
-        document.getElementById('comm').value = res
+        // document.getElementById('comm').value = res
+        document.getElementById(res).selected = true
       }
     }
     qrcode.decode(reader.result)
   }
   reader.readAsDataURL(node.files[0])
 }
+
+function createNode(element) {
+  return document.createElement(element)
+}
+function append(parent, e1) {
+  return parent.appendChild(e1)
+}
+
+// function update() {
+  const commodities = document.getElementsByName('addCommodity')[0]
+  commodities.innerHTML = `<option value="" disabled selected hidden>Select Commodity</option>`
+  axios.get('/api/commodity')
+  .then(data => {
+    let commodity = data.data
+    return commodity.map(listItem => {
+
+      let commodity = createNode('option')
+      commodity.innerHTML = listItem.commodity
+      commodity.id = listItem.commodity
+      
+      append(commodities, commodity)
+    })
+  })
+  .catch(err => console.log(err.detail))
+// }

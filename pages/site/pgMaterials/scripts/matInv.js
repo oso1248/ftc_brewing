@@ -23,14 +23,13 @@ function append(parent, e1) {
   return parent.appendChild(e1)
 }
 
-// function update() {
+
   const commodities = document.getElementsByName('addCommodity')[0]
   commodities.innerHTML = `<option value="" disabled selected hidden>Select Commodity</option>`
   axios.get('/api/commodity')
   .then(data => {
     let commodity = data.data
     return commodity.map(listItem => {
-
       let commodity = createNode('option')
       commodity.innerHTML = listItem.commodity
       commodity.id = listItem.commodity
@@ -39,4 +38,12 @@ function append(parent, e1) {
     })
   })
   .catch(err => console.log(err.detail))
-// }
+
+  function resetAdd(ev){
+    ev.preventDefault();
+    console.log('reset')
+    document.getElementById('frmAdd').reset();
+  }
+
+  document.getElementById('btnAddClear').addEventListener('click', resetAdd)
+// document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)

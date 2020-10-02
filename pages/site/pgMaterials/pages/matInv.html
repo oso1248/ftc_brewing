@@ -20,40 +20,44 @@
     </ul>
   </nav>
   
-  
-
   <div class="qrhead">
     <!-- <input id="comm" type=text size=16 placeholder="Commodity" class=qrcode-text> -->
   </div>
 
   <div class="container2">
 
-  <form class="form" id="frmUpdate" action="">
-    <h2>Add to Inventory</h2>
+  <form class="form" id="frmAdd" action="">
+    <h3>Add to Inventory</h3>
     <div class="input">
       <select name="addCommodity" id="commodity">
         <!-- appended here  -->
       </select>
     </div>
     <div class="input">
-      <input type="text" name="updateContact" id="contact" Placeholder="Contact">
+      <input type="text" name="addPerPallet" id="per_pallet" Placeholder="Per Pallet">
     </div>
     <div class="input">
-      <input type="text" name="updateEmail" id="email" Placeholder="Email">
+      <input type="text" name="addPerPallet" id="pallets" Placeholder="Pallets">
     </div>
     <div class="input">
-      <input type="text" name="updatePhone" id="phone" Placeholder="Phone">
+      <input type="text" name="addUnitTotal" id="unit_total" Placeholder="Unit Total">
     </div>
     <div class="input">
-      <input type="text" name="updateAddress" id="address" Placeholder="Address">
+      <input type="text" name="addUnitTotal" id="units" Placeholder="Units">
+    </div>
+    <div class="input">
+      <input type="text" name="addCount" id="tot_count" Placeholder="Count">
+    </div>
+    <div class="input">
+      <input type="text" name="addEnd" id="tot_end" Placeholder="End Count">
     </div>
     <div class="input">
       <textarea name="updateNote" id="note" cols="21" rows="5" placeholder="Note"></textarea>
     </div>
     
     <div class="button">
-      <button class="btn" id="btnUpdateClear">Clear</button>
-      <button class="btn" id="btnUpdateSubmit">Upload</button>
+      <button class="btn" id="btnAddClear">Clear</button>
+      <button class="btn" id="btnAddSubmit">Upload</button>
     </div>
   </form>
 

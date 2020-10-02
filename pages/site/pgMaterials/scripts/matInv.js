@@ -44,6 +44,17 @@ function append(parent, e1) {
     console.log('reset')
     document.getElementById('frmAdd').reset();
   }
+  function selectCommodity(){
+    let commodity = document.getElementById('commodity').value
+    
+    axios.get('/api/commodity/' + commodity)
+      .then(data => {
+        document.getElementById('per_pallet').value = data.data.per_pallet
+        document.getElementById('unit_total').value = data.data.unit_total
+        document.getElementById('note').value = data.data.note
+      })
+  }
 
   document.getElementById('btnAddClear').addEventListener('click', resetAdd)
 // document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
+document.getElementById('commodity').addEventListener('change', selectCommodity)

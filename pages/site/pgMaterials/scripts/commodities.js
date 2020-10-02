@@ -356,6 +356,7 @@ async function sendUpdate(ev){
   }
 
   let fails = await validateUpdate(data)
+  console.log(data)
   if(fails.length === 0) {
     
     let name = document.getElementsByName('updateCommodity')[0].value

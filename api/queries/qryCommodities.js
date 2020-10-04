@@ -87,6 +87,7 @@ function getByName(name) {
     .join('mtl_container as con', 'com.container_id', '=', 'con.id')
     .join('mtl_supplier as sup', 'com.supplier_id', '=', 'sup.id')
     .select(
+      'com.id',
       'com.commodity',
       'com.sap',
       'com.active',

@@ -109,7 +109,7 @@ async function sendAdd(ev){
   let fails = await validateAdd(data)
   
   if(fails.length === 0) {
-    let total = data.total_per_unit * data.total_count
+    let total = ((parseFloat(data.per_pallet) * parseFloat(data.pallets)) + parseFloat(data.total_count)) * parseFloat(data.total_per_unit)
     // data.push({total_end: total}) 
     data.total_end = total
 

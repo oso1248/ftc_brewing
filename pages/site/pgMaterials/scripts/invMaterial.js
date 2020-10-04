@@ -105,19 +105,20 @@ async function sendAdd(ev){
     let name = form.elements[i].value
     data[id] = name
   }
-  console.log(data)
+  // console.log(data)
   let fails = await validateAdd(data)
   
   if(fails.length === 0) {
-    
+    let total = data.total_per_unit * data.total_count
+    // data.push({total_end: total}) 
+    data.total_end = total
 
-    
     // axios.post('/api/supplier', data)
     //   .then(data => {
     //     alert(data.data.company + ' has been added')
     //   })
     //   .catch(err => alert(err))
-    console.log('im in')
+    alert(JSON.stringify(data))
     deleteRow(data.com_id)
   } else {
     let msg = "Problems:\n"

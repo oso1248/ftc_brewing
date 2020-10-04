@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weekly Inv</title>
 
+  <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
+
   <script src="https://dmla.github.io/jsqrcode/src/qr_packed.js"></script>
 
   <link rel="stylesheet" href="../../commonCSS/styles.css">
@@ -29,7 +32,7 @@
   <form class="form" id="frmAdd" action="">
     <h3>Add to Inventory</h3>
     <div class="input">
-      <select name="addCommodity" id="commodity">
+      <select name="addCommodity" id="com_id">
         <!-- appended here  -->
       </select>
     </div>
@@ -43,16 +46,16 @@
     </div>
     <div class="tooltip input">
       <span class="tooltiptext">Unit Total</span>
-      <input type="number" name="addUnitTotal" id="unit_total" Placeholder="Unit Total">
+      <input type="number" name="addUnitTotal" id="total_per_unit" Placeholder="Unit Total">
     </div>
     <div class="tooltip input">
       <span class="tooltiptext">Count</span>
-      <input type="number" name="addCount" id="tot_count" Placeholder="Count">
+      <input type="number" name="addCount" id="total_count" Placeholder="Count">
     </div>
-    <div class="tooltip input">
+    <!-- <div class="tooltip input">
       <span class="tooltiptext">End Count</span>
-      <input type="number" name="addEnd" id="tot_end" Placeholder="End Count">
-    </div>
+      <input type="text" name="addEnd" id="total_end" Placeholder="End Count">
+    </div> -->
     <div class="input">
       <textarea name="updateNote" id="note" cols="21" rows="5" placeholder="Note"></textarea>
     </div>
@@ -63,9 +66,12 @@
     </div>
   </form>
 
+  <h4 class="remain">Remaining Commodities</h4>
+  <div id="list"></div>
+
 </div>
 
 
-  <script src="../scripts/matInv.js"></script>
+  <script src="../scripts/invMaterial.js"></script>
 </body>
 </html>

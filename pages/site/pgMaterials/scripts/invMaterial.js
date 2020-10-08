@@ -36,6 +36,34 @@ String.prototype.testNanFormat = function () {
     return (/^\d+(\.\d{1,2})?$/).test(this)
 }
 
+async function processArray(array) {
+  for (const item of array) {
+    await deleteRow(item.commodity)
+    console.log(item.commodity)
+  }
+}
+
+async function deleteOnLoad() {
+  let dt = moment().format('YYYY-MM-DD HH:MM')
+  let data = {}
+  data.startDate = moment(dt).startOf('day').format('YYYY-MM-DD HH:MM')
+  data.endDate = moment(dt).endOf('day').format('YYYY-MM-DD HH:MM')
+  
+  axios.post('/api/inventory/material/view', data)
+    .then(res => {
+    // let commodities = []
+    res.data.forEach(async (item) => {
+      setTimeout(function(){
+        deleteRow(item.commodity)
+        console.log(item.commodity)
+      }, 500);
+      // commodities.push(item.commodity)
+      // await deleteRow(item.commodity)
+      // console.log(item.commodity)
+    }) 
+  })
+    .catch(err => console.log(err))
+}
 function loadCommodities() {
   const commodities = document.getElementsByName('addCommodity')[0]
   commodities.innerHTML = `<option value="" disabled selected hidden>Select Commodity</option>`
@@ -65,6 +93,7 @@ function commodityList() {
         columns:[
         {title:"Commodity", field:"commodity",hozAlign:"left", frozen:true},
         {title:"Location", field:"location",hozAlign:"left"},
+        {title:"Active", field:"active",hozAlign:"left"},
         ],
       })
     })
@@ -85,13 +114,17 @@ async function selectCommodity(){
 
       document.getElementById('pallets').value = ""
       document.getElementById('total_count').value = ""
-      // document.getElementById('total_end').value = ""
+      
+      if(data.data.active === 'No') {
+        let msg = `${data.data.commodity} is Active No.\nOnly Add to Inventory if Needed.`
+        alert(msg)
+      }
     })
 }
-function deleteRow(commodity) {
-  commodityTable.getRows()
-    .filter(row => row.getData().commodity == commodity)
-    .forEach(row => row.delete());
+async function deleteRow(commodity) {
+    commodityTable.getRows()
+      .filter(row => row.getData().commodity == commodity)
+      .forEach(row => row.delete())
 }
 async function sendAdd(ev){
   ev.preventDefault() 
@@ -105,21 +138,24 @@ async function sendAdd(ev){
     let name = form.elements[i].value
     data[id] = name
   }
-  // console.log(data)
   let fails = await validateAdd(data)
   
   if(fails.length === 0) {
-    let total = ((parseFloat(data.per_pallet) * parseFloat(data.pallets)) + parseFloat(data.total_count)) * parseFloat(data.total_per_unit)
-    // data.push({total_end: total}) 
-    data.total_end = total
+    let total_end = ((parseFloat(data.per_pallet) * parseFloat(data.pallets)) + parseFloat(data.total_count)) * parseFloat(data.total_per_unit) 
+    let total_count = ((parseFloat(data.per_pallet) * parseFloat(data.pallets)) + parseFloat(data.total_count)) 
 
-    // axios.post('/api/supplier', data)
-    //   .then(data => {
-    //     alert(data.data.company + ' has been added')
-    //   })
-    //   .catch(err => alert(err))
-    alert(JSON.stringify(data))
-    deleteRow(data.com_id)
+    data.total_end = total_end
+    data.total_count = total_count
+    delete data['per_pallet']
+    delete data['pallets']
+
+    axios.post('/api/inventory/material/weekly', data)
+      .then(data => {
+        let msg = `${data.data[0].commodity}\n ${data.data[0].total_end} ${data.data[0].uom}\n Added to Inventory`
+        alert(msg)
+        deleteRow([data.data[0].commodity])
+      })
+      .catch(err => alert(err))
   } else {
     let msg = "Problems:\n"
     for(i = 0; i < fails.length; i++) {
@@ -135,10 +171,6 @@ async function validateAdd (data){
       failures.push({input:'commodity', msg:'Required'})
       data.com_id = null
   }
-  // if(data.per_pallet === "" && data.pallets !== ""){
-  //   failures.push({input:'Per Pallet', msg:'Required'})
-  //   data.per_pallet = null
-  // }
   if(data.per_pallet === ""){
     failures.push({input:'per pallet', msg:'Required'})
     data.per_pallet = null
@@ -171,7 +203,9 @@ document.getElementById('btnAddClear').addEventListener('click', resetAdd)
 document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
 document.getElementById('com_id').addEventListener('change', selectCommodity)
 
-window.addEventListener('DOMContentLoaded', (ev) => {
-  loadCommodities()
-  commodityList()
+window.addEventListener('DOMContentLoaded',async (ev) => {
+  
+  await loadCommodities()
+  await commodityList()
+  await deleteOnLoad()
 })

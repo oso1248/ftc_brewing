@@ -23,5 +23,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTableIfExists('inv_mat')
+  return knex.schema.dropTableIfExists('inv_mat_weekly')
 };

@@ -14,7 +14,6 @@ function login(ev) {
     let name = form.elements[i].value
     data[id] = name
   }
-  console.log(data)
   fetch(api, {
     headers: {
       'Accept': 'application/json',

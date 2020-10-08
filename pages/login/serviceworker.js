@@ -8,6 +8,7 @@ var CACHE_STATIC_NAME = 'static-v001'
 var CACHE_DYNAMIC_NAME = 'dynamic-v002'
 
 self.addEventListener('install', function (event) {
+  self.skipWaiting()
   console.log('Installing Service Worker ...', event)
   event.waitUntil(
     caches.open(CACHE_STATIC_NAME)

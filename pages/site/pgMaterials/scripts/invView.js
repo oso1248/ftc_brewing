@@ -52,7 +52,7 @@ function invDates() {
 
         let invDate = createNode('option')
         invDate.innerHTML = moment(listItem.date_trunc).format('YYYY-MM-DD')
-        
+        console.log(moment(listItem.date_trunc).format('YYYY-MM-DD'))
         append(invDates, invDate)
       })
     })
@@ -203,4 +203,4 @@ document.getElementById('view').onclick = view
 
 window.addEventListener('DOMContentLoaded', (ev) => {
   invDates() 
-})
+}) 

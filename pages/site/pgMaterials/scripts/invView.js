@@ -51,8 +51,9 @@ function invDates() {
       return invDate.map(listItem => {
 
         let invDate = createNode('option')
-        invDate.innerHTML = moment(listItem.date_trunc).add(1,'day').format('YYYY-MM-DD')
-        console.log(moment(listItem.date_trunc).add(1,'day').format('YYYY-MM-DD'))
+        // invDate.innerHTML = moment(listItem.date_trunc).add(1,'day').format('YYYY-MM-DD')
+        invDate.innerHTML = moment(listItem.date_trunc).format('YYYY-MM-DD')
+        // console.log(moment(listItem.date_trunc).add(1,'day').format('YYYY-MM-DD'))
         append(invDates, invDate)
       })
     })

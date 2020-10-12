@@ -1,7 +1,7 @@
 document.getElementById('updateBoxes').style.display="none"
 document.getElementById('attView').style.display="none"
 const api = '/api/brewery'
-
+let DateTime = luxon.DateTime
 
 function createNode(element) {
   return document.createElement(element)
@@ -49,11 +49,8 @@ function invDates() {
     .then(data => {
       let invDate = data.data.rows
       return invDate.map(listItem => {
-
         let invDate = createNode('option')
-        // invDate.innerHTML = moment(listItem.date_trunc).add(1,'day').format('YYYY-MM-DD')
-        invDate.innerHTML = moment(listItem.date_trunc).format('YYYY-MM-DD')
-        // console.log(moment(listItem.date_trunc).add(1,'day').format('YYYY-MM-DD'))
+        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc).toFormat('yyyy-MM-dd')
         append(invDates, invDate)
       })
     })
@@ -63,21 +60,18 @@ function view() {
   document.getElementById('updateBoxes').style.display="none"
   document.getElementById('attView').style.display="block"
   invDates()
-  
 }
 let invTable
 function invMatTable() {
   let dt = document.getElementById('invMatWeekly').value
-  
   let data = {}
-  data.startDate = moment(dt).startOf('day').format('YYYY-MM-DD HH:MM')
-  data.endDate = moment(dt).endOf('day').format('YYYY-MM-DD HH:MM')
+  data.startDate = DateTime.fromISO(dt).endOf('day').minus({days: 1}).toFormat('yyyy-MM-dd TTT')
+  data.endDate = DateTime.fromISO(dt).endOf('day').toFormat('yyyy-MM-dd TTT')
   
   axios.post('/api/inventory/material/view', data)
     .then(res => {
     for(let i = 0; i < res.data.length; i++) {
-      res.data[i].created_at = moment(res.data[i].created_at).format('YYYY-MM-DD')
-      
+      res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd')
     }
       let tableData = res.data
       invTable = new Tabulator("#listView", {
@@ -194,7 +188,7 @@ function supplierExcel(){
   supplierTable.download("xlsx", "suppliers.xlsx", {sheetName:"Suppliers"})
 }
 
-document.getElementById("print-table").addEventListener('click', supplierPrint)
+document.getElementById('print-table').addEventListener('click', supplierPrint)
 function supplierPrint(){
   supplierTable.print(false, true);
 }
@@ -202,6 +196,4 @@ function supplierPrint(){
 document.getElementById('update').onclick = update
 document.getElementById('view').onclick = view
 
-window.addEventListener('DOMContentLoaded', (ev) => {
-  invDates() 
-}) 
+window.addEventListener('DOMContentLoaded', (ev) => { invDates() }) 

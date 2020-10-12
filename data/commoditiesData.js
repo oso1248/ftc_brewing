@@ -58,21 +58,21 @@ const mtl_supplier = [
 ]
 
 const mtl_commodidity = [
-  {commodity: 'AB 50 10' ,active: 'Yes' ,sap: '1493222' ,inventory: 'Fin' ,threshold: 4 ,per_pallet: 4,unit_total: 605 ,note: '' ,uom_id: 3 ,type_id: 5 ,location_id: 4 ,enviro_id: 4,container_id: 4 ,supplier_id: 2},
+  {commodity: 'Herkules Pre Iso' ,active: 'Yes' ,sap: '1493222' ,inventory: 'Fin' ,threshold: 4 ,per_pallet: 4,unit_total: 605 ,note: '' ,uom_id: 3 ,type_id: 5 ,location_id: 4 ,enviro_id: 4,container_id: 4 ,supplier_id: 2},
 
   {commodity: 'Briess C20 50' ,active: 'Yes' ,sap: '1397607' ,inventory: 'Brw' ,threshold: 200 ,per_pallet: 40,unit_total: 50 ,note: '' ,uom_id: 3 ,type_id: 6 ,location_id: 4 ,enviro_id: 3,container_id: 2 ,supplier_id: 5},
 
-  {commodity: 'Caramel Rye 1090' ,active: 'Yes' ,sap: '1815958' ,inventory: 'Brw' ,threshold: 5 ,per_pallet: 1,unit_total: 1090 ,note: '' ,uom_id: 3 ,type_id: 6 ,location_id: 4 ,enviro_id: 3,container_id: 7 ,supplier_id: 5},
+  {commodity: 'Carahell 800' ,active: 'Yes' ,sap: '1815958' ,inventory: 'Brw' ,threshold: 5 ,per_pallet: 1,unit_total: 1090 ,note: '' ,uom_id: 3 ,type_id: 6 ,location_id: 4 ,enviro_id: 3,container_id: 7 ,supplier_id: 5},
 
   {commodity: 'Cascade' ,active: 'Yes' ,sap: '1752767' ,inventory: 'Brw' ,threshold: 25 ,per_pallet: 25,unit_total: 44 ,note: '' ,uom_id: 3 ,type_id: 1 ,location_id: 2 ,enviro_id: 2,container_id: 1 ,supplier_id: 4},
 
-  {commodity: 'Centennial' ,active: 'Yes' ,sap: '1753301' ,inventory: 'Brw' ,threshold: 25 ,per_pallet: 25,unit_total: 44 ,note: '' ,uom_id: 3 ,type_id: 1 ,location_id: 2 ,enviro_id: 2,container_id: 1 ,supplier_id: 4},
+  {commodity: 'Palisade' ,active: 'Yes' ,sap: '1753301' ,inventory: 'Brw' ,threshold: 25 ,per_pallet: 25,unit_total: 44 ,note: '' ,uom_id: 3 ,type_id: 1 ,location_id: 2 ,enviro_id: 2,container_id: 1 ,supplier_id: 4},
 
   {commodity: 'Eclipse' ,active: 'Yes' ,sap: '1602671' ,inventory: 'Fin' ,threshold: 20 ,per_pallet: 20,unit_total: 2.59987987987 ,note: '' ,uom_id: 1 ,type_id: 5 ,location_id: 4 ,enviro_id: 4,container_id: 5 ,supplier_id: 3},
 
   {commodity: 'Cane Sugar Liquid' ,active: 'Yes' ,sap: '1786708' ,inventory: 'Fin' ,threshold: 10 ,per_pallet: 1,unit_total: 3000 ,note: '' ,uom_id: 3 ,type_id: 3 ,location_id: 5 ,enviro_id: 3,container_id: 3 ,supplier_id: 3},
 
-  {commodity: 'Nugget' ,active: 'Yes' ,sap: '1753037' ,inventory: 'Brw' ,threshold: 25 ,per_pallet: 25,unit_total: 44 ,note: '' ,uom_id: 3 ,type_id: 1 ,location_id: 2 ,enviro_id: 2,container_id: 1 ,supplier_id: 4},
+  {commodity: 'Citra' ,active: 'Yes' ,sap: '1753037' ,inventory: 'Brw' ,threshold: 25 ,per_pallet: 25,unit_total: 44 ,note: '' ,uom_id: 3 ,type_id: 1 ,location_id: 2 ,enviro_id: 2,container_id: 1 ,supplier_id: 4},
 
   {commodity: 'Strawberry Sky Juice' ,active: 'Yes' ,sap: '1847147' ,inventory: 'Fin' ,threshold: 1 ,per_pallet: 1,unit_total: 275 ,note: '' ,uom_id: 1 ,type_id: 5 ,location_id: 4 ,enviro_id: 3,container_id: 3 ,supplier_id: 2},
 

@@ -16,7 +16,9 @@ String.prototype.toNonAlpha = function (spaces) {
     return this.replace(/[^0-9a-z]/gi, '')
   }
 }
-
+String.prototype.testNanFormat = function () {
+  return (/^\d+(\.\d{1,2})?$/).test(this)
+}
 
 function createNode(element) {
   return document.createElement(element)
@@ -152,10 +154,6 @@ function update() {
 }
 let commodityTable
 function view() {
-  // document.getElementById('frmAdd').style.display="none"
-  // document.getElementById('frmDelete').style.display="none"
-  // document.getElementById('frmUpdate').style.display="none"
-  // document.getElementById('list').style.display="block"
   document.getElementById('updateBoxes').style.display="none"
   document.getElementById('deleteBoxes').style.display="none"
   document.getElementById('attView').style.display="block"
@@ -303,33 +301,26 @@ async function validateAdd (data){
   if(data.threshold === ""){
     failures.push({input:'threshold', msg:'Required'})
     data.threshold = null
-  } else {
-    data.threshold = data.threshold.toNonAlpha()
+  } else if(!data.threshold.testNanFormat()) {
+    failures.push({input:'threshold', msg:'To 2 Decimals Only'})
+    data.threshold = null
   } 
-  if(isNaN(data.threshold)){
-    failures.push({input:'threshold', msg:'Not A Number'})
-  }
-
+  
   if(data.per_pallet === ""){
     failures.push({input:'pallet', msg:'Required'})
     data.per_pallet = null
-  } else {
-    data.per_pallet = data.per_pallet.toNonAlpha()
+  } else if(!data.per_pallet.testNanFormat()) {
+    failures.push({input:'pallet', msg:'To 2 Decimals Only'})
+    data.per_pallet = null
   }
-  if(isNaN(data.per_pallet)){
-    failures.push({input:'pallet', msg:'Not A Number'})
-  }
-
+  
   if(data.unit_total === ""){
     failures.push({input:'unit', msg:'Required'})
     data.unit_total = null
-  } else {
-    data.unit_total = data.unit_total.toNonAlpha()
+  } else if(!data.unit_total.testNanFormat()) {
+    failures.push({input:'unit total', msg:'To 2 Decimals Only'})
   } 
-  if(isNaN(data.unit_total)){
-    failures.push({input:'unit', msg:'Not A Number'})
-  }
-
+  
   if(data.uom_id === ""){
     failures.push({input:'uom', msg:'Required'})
     data.uom_id = null
@@ -417,34 +408,27 @@ function validateUpdate(data){
     data.enviro_id = null
   }
 
-  if(data.threshold === ''){
+  if(data.threshold === ""){
     failures.push({input:'threshold', msg:'Required'})
     data.threshold = null
-  } else {
-    data.threshold = data.threshold.toNonAlpha()
-  } 
-  if(isNaN(data.threshold)){
-    failures.push({input:'threshold', msg:'Not A Number'})
+  } else if(!data.threshold.testNanFormat()) {
+    failures.push({input:'threshold', msg:'To 2 Decimals Only'})
+    data.threshold = null
   }
 
-  if(data.per_pallet === ''){
+  if(data.per_pallet === ""){
     failures.push({input:'pallet', msg:'Required'})
     data.per_pallet = null
-  } else {
-    data.per_pallet = data.per_pallet.toNonAlpha()
-  }
-  if(isNaN(data.per_pallet)){
-    failures.push({input:'pallet', msg:'Not A Number'})
+  } else if(!data.per_pallet.testNanFormat()) {
+    failures.push({input:'pallet', msg:'To 2 Decimals Only'})
+    data.per_pallet = null
   }
 
-  if(data.unit_total === ''){
+  if(data.unit_total === ""){
     failures.push({input:'unit', msg:'Required'})
     data.unit_total = null
-  } else {
-    data.unit_total = data.unit_total.toNonAlpha()
-  } 
-  if(isNaN(data.unit_total)){
-    failures.push({input:'unit', msg:'Not A Number'})
+  } else if(!data.unit_total.testNanFormat()) {
+    failures.push({input:'unit total', msg:'To 2 Decimals Only'})
   }
 
   if(data.uom_id === ''){

@@ -1,3 +1,5 @@
+let DateTime = luxon.DateTime
+
 function openQRCamera(node) {
   let reader = new FileReader();
   reader.onload = function() {
@@ -9,18 +11,22 @@ function openQRCamera(node) {
         // alert(res)
         // document.getElementById('comm').value = res
         document.getElementById(res).selected = true
+        selectCommodity()      
       }
     }
     qrcode.decode(reader.result)
   }
   reader.readAsDataURL(node.files[0])
+  
 }
+
 function createNode(element) {
   return document.createElement(element)
 }
 function append(parent, e1) {
   return parent.appendChild(e1)
 }
+
 String.prototype.toProperCase = function () {
   return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + 
     txt.substr(1).toLowerCase()})
@@ -44,22 +50,17 @@ async function processArray(array) {
 }
 
 async function deleteOnLoad() {
-  let dt = moment().format('YYYY-MM-DD HH:MM')
   let data = {}
-  data.startDate = moment(dt).startOf('day').format('YYYY-MM-DD HH:MM')
-  data.endDate = moment(dt).endOf('day').format('YYYY-MM-DD HH:MM')
-  
+  data.startDate = DateTime.local().endOf('day').minus({days: 1}).toFormat('yyyy-MM-dd TTT')
+  data.endDate = DateTime.local().endOf('day').toFormat('yyyy-MM-dd TTT')
+  console.log(data)
   axios.post('/api/inventory/material/view', data)
     .then(res => {
-    // let commodities = []
-    res.data.forEach(async (item) => {
-      setTimeout(function(){
-        deleteRow(item.commodity)
-        console.log(item.commodity)
-      }, 500);
-      // commodities.push(item.commodity)
-      // await deleteRow(item.commodity)
-      // console.log(item.commodity)
+      res.data.forEach(async (item) => {
+        setTimeout(function(){
+          deleteRow(item.commodity)
+          console.log(item.commodity)
+        }, 500);
     }) 
   })
     .catch(err => console.log(err))
@@ -204,7 +205,6 @@ document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
 document.getElementById('com_id').addEventListener('change', selectCommodity)
 
 window.addEventListener('DOMContentLoaded',async (ev) => {
-  
   await loadCommodities()
   await commodityList()
   await deleteOnLoad()

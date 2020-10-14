@@ -86,6 +86,6 @@ select {
   }
 
   body {
-    margin: 0mm 0mm 0mm 0mm; /* margin you want for the content */
+    margin: -2mm 0mm 0mm 0mm; /* margin you want for the content */
   }
 }

@@ -1,0 +1,50 @@
+.container2 {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.button button {
+  background-color: cornflowerblue;
+  border: 1px solid green;
+  color: white;
+  padding: 10px 24px; 
+  cursor: pointer; 
+  width: 20%;
+  margin: 0px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.button button:hover {
+  background-color: #3e8e41;
+}
+
+.btnLabel {
+  width: 60%;
+}
+
+@media (max-width: 850px) {
+  .form input, textarea, select, option {
+  width: 70%;  
+  }
+  .button button {
+  width: 35%;
+  }
+  #note {
+    width: 70%;
+  }
+}  
+@media (max-width: 700px) {
+  .form input, textarea, select, option {
+  width: 90%; 
+  }
+  .button button {
+  width: 45%;
+  }
+  #note {
+    width: 90%;
+  }
+  .supplier {
+    font-size: 12px;
+  }
+}

@@ -96,10 +96,6 @@ function uom(dropDown, func){
 
 // Views
 function add() {
-  // document.getElementById('frmUpdate').style.display="none"
-  // document.getElementById('frmDelete').style.display="none"
-  // document.getElementById('list').style.display="none"
-  // document.getElementById('frmAdd').style.display="block"
   document.getElementById('updateBoxes').style.display="none"
   document.getElementById('deleteBoxes').style.display="none"
   document.getElementById('attView').style.display="none"

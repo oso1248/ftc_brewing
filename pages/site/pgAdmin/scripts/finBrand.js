@@ -3,7 +3,6 @@ document.getElementById('updateBoxes').style.display="none"
 document.getElementById('deleteBoxes').style.display="none"
 document.getElementById('attView').style.display="none"
 
-
 function createNode(element) {
   return document.createElement(element)
 }
@@ -33,6 +32,9 @@ String.prototype.toProperCase = function () {
 String.prototype.toNonAlpha = function () {
   return this.replace(/[^0-9a-z]/gi, '')
 }
+String.prototype.testLengthFour = function () {
+  return (/^[^\s]{4}$/).test(this)
+}
 
 //Views
 function add() {
@@ -40,6 +42,12 @@ function add() {
   document.getElementById('deleteBoxes').style.display="none"
   document.getElementById('attView').style.display="none"
   document.getElementById('addBoxes').style.display="grid"
+
+  let dropDown = document.getElementById('brw_id')
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brew Brand</option>`
+  api = '/api/brand/brw/get'
+  title = 'brand'
+  createList(api, dropDown, title)
 }
 function update() {
   document.getElementById('deleteBoxes').style.display="none"
@@ -47,35 +55,40 @@ function update() {
   document.getElementById('addBoxes').style.display="none"
   document.getElementById('updateBoxes').style.display="grid"
 
-  let dropDown = document.getElementsByName('updateBrand')[0]
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
-  let api = '/api/brand/brw/get'
-  let title = 'brand'
+  let dropDown = document.getElementsByName('updateFinBrnd')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Fin Brand</option>`
+  let api = '/api/brand/fin/get'
+  let title = 'brndFin'
   createList(api, dropDown, title)
 
+  dropDown = document.getElementsByName('updateBrwBrnd')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brew Brand</option>`
+  api = '/api/brand/brw/get'
+  title = 'brand'
+  createList(api, dropDown, title)
 }
+let brandTable
 function view() {
   document.getElementById('updateBoxes').style.display="none"
   document.getElementById('deleteBoxes').style.display="none"
   document.getElementById('attView').style.display="grid"
   document.getElementById('addBoxes').style.display="none"
 
-
-  axios.post('/api/brand/brw/get', {active:false})
+  axios.post('/api/brand/fin/get', {active: false})
     .then(res => {
       let tableData = res.data
-      var table = new Tabulator("#list", {
+      brandTable = new Tabulator("#list", {
         resizableColumns:false,
         height:"309px",
         layout:"fitDataFill",
+        responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
-        {title:"Brand", field:"brand",hozAlign:"center"},
+        // {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
+        {title:"Fin Brand", field:"brndFin",hozAlign:"center", frozen:true},
         {title:"Active", field:"active",hozAlign:"center"},
-        {title:"Standard Hops", field:"hop_std",hozAlign:"center"},
-        {title:"Craft Hops", field:"hop_crft",hozAlign:"center"},
-        {title:"Dry Hops", field:"hop_dry",hozAlign:"center"},
-        {title:"Super Sacks", field:"supr_sac",hozAlign:"center"},
+        {title:"Brw Brand", field:"brndBrw",hozAlign:"center"},
+        {title:"Pck Brand", field:"brndPck",hozAlign:"center"},
         {title:"Note", field:"note", hozAlign:"center"},
         ],
       })
@@ -97,13 +110,11 @@ function del() {
 
 }
 
-
-//Routes Add Clear Form
+//Routes Add
 function resetAdd(ev){
   ev.preventDefault();
-  document.getElementById('frmAdd').reset()
+  document.getElementById('frmAdd').reset();
 }
-//Routes Add
 async function sendAdd(ev){
   ev.preventDefault() 
   ev.stopPropagation()
@@ -114,17 +125,18 @@ async function sendAdd(ev){
   for (i = 0; i < form.length - 2; i++) {
     let id = form.elements[i].id
     let name = form.elements[i].value.toProperCase()
-    if(id == 'brand'){
+    if(id == 'brw_id'){
+      name = name.toNonAlpha().toUpperCase()
+    } else if (id == 'brand') {
       name = name.toNonAlpha().toUpperCase()
     }
     data[id] = name
   }
   let fails = await validateAdd(data)
   if(fails.length === 0) {
-    axios.post('/api/brand/brw', data)
+    axios.post('/api/brand/fin', data)
       .then(data => {
-        alert(data.data.brand + ' has been added')
-        document.getElementById('frmAdd').reset()
+        alert(data.data.brndFin + ' has been added')
       })
       .catch(err => alert(err))
       // .catch(err => console.log(err))
@@ -139,46 +151,34 @@ async function sendAdd(ev){
 async function validateAdd(data){
   let failures = [];
   let name = data.brand
-  let query = '/api/brand/brw/' + name
+  let query = '/api/brand/fin/' + name
   let res = await axios.get(query)
 
   if(res.data.msg !== 'null') {
     failures.push({input:'brand', msg:'Taken'})
-  } 
-  if( data.brand === ""){
-      failures.push({input:'brand', msg:'Required Field'})
-      data.brand = null
   }
-  if( data.hop_std === ""){
-    failures.push({input:'standard hops', msg:'Required Field'})
-    data.hop_std = null
+  if(data.brand === ""){
+    failures.push({input:'brand', msg:'Required Field'})
+    data.brand = null
+  } else if (!data.brand.testLengthFour()) {
+      failures.push({input:'brand', msg:'4 Characters Only'})
   }
-  if( data.hop_crft === ""){
-    failures.push({input:'craft hops', msg:'Required Field'})
-    data.hop_crft = null
-  }
-  if( data.hop_dry === ""){
-    failures.push({input:'dry hops', msg:'Required Field'})
-    data.hop_dry = null
-  }
-  if( data.supr_sac === ""){
-    failures.push({input:'super sacks', msg:'Required Field'})
-    data.supr_sac = null
+  if( data.brw_id === ""){
+    failures.push({input:'brew brand', msg:'Required Field'})
+    data.brw_id = null
   }
   if( data.active === ""){
     failures.push({input:'active', msg:'Required Field'})
-    data.supr_sac = null
+    data.active = null
   }
   return failures
 }
 
-
-//Routes Update Clear form
+//Routes Update
 function resetUpdate(ev){
   ev.preventDefault();
   document.getElementById('frmUpdate').reset()
 }
-//Routes Update
 async function sendUpdate(ev){
   ev.preventDefault() 
   ev.stopPropagation()
@@ -194,10 +194,10 @@ async function sendUpdate(ev){
   }
   let fails = await validateUpdate(data)
   if(fails.length === 0) {
-    let brand = document.getElementsByName('updateBrand')[0].value
-    axios.patch('/api/brand/brw/' + brand, data)
+    let brand = document.getElementsByName('updateFinBrnd')[0].value
+    axios.patch('/api/brand/fin/' + brand, data)
       .then(data => {
-        alert(data.data.brand + ' has been updated')
+        alert(data.data.brndFin + ' has been updated')
         document.getElementById('frmUpdate').reset()
       })
       .catch(err => alert(err))
@@ -211,54 +211,38 @@ async function sendUpdate(ev){
 }
 async function validateUpdate(data){
   let failures = []
-  let brand = document.getElementsByName('updateBrand')[0].value
-  if( brand === ""){
-      failures.push({input:'brand', msg:'Required Field'})
-      data.brand = null
+  let name = document.getElementsByName('updateFinBrnd')[0].value
+  if (name === ""){
+    failures.push({input:'brand', msg:'Required Field'})
+  } else if (!name.testLengthFour()) {
+      failures.push({input:'brand', msg:'4 Characters Only'})
   }
-  if( data.hop_std === ""){
-    failures.push({input:'standard hops', msg:'Required Field'})
-    data.hop_std = null
-  }
-  if( data.hop_crft === ""){
-    failures.push({input:'craft hops', msg:'Required Field'})
-    data.hop_crft = null
-  }
-  if( data.hop_dry === ""){
-    failures.push({input:'dry hops', msg:'Required Field'})
-    data.hop_dry = null
-  }
-  if( data.supr_sac === ""){
-    failures.push({input:'super sacks', msg:'Required Field'})
-    data.supr_sac = null
+  if( data.brw_id === ""){
+    failures.push({input:'brew brand', msg:'Required Field'})
+    data.brw_id = null
   }
   if( data.active === ""){
     failures.push({input:'active', msg:'Required Field'})
-    data.supr_sac = null
+    data.active = null
   }
   return failures
 }
 function selectBrand(){
-  let brand = document.getElementsByName('updateBrand')[0].value
+  let brand = document.getElementsByName('updateFinBrnd')[0].value
   
-  axios.get('/api/brand/brw/' + brand)
+  axios.get('/api/brand/fin/' + brand)
     .then(data => {
-      document.getElementsByName('updateStandard')[0].value = data.data.hop_std
-      document.getElementsByName('updateCraft')[0].value = data.data.hop_crft
-      document.getElementsByName('updateDry')[0].value = data.data.hop_dry
-      document.getElementsByName('updateSuper')[0].value = data.data.supr_sac
+      document.getElementsByName('updateBrwBrnd')[0].value = data.data.brndBrw
       document.getElementsByName('updateActive')[0].value = data.data.active
       document.getElementsByName('updateNote')[0].value = data.data.note
     })
 }
 
-
-//Routes Delete Clear Form
+//Routes Delete
 function resetDelete(ev){
   ev.preventDefault();
   document.getElementById('frmDelete').reset();
 }
-// Routes delete
 async function sendDelete(ev){
   ev.preventDefault() 
   ev.stopPropagation()
@@ -274,7 +258,6 @@ async function sendDelete(ev){
     })
     .catch(err => alert(err.detail))
 }
-
 
 //Clear forms add
 document.getElementById('btnAddClear').addEventListener('click', resetAdd)
@@ -292,10 +275,20 @@ document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
 document.getElementById('btnDeleteSubmit').addEventListener('click', sendDelete)
 
 
-document.getElementsByName('updateBrand')[0].addEventListener('change', selectBrand)
+document.getElementsByName('updateFinBrnd')[0].addEventListener('change', selectBrand)
 
 
 document.getElementById('add').onclick = add
 document.getElementById('update').onclick = update
 document.getElementById('view').onclick = view
 document.getElementById('delete').onclick = del
+
+// document.getElementById('download-xlsx').addEventListener('click', brandExcel)
+function brandExcel(){
+  brandTable.download("xlsx", "brands.xlsx", {sheetName:"Brands"})
+}
+
+// document.getElementById("print-table").addEventListener('click', brandPrint)
+function brandPrint(){
+  brandTable.print(false, true);
+}

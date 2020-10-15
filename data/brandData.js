@@ -8,25 +8,25 @@ const brnd_brw = [
   ]
    
   const brnd_fin = [
-  {brand:"HBBL",brw_id:1,note:""},
-  {brand:"HBUD",brw_id:2,note:""},
-  {brand:"HBNL",brw_id:3,note:""},
-  {brand:"HBNS",brw_id:3,note:""},
-  {brand:"EBIN",brw_id:3,note:""},
-  {brand:"PTHD",brw_id:4,note:""},
-  {brand:"ELSP",brw_id:5,note:""},
-  {brand:"9GNC",brw_id:6,note:""},
+  {brand:"HBBL",brw_id:1,active:"Yes",note:""},
+  {brand:"HBUD",brw_id:2,active:"Yes",note:""},
+  {brand:"HBNL",brw_id:3,active:"Yes",note:""},
+  {brand:"HBNS",brw_id:3,active:"Yes",note:""},
+  {brand:"EBIN",brw_id:3,active:"Yes",note:""},
+  {brand:"PTHD",brw_id:4,active:"Yes",note:""},
+  {brand:"ELSP",brw_id:5,active:"Yes",note:""},
+  {brand:"9GNC",brw_id:6,active:"Yes",note:""},
   ]
    
   const brnd_pck = [
-  {brand:"BDL5",fin_id:1,note:""},
-  {brand:"BUD5",fin_id:2,note:""},
-  {brand:"ABN5",fin_id:3,note:""},
-  {brand:"NLS5",fin_id:4,note:""},
-  {brand:"NTI6",fin_id:5,note:""},
-  {brand:"BLP6",fin_id:6,note:""},
-  {brand:"ES18",fin_id:7,note:""},
-  {brand:"GNX7",fin_id:8,note:""},
+  {brand:"BDL5",fin_id:1,active:"Yes",note:""},
+  {brand:"BUD5",fin_id:2,active:"Yes",note:""},
+  {brand:"ABN5",fin_id:3,active:"Yes",note:""},
+  {brand:"NLS5",fin_id:4,active:"Yes",note:""},
+  {brand:"NTI6",fin_id:5,active:"Yes",note:""},
+  {brand:"BLP6",fin_id:6,active:"Yes",note:""},
+  {brand:"ES18",fin_id:7,active:"Yes",note:""},
+  {brand:"GNX7",fin_id:8,active:"Yes",note:""},
   ]
    
   const fin_smpl = [

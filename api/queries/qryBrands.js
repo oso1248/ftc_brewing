@@ -5,8 +5,15 @@ async function addBrw(data) {
   const [{brand}]= await db('brnd_brw').insert(data, ['brand'])
   return getByNameBrw(brand)
 }
-function getAllBrw() {
-  return db('brnd_brw').orderBy('brand')
+function getAllBrw(active) {
+  if(active) {
+  return db('brnd_brw AS brw')
+  .where('active', '=', 'Yes')
+    .orderBy('brand')
+  } else {
+    return db('brnd_brw AS brw')
+    .orderBy([{column:'active',order:'desc'},{ column:'brand'}])
+  }
 }
 function getByNameBrw(name) {
   return db('brnd_brw')
@@ -35,22 +42,44 @@ async function addFin(data) {
   const [{brand}]= await db('brnd_fin').insert(data, ['brand'])
   return getByNameFin(brand)
 }
-function getAllFin() {
-  return db('brnd_fin AS fin')
-    .join('brnd_brw AS brw','fin.brw_id','=','brw.id')
-    .select(
-      'fin.brand AS brndFin',
-      'brw.brand AS brndBrw',
-      'fin.note'
-    )
-    .orderBy('fin.brand')
+function getAllFin(active) {
+  if(active) {
+    return db('brnd_fin AS fin')
+      .join('brnd_brw AS brw','fin.brw_id','=','brw.id')
+      .leftOuterJoin('brnd_pck as pck','pck.fin_id','=','fin.id')
+      .select(
+        'fin.brand AS brndFin',
+        'fin.active AS active',
+        'pck.brand AS brndPck',
+        'brw.brand AS brndBrw',
+        'fin.note'
+      )
+      .where('fin.active', '=', 'Yes')
+      .orderBy('fin.brand')
+  } else {
+    return db('brnd_fin AS fin')
+      .join('brnd_brw AS brw','fin.brw_id','=','brw.id')
+      .leftOuterJoin('brnd_pck as pck','pck.fin_id','=','fin.id')
+      .select(
+        'fin.brand AS brndFin',
+        'fin.active AS active',
+        'pck.brand AS brndPck',
+        'brw.brand AS brndBrw',
+        'fin.note'
+      )
+      // .orderBy('fin.brand')
+      .orderBy([{ column: 'fin.active', order: 'desc'}, { column: 'fin.brand' }])
+  }
 }
 function getByNameFin(name) {
   return db('brnd_fin AS fin')
     .join('brnd_brw AS brw','fin.brw_id','=','brw.id')
+    .leftOuterJoin('brnd_pck as pck','pck.fin_id','=','fin.id')
     .select(
       'fin.brand AS brndFin',
+      'fin.active AS active',
       'brw.brand AS brndBrw',
+      'pck.brand AS brndPck',
       'fin.note'
     )
     .where({'fin.brand': name})
@@ -117,7 +146,7 @@ module.exports = {
   changeBrw, 
   destroyBrw,
   addFin, 
-  getAllFin, 
+  getAllFin,
   getByNameFin, 
   changeFin, 
   destroyFin,

@@ -13,8 +13,8 @@ router.post('/brw', (req, res) => {
     .catch(err => res.status(500).json({msg: err.detail}))
     // .catch(err => res.status(500).send(err.detail))
 })
-router.get('/brw', (req, res) => {
-  db.getAllBrw()
+router.post('/brw/get', (req, res) => {
+  db.getAllBrw(req.body.true)
     .then(data => {
       if(data) {
         res.status(200).json(data)
@@ -62,12 +62,13 @@ router.delete('/brw/:name', (req, res) => {
 router.post('/fin', (req, res) => {
   db.addFin(req.body)
     .then(data => {
+      console.log(data)
       res.status(200).json(data)
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/fin', (req, res) => {
-  db.getAllFin()
+router.post('/fin/get', (req, res) => {
+  db.getAllFin(req.body.active)
     .then(data => {
       if(data) {
         res.status(200).json(data)

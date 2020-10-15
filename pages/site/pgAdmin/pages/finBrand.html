@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Brewhouse Brands</title>
+  <title>Admin Finsihing Brands</title>
   
 
   <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
@@ -11,14 +11,14 @@
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <link rel="stylesheet" href="../../commonCSS/styles.css">
-  <link rel="stylesheet" href="../styles/brwBrand.css">
+  <link rel="stylesheet" href="../styles/finBrand.css">
 
 </head>
 <body>
   <div class="container1"><! -- Start of Container1 -->
     <header>
       <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
-      <h1>Admin Brewhouse Brands</h1>
+      <h1>Admin Finishing Brands</h1>
       <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
        
     </header>
@@ -71,39 +71,16 @@
     <div class="formBox">
       <form class="form" id="frmAdd" action="">
         <h1>Add Brand</h1>
-        <div class="input">
-          <input type="text"  id="brand" Placeholder="Brew Brand">
-        </div>
-
 
         <div class="input">
-          <select name="add" id="hop_std">
-            <option value="" disabled selected hidden>Standard Hops</option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>  
+          <input type="text"  id="brand" Placeholder="Finishing Brand">
         </div>
+
         <div class="input">
-          <select name="add" id="hop_crft">
-            <option value="" disabled selected hidden>Craft Hops</option>
-            <option>Yes</option>
-            <option>No</option>
+          <select name="add" id="brw_id">
           </select>  
         </div>
-        <div class="input">
-          <select name="add" id="hop_dry">
-            <option value="" disabled selected hidden>Dry Hops</option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>  
-        </div>
-        <div class="input">
-          <select name="add" id="supr_sac">
-            <option value="" disabled selected hidden>Super Sacks</option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>  
-        </div>
+
         <div class="input">
           <select name="add" id="active">
             <option value="" disabled selected hidden>Active</option>
@@ -134,41 +111,17 @@
       <form class="form" id="frmUpdate" action="">
         <h1>Update Brand</h1>
         <div class="input">
-          <select name="updateBrand" id="brand"></select>
-          <!-- <input type="text"  id="location" Placeholder="location"> -->
+          <select name="updateFinBrnd" id="brand">
+            <option value="" disabled selected hidden>Select Finishing Brand</option>
+          </select>
         </div>
+        
         <div class="tooltip input">
-          <span class="tooltiptext">Standard Hops</span>
-          <select name="updateStandard" id="hop_std">
-            <option value="" disabled selected hidden>Standard Hops</option>
-            <option>Yes</option>
-            <option>No</option>
+          <span class="tooltiptext">Brew Brand</span>
+          <select name="updateBrwBrnd" id="brw_id">
           </select>  
         </div>
-        <div class="tooltip input">
-          <span class="tooltiptext">Craft Hops</span>
-          <select name="updateCraft" id="hop_crft">
-            <option value="" disabled selected hidden>Craft Hops</option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>  
-        </div>
-        <div class="tooltip input">
-          <span class="tooltiptext">Dry Hops</span>
-          <select name="updateDry" id="hop_dry">
-            <option value="" disabled selected hidden>Dry Hops</option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>  
-        </div>
-        <div class="tooltip input">
-          <span class="tooltiptext">Super Sacks</span>
-          <select name="updateSuper" id="supr_sac">
-            <option value="" disabled selected hidden>Super Sacks</option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>  
-        </div>
+
         <div class="tooltip input">
           <span class="tooltiptext">Active</span>
           <select name="updateActive" id="active">
@@ -213,12 +166,16 @@
 
 
     <div class="boxxes" id="attView">
+      <div class="button btnLabel">
+        <!-- <button class ="btn" id ="download-xlsx">Save XLSX</button> -->
+        <!-- <button class ="btn" id="print-table">Print Table</button> -->
+      </div>
       <div id="list"></div>
     </div>
 
   </div><!-- end container2 -->
 
   <script src="../../commonJS/index.js"></script>
-  <script src="../scripts/brwBrand.js"></script>
+  <script src="../scripts/finBrand.js"></script>
 </body>
 </html>

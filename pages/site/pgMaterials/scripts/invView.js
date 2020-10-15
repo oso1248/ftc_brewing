@@ -183,14 +183,14 @@ document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
 // document.getElementsByName('updateCompany')[0].addEventListener('change', selectSupplier)
 document.getElementById('invMatWeekly').addEventListener('change', invMatTable)
 
-document.getElementById('download-xlsx').addEventListener('click', supplierExcel)
-function supplierExcel(){
-  supplierTable.download("xlsx", "suppliers.xlsx", {sheetName:"Suppliers"})
+document.getElementById('download-xlsx').addEventListener('click', tableExcel)
+function tableExcel(){
+  invTable.download("xlsx", "suppliers.xlsx", {sheetName:"Suppliers"})
 }
 
-document.getElementById('print-table').addEventListener('click', supplierPrint)
-function supplierPrint(){
-  supplierTable.print(false, true);
+document.getElementById('print-table').addEventListener('click', tablePrint)
+function tablePrint(){
+  invTable.print(false, true);
 }
 
 document.getElementById('update').onclick = update

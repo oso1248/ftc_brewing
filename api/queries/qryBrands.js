@@ -108,22 +108,43 @@ async function addPck(data) {
   const [{brand}]= await db('brnd_pck').insert(data, ['brand'])
   return getByNamePck(brand)
 }
-function getAllPck() {
-  return db('brnd_pck AS pck')
-    .join('brnd_fin AS fin','pck.fin_id','=','fin.id')
-    .select(
-      'pck.brand AS brndPck',
-      'brw.brand AS brndBrw',
-      'pck.note'
-    )
-    .orderBy('pck.brand')
+function getAllPck(active) {
+  if(active) {
+    return db('brnd_fin AS fin')
+      .join('brnd_brw AS brw','fin.brw_id','=','brw.id')
+      .join('brnd_pck as pck','pck.fin_id','=','fin.id')
+      .select(
+        'pck.brand AS brndPck',
+        'pck.active as active',
+        'fin.brand AS brndFin',
+        'brw.brand AS brndBrw',
+        'pck.note'
+      )
+      .where('pck.active', '=', 'Yes')
+      .orderBy('pck.brand')
+  } else {
+    return db('brnd_fin AS fin')
+      .join('brnd_brw AS brw','fin.brw_id','=','brw.id')
+      .join('brnd_pck as pck','pck.fin_id','=','fin.id')
+      .select(
+        'pck.brand AS brndPck',
+        'pck.active as active',
+        'fin.brand AS brndFin',
+        'brw.brand AS brndBrw',
+        'pck.note'
+      )
+      .orderBy([{ column: 'pck.active', order: 'desc'}, { column: 'pck.brand' }])
+    }
 }
 function getByNamePck(name) {
-  return db('brnd_pck AS pck')
-    .join('brnd_fin AS fin','pck.fin_id','=','fin.id')
+  return db('brnd_fin AS fin')
+    .join('brnd_brw AS brw','fin.brw_id','=','brw.id')
+    .join('brnd_pck as pck','pck.fin_id','=','fin.id')
     .select(
-      'pck.brand AS brndPck',
+      'brw.brand AS brndBrw',
       'fin.brand AS brndFin',
+      'pck.brand AS brndPck',
+      'pck.active AS active',
       'pck.note'
     )
     .where({'pck.brand': name})

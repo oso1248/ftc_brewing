@@ -193,7 +193,7 @@ function tablePrint(){
   invTable.print(false, true);
 }
 
-document.getElementById('update').onclick = update
+// document.getElementById('update').onclick = update
 document.getElementById('view').onclick = view
 
 window.addEventListener('DOMContentLoaded', (ev) => { invDates() }) 

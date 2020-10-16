@@ -120,8 +120,8 @@ router.post('/pck', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/pck', (req, res) => {
-  db.getAllPck()
+router.post('/pck/get', (req, res) => {
+  db.getAllPck(req.body.active)
     .then(data => {
       if(data) {
         res.status(200).json(data)
@@ -132,7 +132,7 @@ router.get('/pck', (req, res) => {
     .catch(err => res.status(500).json({msg: err.detail}))
 })
 router.get('/pck/:name', (req, res) => {
-  db.getByNamePack(req.params.name)
+  db.getByNamePck(req.params.name)
     .then(data => {
       if(data){
         res.status(200).json(data)

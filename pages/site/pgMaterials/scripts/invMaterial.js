@@ -11,7 +11,8 @@ function openQRCamera(node) {
         // alert(res)
         // document.getElementById('comm').value = res
         document.getElementById(res).selected = true
-        selectCommodity()      
+        selectCommodity()
+        
       }
     }
     qrcode.decode(reader.result)
@@ -48,18 +49,15 @@ async function processArray(array) {
     console.log(item.commodity)
   }
 }
-
 async function deleteOnLoad() {
   let data = {}
   data.startDate = DateTime.local().endOf('day').minus({days: 1}).toFormat('yyyy-MM-dd TTT')
   data.endDate = DateTime.local().endOf('day').toFormat('yyyy-MM-dd TTT')
-  console.log(data)
   axios.post('/api/inventory/material/view', data)
     .then(res => {
       res.data.forEach(async (item) => {
         setTimeout(function(){
           deleteRow(item.commodity)
-          console.log(item.commodity)
         }, 500);
     }) 
   })
@@ -88,8 +86,9 @@ function commodityList() {
       let tableData = res.data
 
       commodityTable = new Tabulator("#list", {
+        resizableColumns:false,
         height:"330px",
-        layout:"fitDataStretch",
+        layout:"fitDataFill",
         data:tableData,
         columns:[
         {title:"Commodity", field:"commodity",hozAlign:"left", frozen:true},
@@ -99,6 +98,37 @@ function commodityList() {
       })
     })
     .catch(err => console.log(err))
+}
+let inventoryTable
+function inventoryList() {
+  let data = {}
+  data.startDate = DateTime.local().endOf('day').minus({days: 1}).toFormat('yyyy-MM-dd TTT')
+  data.endDate = DateTime.local().endOf('day').toFormat('yyyy-MM-dd TTT')
+  
+  axios.post('/api/inventory/material/view', data)
+    .then(res => {
+    for(let i = 0; i < res.data.length; i++) {
+      res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd')
+    }
+      let tableData = res.data
+      inventoryTable = new Tabulator("#invList", {
+        resizableColumns:false,
+        height:"330px",
+        layout:"fitDataFill",
+        data:tableData,
+        columns:[
+        {title:"Commodity", field:"commodity",hozAlign:"center", frozen:true},
+        {title:"SAP", field:"sap", hozAlign:"center"},
+        {title:"Per Unit", field:"total_per_unit",hozAlign:"center"},
+        {title:"Units", field:"total_count",hozAlign:"center"},
+        {title:"Total", field:"total_end",hozAlign:"center"},
+        {title:"Username", field:"username",hozAlign:"center"},
+        {title:"Date", field:"created_at",hozAlign:"center"},
+        {title:"Note", field:"note",hozAlign:"center"},
+        ],
+      })
+    })
+    .catch(err => console.log(err.detail))
 }
 function resetAdd(ev){
   ev.preventDefault() 
@@ -155,6 +185,7 @@ async function sendAdd(ev){
         let msg = `${data.data[0].commodity}\n ${data.data[0].total_end} ${data.data[0].uom}\n Added to Inventory`
         alert(msg)
         deleteRow([data.data[0].commodity])
+        inventoryList()     
       })
       .catch(err => alert(err))
   } else {
@@ -207,5 +238,6 @@ document.getElementById('com_id').addEventListener('change', selectCommodity)
 window.addEventListener('DOMContentLoaded',async (ev) => {
   await loadCommodities()
   await commodityList()
+  await inventoryList()
   await deleteOnLoad()
 })

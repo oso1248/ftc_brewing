@@ -3,17 +3,15 @@ const path = require('path')
 const session = require('express-session')
 
 
-
 const server = express()
 server.use(express.json())
-
 
 
 const sessionConfig = {
   name: 'BudApp',
   secret: process.env.SECRET,
   cookie: {
-    maxAge: 1000 * 60 * 60,
+    maxAge: 1000 * 60 * 60 * 24 * 180,
     secure: false, // set true for production for https
     httpOnly: true, // no js access
     sameSite: true
@@ -23,11 +21,9 @@ const sessionConfig = {
 }
 
 
-
 server.use(session(sessionConfig))
 const permissions1 = require('./auth/perm1')
 const permissions5 = require('./auth/perm5')
-
 
 
 const loginRouter = require('./auth/login')
@@ -44,13 +40,11 @@ const brandRouter = require('./routes/rtsBrands')
 const inventoryRouter = require('./routes/rtsInventory')
 
 
-
 server.use(express.static(path.join(__dirname, '../pages/login/')))
 server.use('/api/auth', loginRouter)
 server.use('/', permissions1)
 server.use('/pgAdmin/', permissions5)
 server.use(express.static(path.join(__dirname, '../pages/site/')))
-
 
 
 server.use('/api/user', userRouter)
@@ -64,7 +58,6 @@ server.use('/api/enviro', enviroRouter)
 server.use('/api/uom', uomRouter)
 server.use('/api/brand', brandRouter)
 server.use('/api/inventory', inventoryRouter)
-
 
 
 module.exports = server

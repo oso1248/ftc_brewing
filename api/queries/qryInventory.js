@@ -42,7 +42,8 @@ function getByDate(data) {
       'inv.total_end',
       'uom.uom',
       'inv.username',
-      'inv.created_at'
+      'inv.created_at',
+      'inv.note'
     )
     .where('inv.created_at', '>', data.startDate)
     .andWhere('inv.created_at', '<', data.endDate)

@@ -63,6 +63,7 @@ function view() {
     .then(res => {
       let tableData = res.data
       supplierTable = new Tabulator("#list", {
+        resizableColumns:false,
         height:"309px",
         layout:"fitDataFill",
         data:tableData,
@@ -106,7 +107,7 @@ function del() {
 // routes add
 function resetAdd(ev){
   ev.preventDefault();
-  document.getElementById('frmAdd').reset();
+  document.getElementById('frmAdd').reset()
 }
 async function sendAdd(ev){
   ev.preventDefault() 
@@ -125,6 +126,7 @@ async function sendAdd(ev){
     axios.post('/api/supplier', data)
       .then(data => {
         alert(data.data.company + ' has been added')
+        document.getElementById('frmAdd').reset()
       })
       .catch(err => alert(err))
   } else {
@@ -193,7 +195,7 @@ async function validateAdd (data){
 // routes update
 function resetUpdate(ev){
   ev.preventDefault();
-  document.getElementById('frmUpdate').reset();
+  document.getElementById('frmUpdate').reset()
 }
 async function sendUpdate(ev){
   ev.preventDefault() 
@@ -214,6 +216,7 @@ async function sendUpdate(ev){
     axios.patch('/api/supplier/' + name, data)
       .then(data => {
         alert(data.data.company + ' updated')
+        document.getElementById('frmUpdate').reset()
       })
       .catch(err => alert(err))
     } else {
@@ -333,4 +336,4 @@ function supplierPrint(){
 document.getElementById('add').onclick = add
 document.getElementById('update').onclick = update
 document.getElementById('view').onclick = view
-document.getElementById('delete').onclick = del
+// document.getElementById('delete').onclick = del

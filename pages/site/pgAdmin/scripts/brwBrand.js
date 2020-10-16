@@ -60,7 +60,6 @@ function view() {
   document.getElementById('attView').style.display="grid"
   document.getElementById('addBoxes').style.display="none"
 
-
   axios.post('/api/brand/brw/get', {active:false})
     .then(res => {
       let tableData = res.data
@@ -139,12 +138,16 @@ async function sendAdd(ev){
 async function validateAdd(data){
   let failures = [];
   let name = data.brand
-  let query = '/api/brand/brw/' + name
-  let res = await axios.get(query)
-
-  if(res.data.msg !== 'null') {
+  if(!data.brand) {
     failures.push({input:'brand', msg:'Taken'})
-  } 
+  } else {
+    let query = '/api/brand/brw/' + name
+    let res = await axios.get(query)
+    if(res.data.msg !== 'null') {
+      failures.push({input:'brand', msg:'Taken'})  
+    }
+  }
+
   if( data.brand === ""){
       failures.push({input:'brand', msg:'Required Field'})
       data.brand = null
@@ -298,4 +301,4 @@ document.getElementsByName('updateBrand')[0].addEventListener('change', selectBr
 document.getElementById('add').onclick = add
 document.getElementById('update').onclick = update
 document.getElementById('view').onclick = view
-document.getElementById('delete').onclick = del
+// document.getElementById('delete').onclick = del

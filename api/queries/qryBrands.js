@@ -9,7 +9,7 @@ function getAllBrw(active) {
   if(active) {
   return db('brnd_brw AS brw')
   .where('active', '=', 'Yes')
-    .orderBy('brand')
+  .orderBy('brand')
   } else {
     return db('brnd_brw AS brw')
     .orderBy([{column:'active',order:'desc'},{ column:'brand'}])

@@ -51,7 +51,33 @@ async function add(data) {
   return getByName(commodity)
 }
 
-function getAll() {
+function getAll(active) {
+  if(active) {
+    return db('mtl_commodity AS com')
+    .join('mtl_uom as uom', 'com.uom_id', '=', 'uom.id')
+    .join('mtl_type as typ', 'com.type_id', '=', 'typ.id')
+    .join('mtl_location AS loc', 'com.location_id', 'loc.id' )
+    .join('mtl_enviro as env', 'com.enviro_id', '=', 'env.id')
+    .join('mtl_container as con', 'com.container_id', '=', 'con.id')
+    .join('mtl_supplier as sup', 'com.supplier_id', '=', 'sup.id')
+    .select(
+      'com.commodity',
+      'com.sap',
+      'com.active',
+      'com.inventory',
+      'loc.location',
+      'sup.company',
+      'typ.type',
+      'con.container',
+      'env.enviro',
+      'com.threshold',
+      'com.per_pallet',
+      'com.unit_total',
+      'uom.uom',
+      'com.note'
+    )
+    .orderBy('com.commodity', 'asc')
+  } else {
   return db('mtl_commodity AS com')
     .join('mtl_uom as uom', 'com.uom_id', '=', 'uom.id')
     .join('mtl_type as typ', 'com.type_id', '=', 'typ.id')
@@ -75,7 +101,9 @@ function getAll() {
       'uom.uom',
       'com.note'
     )
-    .orderBy('commodity', 'asc')
+    // .orderBy('com.commodity', 'asc')
+    .orderBy([{column:'com.active',order:'desc'},{ column:'com.commodity'}])
+  }
 }
 
 function getByName(name) {

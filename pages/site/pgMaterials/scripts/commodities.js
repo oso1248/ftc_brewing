@@ -22,12 +22,28 @@ String.prototype.testNanFormat = function () {
 
 function createNode(element) {
   return document.createElement(element)
-};
+}
 function append(parent, e1) {
   return parent.appendChild(e1)
-};
+}
 function createList(api, parent, title) {
   axios.get(api)
+  .then(res => {
+    let list = res.data
+    list.forEach((elem) => {
+    let listItem = elem[title]
+    let option = createNode('option')
+    option.innerHTML = listItem
+    // option.id = listItem
+    append(parent, option)
+    });
+  })
+  .catch(err => {
+    console.error(err)
+  })
+}
+function createListCommodity(api, parent, title) {
+  axios.post(api, {active: false})
   .then(res => {
     let list = res.data
     list.forEach((elem) => {
@@ -59,9 +75,9 @@ function createListID(api, parent, title) {
   })
 }
 function commodity(dropDown){
-  const api = '/api/commodity'
+  const api = '/api/commodity/get'
   let title = 'commodity'
-  createList(api, dropDown, title)
+  createListCommodity(api, dropDown, title)
 }
 function supplier(dropDown, func){
   const api = '/api/supplier'
@@ -125,7 +141,7 @@ function update() {
   document.getElementById('attView').style.display="none"
   document.getElementById('addBoxes').style.display="none"
   document.getElementById('updateBoxes').style.display="grid"
-  
+
   let dropDown = document.getElementsByName('updateCommodity')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Commodity</option>`
   commodity(dropDown)
@@ -155,11 +171,12 @@ function view() {
   document.getElementById('attView').style.display="block"
   document.getElementById('addBoxes').style.display="none"
 
-  axios.get('/api/commodity')
+  axios.post('/api/commodity/get', {active: false})
     .then(res => {
       let tableData = res.data
 
       commodityTable = new Tabulator("#list", {
+        resizableColumns:false,
         height:"330px",
         layout:"fitDataFill",
         data:tableData,
@@ -210,7 +227,7 @@ function del() {
 // routes add
 function resetAdd(ev){
   ev.preventDefault();
-  document.getElementById('frmAdd').reset();
+  document.getElementById('frmAdd').reset()
 }
 async function sendAdd(ev){
   ev.preventDefault() 
@@ -229,6 +246,7 @@ async function sendAdd(ev){
     axios.post('/api/commodity', data)
       .then(data => {
         alert(data.data.commodity + ' has been added')
+        document.getElementById('frmAdd').reset()
       })
       .catch(err => alert(err))
   } else {
@@ -241,20 +259,16 @@ async function sendAdd(ev){
 }
 async function validateAdd (data){
   let failures = []
-
   data.commodity = data.commodity.toNonAlpha('').toProperCase()
-  let query = '/api/commodity/' + data.commodity
-  let res = await axios.get(query)
 
-  if(res.data.msg !== 'null') {
-    failures.push({input:'name', msg:'Taken'})
-  }
-
-  if(data.commodity === ""){
-      failures.push({input:'commodity', msg:'Required'})
-      data.commodity = null
+  if(!data.commodity) {
+    failures.push({input:'commodity', msg:'Taken'})
   } else {
-    data.commodity = data.commodity.toNonAlpha('').toProperCase()
+    let query = '/api/commodity/' + data.commodity
+    let res = await axios.get(query)
+    if(res.data.msg !== 'null') {
+      failures.push({input:'commodity', msg:'Taken'})  
+    }
   }
 
   if(data.sap === ""){
@@ -327,7 +341,7 @@ async function validateAdd (data){
 // routes update
 function resetUpdate(ev){
   ev.preventDefault();
-  document.getElementById('frmUpdate').reset();
+  document.getElementById('frmUpdate').reset()
 }
 async function sendUpdate(ev){
   ev.preventDefault() 
@@ -341,15 +355,14 @@ async function sendUpdate(ev){
     let name = form.elements[i].value
     data[id] = name
   }
-
   let fails = await validateUpdate(data)
-  console.log(data)
   if(fails.length === 0) {
     
     let name = document.getElementsByName('updateCommodity')[0].value
     axios.patch('/api/commodity/' + name, data)
       .then(data => {
         alert(data.data.commodity + ' updated')
+        document.getElementById('frmUpdate').reset()
       })
       .catch(err => alert(err))
     } else {
@@ -359,7 +372,6 @@ async function sendUpdate(ev){
       }
       alert(msg)
     }
-    
 }
 function validateUpdate(data){
   let failures = []
@@ -486,7 +498,7 @@ document.getElementById('btnDeleteSubmit').addEventListener('click', sendDelete)
 document.getElementById('add').onclick = add
 document.getElementById('update').onclick = update
 document.getElementById('view').onclick = view
-document.getElementById('delete').onclick = del
+// document.getElementById('delete').onclick = del
 
 document.getElementById('download-xlsx').addEventListener('click', supplierExcel)
 function supplierExcel(){

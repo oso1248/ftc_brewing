@@ -149,14 +149,18 @@ async function sendAdd(ev){
   }
 }
 async function validateAdd(data){
-  let failures = [];
+  let failures = []
   let name = data.brand
-  let query = '/api/brand/fin/' + name
-  let res = await axios.get(query)
-
-  if(res.data.msg !== 'null') {
+  if(!data.brand) {
     failures.push({input:'brand', msg:'Taken'})
+  } else {
+    let query = '/api/brand/fin/' + name
+    let res = await axios.get(query)
+    if(res.data.msg !== 'null') {
+      failures.push({input:'brand', msg:'Taken'})  
+    }
   }
+
   if(data.brand === ""){
     failures.push({input:'brand', msg:'Required Field'})
     data.brand = null
@@ -281,7 +285,7 @@ document.getElementsByName('updateFinBrnd')[0].addEventListener('change', select
 document.getElementById('add').onclick = add
 document.getElementById('update').onclick = update
 document.getElementById('view').onclick = view
-document.getElementById('delete').onclick = del
+// document.getElementById('delete').onclick = del
 
 // document.getElementById('download-xlsx').addEventListener('click', brandExcel)
 function brandExcel(){

@@ -86,6 +86,7 @@ function invMatTable() {
         {title:"Total", field:"total_end",hozAlign:"center"},
         {title:"Username", field:"username",hozAlign:"center"},
         {title:"Date", field:"created_at",hozAlign:"center"},
+        {title:"Note", field:"note",hozAlign:"center"},
         ],
       })
     })

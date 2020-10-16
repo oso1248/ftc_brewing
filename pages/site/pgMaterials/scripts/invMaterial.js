@@ -185,7 +185,8 @@ async function sendAdd(ev){
         let msg = `${data.data[0].commodity}\n ${data.data[0].total_end} ${data.data[0].uom}\n Added to Inventory`
         alert(msg)
         deleteRow([data.data[0].commodity])
-        inventoryList()     
+        inventoryList()
+        document.getElementById('frmAdd').reset()  
       })
       .catch(err => alert(err))
   } else {

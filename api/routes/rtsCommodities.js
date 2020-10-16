@@ -12,8 +12,9 @@ router.post('/', (req, res) => {
     .catch(err => res.status(500).json({msg: err.detail}))
 })
 
-router.get('/', (req, res) => {
-  db.getAll()
+router.post('/get', (req, res) => {
+  console.log('router hit')
+  db.getAll(req.body.active)
     .then(data => {
       if(data) {
         res.status(200).json(data)

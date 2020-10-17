@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finishing Brands</title>
+  
+  <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
+  <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="../../commonCSS/styles.css">
+  <link rel="stylesheet" href="../styles/brands.css">
+
+
+</head>
+<body>
+  <div class="container1"><! -- Start of Container1 -->
+    <header>
+      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+      <h1>Finishing Brands</h1>
+      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+       
+    </header>
+    <! -- Navigation -->
+    <nav class="main-nav">
+      <ul class="">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../pgBrewhouse/brewhouse.html">Brewhouse</a></li>
+        <li><a href="../../pgFinishing/finishing.html">Finishing</a></li>
+        <li><a href="../material.html">Materials</a></li>
+        <li><a href="../../pgAdmin/admin.html">Admin</a></li>
+        <li><a href="" id="logout">Log Out</a></li>
+      </ul>
+    </nav>
+  
+   <!-- <div class="spacer"></div> -->
+    
+   <div class="boxes">
+
+    <div class="box" id="viewBrands">
+      <a style="display: block">  
+        <!-- <img src="" alt="">   -->
+        <h3>Brand View</h3>
+        <p></p>
+      </a>
+    </div>
+    
+
+    <div class="box" id="update">
+      <a style="display: block">  
+        <!-- <img src="" alt="">   -->
+        <h3>Brand Details</h3>
+        <p></p>
+      </a>
+    </div>
+
+    <div class="box" id="view">
+      <a style="display: block">  
+        <h3>Brand Recipe</h3>
+      </a>
+    </div>
+
+    <!-- <div class="box" id="delete">
+      <a style="display: block">  
+        <h3>Delete Commodity</h3>
+      </a>
+    </div> -->
+
+   </div> <!-- End Boxes   -->
+       
+  </div><! -- End of container1 -->
+
+  <div class="spacer"></div>
+  <div class="spacer"></div>
+
+  <div class="container2"><!-- start container2 -->
+
+    <div id="addBoxes" class="boxxes">
+      <nav class="main-nav">
+        <ul class="">
+          <li><a id="schoene">Schoene</a></li>
+          <li><a id="finish">Filter</a></li>
+          <li><a id="package">Package</a></li>
+        </ul>
+      </nav>
+
+      <div class="boxxes" id="viewBrwBrand">
+        <div class="button btnLabel">
+          <button class ="btn" id ="download-xlsx">Save XLSX</button>
+          <button class ="btn" id="print-table">Print Table</button>
+        </div>
+        <div id="viewBrandBrw"></div>
+      </div>
+
+      <div class="boxxes" id="viewFinBrand">
+        <div class="button btnLabel">
+          <button class ="btn" id ="download-xlsx">Save XLSX</button>
+          <button class ="btn" id="print-table">Print Table</button>
+        </div>
+        <div id="viewBrandFin"></div>
+      </div>
+
+      <div class="boxxes" id="viewPckBrand">
+        <div class="button btnLabel">
+          <button class ="btn" id ="download-xlsx">Save XLSX</button>
+          <button class ="btn" id="print-table">Print Table</button>
+        </div>
+        <div id="viewBrandPck"></div>
+      </div>
+
+    </div>
+    
+
+    <div id="updateBoxes" class="boxxes">
+      <h1 class="headers">Details</h1>
+      <form class="form" id="frmAdd" action="">
+        <div class="input">
+          <select name="" id="brwBrandView">
+              
+          </select>
+        </div>
+        <div class="input">
+          <select name="" id="finBrandView">
+              
+          </select>
+        </div>
+        <div class="input">
+          <select name="" id="pckBrandView">
+              
+          </select>
+        </div> 
+      </form>
+    </div>
+
+    <div id="deleteBoxes" class="boxxes">
+      <form class="form" id="frmDelete" action="">
+        <h1>Delete Commodity</h1>
+        <div class="input">
+          <select name="deleteCommodity" id="commodity"></select>
+        </div>
+
+        <div class="button">
+          <button class="btn" id="btnDeleteClear">Clear</button>
+          <button class="btn" id="btnDeleteSubmit">Delete</button>
+        </div>
+      </form>
+    </div>
+    
+    
+
+
+  </div><!-- end container2 -->
+
+  <script src="../../commonJS/index.js"></script>
+  <script src="../scripts/brands.js"></script>
+</body>
+</html>

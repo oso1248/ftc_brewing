@@ -66,7 +66,7 @@ async function deleteOnLoad() {
 function loadCommodities() {
   const commodities = document.getElementsByName('addCommodity')[0]
   commodities.innerHTML = `<option value="" disabled selected hidden>Select Commodity</option>`
-  axios.get('/api/commodity')
+  axios.post('/api/commodity/get', {active:false})
   .then(data => {
     let commodity = data.data
     return commodity.map(listItem => {
@@ -81,7 +81,7 @@ function loadCommodities() {
 }
 let commodityTable
 function commodityList() {
-  axios.get('/api/commodity')
+  axios.post('/api/commodity/get', {active: false})
     .then(res => {
       let tableData = res.data
 

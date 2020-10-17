@@ -13,7 +13,6 @@ router.post('/', (req, res) => {
 })
 
 router.post('/get', (req, res) => {
-  console.log('router hit')
   db.getAll(req.body.active)
     .then(data => {
       if(data) {

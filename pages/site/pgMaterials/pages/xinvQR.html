@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Codes</title>
 
+  
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="../../commonCSS/styles.css">
     <link rel="stylesheet" href="../styles/xinvQR.css">
@@ -38,12 +39,14 @@
   
     <div class="container2">
 
-      <a id="scanBtn" onclick="bridgeit.scan('scanBtn', 'onAfterCaptureScan')">Scan Code</a>
-      <div id="scans">Result Here</div>
+    <div id="qr-reader" style="width:500px"></div>
+    <div id="qr-reader-results"></div>
 
     </div>
     <script src="../../commonJS/index.js"></script>
-    <script src="../../commonJS/bridgeIT.js"></script>
+    <script src="../../commonJS/html5-qrcode.js"></script>
+
+
     <script src="../scripts/xinvQR.js"></script>
   </body>
   </html>

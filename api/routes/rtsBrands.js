@@ -14,7 +14,7 @@ router.post('/brw', (req, res) => {
     // .catch(err => res.status(500).send(err.detail))
 })
 router.post('/brw/get', (req, res) => {
-  db.getAllBrw(req.body.true)
+  db.getAllBrw(req.body.active)
     .then(data => {
       if(data) {
         res.status(200).json(data)
@@ -164,6 +164,33 @@ router.delete('/pck/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
+
+
+// brand details
+router.get('/detail/brwpre/:name', (req, res) => {
+  db.getDetailByNameBrwPre(req.params.name)
+    .then(data => {
+      if(data){
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.get('/detail/brwpost/:name', (req, res) => {
+  db.getDetailByNameBrwPost(req.params.name)
+    .then(data => {
+      if(data){
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+
+
 
 module.exports = router
 

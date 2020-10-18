@@ -29,7 +29,7 @@
         <li><a href="../../index.html">Home</a></li>
         <li><a href="../../pgBrewhouse/brewhouse.html">Brewhouse</a></li>
         <li><a href="../../pgFinishing/finishing.html">Finishing</a></li>
-        <li><a href="../material.html">Materials</a></li>
+        <li><a href="../../pgMaterials/material.html">Materials</a></li>
         <li><a href="../../pgAdmin/admin.html">Admin</a></li>
         <li><a href="" id="logout">Log Out</a></li>
       </ul>
@@ -48,7 +48,7 @@
     </div>
     
 
-    <div class="box" id="update">
+    <div class="box" id="detailsBrands">
       <a style="display: block">  
         <!-- <img src="" alt="">   -->
         <h3>Brand Details</h3>
@@ -78,34 +78,35 @@
   <div class="container2"><!-- start container2 -->
 
     <div id="addBoxes" class="boxxes">
-      <nav class="main-nav">
+      <h1 class="headers">View Brands</h1>
+      <nav class="main-nav sub-nav">
         <ul class="">
-          <li><a id="schoene">Schoene</a></li>
-          <li><a id="finish">Filter</a></li>
-          <li><a id="package">Package</a></li>
+          <li class="nav-sub"><a id="viewSchoene">Schoene</a></li>
+          <li class="nav-sub"><a id="viewFinish">Filter</a></li>
+          <li class="nav-sub"><a id="viewPackage">Package</a></li>
         </ul>
       </nav>
 
       <div class="boxxes" id="viewBrwBrand">
         <div class="button btnLabel">
-          <button class ="btn" id ="download-xlsx">Save XLSX</button>
-          <button class ="btn" id="print-table">Print Table</button>
+          <button class ="btn" id ="xlsxViewBrandBrwTable">Save XLSX</button>
+          <button class ="btn" id="printViewBrandBrwTable">Print Table</button>
         </div>
         <div id="viewBrandBrw"></div>
       </div>
 
       <div class="boxxes" id="viewFinBrand">
         <div class="button btnLabel">
-          <button class ="btn" id ="download-xlsx">Save XLSX</button>
-          <button class ="btn" id="print-table">Print Table</button>
+          <button class ="btn" id ="xlsxViewBrandFinTable">Save XLSX</button>
+          <button class ="btn" id="printViewBrandFinTable">Print Table</button>
         </div>
         <div id="viewBrandFin"></div>
       </div>
 
       <div class="boxxes" id="viewPckBrand">
         <div class="button btnLabel">
-          <button class ="btn" id ="download-xlsx">Save XLSX</button>
-          <button class ="btn" id="print-table">Print Table</button>
+          <button class ="btn" id ="xlsxViewBrandPckTable">Save XLSX</button>
+          <button class ="btn" id="printViewBrandPckTable">Print Table</button>
         </div>
         <div id="viewBrandPck"></div>
       </div>
@@ -114,25 +115,70 @@
     
 
     <div id="updateBoxes" class="boxxes">
-      <h1 class="headers">Details</h1>
-      <form class="form" id="frmAdd" action="">
+      <h1 class="headers">Brand Details</h1>
+      <form class="form formList" id="frmAdd" action="">
         <div class="input">
-          <select name="" id="brwBrandView">
+          <select name="" id="brwBrandDetail">
               
           </select>
         </div>
         <div class="input">
-          <select name="" id="finBrandView">
+          <select name="" id="finBrandDetail">
               
           </select>
         </div>
         <div class="input">
-          <select name="" id="pckBrandView">
+          <select name="" id="pckBrandDetail">
               
           </select>
         </div> 
       </form>
+
+      <div class="boxxes" id="detailBrwBrand">
+        
+        <div id="detailBrandBrw">
+          <div class="button btnLabel">
+            <button class ="btn" id ="xlsxDetailBrandBrwTablePre">Save XLSX</button>
+            <button class ="btn" id="printDetailBrandBrwTablePre">Print Table</button>
+          </div>
+          <h1>Pre Transfer</h1>
+          <div id="detailBrandBrwPre"></div>
+          <div class="button btnLabel">
+            <button class ="btn" id ="xlsxDetailBrandBrwTablePost">Save XLSX</button>
+            <button class ="btn" id="printDetailBrandBrwTablePost">Print Table</button>
+          </div>
+          <h1>Post Transfer</h1>
+          <div id="detailBrandBrwPost"></div>
+        </div>
+      </div>
+
+      <div class="boxxes" id="detailFinBrand">
+        <div class="button btnLabel">
+          <button class ="btn" id ="xlsxDetailBrandFinTable">Save XLSX</button>
+          <button class ="btn" id="printDetailBrandFinTable">Print Table</button>
+        </div>
+        <div id="detailBrandFin"></div>
+      </div>
+
+      <div class="boxxes" id="detailPckBrand">
+        <div class="button btnLabel">
+          <button class ="btn" id ="xlsxDetailBrandPckTable">Save XLSX</button>
+          <button class ="btn" id="printDetailBrandPckTable">Print Table</button>
+        </div>
+        <div id="detailBrandPck"></div>
+      </div>
+
+
+
+
     </div>
+
+
+
+
+
+
+
 
     <div id="deleteBoxes" class="boxxes">
       <form class="form" id="frmDelete" action="">

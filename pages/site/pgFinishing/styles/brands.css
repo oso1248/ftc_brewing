@@ -3,6 +3,14 @@
   margin: 0 auto;
 }
 
+.sub-nav ul{
+  display: grid;
+  grid-gap: 20px;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .headers {
   margin: 0 auto;
   text-align: center;
@@ -20,16 +28,11 @@
 .form input, select, option {
   text-align: center;
   margin: 5px;
-  /* line-height: 5; */
-  width: 40%;
+  width: 100%;
   font-size: 20px;
   height: 44px;
   text-align-last: center;
   border-radius: 10px; 
-}
-
-.form {
-  text-align: center;
 }
 
 .button button {
@@ -48,10 +51,23 @@
   background-color: #3e8e41;
 }
 
+.form {
+  text-align: center;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
 
 @media (max-width: 850px) {
-  .form input, textarea, select, option {
-  width: 70%;  
+  /* .form input, textarea, select, option { */
+  /* width: 70%;   */
+  /* } */
+  .form {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .sub-nav ul {
+    grid-template-columns: repeat(2, 1fr);
   }
   .button button {
   width: 35%;
@@ -61,8 +77,11 @@
   }
 }  
 @media (max-width: 700px) {
-  .form input, textarea, select, option {
-  width: 90%; 
+  .form {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .sub-nav ul {
+    grid-template-columns: repeat(1, 1fr);
   }
   .button button {
   width: 45%;

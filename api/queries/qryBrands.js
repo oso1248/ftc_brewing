@@ -6,6 +6,7 @@ async function addBrw(data) {
   return getByNameBrw(brand)
 }
 function getAllBrw(active) {
+  console.log(active)
   if(active) {
   return db('brnd_brw AS brw')
   .where('active', '=', 'Yes')
@@ -160,6 +161,45 @@ async function destroyPck(name) {
   return getByNamePck(name)
 }
 
+
+// Detail
+function getDetailByNameBrwPre(name) {
+  return db('brnd_brw AS brw')
+    .join('csx_pre AS pre','pre.brw_id', '=', 'brw.id')
+    .select(
+      'brw.brand AS Brand',
+      'pre.tk_chp AS Chip Tank',
+      'pre.tk_uni AS Uni Tank',
+      'pre.lines AS Lines',
+      'pre.cooler AS Cooler',
+      'pre.seps AS Separators',
+      'pre.acp AS ACP',
+      'pre.tk_sch AS Schoene Tank',
+      'pre.tk_fill AS Fill Tank',
+      'pre.note AS Note'
+      )
+    .where({'brw.brand': name})
+    .first() 
+}
+function getDetailByNameBrwPost(name) {
+  return db('brnd_brw AS brw')
+    .join('csx_post AS post','post.brw_id', '=', 'brw.id')
+    .select(
+      'brw.brand AS Brand',
+      'post.tk_chp AS Chip Tank',
+      'post.tk_uni AS Uni Tank',
+      'post.lines AS Lines',
+      'post.seps AS Separators',
+      'post.tk_sch AS Schoene Tank',
+      'post.note AS Note'
+
+      )
+    .where({'brw.brand': name})
+    .first() 
+}
+
+
+
 module.exports = {
   addBrw, 
   getAllBrw, 
@@ -175,5 +215,7 @@ module.exports = {
   getAllPck, 
   getByNamePck, 
   changePck, 
-  destroyPck
+  destroyPck,
+  getDetailByNameBrwPre,
+  getDetailByNameBrwPost
 }

@@ -222,6 +222,7 @@ function detailBrands() {
   title = 'brndPck'
   createList(api, dropDown, title)
 }
+
 document.getElementById('brwBrandDetail').addEventListener('change', detailBrandBrew)
 let detailBrandBrwTablePre
 let detailBrandBrwTablePost
@@ -253,7 +254,6 @@ function detailBrandBrewPre(name) {
       })
     })
     .catch(err => console.log(err))
-
 }
 function detailBrandBrewPost(name) {
   axios.get('/api/brand/detail/brwpost/' + name)
@@ -274,7 +274,6 @@ function detailBrandBrewPost(name) {
       })
     })
     .catch(err => console.log(err))
-
 }
 document.getElementById('xlsxDetailBrandBrwTablePre').addEventListener('click', xlsxDetailBrandBrwTablePre)
 function xlsxDetailBrandBrwTablePre(){
@@ -296,41 +295,77 @@ function printDetailBrandBrwTablePost(){
 
 
 document.getElementById('finBrandDetail').addEventListener('change', detailBrandFin)
-let detailBrandFinTable
-function detailBrandFin() {
+let detailBrandFinTableFin
+let detailBrandFinTablePost
+async function detailBrandFin() {
   document.getElementById('detailPckBrand').style.display="none"
   document.getElementById('detailBrwBrand').style.display="none"
   document.getElementById('detailFinBrand').style.display="block"
   console.log('detail fin')
-  // axios.post('/api/brand/brw/get', {active: false})
-  //   .then(res => {
-  //     let tableData = res.data
-
-  //     detailBrandFinTable = new Tabulator("#detailBrandBrw", {
-  //       resizableColumns:false,
-  //       height:"330px",
-  //       layout:"fitDataFill",
-  //       data:tableData,
-  //       columns:[
-  //       {title:"Brand", field:"brand",hozAlign:"center", frozen:true},
-  //       {title:"Active", field:"active",hozAlign:"center"},
-  //       {title:"Hops", field:"hop_std",hozAlign:"center"},
-  //       {title:"Craft Hops", field:"hop_crft",hozAlign:"center"},
-  //       {title:"Dry Hops", field:"hop_dry",hozAlign:"center"},
-  //       {title:"Super Sacks", field:"supr_sac",hozAlign:"center"},
-  //       ],
-  //     })
-  //   })
-  //   .catch(err => console.log(err))
+  
+  let name = document.getElementById('finBrandDetail').value
+  await detailBrandFinPre(name)
+  await detailBrandFinPost(name)
 }
-document.getElementById('xlsxDetailBrandFinTable').addEventListener('click', xlsxDetailBrandFinTable)
+function detailBrandFinPre(name) {
+  axios.get('/api/brand/detail/finpre/' + name)
+    .then(res => {
+      let tableData = res.data
+      tableData = convert(tableData)
+      
+      detailBrandBrwTablePre = new Tabulator("#detailBrandFinPre", {
+        resizableColumns:false,
+        height:"272px",
+        layout:"fitDataFill",
+        data:tableData,
+        columns:[
+          // {formatter:"rowSelection", titleFormatter:"rowSelection", hozAlign:"center", cellClick:function(e, cell) {cell.getRow().toggleSelect()}},
+          {title:"Object", field:"object", hozAlign:"Left"},
+          {title:"Method", field:"method", hozAlign:"Left"},
+        ],
+      })
+    })
+    .catch(err => console.log(err))
+}
+function detailBrandFinPost(name) {
+  axios.get('/api/brand/detail/finpost/' + name)
+    .then(res => {
+      let tableData = res.data
+      tableData = convert(tableData)
+      
+      detailBrandBrwTablePost = new Tabulator("#detailBrandFinPost", {
+        resizableColumns:false,
+        height:"218px",
+        layout:"fitDataFill",
+        data:tableData,
+        columns:[
+          // {formatter:"rowSelection", titleFormatter:"rowSelection", hozAlign:"center", cellClick:function(e, cell) {cell.getRow().toggleSelect()}},
+          {title:"Object", field:"object", hozAlign:"Left"},
+          {title:"Method", field:"method", hozAlign:"Left"},
+        ],
+      })
+    })
+    .catch(err => console.log(err))
+}
+
+
+
+
+
+// document.getElementById('xlsxDetailBrandFinTable').addEventListener('click', xlsxDetailBrandFinTable)
 function xlsxDetailBrandFinTable(){
   detailBrandFinTable.download("xlsx", "brand_fin.xlsx", {sheetName:"Brands"})
 }
-document.getElementById('printDetailBrandFinTable').addEventListener('click', printDetailBrandFinTable)
+// document.getElementById('printDetailBrandFinTable').addEventListener('click', printDetailBrandFinTable)
 function printDetailBrandFinTable(){
   detailBrandFinTable.print(false, true);
 }
+
+
+
+
+
+
 document.getElementById('pckBrandDetail').addEventListener('change', detailBrandPck)
 let detailBrandPckTable
 function detailBrandPck() {

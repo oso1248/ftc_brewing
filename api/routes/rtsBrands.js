@@ -189,8 +189,50 @@ router.get('/detail/brwpost/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-
-
+router.get('/detail/finpre/:name', (req, res) => {
+  db.getDetailByNameFinPre(req.params.name)
+    .then(data => {
+      if(data){
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.get('/detail/finpost/:name', (req, res) => {
+  db.getDetailByNameFinPost(req.params.name)
+    .then(data => {
+      if(data){
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.get('/detail/pckpre/:name', (req, res) => {
+  db.getDetailByNamePckPre(req.params.name)
+    .then(data => {
+      if(data){
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.get('/detail/pckpost/:name', (req, res) => {
+  db.getDetailByNamePckPost(req.params.name)
+    .then(data => {
+      if(data){
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
 
 module.exports = router
 

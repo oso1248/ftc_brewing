@@ -118,19 +118,13 @@
       <h1 class="headers">Brand Details</h1>
       <form class="form formList" id="frmAdd" action="">
         <div class="input">
-          <select name="" id="brwBrandDetail">
-              
-          </select>
+          <select name="" id="brwBrandDetail"></select>
         </div>
         <div class="input">
-          <select name="" id="finBrandDetail">
-              
-          </select>
+          <select name="" id="finBrandDetail"></select>
         </div>
         <div class="input">
-          <select name="" id="pckBrandDetail">
-              
-          </select>
+          <select name="" id="pckBrandDetail"></select>
         </div> 
       </form>
 
@@ -150,14 +144,26 @@
           <h1>Post Transfer</h1>
           <div id="detailBrandBrwPost"></div>
         </div>
+
       </div>
 
       <div class="boxxes" id="detailFinBrand">
-        <div class="button btnLabel">
-          <button class ="btn" id ="xlsxDetailBrandFinTable">Save XLSX</button>
-          <button class ="btn" id="printDetailBrandFinTable">Print Table</button>
+
+        <div id="detailBrandFin">
+          <div class="button btnLabel">
+            <button class ="btn" id ="xlsxDetailBrandFinTablePre">Save XLSX</button>
+            <button class ="btn" id="printDetailBrandFinTablePre">Print Table</button>
+          </div>
+          <h1>Pre Filter</h1>
+          <div id="detailBrandFinPre"></div>
+          <div class="button btnLabel">
+            <button class ="btn" id ="xlsxDetailBrandFinTablePost">Save XLSX</button>
+            <button class ="btn" id="printDetailBrandFinTablePost">Print Table</button>
+          </div>
+          <h1>Post Filter</h1>
+          <div id="detailBrandFinPost"></div>
         </div>
-        <div id="detailBrandFin"></div>
+        
       </div>
 
       <div class="boxxes" id="detailPckBrand">
@@ -168,16 +174,7 @@
         <div id="detailBrandPck"></div>
       </div>
 
-
-
-
     </div>
-
-
-
-
-
-
 
 
     <div id="deleteBoxes" class="boxxes">

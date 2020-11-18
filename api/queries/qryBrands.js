@@ -1,12 +1,12 @@
 const db = require('../dbConfig')
 
+
 //Brand brw
 async function addBrw(data) {
   const [{brand}]= await db('brnd_brw').insert(data, ['brand'])
   return getByNameBrw(brand)
 }
 function getAllBrw(active) {
-  console.log(active)
   if(active) {
   return db('brnd_brw AS brw')
   .where('active', '=', 'Yes')
@@ -30,6 +30,7 @@ async function destroyBrw(name) {
   let remove = await db('brnd_brw').where('brand', name).del()
   return getByNameBrw(name)
 }
+
 
 //Brand fin
 async function brwId(data){
@@ -95,6 +96,7 @@ async function destroyFin(name) {
   let remove = await db('brnd_fin').where('brand', name).del()
   return getByNameFin(name)
 }
+
 
 //Brand pck
 async function finId(data){
@@ -229,6 +231,38 @@ function getDetailByNameFinPost(name) {
     .where({'fin.brand': name})
     .first() 
 }
+function getDetailByNamePckPre(name) {
+  return db('brnd_fin AS fin')
+    .join('fltr_pre AS pre','pre.fin_id', '=', 'fin.id')
+    .select(
+      'fin.brand AS Brand',
+      'pre.tk_sch AS Schoene Tank',
+      'pre.lines AS System',
+      'pre.tk_trp AS Trap',
+      'pre.tk_fbt AS Filter Beer Tank',
+      'pre.tk_fill AS Fill Tank',
+      'pre.inj AS Injection',
+      'pre.ctrl AS Control',
+      'pre.note AS Note'
+      )
+    .where({'fin.brand': name})
+    .first() 
+}
+function getDetailByNamePckPost(name) {
+  return db('brnd_fin AS fin')
+    .join('fltr_post AS post','post.fin_id', '=', 'fin.id')
+    .select(
+      'fin.brand AS Brand',
+      'post.tk_sch AS Schoene Tank',
+      'post.lines AS System',
+      'post.tk_trp AS Trap',
+      'post.tk_fbt AS Filter Beer Tank',
+      'post.recover AS Recover',
+      'post.note AS Note'
+      )
+    .where({'fin.brand': name})
+    .first() 
+}
 
 
 module.exports = {
@@ -250,5 +284,7 @@ module.exports = {
   getDetailByNameBrwPre,
   getDetailByNameBrwPost,
   getDetailByNameFinPre,
-  getDetailByNameFinPost
+  getDetailByNameFinPost,
+  getDetailByNamePckPre,
+  getDetailByNamePckPost
 }

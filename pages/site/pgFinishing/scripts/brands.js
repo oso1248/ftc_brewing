@@ -205,24 +205,23 @@ function detailBrands() {
   document.getElementById('detailPckBrand').style.display="none"
   
   let dropDown = document.getElementById('brwBrandDetail')
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Schoene Brand</option>`
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Schoene</option>`
   let api = '/api/brand/brw/get'
   let title = 'brand'
   createList(api, dropDown, title)
 
   dropDown = document.getElementById('finBrandDetail')
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Finishing Brand</option>`
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Filters</option>`
   api = '/api/brand/fin/get'
   title = 'brndFin'
   createList(api, dropDown, title)
 
   dropDown = document.getElementById('pckBrandDetail')
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Packaging Brand</option>`
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Releasing</option>`
   api = '/api/brand/pck/get'
   title = 'brndPck'
   createList(api, dropDown, title)
 }
-
 document.getElementById('brwBrandDetail').addEventListener('change', detailBrandBrew)
 let detailBrandBrwTablePre
 let detailBrandBrwTablePost
@@ -230,10 +229,15 @@ async function detailBrandBrew() {
   document.getElementById('detailPckBrand').style.display="none"
   document.getElementById('detailFinBrand').style.display="none"
   document.getElementById('detailBrwBrand').style.display="block"
+  console.log('detail brw')
+
   let name = document.getElementById('brwBrandDetail').value
-  console.log('detail brew')
+  document.getElementById('finBrandDetail').selectedIndex = 0
+  document.getElementById('pckBrandDetail').selectedIndex = 0
   await detailBrandBrewPre(name)
   await detailBrandBrewPost(name)
+
+  document.getElementById('finBrandDetail').selectedIndex = 0
 }
 function detailBrandBrewPre(name) {
   axios.get('/api/brand/detail/brwpre/' + name)
@@ -292,10 +296,8 @@ function printDetailBrandBrwTablePost(){
   detailBrandBrwTablePost.print(false, true);
 }
 
-
-
 document.getElementById('finBrandDetail').addEventListener('change', detailBrandFin)
-let detailBrandFinTableFin
+let detailBrandFinTablePre
 let detailBrandFinTablePost
 async function detailBrandFin() {
   document.getElementById('detailPckBrand').style.display="none"
@@ -304,6 +306,8 @@ async function detailBrandFin() {
   console.log('detail fin')
   
   let name = document.getElementById('finBrandDetail').value
+  document.getElementById('brwBrandDetail').selectedIndex = 0
+  document.getElementById('pckBrandDetail').selectedIndex = 0
   await detailBrandFinPre(name)
   await detailBrandFinPost(name)
 }
@@ -313,7 +317,7 @@ function detailBrandFinPre(name) {
       let tableData = res.data
       tableData = convert(tableData)
       
-      detailBrandBrwTablePre = new Tabulator("#detailBrandFinPre", {
+      detailBrandFinTablePre = new Tabulator("#detailBrandFinPre", {
         resizableColumns:false,
         height:"272px",
         layout:"fitDataFill",
@@ -333,7 +337,7 @@ function detailBrandFinPost(name) {
       let tableData = res.data
       tableData = convert(tableData)
       
-      detailBrandBrwTablePost = new Tabulator("#detailBrandFinPost", {
+      detailBrandFinTablePost = new Tabulator("#detailBrandFinPost", {
         resizableColumns:false,
         height:"218px",
         layout:"fitDataFill",
@@ -347,58 +351,74 @@ function detailBrandFinPost(name) {
     })
     .catch(err => console.log(err))
 }
-
-
-
-
-
-// document.getElementById('xlsxDetailBrandFinTable').addEventListener('click', xlsxDetailBrandFinTable)
-function xlsxDetailBrandFinTable(){
-  detailBrandFinTable.download("xlsx", "brand_fin.xlsx", {sheetName:"Brands"})
+document.getElementById('xlsxDetailBrandFinTablePre').addEventListener('click', xlsxDetailBrandFinTablePre)
+function xlsxDetailBrandFinTablePre(){
+  detailBrandFinTablePre.download("xlsx", "brand_fin.xlsx", {sheetName:"Brands"})
 }
-// document.getElementById('printDetailBrandFinTable').addEventListener('click', printDetailBrandFinTable)
-function printDetailBrandFinTable(){
-  detailBrandFinTable.print(false, true);
+document.getElementById('printDetailBrandFinTablePre').addEventListener('click', printDetailBrandFinTablePre)
+function printDetailBrandFinTablePre(){
+  detailBrandFinTablePre.print(false, true)
 }
-
-
-
-
-
+document.getElementById('xlsxDetailBrandFinTablePost').addEventListener('click', xlsxDetailBrandFinTablePost)
+function xlsxDetailBrandFinTablePost(){
+  detailBrandFinTablePost.download("xlsx", "brand_fin.xlsx", {sheetName:"Brands"})
+}
+document.getElementById('printDetailBrandFinTablePost').addEventListener('click', printDetailBrandFinTablePost)
+function printDetailBrandFinTablePost(){
+  detailBrandFinTablePost.print(false, true)
+}
 
 document.getElementById('pckBrandDetail').addEventListener('change', detailBrandPck)
-let detailBrandPckTable
-function detailBrandPck() {
+let detailBrandPckTablePre
+let detailBrandPckTablePost
+async function detailBrandPck() {
   document.getElementById('detailBrwBrand').style.display="none"
   document.getElementById('detailFinBrand').style.display="none"
   document.getElementById('detailPckBrand').style.display="block"
   console.log('detail pck')
-  // axios.post('/api/brand/brw/get', {active: false})
-  //   .then(res => {
-  //     let tableData = res.data
+  
+  let name = document.getElementById('pckBrandDetail').value
+  document.getElementById('brwBrandDetail').selectedIndex = 0
+  document.getElementById('finBrandDetail').selectedIndex = 0
 
-  //     detailBrandPckTable = new Tabulator("#detailBrandBrw", {
-  //       resizableColumns:false,
-  //       height:"330px",
-  //       layout:"fitDataFill",
-  //       data:tableData,
-  //       columns:[
-  //       {title:"Brand", field:"brand",hozAlign:"center", frozen:true},
-  //       {title:"Active", field:"active",hozAlign:"center"},
-  //       {title:"Hops", field:"hop_std",hozAlign:"center"},
-  //       {title:"Craft Hops", field:"hop_crft",hozAlign:"center"},
-  //       {title:"Dry Hops", field:"hop_dry",hozAlign:"center"},
-  //       {title:"Super Sacks", field:"supr_sac",hozAlign:"center"},
-  //       ],
-  //     })
-  //   })
-  //   .catch(err => console.log(err))
 }
-document.getElementById('xlsxDetailBrandPckTable').addEventListener('click', xlsxDetailBrandPckTable)
-function xlsxDetailBrandPckTable(){
-  detailBrandFinTable.download("xlsx", "brand_pck.xlsx", {sheetName:"Brands"})
+function detailBrandPckPre(name) {
+  axios.get('/api/brand/detail/pckpre/' + name)
+    .then(res => {
+      let tableData = res.data
+      tableData = convert(tableData)
+      
+      detailBrandPckTablePre = new Tabulator("#detailBrandPckPre", {
+        resizableColumns:false,
+        height:"272px",
+        layout:"fitDataFill",
+        data:tableData,
+        columns:[
+          // {formatter:"rowSelection", titleFormatter:"rowSelection", hozAlign:"center", cellClick:function(e, cell) {cell.getRow().toggleSelect()}},
+          {title:"Object", field:"object", hozAlign:"Left"},
+          {title:"Method", field:"method", hozAlign:"Left"},
+        ],
+      })
+    })
+    .catch(err => console.log(err))
 }
-document.getElementById('printDetailBrandPckTable').addEventListener('click', printDetailBrandPckTable)
-function printDetailBrandPckTable(){
-  detailBrandPckTable.print(false, true);
+function detailBrandPckPost(name) {
+  axios.get('/api/brand/detail/pckpost/' + name)
+    .then(res => {
+      let tableData = res.data
+      tableData = convert(tableData)
+      
+      detailBrandPckTablePost = new Tabulator("#detailBrandPckPost", {
+        resizableColumns:false,
+        height:"218px",
+        layout:"fitDataFill",
+        data:tableData,
+        columns:[
+          // {formatter:"rowSelection", titleFormatter:"rowSelection", hozAlign:"center", cellClick:function(e, cell) {cell.getRow().toggleSelect()}},
+          {title:"Object", field:"object", hozAlign:"Left"},
+          {title:"Method", field:"method", hozAlign:"Left"},
+        ],
+      })
+    })
+    .catch(err => console.log(err))
 }

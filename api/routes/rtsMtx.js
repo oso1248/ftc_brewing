@@ -6,6 +6,7 @@ const router = express.Router()
 
 //hop
 router.post('/brnd', (req, res) => {
+  
   if(req.body.method === 'update') {
     db.getBrndHopUpdate(req.body.brand)
       .then(data => {

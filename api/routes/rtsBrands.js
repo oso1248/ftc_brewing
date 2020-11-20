@@ -25,6 +25,7 @@ router.post('/brw/get', (req, res) => {
     .catch(err => res.status(500).json({msg: err.detail}))
 })
 router.get('/brw/:name', (req, res) => {
+  console.log('router hit')
   db.getByNameBrw(req.params.name)
     .then(data => {
       if(data){
@@ -57,6 +58,53 @@ router.delete('/brw/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
+
+router.post('/brw/get/std', (req, res) => {
+  db.getAllBrwStd(req.body.active)
+    .then(data => {
+      if(data) {
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/brw/get/crft', (req, res) => {
+  db.getAllBrwStd(req.body.active)
+    .then(data => {
+      if(data) {
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/brw/get/dry', (req, res) => {
+  db.getAllBrwDry(req.body.active)
+    .then(data => {
+      if(data) {
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/brw/get/sac', (req, res) => {
+  db.getAllBrwSac(req.body.active)
+    .then(data => {
+      if(data) {
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+
+
 
 //fin
 router.post('/fin', (req, res) => {
@@ -233,6 +281,43 @@ router.get('/detail/pckpost/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
+
+
+// brand recipe
+router.get('/recipe/chp/:name', (req, res) => {
+  db.getRecipeByNameChp(req.params.name)
+    .then(data => {
+      if(data){
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.get('/recipe/sch/:name', (req, res) => {
+  db.getRecipeByNameSch(req.params.name)
+    .then(data => {
+      if(data){
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.get('/recipe/fin/:name', (req, res) => {
+  db.getRecipeByNameFin(req.params.name)
+    .then(data => {
+      if(data){
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+
 
 module.exports = router
 

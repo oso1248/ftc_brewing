@@ -43,83 +43,83 @@ const brnd_brw = [
   const fin_params = [
   {
   fin_id: 1,
-  og_relctrl:"",og_ftrcrtl:"",og_sp:"",og_losl:"8.15",og_losh: "9.39",
-  alc_relctrl:"Yes",alc_ftrcrtl:"Yes",alc_sp:"3.30",alc_losl:"3.20",alc_losh:"3.45",
-  cal_relctrl:"Yes",cal_ftrcrtl:"",cal_sp:"",cal_losl:"100",cal_losh:"115",
-  crb_relctrl: "Yes",crb_ftrcrtl: "",crb_sp:"",crb_losl:"5.08",crb_losh:"7.90",
-  rdf_relctrl:"",rdf_ftrcrtl:"",rdf_sp:"",rdf_losl:"72",rdf_losh:"82",
-  co2_relctrl:"Yes",co2_ftrcrtl:"Yes",co2_sp:"2.70",co2_losl:"2.55",co2_losh:"2.90",
-  cc_relctrl:"",cc_ftrcrtl:"",cc_sp:"",cc_losl:"",cc_losh: ""
+  og_relctrl:"",og_ftrctrl:"",og_sp:"",og_losl:"8.15",og_losh: "9.39",
+  alc_relctrl:"Yes",alc_ftrctrl:"Yes",alc_sp:"3.30",alc_losl:"3.20",alc_losh:"3.45",
+  cal_relctrl:"Yes",cal_ftrctrl:"",cal_sp:"",cal_losl:"100",cal_losh:"115",
+  crb_relctrl: "Yes",crb_ftrctrl: "",crb_sp:"",crb_losl:"5.08",crb_losh:"7.90",
+  rdf_relctrl:"",rdf_ftrctrl:"",rdf_sp:"",rdf_losl:"72",rdf_losh:"82",
+  co2_relctrl:"Yes",co2_ftrctrl:"Yes",co2_sp:"2.70",co2_losl:"2.55",co2_losh:"2.90",
+  cc_relctrl:"",cc_ftrctrl:"",cc_sp:"",cc_losl:"",cc_losh: ""
   },
   {
   fin_id:2,
-  og_relctrl:"Yes",og_ftrcrtl:"Yes",og_sp:"11",og_losl:"10.8",og_losh:"11.2",
-  alc_relctrl:"Yes",alc_ftrcrtl:"",alc_sp:"",alc_losl:"3.7",alc_losh:"4",
-  cal_relctrl:"Yes",cal_ftrcrtl:"",cal_sp:"",cal_losl:"135",cal_losh:"150",
-  crb_relctrl:"Yes",crb_ftrcrtl:"",crb_sp:"",crb_losl:"9.1",crb_losh:"12.7",
-  rdf_relctrl:"",rdf_ftrcrtl:"",rdf_sp:"",rdf_losl:"66.5",rdf_losh:"71.9",
-  co2_relctrl:"Yes",co2_ftrcrtl:"Yes",co2_sp:"2.7",co2_losl:"2.55",co2_losh:"2.9",
-  cc_relctrl:"",cc_ftrcrtl:"",cc_sp:"",cc_losl:"",cc_losh:""
+  og_relctrl:"Yes",og_ftrctrl:"Yes",og_sp:"11",og_losl:"10.8",og_losh:"11.2",
+  alc_relctrl:"Yes",alc_ftrctrl:"",alc_sp:"",alc_losl:"3.7",alc_losh:"4",
+  cal_relctrl:"Yes",cal_ftrctrl:"",cal_sp:"",cal_losl:"135",cal_losh:"150",
+  crb_relctrl:"Yes",crb_ftrctrl:"",crb_sp:"",crb_losl:"9.1",crb_losh:"12.7",
+  rdf_relctrl:"",rdf_ftrctrl:"",rdf_sp:"",rdf_losl:"66.5",rdf_losh:"71.9",
+  co2_relctrl:"Yes",co2_ftrctrl:"Yes",co2_sp:"2.7",co2_losl:"2.55",co2_losh:"2.9",
+  cc_relctrl:"",cc_ftrctrl:"",cc_sp:"",cc_losl:"",cc_losh:""
   },
   {
   fin_id:3,
-  og_relctrl:"",og_ftrcrtl:"",og_sp:"",og_losl:"7.12",og_losh:"8.36",
-  alc_relctrl:"Yes",alc_ftrcrtl:"Yes",alc_sp:"3.23",alc_losl:"3.2",alc_losh:"3.45",
-  cal_relctrl:"Yes",cal_ftrcrtl:"",cal_sp:"",cal_losl:"85",cal_losh:"100",
-  crb_relctrl:"Yes",crb_ftrcrtl:"",crb_sp:"",crb_losl:"1.6",crb_losh:"3.8",
-  rdf_relctrl:"",rdf_ftrcrtl:"",rdf_sp:"",rdf_losl:"83.1",rdf_losh:"86",
-  co2_relctrl:"Yes",co2_ftrcrtl:"",co2_sp:"",co2_losl:"2.55",co2_losh:"2.90",
-  cc_relctrl:"",cc_ftrcrtl:"",cc_sp:"",cc_losl:"",cc_losh:""
+  og_relctrl:"",og_ftrctrl:"",og_sp:"",og_losl:"7.12",og_losh:"8.36",
+  alc_relctrl:"Yes",alc_ftrctrl:"Yes",alc_sp:"3.23",alc_losl:"3.2",alc_losh:"3.45",
+  cal_relctrl:"Yes",cal_ftrctrl:"",cal_sp:"",cal_losl:"85",cal_losh:"100",
+  crb_relctrl:"Yes",crb_ftrctrl:"",crb_sp:"",crb_losl:"1.6",crb_losh:"3.8",
+  rdf_relctrl:"",rdf_ftrctrl:"",rdf_sp:"",rdf_losl:"83.1",rdf_losh:"86",
+  co2_relctrl:"Yes",co2_ftrctrl:"",co2_sp:"",co2_losl:"2.55",co2_losh:"2.90",
+  cc_relctrl:"",cc_ftrctrl:"",cc_sp:"",cc_losl:"",cc_losh:""
   },
   {
   fin_id:4,
-  og_relctrl:"",og_ftrcrtl:"",og_sp:"",og_losl:"9.84",og_losh:"10.84",
-  alc_relctrl:"Yes",alc_ftrcrtl:"Yes",alc_sp:"3.23",alc_losl:"3.2",alc_losh:"3.45",
-  cal_relctrl:"Yes",cal_ftrcrtl:"",cal_sp:"",cal_losl:"1.6",cal_losh:"14.4",
-  crb_relctrl:"Yes",crb_ftrcrtl:"",crb_sp:"",crb_losl:"",crb_losh:"",
-  rdf_relctrl:"",rdf_ftrcrtl:"",rdf_sp:"",rdf_losl:"",rdf_losh:"",
-  co2_relctrl:"Yes",co2_ftrcrtl:"Yes",co2_sp:"",co2_losl:"",co2_losh:"",
-  cc_relctrl:"",cc_ftrcrtl:"",cc_sp:"",cc_losl:"",cc_losh:""
+  og_relctrl:"",og_ftrctrl:"",og_sp:"",og_losl:"9.84",og_losh:"10.84",
+  alc_relctrl:"Yes",alc_ftrctrl:"Yes",alc_sp:"3.23",alc_losl:"3.2",alc_losh:"3.45",
+  cal_relctrl:"Yes",cal_ftrctrl:"",cal_sp:"",cal_losl:"1.6",cal_losh:"14.4",
+  crb_relctrl:"Yes",crb_ftrctrl:"",crb_sp:"",crb_losl:"",crb_losh:"",
+  rdf_relctrl:"",rdf_ftrctrl:"",rdf_sp:"",rdf_losl:"",rdf_losh:"",
+  co2_relctrl:"Yes",co2_ftrctrl:"Yes",co2_sp:"",co2_losl:"",co2_losh:"",
+  cc_relctrl:"",cc_ftrctrl:"",cc_sp:"",cc_losl:"",cc_losh:""
   },
   {
   fin_id:5,
-  og_relctrl:"",og_ftrcrtl: "",og_sp: "",og_losl: "10.4",og_losh: "11",
-  alc_relctrl:"Yes",alc_ftrcrtl:"Yes",alc_sp:"4.68",alc_losl:"4.52",alc_losh:"",
-  cal_relctrl:"",cal_ftrcrtl:"",cal_sp:"",cal_losl:"125",cal_losh:"140",
-  crb_relctrl:"",crb_ftrcrtl:"",crb_sp:"",crb_losl:"2.5",crb_losh:"5",
-  rdf_relctrl:"",rdf_ftrcrtl:"",rdf_sp:"",rdf_losl:"84",rdf_losh:"88",
-  co2_relctrl:"Yes",co2_ftrcrtl:"Yes",co2_sp:"",co2_losl:"2.55",co2_losh:"2.90",
-  cc_relctrl:"",cc_ftrcrtl:"",cc_sp:"",cc_losl:"",cc_losh:""
+  og_relctrl:"",og_ftrctrl: "",og_sp: "",og_losl: "10.4",og_losh: "11",
+  alc_relctrl:"Yes",alc_ftrctrl:"Yes",alc_sp:"4.68",alc_losl:"4.52",alc_losh:"",
+  cal_relctrl:"",cal_ftrctrl:"",cal_sp:"",cal_losl:"125",cal_losh:"140",
+  crb_relctrl:"",crb_ftrctrl:"",crb_sp:"",crb_losl:"2.5",crb_losh:"5",
+  rdf_relctrl:"",rdf_ftrctrl:"",rdf_sp:"",rdf_losl:"84",rdf_losh:"88",
+  co2_relctrl:"Yes",co2_ftrctrl:"Yes",co2_sp:"",co2_losl:"2.55",co2_losh:"2.90",
+  cc_relctrl:"",cc_ftrctrl:"",cc_sp:"",cc_losl:"",cc_losh:""
   },
   {
   fin_id: 6,
-  og_relctrl:"",og_ftrcrtl:"",og_sp:"",og_losl:"10.5",og_losh:"11.5",
-  alc_relctrl:"Yes",alc_ftrcrtl:"Yes",alc_sp:"4.75",alc_losl:"4.60",alc_losh:"4.90",
-  cal_relctrl:"Yes",cal_ftrcrtl:"",cal_sp:"",cal_losl:"127",cal_losh:"144",
-  crb_relctrl:"Yes",crb_ftrcrtl:"",crb_sp:"",crb_losl:"3.5",crb_losh:"6.1",
-  rdf_relctrl:"",rdf_ftrcrtl:"",rdf_sp:"",rdf_losl:"93.6",rdf_losh:"91",
-  co2_relctrl:"Yes",co2_ftrcrtl:"Yes",co2_sp:"",co2_losl:"2.55",co2_losh:"2.90",
-  cc_relctrl:"",cc_ftrcrtl:"",cc_sp:"",cc_losl:"",cc_losh:""
+  og_relctrl:"",og_ftrctrl:"",og_sp:"",og_losl:"10.5",og_losh:"11.5",
+  alc_relctrl:"Yes",alc_ftrctrl:"Yes",alc_sp:"4.75",alc_losl:"4.60",alc_losh:"4.90",
+  cal_relctrl:"Yes",cal_ftrctrl:"",cal_sp:"",cal_losl:"127",cal_losh:"144",
+  crb_relctrl:"Yes",crb_ftrctrl:"",crb_sp:"",crb_losl:"3.5",crb_losh:"6.1",
+  rdf_relctrl:"",rdf_ftrctrl:"",rdf_sp:"",rdf_losl:"93.6",rdf_losh:"91",
+  co2_relctrl:"Yes",co2_ftrctrl:"Yes",co2_sp:"",co2_losl:"2.55",co2_losh:"2.90",
+  cc_relctrl:"",cc_ftrctrl:"",cc_sp:"",cc_losl:"",cc_losh:""
   },
   {
   fin_id: 7,
-  og_relctrl:"",og_ftrcrtl:"",og_sp:"",og_losl:"15.26",og_losh:"20",
-  alc_relctrl:"Yes",alc_ftrcrtl:"",alc_sp:"6.4",alc_losl:"6.25",alc_losh:"6.55",
-  cal_relctrl:"",cal_ftrcrtl:"",cal_sp:"",cal_losl:"218",cal_losh:"268",
-  crb_relctrl:"",crb_ftrcrtl:"",crb_sp:"",crb_losl:"9.6",crb_losh:"19.6",
-  rdf_relctrl:"",rdf_ftrcrtl:"",rdf_sp:"",rdf_losl:"66.5",rdf_losh:"70.5",
-  co2_relctrl:"Yes",co2_ftrcrtl:"",co2_sp:"2.4",co2_losl:"2.2",co2_losh:"2.6",
-  cc_relctrl:"",cc_ftrcrtl:"",cc_sp:"",cc_losl:"",cc_losh:""
+  og_relctrl:"",og_ftrctrl:"",og_sp:"",og_losl:"15.26",og_losh:"20",
+  alc_relctrl:"Yes",alc_ftrctrl:"",alc_sp:"6.4",alc_losl:"6.25",alc_losh:"6.55",
+  cal_relctrl:"",cal_ftrctrl:"",cal_sp:"",cal_losl:"218",cal_losh:"268",
+  crb_relctrl:"",crb_ftrctrl:"",crb_sp:"",crb_losl:"9.6",crb_losh:"19.6",
+  rdf_relctrl:"",rdf_ftrctrl:"",rdf_sp:"",rdf_losl:"66.5",rdf_losh:"70.5",
+  co2_relctrl:"Yes",co2_ftrctrl:"",co2_sp:"2.4",co2_losl:"2.2",co2_losh:"2.6",
+  cc_relctrl:"",cc_ftrctrl:"",cc_sp:"",cc_losl:"",cc_losh:""
   },
   {
   fin_id: 8,
-  og_relctrl:"",og_ftrcrtl:"",og_sp:"",og_losl:"",og_losh:"",
-  alc_relctrl:"Yes",alc_ftrcrtl:"",alc_sp:"5.45",alc_losl:"5.35",alc_losh:"5.6",
-  cal_relctrl:"",cal_ftrcrtl:"",cal_sp:"",cal_losl:"203",cal_losh:"213",
-  crb_relctrl:"",crb_ftrcrtl:"",crb_sp:"",crb_losl:"19",crb_losh:"23.3",
-  rdf_relctrl:"",rdf_ftrcrtl:"",rdf_sp:"",rdf_losl:"66",rdf_losh:"68",
-  co2_relctrl:"Yes",co2_ftrcrtl:"Yes",co2_sp:"2.70",co2_losl:"2.55",co2_losh:"2.9",
-  cc_relctrl:"",cc_ftrcrtl:"",cc_sp:"",cc_losl:"",cc_losh:""
+  og_relctrl:"",og_ftrctrl:"",og_sp:"",og_losl:"",og_losh:"",
+  alc_relctrl:"Yes",alc_ftrctrl:"",alc_sp:"5.45",alc_losl:"5.35",alc_losh:"5.6",
+  cal_relctrl:"",cal_ftrctrl:"",cal_sp:"",cal_losl:"203",cal_losh:"213",
+  crb_relctrl:"",crb_ftrctrl:"",crb_sp:"",crb_losl:"19",crb_losh:"23.3",
+  rdf_relctrl:"",rdf_ftrctrl:"",rdf_sp:"",rdf_losl:"66",rdf_losh:"68",
+  co2_relctrl:"Yes",co2_ftrctrl:"Yes",co2_sp:"2.70",co2_losl:"2.55",co2_losh:"2.9",
+  cc_relctrl:"",cc_ftrctrl:"",cc_sp:"",cc_losl:"",cc_losh:""
   }
   ]
    
@@ -161,13 +161,13 @@ const brnd_brw = [
    
   const rel_post = [
   {fin_id:1,pck_id:1,tk_fbt:"Ok To Fill",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"",note:""},
-  {fin_id:1,pck_id:1,tk_fbt:"Ok To Fill",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"",note:""},
-  {fin_id:1,pck_id:1,tk_fbt:"Ok To Fill",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"",note:""},
-  {fin_id:1,pck_id:1,tk_fbt:"CIP",lines:"CIP",tk_lin:"CIP",tk_dft:"CIP",recover:"Condensate",note:""},
-  {fin_id:1,pck_id:1,tk_fbt:"Ok To Fill",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",note:""},
-  {fin_id:1,pck_id:1,tk_fbt:"Ok To Fill",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",note:""},
-  {fin_id:1,pck_id:1,tk_fbt:"Rinse",lines:"Rinse",tk_lin:"Rinse",tk_dft:"Rinse",recover:"Condensate",note:""},
-  {fin_id:1,pck_id:1,tk_fbt:"Rinse",lines:"Rinse",tk_lin:"Rinse",tk_dft:"Rinse",recover:"Condensate",note:""}
+  {fin_id:2,pck_id:2,tk_fbt:"Ok To Fill",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"",note:""},
+  {fin_id:3,pck_id:3,tk_fbt:"Ok To Fill",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"",note:""},
+  {fin_id:4,pck_id:4,tk_fbt:"CIP",lines:"CIP",tk_lin:"CIP",tk_dft:"CIP",recover:"Condensate",note:""},
+  {fin_id:5,pck_id:5,tk_fbt:"Ok To Fill",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",note:""},
+  {fin_id:6,pck_id:6,tk_fbt:"Ok To Fill",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",note:""},
+  {fin_id:7,pck_id:7,tk_fbt:"Rinse",lines:"Rinse",tk_lin:"Rinse",tk_dft:"Rinse",recover:"Condensate",note:""},
+  {fin_id:8,pck_id:8,tk_fbt:"Rinse",lines:"Rinse",tk_lin:"Rinse",tk_dft:"Rinse",recover:"Condensate",note:""}
   ]
    
   const rel_pre = [

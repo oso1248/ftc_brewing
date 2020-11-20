@@ -24,7 +24,7 @@ function createListBrwBrand(api, parent, title) {
   })
 }
 function brwBrand(dropDown){
-  const api = '/api/brand/brw/get'
+  const api = '/api/brand/brw/get/dry'
   let title = 'brand'
   createListBrwBrand(api, dropDown, title)
 }

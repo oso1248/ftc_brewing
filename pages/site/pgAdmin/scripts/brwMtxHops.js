@@ -24,7 +24,7 @@ function createListBrwBrand(api, parent, title) {
   })
 }
 function brwBrand(dropDown){
-  const api = '/api/brand/brw/get'
+  const api = '/api/brand/brw/get/std'
   let title = 'brand'
   createListBrwBrand(api, dropDown, title)
 }
@@ -117,7 +117,7 @@ function update() {
 function view() {
   document.getElementById('updateBoxes').style.display="none"
   document.getElementById('viewBoxes').style.display="block"
-
+  
   let dropDown = document.getElementById('brwBrandView')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
   brwBrand(dropDown)

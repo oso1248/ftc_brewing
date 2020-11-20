@@ -39,7 +39,8 @@ function convert(obj) {
   return data
 }
 
-// Views
+
+// View Brands
 document.getElementById('viewBrands').onclick = viewBrands
 function viewBrands() {
   document.getElementById('updateBoxes').style.display="none"
@@ -67,6 +68,7 @@ function viewBrands() {
   // title = 'brndPck'
   // createList(api, dropDown, title)
 }
+// View Brw
 document.getElementById('viewSchoene').addEventListener('click', viewBrandBrew)
 let viewBrandBrwTable
 function viewBrandBrew() {
@@ -103,6 +105,7 @@ document.getElementById('printViewBrandBrwTable').addEventListener('click', prin
 function printViewBrandBrwTable(){
   viewBrandBrwTable.print(false, true);
 }
+// View Fin
 document.getElementById('viewFinish').addEventListener('click', viewBrandFin)
 let viewBrandFinTable
 function viewBrandFin() {
@@ -137,6 +140,7 @@ document.getElementById('printViewBrandFinTable').addEventListener('click', prin
 function printViewBrandFinTable(){
   viewBrandFinTable.print(false, true);
 }
+// View Pck
 document.getElementById('viewPackage').addEventListener('click', viewBrandPck)
 let viewBrandPckTable
 function viewBrandPck() {
@@ -173,28 +177,9 @@ function printViewBrandPckTable(){
   viewBrandPckTable.print(false, true);
 }
 
-function selectBrandBrw(){
-  let commodity = document.getElementById('brwBrandView').value
-  
-  axios.get('/api/commodity/' + commodity)
-    .then(data => {
-      document.getElementById(data.data.location).selected = 'selected'
-      document.getElementById(data.data.type).selected = 'selected'
-      document.getElementById(data.data.company).selected = 'selected'
-      document.getElementById(data.data.enviro).selected = 'selected'
-      document.getElementById(data.data.container).selected = 'selected'
-      document.getElementById(data.data.uom).selected = 'selected'
-      document.getElementById(data.data.inventory).selected = 'selected'
-      document.getElementsByName('updateSap')[0].value = data.data.sap
-      document.getElementsByName('updateActive')[0].value = data.data.active
-      document.getElementsByName('updateThreshold')[0].value = data.data.threshold
-      document.getElementsByName('updatePer_pallet')[0].value = data.data.per_pallet
-      document.getElementsByName('updateUnit_total')[0].value = data.data.unit_total
-      document.getElementsByName('updateNote')[0].value = data.data.note
-    })
-}
 
-// Details
+
+// Details Brand
 document.getElementById('detailsBrands').onclick = detailBrands
 function detailBrands() {
   document.getElementById('deleteBoxes').style.display="none"
@@ -222,6 +207,7 @@ function detailBrands() {
   title = 'brndPck'
   createList(api, dropDown, title)
 }
+// Details Band Brw
 document.getElementById('brwBrandDetail').addEventListener('change', detailBrandBrew)
 let detailBrandBrwTablePre
 let detailBrandBrwTablePost
@@ -236,8 +222,6 @@ async function detailBrandBrew() {
   document.getElementById('pckBrandDetail').selectedIndex = 0
   await detailBrandBrewPre(name)
   await detailBrandBrewPost(name)
-
-  document.getElementById('finBrandDetail').selectedIndex = 0
 }
 function detailBrandBrewPre(name) {
   axios.get('/api/brand/detail/brwpre/' + name)
@@ -295,7 +279,7 @@ document.getElementById('printDetailBrandBrwTablePost').addEventListener('click'
 function printDetailBrandBrwTablePost(){
   detailBrandBrwTablePost.print(false, true);
 }
-
+// Details Brand Fin
 document.getElementById('finBrandDetail').addEventListener('change', detailBrandFin)
 let detailBrandFinTablePre
 let detailBrandFinTablePost
@@ -367,7 +351,7 @@ document.getElementById('printDetailBrandFinTablePost').addEventListener('click'
 function printDetailBrandFinTablePost(){
   detailBrandFinTablePost.print(false, true)
 }
-
+// Details Brand Pck
 document.getElementById('pckBrandDetail').addEventListener('change', detailBrandPck)
 let detailBrandPckTablePre
 let detailBrandPckTablePost
@@ -380,21 +364,20 @@ async function detailBrandPck() {
   let name = document.getElementById('pckBrandDetail').value
   document.getElementById('brwBrandDetail').selectedIndex = 0
   document.getElementById('finBrandDetail').selectedIndex = 0
-
+  await detailBrandPckPre(name)
+  await detailBrandPckPost(name)
 }
 function detailBrandPckPre(name) {
   axios.get('/api/brand/detail/pckpre/' + name)
     .then(res => {
       let tableData = res.data
       tableData = convert(tableData)
-      
       detailBrandPckTablePre = new Tabulator("#detailBrandPckPre", {
         resizableColumns:false,
         height:"272px",
         layout:"fitDataFill",
         data:tableData,
         columns:[
-          // {formatter:"rowSelection", titleFormatter:"rowSelection", hozAlign:"center", cellClick:function(e, cell) {cell.getRow().toggleSelect()}},
           {title:"Object", field:"object", hozAlign:"Left"},
           {title:"Method", field:"method", hozAlign:"Left"},
         ],
@@ -407,18 +390,167 @@ function detailBrandPckPost(name) {
     .then(res => {
       let tableData = res.data
       tableData = convert(tableData)
-      
       detailBrandPckTablePost = new Tabulator("#detailBrandPckPost", {
         resizableColumns:false,
         height:"218px",
         layout:"fitDataFill",
         data:tableData,
         columns:[
-          // {formatter:"rowSelection", titleFormatter:"rowSelection", hozAlign:"center", cellClick:function(e, cell) {cell.getRow().toggleSelect()}},
           {title:"Object", field:"object", hozAlign:"Left"},
           {title:"Method", field:"method", hozAlign:"Left"},
         ],
       })
     })
     .catch(err => console.log(err))
+}
+
+
+
+//Recipe Brand
+document.getElementById('recipeBrands').onclick = recipeBrands
+function recipeBrands() {
+  document.getElementById('deleteBoxes').style.display="block"
+  document.getElementById('addBoxes').style.display="none"
+  document.getElementById('updateBoxes').style.display="none"
+  document.getElementById('recipeChpBrand').style.display="none"
+  document.getElementById('recipeSchBrand').style.display="none"
+  document.getElementById('recipeFinBrand').style.display="none"
+  
+  let dropDown = document.getElementById('chpBrandRecipe')
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Chip</option>`
+  let api = '/api/brand/brw/get'
+  let title = 'brand'
+  createList(api, dropDown, title)
+
+  dropDown = document.getElementById('schBrandRecipe')
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Schoene</option>`
+  api = '/api/brand/brw/get'
+  title = 'brand'
+  createList(api, dropDown, title)
+
+  dropDown = document.getElementById('finBrandRecipe')
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Filtered</option>`
+  api = '/api/brand/fin/get'
+  title = 'brndFin'
+  createList(api, dropDown, title)
+}
+// Recipe Chp
+document.getElementById('chpBrandRecipe').addEventListener('change', recipeBrandChp)
+let recipeBrandChpTable
+async function recipeBrandChp() {
+  document.getElementById('recipeChpBrand').style.display="block"
+  document.getElementById('recipeSchBrand').style.display="none"
+  document.getElementById('recipeFinBrand').style.display="none"
+  console.log('recipe chp')
+
+  let name = document.getElementById('chpBrandRecipe').value
+  document.getElementById('schBrandRecipe').selectedIndex = 0
+  document.getElementById('finBrandRecipe').selectedIndex = 0
+  await recipeBrandChpDetail(name)
+}
+function recipeBrandChpDetail(name) {
+  axios.get('/api/brand/recipe/chp/' + name)
+    .then(res => {
+      let tableData = res.data
+      tableData = convert(tableData)
+      recipeBrandChpTable = new Tabulator("#recipeBrandChp", {
+        resizableColumns:false,
+        height:"220px",
+        layout:"fitDataFill",
+        data:tableData,
+        columns:[
+          {title:"Parameter", field:"object", hozAlign:"Left"},
+          {title:"Specification", field:"method", hozAlign:"Left"},
+        ],
+      })
+    })
+    .catch(err => console.log(err))
+}
+document.getElementById('xlsxRecipeBrandChp').addEventListener('click', xlsxRecipeBrandChp)
+function xlsxRecipeBrandChp(){
+  recipeBrandChpTable.download("xlsx", "param_chp.xlsx", {sheetName:"Chip"})
+}
+document.getElementById('printRecipeBrandChp').addEventListener('click', printRecipeBrandChp)
+function printRecipeBrandChp(){
+  recipeBrandChpTable.print(false, true)
+}
+// Recipe Sch
+document.getElementById('schBrandRecipe').addEventListener('change', recipeBrandSch)
+let recipeBrandSchTable
+async function recipeBrandSch() {
+  document.getElementById('recipeChpBrand').style.display="none"
+  document.getElementById('recipeSchBrand').style.display="block"
+  document.getElementById('recipeFinBrand').style.display="none"
+  console.log('recipe sch')
+
+  let name = document.getElementById('schBrandRecipe').value
+  document.getElementById('chpBrandRecipe').selectedIndex = 0
+  document.getElementById('finBrandRecipe').selectedIndex = 0
+  await recipeBrandSchDetail(name)
+}
+function recipeBrandSchDetail(name) {
+  axios.get('/api/brand/recipe/sch/' + name)
+    .then(res => {
+      let tableData = res.data
+      tableData = convert(tableData)
+      recipeBrandSchTable = new Tabulator("#recipeBrandSch", {
+        resizableColumns:false,
+        height:"150px",
+        layout:"fitDataFill",
+        data:tableData,
+        columns:[
+          {title:"Parameter", field:"object", hozAlign:"Left"},
+          {title:"Specification", field:"method", hozAlign:"Left"},
+        ],
+      })
+    })
+    .catch(err => console.log(err))
+}
+document.getElementById('xlsxRecipeBrandSch').addEventListener('click', xlsxRecipeBrandSch)
+function xlsxRecipeBrandSch(){
+  recipeBrandSchTable.download("xlsx", "param_sch.xlsx", {sheetName:"Schoene"})
+}
+document.getElementById('printRecipeBrandSch').addEventListener('click', printRecipeBrandSch)
+function printRecipeBrandSch(){
+  recipeBrandSchTable.print(false, true)
+}
+// Recipe Fin
+document.getElementById('finBrandRecipe').addEventListener('change', recipeBrandFin)
+let recipeBrandFinTable
+async function recipeBrandFin() {
+  document.getElementById('recipeChpBrand').style.display="none"
+  document.getElementById('recipeSchBrand').style.display="none"
+  document.getElementById('recipeFinBrand').style.display="block"
+  console.log('recipe fin')
+
+  let name = document.getElementById('finBrandRecipe').value
+  document.getElementById('chpBrandRecipe').selectedIndex = 0
+  document.getElementById('schBrandRecipe').selectedIndex = 0
+  await recipeBrandFinDetail(name)
+}
+function recipeBrandFinDetail(name) {
+  axios.get('/api/brand/recipe/fin/' + name)
+    .then(res => {
+      let tableData = res.data
+      tableData = convert(tableData)
+      recipeBrandFinTable = new Tabulator("#recipeBrandFinTbl", {
+        resizableColumns:false,
+        height:"1025px",
+        layout:"fitDataFill",
+        data:tableData,
+        columns:[
+          {title:"Object", field:"object", hozAlign:"Left"},
+          {title:"Method", field:"method", hozAlign:"Left"},
+        ],
+      })
+    })
+    .catch(err => console.log(err))
+}
+document.getElementById('xlsxRecipeBrandFin').addEventListener('click', xlsxRecipeBrandFin)
+function xlsxRecipeBrandFin(){
+  recipeBrandFinTable.download("xlsx", "param_fin.xlsx", {sheetName:"Filtered"})
+}
+document.getElementById('printRecipeBrandFin').addEventListener('click', printRecipeBrandFin)
+function printRecipeBrandFin(){
+  recipeBrandFinTable.print(false, true)
 }

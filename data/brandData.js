@@ -160,47 +160,47 @@ const brnd_brw = [
   ]
    
   const rel_post = [
-  {fin_id:1,pck_id:1,tk_fbt:"Ok To Fill",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"",note:""},
-  {fin_id:2,pck_id:2,tk_fbt:"Ok To Fill",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"",note:""},
-  {fin_id:3,pck_id:3,tk_fbt:"Ok To Fill",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"",note:""},
-  {fin_id:4,pck_id:4,tk_fbt:"CIP",lines:"CIP",tk_lin:"CIP",tk_dft:"CIP",recover:"Condensate",note:""},
-  {fin_id:5,pck_id:5,tk_fbt:"Ok To Fill",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",note:""},
-  {fin_id:6,pck_id:6,tk_fbt:"Ok To Fill",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",note:""},
-  {fin_id:7,pck_id:7,tk_fbt:"Rinse",lines:"Rinse",tk_lin:"Rinse",tk_dft:"Rinse",recover:"Condensate",note:""},
-  {fin_id:8,pck_id:8,tk_fbt:"Rinse",lines:"Rinse",tk_lin:"Rinse",tk_dft:"Rinse",recover:"Condensate",note:""}
+  {fin_id:1,tk_fbt:"Ok To Fill",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"",note:""},
+  {fin_id:2,tk_fbt:"Ok To Fill",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"",note:""},
+  {fin_id:3,tk_fbt:"Ok To Fill",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"",note:""},
+  {fin_id:4,tk_fbt:"CIP",lines:"CIP",tk_lin:"CIP",tk_dft:"CIP",recover:"Condensate",note:""},
+  {fin_id:5,tk_fbt:"Ok To Fill",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",note:""},
+  {fin_id:6,tk_fbt:"Ok To Fill",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",note:""},
+  {fin_id:7,tk_fbt:"Rinse",lines:"Rinse",tk_lin:"Rinse",tk_dft:"Rinse",recover:"Condensate",note:""},
+  {fin_id:8,tk_fbt:"Rinse",lines:"Rinse",tk_lin:"Rinse",tk_dft:"Rinse",recover:"Condensate",note:""}
   ]
    
   const rel_pre = [
-  {fin_id:1,pck_id:1,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",ctrl:"Analyzer",note:""},
-  {fin_id:2,pck_id:2,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",ctrl:"Analyzer",note:""},
-  {fin_id:3,pck_id:3,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",ctrl:"Analyzer",note:""},
-  {fin_id:4,pck_id:4,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"In WIC",tk_dft:"In WIC",recover:"Condensate",ctrl:"Analyzer",note:""},
-  {fin_id:5,pck_id:5,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",ctrl:"Analyzer",note:""},
-  {fin_id:6,pck_id:6,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"In WIC",tk_dft:"In WIC",recover:"Condensate",ctrl:"Analyzer",note:""},
-  {fin_id:7,pck_id:7,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"In WIC",tk_dft:"In WIC",recover:"Condensate",ctrl:"Alcolyzer",note:""},
-  {fin_id:8,pck_id:8,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"In WIC",tk_dft:"In WIC",recover:"Condensate",ctrl:"Alcolyzer",note:""}
+  {fin_id:1,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",ctrl:"Analyzer",note:""},
+  {fin_id:2,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",ctrl:"Analyzer",note:""},
+  {fin_id:3,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",ctrl:"Analyzer",note:""},
+  {fin_id:4,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"In WIC",tk_dft:"In WIC",recover:"Condensate",ctrl:"Analyzer",note:""},
+  {fin_id:5,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"Matrix Blend",tk_dft:"Matrix Blend",recover:"GBeer",ctrl:"Analyzer",note:""},
+  {fin_id:6,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"In WIC",tk_dft:"In WIC",recover:"Condensate",ctrl:"Analyzer",note:""},
+  {fin_id:7,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"In WIC",tk_dft:"In WIC",recover:"Condensate",ctrl:"Alcolyzer",note:""},
+  {fin_id:8,tk_fbt:"Releasable",lines:"In WIC",tk_lin:"In WIC",tk_dft:"In WIC",recover:"Condensate",ctrl:"Alcolyzer",note:""}
   ]
    
   const fltr_post = [
-  {fin_id: 1,brw_id:1,tk_sch:"Ok To Fill",lines:"Matrix Blend",tk_trp:"NA",tk_fbt:"Lab Data",recover:"GBeer",note:""},
-  {fin_id: 2,brw_id:2,tk_sch:"Ok To Fill",lines:"Matrix Blend",tk_trp:"NA",tk_fbt:"Lab Data",recover:"GBeer",note:""},
-  {fin_id: 3,brw_id:3,tk_sch:"Ok To Fill",lines:"Matrix Blend",tk_trp:"NA",tk_fbt:"Lab Data",recover:"GBeer",note:""},
-  {fin_id: 4,brw_id:3,tk_sch:"Ok To Fill",lines:"Matrix Blend",tk_trp:"NA",tk_fbt:"Lab Data",recover:"GBeer",note:""},
-  {fin_id: 5,brw_id:3,tk_sch:"Ok To Fill",lines:"CIP",tk_trp:"NA",tk_fbt:"Lab Data",recover:"GBeer",note:""},
-  {fin_id: 6,brw_id:4,tk_sch:"Ok To Fill",lines:"Matrix Blend",tk_trp:"NA",tk_fbt:"Lab Data",recover:"Condensate",note:""},
-  {fin_id: 7,brw_id:5,tk_sch:"Rinse",lines:"Rinse",tk_trp:"NA",tk_fbt:"Lab Data",recover:"Condensate",note:""},
-  {fin_id: 8,brw_id:6,tk_sch:"Rinse",lines:"Rinse",tk_trp:"NA",tk_fbt:"Lab Data",recover:"Condensate",note:""},
+  {fin_id: 1,tk_sch:"Ok To Fill",lines:"Matrix Blend",tk_trp:"NA",tk_fbt:"Lab Data",recover:"GBeer",note:""},
+  {fin_id: 2,tk_sch:"Ok To Fill",lines:"Matrix Blend",tk_trp:"NA",tk_fbt:"Lab Data",recover:"GBeer",note:""},
+  {fin_id: 3,tk_sch:"Ok To Fill",lines:"Matrix Blend",tk_trp:"NA",tk_fbt:"Lab Data",recover:"GBeer",note:""},
+  {fin_id: 4,tk_sch:"Ok To Fill",lines:"Matrix Blend",tk_trp:"NA",tk_fbt:"Lab Data",recover:"GBeer",note:""},
+  {fin_id: 5,tk_sch:"Ok To Fill",lines:"CIP",tk_trp:"NA",tk_fbt:"Lab Data",recover:"GBeer",note:""},
+  {fin_id: 6,tk_sch:"Ok To Fill",lines:"Matrix Blend",tk_trp:"NA",tk_fbt:"Lab Data",recover:"Condensate",note:""},
+  {fin_id: 7,tk_sch:"Rinse",lines:"Rinse",tk_trp:"NA",tk_fbt:"Lab Data",recover:"Condensate",note:""},
+  {fin_id: 8,tk_sch:"Rinse",lines:"Rinse",tk_trp:"NA",tk_fbt:"Lab Data",recover:"Condensate",note:""},
   ]
    
   const fltr_pre = [
-  {fin_id:1,brw_id:1,tk_sch:"Releasable",lines:"Matrix Blend",tk_trp:"Use",tk_fbt:"Matrix Blend",tk_fill:"On COE",inj:"NA",ctrl:"Analyzer",note:""},
-  {fin_id:2,brw_id:2,tk_sch:"Releasable",lines:"Matrix Blend",tk_trp:"Use",tk_fbt:"Matrix Blend",tk_fill:"On COE",inj:"NA",ctrl:"Analyzer",note:""},
-  {fin_id:3,brw_id:3,tk_sch:"Releasable",lines:"Matrix Blend",tk_trp:"Use",tk_fbt:"Matrix Blend",tk_fill:"On COE",inj:"NA",ctrl:"Analyzer",note:""},
-  {fin_id:4,brw_id:3,tk_sch:"Releasable",lines:"Matrix Blend",tk_trp:"Use",tk_fbt:"Matrix Blend",tk_fill:"On COE",inj:"NA",ctrl:"Analyzer",note:""},
-  {fin_id:5,brw_id:3,tk_sch:"Releasable",lines:"Matrix Blend",tk_trp:"Use",tk_fbt:"Matrix Blend",tk_fill:"On COx",inj:"Skid 1",ctrl:"Analyzer",note:""},
-  {fin_id:6,brw_id:4,tk_sch:"Releasable",lines:"Blow Out",tk_trp:"Use",tk_fbt:"Rinsed",tk_fill:"On COE",inj:"Pre",ctrl:"Analyzer",note:""},
-  {fin_id:7,brw_id:5,tk_sch:"Releasable",lines:"Rinsed",tk_trp:"NA",tk_fbt:"Rinsed",tk_fill:"On COE",inj:"NA",ctrl:"Ratio",note:""},
-  {fin_id:8,brw_id:6,tk_sch:"Releasable",lines:"Rinsed",tk_trp:"Bypass",tk_fbt:"Rinsed",tk_fill:"On COE",inj:"NA",ctrl:"Ratio",note:""}
+  {fin_id:1,tk_sch:"Releasable",lines:"Matrix Blend",tk_trp:"Use",tk_fbt:"Matrix Blend",tk_fill:"On COE",inj:"NA",ctrl:"Analyzer",note:""},
+  {fin_id:2,tk_sch:"Releasable",lines:"Matrix Blend",tk_trp:"Use",tk_fbt:"Matrix Blend",tk_fill:"On COE",inj:"NA",ctrl:"Analyzer",note:""},
+  {fin_id:3,tk_sch:"Releasable",lines:"Matrix Blend",tk_trp:"Use",tk_fbt:"Matrix Blend",tk_fill:"On COE",inj:"NA",ctrl:"Analyzer",note:""},
+  {fin_id:4,tk_sch:"Releasable",lines:"Matrix Blend",tk_trp:"Use",tk_fbt:"Matrix Blend",tk_fill:"On COE",inj:"NA",ctrl:"Analyzer",note:""},
+  {fin_id:5,tk_sch:"Releasable",lines:"Matrix Blend",tk_trp:"Use",tk_fbt:"Matrix Blend",tk_fill:"On COx",inj:"Skid 1",ctrl:"Analyzer",note:""},
+  {fin_id:6,tk_sch:"Releasable",lines:"Blow Out",tk_trp:"Use",tk_fbt:"Rinsed",tk_fill:"On COE",inj:"Pre",ctrl:"Analyzer",note:""},
+  {fin_id:7,tk_sch:"Releasable",lines:"Rinsed",tk_trp:"NA",tk_fbt:"Rinsed",tk_fill:"On COE",inj:"NA",ctrl:"Ratio",note:""},
+  {fin_id:8,tk_sch:"Releasable",lines:"Rinsed",tk_trp:"Bypass",tk_fbt:"Rinsed",tk_fill:"On COE",inj:"NA",ctrl:"Ratio",note:""}
   ]
    
   const csx_post = [

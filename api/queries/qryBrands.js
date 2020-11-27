@@ -3,7 +3,15 @@ const db = require('../dbConfig')
 
 //Brand brw
 async function addBrw(data) {
-  const [{brand}]= await db('brnd_brw').insert(data, ['brand'])
+  const [{brand, id}]= await db('brnd_brw').insert(data, ['brand', 'id'])
+  let res = await db('csx_pre').insert({'brw_id': id})
+  res = await db('csx_post').insert({'brw_id': id})
+  res = await db('chp_params').insert({'brw_id': id})
+  res = await db('chp_smpl').insert({'brw_id': id})
+  res = await db('sch_params').insert({'brw_id': id})
+  res = await db('sch_smpl').insert({'brw_id': id})
+  res = await db('acx_pre').insert({'brw_id': id})
+  res = await db('acx_post').insert({'brw_id': id})
   return getByNameBrw(brand)
 }
 function getAllBrw(active) {
@@ -92,7 +100,14 @@ async function brwId(data){
 }
 async function addFin(data) {
   await brwId(data)
-  const [{brand}]= await db('brnd_fin').insert(data, ['brand'])
+  const [{brand, id}]= await db('brnd_fin').insert(data, ['brand', 'id'])
+  let res = await db('fin_smpl').insert({'fin_id': id})
+  res = await db('fin_params').insert({'fin_id': id})
+  res = await db('rel_pre').insert({'fin_id': id})
+  res = await db('rel_post').insert({'fin_id': id})
+  res = await db('fltr_pre').insert({'fin_id': id})
+  res = await db('fltr_post').insert({'fin_id': id})
+
   return getByNameFin(brand)
 }
 function getAllFin(active) {
@@ -292,10 +307,10 @@ function getDetailByNameFilPost(name) {
     .first() 
 }
 function getDetailByNameRelPre(name) {
-  return db('brnd_pck AS pck')
-    .join('rel_pre AS pre','pre.pck_id', '=', 'pck.id')
+  return db('brnd_fin AS fin')
+    .join('rel_pre AS pre','pre.fin_id', '=', 'fin.id')
     .select(
-      'pck.brand',
+      'fin.brand',
       'pre.tk_fbt',
       'pre.lines',
       'pre.tk_lin',
@@ -303,25 +318,25 @@ function getDetailByNameRelPre(name) {
       'pre.recover',
       'pre.ctrl',
       'pre.note',
-      'pck.id'
+      'fin.id'
       )
-    .where({'pck.brand': name})
+    .where({'fin.brand': name})
     .first() 
 }
 function getDetailByNameRelPost(name) {
-  return db('brnd_pck AS pck')
-    .join('rel_post AS post','post.pck_id', '=', 'pck.id')
+  return db('brnd_fin AS fin')
+    .join('rel_post AS post','post.fin_id', '=', 'fin.id')
     .select(
-      'pck.brand',
+      'fin.brand',
       'post.tk_fbt',
       'post.lines',
       'post.tk_lin',
       'post.tk_dft',
       'post.recover',
       'post.note',
-      'pck.id'
+      'fin.id'
       )
-    .where({'pck.brand': name})
+    .where({'fin.brand': name})
     .first() 
 }
 async function patchDetail(changes) {
@@ -402,7 +417,7 @@ function patchRelPre(changes) {
     let queries = []
     changes.forEach(data => {
       const query = db('rel_pre')
-        .where('pck_id', data.id_brnd)
+        .where('fin_id', data.id_brnd)
         .update(data.db, data.method)
         .transacting(trx)
       queries.push(query)
@@ -418,7 +433,7 @@ function patchRelPost(changes) {
     let queries = []
     changes.forEach(data => {
       const query = db('rel_post')
-        .where('pck_id', data.id_brnd)
+        .where('fin_id', data.id_brnd)
         .update(data.db, data.method)
         .transacting(trx)
       queries.push(query)

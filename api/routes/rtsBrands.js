@@ -221,7 +221,8 @@ router.get('/detail/csxpre/:name', (req, res) => {
       if(data){
         res.status(200).json(data)
       } else {
-        res.status(200).json({msg: 'null'})
+        // res.status(200).json({msg: 'null'})
+        res.status(200).json(data)
       }
     })
     .catch(err => res.status(500).json({msg: err.detail}))

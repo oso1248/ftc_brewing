@@ -224,8 +224,8 @@ function detailBrands() {
 
   dropDown = document.getElementById('pckBrandDetail')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Releasing</option>`
-  api = '/api/brand/pck/get'
-  title = 'brndPck'
+  api = '/api/brand/fin/get'
+  title = 'brndFin'
   createList(api, dropDown, title)
 }
 // Details Band Brw

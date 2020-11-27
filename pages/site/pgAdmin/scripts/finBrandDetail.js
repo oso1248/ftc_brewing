@@ -124,8 +124,8 @@ async function selectUpdate() {
   await updateFinDetailPostCsx(data.brndBrw, methods)
   await updateFinDetailPreFil(data.brndFin, methods)
   await updateFinDetailPostFil(data.brndFin, methods)
-  await updateFinDetailPreRel(data.brndPck, methods)
-  await updateFinDetailPostRel(data.brndPck, methods)
+  await updateFinDetailPreRel(data.brndFin, methods)
+  await updateFinDetailPostRel(data.brndFin, methods)
 }
 async function method() {
   let res = await axios.get('/api/brand/method/cold')
@@ -369,8 +369,8 @@ async function selectView() {
   await viewFinDetailPostCsx(data.brndBrw)
   await viewFinDetailPreFil(data.brndFin)
   await viewFinDetailPostFil(data.brndFin)
-  await viewFinDetailPreRel(data.brndPck)
-  await viewFinDetailPostRel(data.brndPck)
+  await viewFinDetailPreRel(data.brndFin)
+  await viewFinDetailPostRel(data.brndFin)
 
   let row = tableViewFinDetailPostRel.getRow(2)
   let rowData = row.getData()

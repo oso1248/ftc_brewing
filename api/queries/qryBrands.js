@@ -83,8 +83,6 @@ function getAllBrwSac(active) {
 
 
 
-
-
 //Brand fin
 async function brwId(data){
   let rtn = await db('brnd_brw').select('id').where('brand', data['brw_id'])
@@ -106,7 +104,9 @@ function getAllFin(active) {
         'fin.brand AS brndFin',
         'fin.active AS active',
         'pck.brand AS brndPck',
+        'pck.active AS pckActive',
         'brw.brand AS brndBrw',
+        'brw.active AS brwActive',
         'fin.note'
       )
       .where('fin.active', '=', 'Yes')
@@ -119,7 +119,9 @@ function getAllFin(active) {
         'fin.brand AS brndFin',
         'fin.active AS active',
         'pck.brand AS brndPck',
+        'pck.active AS pckActive',
         'brw.brand AS brndBrw',
+        'brw.active AS brwActive',
         'fin.note'
       )
       // .orderBy('fin.brand')
@@ -134,7 +136,9 @@ function getByNameFin(name) {
       'fin.brand AS brndFin',
       'fin.active AS active',
       'brw.brand AS brndBrw',
+      'brw.active AS brwActive',
       'pck.brand AS brndPck',
+      'pck.active AS pckActive',
       'fin.note'
     )
     .where({'fin.brand': name})
@@ -218,103 +222,213 @@ async function destroyPck(name) {
 
 
 // Detail
-function getDetailByNameBrwPre(name) {
+function getDetailByNameCsxPre(name) {
   return db('brnd_brw AS brw')
     .join('csx_pre AS pre','pre.brw_id', '=', 'brw.id')
     .select(
-      'brw.brand AS Brand',
-      'pre.tk_chp AS Chip Tank',
-      'pre.tk_uni AS Uni Tank',
-      'pre.lines AS Lines',
-      'pre.cooler AS Cooler',
-      'pre.seps AS Separators',
-      'pre.acp AS ACP',
-      'pre.tk_sch AS Schoene Tank',
-      'pre.tk_fill AS Fill Tank',
-      'pre.note AS Note'
+      'brw.brand',
+      'pre.tk_chp',
+      'pre.tk_uni',
+      'pre.lines',
+      'pre.cooler',
+      'pre.seps',
+      'pre.acp',
+      'pre.tk_sch',
+      'pre.tk_fill',
+      'pre.note',
+      'brw.id'
       )
     .where({'brw.brand': name})
     .first() 
 }
-function getDetailByNameBrwPost(name) {
+function getDetailByNameCsxPost(name) {
   return db('brnd_brw AS brw')
     .join('csx_post AS post','post.brw_id', '=', 'brw.id')
     .select(
-      'brw.brand AS Brand',
-      'post.tk_chp AS Chip Tank',
-      'post.tk_uni AS Uni Tank',
-      'post.lines AS Lines',
-      'post.seps AS Separators',
-      'post.tk_sch AS Schoene Tank',
-      'post.note AS Note'
-
+      'brw.brand',
+      'post.tk_chp',
+      'post.tk_uni',
+      'post.lines',
+      'post.seps',
+      'post.tk_sch',
+      'post.note',
+      'brw.id'
       )
     .where({'brw.brand': name})
     .first() 
 }
-function getDetailByNameFinPre(name) {
+function getDetailByNameFilPre(name) {
   return db('brnd_fin AS fin')
     .join('fltr_pre AS pre','pre.fin_id', '=', 'fin.id')
     .select(
-      'fin.brand AS Brand',
-      'pre.tk_sch AS Schoene Tank',
-      'pre.lines AS System',
-      'pre.tk_trp AS Trap',
-      'pre.tk_fbt AS Filter Beer Tank',
-      'pre.tk_fill AS Fill Tank',
-      'pre.inj AS Injection',
-      'pre.ctrl AS Control',
-      'pre.note AS Note'
+      'fin.brand',
+      'pre.tk_sch',
+      'pre.lines',
+      'pre.tk_trp',
+      'pre.tk_fbt',
+      'pre.tk_fill',
+      'pre.inj',
+      'pre.ctrl',
+      'pre.note',
+      'fin.id'
       )
     .where({'fin.brand': name})
     .first() 
 }
-function getDetailByNameFinPost(name) {
+function getDetailByNameFilPost(name) {
   return db('brnd_fin AS fin')
     .join('fltr_post AS post','post.fin_id', '=', 'fin.id')
     .select(
-      'fin.brand AS Brand',
-      'post.tk_sch AS Schoene Tank',
-      'post.lines AS System',
-      'post.tk_trp AS Trap',
-      'post.tk_fbt AS Filter Beer Tank',
-      'post.recover AS Recover',
-      'post.note AS Note'
+      'fin.brand',
+      'post.tk_sch',
+      'post.lines',
+      'post.tk_trp',
+      'post.tk_fbt',
+      'post.recover',
+      'post.note',
+      'fin.id'
       )
     .where({'fin.brand': name})
     .first() 
 }
-function getDetailByNamePckPre(name) {
+function getDetailByNameRelPre(name) {
   return db('brnd_pck AS pck')
     .join('rel_pre AS pre','pre.pck_id', '=', 'pck.id')
     .select(
-      'pck.brand AS Brand',
-      'pre.tk_fbt AS Filter Beer Tank',
-      'pre.lines AS Release Line',
-      'pre.tk_lin AS Package Line',
-      'pre.tk_dft AS Draft Line',
-      'pre.recover AS Recover',
-      'pre.ctrl AS Control',
-      'pre.note AS Note'
+      'pck.brand',
+      'pre.tk_fbt',
+      'pre.lines',
+      'pre.tk_lin',
+      'pre.tk_dft',
+      'pre.recover',
+      'pre.ctrl',
+      'pre.note',
+      'pck.id'
       )
     .where({'pck.brand': name})
     .first() 
 }
-function getDetailByNamePckPost(name) {
+function getDetailByNameRelPost(name) {
   return db('brnd_pck AS pck')
     .join('rel_post AS post','post.pck_id', '=', 'pck.id')
     .select(
-      'pck.brand AS Brand',
-      'post.tk_fbt AS Filter Beer Tank',
-      'post.lines AS Release Line',
-      'post.tk_lin AS Package Line',
-      'post.tk_dft AS Draft Line',
-      'post.recover AS Recover',
-      'post.note AS Note'
+      'pck.brand',
+      'post.tk_fbt',
+      'post.lines',
+      'post.tk_lin',
+      'post.tk_dft',
+      'post.recover',
+      'post.note',
+      'pck.id'
       )
     .where({'pck.brand': name})
     .first() 
 }
+async function patchDetail(changes) {
+  await patchCsxPre(changes[0])
+  await patchCsxPost(changes[1])
+  await patchFltrPre(changes[2])
+  await patchFltrPost(changes[3])
+  await patchRelPre(changes[4])
+  await patchRelPost(changes[5])
+}
+function patchCsxPre(changes) {
+  changes.shift()
+  return db.transaction(trx => {
+    let queries = []
+    changes.forEach(data => {
+      const query = db('csx_pre')
+        .where('brw_id', data.id_brnd)
+        .update(data.db, data.method)
+        .transacting(trx)
+      queries.push(query)
+    })
+    Promise.all(queries) 
+      .then(trx.commit)
+      .catch(trx.rollback)
+  })
+}
+function patchCsxPost(changes) {
+  changes.shift()
+  return db.transaction(trx => {
+    let queries = []
+    changes.forEach(data => {
+      const query = db('csx_post')
+        .where('brw_id', data.id_brnd)
+        .update(data.db, data.method)
+        .transacting(trx)
+      queries.push(query)
+    })
+    Promise.all(queries) 
+      .then(trx.commit)
+      .catch(trx.rollback)
+  })
+}
+function patchFltrPre(changes) {
+  changes.shift()
+  return db.transaction(trx => {
+    let queries = []
+    changes.forEach(data => {
+      const query = db('fltr_pre')
+        .where('fin_id', data.id_brnd)
+        .update(data.db, data.method)
+        .transacting(trx)
+      queries.push(query)
+    })
+    Promise.all(queries) 
+      .then(trx.commit)
+      .catch(trx.rollback)
+  })
+}
+function patchFltrPost(changes) {
+  changes.shift()
+  return db.transaction(trx => {
+    let queries = []
+    changes.forEach(data => {
+      const query = db('fltr_post')
+        .where('fin_id', data.id_brnd)
+        .update(data.db, data.method)
+        .transacting(trx)
+      queries.push(query)
+    })
+    Promise.all(queries) 
+      .then(trx.commit)
+      .catch(trx.rollback)
+  })
+}
+function patchRelPre(changes) {
+  changes.shift()
+  return db.transaction(trx => {
+    let queries = []
+    changes.forEach(data => {
+      const query = db('rel_pre')
+        .where('pck_id', data.id_brnd)
+        .update(data.db, data.method)
+        .transacting(trx)
+      queries.push(query)
+    })
+    Promise.all(queries) 
+      .then(trx.commit)
+      .catch(trx.rollback)
+  })
+}
+function patchRelPost(changes) {
+  changes.shift()
+  return db.transaction(trx => {
+    let queries = []
+    changes.forEach(data => {
+      const query = db('rel_post')
+        .where('pck_id', data.id_brnd)
+        .update(data.db, data.method)
+        .transacting(trx)
+      queries.push(query)
+    })
+    Promise.all(queries) 
+      .then(trx.commit)
+      .catch(trx.rollback)
+  })
+}
+
 
 
 //Recipe
@@ -322,13 +436,13 @@ function getRecipeByNameChp(name) {
   return db('brnd_brw AS brw')
     .join('chp_params AS chp','chp.brw_id', '=', 'brw.id')
     .select(
-      'brw.brand AS Brand',
-      'chp.param_d AS Diacetyl',
-      'chp.param_p AS Pentanedione',
-      'chp.param_aa AS Acid Aldehyde',
-      'chp.param_abw AS ABW',
-      'chp.param_rdf AS RDF',
-      'chp.note AS Note'
+      'brw.brand',
+      'chp.param_d',
+      'chp.param_p',
+      'chp.param_aa',
+      'chp.param_abw',
+      'chp.param_rdf',
+      'chp.note'
       )
     .where({'brw.brand': name})
     .first() 
@@ -337,10 +451,10 @@ function getRecipeByNameSch(name) {
   return db('brnd_brw AS brw')
     .join('sch_params AS sch','sch.brw_id', '=', 'brw.id')
     .select(
-      'brw.brand AS Brand',
-      'sch.cc AS Cell Count',
-      'sch.acp AS ACP Rate',
-      'sch.note AS Note'
+      'brw.brand',
+      'sch.cc',
+      'sch.acp',
+      'sch.note'
       )
     .where({'brw.brand': name})
     .first() 
@@ -349,57 +463,66 @@ function getRecipeByNameFin(name) {
   return db('brnd_fin AS fin')
     .join('fin_params AS prm','prm.fin_id', '=', 'fin.id')
     .select(
-      'fin.brand AS Brand',
+      'fin.brand',
 
-      'prm.og_ftrctrl AS OG Fltr Control',
-      'prm.alc_ftrctrl AS ALC Fltr Control',
-      'prm.cal_ftrctrl AS CAL Fltr Control',
-      'prm.crb_ftrctrl AS Carb Fltr Control',
-      'prm.rdf_ftrctrl AS RDF Fltr Control',
-      'prm.co2_ftrctrl AS Co2 Fltr Control',
-      'prm.cc_ftrctrl AS CC Fltr Control',
+      'prm.og_ftrctrl',
+      'prm.alc_ftrctrl',
+      'prm.cal_ftrctrl',
+      'prm.crb_ftrctrl',
+      'prm.rdf_ftrctrl',
+      'prm.co2_ftrctrl',
+      'prm.cc_ftrctrl',
 
-      'prm.og_relctrl AS OG Rel Control',
-      'prm.alc_relctrl AS ALC Rel Control',
-      'prm.cal_relctrl AS CAL Rel Control',
-      'prm.crb_relctrl AS Carb Rel Control',
-      'prm.rdf_relctrl AS RDF Rel Control',
-      'prm.co2_relctrl AS Co2 Rel Control',
-      'prm.cc_relctrl AS CC Rel Control',
+      'prm.og_relctrl',
+      'prm.alc_relctrl',
+      'prm.cal_relctrl',
+      'prm.crb_relctrl',
+      'prm.rdf_relctrl',
+      'prm.co2_relctrl',
+      'prm.cc_relctrl',
       
-      'prm.og_sp AS OG Set Point',
-      'prm.og_losl AS OG LOSL',
-      'prm.og_losh AS OG LOSH',
+      'prm.og_sp',
+      'prm.og_losl',
+      'prm.og_losh',
 
-      'prm.alc_sp AS ALC Set Point',
-      'prm.alc_losl AS ALC LOSL',
-      'prm.alc_losh AS ALC LOSH',
+      'prm.alc_sp',
+      'prm.alc_losl',
+      'prm.alc_losh',
 
-      'prm.cal_sp AS CAL Set Point',
-      'prm.cal_losl AS CAL LOSL',
-      'prm.cal_losh AS CAL LOSH',
+      'prm.cal_sp',
+      'prm.cal_losl',
+      'prm.cal_losh',
 
-      'prm.crb_sp AS Carb Set Point',
-      'prm.crb_losl AS Carb LOSL',
-      'prm.crb_losh AS Carb LOSH',
+      'prm.crb_sp',
+      'prm.crb_losl',
+      'prm.crb_losh',
 
-      'prm.rdf_sp AS RDF Set Point',
-      'prm.rdf_losl AS RDF LOSL',
-      'prm.rdf_losh AS RDF LOSH',
+      'prm.rdf_sp',
+      'prm.rdf_losl',
+      'prm.rdf_losh',
 
-      'prm.co2_sp AS Co2 Set Point',
-      'prm.co2_losl AS Co2 LOSL',
-      'prm.co2_losh AS Co2 LOSH',
+      'prm.co2_sp',
+      'prm.co2_losl',
+      'prm.co2_losh',
 
-      'prm.cc_sp AS CC Set Point',
-      'prm.cc_losl AS CC LOSL',
-      'prm.cc_losh AS CC LOSH',
+      'prm.cc_sp',
+      'prm.cc_losl',
+      'prm.cc_losh',
       
-      'prm.note AS Note'
+      'prm.note'
       )
     .where({'fin.brand': name})
     .first() 
 }
+
+
+//methods
+function getAllMethod() {
+  return db('methods_cold')
+  .orderBy('method')
+}
+
+
 
 module.exports = {
   addBrw, 
@@ -417,17 +540,19 @@ module.exports = {
   getByNamePck, 
   changePck, 
   destroyPck,
-  getDetailByNameBrwPre,
-  getDetailByNameBrwPost,
-  getDetailByNameFinPre,
-  getDetailByNameFinPost,
-  getDetailByNamePckPre,
-  getDetailByNamePckPost,
+  getDetailByNameCsxPre,
+  getDetailByNameCsxPost,
+  getDetailByNameFilPre,
+  getDetailByNameFilPost,
+  getDetailByNameRelPre,
+  getDetailByNameRelPost,
   getRecipeByNameChp,
   getRecipeByNameSch,
   getRecipeByNameFin,
   getAllBrwStd,
   getAllBrwDry,
   getAllBrwSac,
-  getAllBrwCrft
+  getAllBrwCrft,
+  getAllMethod,
+  patchDetail
 }

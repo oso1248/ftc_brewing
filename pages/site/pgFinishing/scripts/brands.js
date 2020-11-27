@@ -38,6 +38,27 @@ function convert(obj) {
   }
   return data
 }
+function convert2(obj, labels) {
+  let id = obj.id
+  delete obj['id']
+  let json = {}
+  let data = []
+  let i = 0
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      json = {}
+      json['id'] = i
+      json['id_brnd'] = id
+      json['db'] = key
+      json['object'] = labels[i]
+      json['method'] = obj[key]
+      data.push(json)
+      i++
+    }  
+  }
+  // console.log(data)
+  return data
+}
 
 
 // View Brands
@@ -224,40 +245,46 @@ async function detailBrandBrew() {
   await detailBrandBrewPost(name)
 }
 function detailBrandBrewPre(name) {
-  axios.get('/api/brand/detail/brwpre/' + name)
+  let labels = ['Brand','Chip Tank', 'UniTank', 'Lines','Cooler', 'Seperators','ACP', 'Schoene Tank','Fill Tank', 'Note']
+  axios.get('/api/brand/detail/csxpre/' + name)
     .then(res => {
       let tableData = res.data
-      tableData = convert(tableData)
+      tableData = convert2(tableData, labels)
       
-      detailBrandBrwTablePre = new Tabulator("#detailBrandBrwPre", {
+      detailBrandBrwTablePre = new Tabulator('#detailBrandBrwPre', {
         resizableColumns:false,
-        height:"300px",
-        layout:"fitDataFill",
+        height:'300px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-          // {formatter:"rowSelection", titleFormatter:"rowSelection", hozAlign:"center", cellClick:function(e, cell) {cell.getRow().toggleSelect()}},
-          {title:"Object", field:"object", hozAlign:"Left"},
-          {title:"Method", field:"method", hozAlign:"Left"},
+
+
+          
+
+          // {formatter:'rowSelection', titleFormatter:'rowSelection', hozAlign:'center', cellClick:function(e, cell) {cell.getRow().toggleSelect()}},
+          {title:'Object', field:'object', hozAlign:'Left'},
+          {title:'Method', field:'method', hozAlign:'Left'},
         ],
       })
     })
     .catch(err => console.log(err))
 }
 function detailBrandBrewPost(name) {
-  axios.get('/api/brand/detail/brwpost/' + name)
+  let labels = ['Brand','Chip Tank', 'UniTank', 'Lines', 'Seperators', 'Schoene Tank', 'Note']
+  axios.get('/api/brand/detail/csxpost/' + name)
     .then(res => {
       let tableData = res.data
-      tableData = convert(tableData)
+      tableData = convert2(tableData, labels)
       
-      detailBrandBrwTablePost = new Tabulator("#detailBrandBrwPost", {
+      detailBrandBrwTablePost = new Tabulator('#detailBrandBrwPost', {
         resizableColumns:false,
-        height:"218px",
-        layout:"fitDataFill",
+        height:'218px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-          // {formatter:"rowSelection", titleFormatter:"rowSelection", hozAlign:"center", cellClick:function(e, cell) {cell.getRow().toggleSelect()}},
-          {title:"Object", field:"object", hozAlign:"Left"},
-          {title:"Method", field:"method", hozAlign:"Left"},
+          // {formatter:'rowSelection', titleFormatter:'rowSelection', hozAlign:'center', cellClick:function(e, cell) {cell.getRow().toggleSelect()}},
+          {title:'Object', field:'object', hozAlign:'Left'},
+          {title:'Method', field:'method', hozAlign:'Left'},
         ],
       })
     })
@@ -296,40 +323,42 @@ async function detailBrandFin() {
   await detailBrandFinPost(name)
 }
 function detailBrandFinPre(name) {
-  axios.get('/api/brand/detail/finpre/' + name)
+  let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Fill Tank', 'Injection', 'Control', 'Note']
+  axios.get('/api/brand/detail/filpre/' + name)
     .then(res => {
       let tableData = res.data
-      tableData = convert(tableData)
+      tableData = convert2(tableData, labels)
       
-      detailBrandFinTablePre = new Tabulator("#detailBrandFinPre", {
+      detailBrandFinTablePre = new Tabulator('#detailBrandFinPre', {
         resizableColumns:false,
-        height:"272px",
-        layout:"fitDataFill",
+        height:'272px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-          // {formatter:"rowSelection", titleFormatter:"rowSelection", hozAlign:"center", cellClick:function(e, cell) {cell.getRow().toggleSelect()}},
-          {title:"Object", field:"object", hozAlign:"Left"},
-          {title:"Method", field:"method", hozAlign:"Left"},
+          // {formatter:'rowSelection', titleFormatter:'rowSelection', hozAlign:'center', cellClick:function(e, cell) {cell.getRow().toggleSelect()}},
+          {title:'Object', field:'object', hozAlign:'Left'},
+          {title:'Method', field:'method', hozAlign:'Left'},
         ],
       })
     })
     .catch(err => console.log(err))
 }
 function detailBrandFinPost(name) {
-  axios.get('/api/brand/detail/finpost/' + name)
+  let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Recover', 'Note']
+  axios.get('/api/brand/detail/filpost/' + name)
     .then(res => {
       let tableData = res.data
-      tableData = convert(tableData)
+      tableData = convert2(tableData, labels)
       
-      detailBrandFinTablePost = new Tabulator("#detailBrandFinPost", {
+      detailBrandFinTablePost = new Tabulator('#detailBrandFinPost', {
         resizableColumns:false,
-        height:"218px",
-        layout:"fitDataFill",
+        height:'218px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-          // {formatter:"rowSelection", titleFormatter:"rowSelection", hozAlign:"center", cellClick:function(e, cell) {cell.getRow().toggleSelect()}},
-          {title:"Object", field:"object", hozAlign:"Left"},
-          {title:"Method", field:"method", hozAlign:"Left"},
+          // {formatter:'rowSelection', titleFormatter:'rowSelection', hozAlign:'center', cellClick:function(e, cell) {cell.getRow().toggleSelect()}},
+          {title:'Object', field:'object', hozAlign:'Left'},
+          {title:'Method', field:'method', hozAlign:'Left'},
         ],
       })
     })
@@ -368,36 +397,38 @@ async function detailBrandPck() {
   await detailBrandPckPost(name)
 }
 function detailBrandPckPre(name) {
-  axios.get('/api/brand/detail/pckpre/' + name)
+  let labels = ['Brand','Filter Beer Tank','Release Line','Package Line','Draft Line','Recover','Control','Note']
+  axios.get('/api/brand/detail/relpre/' + name)
     .then(res => {
       let tableData = res.data
-      tableData = convert(tableData)
-      detailBrandPckTablePre = new Tabulator("#detailBrandPckPre", {
+      tableData = convert2(tableData, labels)
+      detailBrandPckTablePre = new Tabulator('#detailBrandPckPre', {
         resizableColumns:false,
-        height:"272px",
-        layout:"fitDataFill",
+        height:'272px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-          {title:"Object", field:"object", hozAlign:"Left"},
-          {title:"Method", field:"method", hozAlign:"Left"},
+          {title:'Object', field:'object', hozAlign:'Left'},
+          {title:'Method', field:'method', hozAlign:'Left'},
         ],
       })
     })
     .catch(err => console.log(err))
 }
 function detailBrandPckPost(name) {
-  axios.get('/api/brand/detail/pckpost/' + name)
+  let labels = ['Brand','Filter Beer Tank','System Lines','Package','Draft','Recover','Note']
+  axios.get('/api/brand/detail/relpost/' + name)
     .then(res => {
       let tableData = res.data
-      tableData = convert(tableData)
-      detailBrandPckTablePost = new Tabulator("#detailBrandPckPost", {
+      tableData = convert2(tableData, labels)
+      detailBrandPckTablePost = new Tabulator('#detailBrandPckPost', {
         resizableColumns:false,
-        height:"218px",
-        layout:"fitDataFill",
+        height:'218px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-          {title:"Object", field:"object", hozAlign:"Left"},
-          {title:"Method", field:"method", hozAlign:"Left"},
+          {title:'Object', field:'object', hozAlign:'Left'},
+          {title:'Method', field:'method', hozAlign:'Left'},
         ],
       })
     })

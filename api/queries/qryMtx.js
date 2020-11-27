@@ -39,8 +39,7 @@ async function patchBrndHopUpdate(name, changes){
     Promise.all(queries) 
       .then(trx.commit)
       .catch(trx.rollback)
-})
-
+  })
 }
 
 

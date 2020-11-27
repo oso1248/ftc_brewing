@@ -12,6 +12,27 @@ async function addBrw(data) {
   res = await db('sch_smpl').insert({'brw_id': id})
   res = await db('acx_pre').insert({'brw_id': id})
   res = await db('acx_post').insert({'brw_id': id})
+  
+  await db.schema.table('mtx_hop_dry', function (table) {
+    table.decimal(brand, 50, 2)
+    .notNullable()
+    .defaultTo(0)
+  })
+  await db.schema.table('mtx_hop_std', function (table) {
+    table.decimal(brand, 50, 2)
+    .notNullable()
+    .defaultTo(0)
+  })
+  await db.schema.table('mtx_sac_supr', function (table) {
+    table.decimal(brand, 50, 2)
+    .notNullable()
+    .defaultTo(0)
+  })
+  await db.schema.table('mtx_material', function (table) {
+    table.decimal(brand, 50, 2)
+    .notNullable()
+    .defaultTo(0)
+  })
   return getByNameBrw(brand)
 }
 function getAllBrw(active) {

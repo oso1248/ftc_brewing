@@ -47,7 +47,11 @@ async function add(data) {
   await container(data)
   await supplier(data)
   
-  const [{commodity}] = await db('mtl_commodity').insert(data, ['commodity'])
+  const [{commodity, id}] = await db('mtl_commodity').insert(data, ['commodity', 'id'])
+  let res = await db('mtx_hop_dry').insert({'com_id': id})
+  res = await db('mtx_hop_std').insert({'com_id': id})
+  res = await db('mtx_sac_supr').insert({'com_id': id})
+  res = await db('mtx_material').insert({'com_id': id})
   return getByName(commodity)
 }
 

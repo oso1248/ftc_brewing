@@ -215,8 +215,8 @@ router.delete('/pck/:name', (req, res) => {
 
 
 // brand details
-router.get('/detail/brwpre/:name', (req, res) => {
-  db.getDetailByNameBrwPre(req.params.name)
+router.get('/detail/csxpre/:name', (req, res) => {
+  db.getDetailByNameCsxPre(req.params.name)
     .then(data => {
       if(data){
         res.status(200).json(data)
@@ -226,8 +226,8 @@ router.get('/detail/brwpre/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/detail/brwpost/:name', (req, res) => {
-  db.getDetailByNameBrwPost(req.params.name)
+router.get('/detail/csxpost/:name', (req, res) => {
+  db.getDetailByNameCsxPost(req.params.name)
     .then(data => {
       if(data){
         res.status(200).json(data)
@@ -237,8 +237,8 @@ router.get('/detail/brwpost/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/detail/finpre/:name', (req, res) => {
-  db.getDetailByNameFinPre(req.params.name)
+router.get('/detail/filpre/:name', (req, res) => {
+  db.getDetailByNameFilPre(req.params.name)
     .then(data => {
       if(data){
         res.status(200).json(data)
@@ -248,8 +248,8 @@ router.get('/detail/finpre/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/detail/finpost/:name', (req, res) => {
-  db.getDetailByNameFinPost(req.params.name)
+router.get('/detail/filpost/:name', (req, res) => {
+  db.getDetailByNameFilPost(req.params.name)
     .then(data => {
       if(data){
         res.status(200).json(data)
@@ -259,8 +259,8 @@ router.get('/detail/finpost/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/detail/pckpre/:name', (req, res) => {
-  db.getDetailByNamePckPre(req.params.name)
+router.get('/detail/relpre/:name', (req, res) => {
+  db.getDetailByNameRelPre(req.params.name)
     .then(data => {
       if(data){
         res.status(200).json(data)
@@ -270,8 +270,8 @@ router.get('/detail/pckpre/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/detail/pckpost/:name', (req, res) => {
-  db.getDetailByNamePckPost(req.params.name)
+router.get('/detail/relpost/:name', (req, res) => {
+  db.getDetailByNameRelPost(req.params.name)
     .then(data => {
       if(data){
         res.status(200).json(data)
@@ -281,7 +281,19 @@ router.get('/detail/pckpost/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
+router.patch('/detail/updatedetail', (req, res) => {
+  // console.log(req.body[0][0].method)
+  db.patchDetail(req.body)
+    .then(data => {
+      if(data){
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
 
+})
 
 // brand recipe
 router.get('/recipe/chp/:name', (req, res) => {
@@ -318,6 +330,19 @@ router.get('/recipe/fin/:name', (req, res) => {
     .catch(err => res.status(500).json({msg: err.detail}))
 })
 
+
+// methods cold
+router.get('/method/cold', (req, res) => {
+  db.getAllMethod()
+    .then(data => {
+      if(data) {
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
 
 module.exports = router
 

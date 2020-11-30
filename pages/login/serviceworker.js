@@ -60,6 +60,8 @@ self.addEventListener('fetch', function(event) {
             .then(function(res){
               if (res === undefined) { 
                 // get and return the offline page
+                // res = res.redirect('/offLine.html')
+                // return caches('/offLine.html')
               } 
               return res;
           })

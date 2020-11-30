@@ -78,17 +78,10 @@ function convertBrand(obj) {
 
 
 // Update
-let tableUpdateBrandLineage
-let tableUpdateFinDetailPreCsx
-let tableUpdateFinDetailPostCsx
-let tableUpdateFinDetailPreFil
-let tableUpdateFinDetailPostFil
-let tableUpdateFinDetailPreRel
-let tableUpdateFinDetailPostRel
-document.getElementById('add').onclick = updateView
-// document.getElementById('btnUpdateClear').addEventListener('click', resetUpdate)
-document.getElementById('brwBrandUpdate').addEventListener('change', selectUpdate)
-// document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
+let tableUpdateBrandChp
+let tableUpdateBrandSch
+let tableUpdateBrandFin
+
 function resetUpdate(ev){
   ev.preventDefault()
   document.getElementById('frmUpdate').reset()
@@ -102,189 +95,156 @@ function resetUpdate(ev){
     tableUpdateFinDetailPostRel.clearData()
   }
 }
+document.getElementById('add').onclick = updateView
 function updateView() {
   document.getElementById('viewBoxes').style.display="none"
   document.getElementById('updateBoxes').style.display="block"
 
-  document.getElementById('updateLineageBox').style.display="none"
+  document.getElementById('updateLineageBoxChp').style.display="none"
+  document.getElementById('updateLineageBoxFin').style.display="none"
   
-  let dropDown = document.getElementById('brwBrandUpdate')
+
+  let dropDown = document.getElementById('finBrandUpdate')
   let api = '/api/brand/fin/get/'
   let title = 'brndFin'
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Finishing Brand</option>`
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Finished Brand</option>`
   createListBrwBrand(api, dropDown, title)
 
-  if(hopTableUpdate) {
-    hopTableUpdate.clearData()
-  }
+  dropDown = document.getElementById('brwBrandUpdate')
+  api = '/api/brand/brw/get/'
+  title = 'brand'
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Schoene Brand</option>`
+  createListBrwBrand(api, dropDown, title)
+
 }
-async function selectUpdate() {
-  document.getElementById('updateLineageBox').style.display="block"
-  let methods = await method()
-  await updateBrandLineage()
-  let data = tableUpdateBrandLineage.getData()[0]
-  await updateFinDetailPreCsx(data.brndBrw, methods)
-  await updateFinDetailPostCsx(data.brndBrw, methods)
-  await updateFinDetailPreFil(data.brndFin, methods)
-  await updateFinDetailPostFil(data.brndFin, methods)
-  await updateFinDetailPreRel(data.brndPck, methods)
-  await updateFinDetailPostRel(data.brndPck, methods)
+
+document.getElementById('brwBrandUpdate').addEventListener('change', selectUpdateBrw)
+function selectUpdateBrw() {
+  document.getElementById('updateLineageBoxChp').style.display="block"
+  document.getElementById('updateLineageBoxFin').style.display="none"
+
+  let brand = document.getElementById('brwBrandUpdate').value
+  
+  chpBrandUpdate(brand)
+  schBrandUpdate(brand)
+
+  document.getElementById('finBrandUpdate').selectedIndex = 0
 }
-async function method() {
-  let res = await axios.get('/api/brand/method/cold')
+async function chpBrandUpdate(name) {
+  let labels = [
+    'Brand',
+    
+  ]
+  await axios.get('/api/brand/recipe/chp/' + name)
     .then(res => {
       let data = res.data
-      let json = {}
-      for (let i = 0; i < data.length; i++) {
-        json[data[i].method] = data[i].method
-      }
-      return json
-    })
-    .catch(err => console.log(err))
-  return res
-}
-async function updateBrandLineage() {
-  let name = document.getElementById('brwBrandUpdate').value
-  await axios.get('/api/brand/fin/' + name)
-    .then(res => {
-      let tableData = [res.data]
-      tableUpdateBrandLineage = new Tabulator('#updateLineageTable', {
+      // let tableData = convert(data, labels)
+      let tableData = convert2(data)
+      // let tableData = convert2(data)
+      tableUpdateBrandChp = new Tabulator('#updateFinRecipeChpTable', {
         resizableColumns:false,
-        height:'55px',
+        height:'1000x',
         layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:'Schoene', field:'brndBrw',hozAlign:'center', frozen:true},        
-        {title:'Finished', field:'brndFin',hozAlign:'center'},
-        {title:'Package', field:'brndPck',hozAlign:'center'},
-        {title:'Active', field:'active',hozAlign:'center'},
+        {title:'Object', field:'object',hozAlign:'left', frozen:true},        
+        {title:'Method', field:'method',hozAlign:'left'},
         ],
       })
     })
     .catch(err => console.log(err))
 }
-async function updateFinDetailPreCsx(name, method) {
-  // console.log('preCSX', name)
-  let labels = ['Brand','Chip Tank', 'UniTank', 'Lines','Cooler', 'Seperators','ACP', 'Schoene Tank','Fill Tank', 'Note']
-  await axios.get('/api/brand/detail/csxpre/' + name)
+async function schBrandUpdate(name) {
+  let labels = [
+    'Brand',
+    
+  ]
+  await axios.get('/api/brand/recipe/sch/' + name)
     .then(res => {
       let data = res.data
-      let tableData = convert(data, labels)
-      tableUpdateFinDetailPreCsx = new Tabulator('#updateFinDetailPreCsxTable', {
+      // let tableData = convert(data, labels)
+      let tableData = convert2(data)
+      // let tableData = convert2(data)
+      tableUpdateBrandSch = new Tabulator('#updateFinRecipeSchTable', {
         resizableColumns:false,
-        height:'330px',
-        layout:'fitDataStretch',
+        height:'1000x',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:'Object', field:'object',hozAlign:'center', frozen:true},        
-        // {title:'Method', field:'method',hozAlign:'center'},
-        {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}}
+        {title:'Object', field:'object',hozAlign:'left', frozen:true},        
+        {title:'Method', field:'method',hozAlign:'left'},
         ],
       })
     })
     .catch(err => console.log(err))
 }
-async function updateFinDetailPostCsx(name, method) {
-  // console.log('postCSX', name)
-  let labels = ['Brand','Chip Tank', 'UniTank', 'Lines', 'Seperators', 'Schoene Tank', 'Note']
-  await axios.get('/api/brand/detail/csxpost/' + name)
-    .then(res => {
-      let data = res.data
-      let tableData = convert(data, labels)
-      tableUpdateFinDetailPostCsx = new Tabulator('#updateFinDetailPostCsxTable', {
-        resizableColumns:false,
-        height:'330px',
-        layout:'fitDataStretch',
-        data:tableData,
-        columns:[
-        {title:'Object', field:'object',hozAlign:'center', frozen:true},        
-        // {title:'Method', field:'method',hozAlign:'center'},
-        {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}}
-        ],
-      })
-    })
-    .catch(err => console.log(err))
+
+document.getElementById('finBrandUpdate').addEventListener('change', selectUpdateFin)
+function selectUpdateFin() {
+  document.getElementById('updateLineageBoxFin').style.display="block"
+  document.getElementById('updateLineageBoxChp').style.display="none"
+
+  let brand = document.getElementById('finBrandUpdate').value
+  
+  finBrandUpdate(brand)
+
+  document.getElementById('brwBrandUpdate').selectedIndex = 0
+  
 }
-async function updateFinDetailPreFil(name, method) {
-  // console.log('preFil', name)
-  let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Fill Tank', 'Injection', 'Control', 'Note']
-  await axios.get('/api/brand/detail/filpre/' + name)
+async function finBrandUpdate(name) {
+  let labels = [
+    'Brand',
+    'Ctrl Filter OG',
+    'Ctrl Filter Alc',
+    'Ctrl Filter Cal',
+    'Ctrl Filter Carb',
+    'Ctrl Filter RDF',
+    'Ctrl Filter Co2',
+    'Ctrl Filter CC',
+    'Ctrl Release OG',
+    'Ctrl Release Alc',
+    'Ctrl Release Cal',
+    'Ctrl Release Carb',
+    'Ctrl Release RDF',
+    'Ctrl Release Co2',
+    'Ctrl Release CC',
+    'Set Point OG',
+    'LOSL OG',
+    'LOSH OG',
+    'Set Point Alc',
+    'LOSL Alc',
+    'LOSH ALc',
+    'Set Point Cal',
+    'LOSL Cal',
+    'LOSH Cal',
+    'Set Point Carb',
+    'LOSL Carb',
+    'LOSH Carb',
+    'Set Point RDF',
+    'LOSL RDF',
+    'LOSH RDF',
+    'Set Point Co2',
+    'LOSL Co2',
+    'LOSH Co2',
+    'Set Point CC',
+    'LOSL CC',
+    'LOSH CC',
+    'Note'
+  ]
+  await axios.get('/api/brand/recipe/fin/' + name)
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)
-      tableUpdateFinDetailPreFil = new Tabulator('#updateFinDetailPreFilTable', {
+      // let tableData = convert2(data)
+      tableUpdateBrandFin = new Tabulator('#updateFinRecipeFinTable', {
         resizableColumns:false,
-        height:'330px',
-        layout:'fitDataStretch',
+        height:'1000x',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:'Object', field:'object',hozAlign:'center', frozen:true},        
-        // {title:'Method', field:'method',hozAlign:'center'},
-        {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}}
+        {title:'Object', field:'object',hozAlign:'left', frozen:true},        
+        {title:'Method', field:'method',hozAlign:'left'},
         ],
-      })
-    })
-    .catch(err => console.log(err))
-}
-async function updateFinDetailPostFil(name, method) {
-  // console.log('postFil', name)
-  let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Recover', 'Note']
-  await axios.get('/api/brand/detail/filpost/' + name)
-    .then(res => {
-      let data = res.data
-      let tableData = convert(data, labels)
-      tableUpdateFinDetailPostFil = new Tabulator('#updateFinDetailPostFilTable', {
-        resizableColumns:false,
-        height:'330px',
-        layout:'fitDataStretch',
-        data:tableData,
-        columns:[
-        {title:'Object', field:'object',hozAlign:'center', frozen:true},        
-        // {title:'Method', field:'method',hozAlign:'center'},
-        {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}}
-        ],
-      })
-    })
-    .catch(err => console.log(err))
-}
-async function updateFinDetailPreRel(name, method) {
-  // console.log('preRel', name)
-  let labels = ['Brand','Filter Beer Tank','Release Line','Package Line','Draft Line','Recover','Control','Note']
-  await axios.get('/api/brand/detail/relpre/' + name)
-    .then(res => {
-      let data = res.data
-      let tableData = convert(data, labels)
-      tableUpdateFinDetailPreRel = new Tabulator('#updateFinDetailPreRelTable', {
-        resizableColumns:false,
-        height:'330px',
-        layout:'fitDataStretch',
-        data:tableData,
-        columns:[
-        {title:'Object', field:'object',hozAlign:'center', frozen:true},        
-        // {title:'Method', field:'method',hozAlign:'center'},
-        {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}}
-        ],
-      })
-    })
-    .catch(err => console.log(err))
-}
-async function updateFinDetailPostRel(name, method) {
-  // console.log('postRel', name)
-  let labels = ['Brand','Filter Beer Tank','System Lines','Package','Draft','Recover','Note']
-  await axios.get('/api/brand/detail/relpost/' + name)
-    .then(res => {
-      let data = res.data
-      let tableData = convert(data, labels)
-      tableUpdateFinDetailPostRel = new Tabulator('#updateFinDetailPostRelTable', {
-        resizableColumns:false,
-        height:'330px',
-        layout:'fitDataStretch',
-        data:tableData,
-        columns:[
-        {title:'Object',field:'object',hozAlign:'center',frozen:true},        
-        // {title:'Method', field:'method',hozAlign:'left', editor:'select', editorParams:{values:method}},
-        {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}}
-        ]
       })
     })
     .catch(err => console.log(err))
@@ -293,262 +253,160 @@ async function updateFinDetailPostRel(name, method) {
 
 
 // view
-let tableViewBrandLineage
-let tableViewFinDetailPreCsx
-let tableViewFinDetailPostCsx
-let tableViewFinDetailPreFil
-let tableViewFinDetailPostFil
-let tableViewFinDetailPreRel
-let tableViewFinDetailPostRel
+let tableViewBrandChp
+let tableViewBrandSch
+let tableViewBrandFin
+
 document.getElementById('update').onclick = viewView
-// document.getElementById('btnViewClear').addEventListener('click', resetView)
-document.getElementById('brwBrandView').addEventListener('change', selectView)
-function resetView(ev){
-  ev.preventDefault()
-  document.getElementById('frmView').reset()
-  if (tableViewBrandLineage) {
-    tableViewBrandLineage.clearData()
-    tableViewFinDetailPreCsx.clearData()
-    tableViewFinDetailPostCsx.clearData()
-    tableViewFinDetailPreFil.clearData()
-    tableViewFinDetailPostFil.clearData()
-    tableViewFinDetailPreRel.clearData()
-    tableViewFinDetailPostRel.clearData()
-  }
-}
 function viewView() {
   document.getElementById('updateBoxes').style.display="none"
   document.getElementById('viewBoxes').style.display="block"
-  document.getElementById('viewLineageBox').style.display="none"
+
+  document.getElementById('viewLineageBoxChp').style.display="none"
+  document.getElementById('viewLineageBoxFin').style.display="none"
 
   let api = '/api/brand/fin/get/'
   let title = 'brndFin'
-  let dropDown = document.getElementById('brwBrandView')
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Finishing Brand</option>`
+  let dropDown = document.getElementById('finBrandView')
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Finished Brand</option>`
+  createListBrwBrand(api, dropDown, title)
+
+  dropDown = document.getElementById('brwBrandView')
+  api = '/api/brand/brw/get/'
+  title = 'brand'
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Schoene Brand</option>`
   createListBrwBrand(api, dropDown, title)
 }
-async function selectView() {
-  document.getElementById('viewLineageBox').style.display="block"
 
-  await viewBrandLineage()
-  let data = tableViewBrandLineage.getData()[0]
-  await viewFinDetailPreCsx(data.brndBrw)
-  await viewFinDetailPostCsx(data.brndBrw)
-  await viewFinDetailPreFil(data.brndFin)
-  await viewFinDetailPostFil(data.brndFin)
-  await viewFinDetailPreRel(data.brndPck)
-  await viewFinDetailPostRel(data.brndPck)
+document.getElementById('brwBrandView').addEventListener('change', selectViewBrw)
+function selectViewBrw() {
+  document.getElementById('viewLineageBoxChp').style.display="block"
+  document.getElementById('viewLineageBoxFin').style.display="none"
 
-  let row = tableViewFinDetailPostRel.getRow(2)
-  let rowData = row.getData()
+  let brand = document.getElementById('brwBrandView').value
+  
+  chpBrandView(brand)
+  schBrandView(brand)
+
+  document.getElementById('finBrandView').selectedIndex = 0
+  
 }
-async function viewBrandLineage() {
-  let name = document.getElementById('brwBrandView').value
-  await axios.get('/api/brand/fin/' + name)
-    .then(res => {
-      let tableData = [res.data]
-      tableViewBrandLineage = new Tabulator("#viewLineageTable", {
-        resizableColumns:false,
-        height:"55px",
-        layout:"fitDataFill",
-        data:tableData,
-        columns:[
-        {title:"Schoene", field:"brndBrw",hozAlign:"center", frozen:true},        
-        {title:"Finished", field:"brndFin",hozAlign:"center"},
-        {title:"Package", field:"brndPck",hozAlign:"center"},
-        {title:"Active", field:"active",hozAlign:"center"},
-        ],
-      })
-    })
-    .catch(err => console.log(err))
-}
-async function viewFinDetailPreCsx(name) {
-  let labels = ['Brand','Chip Tank', 'UniTank', 'Lines','Cooler', 'Seperators','ACP', 'Schoene Tank','Fill Tank', 'Note']
-  await axios.get('/api/brand/detail/csxpre/' + name)
+async function chpBrandView(name) {
+  let labels = [
+    'Brand',
+    
+  ]
+  await axios.get('/api/brand/recipe/chp/' + name)
     .then(res => {
       let data = res.data
-      let tableData = convert(data, labels)
-      tableViewFinDetailPreCsx = new Tabulator('#viewFinDetailPreCsxTable', {
+      // let tableData = convert(data, labels)
+      let tableData = convert2(data)
+      // let tableData = convert2(data)
+      tableViewBrandChp = new Tabulator('#viewFinRecipeChpTable', {
         resizableColumns:false,
-        height:'330px',
+        height:'1000x',
         layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:'Object', field:'object',hozAlign:'center', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'center'},
+        {title:'Object', field:'object',hozAlign:'left', frozen:true},        
+        {title:'Method', field:'method',hozAlign:'left'},
         ],
       })
     })
     .catch(err => console.log(err))
 }
-async function viewFinDetailPostCsx(name) {
-  let labels = ['Brand','Chip Tank', 'UniTank', 'Lines', 'Seperators', 'Schoene Tank', 'Note']
-  await axios.get('/api/brand/detail/csxpost/' + name)
+async function schBrandView(name) {
+  let labels = [
+    'Brand',
+    
+  ]
+  await axios.get('/api/brand/recipe/sch/' + name)
     .then(res => {
       let data = res.data
-      let tableData = convert(data, labels)
-      tableViewFinDetailPostCsx = new Tabulator('#viewFinDetailPostCsxTable', {
+      // let tableData = convert(data, labels)
+      let tableData = convert2(data)
+      // let tableData = convert2(data)
+      tableViewBrandSch = new Tabulator('#viewFinRecipeSchTable', {
         resizableColumns:false,
-        height:'330px',
+        height:'1000x',
         layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:'Object', field:'object',hozAlign:'center', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'center'},
+        {title:'Object', field:'object',hozAlign:'left', frozen:true},        
+        {title:'Method', field:'method',hozAlign:'left'},
         ],
       })
     })
     .catch(err => console.log(err))
 }
-async function viewFinDetailPreFil(name) {
-  let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Fill Tank', 'Injection', 'Control', 'Note']
-  await axios.get('/api/brand/detail/filpre/' + name)
+
+document.getElementById('finBrandView').addEventListener('change', selectViewFin)
+function selectViewFin() {
+  document.getElementById('viewLineageBoxFin').style.display="block"
+  document.getElementById('viewLineageBoxChp').style.display="none"
+
+  let brand = document.getElementById('finBrandView').value
+
+  finBrandView(brand)
+
+  document.getElementById('brwBrandView').selectedIndex = 0
+  
+}
+async function finBrandView(name) {
+  let labels = [
+    'Brand',
+    'Ctrl Filter OG',
+    'Ctrl Filter Alc',
+    'Ctrl Filter Cal',
+    'Ctrl Filter Carb',
+    'Ctrl Filter RDF',
+    'Ctrl Filter Co2',
+    'Ctrl Filter CC',
+    'Ctrl Release OG',
+    'Ctrl Release Alc',
+    'Ctrl Release Cal',
+    'Ctrl Release Carb',
+    'Ctrl Release RDF',
+    'Ctrl Release Co2',
+    'Ctrl Release CC',
+    'Set Point OG',
+    'LOSL OG',
+    'LOSH OG',
+    'Set Point Alc',
+    'LOSL Alc',
+    'LOSH ALc',
+    'Set Point Cal',
+    'LOSL Cal',
+    'LOSH Cal',
+    'Set Point Carb',
+    'LOSL Carb',
+    'LOSH Carb',
+    'Set Point RDF',
+    'LOSL RDF',
+    'LOSH RDF',
+    'Set Point Co2',
+    'LOSL Co2',
+    'LOSH Co2',
+    'Set Point CC',
+    'LOSL CC',
+    'LOSH CC',
+    'Note'
+  ]
+  await axios.get('/api/brand/recipe/fin/' + name)
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)
-      tableViewFinDetailPreFil = new Tabulator('#viewFinDetailPreFilTable', {
+      // let tableData = convert2(data)
+      tableViewBrandFin = new Tabulator('#viewFinRecipeFinTable', {
         resizableColumns:false,
-        height:'330px',
+        height:'1000x',
         layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:'Object', field:'object',hozAlign:'center', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'center'},
+        {title:'Object', field:'object',hozAlign:'left', frozen:true},        
+        {title:'Method', field:'method',hozAlign:'left'},
         ],
       })
     })
     .catch(err => console.log(err))
 }
-async function viewFinDetailPostFil(name) {
-  let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Recover', 'Note']
-  await axios.get('/api/brand/detail/filpost/' + name)
-    .then(res => {
-      let data = res.data
-      let tableData = convert(data, labels)
-      tableViewFinDetailPostFil = new Tabulator('#viewFinDetailPostFilTable', {
-        resizableColumns:false,
-        height:'330px',
-        layout:'fitDataFill',
-        data:tableData,
-        columns:[
-        {title:'Object', field:'object',hozAlign:'center', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'center'},
-        ],
-      })
-    })
-    .catch(err => console.log(err))
-}
-async function viewFinDetailPreRel(name) {
-  let labels = ['Brand','Filter Beer Tank','Release Line','Package Line','Draft Line','Recover','Control','Note']
-  await axios.get('/api/brand/detail/relpre/' + name)
-    .then(res => {
-      let data = res.data
-      let tableData = convert(data, labels)
-      tableViewFinDetailPreRel = new Tabulator('#viewFinDetailPreRelTable', {
-        resizableColumns:false,
-        height:'330px',
-        layout:'fitDataFill',
-        data:tableData,
-        columns:[
-        {title:'Object', field:'object',hozAlign:'center', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'center'},
-        ],
-      })
-    })
-    .catch(err => console.log(err))
-}
-async function viewFinDetailPostRel(name) {
-  let labels = ['Brand','Filter Beer Tank','System Lines','Package','Draft','Recover','Note']
-  await axios.get('/api/brand/detail/relpost/' + name)
-    .then(res => {
-      let data = res.data
-      let tableData = convert(data, labels)
-      tableViewFinDetailPostRel = new Tabulator('#viewFinDetailPostRelTable', {
-        resizableColumns:false,
-        height:'330px',
-        layout:'fitDataFill',
-        data:tableData,
-        columns:[
-        {title:'Object', field:'object',hozAlign:'center', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'center'},
-        ],
-      })
-    })
-    .catch(err => console.log(err))
-}
-
-
-
-
-
-// routes hops
-async function sendUpdate(ev){
-  ev.preventDefault() 
-  ev.stopPropagation()
-
-  let tblData = hopTableUpdate.getData()
-  axios.patch('/api/mtx/dry/patch', tblData)
-    .then(data => {
-      alert('Updated')
-      document.getElementById('frmUpdate').reset()
-      if(hopTableUpdate) {
-        hopTableUpdate.clearData()
-      }
-    })
-    .catch(err => alert(err))
-}
-let hopTableUpdate
-function selectBrwBrandUpdate(){
-  let brwBrand = document.getElementById('brwBrandUpdate').value
-  axios.post('/api/mtx/dry', {brand: `${brwBrand}`, method: 'update'})
-    .then(res => {
-      let tableData = res.data
-      res.data.unshift({Hop:'Brand', Pounds:`${brwBrand}`})
-      hopTableUpdate = new Tabulator("#updateHop", {
-        resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
-        data:tableData,
-        columns:[
-        {title:"Hop", field:"Hop",hozAlign:"center", frozen:true},
-        {title:"Pounds", field:"Pounds",hozAlign:"center", editor:true, validator:["numeric"]},
-        ],
-        // validationFailed:function(cell, value, validators){
-
-        // }
-      })
-    })
-    .catch(err => console.log(err))
-}
-let hopTableView
-function selectBrwBrandView(){
-  let brwBrand = document.getElementById('brwBrandView').value
-  axios.post('/api/mtx/dry', {brand: `${brwBrand}`, method: 'view'})
-    .then(res => {
-      let tableData = res.data
-      res.data.unshift({Hop:'Brand', Pounds:`${brwBrand}`})
-      hopTableView = new Tabulator("#viewHop", {
-        resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
-        data:tableData,
-        columns:[
-        {title:"Hop", field:"Hop",hozAlign:"center", frozen:true},
-        {title:"Pounds", field:"Pounds",hozAlign:"center"},
-        ],
-      })
-    })
-    .catch(err => console.log(err))
-}
-
-
-
-
-
-
-
-
-
-
-
-

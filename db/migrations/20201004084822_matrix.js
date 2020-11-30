@@ -114,7 +114,6 @@ exports.up = function(knex) {
   })
 };
 
-               
 exports.down = function(knex) {
   return knex.schema.dropTableIfExists('mtx_sac_supr').dropTableIfExists('mtx_hop_dry').dropTableIfExists('mtx_hop_std').dropTableIfExists('mtx_material')
 };

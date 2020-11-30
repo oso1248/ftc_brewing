@@ -552,6 +552,7 @@ function getRecipeByNameFin(name) {
 }
 
 
+
 //methods
 function getAllMethod() {
   return db('methods_cold')

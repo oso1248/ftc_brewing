@@ -195,34 +195,34 @@ exports.up = async function(knex) {
     EXECUTE PROCEDURE update_timestamp();
   `);
 //matrix
-  await knex.raw(`
-    CREATE TRIGGER update_timestamp
-    BEFORE UPDATE
-    ON mtx_hop_std
-    FOR EACH ROW
-    EXECUTE PROCEDURE update_timestamp();
-  `);
-  await knex.raw(`
-    CREATE TRIGGER update_timestamp
-    BEFORE UPDATE
-    ON mtx_hop_dry
-    FOR EACH ROW
-    EXECUTE PROCEDURE update_timestamp();
-  `);
-  await knex.raw(`
-    CREATE TRIGGER update_timestamp
-    BEFORE UPDATE
-    ON mtx_sac_supr
-    FOR EACH ROW
-    EXECUTE PROCEDURE update_timestamp();
-  `);
-  await knex.raw(`
-    CREATE TRIGGER update_timestamp
-    BEFORE UPDATE
-    ON mtx_material
-    FOR EACH ROW
-    EXECUTE PROCEDURE update_timestamp();
-  `);
+  // await knex.raw(`
+  //   CREATE TRIGGER update_timestamp
+  //   BEFORE UPDATE
+  //   ON mtx_hop_std
+  //   FOR EACH ROW
+  //   EXECUTE PROCEDURE update_timestamp();
+  // `);
+  // await knex.raw(`
+  //   CREATE TRIGGER update_timestamp
+  //   BEFORE UPDATE
+  //   ON mtx_hop_dry
+  //   FOR EACH ROW
+  //   EXECUTE PROCEDURE update_timestamp();
+  // `);
+  // await knex.raw(`
+  //   CREATE TRIGGER update_timestamp
+  //   BEFORE UPDATE
+  //   ON mtx_sac_supr
+  //   FOR EACH ROW
+  //   EXECUTE PROCEDURE update_timestamp();
+  // `);
+  // await knex.raw(`
+  //   CREATE TRIGGER update_timestamp
+  //   BEFORE UPDATE
+  //   ON mtx_material
+  //   FOR EACH ROW
+  //   EXECUTE PROCEDURE update_timestamp();
+  // `);
 };
 
 exports.down = function(knex) {

@@ -76,7 +76,7 @@ async function patchBrndDryUpdate(name, changes){
         .where('com_id', data.com_id)
         .update(name, data.Pounds)
         .transacting(trx)
-      queries.push(query)
+      queries.push(query) 
     })
     Promise.all(queries) 
       .then(trx.commit)

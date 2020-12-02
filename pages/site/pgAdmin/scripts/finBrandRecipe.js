@@ -41,6 +41,7 @@ function convert2(obj) {
   return data
 }
 function convert(obj, labels) {
+  // console.log(obj)
   let id = obj.id
   delete obj['id']
   let json = {}
@@ -61,20 +62,6 @@ function convert(obj, labels) {
   // console.log(data)
   return data
 }
-function convertBrand(obj) {
-  let json = { }
-  let data = []
-  let i = 1
-  for (key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      json = {}
-      json['brand'] = key
-      json['active'] = obj[key]
-      data.push(json)
-    }  
-  }
-  return data
-}
 
 
 // Update
@@ -82,19 +69,6 @@ let tableUpdateBrandChp
 let tableUpdateBrandSch
 let tableUpdateBrandFin
 
-function resetUpdate(ev){
-  ev.preventDefault()
-  document.getElementById('frmUpdate').reset()
-  if (tableUpdateBrandLineage) {
-    tableUpdateBrandLineage.clearData()
-    tableUpdateFinDetailPreCsx.clearData()
-    tableUpdateFinDetailPostCsx.clearData()
-    tableUpdateFinDetailPreFil.clearData()
-    tableUpdateFinDetailPostFil.clearData()
-    tableUpdateFinDetailPreRel.clearData()
-    tableUpdateFinDetailPostRel.clearData()
-  }
-}
 document.getElementById('add').onclick = updateView
 function updateView() {
   document.getElementById('viewBoxes').style.display="none"
@@ -118,6 +92,28 @@ function updateView() {
 
 }
 
+document.getElementById('btnUpdateClearChp').addEventListener('click', resetUpdateChp)
+function resetUpdateChp(ev){
+  ev.preventDefault()
+  if (tableUpdateBrandChp) {
+    tableUpdateBrandChp.clearData()
+  }
+}
+document.getElementById('btnUpdateClearSch').addEventListener('click', resetUpdateSch)
+function resetUpdateSch(ev){
+  ev.preventDefault()
+  if (tableUpdateBrandSch) {
+    tableUpdateBrandSch.clearData()
+  }
+}
+document.getElementById('btnUpdateClearFin').addEventListener('click', resetUpdateFin)
+function resetUpdateFin(ev){
+  ev.preventDefault()
+  if (tableUpdateBrandFin) {
+    tableUpdateBrandFin.clearData()
+  }
+}
+
 document.getElementById('brwBrandUpdate').addEventListener('change', selectUpdateBrw)
 function selectUpdateBrw() {
   document.getElementById('updateLineageBoxChp').style.display="block"
@@ -133,13 +129,17 @@ function selectUpdateBrw() {
 async function chpBrandUpdate(name) {
   let labels = [
     'Brand',
-    
+    'Diacetyl',
+    'Pentanedione',
+    'Acid Aldehyde',
+    'ABW',
+    'RDF',
+    'Note',
   ]
   await axios.get('/api/brand/recipe/chp/' + name)
     .then(res => {
       let data = res.data
-      // let tableData = convert(data, labels)
-      let tableData = convert2(data)
+      let tableData = convert(data, labels)
       // let tableData = convert2(data)
       tableUpdateBrandChp = new Tabulator('#updateFinRecipeChpTable', {
         resizableColumns:false,
@@ -148,7 +148,7 @@ async function chpBrandUpdate(name) {
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'left'},
+        {title:'Method', field:'method',hozAlign:'left', editor:true},
         ],
       })
     })
@@ -157,13 +157,14 @@ async function chpBrandUpdate(name) {
 async function schBrandUpdate(name) {
   let labels = [
     'Brand',
-    
+    'Cell Count',
+    'ACP Rate',
+    'Note',
   ]
   await axios.get('/api/brand/recipe/sch/' + name)
     .then(res => {
       let data = res.data
-      // let tableData = convert(data, labels)
-      let tableData = convert2(data)
+      let tableData = convert(data, labels)
       // let tableData = convert2(data)
       tableUpdateBrandSch = new Tabulator('#updateFinRecipeSchTable', {
         resizableColumns:false,
@@ -172,7 +173,7 @@ async function schBrandUpdate(name) {
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'left'},
+        {title:'Method', field:'method',hozAlign:'left', editor:true},
         ],
       })
     })
@@ -243,11 +244,54 @@ async function finBrandUpdate(name) {
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'left'},
+        {title:'Method', field:'method',hozAlign:'left', editor:true},
         ],
       })
     })
     .catch(err => console.log(err))
+}
+
+document.getElementById('btnUpdateSubmitChp').addEventListener('click', sendUpdateChp)
+async function sendUpdateChp(ev){
+  ev.preventDefault() 
+  ev.stopPropagation()
+  
+  let tableData = tableUpdateBrandChp.getData()
+  // console.log(tableData)
+  await axios.patch('/api/brand/detail/updaterecipe/chip', tableData)
+    .then(data => {
+      // console.log(data.data)
+      alert('Updated')
+    })
+    .catch(err => alert(err))
+}
+document.getElementById('btnUpdateSubmitSch').addEventListener('click', sendUpdateSch)
+async function sendUpdateSch(ev){
+  ev.preventDefault() 
+  ev.stopPropagation()
+  
+  let tableData = tableUpdateBrandSch.getData()
+  // console.log(tableData)
+  await axios.patch('/api/brand/detail/updaterecipe/schoene', tableData)
+    .then(data => {
+      // console.log(data.data)
+      alert('Updated')
+    })
+    .catch(err => alert(err))
+}
+document.getElementById('btnUpdateSubmitFin').addEventListener('click', sendUpdateFin)
+async function sendUpdateFin(ev){
+  ev.preventDefault() 
+  ev.stopPropagation()
+  
+  let tableData = tableUpdateBrandFin.getData()
+  // console.log(tableData)
+  await axios.patch('/api/brand/detail/updaterecipe/filtered', tableData)
+    .then(data => {
+      // console.log(data.data)
+      alert('Updated')
+    })
+    .catch(err => alert(err))
 }
 
 
@@ -294,13 +338,17 @@ function selectViewBrw() {
 async function chpBrandView(name) {
   let labels = [
     'Brand',
-    
+    'Diacetyl',
+    'Pentanedione',
+    'Acid Aldehyde',
+    'ABW',
+    'RDF',
+    'Note',
   ]
   await axios.get('/api/brand/recipe/chp/' + name)
     .then(res => {
       let data = res.data
-      // let tableData = convert(data, labels)
-      let tableData = convert2(data)
+      let tableData = convert(data, labels)
       // let tableData = convert2(data)
       tableViewBrandChp = new Tabulator('#viewFinRecipeChpTable', {
         resizableColumns:false,
@@ -318,13 +366,14 @@ async function chpBrandView(name) {
 async function schBrandView(name) {
   let labels = [
     'Brand',
-    
+    'Cell Count',
+    'ACP Rate',
+    'Note',
   ]
   await axios.get('/api/brand/recipe/sch/' + name)
     .then(res => {
       let data = res.data
-      // let tableData = convert(data, labels)
-      let tableData = convert2(data)
+      let tableData = convert(data, labels)
       // let tableData = convert2(data)
       tableViewBrandSch = new Tabulator('#viewFinRecipeSchTable', {
         resizableColumns:false,

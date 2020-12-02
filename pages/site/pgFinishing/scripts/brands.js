@@ -480,13 +480,22 @@ async function recipeBrandChp() {
   await recipeBrandChpDetail(name)
 }
 function recipeBrandChpDetail(name) {
+  let labels = [
+    'Brand',
+    'Diacetyl',
+    'Pentanedione',
+    'Acid Aldehyde',
+    'ABW',
+    'RDF',
+    'Note',
+  ]
   axios.get('/api/brand/recipe/chp/' + name)
     .then(res => {
       let tableData = res.data
-      tableData = convert(tableData)
+      tableData = convert2(tableData, labels)
       recipeBrandChpTable = new Tabulator("#recipeBrandChp", {
         resizableColumns:false,
-        height:"220px",
+        height:"300px",
         layout:"fitDataFill",
         data:tableData,
         columns:[
@@ -520,13 +529,19 @@ async function recipeBrandSch() {
   await recipeBrandSchDetail(name)
 }
 function recipeBrandSchDetail(name) {
+  let labels = [
+    'Brand',
+    'Cell Count',
+    'ACP Rate',
+    'Note',
+  ]
   axios.get('/api/brand/recipe/sch/' + name)
     .then(res => {
       let tableData = res.data
-      tableData = convert(tableData)
+      tableData = convert2(tableData, labels)
       recipeBrandSchTable = new Tabulator("#recipeBrandSch", {
         resizableColumns:false,
-        height:"150px",
+        height:"300px",
         layout:"fitDataFill",
         data:tableData,
         columns:[
@@ -560,10 +575,49 @@ async function recipeBrandFin() {
   await recipeBrandFinDetail(name)
 }
 function recipeBrandFinDetail(name) {
+  let labels = [
+    'Brand',
+    'Ctrl Filter OG',
+    'Ctrl Filter Alc',
+    'Ctrl Filter Cal',
+    'Ctrl Filter Carb',
+    'Ctrl Filter RDF',
+    'Ctrl Filter Co2',
+    'Ctrl Filter CC',
+    'Ctrl Release OG',
+    'Ctrl Release Alc',
+    'Ctrl Release Cal',
+    'Ctrl Release Carb',
+    'Ctrl Release RDF',
+    'Ctrl Release Co2',
+    'Ctrl Release CC',
+    'Set Point OG',
+    'LOSL OG',
+    'LOSH OG',
+    'Set Point Alc',
+    'LOSL Alc',
+    'LOSH ALc',
+    'Set Point Cal',
+    'LOSL Cal',
+    'LOSH Cal',
+    'Set Point Carb',
+    'LOSL Carb',
+    'LOSH Carb',
+    'Set Point RDF',
+    'LOSL RDF',
+    'LOSH RDF',
+    'Set Point Co2',
+    'LOSL Co2',
+    'LOSH Co2',
+    'Set Point CC',
+    'LOSL CC',
+    'LOSH CC',
+    'Note'
+  ]
   axios.get('/api/brand/recipe/fin/' + name)
     .then(res => {
       let tableData = res.data
-      tableData = convert(tableData)
+      tableData = convert2(tableData, labels)
       recipeBrandFinTable = new Tabulator("#recipeBrandFinTbl", {
         resizableColumns:false,
         height:"1025px",

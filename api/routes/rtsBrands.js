@@ -332,7 +332,6 @@ router.get('/recipe/fin/:name', (req, res) => {
 })
 router.patch('/detail/updaterecipe/:table', (req, res) => {
     if(req.params.table === 'chip') {
-      // res.status(200).json({msg: 'chip'})
       db.patchRecipeChp(req.body)
       .then(data => {
         if(data){
@@ -343,7 +342,6 @@ router.patch('/detail/updaterecipe/:table', (req, res) => {
       })
       .catch(err => res.status(500).json({msg: err.detail}))
     } else if(req.params.table === 'schoene') {
-      // res.status(200).json({msg: 'schoene'})
       db.patchRecipeSch(req.body)
       .then(data => {
         if(data){
@@ -354,7 +352,6 @@ router.patch('/detail/updaterecipe/:table', (req, res) => {
       })
       .catch(err => res.status(500).json({msg: err.detail}))
     } else if(req.params.table === 'filtered') {
-      // res.status(200).json({msg: 'filtered'})
       db.patchRecipeFin(req.body)
       .then(data => {
         if(data){

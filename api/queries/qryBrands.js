@@ -478,7 +478,8 @@ function getRecipeByNameChp(name) {
       'chp.param_aa',
       'chp.param_abw',
       'chp.param_rdf',
-      'chp.note'
+      'chp.note',
+      'brw.id',      
       )
     .where({'brw.brand': name})
     .first() 
@@ -490,7 +491,8 @@ function getRecipeByNameSch(name) {
       'brw.brand',
       'sch.cc',
       'sch.acp',
-      'sch.note'
+      'sch.note',
+      'brw.id'
       )
     .where({'brw.brand': name})
     .first() 
@@ -545,12 +547,61 @@ function getRecipeByNameFin(name) {
       'prm.cc_losl',
       'prm.cc_losh',
       
-      'prm.note'
+      'prm.note',
+      'fin.id'
       )
     .where({'fin.brand': name})
     .first() 
 }
-
+function patchRecipeChp(changes) {
+  changes.shift()
+  return db.transaction(trx => {
+    let queries = []
+    changes.forEach(data => {
+      const query = db('chp_params')
+        .where('brw_id', data.id_brnd)
+        .update(data.db, data.method)
+        .transacting(trx)
+      queries.push(query)
+    })
+    Promise.all(queries) 
+      .then(trx.commit)
+      .catch(trx.rollback)
+  })
+}
+function patchRecipeSch(changes) {
+  changes.shift()
+  return db.transaction(trx => {
+    let queries = []
+    changes.forEach(data => {
+      const query = db('sch_params')
+        .where('brw_id', data.id_brnd)
+        .update(data.db, data.method)
+        .transacting(trx)
+      queries.push(query)
+    })
+    Promise.all(queries) 
+      .then(trx.commit)
+      .catch(trx.rollback)
+  })
+}
+function patchRecipeFin(changes) {
+  changes.shift()
+  return db.transaction(trx => {
+    let queries = []
+    changes.forEach(data => {
+      // console.log(data.id_brnd, data.db, data.method)
+      const query = db('fin_params')
+        .where('fin_id', data.id_brnd)
+        .update(data.db, data.method)
+        .transacting(trx)
+      queries.push(query)
+    })
+    Promise.all(queries) 
+      .then(trx.commit)
+      .catch(trx.rollback)
+  })
+}
 
 
 //methods
@@ -591,5 +642,8 @@ module.exports = {
   getAllBrwSac,
   getAllBrwCrft,
   getAllMethod,
-  patchDetail
+  patchDetail,
+  patchRecipeChp,
+  patchRecipeSch,
+  patchRecipeFin
 }

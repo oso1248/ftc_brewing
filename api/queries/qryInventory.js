@@ -65,4 +65,46 @@ function getByDatetwo(date) {
 }
 
 
-module.exports = {add, getInvDateMaterial, getByID, getByDate}
+async function addInvHopWeekly(data) {
+  await com(data)
+  const [{id}] = await db('inv_hop_weekly').insert(data, ['id'])
+  return getByIDHopWeekly(id)
+}
+function getByIDHopWeekly(id) {
+  return db('inv_hop_weekly as inv')
+    .join('mtl_commodity as com', 'inv.com_id', '=', 'com.id' )
+    .join('mtl_uom as uom', 'com.uom_id', '=', 'uom.id')
+    .select(
+      'com.commodity',
+      'inv.lbs',
+      'uom.uom'
+    )
+    .where({'inv.id': id})
+}
+function getByDate(data) {
+  return db('inv_hop_weekly as inv')
+    .join('mtl_commodity as com', 'inv.com_id', '=', 'com.id' )
+    .join('mtl_uom as uom', 'com.uom_id', '=', 'uom.id')
+    .select(
+      'com.commodity',
+      'com.sap',
+      'inv.lbs',
+      'uom.uom',
+      'inv.lot',
+      'inv.username',
+      'inv.created_at',
+      'inv.note'
+    )
+    .where('inv.created_at', '>', data.startDate)
+    .andWhere('inv.created_at', '<', data.endDate)
+}
+
+
+
+module.exports = {
+  add, 
+  getInvDateMaterial, 
+  getByID, 
+  getByDate, 
+  addInvHopWeekly
+}

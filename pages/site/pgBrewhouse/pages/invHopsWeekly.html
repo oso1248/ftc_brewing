@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Hop Inv</title>
+
+  <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
+  <script src="https://dmla.github.io/jsqrcode/src/qr_packed.js"></script>
+
+  <link rel="stylesheet" href="../../commonCSS/styles.css">
+  <link rel="stylesheet" href="../styles/invHopsWeekly.css">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+  <nav class="main-nav">
+    <ul class="">
+      <li><a href="../brewhouse.html">Back</a></li>
+      <li><label id="scanner" class=qrcode-text-btn><a>Scan</a><input type=file accept="image/*" capture=environment onchange="openQRCamera(this);" tabindex=-1></label> </li>
+    </ul>
+  </nav>
+  
+  <div class="qrhead">
+    <!-- <input id="comm" type=text size=16 placeholder="Commodity" class=qrcode-text> -->
+  </div>
+
+  <div class="container2">
+
+  <form class="form" id="frmAdd" action="">
+    <h3>Add to Inventory</h3>
+    <div class="input">
+      <select name="addCommodity" id="com_id">
+        <!-- appended here  -->
+      </select>
+    </div>
+    <div class="tooltip input">
+      <span class="tooltiptext">Per Pallet</span>
+      <input type="number" name="addPerPallet" id="per_pallet" Placeholder="Per Pallet">
+    </div>
+    <div class="tooltip input">
+      <span class="tooltiptext">Pallet Count</span>
+      <input type="number" name="addPerPallet" id="pallet_count" Placeholder="Pallets">
+    </div>
+    <div class="tooltip input">
+      <span class="tooltiptext">Per Unit</span>
+      <input type="number" name="addUnitTotal" id="per_unit" Placeholder="Per Unit">
+    </div>
+    <div class="tooltip input">
+      <span class="tooltiptext">Unit Count</span>
+      <input type="number" name="addCount" id="unit_count" Placeholder="Units">
+    </div>
+    <div class="tooltip input">
+      <span class="tooltiptext">Loose Pounds</span>
+      <input type="number" name="addCount" id="lbs" Placeholder="Loose Pounds">
+    </div>
+    <div class="tooltip input">
+      <span class="tooltiptext">Lot</span>
+      <input type="text" name="addLot" id="lot" Placeholder="Lot">
+    </div>
+    <div class="input">
+      <textarea name="updateNote" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+    </div>
+    
+    <div class="button">
+      <button class="btn" id="btnAddClear">Clear</button>
+      <button class="btn" id="btnAddSubmit">Upload</button>
+    </div>
+  </form>
+
+  <h4 class="remain">Remaining Commodities</h4>
+  <div id="list"></div>
+
+
+  <h4 class="remain">Running Inventory</h4>
+  <div id="invList"></div>
+</div>
+
+
+  <script src="../scripts/invHopsWeekly.js"></script>
+</body>
+</html>

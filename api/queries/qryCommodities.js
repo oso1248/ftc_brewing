@@ -54,7 +54,6 @@ async function add(data) {
   res = await db('mtx_material').insert({'com_id': id})
   return getByName(commodity)
 }
-
 function getAll(active) {
   if(active) {
     return db('mtl_commodity AS com')
@@ -109,7 +108,6 @@ function getAll(active) {
     .orderBy([{column:'com.active',order:'desc'},{ column:'com.commodity'}])
   }
 }
-
 function getByName(name) {
   return db('mtl_commodity AS com')
     .join('mtl_uom as uom', 'com.uom_id', '=', 'uom.id')
@@ -138,7 +136,64 @@ function getByName(name) {
   .where({'com.commodity': name})
   .first() 
 }
-
+function getByType(active, type) {
+  if(active) {
+    return db('mtl_commodity AS com')
+    .join('mtl_uom as uom', 'com.uom_id', '=', 'uom.id')
+    .join('mtl_type as typ', 'com.type_id', '=', 'typ.id')
+    .join('mtl_location AS loc', 'com.location_id', 'loc.id' )
+    .join('mtl_enviro as env', 'com.enviro_id', '=', 'env.id')
+    .join('mtl_container as con', 'com.container_id', '=', 'con.id')
+    .join('mtl_supplier as sup', 'com.supplier_id', '=', 'sup.id')
+    .select(
+      'com.id as com_id',
+      'com.commodity',
+      'com.sap',
+      'com.active',
+      'com.inventory',
+      'loc.location',
+      'sup.company',
+      'typ.type',
+      'con.container',
+      'env.enviro',
+      'com.threshold',
+      'com.per_pallet',
+      'com.unit_total',
+      'uom.uom',
+      'com.note'
+    )
+    .where('typ.type', '=', type)
+    .orderBy('com.commodity', 'asc')
+  } else {
+  return db('mtl_commodity AS com')
+    .join('mtl_uom as uom', 'com.uom_id', '=', 'uom.id')
+    .join('mtl_type as typ', 'com.type_id', '=', 'typ.id')
+    .join('mtl_location AS loc', 'com.location_id', 'loc.id' )
+    .join('mtl_enviro as env', 'com.enviro_id', '=', 'env.id')
+    .join('mtl_container as con', 'com.container_id', '=', 'con.id')
+    .join('mtl_supplier as sup', 'com.supplier_id', '=', 'sup.id')
+    .select(
+      'com.id as com_id',
+      'com.commodity',
+      'com.sap',
+      'com.active',
+      'com.inventory',
+      'loc.location',
+      'sup.company',
+      'typ.type',
+      'con.container',
+      'env.enviro',
+      'com.threshold',
+      'com.per_pallet',
+      'com.unit_total',
+      'uom.uom',
+      'com.note'
+    )
+    // .orderBy('com.commodity', 'asc')
+    .where('typ.type', '=', type)
+    .orderBy([{column:'com.active',order:'desc'},{ column:'com.commodity'}])
+  }
+}
 async function change(name, changes) {
   await uom(changes)  
   await type(changes)
@@ -153,10 +208,10 @@ async function change(name, changes) {
     return getByName(name)
     })
 }
-
 async function destroy(name) {
   let remove = await db('mtl_commodity').where('commodity', name).del()
   return getByName(name)
 }
 
-module.exports = {add, getAll, getByName, change, destroy}
+
+module.exports = {add, getAll, getByName, change, destroy, getByType}

@@ -189,13 +189,13 @@ async function sendAdd(ev){
         document.getElementById('frmAdd').reset()  
       })
       .catch(err => alert(err))
-  } else {
-    let msg = "Problems:\n"
-    for(i = 0; i < fails.length; i++) {
-      msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
+    } else {
+      let msg = "Problems:\n"
+      for(i = 0; i < fails.length; i++) {
+        msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
+      }
+      alert(msg)
     }
-    alert(msg)
-  }
 }
 async function validateAdd (data){
   let failures = []

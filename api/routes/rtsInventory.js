@@ -80,6 +80,15 @@ router.post('/hop/weekly/view', (req, res) => {
     .catch(err => res.status(500).json({msg: err.detail}))
 })
 
+//hop inv daily
+router.post('/hop/daily', (req, res) => {
+  let user = req.session.user.username
+  db.addInvHopDaily(req.body, user)
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
 
 
 

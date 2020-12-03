@@ -31,6 +31,8 @@ exports.up = function(knex) {
       .onUpdate('CASCADE')
     tbl.decimal('sets', 8, 2)
       .notNullable()
+    tbl.string('username', 50)
+      .notNullable()
     tbl.timestamps(true, true)
   })
   .createTable('inv_hop_weekly', tbl => {
@@ -59,12 +61,10 @@ exports.up = function(knex) {
       .notNullable()
     tbl.string('username', 50)
       .notNullable()
-    // tbl.decimal('shift', 8, 2)
-    //   .notNullable()
     tbl.timestamps(true, true)
   })
 }
 
 exports.down = function(knex) {
-  return knex.schema.dropTableIfExists('inv_mat_weekly').dropTableIfExists('inv_hop_daily').dropTableIfExists('inv_hop_weekly').dropTableIfExists('last_brews')
+  return knex.schema.dropTableIfExists('inv_mat_weekly').dropTableIfExists('inv_hop_daily').dropTableIfExists('inv_hop_weekly').dropTableIfExists('inv_last_brews')
 }

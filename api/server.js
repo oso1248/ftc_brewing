@@ -1,24 +1,42 @@
 const express = require('express')
 const path = require('path')
 const session = require('express-session')
+// const pg = require('pg')
+const pgSession = require('connect-pg-simple')
 
 
 const server = express()
 server.use(express.json())
 
-
 const sessionConfig = {
+  conString:process.env.DATABASE_URL || 'postgres://localhost/brew',
+  store: new (pgSession(session))(),
   name: 'BudApp',
+  resave: false,
+  saveUninitialized: true, // set to false for prod GDPR laws
   secret: process.env.SECRET,
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 180,
     secure: false, // set true for production for https
     httpOnly: true, // no js access
     sameSite: true
-  },
-  resave: false,
-  saveUninitialized: true, // set to false for prod GDPR laws
+  }
 }
+
+
+
+// const sessionConfig = {
+//   name: 'BudApp',
+//   secret: process.env.SECRET,
+//   cookie: {
+//     maxAge: 1000 * 60 * 60 * 24 * 180,
+//     secure: false, // set true for production for https
+//     httpOnly: true, // no js access
+//     sameSite: true
+//   },
+//   resave: false,
+//   saveUninitialized: true, // set to false for prod GDPR laws
+// }
 
 
 server.use(session(sessionConfig))

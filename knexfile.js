@@ -3,6 +3,7 @@ module.exports = {
     client: 'pg',
     useNullAsDefault: true,
     connection:'postgres://localhost/brew',
+    // connection:process.env.DATABASE_URL,
     migrations: {
       directory: './db/migrations'
     },

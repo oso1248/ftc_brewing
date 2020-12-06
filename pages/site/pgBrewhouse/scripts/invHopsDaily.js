@@ -4,6 +4,10 @@ let mids = DateTime.local().startOf('day').minus({hours: .5}).toFormat('yyyy-MM-
 let days = DateTime.local().startOf('day').plus({hours: 7.5}).toFormat('yyyy-MM-dd TTT')  
 let afts = DateTime.local().startOf('day').plus({hours: 15.5}).toFormat('yyyy-MM-dd TTT')
 let ends = DateTime.local().startOf('day').plus({hours: 23.5}).toFormat('yyyy-MM-dd TTT')
+console.log(days)
+console.log(afts)
+let week = DateTime.local().startOf('week').toFormat('yyyy-MM-dd TTT')
+console.log(week)
 
 String.prototype.toNonAlpha = function (spaces) {
   if(spaces === '') {

@@ -1,0 +1,106 @@
+.container2 {
+  width: 100%;
+  margin: 0 auto;
+}
+
+#note {
+  resize: none;
+  line-height: 1.4;
+  width: 40%;
+  margin: 5px;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.form input, select, option {
+  text-align: center;
+  margin: 5px;
+  margin-bottom: 40px;
+  /* line-height: 5; */
+  width: 40%;
+  font-size: 20px;
+  height: 44px;
+  text-align-last: center;
+  border-radius: 10px; 
+}
+
+.form {
+  text-align: center;
+}
+
+.button button {
+  background-color: cornflowerblue;
+  border: 1px solid green;
+  color: white;
+  padding: 10px 24px; 
+  cursor: pointer; 
+  width: 20%;
+  margin: 0px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.button button:hover {
+  background-color: #3e8e41;
+}
+
+.btnLabel {
+  width: 60%;
+}
+
+.tableDaily {
+  display: grid;
+  grid-gap: 20px;
+  padding: 0;
+  /* grid-template-areas: "tableMid tableDay tableAft"; */
+  grid-template-columns: repeat(3, 1fr);
+}
+
+
+.tableWeekly {
+  display: grid;
+  grid-gap: 20px;
+  padding: 0;
+  /* grid-template-areas:"tableHard tableSets tableRolling"; */
+  grid-template-columns: repeat(3, 1fr);
+}
+
+
+@media (max-width: 850px) {
+  .form input, textarea, select, option {
+  width: 70%;  
+  }
+  .button button {
+  width: 35%;
+  }
+  #note {
+    width: 70%;
+  }
+}  
+@media (max-width: 700px) {
+  .form input, textarea, select, option {
+  width: 90%; 
+  }
+  .button button {
+  width: 45%;
+  }
+  #note {
+    width: 90%;
+  }
+  .supplier {
+    font-size: 12px;
+  }
+  .tableDaily {
+    display: grid;
+    grid-gap: 20px;
+    padding: 0;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .tableWeekly {
+    display: grid;
+    grid-gap: 20px;
+    padding: 0;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

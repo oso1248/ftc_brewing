@@ -23,22 +23,6 @@ const sessionConfig = {
   }
 }
 
-
-
-// const sessionConfig = {
-//   name: 'BudApp',
-//   secret: process.env.SECRET,
-//   cookie: {
-//     maxAge: 1000 * 60 * 60 * 24 * 180,
-//     secure: false, // set true for production for https
-//     httpOnly: true, // no js access
-//     sameSite: true
-//   },
-//   resave: false,
-//   saveUninitialized: true, // set to false for prod GDPR laws
-// }
-
-
 server.use(session(sessionConfig))
 const permissions1 = require('./auth/perm1')
 const permissions5 = require('./auth/perm5')

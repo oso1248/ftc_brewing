@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hops Inventory View</title>
+  
+  <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
+  <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
+  <link rel="stylesheet" href="../../commonCSS/styles.css">
+  <link rel="stylesheet" href="../styles/invHopView.css">
+
+
+</head>
+<body>
+  <div class="container1"><! -- Start of Container1 -->
+    <header>
+      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+      <h1>Hops Inventory View</h1>
+      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+       
+    </header>
+    <! -- Navigation -->
+    <nav class="main-nav">
+      <ul class="">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../pgBrewhouse/brewhouse.html">Brewhouse</a></li>
+        <li><a href="../../pgFinishing/finishing.html">Finishing</a></li>
+        <li><a href="../../pgMaterials/material.html">Materials</a></li>
+        <li><a href="../../pgAdmin/admin.html">Admin</a></li>
+        <li><a href="" id="logout">Log Out</a></li>
+      </ul>
+    </nav>
+   
+   <div class="boxes">
+    <div class="box" id="day">
+      <a style="display: block"><h3>View Daily</h3></a>
+    </div>
+    <div class="box" id="week">
+      <a style="display: block"><h3>View Weekly</h3></a>
+    </div>
+
+
+   </div> <!-- End Boxes   -->
+    
+  </div><! -- End of container1 -->
+  <div class="spacer"></div>
+  
+  <div class="container2"><!-- start container2 -->
+
+    <div id="boxDay">
+      <form class="form" id="frmDaily" action="">
+        <h1>Daily Inventory</h1>
+        <div class="input">
+          <select name="viewInvMatWeekly" id="selDateDay">
+            <!-- appended here  -->
+          </select>
+        </div>
+      </form>
+      
+      <div id="dailyTables" class="tableDaily">
+
+        <div class="tableMid">
+          <h3 id="mid" class="headers">Mids</h3>
+          <div id="dailyMid" class="tableAft"></div>
+        </div>
+        <div class="tableDay">
+          <h3 id="day" class="headers">Days</h3>
+          <div id="dailyDay" class="tableAft"></div>
+        </div>
+        <div class="tableAft">
+          <h3 id="aft" class="headers">Afts</h3>
+          <div id="dailyAft" class="tableAft"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="boxWeek">
+      <form class="form" id="frmWeekly" action="">
+        <h1>Weekly Inventory</h1>
+        <div class="input">
+          <select name="viewInvMatWeekly" id="selDateWeek">
+            <!-- appended here  -->
+          </select>
+        </div>
+      </form>
+
+      <div id="weeklyTables" class="tableWeekly">
+        <div class="tableHard">
+          <h3 id="hard" class="headers">Weekly Hard</h3>
+          <div id="weeklyHard" class=""></div>
+        </div>
+        <div class="tableSets">
+          <h3 id="lastBrews" class="headers">Weekly Sets</h3>
+          <div id="weeklySets" class=""></div>
+        </div>
+        <div class="tableRolling">
+          <h3 id="" class="headers">Weekly Rolling</h3>
+          <div id="weeklyRolling" class=""></div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- end container2 -->
+
+  <script src="../../commonJS/index.js"></script>
+  <script src="../scripts/invHopView.js"></script>
+</body>
+</html>

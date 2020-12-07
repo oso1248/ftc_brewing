@@ -102,8 +102,9 @@ function commodityList() {
 let inventoryTable
 function inventoryList() {
   let data = {}
-  data.startDate = DateTime.local().endOf('day').minus({days: 1}).toFormat('yyyy-MM-dd TTT')
-  data.endDate = DateTime.local().endOf('day').toFormat('yyyy-MM-dd TTT')
+  data.start = DateTime.local().endOf('day').minus({days: 1}).toFormat('yyyy-MM-dd TTT')
+  data.end = DateTime.local().endOf('day').toFormat('yyyy-MM-dd TTT')
+  console.log(data)
   axios.post('/api/inventory/hop/weekly/view', data)
     .then(res => {
     for(let i = 0; i < res.data.length; i++) {

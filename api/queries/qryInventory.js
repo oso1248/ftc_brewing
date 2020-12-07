@@ -105,6 +105,7 @@ function getHopWeeklyInvHard(data) {
       'inv.lot',
       'inv.lbs',
       'inv.username',
+      'inv.created_at'
     )
     .orderBy('com.commodity')
 

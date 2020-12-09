@@ -166,7 +166,7 @@ async function getSets(data) {
       'inv.sets',
       'inv.username'
     )
-    .where('inv.created_at', '>', data.start)
+    .where('inv.created_at', '>', data.startSets)
     .andWhere('inv.created_at', '<', data.end)
 }
 function getSetsCombined(data) {
@@ -174,7 +174,7 @@ function getSetsCombined(data) {
     .join('brnd_brw as brw', function(){
       this.on(function(){
         this.on('inv.brw_id', '=', 'brw.id')
-        this.andOnVal('inv.created_at', '>', data.start)
+        this.andOnVal('inv.created_at', '>', data.startSets)
         this.andOnVal('inv.created_at', '<', data.end)
       })
     })
@@ -220,9 +220,10 @@ async function getHopDaily(data) {
   return mtx
 }
 async function getHopRollingInv(data) {
+  console.log(data)
   let sets = await getSetsCombined(data)
   let invWeek = await getHopWeeklyInvCombined(data)
-    
+  
   for (let i = 0; i < sets.length; i++) {
     let hops = await getHopMtx(sets[i].brand)
     for (let x = 0; x < hops.length; x++) {

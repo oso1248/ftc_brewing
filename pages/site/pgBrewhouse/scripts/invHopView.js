@@ -49,7 +49,7 @@ function loadTableDailyMid(date) {
   let mids = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd TTT')
   let days = DateTime.fromISO(date).plus({hours: 7, minutes: 30}).toFormat('yyyy-MM-dd TTT')
   let timeSpan = {}
-  timeSpan.start = mids
+  timeSpan.startSets = mids
   timeSpan.end = days
 
   axios.post('/api/inventory/hop/daily/view', timeSpan)
@@ -73,7 +73,7 @@ function loadTableDailyDay(date) {
   let days = DateTime.fromISO(date).plus({hours: 7, minutes: 30}).toFormat('yyyy-MM-dd TTT')
   let afts = DateTime.fromISO(date).plus({hours: 15, minutes: 30}).toFormat('yyyy-MM-dd TTT')
   let timeSpan = {}
-  timeSpan.start = days
+  timeSpan.startSets = days
   timeSpan.end = afts
 
   axios.post('/api/inventory/hop/daily/view', timeSpan)
@@ -97,7 +97,7 @@ function loadTableDailyAft(date) {
   let afts = DateTime.fromISO(date).plus({hours: 15, minutes: 30}).toFormat('yyyy-MM-dd TTT')
   let ends = DateTime.fromISO(date).plus({hours: 23, minutes: 59}).toFormat('yyyy-MM-dd TTT')
   let timeSpan = {}
-  timeSpan.start = afts
+  timeSpan.startSets = afts
   timeSpan.end = ends
 
   axios.post('/api/inventory/hop/daily/view', timeSpan)
@@ -185,7 +185,7 @@ function loadTableWeeklySets(date) {
   let start = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd TTT')
   let end = DateTime.fromISO(date).plus({hours: 167, minutes: 30}).toFormat('yyyy-MM-dd TTT')
   let timeSpan = {}
-  timeSpan.start = start
+  timeSpan.startSets = start
   timeSpan.end = end
   // console.log(date)
   // console.log(timeSpan)
@@ -206,13 +206,16 @@ function loadTableWeeklySets(date) {
     .catch(err => console.log(err))
 }
 function loadTableWeeklyRolling(date) {
-  let start = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  let start = DateTime.fromISO(date).minus({hours: 24, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  let startSets = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd TTT')
   let end = DateTime.fromISO(date).plus({hours: 167, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  
   let timeSpan = {}
   timeSpan.start = start
+  timeSpan.startSets = startSets
   timeSpan.end = end
   // console.log(date)
-  // console.log(timeSpan)
+  console.log(timeSpan)
   axios.post('/api/inventory/hop/weekly/view/rolling', timeSpan)
     .then(res => {
       let tableData = res.data

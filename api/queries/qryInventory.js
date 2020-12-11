@@ -20,7 +20,13 @@ async function add(data) {
 }
 
 function getInvDateMaterial() {
-  return db.raw(`SELECT DISTINCT DATE_TRUNC('day',created_at) FROM inv_mat_weekly ORDER BY DATE_TRUNC('day',created_at) DESC`)
+  return db.raw(`
+  SELECT DISTINCT DATE_TRUNC('day',created_at) 
+  FROM inv_mat_weekly
+  WHERE EXTRACT(DOW FROM created_at) = 1
+    AND created_at > NOW() - INTERVAL '365 days'
+  ORDER BY DATE_TRUNC('day',created_at) DESC
+  `)
 }
 
 function getByID(id) {
@@ -111,14 +117,27 @@ function getHopWeeklyInvHard(data) {
 
 }
 async function getInvHopWeeklyDate() {
-  let {rows} = await db.raw(`SELECT DISTINCT DATE_TRUNC('day',created_at) FROM inv_hop_weekly ORDER BY DATE_TRUNC('day',created_at) DESC`)
+  let {rows} = await db.raw(`
+  SELECT DISTINCT DATE_TRUNC('day',created_at) 
+  FROM inv_hop_weekly
+  WHERE EXTRACT(DOW FROM created_at) = 0
+    AND created_at > NOW() - INTERVAL '365 days'
+  ORDER BY DATE_TRUNC('day',created_at) DESC
+  `)
   return rows
 }
 
 
 //hop daily
 async function getInvHopDailyDate() {
-  let {rows} = await db.raw(`SELECT DISTINCT DATE_TRUNC('day',created_at) FROM inv_hop_daily ORDER BY DATE_TRUNC('day',created_at) DESC`)
+  console.log('query')
+  let {rows} = await db.raw(`
+  SELECT DISTINCT DATE_TRUNC('day',created_at) 
+  FROM inv_hop_daily 
+  WHERE DATE_TRUNC('day',created_at) > NOW() - INTERVAL '365 days'
+  ORDER BY DATE_TRUNC('day',created_at) DESC
+  `)
+  
   return rows
 }
 async function deleteSets(time) {

@@ -50,7 +50,7 @@ self.addEventListener('fetch', function(event) {
         return caches.open(CACHE_DYNAMIC_NAME)
           .then(function(cache) {
             // Put in cache if succeeds
-            cache.put(event.request.url, res.clone());
+            cache.put(event.request.url, res.clone())
             return res;
           })
       })
@@ -60,8 +60,7 @@ self.addEventListener('fetch', function(event) {
             .then(function(res){
               if (res === undefined) { 
                 // get and return the offline page
-                // res = res.redirect('/offLine.html')
-                // return caches('/offLine.html')
+                res = caches.match('/offLine.html')
               } 
               return res;
           })

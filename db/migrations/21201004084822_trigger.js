@@ -194,35 +194,26 @@ exports.up = async function(knex) {
     FOR EACH ROW
     EXECUTE PROCEDURE update_timestamp();
   `);
-//matrix
-  // await knex.raw(`
-  //   CREATE TRIGGER update_timestamp
-  //   BEFORE UPDATE
-  //   ON mtx_hop_std
-  //   FOR EACH ROW
-  //   EXECUTE PROCEDURE update_timestamp();
-  // `);
-  // await knex.raw(`
-  //   CREATE TRIGGER update_timestamp
-  //   BEFORE UPDATE
-  //   ON mtx_hop_dry
-  //   FOR EACH ROW
-  //   EXECUTE PROCEDURE update_timestamp();
-  // `);
-  // await knex.raw(`
-  //   CREATE TRIGGER update_timestamp
-  //   BEFORE UPDATE
-  //   ON mtx_sac_supr
-  //   FOR EACH ROW
-  //   EXECUTE PROCEDURE update_timestamp();
-  // `);
-  // await knex.raw(`
-  //   CREATE TRIGGER update_timestamp
-  //   BEFORE UPDATE
-  //   ON mtx_material
-  //   FOR EACH ROW
-  //   EXECUTE PROCEDURE update_timestamp();
-  // `);
+  await knex.raw(`
+    CREATE TRIGGER trigger_delete_old_rows_inv_mat_weekly
+    AFTER INSERT ON inv_mat_weekly
+    EXECUTE PROCEDURE delete_old_rows_inv_mat_weekly();
+  `);
+  await knex.raw(`
+    CREATE TRIGGER trigger_delete_old_rows_inv_hop_daily
+    AFTER INSERT ON inv_hop_daily
+    EXECUTE PROCEDURE delete_old_rows_inv_hop_daily();
+  `);
+  await knex.raw(`
+    CREATE TRIGGER trigger_delete_old_rows_inv_hop_weekly
+    AFTER INSERT ON inv_hop_weekly
+    EXECUTE PROCEDURE delete_old_rows_inv_hop_weekly();
+  `);
+  await knex.raw(`
+    CREATE TRIGGER trigger_delete_old_rows_inv_last_brews
+    AFTER INSERT ON inv_hop_weekly
+    EXECUTE PROCEDURE delete_old_rows_inv_last_brews();
+  `);
 };
 
 exports.down = function(knex) {

@@ -1,5 +1,5 @@
 document.getElementById('updateBoxes').style.display="none"
-document.getElementById('attView').style.display="none"
+// document.getElementById('attView').style.display="none"
 const api = '/api/brewery'
 let DateTime = luxon.DateTime
 

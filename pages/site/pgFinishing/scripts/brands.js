@@ -71,23 +71,6 @@ function viewBrands() {
   document.getElementById('viewFinBrand').style.display="none"
   document.getElementById('viewPckBrand').style.display="none"
 
-  // let dropDown = document.getElementById('brwBrandView')
-  // dropDown.innerHTML = `<option value="" disabled selected hidden>Schoene Brand</option>`
-  // let api = '/api/brand/brw/get'
-  // let title = 'brand'
-  // createList(api, dropDown, title)
-
-  // dropDown = document.getElementById('finBrandView')
-  // dropDown.innerHTML = `<option value="" disabled selected hidden>Finishing Brand</option>`
-  // api = '/api/brand/fin/get'
-  // title = 'brndFin'
-  // createList(api, dropDown, title)
-
-  // dropDown = document.getElementById('pckBrandView')
-  // dropDown.innerHTML = `<option value="" disabled selected hidden>Packaging Brand</option>`
-  // api = '/api/brand/pck/get'
-  // title = 'brndPck'
-  // createList(api, dropDown, title)
 }
 // View Brw
 document.getElementById('viewSchoene').addEventListener('click', viewBrandBrew)
@@ -292,7 +275,7 @@ function detailBrandBrewPost(name) {
 }
 document.getElementById('xlsxDetailBrandBrwTablePre').addEventListener('click', xlsxDetailBrandBrwTablePre)
 function xlsxDetailBrandBrwTablePre(){
-  detailBrandBrwTablePre.download("xlsx", "brand_brw.xlsx", {sheetName:"Brands"})
+  detailBrandBrwTablePre.download("xlsx", "pre_csx.xlsx", {sheetName:"Pre Csx"})
 }
 document.getElementById('printDetailBrandBrwTablePre').addEventListener('click', printDetailBrandBrwTablePre)
 function printDetailBrandBrwTablePre(){
@@ -300,7 +283,7 @@ function printDetailBrandBrwTablePre(){
 }
 document.getElementById('xlsxDetailBrandBrwTablePost').addEventListener('click', xlsxDetailBrandBrwTablePost)
 function xlsxDetailBrandBrwTablePost(){
-  detailBrandBrwTablePost.download("xlsx", "brand_brw.xlsx", {sheetName:"Brands"})
+  detailBrandBrwTablePost.download("xlsx", "post_csx.xlsx", {sheetName:"Post Csx"})
 }
 document.getElementById('printDetailBrandBrwTablePost').addEventListener('click', printDetailBrandBrwTablePost)
 function printDetailBrandBrwTablePost(){
@@ -366,7 +349,7 @@ function detailBrandFinPost(name) {
 }
 document.getElementById('xlsxDetailBrandFinTablePre').addEventListener('click', xlsxDetailBrandFinTablePre)
 function xlsxDetailBrandFinTablePre(){
-  detailBrandFinTablePre.download("xlsx", "brand_fin.xlsx", {sheetName:"Brands"})
+  detailBrandFinTablePre.download("xlsx", "pre_filter.xlsx", {sheetName:"Pre Filter"})
 }
 document.getElementById('printDetailBrandFinTablePre').addEventListener('click', printDetailBrandFinTablePre)
 function printDetailBrandFinTablePre(){
@@ -374,7 +357,7 @@ function printDetailBrandFinTablePre(){
 }
 document.getElementById('xlsxDetailBrandFinTablePost').addEventListener('click', xlsxDetailBrandFinTablePost)
 function xlsxDetailBrandFinTablePost(){
-  detailBrandFinTablePost.download("xlsx", "brand_fin.xlsx", {sheetName:"Brands"})
+  detailBrandFinTablePost.download("xlsx", "post_filter.xlsx", {sheetName:"Post Filter"})
 }
 document.getElementById('printDetailBrandFinTablePost').addEventListener('click', printDetailBrandFinTablePost)
 function printDetailBrandFinTablePost(){
@@ -434,6 +417,23 @@ function detailBrandPckPost(name) {
     })
     .catch(err => console.log(err))
 }
+document.getElementById('xlsxDetailBrandPckTablePre').addEventListener('click', xlsxDetailBrandPckTablePre)
+function xlsxDetailBrandPckTablePre(){
+  detailBrandPckTablePre.download("xlsx", "pre_release.xlsx", {sheetName:"Pre Release"})
+}
+document.getElementById('printDetailBrandPckTablePre').addEventListener('click', printDetailBrandPckTablePre)
+function printDetailBrandPckTablePre(){
+  detailBrandPckTablePre.print(false, true)
+}
+document.getElementById('xlsxDetailBrandPckTablePost').addEventListener('click', xlsxDetailBrandPckTablePost)
+function xlsxDetailBrandPckTablePost(){
+  detailBrandPckTablePost.download("xlsx", "post_release.xlsx", {sheetName:"Post Release"})
+}
+document.getElementById('printDetailBrandPckTablePost').addEventListener('click', printDetailBrandPckTablePost)
+function printDetailBrandPckTablePost(){
+  detailBrandPckTablePost.print(false, true)
+}
+
 
 
 

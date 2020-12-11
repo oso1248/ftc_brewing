@@ -140,22 +140,22 @@ document.getElementById('btnViewClear').addEventListener('click', resetView)
 document.getElementById('add').onclick = update
 document.getElementById('update').onclick = view
 
-document.getElementById('download_xlsx_Hop_Update').addEventListener('click', HopUpdate)
+// document.getElementById('download_xlsx_Hop_Update').addEventListener('click', HopUpdate)
 function HopUpdate(){
   hopTableUpdate.download("xlsx", "DryUpdate.xlsx", {sheetName:"DryUpdate"})
 }
 
-document.getElementById('print_table_Hop_Update').addEventListener('click', HopUpdatePrint)
+// document.getElementById('print_table_Hop_Update').addEventListener('click', HopUpdatePrint)
 function HopUpdatePrint(){
   hopTableUpdate.print(false, true);
 }
 
-document.getElementById('download_xlsx_Hop_View').addEventListener('click', HopView)
+// document.getElementById('download_xlsx_Hop_View').addEventListener('click', HopView)
 function HopView(){
   hopTableView.download("xlsx", "DryView.xlsx", {sheetName:"DryView"})
 }
 
-document.getElementById('print_table_Hop_View').addEventListener('click', HopViewPrint)
+// document.getElementById('print_table_Hop_View').addEventListener('click', HopViewPrint)
 function HopViewPrint(){
   hopTableView.print(false, true);
 }

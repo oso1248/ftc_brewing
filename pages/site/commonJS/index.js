@@ -1,4 +1,5 @@
 function logout() {
+  console.log('logout')
   fetch('/api/auth/logout')
   .then(res => res.json())
   .then(data => {

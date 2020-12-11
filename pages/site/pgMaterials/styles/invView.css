@@ -35,7 +35,7 @@
   color: white;
   padding: 10px 24px; 
   cursor: pointer; 
-  width: 20%;
+  width: 40%;
   margin: 0px;
   margin-bottom: 10px;
   border-radius: 10px;
@@ -54,8 +54,8 @@
   width: 70%;  
   }
   .button button {
-  width: 35%;
-  }
+    width: 35%;
+    }
   #note {
     width: 70%;
   }

@@ -68,12 +68,22 @@ function viewBrandBrew() {
     })
     .catch(err => console.log(err))
 }
+document.getElementById('xlsxBrndView').addEventListener('click', xlsxBrndView)
+function xlsxBrndView(){
+  viewBrandBrwTable.download("xlsx", "brew_brands.xlsx", {sheetName:"Brands"})
+}
+document.getElementById('printBrndView').addEventListener('click', printBrndView)
+function printBrndView(){
+  viewBrandBrwTable.print(false, true);
+}
+
 
 
 // Standard hops
 let viewStdHopTable
 document.getElementById('stdHopView').onclick = stdHopView
 function stdHopView() {
+  document.getElementById('stdHopBtn').style.display="none"
   document.getElementById('brndViewHide').style.display="none"
   document.getElementById('stdHopHide').style.display="block"
   document.getElementById('dryHopHide').style.display="none"
@@ -92,6 +102,7 @@ function stdHopList() {
 }
 document.getElementById('stdHopSel').addEventListener('change', stdHopTbl)
 async function stdHopTbl() {
+  document.getElementById('stdHopBtn').style.display="block"
   let name = document.getElementById('stdHopSel').value
   axios.post('/api/mtx/brnd', {brand: `${name}`, method: 'view'})
     .then(res => {
@@ -111,12 +122,23 @@ async function stdHopTbl() {
     })
     .catch(err => console.log(err))  
 }
+document.getElementById('xlsxStdHop').addEventListener('click', xlsxStdHop)
+function xlsxStdHop(){
+  viewStdHopTable.download("xlsx", "standard_hops.xlsx", {sheetName:"Standard Hops"})
+}
+document.getElementById('printStdHop').addEventListener('click', printStdHop)
+function printStdHop(){
+  viewStdHopTable.print(false, true);
+}
+
+
 
 
 // Dry Hops
 let viewDryHopTable
 document.getElementById('dryHopView').onclick = dryHopView
 function dryHopView() {
+  document.getElementById('dryHopBtn').style.display="none"
   document.getElementById('brndViewHide').style.display="none"
   document.getElementById('stdHopHide').style.display="none"
   document.getElementById('dryHopHide').style.display="block"
@@ -135,6 +157,7 @@ function dryHopList() {
 }
 document.getElementById('dryHopSel').addEventListener('change', dryHopTbl)
 async function dryHopTbl() {
+  document.getElementById('dryHopBtn').style.display="block"
   let name = document.getElementById('dryHopSel').value
   axios.post('/api/mtx/dry', {brand: `${name}`, method: 'view'})
     .then(res => {
@@ -154,12 +177,25 @@ async function dryHopTbl() {
     })
     .catch(err => console.log(err))  
 }
+document.getElementById('xlsxDryHop').addEventListener('click', xlsxDryHop)
+function xlsxDryHop(){
+  viewDryHopTable.download("xlsx", "dry_hop.xlsx", {sheetName:"Dry Hops"})
+}
+document.getElementById('printDryHop').addEventListener('click', printDryHop)
+function printDryHop(){
+  viewDryHopTable.print(false, true);
+}
+
+
+
+
 
 
 // Super Sacks
 let viewSprSacTable
 document.getElementById('sprSacView').onclick = sprSacView
 function sprSacView() {
+  document.getElementById('sprSacBtn').style.display="none"
   document.getElementById('brndViewHide').style.display="none"
   document.getElementById('stdHopHide').style.display="none"
   document.getElementById('dryHopHide').style.display="none"
@@ -178,6 +214,7 @@ function sprSacList() {
 }
 document.getElementById('sprSacSel').addEventListener('change', sprSacTbl)
 async function sprSacTbl() {
+  document.getElementById('sprSacBtn').style.display="block"
   let name = document.getElementById('sprSacSel').value
   axios.post('/api/mtx/sac', {brand: `${name}`, method: 'view'})
     .then(res => {
@@ -196,19 +233,11 @@ async function sprSacTbl() {
     })
     .catch(err => console.log(err))  
 }
-
-
-
-
-
-
-
-
-// document.getElementById('xlsxViewBrandPckTable').addEventListener('click', xlsxViewBrandPckTable)
-// function xlsxViewBrandPckTable(){
-//   viewBrandPckTable.download("xlsx", "brand_pck.xlsx", {sheetName:"Brands"})
-// }
-// document.getElementById('printViewBrandPckTable').addEventListener('click', printViewBrandPckTable)
-// function printViewBrandPckTable(){
-//   viewBrandPckTable.print(false, true);
-// }
+document.getElementById('xlsxSprSac').addEventListener('click', xlsxSprSac)
+function xlsxSprSac(){
+  viewSprSacTable.download("xlsx", "super_sacks.xlsx", {sheetName:"Super Sacks"})
+}
+document.getElementById('printSprSac').addEventListener('click', printSprSac)
+function printSprSac(){
+  viewSprSacTable.print(false, true);
+}

@@ -18,7 +18,7 @@ const sessionConfig = {
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 180,
     secure: false, // set true for production for https
-    httpOnly: true, // no js access
+    httpOnly: false, // no js access
     sameSite: true
   }
 }

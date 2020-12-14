@@ -148,7 +148,7 @@ async function chpBrandUpdate(name) {
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'left', editor:true},
+        {title:'Method', field:'method',hozAlign:'left', formatter:'textarea', editor:true},
         ],
       })
     })
@@ -173,7 +173,7 @@ async function schBrandUpdate(name) {
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'left', editor:true},
+        {title:'Method', field:'method',hozAlign:'left', formatter:'textarea', editor:true},
         ],
       })
     })
@@ -244,7 +244,7 @@ async function finBrandUpdate(name) {
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'left', editor:true},
+        {title:'Method', field:'method',hozAlign:'left', formatter:'textarea', editor:true},
         ],
       })
     })
@@ -357,7 +357,7 @@ async function chpBrandView(name) {
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'left'},
+        {title:'Method', field:'method',hozAlign:'left', formatter:'textarea'},
         ],
       })
     })
@@ -382,7 +382,7 @@ async function schBrandView(name) {
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'left'},
+        {title:'Method', field:'method',hozAlign:'left', formatter:'textarea'},
         ],
       })
     })
@@ -453,7 +453,7 @@ async function finBrandView(name) {
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'left'},
+        {title:'Method', field:'method',hozAlign:'left', formatter:'textarea'},
         ],
       })
     })

@@ -176,7 +176,7 @@ async function updateFinDetailPreCsx(name, method) {
         columns:[
         {title:'Object', field:'object',hozAlign:'center', frozen:true},        
         // {title:'Method', field:'method',hozAlign:'center'},
-        {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}}
+        {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}, formatter:'textarea'}
         ],
       })
     })
@@ -197,7 +197,7 @@ async function updateFinDetailPostCsx(name, method) {
         columns:[
         {title:'Object', field:'object',hozAlign:'center', frozen:true},        
         // {title:'Method', field:'method',hozAlign:'center'},
-        {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}}
+        {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}, formatter:'textarea'}
         ],
       })
     })
@@ -218,7 +218,7 @@ async function updateFinDetailPreFil(name, method) {
         columns:[
         {title:'Object', field:'object',hozAlign:'center', frozen:true},        
         // {title:'Method', field:'method',hozAlign:'center'},
-        {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}}
+        {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}, formatter:'textarea'}
         ],
       })
     })
@@ -239,7 +239,7 @@ async function updateFinDetailPostFil(name, method) {
         columns:[
         {title:'Object', field:'object',hozAlign:'center', frozen:true},        
         // {title:'Method', field:'method',hozAlign:'center'},
-        {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}}
+        {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}, formatter:'textarea'}
         ],
       })
     })
@@ -260,7 +260,7 @@ async function updateFinDetailPreRel(name, method) {
         columns:[
         {title:'Object', field:'object',hozAlign:'center', frozen:true},        
         // {title:'Method', field:'method',hozAlign:'center'},
-        {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}}
+        {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}, formatter:'textarea'}
         ],
       })
     })
@@ -281,7 +281,7 @@ async function updateFinDetailPostRel(name, method) {
         columns:[
         {title:'Object',field:'object',hozAlign:'center',frozen:true},        
         // {title:'Method', field:'method',hozAlign:'left', editor:'select', editorParams:{values:method}},
-        {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}}
+        {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}, formatter:'textarea'}
         ]
       })
     })
@@ -408,7 +408,7 @@ async function viewFinDetailPreCsx(name) {
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'left'},
+        {title:'Method', field:'method',hozAlign:'left', formatter:'textarea'},
         ],
       })
     })
@@ -427,7 +427,7 @@ async function viewFinDetailPostCsx(name) {
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'left'},
+        {title:'Method', field:'method',hozAlign:'left', formatter:'textarea'},
         ],
       })
     })
@@ -446,7 +446,7 @@ async function viewFinDetailPreFil(name) {
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'left'},
+        {title:'Method', field:'method',hozAlign:'left', formatter:'textarea'},
         ],
       })
     })
@@ -465,7 +465,7 @@ async function viewFinDetailPostFil(name) {
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'left'},
+        {title:'Method', field:'method',hozAlign:'left', formatter:'textarea'},
         ],
       })
     })
@@ -484,7 +484,7 @@ async function viewFinDetailPreRel(name) {
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'left'},
+        {title:'Method', field:'method',hozAlign:'left', formatter:'textarea'},
         ],
       })
     })
@@ -503,7 +503,7 @@ async function viewFinDetailPostRel(name) {
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
-        {title:'Method', field:'method',hozAlign:'left'},
+        {title:'Method', field:'method',hozAlign:'left', formatter:'textarea'},
         ],
       })
     })

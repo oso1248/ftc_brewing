@@ -188,13 +188,6 @@ exports.up = async function(knex) {
   `);
 //inventory
   await knex.raw(`
-    CREATE TRIGGER update_timestamp
-    BEFORE UPDATE
-    ON inv_mat_weekly
-    FOR EACH ROW
-    EXECUTE PROCEDURE update_timestamp();
-  `);
-  await knex.raw(`
     CREATE TRIGGER trigger_delete_old_rows_inv_mat_weekly
     AFTER INSERT ON inv_mat_weekly
     EXECUTE PROCEDURE delete_old_rows_inv_mat_weekly();
@@ -211,7 +204,7 @@ exports.up = async function(knex) {
   `);
   await knex.raw(`
     CREATE TRIGGER trigger_delete_old_rows_inv_last_brews
-    AFTER INSERT ON inv_hop_weekly
+    AFTER INSERT ON inv_last_brews
     EXECUTE PROCEDURE delete_old_rows_inv_last_brews();
   `);
 };

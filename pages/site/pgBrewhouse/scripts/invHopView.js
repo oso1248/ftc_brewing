@@ -46,8 +46,10 @@ function invDatesDaySelect() {
   document.getElementById('dailyTables').style.display='grid'
 }
 function loadTableDailyMid(date) {
-  let mids = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd TTT')
-  let days = DateTime.fromISO(date).plus({hours: 7, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  // let mids = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  // let days = DateTime.fromISO(date).plus({hours: 7, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  let mids = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
+  let days = DateTime.fromISO(date).plus({hours: 7, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
   let timeSpan = {}
   timeSpan.startSets = mids
   timeSpan.end = days
@@ -70,8 +72,10 @@ function loadTableDailyMid(date) {
     .catch(err => console.log(err))
 }
 function loadTableDailyDay(date) {
-  let days = DateTime.fromISO(date).plus({hours: 7, minutes: 30}).toFormat('yyyy-MM-dd TTT')
-  let afts = DateTime.fromISO(date).plus({hours: 15, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  // let days = DateTime.fromISO(date).plus({hours: 7, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  // let afts = DateTime.fromISO(date).plus({hours: 15, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  let days = DateTime.fromISO(date).plus({hours: 7, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
+  let afts = DateTime.fromISO(date).plus({hours: 15, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
   let timeSpan = {}
   timeSpan.startSets = days
   timeSpan.end = afts
@@ -94,8 +98,10 @@ function loadTableDailyDay(date) {
     .catch(err => console.log(err))
 }
 function loadTableDailyAft(date) {
-  let afts = DateTime.fromISO(date).plus({hours: 15, minutes: 30}).toFormat('yyyy-MM-dd TTT')
-  let ends = DateTime.fromISO(date).plus({hours: 23, minutes: 59}).toFormat('yyyy-MM-dd TTT')
+  // let afts = DateTime.fromISO(date).plus({hours: 15, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  // let ends = DateTime.fromISO(date).plus({hours: 23, minutes: 59}).toFormat('yyyy-MM-dd TTT')
+  let afts = DateTime.fromISO(date).plus({hours: 15, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
+  let ends = DateTime.fromISO(date).plus({hours: 23, minutes: 59}).toFormat('yyyy-MM-dd HH:mm')
   let timeSpan = {}
   timeSpan.startSets = afts
   timeSpan.end = ends
@@ -156,8 +162,10 @@ function invDatesWeekSelect() {
   document.getElementById('weeklyTables').style.display='grid'
 }
 function loadTableWeeklyHard(date) {
-  let start = DateTime.fromISO(date).minus({hours: 24, minutes: 30}).toFormat('yyyy-MM-dd TTT')
-  let end = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  // let start = DateTime.fromISO(date).minus({hours: 24, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  // let end = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  let start = DateTime.fromISO(date).minus({hours: 24, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
+  let end = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
   let timeSpan = {}
   timeSpan.start = start
   timeSpan.end = end
@@ -182,8 +190,10 @@ function loadTableWeeklyHard(date) {
     .catch(err => console.log(err))
 }
 function loadTableWeeklySets(date) {
-  let start = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd TTT')
-  let end = DateTime.fromISO(date).plus({hours: 167, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  // let start = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  // let end = DateTime.fromISO(date).plus({hours: 167, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  let start = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
+  let end = DateTime.fromISO(date).plus({hours: 167, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
   let timeSpan = {}
   timeSpan.startSets = start
   timeSpan.end = end
@@ -206,9 +216,12 @@ function loadTableWeeklySets(date) {
     .catch(err => console.log(err))
 }
 function loadTableWeeklyRolling(date) {
-  let start = DateTime.fromISO(date).minus({hours: 24, minutes: 30}).toFormat('yyyy-MM-dd TTT')
-  let startSets = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd TTT')
-  let end = DateTime.fromISO(date).plus({hours: 167, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  // let start = DateTime.fromISO(date).minus({hours: 24, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  // let startSets = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  // let end = DateTime.fromISO(date).plus({hours: 167, minutes: 30}).toFormat('yyyy-MM-dd TTT')
+  let start = DateTime.fromISO(date).minus({hours: 24, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
+  let startSets = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
+  let end = DateTime.fromISO(date).plus({hours: 167, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
   
   let timeSpan = {}
   timeSpan.start = start

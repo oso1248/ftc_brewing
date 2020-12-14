@@ -5,6 +5,7 @@ function logout() {
   .then(data => {
     let { msg } = data
     // location.href = '/index.html'
+    // document.cookie = 'BudApp=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
     res.redirect('/login.html')
   })
 }

@@ -1,5 +1,6 @@
 const db = require('../dbConfig')
 
+//Material weekly
 async function com(data){
   let rtn = await db('mtl_commodity').select('id').where('commodity', data['com_id'])
   let {id} = rtn[0]
@@ -213,6 +214,7 @@ async function getHopMtx(brand) {
       `${brand} as brand`,
     )
     .where('typ.type', 'hop')
+    .andWhere('com.active', 'Yes')
     .orderBy('com.commodity')
 }
 async function getHopList() {

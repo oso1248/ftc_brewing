@@ -44,9 +44,8 @@ const mtxRouter = require('./routes/rtsMtx')
 
 
 
-// server.use(express.static(path.join(__dirname, '../pages/site/index.html')))
-server.use(express.static(path.join(__dirname, '../pages/login/')))
 
+server.use(express.static(path.join(__dirname, '../pages/site/login/')))
 server.use('/api/auth', loginRouter)
 server.use('/', permissions1)
 server.use('/pgAdmin/', permissions5)

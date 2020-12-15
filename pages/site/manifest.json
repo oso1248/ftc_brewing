@@ -1,8 +1,8 @@
 {
   "name": "FTC Brewing App",
   "short_name": "Bud",
-  "start_url": "index.html",
-  "scope": "./",
+  "start_url": "./index.html",
+  
   "icons": [
     { 
       "src": "256.png",

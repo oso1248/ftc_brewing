@@ -231,10 +231,14 @@ async function validateAdd (data){
   return failures
 }
 
+function goBack() {
+  window.history.back();
+}
 
 document.getElementById('btnAddClear').addEventListener('click', resetAdd)
 document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
 document.getElementById('com_id').addEventListener('change', selectCommodity)
+document.getElementById('btnBack').addEventListener('click', goBack)
 
 window.addEventListener('DOMContentLoaded',async (ev) => {
   await loadCommodities()

@@ -4,7 +4,7 @@ if('serviceWorker' in navigator) {
     .then(function() { console.log('Service Worker Registered') })
 }
 
-var CACHE_STATIC = 'static-v001'
+var CACHE_STATIC = 'static-v002'
 
 
 self.addEventListener('install', function (event) {

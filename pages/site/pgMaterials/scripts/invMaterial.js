@@ -113,6 +113,7 @@ function inventoryList() {
       let tableData = res.data
       inventoryTable = new Tabulator("#invList", {
         resizableColumns:false,
+        selectable:true,
         height:"330px",
         layout:"fitDataFill",
         data:tableData,
@@ -130,6 +131,24 @@ function inventoryList() {
     })
     .catch(err => console.log(err.detail))
 }
+
+function deleteRowInv(ev) {
+  ev.preventDefault() 
+  ev.stopPropagation()
+  
+  let selectedData = inventoryTable.getSelectedData()
+  if (selectedData.length > 1) {
+    alert('Can only delete 1 row at a time.')
+    return
+  }
+  
+  console.log('delete', selectedData)
+}
+
+
+document.getElementById('btnDeleteInv').addEventListener('click', deleteRowInv)
+
+
 function resetAdd(ev){
   ev.preventDefault() 
   ev.stopPropagation()
@@ -160,7 +179,7 @@ async function deleteRow(commodity) {
 async function sendAdd(ev){
   ev.preventDefault() 
   ev.stopPropagation()
-
+  console.log('add')
   const form = document.getElementById('frmAdd')
   let data = {}
   let i

@@ -23,7 +23,7 @@ const sessionConfig = {
   }
 }
 
-server.use(session(sessionConfig))
+
 const permissions1 = require('./auth/perm1')
 const permissions5 = require('./auth/perm5')
 
@@ -44,11 +44,11 @@ const mtxRouter = require('./routes/rtsMtx')
 
 
 
-
+server.use(session(sessionConfig))
 server.use(express.static(path.join(__dirname, '../pages/site/login/')))
 server.use('/api/auth', loginRouter)
-server.use('/', permissions1)
 server.use('/pgAdmin/', permissions5)
+server.use('/', permissions1)
 server.use(express.static(path.join(__dirname, '../pages/site/')))
 
 

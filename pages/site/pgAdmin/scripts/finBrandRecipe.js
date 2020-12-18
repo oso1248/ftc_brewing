@@ -136,7 +136,7 @@ async function chpBrandUpdate(name) {
     'RDF',
     'Note',
   ]
-  await axios.get('/api/brand/recipe/chp/' + name)
+  await axios.post('/api/brand/recipe/chp', {name: name})
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)
@@ -161,7 +161,7 @@ async function schBrandUpdate(name) {
     'ACP Rate',
     'Note',
   ]
-  await axios.get('/api/brand/recipe/sch/' + name)
+  await axios.post('/api/brand/recipe/sch', {name: name})
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)
@@ -232,7 +232,7 @@ async function finBrandUpdate(name) {
     'LOSH CC',
     'Note'
   ]
-  await axios.get('/api/brand/recipe/fin/' + name)
+  await axios.post('/api/brand/recipe/fin', {name: name})
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)
@@ -345,7 +345,7 @@ async function chpBrandView(name) {
     'RDF',
     'Note',
   ]
-  await axios.get('/api/brand/recipe/chp/' + name)
+  await axios.post('/api/brand/recipe/chp', {name: name})
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)
@@ -370,7 +370,7 @@ async function schBrandView(name) {
     'ACP Rate',
     'Note',
   ]
-  await axios.get('/api/brand/recipe/sch/' + name)
+  await axios.post('/api/brand/recipe/sch', {name: name})
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)
@@ -441,7 +441,7 @@ async function finBrandView(name) {
     'LOSH CC',
     'Note'
   ]
-  await axios.get('/api/brand/recipe/fin/' + name)
+  await axios.post('/api/brand/recipe/fin', {name: name})
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)

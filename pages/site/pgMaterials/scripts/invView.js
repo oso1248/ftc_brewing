@@ -45,7 +45,7 @@ function update() {
 function invDates() {
   let invDates = document.getElementById('invMatWeekly')
   invDates.innerHTML = `<option value="" disabled selected hidden>Select Date</option>`
-  axios.get('/api/inventory/material/date')
+  axios.post('/api/inventory/material/date')
     .then(data => {
       let invDate = data.data.rows
       return invDate.map(listItem => {

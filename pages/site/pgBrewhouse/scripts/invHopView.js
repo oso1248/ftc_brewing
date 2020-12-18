@@ -25,7 +25,7 @@ function viewDay() {
 function invDatesDay() {
   let invDates = document.getElementById('selDateDay')
   invDates.innerHTML = `<option value="" disabled selected hidden>Select Date</option>`
-  axios.get('/api/inventory/hop/daily/dates')
+  axios.post('/api/inventory/hop/daily/dates')
     .then(data => {
       let invDate = data.data
       return invDate.map(listItem => {
@@ -139,7 +139,7 @@ function viewWeek() {
 function invDatesWeek() {
   let invDates = document.getElementById('selDateWeek')
   invDates.innerHTML = `<option value="" disabled selected hidden>Select Date</option>`
-  axios.get('/api/inventory/hop/weekly/dates')
+  axios.post('/api/inventory/hop/weekly/dates')
     .then(data => {
       let invDate = data.data
       return invDate.map(listItem => {

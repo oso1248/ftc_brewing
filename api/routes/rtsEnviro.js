@@ -12,7 +12,7 @@ router.post('/', (req, res) => {
     .catch(err => res.status(500).json({msg: err.detail}))
 })
 
-router.get('/', (req, res) => {
+router.post('/all', (req, res) => {
   db.getAll()
     .then(data => {
       if(data) {
@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
     .catch(err => res.status(500).json({msg: err.detail}))
 })
 
-router.get('/:name', (req, res) => {
+router.post('/name', (req, res) => {
   db.getByName(req.params.name)
     .then(data => {
       if(data){

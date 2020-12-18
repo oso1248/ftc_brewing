@@ -229,7 +229,7 @@ async function detailBrandBrew() {
 }
 function detailBrandBrewPre(name) {
   let labels = ['Brand','Chip Tank', 'UniTank', 'Lines','Cooler', 'Seperators','ACP', 'Schoene Tank','Fill Tank', 'Note']
-  axios.get('/api/brand/detail/csxpre/' + name)
+  axios.post('/api/brand/detail/csxpre',{name:`${name}`})
     .then(res => {
       let tableData = res.data
       tableData = convert2(tableData, labels)
@@ -240,10 +240,6 @@ function detailBrandBrewPre(name) {
         layout:'fitDataFill',
         data:tableData,
         columns:[
-
-
-          
-
           // {formatter:'rowSelection', titleFormatter:'rowSelection', hozAlign:'center', cellClick:function(e, cell) {cell.getRow().toggleSelect()}},
           {title:'Object', field:'object', hozAlign:'Left'},
           {title:'Method', field:'method', hozAlign:'Left'},
@@ -254,7 +250,7 @@ function detailBrandBrewPre(name) {
 }
 function detailBrandBrewPost(name) {
   let labels = ['Brand','Chip Tank', 'UniTank', 'Lines', 'Seperators', 'Schoene Tank', 'Note']
-  axios.get('/api/brand/detail/csxpost/' + name)
+  axios.post('/api/brand/detail/csxpost/', {name: `${name}`})
     .then(res => {
       let tableData = res.data
       tableData = convert2(tableData, labels)
@@ -307,7 +303,7 @@ async function detailBrandFin() {
 }
 function detailBrandFinPre(name) {
   let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Fill Tank', 'Injection', 'Control', 'Note']
-  axios.get('/api/brand/detail/filpre/' + name)
+  axios.post('/api/brand/detail/filpre/', {name: `${name}`})
     .then(res => {
       let tableData = res.data
       tableData = convert2(tableData, labels)
@@ -328,7 +324,7 @@ function detailBrandFinPre(name) {
 }
 function detailBrandFinPost(name) {
   let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Recover', 'Note']
-  axios.get('/api/brand/detail/filpost/' + name)
+  axios.post('/api/brand/detail/filpost/', {name: `${name}`})
     .then(res => {
       let tableData = res.data
       tableData = convert2(tableData, labels)
@@ -381,7 +377,7 @@ async function detailBrandPck() {
 }
 function detailBrandPckPre(name) {
   let labels = ['Brand','Filter Beer Tank','Release Line','Package Line','Draft Line','Recover','Control','Note']
-  axios.get('/api/brand/detail/relpre/' + name)
+  axios.post('/api/brand/detail/relpre/', {name: `${name}`})
     .then(res => {
       let tableData = res.data
       tableData = convert2(tableData, labels)
@@ -400,7 +396,7 @@ function detailBrandPckPre(name) {
 }
 function detailBrandPckPost(name) {
   let labels = ['Brand','Filter Beer Tank','System Lines','Package','Draft','Recover','Note']
-  axios.get('/api/brand/detail/relpost/' + name)
+  axios.post('/api/brand/detail/relpost/', {name: `${name}`})
     .then(res => {
       let tableData = res.data
       tableData = convert2(tableData, labels)
@@ -489,7 +485,7 @@ function recipeBrandChpDetail(name) {
     'RDF',
     'Note',
   ]
-  axios.get('/api/brand/recipe/chp/' + name)
+  axios.post('/api/brand/recipe/chp/', {name: `${name}`})
     .then(res => {
       let tableData = res.data
       tableData = convert2(tableData, labels)
@@ -535,7 +531,7 @@ function recipeBrandSchDetail(name) {
     'ACP Rate',
     'Note',
   ]
-  axios.get('/api/brand/recipe/sch/' + name)
+  axios.post('/api/brand/recipe/sch', {name: `${name}`})
     .then(res => {
       let tableData = res.data
       tableData = convert2(tableData, labels)
@@ -614,7 +610,7 @@ function recipeBrandFinDetail(name) {
     'LOSH CC',
     'Note'
   ]
-  axios.get('/api/brand/recipe/fin/' + name)
+  axios.post('/api/brand/recipe/fin/', {name: `${name}`})
     .then(res => {
       let tableData = res.data
       tableData = convert2(tableData, labels)

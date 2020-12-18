@@ -27,7 +27,7 @@ function append(parent, e1) {
   return parent.appendChild(e1)
 }
 function createList(api, parent, title) {
-  axios.get(api)
+  axios.post(api)
   .then(res => {
     let list = res.data
     list.forEach((elem) => {
@@ -59,7 +59,7 @@ function createListCommodity(api, parent, title) {
   })
 }
 function createListID(api, parent, title) {
-  axios.get(api)
+  axios.post(api)
   .then(res => {
     let list = res.data
     list.forEach((elem) => {
@@ -80,32 +80,32 @@ function commodity(dropDown){
   createListCommodity(api, dropDown, title)
 }
 function supplier(dropDown, func){
-  const api = '/api/supplier'
+  const api = '/api/supplier/name/all'
   let title = 'company'
   func(api, dropDown, title)
 }
 function locations(dropDown, func){
-  const api = '/api/location'
+  const api = '/api/location/all'
   let title = 'location'
   func(api, dropDown, title)
 }
 function type(dropDown, func){
-  const api = '/api/type'
+  const api = '/api/type/all'
   let title = 'type'
   func(api, dropDown, title)
 }
 function container(dropDown, func){
-  const api = '/api/container'
+  const api = '/api/container/all'
   let title = 'container'
   func(api, dropDown, title)
 }
 function environmental(dropDown, func){
-  const api = '/api/enviro'
+  const api = '/api/enviro/all'
   let title = 'enviro'
   func(api, dropDown, title)
 }
 function uom(dropDown, func){
-  const api = '/api/uom'
+  const api = '/api/uom/all'
   let title = 'uom'
   func(api, dropDown, title)
 }
@@ -448,7 +448,7 @@ function validateUpdate(data){
 function selectCommodity(){
   let commodity = document.getElementsByName('updateCommodity')[0].value
   
-  axios.get('/api/commodity/' + commodity)
+  axios.post('/api/commodity/name', {name: `${commodity}`})
     .then(data => {
       document.getElementById(data.data.location).selected = 'selected'
       document.getElementById(data.data.type).selected = 'selected'

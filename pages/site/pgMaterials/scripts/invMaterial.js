@@ -137,7 +137,7 @@ function resetAdd(ev){
 }
 async function selectCommodity(){
   let commodity = document.getElementById('com_id').value
-  axios.get('/api/commodity/' + commodity)
+  axios.post('/api/commodity/name', {name: `${commodity}`})
     .then(data => {
       document.getElementById('per_pallet').value = data.data.per_pallet
       document.getElementById('total_per_unit').value = data.data.unit_total

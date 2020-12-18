@@ -50,21 +50,28 @@ self.addEventListener('fetch', function(event) {
         return response
       }
       return fetch(event.request).then(function(response) {
-        if (response.status !== 404) {
+        console.log('From Network', event.request.method, response.status, event.request.url)
+        if ((response.status === 200 || response.status === 0) && (event.request.method !== 'POST' && event.request.method !== 'PATCH' && event.request.method !== 'DELETE')) { 
           return caches.open(CACHE_STATIC)
             .then(function(cache) {
-              console.log('From Network', event.request.url) 
+              console.log('Put cache', event.request.method, event.request.url)
               cache.put(event.request.url, response.clone())
               return response
           }) 
+        } else if (response.status === 404) {
+          return caches.match('/offLine.html');
         }
-        return caches.match('/offLine.html');
+        return response
       });
     }).catch(function() {
-      return caches.match('/offLine.html');
+      return caches.match('/offLine.html')
     })
   );
 });
+
+
+
+
 
 // var CACHE_STATIC_NAME = 'static-v001'
 // var CACHE_DYNAMIC_NAME = 'dynamic-v002'

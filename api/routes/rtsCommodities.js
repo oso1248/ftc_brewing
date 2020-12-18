@@ -22,8 +22,8 @@ router.post('/get', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/:name', (req, res) => {
-  db.getByName(req.params.name)
+router.post('/name', (req, res) => {
+  db.getByName(req.body.name)
     .then(data => {
       if(data){
         res.status(200).json(data)
@@ -33,6 +33,8 @@ router.get('/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
+
+
 router.post('/get/type/:type', (req, res) => {
   db.getByType(req.body.active, req.params.type)
     .then(data => {

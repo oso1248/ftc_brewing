@@ -39,7 +39,7 @@ function update() {
   
   const suppliers = document.getElementsByName('updateCompany')[0]
   suppliers.innerHTML = `<option value="" disabled selected hidden>Select Supplier</option>`
-  axios.get('/api/supplier')
+  axios.post('/api/supplier/name/all')
   .then(data => {
     let supplier = data.data
     return supplier.map(listItem => {
@@ -59,7 +59,7 @@ function view() {
   document.getElementById('attView').style.display="block"
   document.getElementById('addBoxes').style.display="none"
   
-  axios.get('/api/supplier')
+  axios.post('/api/supplier/name/all')
     .then(res => {
       let tableData = res.data
       supplierTable = new Tabulator("#list", {
@@ -282,7 +282,7 @@ function selectSupplier(){
   let phone = document.getElementsByName('updatePhone')[0]
   let address = document.getElementsByName('updateAddress')[0]
   let note = document.getElementsByName('updateNote')[0]
-  axios.get('/api/supplier/' + company)
+  axios.post('/api/supplier/name', {name: `${company}`})
     .then(data => {
       contact.value = data.data.contact
       email.value = data.data.email

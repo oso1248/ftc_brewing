@@ -35,7 +35,7 @@ router.post('/material/view', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/material/date', (req, res) => {
+router.post('/material/date', (req, res) => {
   db.getInvDateMaterial()
     .then(data => {
       if(data) {
@@ -101,7 +101,7 @@ router.post('/hop/sets/view', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/hop/weekly/dates', (req, res) => {
+router.post('/hop/weekly/dates', (req, res) => {
   db.getInvHopWeeklyDate()
     .then(data => {
       res.status(200).json(data)
@@ -119,7 +119,8 @@ router.post('/hop/daily', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/hop/daily/dates', (req, res) => {
+
+router.post('/hop/daily/dates', (req, res) => {
   db.getInvHopDailyDate()
     .then(data => {
       res.status(200).json(data)

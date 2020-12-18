@@ -24,9 +24,9 @@ router.post('/brw/get', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/brw/:name', (req, res) => {
+router.post('/brw/name', (req, res) => {
   console.log('router hit')
-  db.getByNameBrw(req.params.name)
+  db.getByNameBrw(req.body.name)
     .then(data => {
       if(data){
         res.status(200).json(data)
@@ -126,8 +126,8 @@ router.post('/fin/get', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/fin/:name', (req, res) => {
-  db.getByNameFin(req.params.name)
+router.post('/fin/get/name', (req, res) => {
+  db.getByNameFin(req.body.name)
     .then(data => {
       if(data){
         res.status(200).json(data)
@@ -179,8 +179,8 @@ router.post('/pck/get', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/pck/:name', (req, res) => {
-  db.getByNamePck(req.params.name)
+router.post('/pck/get/name', (req, res) => {
+  db.getByNamePck(req.body.name)
     .then(data => {
       if(data){
         res.status(200).json(data)
@@ -215,8 +215,8 @@ router.delete('/pck/:name', (req, res) => {
 
 
 // brand details
-router.get('/detail/csxpre/:name', (req, res) => {
-  db.getDetailByNameCsxPre(req.params.name)
+router.post('/detail/csxpre', (req, res) => {
+  db.getDetailByNameCsxPre(req.body.name)
     .then(data => {
       if(data){
         res.status(200).json(data)
@@ -227,8 +227,8 @@ router.get('/detail/csxpre/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/detail/csxpost/:name', (req, res) => {
-  db.getDetailByNameCsxPost(req.params.name)
+router.post('/detail/csxpost', (req, res) => {
+  db.getDetailByNameCsxPost(req.body.name)
     .then(data => {
       if(data){
         res.status(200).json(data)
@@ -238,8 +238,8 @@ router.get('/detail/csxpost/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/detail/filpre/:name', (req, res) => {
-  db.getDetailByNameFilPre(req.params.name)
+router.post('/detail/filpre', (req, res) => {
+  db.getDetailByNameFilPre(req.body.name)
     .then(data => {
       if(data){
         res.status(200).json(data)
@@ -249,8 +249,8 @@ router.get('/detail/filpre/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/detail/filpost/:name', (req, res) => {
-  db.getDetailByNameFilPost(req.params.name)
+router.post('/detail/filpost', (req, res) => {
+  db.getDetailByNameFilPost(req.body.name)
     .then(data => {
       if(data){
         res.status(200).json(data)
@@ -260,8 +260,8 @@ router.get('/detail/filpost/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/detail/relpre/:name', (req, res) => {
-  db.getDetailByNameRelPre(req.params.name)
+router.post('/detail/relpre', (req, res) => {
+  db.getDetailByNameRelPre(req.body.name)
     .then(data => {
       if(data){
         res.status(200).json(data)
@@ -271,8 +271,8 @@ router.get('/detail/relpre/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/detail/relpost/:name', (req, res) => {
-  db.getDetailByNameRelPost(req.params.name)
+router.post('/detail/relpost', (req, res) => {
+  db.getDetailByNameRelPost(req.body.name)
     .then(data => {
       if(data){
         res.status(200).json(data)
@@ -297,8 +297,8 @@ router.patch('/detail/updatedetail', (req, res) => {
 })
 
 // brand recipe
-router.get('/recipe/chp/:name', (req, res) => {
-  db.getRecipeByNameChp(req.params.name)
+router.post('/recipe/chp', (req, res) => {
+  db.getRecipeByNameChp(req.body.name)
     .then(data => {
       if(data){
         res.status(200).json(data)
@@ -308,8 +308,8 @@ router.get('/recipe/chp/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/recipe/sch/:name', (req, res) => {
-  db.getRecipeByNameSch(req.params.name)
+router.post('/recipe/sch', (req, res) => {
+  db.getRecipeByNameSch(req.body.name)
     .then(data => {
       if(data){
         res.status(200).json(data)
@@ -319,8 +319,8 @@ router.get('/recipe/sch/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/recipe/fin/:name', (req, res) => {
-  db.getRecipeByNameFin(req.params.name)
+router.post('/recipe/fin', (req, res) => {
+  db.getRecipeByNameFin(req.body.name)
     .then(data => {
       if(data){
         res.status(200).json(data)
@@ -366,7 +366,7 @@ router.patch('/detail/updaterecipe/:table', (req, res) => {
 )
 
 // methods cold
-router.get('/method/cold', (req, res) => {
+router.post('/method/cold', (req, res) => {
   db.getAllMethod()
     .then(data => {
       if(data) {

@@ -11,7 +11,7 @@ function append(parent, e1) {
   return parent.appendChild(e1)
 }
 function createList(api, parent, title) {
-  axios.get(api)
+  axios.post(api)
   .then(res => {
     let list = res.data
     list.forEach((elem) => {
@@ -43,31 +43,31 @@ function update() {
 
   let dropDown = document.getElementsByName('updateLocation')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Location</option>`
-  let api = '/api/location'
+  let api = '/api/location/all'
   let title = 'location'
   createList(api, dropDown, title)
 
   dropDown = document.getElementsByName('updateType')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Type</option>`
-  api = '/api/type'
+  api = '/api/type/all'
   title = 'type'
   createList(api, dropDown, title)
 
   dropDown = document.getElementsByName('updateEnviro')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Enviro</option>`
-  api = '/api/enviro'
+  api = '/api/enviro/all'
   title = 'enviro'
   createList(api, dropDown, title)
 
   dropDown = document.getElementsByName('updateContainer')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Container</option>`
-  api = '/api/container'
+  api = '/api/container/all'
   title = 'container'
   createList(api, dropDown, title)
 
   dropDown = document.getElementsByName('updateUom')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select UOM</option>`
-  api = '/api/uom'
+  api = '/api/uom/all'
   title = 'uom'
   createList(api, dropDown, title)
 }
@@ -78,7 +78,7 @@ function view() {
   document.getElementById('addBoxes').style.display="none"
 
 
-  axios.get('/api/location')
+  axios.post('/api/location/all')
     .then(res => {
       let tableData = res.data
       var table = new Tabulator("#listLocation", {
@@ -96,7 +96,7 @@ function view() {
     })
     .catch(err => console.log(err))
 
-    axios.get('/api/Type')
+    axios.post('/api/Type/all')
     .then(res => {
       let tableData = res.data
       var table = new Tabulator("#listType", {
@@ -114,7 +114,7 @@ function view() {
     })
     .catch(err => console.log(err))
 
-    axios.get('/api/Enviro')
+    axios.post('/api/Enviro/all')
     .then(res => {
       let tableData = res.data
       var table = new Tabulator("#listEnviro", {
@@ -132,7 +132,7 @@ function view() {
     })
     .catch(err => console.log(err))
 
-    axios.get('/api/Container')
+    axios.post('/api/Container/all')
     .then(res => {
       let tableData = res.data
       var table = new Tabulator("#listContainer", {
@@ -150,7 +150,7 @@ function view() {
     })
     .catch(err => console.log(err))
 
-    axios.get('/api/uom')
+    axios.post('/api/uom/all')
     .then(res => {
       let tableData = res.data
       var table = new Tabulator("#listUOM", {
@@ -179,31 +179,31 @@ function del() {
 
   let dropDown = document.getElementsByName('deleteLocation')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Location</option>`
-  let api = '/api/location'
+  let api = '/api/location/all'
   let title = 'location'
   createList(api, dropDown, title)
 
   dropDown = document.getElementsByName('deleteType')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Type</option>`
-  api = '/api/type'
+  api = '/api/type/all'
   title = 'type'
   createList(api, dropDown, title)
 
   dropDown = document.getElementsByName('deleteEnviro')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Enviro</option>`
-  api = '/api/enviro'
+  api = '/api/enviro/all'
   title = 'enviro'
   createList(api, dropDown, title)
 
   dropDown = document.getElementsByName('deleteContainer')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Container</option>`
-  api = '/api/container'
+  api = '/api/container/all'
   title = 'container'
   createList(api, dropDown, title)
 
   dropDown = document.getElementsByName('deleteUOM')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select UOM</option>`
-  api = '/api/uom'
+  api = '/api/uom/all'
   title = 'uom'
   createList(api, dropDown, title)
 }
@@ -766,4 +766,4 @@ document.getElementById('btnDeleteSubmitUOM').addEventListener('click', sendDele
 document.getElementById('add').onclick = add
 document.getElementById('update').onclick = update
 document.getElementById('view').onclick = view
-document.getElementById('delete').onclick = del
+// document.getElementById('delete').onclick = del

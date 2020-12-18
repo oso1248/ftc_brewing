@@ -244,7 +244,7 @@ async function validateUpdate(data){
 function selectBrand(){
   let brand = document.getElementsByName('updateBrand')[0].value
   
-  axios.get('/api/brand/brw/' + brand)
+  axios.post('/api/brand/brw/name', {name: brand})
     .then(data => {
       document.getElementsByName('updateStandard')[0].value = data.data.hop_std
       document.getElementsByName('updateCraft')[0].value = data.data.hop_crft

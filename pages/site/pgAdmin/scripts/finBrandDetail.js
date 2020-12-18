@@ -128,7 +128,7 @@ async function selectUpdate() {
   await updateFinDetailPostRel(data.brndFin, methods)
 }
 async function method() {
-  let res = await axios.get('/api/brand/method/cold')
+  let res = await axios.post('/api/brand/method/cold')
     .then(res => {
       let data = res.data
       let json = {}
@@ -142,7 +142,7 @@ async function method() {
 }
 async function updateBrandLineage() {
   let name = document.getElementById('brwBrandUpdate').value
-  await axios.get('/api/brand/fin/' + name)
+  await axios.post('/api/brand/fin/get/name', {name:name})
     .then(res => {
       let tableData = [res.data]
       tableUpdateBrandLineage = new Tabulator('#updateLineageTable', {
@@ -163,7 +163,7 @@ async function updateBrandLineage() {
 async function updateFinDetailPreCsx(name, method) {
   // console.log('preCSX', name)
   let labels = ['Brand','Chip Tank', 'UniTank', 'Lines','Cooler', 'Seperators','ACP', 'Schoene Tank','Fill Tank', 'Note']
-  await axios.get('/api/brand/detail/csxpre/' + name)
+  await axios.post('/api/brand/detail/csxpre', {name: name})
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)
@@ -185,7 +185,7 @@ async function updateFinDetailPreCsx(name, method) {
 async function updateFinDetailPostCsx(name, method) {
   // console.log('postCSX', name)
   let labels = ['Brand','Chip Tank', 'UniTank', 'Lines', 'Seperators', 'Schoene Tank', 'Note']
-  await axios.get('/api/brand/detail/csxpost/' + name)
+  await axios.post('/api/brand/detail/csxpost', {name: name})
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)
@@ -206,7 +206,7 @@ async function updateFinDetailPostCsx(name, method) {
 async function updateFinDetailPreFil(name, method) {
   // console.log('preFil', name)
   let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Fill Tank', 'Injection', 'Control', 'Note']
-  await axios.get('/api/brand/detail/filpre/' + name)
+  await axios.post('/api/brand/detail/filpre', {name: name})
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)
@@ -227,7 +227,7 @@ async function updateFinDetailPreFil(name, method) {
 async function updateFinDetailPostFil(name, method) {
   // console.log('postFil', name)
   let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Recover', 'Note']
-  await axios.get('/api/brand/detail/filpost/' + name)
+  await axios.post('/api/brand/detail/filpost', {name: name})
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)
@@ -248,7 +248,7 @@ async function updateFinDetailPostFil(name, method) {
 async function updateFinDetailPreRel(name, method) {
   // console.log('preRel', name)
   let labels = ['Brand','Filter Beer Tank','Release Line','Package Line','Draft Line','Recover','Control','Note']
-  await axios.get('/api/brand/detail/relpre/' + name)
+  await axios.post('/api/brand/detail/relpre', {name: name})
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)
@@ -269,7 +269,7 @@ async function updateFinDetailPreRel(name, method) {
 async function updateFinDetailPostRel(name, method) {
   // console.log('postRel', name)
   let labels = ['Brand','Filter Beer Tank','System Lines','Package','Draft','Recover','Note']
-  await axios.get('/api/brand/detail/relpost/' + name)
+  await axios.post('/api/brand/detail/relpost', {name: name})
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)
@@ -375,9 +375,10 @@ async function selectView() {
   let row = tableViewFinDetailPostRel.getRow(2)
   let rowData = row.getData()
 }
+
 async function viewBrandLineage() {
   let name = document.getElementById('brwBrandView').value
-  await axios.get('/api/brand/fin/' + name)
+  await axios.post('/api/brand/fin/get/name', {name:name})
     .then(res => {
       let tableData = [res.data]
       tableViewBrandLineage = new Tabulator("#viewLineageTable", {
@@ -397,7 +398,7 @@ async function viewBrandLineage() {
 }
 async function viewFinDetailPreCsx(name) {
   let labels = ['Brand','Chip Tank', 'UniTank', 'Lines','Cooler', 'Seperators','ACP', 'Schoene Tank','Fill Tank', 'Note']
-  await axios.get('/api/brand/detail/csxpre/' + name)
+  await axios.post('/api/brand/detail/csxpre', {name:name})
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)
@@ -416,7 +417,7 @@ async function viewFinDetailPreCsx(name) {
 }
 async function viewFinDetailPostCsx(name) {
   let labels = ['Brand','Chip Tank', 'UniTank', 'Lines', 'Seperators', 'Schoene Tank', 'Note']
-  await axios.get('/api/brand/detail/csxpost/' + name)
+  await axios.post('/api/brand/detail/csxpost', {name:name})
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)
@@ -435,7 +436,7 @@ async function viewFinDetailPostCsx(name) {
 }
 async function viewFinDetailPreFil(name) {
   let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Fill Tank', 'Injection', 'Control', 'Note']
-  await axios.get('/api/brand/detail/filpre/' + name)
+  await axios.post('/api/brand/detail/filpre', {name:name})
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)
@@ -454,7 +455,7 @@ async function viewFinDetailPreFil(name) {
 }
 async function viewFinDetailPostFil(name) {
   let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Recover', 'Note']
-  await axios.get('/api/brand/detail/filpost/' + name)
+  await axios.post('/api/brand/detail/filpost', {name:name})
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)
@@ -473,7 +474,7 @@ async function viewFinDetailPostFil(name) {
 }
 async function viewFinDetailPreRel(name) {
   let labels = ['Brand','Filter Beer Tank','Release Line','Package Line','Draft Line','Recover','Control','Note']
-  await axios.get('/api/brand/detail/relpre/' + name)
+  await axios.post('/api/brand/detail/relpre', {name:name})
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)
@@ -492,7 +493,7 @@ async function viewFinDetailPreRel(name) {
 }
 async function viewFinDetailPostRel(name) {
   let labels = ['Brand','Filter Beer Tank','System Lines','Package','Draft','Recover','Note']
-  await axios.get('/api/brand/detail/relpost/' + name)
+  await axios.post('/api/brand/detail/relpost', {name:name})
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)

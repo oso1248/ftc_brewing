@@ -4,7 +4,7 @@ if('serviceWorker' in navigator) {
     .then(function() { console.log('Service Worker Registered') })
 }
 
-var CACHE_STATIC = 'static-v002'
+var CACHE_STATIC = 'static-v001'
 
 
 self.addEventListener('install', function (event) {
@@ -15,11 +15,8 @@ self.addEventListener('install', function (event) {
       .then(function (cache) {
         console.log('Precaching App Shell')
         cache.addAll([
-            // '/login.html',
+            '/login.html',
             '/login.css',
-            // '',
-            '/256.png',
-            '/barrel.jpg',
             '/offLine.html',
         ])
       })
@@ -46,11 +43,11 @@ self.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request).then(function(response) {
       if (response && !event.request.url.endsWith('login.html')) {
-        console.log('From Cache', event.request.url)
+        // console.log('From Cache', event.request.url)
         return response
       }
       return fetch(event.request).then(function(response) {
-        console.log('From Network', event.request.method, response.status, event.request.url)
+        // console.log('From Network', event.request.method, response.status, event.request.url)
         if ((response.status === 200 || response.status === 0) && (event.request.method !== 'POST' && event.request.method !== 'PATCH' && event.request.method !== 'DELETE')) { 
           return caches.open(CACHE_STATIC)
             .then(function(cache) {

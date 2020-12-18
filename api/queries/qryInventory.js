@@ -46,6 +46,7 @@ function getByDate(data) {
     .join('mtl_commodity as com', 'inv.com_id', '=', 'com.id' )
     .join('mtl_uom as uom', 'com.uom_id', '=', 'uom.id')
     .select(
+      'inv.id',
       'com.commodity',
       'com.sap',
       'inv.total_per_unit',

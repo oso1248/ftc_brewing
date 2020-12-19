@@ -146,12 +146,12 @@ async function deleteRowInv(ev) {
    return
   }
 
-  axios.delete('/api/inventory/weekly/'+ selectedData[0].id)
+  await axios.delete('/api/inventory/weekly/'+ selectedData[0].id)
     .then(data => {
       alert(data.data.msg)
     })
     .catch(err => alert(err))
-
+  
   await commodityList()
   await inventoryList()
   await deleteOnLoad()

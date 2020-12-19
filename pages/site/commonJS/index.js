@@ -5,8 +5,8 @@ async function logout() {
   .then(data => {
     let { msg } = data
     document.cookie = 'BudApp=; Max-Age=-99999999;'
-    
-    window.location.replace('/login/login.html')
+    // caches.delete(CACHE_STATIC)
+    window.location.replace('/login.html')
   })
 }
 

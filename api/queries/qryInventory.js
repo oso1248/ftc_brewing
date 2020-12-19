@@ -60,6 +60,11 @@ function getByDate(data) {
     .where('inv.created_at', '>', data.startDate)
     .andWhere('inv.created_at', '<', data.endDate)
 }
+async function destroy(id) {
+  let remove = await db('inv_mat_weekly').where('id', id).del()
+  return getByID(id)
+}
+
 
 //hop weekly
 async function addInvHopWeekly(data) {
@@ -272,5 +277,6 @@ module.exports = {
   getHopRollingInv,
   getHopWeeklyInvCombined,
   getHopWeeklyInvHard,
-  getSetsCombined
+  getSetsCombined,
+  destroy
 }

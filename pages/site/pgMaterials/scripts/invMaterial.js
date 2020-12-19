@@ -132,7 +132,7 @@ function inventoryList() {
     .catch(err => console.log(err.detail))
 }
 
-function deleteRowInv(ev) {
+async function deleteRowInv(ev) {
   ev.preventDefault() 
   ev.stopPropagation()
   
@@ -142,7 +142,19 @@ function deleteRowInv(ev) {
     return
   }
   
-  console.log('delete', selectedData)
+  if (!confirm(`Are you sure you want to delete\n\n ${selectedData[0].commodity} \n\nfrom the inventory?`)) {
+   return
+  }
+
+  axios.delete('/api/inventory/weekly/'+ selectedData[0].id)
+    .then(data => {
+      alert(data.data.msg)
+    })
+    .catch(err => alert(err))
+
+  await commodityList()
+  await inventoryList()
+  await deleteOnLoad()
 }
 
 

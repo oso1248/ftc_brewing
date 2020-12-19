@@ -57,7 +57,17 @@ router.patch('/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-
+router.delete('/weekly/:id', (req, res) => {
+  db.destroy(req.params.id)
+    .then(data => {
+      if(data.length === 0) {
+        res.status(200).json({msg: 'deleted'})
+      } else {
+        res.status(200).json({msg: 'error: not deleted'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
 
 //hop inv weekly
 router.post('/hop/weekly', (req, res) => {

@@ -18,6 +18,8 @@ self.addEventListener('install', function (event) {
             '/login.html',
             '/login.css',
             '/offLine.html',
+            '/256.png',
+            '/barrel.jpg',
         ])
       })
   )

@@ -10,7 +10,8 @@ server.use(express.json())
 
 const sessionConfig = {
   conString:process.env.DATABASE_URL || 'postgres://localhost/brew',
-  store: new (pgSession(session))(),
+  // store: new (pgSession(session))(),
+  store: new (pgSession(session)),
   name: 'BudApp',
   resave: false,
   saveUninitialized: true, // set to false for prod GDPR laws
@@ -45,6 +46,8 @@ const mtxRouter = require('./routes/rtsMtx')
 
 
 server.use(session(sessionConfig))
+
+
 server.use(express.static(path.join(__dirname, '../pages/site/login/')))
 server.use('/api/auth', loginRouter)
 server.use('/pgAdmin/', permissions5)

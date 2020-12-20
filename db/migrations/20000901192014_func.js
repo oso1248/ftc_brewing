@@ -59,6 +59,19 @@ exports.up = async function(knex) {
     END;
     $$;
   `)
+  // session delete orphan sessions
+  await knex.raw(`
+    CREATE OR REPLACE FUNCTION delete_orphan_sessions() RETURNS TRIGGER
+    LANGUAGE plpgsql
+    AS
+    $$
+    BEGIN
+      DELETE FROM session WHERE NOT sess :: text LIKE '%user%';
+      RETURN NULL;
+    END;
+    $$;
+  `)
+
 }
 
 exports.down = async function(knex) {
@@ -76,5 +89,8 @@ exports.down = async function(knex) {
   `)
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_old_rows_inv_last_brews() CASCADE;
+  `)
+  await knex.raw(`
+    DROP FUNCTION IF EXISTS delete_orphan_sessions() CASCADE;
   `)
 }

@@ -4,9 +4,12 @@ async function logout() {
   .then(data => {
     if(data.msg === 'no user') {
       alert('no user')
+      document.cookie = 'BudApp=; Max-Age=-99999999;'
+      window.location.replace('/login.html')
       return
-    } else if (data.msg === 'You Can Checkout Anytime But You Can Never Leave') {
-      alert('problem logging out')
+    } else if (window.location != '/login.html') {
+      document.cookie = 'BudApp=; Max-Age=-99999999;'
+      window.location.replace('/login.html')
       return
     } else {
       document.cookie = 'BudApp=; Max-Age=-99999999;'

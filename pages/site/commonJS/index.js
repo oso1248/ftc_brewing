@@ -1,13 +1,44 @@
 async function logout() {
-  
-  fetch('/api/auth/logout')
+  await fetch('/api/auth/logout',{method:'post'})
   .then(res => res.json())
   .then(data => {
-    let { msg } = data
-    document.cookie = 'BudApp=; Max-Age=-99999999;'
-    // caches.delete(CACHE_STATIC)
-    window.location.replace('/login.html')
+    if(data.msg === 'no user') {
+      alert('no user')
+      return
+    } else if (data.msg === 'You Can Checkout Anytime But You Can Never Leave') {
+      alert('problem logging out')
+      return
+    } else {
+      document.cookie = 'BudApp=; Max-Age=-99999999;'
+      window.location.replace('/login.html')
+    }  
   })
+  .catch(err => {
+    // console.log(err)
+    window.location.replace('/offLine.html')
+  })
+  
 }
+
+// async function logout() {
+//   // fetch('/api/auth/logout')
+//   await fetch('/api/auth/logout',{method:'post'})
+//   .then(res => res.json())
+//   .then(data => {
+//     alert('logged out')
+//     let { msg } = data
+//     console.log(msg)  
+
+//     // window.location.replace('/login.html')
+
+    // document.cookie = 'BudApp=; Max-Age=-99999999;'
+//     // caches.delete(CACHE_STATIC)
+//     // window.location.replace('/login.html')
+//     // window.location.href('/login.html')
+    
+//   })
+// }
+
+
 
 document.getElementById('logout').addEventListener('click', logout)

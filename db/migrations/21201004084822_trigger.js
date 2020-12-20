@@ -207,6 +207,11 @@ exports.up = async function(knex) {
     AFTER INSERT ON inv_last_brews
     EXECUTE PROCEDURE delete_old_rows_inv_last_brews();
   `);
+  await knex.raw(`
+    CREATE TRIGGER trigger_delete_orphan_sessions
+    BEFORE INSERT ON session
+    EXECUTE PROCEDURE delete_orphan_sessions();
+  `);
 };
 
 exports.down = function(knex) {

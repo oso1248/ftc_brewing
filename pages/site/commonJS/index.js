@@ -4,14 +4,35 @@ async function logout() {
   .then(data => {
     if(data.msg === 'no user') {
       alert('no user')
+      caches.keys()
+        .then(keys => {
+          return caches.open(keys)
+        })
+        .then(cache => {
+          cache.delete('/pgAdmin/admin.html')
+        })
       document.cookie = 'BudApp=; Max-Age=-99999999;'
       window.location.replace('/login.html')
       return
     } else if (window.location != '/login.html') {
+      caches.keys()
+        .then(keys => {
+          return caches.open(keys)
+        })
+        .then(cache => {
+          cache.delete('/pgAdmin/admin.html')
+        })
       document.cookie = 'BudApp=; Max-Age=-99999999;'
       window.location.replace('/login.html')
       return
     } else {
+      caches.keys()
+        .then(keys => {
+          return caches.open(keys)
+        })
+        .then(cache => {
+          cache.delete('/pgAdmin/admin.html')
+        })
       document.cookie = 'BudApp=; Max-Age=-99999999;'
       window.location.replace('/login.html')
     }  
@@ -19,29 +40,7 @@ async function logout() {
   .catch(err => {
     // console.log(err)
     window.location.replace('/offLine.html')
-  })
-  
+  })  
 }
-
-// async function logout() {
-//   // fetch('/api/auth/logout')
-//   await fetch('/api/auth/logout',{method:'post'})
-//   .then(res => res.json())
-//   .then(data => {
-//     alert('logged out')
-//     let { msg } = data
-//     console.log(msg)  
-
-//     // window.location.replace('/login.html')
-
-    // document.cookie = 'BudApp=; Max-Age=-99999999;'
-//     // caches.delete(CACHE_STATIC)
-//     // window.location.replace('/login.html')
-//     // window.location.href('/login.html')
-    
-//   })
-// }
-
-
 
 document.getElementById('logout').addEventListener('click', logout)

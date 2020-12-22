@@ -10,11 +10,10 @@ function getPass(name) {
     .first() 
 }
 async function deleteSess(name) {
-  console.log('name', name)
   await db.raw(`
    DELETE
    FROM session
-   WHERE sess -> 'user' ->> 'username' = 'adam'
+   WHERE sess -> 'user' ->> 'username' = '${name}'
   `)
   return {msg: 'null'}
 }
@@ -46,7 +45,6 @@ router.post('/login', (req, res) => {
 
 router.post('/logout', (req, res) => {
   if(!req.session.user) {
-    console.log('null')
     res.status(200).json({msg: 'no user'})
     return
   }

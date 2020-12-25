@@ -113,6 +113,7 @@ function getHopWeeklyInvHard(data) {
       })
     })
     .select(
+      'inv.id',
       'com.commodity',
       'com.sap',
       'inv.lot',
@@ -133,7 +134,10 @@ async function getInvHopWeeklyDate() {
   `)
   return rows
 }
-
+async function destroyHopInv(id) {
+  let remove = await db('inv_hop_weekly').where('id', id).del()
+  return getByIDHopWeekly(id)
+}
 
 //hop daily
 async function getInvHopDailyDate() {
@@ -278,5 +282,6 @@ module.exports = {
   getHopWeeklyInvCombined,
   getHopWeeklyInvHard,
   getSetsCombined,
-  destroy
+  destroy,
+  destroyHopInv
 }

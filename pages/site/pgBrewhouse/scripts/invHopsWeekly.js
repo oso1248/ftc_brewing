@@ -113,6 +113,7 @@ function inventoryList() {
       let tableData = res.data
       inventoryTable = new Tabulator("#invList", {
         resizableColumns:false,
+        selectable:true,
         height:"330px",
         layout:"fitDataFill",
         data:tableData,
@@ -129,6 +130,32 @@ function inventoryList() {
     })
     .catch(err => console.log(err.detail))
 }
+document.getElementById('btnDeleteInv').addEventListener('click', deleteRowInv)
+async function deleteRowInv(ev) {
+  ev.preventDefault() 
+  ev.stopPropagation()
+  
+  let selectedData = inventoryTable.getSelectedData()
+  if (selectedData.length > 1) {
+    alert('Can only delete 1 row at a time.')
+    return
+  }
+  
+  if (!confirm(`Are you sure you want to delete\n\n ${selectedData[0].commodity} \n\nfrom the inventory?`)) {
+   return
+  }
+  await axios.delete('/api/inventory/hop/weekly/'+ selectedData[0].id)
+    .then(data => {
+      alert(data.data.msg)
+    })
+    .catch(err => alert(err))
+  
+  await commodityList()
+  await inventoryList()
+  await deleteOnLoad()
+}
+
+
 function resetAdd(ev){
   ev.preventDefault() 
   ev.stopPropagation()

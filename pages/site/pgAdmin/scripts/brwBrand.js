@@ -136,13 +136,14 @@ async function sendAdd(ev){
   }
 }
 async function validateAdd(data){
+  console.log('hello')
   let failures = [];
   let name = data.brand
   if(!data.brand) {
     failures.push({input:'brand', msg:'Taken'})
   } else {
-    let query = '/api/brand/brw/' + name
-    let res = await axios.get(query)
+    let query = '/api/brand/brw/name'
+    let res = await axios.post(query, {name: name})
     if(res.data.msg !== 'null') {
       failures.push({input:'brand', msg:'Taken'})  
     }

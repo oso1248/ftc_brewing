@@ -42,11 +42,12 @@ const uomRouter = require('./routes/rtsUom')
 const brandRouter = require('./routes/rtsBrands')
 const inventoryRouter = require('./routes/rtsInventory')
 const mtxRouter = require('./routes/rtsMtx')
+const vesselRouter = require('./routes/rtsVessel')
+const hibernateRouter = require('./routes/rtsHibernate')
 
 
 
 server.use(session(sessionConfig))
-
 
 server.use(express.static(path.join(__dirname, '../pages/site/login/')))
 server.use('/api/auth', loginRouter)
@@ -67,6 +68,8 @@ server.use('/api/uom', uomRouter)
 server.use('/api/brand', brandRouter)
 server.use('/api/inventory', inventoryRouter)
 server.use('/api/mtx', mtxRouter)
+server.use('/api/vessel', vesselRouter)
+server.use('/api/hibernate', hibernateRouter)
 
 
 module.exports = server

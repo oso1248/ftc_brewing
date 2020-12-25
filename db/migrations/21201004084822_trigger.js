@@ -186,6 +186,28 @@ exports.up = async function(knex) {
     FOR EACH ROW
     EXECUTE PROCEDURE update_timestamp();
   `);
+  await knex.raw(`
+    CREATE TRIGGER update_timestamp
+    BEFORE UPDATE
+    ON vessel_type
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_timestamp();
+  `);
+  await knex.raw(`
+    CREATE TRIGGER update_timestamp
+    BEFORE UPDATE
+    ON vessel
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_timestamp();
+  `);
+  await knex.raw(`
+    CREATE TRIGGER update_timestamp
+    BEFORE UPDATE
+    ON hibernated
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_timestamp();
+  `);
+  
 //inventory
   await knex.raw(`
     CREATE TRIGGER trigger_delete_old_rows_inv_mat_weekly
@@ -212,6 +234,12 @@ exports.up = async function(knex) {
     BEFORE INSERT ON session
     EXECUTE PROCEDURE delete_orphan_sessions();
   `);
+  await knex.raw(`
+    CREATE TRIGGER trigger_delete_old_hibernate
+    AFTER INSERT ON hibernated
+    EXECUTE PROCEDURE delete_old_rows_hibernated();
+  `);
+
 };
 
 exports.down = function(knex) {

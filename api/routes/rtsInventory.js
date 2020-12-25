@@ -118,7 +118,17 @@ router.post('/hop/weekly/dates', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-
+router.delete('/hop/weekly/:id', (req, res) => {
+  db.destroyHopInv(req.params.id)
+    .then(data => {
+      if(data.length === 0) {
+        res.status(200).json({msg: 'deleted'})
+      } else {
+        res.status(200).json({msg: 'error: not deleted'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
 
 //hop inv daily
 router.post('/hop/daily', (req, res) => {

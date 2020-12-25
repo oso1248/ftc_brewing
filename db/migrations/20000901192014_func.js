@@ -71,7 +71,17 @@ exports.up = async function(knex) {
     END;
     $$;
   `)
-
+  await knex.raw(`
+    CREATE OR REPLACE FUNCTION delete_old_rows_hibernated() RETURNS TRIGGER
+    LANGUAGE plpgsql
+    AS
+    $$
+    BEGIN
+      DELETE FROM hibernated WHERE created_at < NOW() - INTERVAL '1095 days';
+      RETURN NULL;
+    END;
+    $$;
+  `)
 }
 
 exports.down = async function(knex) {
@@ -92,5 +102,8 @@ exports.down = async function(knex) {
   `)
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_orphan_sessions() CASCADE;
+  `)
+  await knex.raw(`
+    DROP FUNCTION IF EXISTS delete_old_rows_hibernated() CASCADE;
   `)
 }

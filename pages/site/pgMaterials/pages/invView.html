@@ -42,11 +42,17 @@
     
    <div class="boxes">
 
-    <div class="box" id="view">
+    <!-- <div class="box" id="view">
       <a style="display: block">  
         <h3>View Inventory</h3>
       </a>
-    </div>
+    </div> -->
+
+    <!-- <div class="box" id="update">
+      <a style="display: block">  
+        <h3>Update Inventory</h3>
+      </a>
+    </div> -->
 
    </div> <!-- End Boxes   -->
        
@@ -82,13 +88,14 @@
           </select>
         </div>
       </form>
-      <div class="button btnLabel">
-        <button class ="btn" id ="download-xlsx">Save XLSX</button>
-        <button class ="btn" id="print-table">Print Table</button>
+      <div id="tableDiv">
+          <div class="button btnLabel">
+            <button class ="btn" id ="download-xlsx">Save XLSX</button>
+            <button class ="btn" id="print-table">Print Table</button>
+          </div>
+          <div id="listView"></div>
       </div>
-      <div id="listView"></div>
     </div>
-
   </div><!-- end container2 -->
 
   <script src="../../commonJS/index.js"></script>

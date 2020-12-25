@@ -1,4 +1,5 @@
 document.getElementById('updateBoxes').style.display="none"
+document.getElementById('tableDiv').style.display="none"
 // document.getElementById('attView').style.display="none"
 const api = '/api/brewery'
 let DateTime = luxon.DateTime
@@ -91,6 +92,7 @@ function invMatTable() {
       })
     })
     .catch(err => console.log(err.detail))
+    document.getElementById('tableDiv').style.display="block"
 }
 
 
@@ -195,6 +197,6 @@ function tablePrint(){
 }
 
 // document.getElementById('update').onclick = update
-document.getElementById('view').onclick = view
+// document.getElementById('view').onclick = view
 
 window.addEventListener('DOMContentLoaded', (ev) => { invDates() }) 

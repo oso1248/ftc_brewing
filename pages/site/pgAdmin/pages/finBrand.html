@@ -47,6 +47,10 @@
       <a style="display: block"><h3>Update Brand</h3></a>
     </div>
 
+    <div class="box" id="ingredientBox">
+      <a style="display: block"><h3>Ingredient Brand</h3></a>
+    </div>
+
     <div class="box" id="view">
       <a style="display: block"><h3>View Brands</h3></a>
     </div>
@@ -89,9 +93,17 @@
           </select>  
         </div>
 
+        <div class="input">
+          <select name="add" id="injection">
+            <option value="" disabled selected hidden>Pre/Post Injection</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>  
+        </div>
+
 
         <div class="input">
-          <textarea name="note" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+          <textarea class="note" id="note" cols="21" rows="5" placeholder="Note"></textarea>
         </div>
         <div class="button">
           <button class="btn" id="btnAddClear">Clear</button>
@@ -111,28 +123,40 @@
       <form class="form" id="frmUpdate" action="">
         <h1>Update Brand</h1>
         <div class="input">
-          <select name="updateFinBrnd" id="brand">
+          <!-- <select name="updateFinBrnd" id="brand"> -->
+          <select name="fin_id">
             <option value="" disabled selected hidden>Select Finishing Brand</option>
           </select>
         </div>
         
         <div class="tooltip input">
           <span class="tooltiptext">Brew Brand</span>
-          <select name="updateBrwBrnd" id="brw_id">
+          <!-- <select name="updateBrwBrnd" id="brw_id">   -->
+          <select name="brw_id">  
           </select>  
         </div>
 
         <div class="tooltip input">
           <span class="tooltiptext">Active</span>
-          <select name="updateActive" id="active">
+          <select name="active">
             <option value="" disabled selected hidden>Active</option>
             <option>Yes</option>
             <option>No</option>
           </select>  
         </div>
 
+        <div class="tooltip input">
+          <span class="tooltiptext">Injection</span>
+          <select name="injection">
+            <option value="" disabled selected hidden>Pre/Post Injection</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>  
+        </div>
+        
+
         <div class="input">
-          <textarea name="updateNote" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+          <textarea class="note" name="note" cols="21" rows="5" placeholder="Note"></textarea>
         </div>
         <div class="button">
           <button class="btn" id="btnUpdateClear">Clear</button>
@@ -145,24 +169,57 @@
     <!-- end of update boxes -->
 
 
-    <!-- start of delete boxes -->
-    <div id="deleteBoxes" class="boxxes">
+    <!-- start of ingredient boxes -->
+    <div id="injectionBoxes" class="boxxes">
   
     <div class="formBox">
-      <form class="form" id="frmDelete" action="">
-        <h1>Delete Brand</h1>
+      <form class="form" id="frmIngredientAdd" action="">
+        <h1>Add Brand Ingredient</h1>
         <div class="input">
-          <select name="delete" id="brand"></select>
+          <select name="fin_idAdd" id="fin_idAdd"></select>
+        </div>
+        <div class="input">
+          <select name="com_idAdd" id="com_id"></select>
         </div>
         <div class="button">
-          <button class="btn" id="btnDeleteClear">Clear</button>
-          <button class="btn" id="btnDeleteSubmit">Delete</button>
+          <button class="btn" id="btnIngredientAddClear">Clear</button>
+          <button class="btn" id="btnIngredientAddSubmit">Submit</button>
         </div>
       </form>
-    </div>
+
+      <div class="spacer"></div>
+      
+      <form class="form" id="frmIngredientUpdate" action="">
+        <h1>Update Injection Rates</h1>
+        <div class="input">
+          <select name="fin_idUpdate" id="fin_idUpdate"></select>
+        </div>
+        <div class="button">
+          <button class="btn" id="btnIngredientUpdateClear">Clear</button>
+          <button class="btn" id="btnIngredientUpdateSubmit">Update</button>
+        </div>
+      </form>
+
+      <div id="injRateTable"></div>
+      
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <form class="form" id="frmIngredientDelete" action="">
+        <h1>Clear Brand Ingredients</h1>
+        <div class="input">
+          <select name="fin_idDelete" id="fin_idDelete"></select>
+        </div>
+        <div class="button">
+          <button class="btn" id="btnIngredientDeleteClear">Clear</button>
+          <button class="btn" id="btnIngredientDeleteSubmit">Submit</button>
+        </div>
+      </form>
 
     </div>
-    <!-- end of delete boxes -->
+    
+    </div>
+    <!-- end of ingredient boxes -->
 
 
     <div class="boxxes" id="attView">

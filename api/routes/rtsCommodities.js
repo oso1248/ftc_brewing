@@ -69,10 +69,32 @@ router.delete('/:name', (req, res) => {
 })
 
 
-
-
-
-
+router.post('/ingredient/bridge', (req, res) => {
+  db.addFinBridge(req.body)
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.delete('/ingredient/bridge/:id', (req, res) => {
+  db.destroyBridge(req.params.id)
+    .then(data => {
+      if(!data) {
+        res.status(200).json({msg: "deleted"})
+      } else {
+        res.status(200).json(data)
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/ingredient/bridge/get/:id', (req, res) => {
+  console.log('route')
+  db.getFinBridgeById(req.params.id)
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
 
 
 module.exports = router

@@ -1,6 +1,6 @@
 document.getElementById('addBoxes').style.display="none"
 document.getElementById('updateBoxes').style.display="none"
-document.getElementById('deleteBoxes').style.display="none"
+document.getElementById('injectionBoxes').style.display="none"
 document.getElementById('attView').style.display="none"
 
 function createNode(element) {
@@ -17,7 +17,7 @@ function createList(api, parent, title) {
     let listItem = elem[title]
     let option = createNode('option')
     option.innerHTML = listItem
-    option.id = listItem
+    option.id = elem.id
     append(parent, option)
     });
   })
@@ -36,41 +36,13 @@ String.prototype.testLengthFour = function () {
   return (/^[^\s]{4}$/).test(this)
 }
 
-//Views
-function add() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="grid"
 
-  let dropDown = document.getElementById('brw_id')
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brew Brand</option>`
-  api = '/api/brand/brw/get'
-  title = 'brand'
-  createList(api, dropDown, title)
-}
-function update() {
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="grid"
-
-  let dropDown = document.getElementsByName('updateFinBrnd')[0]
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Fin Brand</option>`
-  let api = '/api/brand/fin/get'
-  let title = 'brndFin'
-  createList(api, dropDown, title)
-
-  dropDown = document.getElementsByName('updateBrwBrnd')[0]
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brew Brand</option>`
-  api = '/api/brand/brw/get'
-  title = 'brand'
-  createList(api, dropDown, title)
-}
+//View
+document.getElementById('view').onclick = view
 let brandTable
 function view() {
   document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="none"
+  document.getElementById('injectionBoxes').style.display="none"
   document.getElementById('attView').style.display="grid"
   document.getElementById('addBoxes').style.display="none"
 
@@ -87,6 +59,7 @@ function view() {
         // {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
         {title:"Fin Brand", field:"brndFin",hozAlign:"center", frozen:true},
         {title:"Active", field:"active",hozAlign:"center"},
+        {title:"Injection", field:"injection",hozAlign:"center"},
         {title:"Brw Brand", field:"brndBrw",hozAlign:"center"},
         {title:"Pck Brand", field:"brndPck",hozAlign:"center"},
         {title:"Note", field:"note", hozAlign:"center"},
@@ -96,25 +69,28 @@ function view() {
     .catch(err => console.log(err))
 
 }
-function del() {
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="grid"
 
-  let dropDown = document.getElementsByName('delete')[0]
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
-  let api = '/api/brand/brw'
-  let title = 'brand'
-  createList(api, dropDown, title)
-
-}
 
 //Routes Add
+document.getElementById('add').onclick = add
+function add() {
+  document.getElementById('updateBoxes').style.display="none"
+  document.getElementById('injectionBoxes').style.display="none"
+  document.getElementById('attView').style.display="none"
+  document.getElementById('addBoxes').style.display="grid"
+
+  let dropDown = document.getElementById('brw_id')
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brew Brand</option>`
+  api = '/api/brand/brw/get'
+  title = 'brand'
+  createList(api, dropDown, title)
+}
+document.getElementById('btnAddClear').addEventListener('click', resetAdd)
 function resetAdd(ev){
   ev.preventDefault();
   document.getElementById('frmAdd').reset();
 }
+document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
 async function sendAdd(ev){
   ev.preventDefault() 
   ev.stopPropagation()
@@ -175,14 +151,40 @@ async function validateAdd(data){
     failures.push({input:'active', msg:'Required Field'})
     data.active = null
   }
+  if( data.injection === ""){
+    failures.push({input:'injection', msg:'Required Field'})
+    data.injection = null
+  }
   return failures
 }
 
+
 //Routes Update
+document.getElementById('update').onclick = update
+function update() {
+  document.getElementById('injectionBoxes').style.display="none"
+  document.getElementById('attView').style.display="none"
+  document.getElementById('addBoxes').style.display="none"
+  document.getElementById('updateBoxes').style.display="grid"
+
+  let dropDown = document.getElementsByName('fin_id')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Fin Brand</option>`
+  let api = '/api/brand/fin/get'
+  let title = 'brndFin'
+  createList(api, dropDown, title)
+
+  dropDown = document.getElementsByName('brw_id')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brew Brand</option>`
+  api = '/api/brand/brw/get'
+  title = 'brand'
+  createList(api, dropDown, title)
+}
+document.getElementById('btnUpdateClear').addEventListener('click', resetUpdate)
 function resetUpdate(ev){
   ev.preventDefault();
   document.getElementById('frmUpdate').reset()
 }
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
 async function sendUpdate(ev){
   ev.preventDefault() 
   ev.stopPropagation()
@@ -192,13 +194,14 @@ async function sendUpdate(ev){
   let i
   
   for (i = 1; i < form.length - 2; i++) {
-  let id = form.elements[i].id
+  let id = form.elements[i].name
   let name = form.elements[i].value
   data[id] = name
   }
   let fails = await validateUpdate(data)
+  
   if(fails.length === 0) {
-    let brand = document.getElementsByName('updateFinBrnd')[0].value
+    let brand = document.getElementsByName('fin_id')[0].value
     axios.patch('/api/brand/fin/' + brand, data)
       .then(data => {
         alert(data.data.brndFin + ' has been updated')
@@ -215,7 +218,7 @@ async function sendUpdate(ev){
 }
 async function validateUpdate(data){
   let failures = []
-  let name = document.getElementsByName('updateFinBrnd')[0].value
+  let name = document.getElementsByName('fin_id')[0].value
   if (name === ""){
     failures.push({input:'brand', msg:'Required Field'})
   } else if (!name.testLengthFour()) {
@@ -229,70 +232,175 @@ async function validateUpdate(data){
     failures.push({input:'active', msg:'Required Field'})
     data.active = null
   }
+  if( data.injection === ""){
+    failures.push({input:'injection', msg:'Required Field'})
+    data.injection = null
+  }
   return failures
 }
+document.getElementsByName('fin_id')[0].addEventListener('change', selectBrand)
 function selectBrand(){
-  let brand = document.getElementsByName('updateFinBrnd')[0].value
+  let brand = document.getElementsByName('fin_id')[0].value
   
   axios.post('/api/brand/fin/get/name', {name: brand})
     .then(data => {
-      document.getElementsByName('updateBrwBrnd')[0].value = data.data.brndBrw
-      document.getElementsByName('updateActive')[0].value = data.data.active
-      document.getElementsByName('updateNote')[0].value = data.data.note
+      document.getElementsByName('brw_id')[0].value = data.data.brndBrw
+      document.getElementsByName('active')[0].value = data.data.active
+      document.getElementsByName('injection')[0].value = data.data.injection
+      document.getElementsByName('note')[0].value = data.data.note
     })
 }
 
-//Routes Delete
-function resetDelete(ev){
-  ev.preventDefault();
-  document.getElementById('frmDelete').reset();
+
+//Routes ingredient
+document.getElementById('ingredientBox').onclick = ingredient
+function ingredient() {
+  document.getElementById('injectionBoxes').style.display="block"
+  document.getElementById('attView').style.display="none"
+  document.getElementById('addBoxes').style.display="none"
+  document.getElementById('updateBoxes').style.display="none"
+
+  let dropDown = document.getElementsByName('fin_idAdd')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
+  let api = '/api/brand/fin/ingredient/get'
+  let title = 'brndFin'
+  createList(api, dropDown, title)
+
+  dropDown = document.getElementsByName('fin_idUpdate')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
+  createList(api, dropDown, title)
+
+  dropDown = document.getElementsByName('fin_idDelete')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
+  createList(api, dropDown, title)
+
+  dropDown = document.getElementsByName('com_idAdd')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Ingredient</option>`
+  api = '/api/commodity/get/type/injection'
+  title = 'commodity'
+  createList(api, dropDown, title)
+
 }
-async function sendDelete(ev){
+
+
+document.getElementById('btnIngredientAddSubmit').addEventListener('click', sendBrandIngredientAdd)
+function sendBrandIngredientAdd(ev) {
   ev.preventDefault() 
   ev.stopPropagation()
-  let name = document.getElementsByName('delete')[0].value
-  if(name === '') {
-    alert('brand Required')
+
+  let data = {}
+  let index = document.getElementsByName('fin_idAdd')[0].selectedIndex
+  let options = document.getElementsByName('fin_idAdd')[0].options
+  data.fin_id = options[index].id
+  if(data.fin_id == '') {
+    alert('Finishing brand required')
     return
   }
 
-  axios.delete('/api/brand/brw/' + name)
+  index = document.getElementsByName('com_idAdd')[0].selectedIndex
+  options = document.getElementsByName('com_idAdd')[0].options
+  data.com_id = options[index].id
+  if(data.com_id == '') {
+    alert('Ingredient required')
+    return
+  }
+
+  axios.post('/api/commodity/ingredient/bridge', data)
+    .then(data => {
+      alert(data.data.commodity + ' has been added')
+      document.getElementById('frmIngredientAdd').reset()
+    })
+    .catch(err => alert(err))
+
+}
+document.getElementById('btnIngredientAddClear').addEventListener('click', resetBrandIngredientAdd)
+function resetBrandIngredientAdd(ev){
+  ev.preventDefault();
+  document.getElementById('frmIngredientAdd').reset()
+}
+
+
+document.getElementsByName('fin_idUpdate')[0].addEventListener('change', selectBrandIngredientUpdate)
+let ingredientTable
+function selectBrandIngredientUpdate() {
+  console.log('update')
+  let index = document.getElementsByName('fin_idUpdate')[0].selectedIndex
+  let options = document.getElementsByName('fin_idUpdate')[0].options
+  let id = options[index].id
+
+  axios.post('/api/commodity/ingredient/bridge/get/' + id)
+    .then(res => {
+      let tableData = res.data
+      ingredientTable = new Tabulator("#injRateTable", {
+        resizableColumns:false,
+        height:"120x",
+        layout:"fitDataFill",
+        responsiveLayoutCollapseStartOpen:false,
+        data:tableData,
+        columns:[
+        // {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
+        {title:"Brand", field:"brand",hozAlign:"center", frozen:true},
+        {title:"Commodity", field:"commodity",hozAlign:"center"},
+        {title:"Rate", field:"rate",hozAlign:"center", width: "25px", editor:true, validator:["float"]},
+        ],
+      })
+    })
+    .catch(err => console.log(err))
+
+
+
+
+}
+document.getElementById('btnIngredientUpdateSubmit').addEventListener('click', sendBrandIngredientUpdate)
+function sendBrandIngredientUpdate(ev) {
+  ev.preventDefault() 
+  ev.stopPropagation()
+
+  let data = ingredientTable.getData()
+
+  for (let i = 0; i < data.length; i++) {
+    delete data[i].brand
+    delete data[i].commodity    
+  }
+
+  axios.patch('/api/brand/fin/injection/update', data)
+    .then(data => {
+      alert('Injection rates have been updated')
+      document.getElementById('frmIngredientUpdate').reset()
+      ingredientTable.destroy()
+    })
+    .catch(err => alert(err))
+}
+document.getElementById('btnIngredientUpdateClear').addEventListener('click', resetBrandIngredientUpdate)
+function resetBrandIngredientUpdate(ev){
+  ev.preventDefault();
+  document.getElementById('frmIngredientUpdate').reset()
+  ingredientTable.destroy()
+}
+
+
+document.getElementById('btnIngredientDeleteSubmit').addEventListener('click', sendBrandIngredientDelete)
+function sendBrandIngredientDelete(ev) {
+  ev.preventDefault() 
+  ev.stopPropagation()
+
+  let data = {}
+  let index = document.getElementsByName('fin_idDelete')[0].selectedIndex
+  let options = document.getElementsByName('fin_idDelete')[0].options
+  data.fin_id = options[index].id
+  if(data.fin_id == '') {
+    alert('Finishing brand required')
+    return
+  }
+  axios.delete('/api/commodity/ingredient/bridge/' + data.fin_id)
     .then(data => {
       alert(data.data.msg)
+      document.getElementById('frmIngredientDelete').reset()
     })
-    .catch(err => alert(err.detail))
+    .catch(err => alert(err))
 }
-
-//Clear forms add
-document.getElementById('btnAddClear').addEventListener('click', resetAdd)
-//Clear forms update
-document.getElementById('btnUpdateClear').addEventListener('click', resetUpdate)
-//Clear forms delete
-document.getElementById('btnDeleteClear').addEventListener('click', resetDelete)
-
-
-//Send forms add
-document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
-//Send forms Update
-document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
-// Send forms delete
-document.getElementById('btnDeleteSubmit').addEventListener('click', sendDelete)
-
-
-document.getElementsByName('updateFinBrnd')[0].addEventListener('change', selectBrand)
-
-
-document.getElementById('add').onclick = add
-document.getElementById('update').onclick = update
-document.getElementById('view').onclick = view
-// document.getElementById('delete').onclick = del
-
-// document.getElementById('download-xlsx').addEventListener('click', brandExcel)
-function brandExcel(){
-  brandTable.download("xlsx", "brands.xlsx", {sheetName:"Brands"})
-}
-
-// document.getElementById("print-table").addEventListener('click', brandPrint)
-function brandPrint(){
-  brandTable.print(false, true);
+document.getElementById('btnIngredientDeleteClear').addEventListener('click', resetBrandIngredientDelete)
+function resetBrandIngredientDelete(ev){
+  ev.preventDefault();
+  document.getElementById('frmIngredientDelete').reset()
 }

@@ -57,6 +57,11 @@
   grid-gap: 20px;
   grid-template-columns: repeat(3, 1fr);
 }
+.formOne {
+  width: 40%;
+  text-align: center;
+  margin: auto;
+}
 
 
 @media (max-width: 850px) {
@@ -91,6 +96,9 @@
   }
   .supplier {
     font-size: 12px;
+  }
+  .formOne {
+    width: 60%;
   }
 }
 

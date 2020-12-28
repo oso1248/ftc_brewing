@@ -25,7 +25,6 @@ router.post('/brw/get', (req, res) => {
     .catch(err => res.status(500).json({msg: err.detail}))
 })
 router.post('/brw/name', (req, res) => {
-  console.log('router hit')
   db.getByNameBrw(req.body.name)
     .then(data => {
       if(data){
@@ -110,7 +109,6 @@ router.post('/brw/get/sac', (req, res) => {
 router.post('/fin', (req, res) => {
   db.addFin(req.body)
     .then(data => {
-      console.log(data)
       res.status(200).json(data)
     })
     .catch(err => res.status(500).json({msg: err.detail}))
@@ -159,6 +157,18 @@ router.delete('/fin/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
+router.post('/fin/ingredient/get', (req, res) => {
+  db.getAllFinIngredient(req.body.active)
+    .then(data => {
+      if(data) {
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+
 
 //pck
 router.post('/pck', (req, res) => {
@@ -283,7 +293,6 @@ router.post('/detail/relpost', (req, res) => {
     .catch(err => res.status(500).json({msg: err.detail}))
 })
 router.patch('/detail/updatedetail', (req, res) => {
-  // console.log(req.body[0][0].method)
   db.patchDetail(req.body)
     .then(data => {
       if(data){
@@ -364,6 +373,21 @@ router.patch('/detail/updaterecipe/:table', (req, res) => {
     }
   }
 )
+
+
+// Fin injection
+router.patch('/fin/injection/update', (req, res) => {
+  db.patchFinInjection(req.body)
+    .then(data => {
+      if(data){
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+
+})
 
 // methods cold
 router.post('/method/cold', (req, res) => {

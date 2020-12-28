@@ -136,6 +136,34 @@ function getByName(name) {
   .where({'com.commodity': name})
   .first() 
 }
+function getById(id) {
+  return db('mtl_commodity AS com')
+    .join('mtl_uom as uom', 'com.uom_id', '=', 'uom.id')
+    .join('mtl_type as typ', 'com.type_id', '=', 'typ.id')
+    .join('mtl_location AS loc', 'com.location_id', 'loc.id' )
+    .join('mtl_enviro as env', 'com.enviro_id', '=', 'env.id')
+    .join('mtl_container as con', 'com.container_id', '=', 'con.id')
+    .join('mtl_supplier as sup', 'com.supplier_id', '=', 'sup.id')
+    .select(
+      'com.id',
+      'com.commodity',
+      'com.sap',
+      'com.active',
+      'com.inventory',
+      'loc.location',
+      'sup.company',
+      'typ.type',
+      'con.container',
+      'env.enviro',
+      'com.threshold',
+      'com.per_pallet',
+      'com.unit_total',
+      'uom.uom',
+      'com.note'
+    )
+  .where({'com.id': id})
+  .first() 
+}
 function getByType(active, type) {
   if(active) {
     return db('mtl_commodity AS com')
@@ -173,7 +201,8 @@ function getByType(active, type) {
     .join('mtl_container as con', 'com.container_id', '=', 'con.id')
     .join('mtl_supplier as sup', 'com.supplier_id', '=', 'sup.id')
     .select(
-      'com.id as com_id',
+      // 'com.id as com_id',
+      'com.id',
       'com.commodity',
       'com.sap',
       'com.active',
@@ -214,4 +243,39 @@ async function destroy(name) {
 }
 
 
-module.exports = {add, getAll, getByName, change, destroy, getByType}
+async function addFinBridge(data) {
+  console.log(data)
+  const [{com_id}] = await db('fin_injection_bridge').insert(data, ['com_id'])
+  return getById(com_id)
+}
+async function destroyBridge(id) {
+  let remove = await db('fin_injection_bridge').where('fin_id', id).del()
+  return {msg: 'Brand Cleared'}
+}
+
+function getFinBridgeById(id) {
+  return db('fin_injection_bridge AS brg')
+    .join('brnd_fin as fin', 'fin.id', '=', 'brg.fin_id')
+    .join('mtl_commodity as com', 'com.id', '=', 'brg.com_id')
+    .select(
+      'brg.fin_id',
+      'brg.com_id',
+      'fin.brand',
+      'com.commodity',
+      'brg.rate'
+    )
+  .where({'brg.fin_id': id})
+  .orderBy('com.commodity')
+}
+
+module.exports = {
+  add, 
+  getAll, 
+  getByName, 
+  change, 
+  destroy, 
+  getByType, 
+  addFinBridge, 
+  destroyBridge,
+  getFinBridgeById
+}

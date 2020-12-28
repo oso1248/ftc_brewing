@@ -8,14 +8,14 @@ const brnd_brw = [
   ]
    
   const brnd_fin = [
-  {brand:"HBBL",brw_id:1,active:"Yes",note:""},
-  {brand:"HBUD",brw_id:2,active:"Yes",note:""},
-  {brand:"HBNL",brw_id:3,active:"Yes",note:""},
-  {brand:"HBNS",brw_id:3,active:"Yes",note:""},
-  {brand:"EBIN",brw_id:3,active:"Yes",note:""},
-  {brand:"PTHD",brw_id:4,active:"Yes",note:""},
-  {brand:"ELSP",brw_id:5,active:"Yes",note:""},
-  {brand:"9GNC",brw_id:6,active:"Yes",note:""},
+  {brand:"HBBL",brw_id:1,active:"Yes", injection: "No",note:""},
+  {brand:"HBUD",brw_id:2,active:"Yes", injection: "No",note:""},
+  {brand:"HBNL",brw_id:3,active:"Yes", injection: "No",note:""},
+  {brand:"HBNS",brw_id:3,active:"Yes", injection: "Yes",note:""},
+  {brand:"EBIN",brw_id:3,active:"Yes", injection: "No",note:""},
+  {brand:"PTHD",brw_id:4,active:"Yes", injection: "Yes",note:""},
+  {brand:"ELSP",brw_id:5,active:"Yes", injection: "No",note:""},
+  {brand:"9GNC",brw_id:6,active:"Yes", injection: "No",note:""},
   ]
    
   const brnd_pck = [

@@ -1,6 +1,7 @@
 document.getElementById('addBoxes').style.display="none"
 document.getElementById('updateBoxes').style.display="none"
-document.getElementById('deleteBoxes').style.display="none"
+document.getElementById('recipeBoxes').style.display="none"
+document.getElementById('injectionBoxes').style.display="none"
 
 
 function createNode(element) {
@@ -17,7 +18,7 @@ function createList(api, parent, title) {
     let listItem = elem[title]
     let option = createNode('option')
     option.innerHTML = listItem
-    // option.id = listItem
+    option.id = elem.id
     append(parent, option)
     });
   })
@@ -64,8 +65,9 @@ function convert2(obj, labels) {
 // View Brands
 document.getElementById('viewBrands').onclick = viewBrands
 function viewBrands() {
+  document.getElementById('injectionBoxes').style.display="none"
   document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="none"
+  document.getElementById('recipeBoxes').style.display="none"
   document.getElementById('addBoxes').style.display="block"
   document.getElementById('viewBrwBrand').style.display="none"
   document.getElementById('viewFinBrand').style.display="none"
@@ -186,7 +188,8 @@ function printViewBrandPckTable(){
 // Details Brand
 document.getElementById('detailsBrands').onclick = detailBrands
 function detailBrands() {
-  document.getElementById('deleteBoxes').style.display="none"
+  document.getElementById('injectionBoxes').style.display="none"
+  document.getElementById('recipeBoxes').style.display="none"
   document.getElementById('addBoxes').style.display="none"
   document.getElementById('updateBoxes').style.display="block"
   document.getElementById('detailBrwBrand').style.display="none"
@@ -224,6 +227,7 @@ async function detailBrandBrew() {
   let name = document.getElementById('brwBrandDetail').value
   document.getElementById('finBrandDetail').selectedIndex = 0
   document.getElementById('pckBrandDetail').selectedIndex = 0
+
   await detailBrandBrewPre(name)
   await detailBrandBrewPost(name)
 }
@@ -436,7 +440,8 @@ function printDetailBrandPckTablePost(){
 //Recipe Brand
 document.getElementById('recipeBrands').onclick = recipeBrands
 function recipeBrands() {
-  document.getElementById('deleteBoxes').style.display="block"
+  document.getElementById('injectionBoxes').style.display="none"
+  document.getElementById('recipeBoxes').style.display="block"
   document.getElementById('addBoxes').style.display="none"
   document.getElementById('updateBoxes').style.display="none"
   document.getElementById('recipeChpBrand').style.display="none"
@@ -634,4 +639,52 @@ function xlsxRecipeBrandFin(){
 document.getElementById('printRecipeBrandFin').addEventListener('click', printRecipeBrandFin)
 function printRecipeBrandFin(){
   recipeBrandFinTable.print(false, true)
+}
+
+//Injection
+document.getElementById('injectionBrands').onclick = injectionBrands
+function injectionBrands() {
+  document.getElementById('injectionBoxes').style.display="block"
+  document.getElementById('recipeBoxes').style.display="none"
+  document.getElementById('addBoxes').style.display="none"
+  document.getElementById('updateBoxes').style.display="none"
+  document.getElementById('recipeChpBrand').style.display="none"
+  document.getElementById('recipeSchBrand').style.display="none"
+  document.getElementById('recipeFinBrand').style.display="none"
+  
+  
+  let dropDown = document.getElementById('injectionBrand')
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
+  let api = '/api/brand/fin/ingredient/get'
+  let title = 'brndFin'
+  createList(api, dropDown, title)
+
+}
+document.getElementById('injectionBrand').addEventListener('change', injectionBrandFin)
+let injectionTable
+function injectionBrandFin() {
+
+  let index = document.getElementById('injectionBrand').selectedIndex
+  let options = document.getElementById('injectionBrand').options
+  let id = options[index].id
+
+  axios.post('/api/commodity/ingredient/bridge/get/' + id)
+    .then(res => {
+      let tableData = res.data
+      injectionTable = new Tabulator("#injectionTable", {
+        resizableColumns:false,
+        height:"120x",
+        layout:"fitDataFill",
+        responsiveLayoutCollapseStartOpen:false,
+        data:tableData,
+        columns:[
+        // {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
+        {title:"Brand", field:"brand",hozAlign:"center", frozen:true},
+        {title:"Commodity", field:"commodity",hozAlign:"center"},
+        {title:"Rate", field:"rate",hozAlign:"center", width: "25px"},
+        ],
+      })
+    })
+    .catch(err => console.log(err))
+
 }

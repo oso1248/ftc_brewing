@@ -12,8 +12,7 @@
   grid-template-columns: repeat(1, 1fr);
 }
 
-
-#note {
+.note {
   resize: none;
   line-height: 1.4;
   width: 30%;
@@ -22,6 +21,7 @@
   font-size: 20px;
   border-radius: 10px;
 }
+
 
 .form input, select, option {
   text-align: center;
@@ -66,7 +66,7 @@
   .button button {
   width: 35%;
   }
-  #note {
+  .note {
     width: 70%;
   }
 }  
@@ -83,9 +83,10 @@
   .button button {
   width: 45%;
   }
-  #note {
+  .note {
     width: 90%;
   }
+  
   .supplier {
     font-size: 12px;
   }

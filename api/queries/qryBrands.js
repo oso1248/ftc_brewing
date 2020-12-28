@@ -143,6 +143,7 @@ function getAllFin(active) {
         'pck.active AS pckActive',
         'brw.brand AS brndBrw',
         'brw.active AS brwActive',
+        'fin.injection AS injection',
         'fin.note'
       )
       .where('fin.active', '=', 'Yes')
@@ -158,10 +159,32 @@ function getAllFin(active) {
         'pck.active AS pckActive',
         'brw.brand AS brndBrw',
         'brw.active AS brwActive',
+        'fin.injection AS injection',
         'fin.note'
       )
       // .orderBy('fin.brand')
       .orderBy([{ column: 'fin.active', order: 'desc'}, { column: 'fin.brand' }])
+  }
+}
+function getAllFinIngredient(active) {
+  if(active) {
+    return db('brnd_fin AS fin')
+      .select(
+        'fin.id',
+        'fin.brand AS brndFin',
+      )
+      .where('fin.active', '=', 'Yes')
+      .andWhere('fin.injection', '=', 'Yes')
+      .orderBy('fin.brand')
+  } else {
+    return db('brnd_fin AS fin')
+      .select(
+        'fin.id',
+        'fin.brand AS brndFin',
+      )
+      .where('fin.injection', '=', 'Yes')
+      .orderBy('fin.brand')
+      // .orderBy([{ column: 'fin.active', order: 'desc'}, { column: 'fin.brand' }])
   }
 }
 function getByNameFin(name) {
@@ -175,6 +198,7 @@ function getByNameFin(name) {
       'brw.active AS brwActive',
       'pck.brand AS brndPck',
       'pck.active AS pckActive',
+      'fin.injection AS injection',
       'fin.note'
     )
     .where({'fin.brand': name})
@@ -604,6 +628,25 @@ function patchRecipeFin(changes) {
 }
 
 
+//Fin injection rates
+function patchFinInjection(changes) {
+  return db.transaction(trx => {
+    let queries = []
+    changes.forEach(data => {
+      const query = db('fin_injection_bridge')
+        .where('fin_id', data.fin_id)
+        .andWhere('com_id', data.com_id)
+        .update('rate', data.rate)
+        .transacting(trx)
+      queries.push(query)
+    })
+    Promise.all(queries) 
+      .then(trx.commit)
+      .catch(trx.rollback)
+  })
+}
+
+
 //methods
 function getAllMethod() {
   return db('methods_cold')
@@ -620,6 +663,7 @@ module.exports = {
   destroyBrw,
   addFin, 
   getAllFin,
+  getAllFinIngredient,
   getByNameFin, 
   changeFin, 
   destroyFin,
@@ -645,5 +689,6 @@ module.exports = {
   patchDetail,
   patchRecipeChp,
   patchRecipeSch,
-  patchRecipeFin
+  patchRecipeFin,
+  patchFinInjection
 }

@@ -62,6 +62,12 @@
       </a>
     </div>
 
+    <div class="box" id="injectionBrands">
+      <a style="display: block">  
+        <h3>Brand Injection Rates</h3>
+      </a>
+    </div>
+
    </div> <!-- End Boxes   -->
        
   </div><! -- End of container1 -->
@@ -125,17 +131,18 @@
       <div class="boxxes" id="detailBrwBrand"> <!-- Brand Details Brw-->
         
         <div id="detailBrandBrw">
+          <h1>Pre Transfer</h1>
           <div class="button btnLabel">
             <button class ="btn" id ="xlsxDetailBrandBrwTablePre">Save XLSX</button>
             <button class ="btn" id="printDetailBrandBrwTablePre">Print Table</button>
           </div>
-          <h1>Pre Transfer</h1>
           <div id="detailBrandBrwPre"></div>
+
+          <h1>Post Transfer</h1>
           <div class="button btnLabel">
             <button class ="btn" id ="xlsxDetailBrandBrwTablePost">Save XLSX</button>
             <button class ="btn" id="printDetailBrandBrwTablePost">Print Table</button>
           </div>
-          <h1>Post Transfer</h1>
           <div id="detailBrandBrwPost"></div>
         </div>
 
@@ -144,36 +151,36 @@
       <div class="boxxes" id="detailFinBrand"> <!-- Brand Details Fin-->
 
         <div id="detailBrandFin">
+          <h1>Pre Filter</h1>
           <div class="button btnLabel">
             <button class ="btn" id ="xlsxDetailBrandFinTablePre">Save XLSX</button>
             <button class ="btn" id="printDetailBrandFinTablePre">Print Table</button>
           </div>
-          <h1>Pre Filter</h1>
           <div id="detailBrandFinPre"></div>
+
+          <h1>Post Filter</h1>
           <div class="button btnLabel">
             <button class ="btn" id ="xlsxDetailBrandFinTablePost">Save XLSX</button>
             <button class ="btn" id="printDetailBrandFinTablePost">Print Table</button>
           </div>
-          <h1>Post Filter</h1>
           <div id="detailBrandFinPost"></div>
         </div>
         
       </div>
 
       <div class="boxxes" id="detailPckBrand"> <!-- Brand Details Pck-->
-
+        <h1>Pre Release</h1>
         <div class="button btnLabel">
           <button class ="btn" id ="xlsxDetailBrandPckTablePre">Save XLSX</button>
           <button class ="btn" id="printDetailBrandPckTablePre">Print Table</button>
         </div>
-        <h1>Pre Release</h1>
         <div id="detailBrandPckPre"></div>
 
+        <h1>Post Release</h1>
         <div class="button btnLabel">
           <button class ="btn" id ="xlsxDetailBrandPckTablePost">Save XLSX</button>
           <button class ="btn" id="printDetailBrandPckTablePost">Print Table</button>
         </div>
-        <h1>Post Release</h1>
         <div id="detailBrandPckPost"></div>
 
       </div>
@@ -181,7 +188,7 @@
     </div>
 
 
-    <div id="deleteBoxes" class="boxxes"> <!-- Brand Recipe -->
+    <div id="recipeBoxes" class="boxxes"> <!-- Brand Recipe -->
       <h1 class="headers">Brand Recipe</h1>
       <form class="form formList" id="frmDelete" action="">
         <div class="input">
@@ -198,11 +205,12 @@
       <div class="boxxes" id="recipeChpBrand"> <!-- Brand Recipe Chip-->
         
         <div id="recipeBrandBrw">
+          <h1 class="headers">Chip Recipe</h1>
           <div class="button btnLabel">
             <button class ="btn" id ="xlsxRecipeBrandChp">Save XLSX</button>
             <button class ="btn" id="printRecipeBrandChp">Print Table</button>
           </div>
-          <h1 class="headers">Chip Recipe</h1>
+          
           <div id="recipeBrandChp"></div>
         </div>
 
@@ -211,29 +219,45 @@
       <div class="boxxes" id="recipeSchBrand"> <!-- Brand Recipe Schoene-->
 
         <div id="recipeBrandFin">
+          <h1 class="headers">Schoene Recipe</h1>
           <div class="button btnLabel">
             <button class ="btn" id ="xlsxRecipeBrandSch">Save XLSX</button>
             <button class ="btn" id="printRecipeBrandSch">Print Table</button>
           </div>
-          <h1 class="headers">Schoene Recipe</h1>
+          
           <div id="recipeBrandSch"></div>
         </div>
         
       </div>
 
       <div class="boxxes" id="recipeFinBrand"> <!-- Brand Recipe Filter-->
-
+        <h1 class="headers">Filtered Recipe</h1>
         <div class="button btnLabel">
           <button class ="btn" id ="xlsxRecipeBrandFin">Save XLSX</button>
           <button class ="btn" id="printRecipeBrandFin">Print Table</button>
         </div>
-        <h1 class="headers">Filtered Recipe</h1>
+        <!-- <h1 class="headers">Filtered Recipe</h1> -->
         <div id="recipeBrandFinTbl"></div>
 
       </div>
 
     </div>
     
+    <div id="injectionBoxes" class="boxxes">
+      <h1 class="headers">Brand Injection Rates</h1>
+      <form class="formOne formList" id="frmInjection">
+        <div class="input">
+          <select name="" id="injectionBrand"></select>
+        </div> 
+      </form>
+
+      <!-- <div class="spacer"></div> -->
+      <!-- <div class="button btnLabel">
+        <button class ="btn" id ="xlsxFinInjection">Save XLSX</button>
+        <button class ="btn" id="printFinInjection">Print Table</button>
+      </div> -->
+      <div id="injectionTable"></div>
+    </div>
     
   </div><!-- end container2 -->
 

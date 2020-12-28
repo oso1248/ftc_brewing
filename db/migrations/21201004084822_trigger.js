@@ -16,6 +16,7 @@ exports.up = async function(knex) {
     FOR EACH ROW
     EXECUTE PROCEDURE update_timestamp();
   `);
+
 //commodities
   await knex.raw(`
     CREATE TRIGGER update_timestamp
@@ -66,6 +67,7 @@ exports.up = async function(knex) {
     FOR EACH ROW
     EXECUTE PROCEDURE update_timestamp();
   `);
+
 //fin_data
   await knex.raw(`
     CREATE TRIGGER update_timestamp
@@ -238,6 +240,25 @@ exports.up = async function(knex) {
     CREATE TRIGGER trigger_delete_old_hibernate
     AFTER INSERT ON hibernated
     EXECUTE PROCEDURE delete_old_rows_hibernated();
+  `);
+  await knex.raw(`
+    CREATE TRIGGER trigger_delete_old_rows_fin_injection_log
+    AFTER INSERT ON fin_injection_log
+    EXECUTE PROCEDURE delete_old_rows_fin_injection_log();
+  `);
+  await knex.raw(`
+    CREATE TRIGGER update_timestamp
+    BEFORE UPDATE
+    ON fin_injection_log
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_timestamp();
+  `);
+  await knex.raw(`
+    CREATE TRIGGER update_timestamp
+    BEFORE UPDATE
+    ON fin_injection_bridge
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_timestamp();
   `);
 
 };

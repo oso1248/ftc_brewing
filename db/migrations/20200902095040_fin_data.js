@@ -22,6 +22,8 @@ exports.up = function(knex) {
       tbl.string('brand', 25)
         .notNullable()
         .unique()
+      tbl.string('injection', 5)
+        .notNullable()
       tbl.integer('brw_id')
         .unsigned()
         .notNullable()

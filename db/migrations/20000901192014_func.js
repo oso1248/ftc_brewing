@@ -23,6 +23,18 @@ exports.up = async function(knex) {
     END;
     $$;
   `)
+  // inv_mat_monthly delete old records
+  await knex.raw(`
+    CREATE OR REPLACE FUNCTION delete_old_rows_inv_mat_monthly() RETURNS TRIGGER
+    LANGUAGE plpgsql
+    AS
+    $$
+    BEGIN
+      DELETE FROM inv_mat_monthly WHERE created_at < NOW() - INTERVAL '1095 days';
+      RETURN NULL;
+    END;
+    $$;
+  `)
   // inv_hop_daily delete old records
   await knex.raw(`
     CREATE OR REPLACE FUNCTION delete_old_rows_inv_hop_daily() RETURNS TRIGGER
@@ -101,6 +113,9 @@ exports.down = async function(knex) {
   `)
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_old_rows_inv_mat_weekly() CASCADE;
+  `)
+  await knex.raw(`
+    DROP FUNCTION IF EXISTS delete_old_rows_inv_mat_monthly() CASCADE;
   `)
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_old_rows_inv_hop_daily() CASCADE;

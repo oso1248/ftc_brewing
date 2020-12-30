@@ -1,8 +1,10 @@
-document.getElementById('updateBoxes').style.display="none"
-document.getElementById('tableDiv').style.display="none"
-// document.getElementById('attView').style.display="none"
-const api = '/api/brewery'
 let DateTime = luxon.DateTime
+
+document.getElementById('tableWeeklyDiv').style.display="none"
+document.getElementById('tableMonthlyDiv').style.display="none"
+document.getElementById('invWeekly').style.display="none"
+document.getElementById('invMonthly').style.display="none"
+
 
 function createNode(element) {
   return document.createElement(element)
@@ -23,30 +25,17 @@ String.prototype.toNonAlpha = function (spaces) {
 }
 
 
-// Views
-function update() {
-  document.getElementById('attView').style.display="none"
-  document.getElementById('updateBoxes').style.display="grid"
-  
-  const suppliers = document.getElementsByName('updateCompany')[0]
-  suppliers.innerHTML = `<option value="" disabled selected hidden>Select Supplier</option>`
-  axios.get('/api/supplier')
-  .then(data => {
-    let supplier = data.data
-    return supplier.map(listItem => {
-
-      let supplier = createNode('option')
-      supplier.innerHTML = listItem.company
-      
-      append(suppliers, supplier)
-    })
-  })
-  .catch(err => console.log(err.detail))
+// View weekly
+document.getElementById('viewWeekly').onclick = viewWeekly
+function viewWeekly() {
+  document.getElementById('invWeekly').style.display="block"
+  document.getElementById('invMonthly').style.display="none"
+  weeklyDates()
 }
-function invDates() {
-  let invDates = document.getElementById('invMatWeekly')
+function weeklyDates() {
+  let invDates = document.getElementById('selWeekly')
   invDates.innerHTML = `<option value="" disabled selected hidden>Select Date</option>`
-  axios.post('/api/inventory/material/date')
+  axios.post('/api/inventory/material/weekly/date')
     .then(data => {
       let invDate = data.data.rows
       return invDate.map(listItem => {
@@ -57,25 +46,21 @@ function invDates() {
     })
     .catch(err => console.log(err.detail))
 }
-function view() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('attView').style.display="block"
-  invDates()
-}
-let invTable
-function invMatTable() {
-  let dt = document.getElementById('invMatWeekly').value
+document.getElementById('selWeekly').addEventListener('change', weeklyMatTable)
+let weeklyTable
+function weeklyMatTable() {
+  let dt = document.getElementById('selWeekly').value
   let data = {}
-  data.startDate = DateTime.fromISO(dt).endOf('day').minus({days: 1}).toFormat('yyyy-MM-dd TTT')
-  data.endDate = DateTime.fromISO(dt).endOf('day').toFormat('yyyy-MM-dd TTT')
+  data.startDate = DateTime.fromISO(dt).startOf('day').minus({days: 0}).toFormat('yyyy-MM-dd HH:mm')
+  data.endDate = DateTime.fromISO(dt).endOf('day').toFormat('yyyy-MM-dd HH:mm')
   
-  axios.post('/api/inventory/material/view', data)
+  axios.post('/api/inventory/material/weekly/view', data)
     .then(res => {
     for(let i = 0; i < res.data.length; i++) {
       res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd')
     }
       let tableData = res.data
-      invTable = new Tabulator("#listView", {
+      weeklyTable = new Tabulator("#tableWeekly", {
         height:"309px",
         layout:"fitDataFill",
         data:tableData,
@@ -92,111 +77,87 @@ function invMatTable() {
       })
     })
     .catch(err => console.log(err.detail))
-    document.getElementById('tableDiv').style.display="block"
+    document.getElementById('tableWeeklyDiv').style.display="block"
+}
+document.getElementById('weeklyDownload-xlsx').addEventListener('click', weeklyExcel)
+function weeklyExcel(){
+  weeklyTable.download("xlsx", "weekly_inv.xlsx", {sheetName:"inv"})
+}
+document.getElementById('weeklyPrint-table').addEventListener('click', weeklyPrint)
+function weeklyPrint(){
+  weeklyTable.print(false, true);
 }
 
 
-// routes update
-function resetUpdate(ev){
-  ev.preventDefault();
-  document.getElementById('frmUpdate').reset();
+
+// view monthly
+document.getElementById('viewMonthly').onclick = viewMonthly
+function viewMonthly() {
+  document.getElementById('invWeekly').style.display="none"
+  document.getElementById('invMonthly').style.display="block"
+  monthlyDates()
 }
-async function sendUpdate(ev){
-  ev.preventDefault() 
-  ev.stopPropagation()
-  let form = document.getElementById('frmUpdate')
-  let data = {}
-  let i
-
-  for (i = 1; i < form.length - 2; i++) {
-  let id = form.elements[i].id
-  let name = form.elements[i].value
-  data[id] = name
-  }
-  let fails = await validateUpdate(data)
-
-  if(fails.length === 0) {
-    let name = document.getElementsByName('updateCompany')[0].value
-    axios.patch('/api/supplier/' + name, data)
-      .then(data => {
-        alert(data.data.company + ' updated')
+function monthlyDates() {
+  let invDates = document.getElementById('selMonthly')
+  invDates.innerHTML = `<option value="" disabled selected hidden>Select Date</option>`
+  axios.post('/api/inventory/material/monthly/date')
+    .then(data => {
+      let invDate = data.data.rows
+      return invDate.map(listItem => {
+        let invDate = createNode('option')
+        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc).toFormat('yyyy-MM-dd')
+        append(invDates, invDate)
       })
-      .catch(err => alert(err))
-    } else {
-      let msg = "Problems:\n"
-      for(i = 0; i < fails.length; i++) {
-        msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
-      }
-      alert(msg)
-    } 
+    })
+    .catch(err => console.log(err.detail))
 }
-function validateUpdate(data){
-  let failures = [];
+document.getElementById('selMonthly').addEventListener('change', monthlyMatTable)
+let monthlyTable
+function monthlyMatTable() {
+  let dt = document.getElementById('selMonthly').value
+  let data = {}
+  data.startDate = DateTime.fromISO(dt).startOf('day').minus({days: 0}).toFormat('yyyy-MM-dd HH:mm')
+  data.endDate = DateTime.fromISO(dt).endOf('day').toFormat('yyyy-MM-dd HH:mm')
   
-let company = document.getElementsByName('updateCompany')[0].value
-  
-if(company === ""){
-  failures.push({input:'company', msg:'Required'})
-  data.company = null
-} 
-if(data.contact === ""){
-  failures.push({input:'contact', msg:'Required'})
-  data.contact = null
-} else {
-  data.contact = data.contact.toProperCase()
+  axios.post('/api/inventory/material/monthly/view', data)
+    .then(res => {
+    for(let i = 0; i < res.data.length; i++) {
+      res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd')
+    }
+      let tableData = res.data
+      monthlyTable = new Tabulator("#tableMonthly", {
+        height:"309px",
+        layout:"fitDataFill",
+        data:tableData,
+        columns:[
+        {title:"Commodity", field:"commodity",hozAlign:"center", frozen:true},
+        {title:"SAP", field:"sap", hozAlign:"center"},
+        {title:"Per Unit", field:"total_per_unit",hozAlign:"center"},
+        {title:"Units", field:"total_count",hozAlign:"center"},
+        {title:"Total", field:"total_end",hozAlign:"center"},
+        {title:"Username", field:"username",hozAlign:"center"},
+        {title:"Date", field:"created_at",hozAlign:"center"},
+        {title:"Note", field:"note",hozAlign:"center"},
+        ],
+      })
+    })
+    .catch(err => console.log(err.detail))
+    document.getElementById('tableMonthlyDiv').style.display="block"
 }
-
-if(data.email === ""){
-  failures.push({input:'email', msg:'Required'})
-  data.email = null
-} else {
-  data.email = data.email.toLowerCase()
+document.getElementById('monthlyDownload-xlsx').addEventListener('click', monthlyExcel)
+function monthlyExcel(){
+  monthlyTable.download("xlsx", "monthly_inv.xlsx", {sheetName:"inv"})
 }
-
-if(data.phone === ""){
-  failures.push({input:'phone', msg:'Required'})
-  data.phone = null
-} else {
-  data.phone = data.phone.replace(/\D/g,'')
-  if (data.phone.length != 10) {
-    failures.push({input:'phone', msg:'10 Digits Only'})
-  } else {
-    data.phone = data.phone.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3")
-  }
-}
-
-if(data.address === ""){
-  failures.push({input:'address', msg:'Required'})
-  data.address = null
-} else {
-  data.address = data.address.toProperCase()
-}
-
-if(note === ""){
-  failures.push({input:'note', msg:'Required'})
-  data.address = null
-}
-  return failures
+document.getElementById('monthlyPrint-table').addEventListener('click', monthlyPrint)
+function monthlyPrint(){
+  monthlyTable.print(false, true);
 }
 
 
 
-document.getElementById('btnUpdateClear').addEventListener('click', resetUpdate)
-document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
-// document.getElementsByName('updateCompany')[0].addEventListener('change', selectSupplier)
-document.getElementById('invMatWeekly').addEventListener('change', invMatTable)
 
-document.getElementById('download-xlsx').addEventListener('click', tableExcel)
-function tableExcel(){
-  invTable.download("xlsx", "suppliers.xlsx", {sheetName:"Suppliers"})
-}
 
-document.getElementById('print-table').addEventListener('click', tablePrint)
-function tablePrint(){
-  invTable.print(false, true);
-}
 
-// document.getElementById('update').onclick = update
-// document.getElementById('view').onclick = view
 
-window.addEventListener('DOMContentLoaded', (ev) => { invDates() }) 
+
+// window.addEventListener('DOMContentLoaded', (ev) => { invDates() }) 

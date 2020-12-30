@@ -50,11 +50,11 @@ const mtl_container = [
 ]
 
 const mtl_supplier = [
-  {company: 'Anheuser Busch' ,contact: 'Rachel Hinkel' ,email: 'rachel.hinkel@anheuser-busch.com' ,phone: '970-490-4500' ,address: '' ,note: ''},
-  {company: 'Budweiser' ,contact: 'Madi Teeuws' ,email: 'madi.teeuws@anheuser-busch.com' ,phone: '970-490-4660' ,address: '' ,note: ''},
-  {company: 'Owens Illinois' ,contact: 'Emily Feld' ,email: 'emily.feld@oi.com' ,phone: '970-490-5899' ,address: '' ,note: ''},
-  {company: 'Metal Container' ,contact: 'Megan Khor' ,email: 'megan.kohr@metal-container.com' ,phone: '970-490-5738' ,address: '' ,note: ''},
-  {company: 'Alpha Laval' ,contact: 'Meika Woollard' ,email: 'meika.woollard@alpha-laval.com' ,phone: '970-490-5703' ,address: '' ,note: ''}
+  {company: 'Anheuser Busch' ,contact: 'Bud Brewer' ,email: 'bb@anheuser-busch.com' ,phone: '970-490-4500' ,address: '123 Bud' ,note: ''},
+  {company: 'Budweiser' ,contact: 'Mich Brewer' ,email: 'mb@anheuser-busch.com' ,phone: '970-490-4660' ,address: '123 Mich' ,note: ''},
+  {company: 'Owens Illinois' ,contact: 'Lime Brewer' ,email: 'lv@oi.com' ,phone: '970-490-5899' ,address: '123 Lime' ,note: ''},
+  {company: 'Metal Container' ,contact: 'Ultra Brewer' ,email: 'ub@metal-container.com' ,phone: '970-490-5738' ,address: '123 Ultra' ,note: ''},
+  {company: 'Alpha Laval' ,contact: 'Space Brewer' ,email: 'sb@alpha-laval.com' ,phone: '970-490-5703' ,address: '123 Space' ,note: ''}
 ]
 
 const mtl_commodidity = [

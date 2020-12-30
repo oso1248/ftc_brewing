@@ -1,5 +1,17 @@
 let DateTime = luxon.DateTime
 
+let api
+function setAPI() {
+  let current = DateTime.local().startOf('day').toFormat('yyyy-MM-dd HH:mm')
+  let month = DateTime.local().startOf('month').toFormat('yyyy-MM-dd HH:mm')
+  if (month === current) {
+    api = '/api/inventory/material/monthly/'
+  } else {
+    api = '/api/inventory/material/weekly/'
+  }
+  console.log(api)
+}
+
 function openQRCamera(node) {
   let reader = new FileReader();
   reader.onload = function() {
@@ -28,6 +40,7 @@ function append(parent, e1) {
   return parent.appendChild(e1)
 }
 
+
 String.prototype.toProperCase = function () {
   return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + 
     txt.substr(1).toLowerCase()})
@@ -43,6 +56,7 @@ String.prototype.testNanFormat = function () {
     return (/^\d+(\.\d{1,2})?$/).test(this)
 }
 
+
 async function processArray(array) {
   for (const item of array) {
     await deleteRow(item.commodity)
@@ -51,14 +65,14 @@ async function processArray(array) {
 }
 async function deleteOnLoad() {
   let data = {}
-  data.startDate = DateTime.local().endOf('day').minus({days: 1}).toFormat('yyyy-MM-dd TTT')
-  data.endDate = DateTime.local().endOf('day').toFormat('yyyy-MM-dd TTT')
-  axios.post('/api/inventory/material/view', data)
+  data.startDate = DateTime.local().startOf('day').minus({minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
+  data.endDate = DateTime.local().endOf('day').minus({minutes: 20}).toFormat('yyyy-MM-dd HH:mm')
+  axios.post(api +'view', data)
     .then(res => {
       res.data.forEach(async (item) => {
         setTimeout(function(){
           deleteRow(item.commodity)
-        }, 500);
+        }, 1);
     }) 
   })
     .catch(err => console.log(err))
@@ -105,7 +119,8 @@ function inventoryList() {
   data.startDate = DateTime.local().endOf('day').minus({days: 1}).toFormat('yyyy-MM-dd TTT')
   data.endDate = DateTime.local().endOf('day').toFormat('yyyy-MM-dd TTT')
   
-  axios.post('/api/inventory/material/view', data)
+  // axios.post('/api/inventory/material/weekly/view', data)
+  axios.post(api + 'view', data)
     .then(res => {
     for(let i = 0; i < res.data.length; i++) {
       res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd')
@@ -131,7 +146,7 @@ function inventoryList() {
     })
     .catch(err => console.log(err.detail))
 }
-
+document.getElementById('btnDeleteInv').addEventListener('click', deleteRowInv)
 async function deleteRowInv(ev) {
   ev.preventDefault() 
   ev.stopPropagation()
@@ -146,7 +161,7 @@ async function deleteRowInv(ev) {
    return
   }
 
-  await axios.delete('/api/inventory/weekly/'+ selectedData[0].id)
+  await axios.delete(api + selectedData[0].id)
     .then(data => {
       alert(data.data.msg)
     })
@@ -157,15 +172,14 @@ async function deleteRowInv(ev) {
   await deleteOnLoad()
 }
 
-
-document.getElementById('btnDeleteInv').addEventListener('click', deleteRowInv)
-
-
+document.getElementById('btnAddClear').addEventListener('click', resetAdd)
 function resetAdd(ev){
   ev.preventDefault() 
   ev.stopPropagation()
   document.getElementById('frmAdd').reset()
 }
+
+document.getElementById('com_id').addEventListener('change', selectCommodity)
 async function selectCommodity(){
   let commodity = document.getElementById('com_id').value
   axios.post('/api/commodity/name', {name: `${commodity}`})
@@ -183,11 +197,14 @@ async function selectCommodity(){
       }
     })
 }
+
 async function deleteRow(commodity) {
     commodityTable.getRows()
       .filter(row => row.getData().commodity == commodity)
       .forEach(row => row.delete())
 }
+
+document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
 async function sendAdd(ev){
   ev.preventDefault() 
   ev.stopPropagation()
@@ -211,7 +228,7 @@ async function sendAdd(ev){
     delete data['per_pallet']
     delete data['pallets']
 
-    axios.post('/api/inventory/material/weekly', data)
+    axios.post(api, data)
       .then(data => {
         let msg = `${data.data[0].commodity}\n ${data.data[0].total_end} ${data.data[0].uom}\n Added to Inventory`
         alert(msg)
@@ -262,16 +279,14 @@ async function validateAdd (data){
   return failures
 }
 
+document.getElementById('btnBack').addEventListener('click', goBack)
 function goBack() {
   window.history.back();
 }
 
-document.getElementById('btnAddClear').addEventListener('click', resetAdd)
-document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
-document.getElementById('com_id').addEventListener('change', selectCommodity)
-document.getElementById('btnBack').addEventListener('click', goBack)
 
 window.addEventListener('DOMContentLoaded',async (ev) => {
+  await setAPI()
   await loadCommodities()
   await commodityList()
   await inventoryList()

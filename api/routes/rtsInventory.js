@@ -4,6 +4,7 @@ const router = express.Router()
 
 // -> /api/inventory
 
+
 //mat inv weekly
 router.post('/material/weekly', (req, res) => {
   req.body.username = req.session.user.username
@@ -13,7 +14,7 @@ router.post('/material/weekly', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.get('/:id', (req, res) => {
+router.get('/material/weekly/:id', (req, res) => {
   db.getByID(req.params.id)
     .then(data => {
       if(data) {
@@ -24,7 +25,7 @@ router.get('/:id', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.post('/material/view', (req, res) => {
+router.post('/material/weekly/view', (req, res) => {
   db.getByDate(req.body)
     .then(data => {
       if(data) {
@@ -35,7 +36,7 @@ router.post('/material/view', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.post('/material/date', (req, res) => {
+router.post('/material/weekly/date', (req, res) => {
   db.getInvDateMaterial()
     .then(data => {
       if(data) {
@@ -46,7 +47,7 @@ router.post('/material/date', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.patch('/:name', (req, res) => {
+router.patch('/material/weekly/:name', (req, res) => {
   db.change(req.params.name, req.body)
     .then(data => {
       if(data) {
@@ -57,7 +58,7 @@ router.patch('/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-router.delete('/weekly/:id', (req, res) => {
+router.delete('/material/weekly/:id', (req, res) => {
   db.destroy(req.params.id)
     .then(data => {
       if(data.length === 0) {
@@ -68,6 +69,61 @@ router.delete('/weekly/:id', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
+
+//mat inv monthly
+router.post('/material/monthly', (req, res) => {
+  req.body.username = req.session.user.username
+  db.addMonthly(req.body)
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.get('.material/monthly/:id', (req, res) => {
+  db.getByIDMonthly(req.params.id)
+    .then(data => {
+      if(data) {
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/material/monthly/view', (req, res) => {
+  db.getByDateMonthly(req.body)
+    .then(data => {
+      if(data) {
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.delete('/material/monthly/:id', (req, res) => {
+  db.destroyMonthly(req.params.id)
+    .then(data => {
+      if(data.length === 0) {
+        res.status(200).json({msg: 'deleted'})
+      } else {
+        res.status(200).json({msg: 'error: not deleted'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/material/monthly/date', (req, res) => {
+  db.getInvDateMaterialMonthly()
+    .then(data => {
+      if(data) {
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+
 
 //hop inv weekly
 router.post('/hop/weekly', (req, res) => {

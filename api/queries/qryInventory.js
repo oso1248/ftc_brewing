@@ -66,6 +66,59 @@ async function destroy(id) {
 }
 
 
+//Material monthly
+async function addMonthly(data) {
+  await com(data)
+  const [{id}] = await db('inv_mat_monthly').insert(data, ['id'])
+  return getByID(id)
+}
+function getByIDMonthly(id) {
+  return db('inv_mat_monthly as inv')
+    .join('mtl_commodity as com', 'inv.com_id', '=', 'com.id' )
+    .join('mtl_uom as uom', 'com.uom_id', '=', 'uom.id')
+    .select(
+      'com.commodity',
+      'inv.total_end',
+      'uom.uom'
+    )
+    .where({'inv.id': id})
+}
+async function destroyMonthly(id) {
+  let remove = await db('inv_mat_monthly').where('id', id).del()
+  return getByID(id)
+}
+function getByDateMonthly(data) {
+  
+  return db('inv_mat_monthly as inv')
+    .join('mtl_commodity as com', 'inv.com_id', '=', 'com.id' )
+    .join('mtl_uom as uom', 'com.uom_id', '=', 'uom.id')
+    .select(
+      'inv.id',
+      'com.commodity',
+      'com.sap',
+      'inv.total_per_unit',
+      'inv.total_count',
+      'inv.total_end',
+      'uom.uom',
+      'inv.username',
+      'inv.created_at',
+      'inv.note'
+    )
+    .where('inv.created_at', '>', data.startDate)
+    .andWhere('inv.created_at', '<', data.endDate)
+}
+function getInvDateMaterialMonthly() {
+  return db.raw(`
+  SELECT DISTINCT DATE_TRUNC('day',created_at) 
+  FROM inv_mat_monthly
+  WHERE EXTRACT(DAY FROM created_at) = 1
+    AND created_at > NOW() - INTERVAL '1090 days'
+  ORDER BY DATE_TRUNC('day',created_at) DESC
+  `)
+}
+
+
+
 //hop weekly
 async function addInvHopWeekly(data) {
   await com(data)
@@ -108,8 +161,8 @@ function getHopWeeklyInvHard(data) {
     .join('mtl_commodity as com', function(){
       this.on(function(){
         this.on('inv.com_id', '=', 'com.id')
-        this.andOnVal('inv.created_at', '>', data.start)
-        this.andOnVal('inv.created_at', '<', data.end)
+        this.andOnVal('inv.created_at', '>', data.startDate)
+        this.andOnVal('inv.created_at', '<', data.endDate)
       })
     })
     .select(
@@ -138,6 +191,12 @@ async function destroyHopInv(id) {
   let remove = await db('inv_hop_weekly').where('id', id).del()
   return getByIDHopWeekly(id)
 }
+
+
+
+
+
+
 
 //hop daily
 async function getInvHopDailyDate() {
@@ -283,5 +342,10 @@ module.exports = {
   getHopWeeklyInvHard,
   getSetsCombined,
   destroy,
-  destroyHopInv
+  destroyHopInv,
+  addMonthly,
+  getByIDMonthly,
+  destroyMonthly,
+  getByDateMonthly,
+  getInvDateMaterialMonthly
 }

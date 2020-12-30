@@ -217,6 +217,11 @@ exports.up = async function(knex) {
     EXECUTE PROCEDURE delete_old_rows_inv_mat_weekly();
   `);
   await knex.raw(`
+    CREATE TRIGGER trigger_delete_old_rows_inv_mat_monthly
+    AFTER INSERT ON inv_mat_monthly
+    EXECUTE PROCEDURE delete_old_rows_inv_mat_monthly();
+  `);
+  await knex.raw(`
     CREATE TRIGGER trigger_delete_old_rows_inv_hop_daily
     AFTER INSERT ON inv_hop_daily
     EXECUTE PROCEDURE delete_old_rows_inv_hop_daily();

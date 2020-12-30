@@ -51,8 +51,8 @@ async function processArray(array) {
 }
 async function deleteOnLoad() {
   let data = {}
-  data.startDate = DateTime.local().endOf('day').minus({days: 1}).toFormat('yyyy-MM-dd TTT')
-  data.endDate = DateTime.local().endOf('day').toFormat('yyyy-MM-dd TTT')
+  data.startDate = DateTime.local().startOf('day').minus({minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
+  data.endDate = DateTime.local().endOf('day').minus({minutes: 29}).toFormat('yyyy-MM-dd HH:mm')
   axios.post('/api/inventory/hop/weekly/view', data)
     .then(res => {
       res.data.forEach(async (item) => {
@@ -102,9 +102,8 @@ function commodityList() {
 let inventoryTable
 function inventoryList() {
   let data = {}
-  data.start = DateTime.local().endOf('day').minus({days: 1}).toFormat('yyyy-MM-dd TTT')
-  data.end = DateTime.local().endOf('day').toFormat('yyyy-MM-dd TTT')
-  console.log(data)
+  data.startDate = DateTime.local().startOf('day').minus({minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
+  data.endDate = DateTime.local().endOf('day').minus({minutes: 29}).toFormat('yyyy-MM-dd HH:mm')
   axios.post('/api/inventory/hop/weekly/view', data)
     .then(res => {
     for(let i = 0; i < res.data.length; i++) {

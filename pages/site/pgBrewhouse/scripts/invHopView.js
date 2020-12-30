@@ -167,8 +167,8 @@ function loadTableWeeklyHard(date) {
   let start = DateTime.fromISO(date).minus({hours: 24, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
   let end = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
   let timeSpan = {}
-  timeSpan.start = start
-  timeSpan.end = end
+  timeSpan.startDate = start
+  timeSpan.endDate = end
   // console.log(date)
   // console.log(timeSpan)
   axios.post('/api/inventory/hop/weekly/view', timeSpan)

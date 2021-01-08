@@ -15,9 +15,10 @@ async function location(data){
 }
 
 async function add(data) {
-  await type(data)
-  await location(data)
   
+  await type(data)
+  
+  await location(data)
   const [{vessel}] = await db('vessel').insert(data, ['vessel'])
   return getByName(vessel)
 }
@@ -32,6 +33,7 @@ function getAll(active) {
         'ves.active',
         'ves.note',
         'loc.location',
+        'ves.volume',
         'typ.type',
       )
       .where('ves.active', '=', 'Yes')
@@ -46,6 +48,7 @@ function getAll(active) {
         'ves.active',
         'ves.note',
         'loc.location',
+        'ves.volume',
         'typ.type',
       )
       .orderBy([{column:'ves.active',order:'desc'},{ column:'ves.vessel'}])
@@ -61,6 +64,7 @@ function getByName(name) {
       'ves.active',
       'ves.note',
       'loc.location',
+      'ves.volume',
       'typ.type',
     )
   .where({'ves.vessel': name})
@@ -81,28 +85,9 @@ async function destroy(name) {
   return getByName(name)
 }
 
-// get tanks
-function getAllHibernateTanks() {
-  return db('vessel AS ves')
-    .join('vessel_type as typ', 'ves.type_id', '=', 'typ.id')
-    .select(
-      'ves.vessel',
-    )
-    .where('ves.active', '=', 'Yes')
-    .andWhere('typ.type', '=', 'Chip Beer Tank')
-    .orWhere('typ.type', '=', 'Schoene Beer Tank')
-    .orderBy('ves.vessel')
-}
-function getAllHibernateChipTanks() {
-  return db('vessel AS ves')
-    .join('vessel_type as typ', 'ves.type_id', '=', 'typ.id')
-    .select(
-      'ves.vessel',
-    )
-    .where('ves.active', '=', 'Yes')
-    .andWhere('typ.type', '=', 'Chip Beer Tank')
-    .orderBy('ves.vessel')
-}
+
+
+//vessel types
 function getAllVesselTypes() {
   return db('vessel_type AS ves')
     .select(
@@ -111,34 +96,45 @@ function getAllVesselTypes() {
     )
     .orderBy('ves.type')  
 }
-function getSchoeneTanks(active) {
-  if(active) {
+
+// get vessel by type
+function getByType(req) {
+  if(req.active) {
     return db('vessel AS ves')
-      .join('vessel_type as typ', 'ves.type_id', '=', 'typ.id')
+      .join('mtl_location as loc', 'ves.loc_id', '=', 'loc.id')
+      .join('vessel_type as type', 'ves.type_id', '=', 'type.id')
       .select(
         'ves.id',
         'ves.vessel',
         'ves.active',
         'ves.note',
-        'typ.type',
+        'loc.location',
+        'ves.volume',
+        'type.type',
       )
       .where('ves.active', '=', 'Yes')
-      .andWhere('typ.type', '=', 'Schoene Beer Tank')
+      .andWhere('type.type', '=', req.type)
       .orderBy('ves.vessel')  
   } else {
     return db('vessel AS ves')
-      .join('vessel_type as typ', 'ves.type_id', '=', 'typ.id')
+      .join('mtl_location as loc', 'ves.loc_id', '=', 'loc.id')
+      .join('vessel_type as type', 'ves.type_id', '=', 'type.id')
       .select(
         'ves.id',
         'ves.vessel',
         'ves.active',
         'ves.note',
-        'typ.type',
+        'loc.location',
+        'ves.volume',
+        'type.type',
       )
-      .where('typ.type', '=', 'Schoene Beer Tank')
+      .where('type.type', '=', req.type)
       .orderBy([{column:'ves.active',order:'desc'},{ column:'ves.vessel'}])
   }
 }
+
+
+
 
 
 module.exports = {
@@ -148,7 +144,5 @@ module.exports = {
   change,
   destroy,
   getAllVesselTypes, 
-  getAllHibernateTanks, 
-  getAllHibernateChipTanks,
-  getSchoeneTanks
+  getByType
 }

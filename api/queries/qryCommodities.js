@@ -244,7 +244,6 @@ async function destroy(name) {
 
 
 async function addFinBridge(data) {
-  console.log(data)
   const [{com_id}] = await db('fin_injection_bridge').insert(data, ['com_id'])
   return getById(com_id)
 }

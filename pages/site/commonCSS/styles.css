@@ -1,14 +1,40 @@
-:root {
+/* :root {
   --primary: #ddd;
   --dark: #333;
   --light: #fff;
   --shadow: 0 1px 5px rgba(104, 104, 104, 0.8)
+} */
+:root {
+  --primary: #E0C190;
+  --dark: #634E2C;
+  --light: #F5E5CB;
+  --shadow: 0 1px 5px rgba(104, 104, 104, 0.8)
 }
+
+
+
+/* .tabulator-tableHolder {
+  color:var(--dark);
+  background-color: var(--light);
+}
+
+.tabulator-row-odd{
+  color:var(--dark);
+  background-color: var(--light);
+}
+
+.tabulator-row-even{
+  color:var(--dark);
+  background-color: #E8DAC3;
+} */
+
+
 
 * {
   margin: 0;
   padding: 0;
 }
+
 
 html {
   box-sizing: border-box;
@@ -16,8 +42,13 @@ html {
   font-family: helvetica;
 }
 
+.container2 {
+  color: black;
+}
+
 body {
-  background: #ccc;
+  /* background: #ccc; */
+  background: #E8DAC3;
   padding: 25px;
   line-height: 1.4;
 }
@@ -31,11 +62,6 @@ body {
   max-width: 75px;
 }
 
-/* header {
-  display: grid;
-  grid-template-columns: 10% 80% 10%;
-  margin: 0px;
-} */
 
 header h1 {
   font-family: helvetica;
@@ -91,10 +117,6 @@ a {
 
 .boxes div a{
   height: 75px;
-}
-
-.box {
- 
 }
 
 .boxes div {

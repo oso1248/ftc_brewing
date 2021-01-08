@@ -168,6 +168,17 @@ router.post('/fin/ingredient/get', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
+router.post('/fin/ingredient/brand/get', (req, res) => {
+  db.getBrandFinIngredient(req.body.brand)
+    .then(data => {
+      if(data) {
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
 
 
 //pck

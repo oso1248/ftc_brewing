@@ -17,7 +17,6 @@ function getByName(name) {
 }
 
 async function change(name, changes) {
-  console.log(changes)
   let response = await db('mtl_location').where({location: name}).update(changes)
   return getByName(name)
 

@@ -33,7 +33,6 @@ router.post('/hibernated/tank/get/:id', (req, res) => {
     .catch(err => res.status(500).json({msg: err.detail}))
 })
 router.patch('/hibernated/tank/:id', (req, res) => {
-  console.log(req.params.id, req.body)
   db.update(req.params.id, req.body)
     .then(data => {
       if(data) {

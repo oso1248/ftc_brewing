@@ -53,7 +53,7 @@ self.addEventListener('fetch', function(event) {
         if ((response.status === 200 || response.status === 0) && (event.request.method !== 'POST' && event.request.method !== 'PATCH' && event.request.method !== 'DELETE')) { 
           return caches.open(CACHE_STATIC)
             .then(function(cache) {
-              console.log('Put cache', event.request.method, event.request.url)
+              // console.log('Put cache', event.request.method, event.request.url)
               cache.put(event.request.url, response.clone())
               return response
           }) 

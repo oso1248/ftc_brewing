@@ -40,6 +40,24 @@ exports.up = function(knex) {
     tbl.string('note', 1024)
     tbl.timestamps(true, true)
   })
+  .createTable('mat_archive', tbl => {
+    tbl.increments()
+    tbl.decimal('count_final', 8, 2)
+      .notNullable()
+    tbl.decimal('total_end', 8, 2)
+      .notNullable()
+    tbl.string('username', 50)
+      .notNullable()
+    tbl.integer('com_id')
+      .unsigned()
+      .notNullable()
+      .references('id')
+      .inTable('mtl_commodity')
+      .onDelete('CASCADE')
+      .onUpdate('CASCADE')
+    tbl.string('note', 1024)
+    tbl.timestamps(true, true)
+  })
   .createTable('inv_hop_daily', tbl => {
     tbl.increments()
     tbl.integer('brw_id')
@@ -86,5 +104,5 @@ exports.up = function(knex) {
 }
 
 exports.down = function(knex) {
-  return knex.schema.dropTableIfExists('inv_mat_weekly').dropTableIfExists('inv_mat_monthly').dropTableIfExists('inv_hop_daily').dropTableIfExists('inv_hop_weekly').dropTableIfExists('inv_last_brews')
+  return knex.schema.dropTableIfExists('inv_mat_weekly').dropTableIfExists('inv_mat_monthly').dropTableIfExists('mat_archive').dropTableIfExists('inv_hop_daily').dropTableIfExists('inv_hop_weekly').dropTableIfExists('inv_last_brews')
 }

@@ -3,7 +3,6 @@ let DateTime = luxon.DateTime
 document.getElementById('addBoxes').style.display="none"
 document.getElementById('updateBoxes').style.display="none"
 document.getElementById('attView').style.display="none"
-const api = '/api/brewery'
 
 
 String.prototype.toProperCase = function () {
@@ -61,26 +60,49 @@ function createListHibernate(api, parent, title) {
   })
 }
 
+function createListType(api, parent, title, type) {
+  axios.post(api, {active:true, type: `${type}`})
+  .then(res => {
+    let list = res.data
+    list.forEach((elem) => {
+    let listItem = elem[title]
+    let option = createNode('option')
+    option.innerHTML = listItem
+    option.id = elem.id
+    append(parent, option)
+    });
+  })
+  .catch(err => {
+    console.error(err)
+  })
+}
+
 
 
 // routes add
 document.getElementById('add').onclick = add
-function add() {
+async function add() {
   document.getElementById('updateBoxes').style.display="none"
   document.getElementById('attView').style.display="none"
   document.getElementById('addBoxes').style.display="block"
   
   let dropDown = document.getElementById('org_vessel')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select From Tank</option>`
-  let api = '/api/vessel/hibernate/tanks/get'
+  let api = '/api/vessel/type/get'
   let title = 'vessel'
-  createList(api, dropDown, title)
+  let type = 'tk_chp'
+  await createListType(api, dropDown, title, type)
+  type = 'tk_sch'
+  createListType(api, dropDown, title, type)
+
+
 
   dropDown = document.getElementById('int_vessel')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select To Tank</option>`
-  api = '/api/vessel/hibernate/chiptanks/get'
+  api = '/api/vessel/type/get'
   title = 'vessel'
-  createList(api, dropDown, title)
+  type = 'tk_chp'
+  createListType(api, dropDown, title, type)
 
   dropDown = document.getElementById('brw_id')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
@@ -179,9 +201,10 @@ function update() {
   
   dropDown = document.getElementsByName('end_vessel')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select To Tank</option>`
-  api = '/api/vessel/schoenetanks/get'
+  api = '/api/vessel/type/get'
   title = 'vessel'
-  createList(api, dropDown, title)
+  let type = 'tk_sch'
+  createListType(api, dropDown, title, type)
 
 }
 document.getElementById('btnUpdateClear').addEventListener('click', resetUpdate)
@@ -283,9 +306,9 @@ function view() {
         data:tableData,
         columns:[
           {title:"Brand", field:"brand",hozAlign:"center", frozen:true},
-          {title:"Orig Tk", field:"org_vessel",hozAlign:"center", frozen:true},
+          {title:"Org Tk", field:"org_vessel",hozAlign:"center", frozen:true},
           {title:"Volume", field:"org_vol",hozAlign:"center"},
-          {title:"Hiber Tk", field:"int_vessel",hozAlign:"center"},
+          {title:"Chp Tk", field:"int_vessel",hozAlign:"center"},
           {title:"Volume", field:"int_vol",hozAlign:"center"},
           {title:"Sch Tk", field:"end_vessel",hozAlign:"center"},
           {title:"Volume", field:"end_vol",hozAlign:"center"},

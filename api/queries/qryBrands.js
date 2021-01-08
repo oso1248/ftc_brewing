@@ -187,6 +187,19 @@ function getAllFinIngredient(active) {
       // .orderBy([{ column: 'fin.active', order: 'desc'}, { column: 'fin.brand' }])
   }
 }
+function getBrandFinIngredient(brand) {
+  return db('brnd_fin as fin')
+    .join('fin_injection_bridge AS bridge', 'fin.id', '=', 'bridge.fin_id')
+    .join('mtl_commodity AS com', 'com.id', '=', 'bridge.com_id')
+    .select(
+      'bridge.fin_id',
+      'bridge.com_id',
+      'fin.brand',
+      'com.commodity',
+      'bridge.rate',
+    )
+    .where('fin.brand', '=', brand)
+}
 function getByNameFin(name) {
   return db('brnd_fin AS fin')
     .join('brnd_brw AS brw','fin.brw_id','=','brw.id')
@@ -224,7 +237,6 @@ async function finId(data){
 }
 async function addPck(data) {
   await finId(data)
-  console.log(data)
   const [{brand}]= await db('brnd_pck').insert(data, ['brand'])
   return getByNamePck(brand)
 }
@@ -614,7 +626,6 @@ function patchRecipeFin(changes) {
   return db.transaction(trx => {
     let queries = []
     changes.forEach(data => {
-      // console.log(data.id_brnd, data.db, data.method)
       const query = db('fin_params')
         .where('fin_id', data.id_brnd)
         .update(data.db, data.method)
@@ -690,5 +701,6 @@ module.exports = {
   patchRecipeChp,
   patchRecipeSch,
   patchRecipeFin,
-  patchFinInjection
+  patchFinInjection,
+  getBrandFinIngredient
 }

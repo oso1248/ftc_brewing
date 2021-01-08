@@ -22,6 +22,7 @@ router.post('/get', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
+
 router.post('/name', (req, res) => {
   
   db.getByName(req.body.name)
@@ -58,43 +59,8 @@ router.delete('/:name', (req, res) => {
 })
 
 
-
-router.post('/hibernate/tanks/get', (req, res) => {
-  db.getAllHibernateTanks()
-    .then(data => {
-      if(data) {
-        res.status(200).json(data)
-      } else {
-        res.status(200).json({msg: 'null'})
-      }
-    })
-    .catch(err => res.status(500).json({msg: err.detail}))
-})
-router.post('/hibernate/chiptanks/get', (req, res) => {
-  db.getAllHibernateChipTanks()
-    .then(data => {
-      if(data) {
-        res.status(200).json(data)
-      } else {
-        res.status(200).json({msg: 'null'})
-      }
-    })
-    .catch(err => res.status(500).json({msg: err.detail}))
-})
-router.post('/schoenetanks/get', (req, res) => {
-  db.getSchoeneTanks(req.body.active)
-    .then(data => {
-      if(data) {
-        res.status(200).json(data)
-      } else {
-        res.status(200).json({msg: 'null'})
-      }
-    })
-    .catch(err => res.status(500).json({msg: err.detail}))
-})
-
-//type
-router.post('/type/get', (req, res) => {
+// get vessel types
+router.post('/types/get', (req, res) => {
   db.getAllVesselTypes()
     .then(data => {
       if(data) {
@@ -106,6 +72,18 @@ router.post('/type/get', (req, res) => {
     .catch(err => res.status(500).json({msg: err.detail}))
 })
 
+// get vessel by type
+router.post('/type/get', (req, res) => {
+  db.getByType(req.body)
+    .then(data => {
+      if(data){
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
 
 
 

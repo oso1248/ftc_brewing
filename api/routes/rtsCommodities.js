@@ -88,7 +88,6 @@ router.delete('/ingredient/bridge/:id', (req, res) => {
     .catch(err => res.status(500).json({msg: err.detail}))
 })
 router.post('/ingredient/bridge/get/:id', (req, res) => {
-  console.log('route')
   db.getFinBridgeById(req.params.id)
     .then(data => {
       res.status(200).json(data)

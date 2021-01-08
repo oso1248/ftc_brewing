@@ -13,13 +13,18 @@ async function brewId(data){
   data.brw_id = id
   return data
 }
+async function finId(data){
+  let rtn = await db('brnd_fin').select('id').where('brand', data.fin_id)
+  let {id} = rtn[0]
+  data.fin_id = id
+  return data
+}
 
 async function add(data) {
   await com(data)
   const [{id}] = await db('inv_mat_weekly').insert(data, ['id'])
   return getByID(id)
 }
-
 function getInvDateMaterial() {
   return db.raw(`
   SELECT DISTINCT DATE_TRUNC('day',created_at) 
@@ -29,7 +34,6 @@ function getInvDateMaterial() {
   ORDER BY DATE_TRUNC('day',created_at) DESC
   `)
 }
-
 function getByID(id) {
   return db('inv_mat_weekly as inv')
     .join('mtl_commodity as com', 'inv.com_id', '=', 'com.id' )
@@ -112,14 +116,11 @@ function getInvDateMaterialMonthly() {
   SELECT DISTINCT DATE_TRUNC('day',created_at) 
   FROM inv_mat_monthly
   WHERE EXTRACT(DAY FROM created_at) = 1
-    AND created_at > NOW() - INTERVAL '1090 days'
+    AND created_at > NOW() - INTERVAL '365 days'
   ORDER BY DATE_TRUNC('day',created_at) DESC
   `)
 }
 
-
-
-//hop weekly
 async function addInvHopWeekly(data) {
   await com(data)
   const [{id}] = await db('inv_hop_weekly').insert(data, ['id'])
@@ -195,12 +196,8 @@ async function destroyHopInv(id) {
 
 
 
-
-
-
 //hop daily
 async function getInvHopDailyDate() {
-  console.log('query')
   let {rows} = await db.raw(`
   SELECT DISTINCT DATE_TRUNC('day',created_at) 
   FROM inv_hop_daily 
@@ -310,7 +307,6 @@ async function getHopDaily(data) {
   return mtx
 }
 async function getHopRollingInv(data) {
-  console.log(data)
   let sets = await getSetsCombined(data)
   let invWeek = await getHopWeeklyInvCombined(data)
   
@@ -326,6 +322,61 @@ async function getHopRollingInv(data) {
   return invWeek
 }
 
+
+// fin injection log
+async function addFinInjectionLog(data) {
+  for (let i = 0; i < data.length; i++) {
+    await com(data[i])
+    await finId(data[i])
+  }
+  return db.transaction(trx => {
+    let queries = []
+    data.forEach(elem => {
+      const query = db('fin_injection_log')
+        .insert(elem)
+        .transacting(trx)
+      queries.push(query)
+    })
+    Promise.all(queries) 
+      .then(trx.commit)
+      .catch(trx.rollback)
+  })
+}
+async function finInjectionLogDatesWeekly() {
+  let {rows} = await db.raw(`
+  SELECT DISTINCT DATE_TRUNC('week',created_at) 
+  FROM fin_injection_log
+  ORDER BY DATE_TRUNC('week',created_at) DESC
+  `)
+  return rows
+}
+async function finInjectionLogDatesMonthly() {
+  let {rows} = await db.raw(`
+  SELECT DISTINCT DATE_TRUNC('month',created_at) 
+  FROM fin_injection_log
+  ORDER BY DATE_TRUNC('month',created_at) DESC
+  `)
+  return rows
+}
+
+function finInjectionLogGet(data) {
+  return db('fin_injection_log as inv')
+    .join('brnd_fin as fin', 'inv.fin_id', '=', 'fin.id' )
+    .join('mtl_commodity as com', 'inv.com_id', '=', 'com.id' )
+    .select(
+      'inv.fbt',
+      'fin.brand',
+      'inv.vol_fbt',
+      'com.commodity',
+      'inv.vol_ing',
+      'inv.lot',
+      'inv.username',
+      'inv.created_at',
+    )
+    .where('inv.created_at', '>', data.start)
+    .andWhere('inv.created_at', '<', data.end)
+    .orderBy([{ column: 'inv.created_at' }, { column: 'inv.fbt', order: 'desc' }, { column: 'com.commodity', order: 'asc' }])
+}
 
 module.exports = {
   add, 
@@ -347,5 +398,10 @@ module.exports = {
   getByIDMonthly,
   destroyMonthly,
   getByDateMonthly,
-  getInvDateMaterialMonthly
+  getInvDateMaterialMonthly,
+  addFinInjectionLog,
+  finInjectionLogDatesWeekly,
+  finInjectionLogDatesMonthly,
+  finInjectionLogGet,
+  
 }

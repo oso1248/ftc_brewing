@@ -10,7 +10,6 @@ async function brand(data){
 async function add(data) {
   await brand(data)
   const [{id}] = await db('hibernated').insert(data, ['id'])
-  console.log(id)
   return getById(id)
 }
 function getById(id) {
@@ -35,6 +34,7 @@ function getHibernatedTankList() {
     .select(
       'hib.id',
       'hib.int_vessel',
+      'hib.note',
     )
   .where('hib.end_vol', '=', 0)
   .orderBy('hib.org_vessel', 'asc')

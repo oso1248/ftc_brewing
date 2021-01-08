@@ -33,8 +33,7 @@ router.patch('/brnd/patch', (req, res) => {
   
   let brnd = req.body[0]
   req.body.shift()
-  // console.log(brnd.Pounds)
-  // console.log(req.body)
+  
   db.patchBrndHopUpdate(brnd.Pounds, req.body)
     .then(data => {
       if(data) {

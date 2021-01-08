@@ -195,7 +195,6 @@ router.post('/hop/daily', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-
 router.post('/hop/daily/dates', (req, res) => {
   db.getInvHopDailyDate()
     .then(data => {
@@ -208,6 +207,39 @@ router.post('/hop/daily/dates', (req, res) => {
 // hop daily view
 router.post('/hop/daily/view', (req, res) => {
   db.getHopDaily(req.body)
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+
+// fin injection log
+router.post('/fin/injection/log/add', (req, res) => {
+  req.body.forEach(elem => {
+    elem.username = req.session.user.username 
+  })
+  db.addFinInjectionLog(req.body)
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/fin/injection/log/dates/weekly', (req, res) => {
+  db.finInjectionLogDatesWeekly()
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/fin/injection/log/dates/monthly', (req, res) => {
+  db.finInjectionLogDatesMonthly()
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/fin/injection/log/get', (req, res) => {
+  db.finInjectionLogGet(req.body)
     .then(data => {
       res.status(200).json(data)
     })

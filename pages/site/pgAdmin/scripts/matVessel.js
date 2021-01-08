@@ -61,7 +61,7 @@ function add() {
 
   let dropDown = document.getElementById('type_id')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Type</option>`
-  api = '/api/vessel/type/get'
+  api = '/api/vessel/types/get'
   title = 'type'
   createList(api, dropDown, title)
 
@@ -133,6 +133,10 @@ async function validateAdd(data){
     failures.push({input:'type', msg:'Required Field'})
     data.type_id = null
   }
+  if( data.volume === ""){
+    failures.push({input:'volume', msg:'Required Field'})
+    data.volume = null
+  }
   if( data.active === ""){
     failures.push({input:'active', msg:'Required Field'})
     data.active = null
@@ -156,7 +160,7 @@ function update() {
 
   dropDown = document.getElementsByName('updateType')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Type</option>`
-  api = '/api/vessel/type/get'
+  api = '/api/vessel/types/get'
   title = 'type'
   createList(api, dropDown, title)
 
@@ -209,6 +213,10 @@ async function validateUpdate(data){
     failures.push({input:'location', msg:'Required Field'})
     data.loc_id = null
   }
+  if( data.volume === ""){
+    failures.push({input:'volume', msg:'Required Field'})
+    data.valume = null
+  }
   if( data.type_id === ""){
     failures.push({input:'type', msg:'Required Field'})
     data.type_id = null
@@ -227,6 +235,7 @@ function selectBrand(){
     .then(data => {
       document.getElementsByName('updateType')[0].value = data.data.type
       document.getElementsByName('updateLocation')[0].value = data.data.location
+      document.getElementsByName('updateVolume')[0].value = data.data.volume
       document.getElementsByName('updateActive')[0].value = data.data.active
       document.getElementsByName('updateNote')[0].value = data.data.note
     })
@@ -256,6 +265,7 @@ function view() {
         {title:"Vessel", field:"vessel",hozAlign:"center", frozen:true},
         {title:"Active", field:"active",hozAlign:"center"},
         {title:"Type", field:"type",hozAlign:"center"},
+        {title:"Volume", field:"volume",hozAlign:"center"},
         {title:"Location", field:"location",hozAlign:"center"},
         {title:"Note", field:"note", hozAlign:"center"},
         ],

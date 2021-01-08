@@ -1,0 +1,118 @@
+.container2 {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.headers {
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+.form div, input, select, option {
+  text-align: center;
+  margin: 3px;
+  width: 95%;
+  font-size: 18px;
+  height: 30px;
+  text-align-last: center;
+  border-radius: 10px;
+}
+
+.frmIng {
+  width: 80%;
+  margin: auto;
+}
+.frmDate {
+  width: 40%;
+  margin: auto;
+}
+.frmBtn {
+  width: 80%;
+  margin: auto;
+}
+
+.button button {
+  background-color: cornflowerblue;
+  border: 1px solid green;
+  color: white;
+  padding: 10px 24px; 
+  cursor: pointer; 
+  width: 20%;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.button button:hover {
+  background-color: #3e8e41;
+}
+
+.fbt {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.pump {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.fbt {
+  background-color: #3e8e41;
+}
+.pump {
+  background-color: cornflowerblue;
+}
+
+.dateInput {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 20px;
+  height: 44px;
+  text-align-last: center;
+}
+
+
+@media (max-width: 850px){
+  .form div, input, select, option {
+    font-size: 15px;
+  }
+  .frmIng {
+    width: 100%;
+    margin: auto;
+  }
+  .frmBtn {
+    width: 100%;
+    margin: auto;
+  }
+  
+}
+
+
+@media (max-width: 700px) {
+  .frmIng {
+  width: 100%;
+  margin: auto;
+  }
+  .frmBtn {
+    width: 100%;
+    margin: auto;
+    }
+  .button button {
+    width: 45%;
+  }
+  .fbt {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pump {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .frmDate {
+    width: 80%;
+  }
+}
+
+

@@ -191,23 +191,23 @@ exports.up = async function(knex) {
   await knex.raw(`
     CREATE TRIGGER update_timestamp
     BEFORE UPDATE
-    ON vessel_type
-    FOR EACH ROW
-    EXECUTE PROCEDURE update_timestamp();
-  `);
-  await knex.raw(`
-    CREATE TRIGGER update_timestamp
-    BEFORE UPDATE
-    ON vessel
-    FOR EACH ROW
-    EXECUTE PROCEDURE update_timestamp();
-  `);
-  await knex.raw(`
-    CREATE TRIGGER update_timestamp
-    BEFORE UPDATE
     ON hibernated
     FOR EACH ROW
     EXECUTE PROCEDURE update_timestamp();
+  `);
+  await knex.raw(`
+  CREATE TRIGGER update_timestamp
+  BEFORE UPDATE
+  ON vessel
+  FOR EACH ROW
+  EXECUTE PROCEDURE update_timestamp();
+  `);
+  await knex.raw(`
+  CREATE TRIGGER update_timestamp
+  BEFORE UPDATE
+  ON vessel_type
+  FOR EACH ROW
+  EXECUTE PROCEDURE update_timestamp();
   `);
   
 //inventory

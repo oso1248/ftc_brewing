@@ -17,19 +17,6 @@ String.prototype.toNonAlpha = function (spaces) {
   }
 }
 
-function getShift(shift) {
-  let now = DateTime.local().toFormat('yyyy-MM-dd TTT')
-  if(now > mids && now < days) {
-    shift.start = mids
-    shift.end = days
-  } else if(now > days && now < afts) {
-    shift.start = days
-    shift.end = afts
-  } else if(now > afts && now < ends)  {
-    shift.start = afts
-    shift.end = ends
-  }
-}
 
 let hopsTable
 function setsTable() {
@@ -74,7 +61,6 @@ async function sendUpdate() {
   
   await axios.post('/api/inventory/hop/daily', data)
     .then(data => {
-    console.log(data)
     alert('Added')
     setsTable()
     })
@@ -108,7 +94,19 @@ function getBrews(houses) {
     houses.bh2 = bh2.toNonAlpha().toUpperCase()
   }
 }
-
+function getShift(shift) {
+  let now = DateTime.local().toFormat('yyyy-MM-dd HH:mm')
+  if(now > mids && now < days) {
+    shift.start = mids
+    shift.end = days
+  } else if(now > days && now < afts) {
+    shift.start = days
+    shift.end = afts
+  } else if(now > afts && now < ends)  {
+    shift.start = afts
+    shift.end = ends
+  }
+}
 
 
 document.getElementById('btnAddSubmit').addEventListener('click', sendUpdate)

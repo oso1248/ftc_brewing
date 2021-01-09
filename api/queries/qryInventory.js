@@ -304,6 +304,14 @@ async function getHopDaily(data) {
       mtx[x].username = sets[0].username
     }
   }
+
+   lastBrews = await getLastBrews(data)
+  if(lastBrews.length > 0) {
+    mtx.push(lastBrews)
+  } else {
+    mtx.push([{bh1: 'null', bh2:'null'}])
+  }
+
   return mtx
 }
 async function getHopRollingInv(data) {
@@ -321,7 +329,18 @@ async function getHopRollingInv(data) {
   }
   return invWeek
 }
+function getLastBrews(data) {
+  return db('inv_last_brews')
+    .select(
+      'bh1',
+      'bh2',
+    )
+    .where('created_at','>=',data.startSets)
+    .andWhere('created_at','<=',data.end)
+    .limit(1)
+    .orderBy('created_at', 'desc')
 
+}
 
 // fin injection log
 async function addFinInjectionLog(data) {
@@ -389,6 +408,7 @@ module.exports = {
   getInvHopDailyDate, 
   getInvHopWeeklyDate,
   getHopRollingInv,
+  getLastBrews,
   getHopWeeklyInvCombined,
   getHopWeeklyInvHard,
   getSetsCombined,

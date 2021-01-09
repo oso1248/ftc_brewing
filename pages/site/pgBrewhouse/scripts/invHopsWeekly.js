@@ -27,6 +27,26 @@ function createNode(element) {
 function append(parent, e1) {
   return parent.appendChild(e1)
 }
+function removeChildren(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+}
+function createList(api, parent, title, data) {
+  axios.post(api, data)
+  .then(res => {
+    let list = res.data
+    list.forEach((elem) => {
+    let listItem = elem[title]
+    let option = createNode('option')
+    option.innerHTML = listItem
+    append(parent, option)
+    });
+  })
+  .catch(err => {
+    console.error(err)
+  })
+}
 
 String.prototype.toProperCase = function () {
   return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + 
@@ -162,8 +182,11 @@ function resetAdd(ev){
 }
 async function selectCommodity(){
   let commodity = document.getElementById('com_id').value
+  loadForm(commodity)
+  loadLots(commodity)
+}
+function loadForm(commodity) {
   axios.post('/api/commodity/name', {name:`${commodity}`})
-  
     .then(data => {
       document.getElementById('per_pallet').value = data.data.per_pallet
       document.getElementById('per_unit').value = data.data.unit_total
@@ -179,6 +202,15 @@ async function selectCommodity(){
       }
     })
 }
+async function loadLots(commodity) {
+  let dropDown = document.getElementById('lots')
+  let api = '/api/inventory/hop/daily/lots'
+  let data = {commodity: `${commodity}`}
+  let title = 'lot'
+  await removeChildren(dropDown)
+  createList(api, dropDown, title, data)
+}
+
 async function deleteRow(commodity) {
     commodityTable.getRows()
       .filter(row => row.getData().commodity == commodity)

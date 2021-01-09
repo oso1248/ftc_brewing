@@ -341,6 +341,14 @@ function getLastBrews(data) {
     .orderBy('created_at', 'desc')
 
 }
+function getHopLots(data) {
+  return db('inv_hop_weekly as hop')
+    .join('mtl_commodity as com', 'com.id', '=','hop.com_id')
+    .select('hop.lot')
+    .where('com.commodity', data.commodity)
+    .limit(5)
+    .orderBy('hop.created_at', 'desc')
+}
 
 // fin injection log
 async function addFinInjectionLog(data) {
@@ -409,6 +417,7 @@ module.exports = {
   getInvHopWeeklyDate,
   getHopRollingInv,
   getLastBrews,
+  getHopLots,
   getHopWeeklyInvCombined,
   getHopWeeklyInvHard,
   getSetsCombined,

@@ -209,6 +209,14 @@ router.post('/hop/daily/lastbrews', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
+router.post('/hop/daily/lots', (req, res) => {
+  db.getHopLots(req.body)
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+
 
 // hop daily view
 router.post('/hop/daily/view', (req, res) => {

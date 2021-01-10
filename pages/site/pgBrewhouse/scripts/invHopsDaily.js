@@ -1,13 +1,11 @@
 let DateTime = luxon.DateTime
 
-let mids = DateTime.local().startOf('day').minus({hours: .5}).toFormat('yyyy-MM-dd TTT')
-let days = DateTime.local().startOf('day').plus({hours: 7.5}).toFormat('yyyy-MM-dd TTT')  
-let afts = DateTime.local().startOf('day').plus({hours: 15.5}).toFormat('yyyy-MM-dd TTT')
-let ends = DateTime.local().startOf('day').plus({hours: 23.5}).toFormat('yyyy-MM-dd TTT')
-console.log(days)
-console.log(afts)
-let week = DateTime.local().startOf('week').toFormat('yyyy-MM-dd TTT')
-console.log(week)
+let mids = DateTime.local().startOf('day').minus({hours: .5}).toFormat('yyyy-MM-dd HH:mm')
+let days = DateTime.local().startOf('day').plus({hours: 7.5}).toFormat('yyyy-MM-dd HH:mm')  
+let afts = DateTime.local().startOf('day').plus({hours: 15.5}).toFormat('yyyy-MM-dd HH:mm')
+let ends = DateTime.local().startOf('day').plus({hours: 23.5}).toFormat('yyyy-MM-dd HH:mm')
+let week = DateTime.local().startOf('week').toFormat('yyyy-MM-dd HH:mm')
+
 
 String.prototype.toNonAlpha = function (spaces) {
   if(spaces === '') {
@@ -57,7 +55,12 @@ async function sendUpdate() {
   }
 
   await getShift(shift)
-  data.unshift(shift)
+  if(shift === 'undefined' || Object.keys(shift).length < 2) {
+    alert('please wait until after Mignight')
+    return
+  } else {
+    data.unshift(shift)
+  }
   
   await axios.post('/api/inventory/hop/daily', data)
     .then(data => {
@@ -66,7 +69,6 @@ async function sendUpdate() {
     })
     .catch(err => alert(err))
 }
-
 function getSets(data) {
   for (let i = 0; i < tableData.length; i++) {
     if(typeof tableData[i].sets != 'undefined' && tableData[i].sets != ''){
@@ -96,6 +98,7 @@ function getBrews(houses) {
 }
 function getShift(shift) {
   let now = DateTime.local().toFormat('yyyy-MM-dd HH:mm')
+  
   if(now > mids && now < days) {
     shift.start = mids
     shift.end = days
@@ -105,7 +108,7 @@ function getShift(shift) {
   } else if(now > afts && now < ends)  {
     shift.start = afts
     shift.end = ends
-  }
+  } 
 }
 
 

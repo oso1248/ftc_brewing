@@ -261,7 +261,35 @@ router.post('/fin/injection/log/get', (req, res) => {
 })
 
 
-
+// material archive
+router.post('/material/archive/log/add', (req, res) => {
+  
+  req.body.username = req.session.user.username 
+  
+  db.addMatArchiveLog(req.body)
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/material/archive/log/get', (req, res) => {
+  db.getMatArchiveLog()
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.delete('/material/archive/:id', (req, res) => {
+  db.destroyArchive(req.params.id)
+    .then(data => {
+      if(data.length === 0) {
+        res.status(200).json({msg: 'deleted'})
+      } else {
+        res.status(200).json({msg: 'error: not deleted'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
 
 
 module.exports = router

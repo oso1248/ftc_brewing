@@ -102,7 +102,7 @@ function loadTableDailyDay(date) {
 }
 function loadTableDailyAft(date) {
   let afts = DateTime.fromISO(date).plus({hours: 15, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
-  let ends = DateTime.fromISO(date).plus({hours: 23, minutes: 59}).toFormat('yyyy-MM-dd HH:mm')
+  let ends = DateTime.fromISO(date).plus({hours: 23, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
   let timeSpan = {}
   timeSpan.startSets = afts
   timeSpan.end = ends
@@ -170,7 +170,7 @@ function invDatesWeekSelect() {
 }
 
 function loadTableWeeklyHard(date) {
-  let start = DateTime.fromISO(date).minus({hours: 24, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
+  let start = DateTime.fromISO(date).minus({hours: 8, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
   let end = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
   let timeSpan = {}
   timeSpan.startDate = start

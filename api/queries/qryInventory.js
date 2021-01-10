@@ -385,7 +385,6 @@ async function finInjectionLogDatesMonthly() {
   `)
   return rows
 }
-
 function finInjectionLogGet(data) {
   return db('fin_injection_log as inv')
     .join('brnd_fin as fin', 'inv.fin_id', '=', 'fin.id' )
@@ -404,6 +403,57 @@ function finInjectionLogGet(data) {
     .andWhere('inv.created_at', '<', data.end)
     .orderBy([{ column: 'inv.created_at' }, { column: 'inv.fbt', order: 'desc' }, { column: 'com.commodity', order: 'asc' }])
 }
+
+
+// material archive
+async function addMatArchiveLog(data) {
+
+  await com(data)  
+  await setComActiveNo(data.com_id)
+
+  const [{id}] = await db('mat_archive').insert(data, ['id'])
+  
+  return getByIdArchive(id)
+}
+function getByIdArchive(id) {
+  return db('mat_archive as inv')
+    .join('mtl_commodity as com', 'inv.com_id', '=', 'com.id' )
+    .select(
+      'com.commodity',
+      'inv.count_final',
+      'inv.total_end',
+      'inv.note',
+      'inv.username',
+      
+    )
+    .where({'inv.id': id})
+}
+function setComActiveNo(id) {
+  db('mtl_commodity')
+    .update({active: 'No'})
+    .where({id})
+  .then()
+}
+function getMatArchiveLog() {
+  return db('mat_archive as arc')
+    .join('mtl_commodity as com', 'com.id', '=', 'arc.com_id')
+    .select(
+      'arc.id',
+      'com.commodity',
+      'arc.count_final',
+      'arc.total_end',
+      'arc.username',
+      'arc.created_at',
+      'arc.note'
+    )
+    .orderBy('com.commodity')
+}
+async function destroyArchive(id) {
+  let remove = await db('mat_archive').where('id', id).del()
+  return getByIdArchive(id)
+}
+
+
 
 module.exports = {
   add, 
@@ -432,5 +482,7 @@ module.exports = {
   finInjectionLogDatesWeekly,
   finInjectionLogDatesMonthly,
   finInjectionLogGet,
-  
+  addMatArchiveLog,
+  getMatArchiveLog,
+  destroyArchive
 }

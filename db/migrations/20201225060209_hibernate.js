@@ -16,6 +16,8 @@ exports.up = function(knex) {
     tbl.decimal('end_vol', 50, 2)
       .notNullable()
       .defaultTo(0)
+    tbl.string('username', 50)
+      .notNullable()
     tbl.string('note', 256)
     tbl.integer('brw_id')
       .unsigned()

@@ -243,18 +243,20 @@ function loadTableWeeklyLastBrewsRolling(date) {
     .then(res => {
       let lastBrews = res.data
       let brews = document.getElementById('rollingBrews')
+      let brews2 = document.getElementById('rollingBrews2')
       if(lastBrews.length === 0) {
         lastBrews.push({bh1: 'null', bh2: 'null'})
       }
       brews.innerHTML = '1:'+lastBrews[0].bh1 + '   2:'+lastBrews[0].bh2
+      brews2.innerHTML = '1:'+lastBrews[0].bh1 + '   2:'+lastBrews[0].bh2
     })
     .catch(err => console.log(err))
 }
 
 function loadTableWeeklyRolling(date) {
-  let start = DateTime.fromISO(date).minus({hours: 24, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
+  let start = DateTime.fromISO(date).minus({hours: 8, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
   let startSets = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
-  let end = DateTime.fromISO(date).plus({hours: 167, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
+  let end = DateTime.fromISO(date).plus({hours: 159, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
   
   let timeSpan = {}
   timeSpan.start = start

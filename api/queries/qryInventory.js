@@ -455,6 +455,108 @@ async function destroyArchive(id) {
 
 
 
+// finishing process loss wad add transfer
+async function addProcessWad(data) {
+  const [{id}] = await db('fin_wad_add').insert(data, ['id'])
+
+  return getProcessWadById(id)
+}
+function getProcessWadById(id) {
+  return db('fin_wad_add')
+    .select(
+      'id',
+      'brand',
+      'tank',
+      'vol_start',
+      'vol_stop',
+      'username',
+      'note',
+      'created_at',
+    )
+    .where({id})
+}
+function getProcessWad() {
+  return db('fin_wad_add')
+    .select(
+      'id',
+      'brand',
+      'tank',
+      'vol_start',
+      'vol_stop',
+      'username',
+      'note',
+      'created_at',
+    )
+}
+
+async function addProcessTrans(data) {
+  const [{id}] = await db('fin_trans_add').insert(data, ['id'])
+
+  return getProcessTransById(id)
+}
+function getProcessTransById(id) {
+  return db('fin_trans_add')
+    .select(
+      'id',
+      'brand_from',
+      'brand_to',
+      'tank_from',
+      'tank_to',
+      'volume',
+      'username',
+      'note',
+      'created_at',
+    )
+    .where({id})
+}
+function getProcessTrans() {
+  return db('fin_trans_add')
+    .select(
+      'id',
+      'brand_from',
+      'brand_to',
+      'tank_from',
+      'tank_to',
+      'volume',
+      'username',
+      'note',
+      'created_at',
+    )
+}
+
+async function addProcessLoss(data) {
+  const [{id}] = await db('fin_loss_add').insert(data, ['id'])
+
+  return getProcessLossById(id)
+}
+function getProcessLossById(id) {
+  return db('fin_loss_add')
+    .select(
+      'id',
+      'brand',
+      'tank',
+      'volume',
+      'username',
+      'note',
+      'created_at',
+    )
+    .where({id})
+}
+function getProcessLoss() {
+  return db('fin_loss_add')
+    .select(
+      'id',
+      'brand',
+      'tank',
+      'volume',
+      'username',
+      'note',
+      'created_at',
+    )
+}
+
+
+
 module.exports = {
   add, 
   getInvDateMaterial, 
@@ -484,5 +586,11 @@ module.exports = {
   finInjectionLogGet,
   addMatArchiveLog,
   getMatArchiveLog,
-  destroyArchive
+  destroyArchive,
+  addProcessWad,
+  addProcessTrans,
+  addProcessLoss,
+  getProcessWad,
+  getProcessTrans,
+  getProcessLoss
 }

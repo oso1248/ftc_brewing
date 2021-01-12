@@ -78,7 +78,7 @@ async function deleteOnLoad() {
       res.data.forEach(async (item) => {
         setTimeout(function(){
           deleteRow(item.commodity)
-        }, 1);
+        }, 5);
     }) 
   })
     .catch(err => console.log(err))

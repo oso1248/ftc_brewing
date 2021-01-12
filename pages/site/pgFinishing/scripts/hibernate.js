@@ -300,6 +300,7 @@ function view() {
       let tableData = res.data
       
       hibernateTable = new Tabulator("#list", {
+        printHeader:'<h1>Hibernation Log<h1>',
         resizableColumns:false,
         height:"330px",
         layout:"fitDataFill",
@@ -312,7 +313,9 @@ function view() {
           {title:"Volume", field:"int_vol",hozAlign:"center"},
           {title:"Sch Tk", field:"end_vessel",hozAlign:"center"},
           {title:"Volume", field:"end_vol",hozAlign:"center"},
+          {title:"Username", field:"username1",hozAlign:"center"},
           {title:"Hibernate Date", field:"created_at",hozAlign:"center"},
+          {title:"Username", field:"username2",hozAlign:"center"},
           {title:"Pump Date", field:"updated_at",hozAlign:"center"},
           {title:"Note", field:"note",hozAlign:"center"},
         ],

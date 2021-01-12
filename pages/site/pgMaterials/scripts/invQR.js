@@ -1,13 +1,13 @@
-let generateBtn = select("select")
+let generateBtn = select('select')
 
-generateBtn.addEventListener("change", generateQR)
+generateBtn.addEventListener('change', generateQR)
 
 function generateQR() {
-  let qrLabel = select("label")
-  let qrcode = select("img")
-  let data = select("select").value
-  let size = "130x130"
-  let baseURL = "https://api.qrserver.com/v1/create-qr-code/"
+  let qrLabel = select('label')
+  let qrcode = select('img')
+  let data = select('select').value
+  let size = '130x130'
+  let baseURL = 'https://api.qrserver.com/v1/create-qr-code/'
   let url = `${baseURL}?data=${data}&size=${size}`
   
   console.log(data)

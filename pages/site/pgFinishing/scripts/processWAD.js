@@ -381,6 +381,7 @@ function wadAdditionTable() {
         elem.created_at = DateTime.fromISO(elem.created_at).toFormat('yyyy-MM-dd HH:mm')
       })
       wadTable = new Tabulator("#wadTable", {
+        printHeader:'<h1>WAD Additions<h1>',
         resizableColumns:false,
         height:"330px",
         layout:"fitDataFill",
@@ -414,6 +415,7 @@ function transAdditionTable() {
         elem.created_at = DateTime.fromISO(elem.created_at).toFormat('yyyy-MM-dd HH:mm')
       })
       transTable = new Tabulator("#transTable", {
+        printHeader:'<h1>Transfers<h1>',
         resizableColumns:false,
         height:"330px",
         layout:"fitDataFill",
@@ -447,6 +449,7 @@ function lossAdditionTable() {
         elem.created_at = DateTime.fromISO(elem.created_at).toFormat('yyyy-MM-dd HH:mm')
       })
       lossTable = new Tabulator("#lossTable", {
+        printHeader:'<h1>Process Loss<h1>',
         resizableColumns:false,
         height:"330px",
         layout:"fitDataFill",

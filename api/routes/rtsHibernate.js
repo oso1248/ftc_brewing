@@ -4,6 +4,7 @@ const router = express.Router()
 
 // -> /api/hibernate
 router.post('/', (req, res) => {
+  req.body.username1 = req.session.user.username
   db.add(req.body)
     .then(data => {
       res.status(200).json(data)
@@ -33,6 +34,7 @@ router.post('/hibernated/tank/get/:id', (req, res) => {
     .catch(err => res.status(500).json({msg: err.detail}))
 })
 router.patch('/hibernated/tank/:id', (req, res) => {
+  req.body.username2 = req.session.user.username
   db.update(req.params.id, req.body)
     .then(data => {
       if(data) {

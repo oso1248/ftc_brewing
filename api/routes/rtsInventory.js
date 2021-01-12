@@ -292,4 +292,59 @@ router.delete('/material/archive/:id', (req, res) => {
 })
 
 
+// finishing process loss wad add transfer
+router.post('/process/wad/add', (req, res) => {
+  
+  req.body.username = req.session.user.username 
+  
+  db.addProcessWad(req.body)
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/process/trans/add', (req, res) => {
+  
+  req.body.username = req.session.user.username 
+  
+  db.addProcessTrans(req.body)
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/process/loss/add', (req, res) => {
+  
+  req.body.username = req.session.user.username 
+  
+  db.addProcessLoss(req.body)
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/process/wad/get', (req, res) => {  
+  db.getProcessWad()
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/process/trans/get', (req, res) => {
+  db.getProcessTrans()
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/process/loss/get', (req, res) => {
+  db.getProcessLoss()
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+
+
+
 module.exports = router

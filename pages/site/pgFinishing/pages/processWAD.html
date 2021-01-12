@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta name="viewport" content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height">
+  <title>Process Addition</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
+  
+  <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
+  <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
+
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="../../commonCSS/styles.css">
+  <link rel="stylesheet" href="../styles/processWAD.css">
+
+
+</head>
+<body>
+  <div class="container1"><! -- Start of Container1 -->
+    <header>
+      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+      <h1>Process Loss / WAD Additions</h1>
+      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+       
+    </header>
+    <! -- Navigation -->
+    <nav class="main-nav">
+      <ul class="">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../pgBrewhouse/brewhouse.html">Brewhouse</a></li>
+        <li><a href="../../pgFinishing/finishing.html">Finishing</a></li>
+        <li><a href="../../pgMaterials/material.html">Materials</a></li>
+        <li><a href="../../pgAdmin/admin.html">Admin</a></li>
+        <li><a id="logout">Log Out</a></li>
+      </ul>
+    </nav>
+  
+   <!-- <div class="spacer"></div> -->
+    
+   <div class="boxes">
+
+    <div class="box" id="addWAD">
+      <a style="display: block">  
+        <!-- <img src="" alt="">   -->
+        <h3>Add WAD</h3>
+        <p></p>
+      </a>
+    </div>
+    
+
+    <div class="box" id="addTrans">
+      <a style="display: block">  
+        <!-- <img src="" alt="">   -->
+        <h3>Add Transfer</h3>
+        <p></p>
+      </a>
+    </div>
+
+    <div class="box" id="addLoss">
+      <a style="display: block">  
+        <h3>Add Loss</h3>
+      </a>
+    </div>
+
+    <div class="box" id="viewView">
+      <a style="display: block">  
+        <h3>View Tables</h3>
+      </a>
+    </div>
+
+   </div> <!-- End Boxes   -->
+       
+  </div><! -- End of container1 -->
+
+  <div class="spacer"></div>
+  <div class="spacer"></div>
+
+  <div class="container2"><!-- start container2 -->
+    
+    <div name="formblock" class="frm" id="wadAdd">
+      <h3 class="headers">WAD Addition</h3>
+      <form class="form" action="" id="wad">
+        
+        <select name="brand" id="wadSelbrand"></select>
+        <select name="tank" id="wadSelTank"></select>
+        <input name="vol_start" type="number" placeholder="Start Volume">
+        <input name="vol_stop" type="number" placeholder="Stop Volume">
+        <textarea name="note" name="" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+        <div class="button">
+          <button class="btn" id="wadBtnClear">Clear</button>
+          <button class="btn" id="wadBtnAdd">Submit</button>
+        </div>
+      </form>
+    </div>
+    
+    <div name="formblock" class="frm" id="transAdd">
+      <h3 class="headers">Transfer</h3>
+      <form class="form" action="" id="trans">
+        
+        <select name="brand_from" id="transSelBrandFrom"></select>
+        <select name="tank_from" id="trandSelTankFrom"></select>
+        <select name="brand_to" id="transSelBrandTo"></select>
+        <select name="tank_to" id="transSelTankTo"></select>
+        <input name="volume" type="number" placeholder="Volume bbls">
+        <textarea name="note" name="brand_to" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+        <div class="button">
+          <button class="btn" id="transBtnClear">Clear</button>
+          <button class="btn" id="transBtnAdd">Submit</button>
+        </div>
+      </form>
+    </div>
+    
+    <div name="formblock" class="frm" id="lossAdd">
+      <h3 class="headers">Process Loss</h3>
+      <form class="form" action="" id="loss">
+        <select name="brand" id="lossSelBrand"></select>
+        <select name="tank" id="lossSelTank"></select>
+        <input name="volume" type="number" placeholder="Volume bbls">
+        <textarea name="note" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+        <div class="button">
+          <button class="btn" id="lossBtnClear">Clear</button>
+          <button class="btn" id="lossBtnAdd">Submit</button>
+        </div>
+      </form>
+    </div>
+    
+    
+    <div name="formblock" class="viewTables" id="viewTables2">  
+     <div name="tableView" class="tables" id="viewWad">
+       <h3 class="headers">WAD Additions</h3>
+       <div class="button">
+         <button class="btn btntbl" id="wadDownload-xlsx">Save XSLX</button>
+         <button class="btn btntbl" id="wadPrint-table">Print</button>
+       </div>
+       <div id="wadTable"></div>
+     </div>
+      
+      <div name="tableView" class="tables" id="viewTrans">
+        <h3 class="headers">Transfers</h3>
+       <div class="button">
+         <button class="btn btntbl" id="transDownload-xlsx">Save XSLX</button>
+         <button class="btn btntbl" id="transPrint-table">Print</button>
+       </div>
+       <div id="transTable"></div>
+      </div>
+      
+      <div name="tableView" class="tables" id="viewLoss">
+        <h3 class="headers">Process Loss</h3>
+       <div class="button">
+         <button class="btn btntbl" id="lossDownload-xlsx">Save XSLX</button>
+         <button class="btn btntbl" id="lossPrint-table">Print</button>
+       </div>
+       <div id="lossTable"></div>
+      </div>
+    </div>
+    
+    
+    
+  </div><!-- end container2 -->
+
+  <script src="../../commonJS/index.js"></script>
+  <script src="../scripts/processWAD.js"></script>
+</body>
+</html>

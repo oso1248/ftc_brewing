@@ -265,6 +265,21 @@ exports.up = async function(knex) {
     FOR EACH ROW
     EXECUTE PROCEDURE update_timestamp();
   `);
+  await knex.raw(`
+    CREATE TRIGGER trigger_delete_old_rows_fin_wad_add
+    AFTER INSERT ON fin_wad_add
+    EXECUTE PROCEDURE delete_old_rows_fin_wad_add();
+  `);
+  await knex.raw(`
+    CREATE TRIGGER trigger_delete_old_rows_fin_trans_add
+    AFTER INSERT ON fin_trans_add
+    EXECUTE PROCEDURE delete_old_rows_fin_trans_add();
+  `);
+  await knex.raw(`
+    CREATE TRIGGER trigger_delete_old_rows_fin_loss_add
+    AFTER INSERT ON fin_loss_add
+    EXECUTE PROCEDURE delete_old_rows_fin_wad_add();
+  `);
 
 };
 

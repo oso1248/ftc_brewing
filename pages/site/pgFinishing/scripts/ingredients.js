@@ -344,6 +344,7 @@ function finInjectionWeekly() {
         elem.created_at = DateTime.fromISO(elem.created_at).toFormat('yyyy-MM-dd HH:mm')
       })
       tableWeekly = new Tabulator("#tableWeekly", {
+        printHeader:'<h1>Weekly Ing Addition<h1>',
         resizableColumns:false,
         height:"500px",
         layout:"fitDataFill",
@@ -415,6 +416,7 @@ function finInjectionMonthly() {
         elem.created_at = DateTime.fromISO(elem.created_at).toFormat('yyyy-MM-dd HH:mm')
       })
       tableMonthly = new Tabulator("#tableMonthly", {
+        printHeader:'<h1>Monthly Ing Addition<h1>',
         resizableColumns:false,
         height:"500px",
         layout:"fitDataFill",

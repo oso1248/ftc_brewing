@@ -59,6 +59,8 @@ function getHibernatedLog() {
       'hib.end_vol',
       'brw.brand',
       'hib.note',
+      'hib.username1',
+      'hib.username2',
       'hib.created_at',
       'hib.updated_at',
     )

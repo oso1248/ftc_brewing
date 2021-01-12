@@ -52,6 +52,7 @@ function viewBrandBrew() {
       let tableData = res.data
 
       viewBrandBrwTable = new Tabulator("#brndViewTbl", {
+        printHeader:'<h1>Brew Brands<h1>',
         resizableColumns:false,
         height:"330px",
         layout:"fitDataFill",
@@ -110,6 +111,7 @@ async function stdHopTbl() {
       let tableData = res.data
 
       viewStdHopTable = new Tabulator("#stdHopTbl", {
+        printHeader:'<h1>Standard Hops<h1>',
         resizableColumns:false,
         height:"300px",
         layout:"fitDataFill",
@@ -165,6 +167,7 @@ async function dryHopTbl() {
       let tableData = res.data
 
       viewDryHopTable = new Tabulator("#dryHopTbl", {
+        printHeader:'<h1>Dry Hops<h1>',
         resizableColumns:false,
         height:"300px",
         layout:"fitDataFill",
@@ -221,6 +224,7 @@ async function sprSacTbl() {
       res.data.unshift({commodity:'Brand', Units:`${name}`})
       let tableData = res.data
       viewSprSacTable = new Tabulator("#sprSacTbl", {
+        printHeader:'<h1>Super Sacks<h1>',
         resizableColumns:false,
         height:"300px",
         layout:"fitDataFill",

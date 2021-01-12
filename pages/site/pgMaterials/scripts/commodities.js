@@ -176,6 +176,7 @@ function view() {
       let tableData = res.data
 
       commodityTable = new Tabulator("#list", {
+        printHeader:'<h1>Commodity List<h1>',
         resizableColumns:false,
         height:"330px",
         layout:"fitDataFill",

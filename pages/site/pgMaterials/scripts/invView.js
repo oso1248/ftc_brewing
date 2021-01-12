@@ -61,6 +61,7 @@ function weeklyMatTable() {
     }
       let tableData = res.data
       weeklyTable = new Tabulator("#tableWeekly", {
+        printHeader:'<h1>Weekly Material Inventory<h1>',
         height:"309px",
         layout:"fitDataFill",
         data:tableData,
@@ -126,6 +127,7 @@ function monthlyMatTable() {
     }
       let tableData = res.data
       monthlyTable = new Tabulator("#tableMonthly", {
+        printHeader:'<h1>Monthly Material Inventory<h1>',
         height:"309px",
         layout:"fitDataFill",
         data:tableData,

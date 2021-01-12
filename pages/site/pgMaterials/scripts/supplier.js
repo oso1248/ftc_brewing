@@ -63,6 +63,7 @@ function view() {
     .then(res => {
       let tableData = res.data
       supplierTable = new Tabulator("#list", {
+        printHeader:'<h1>Suppliers<h1>',
         resizableColumns:false,
         height:"309px",
         layout:"fitDataFill",
@@ -325,10 +326,10 @@ document.getElementById('btnDeleteSubmit').addEventListener('click', sendDelete)
 
 document.getElementById('download-xlsx').addEventListener('click', supplierExcel)
 function supplierExcel(){
-  supplierTable.download("xlsx", "suppliers.xlsx", {sheetName:"Suppliers"})
+  supplierTable.download('xlsx', 'suppliers.xlsx', {sheetName:'Suppliers'})
 }
 
-document.getElementById("print-table").addEventListener('click', supplierPrint)
+document.getElementById('print-table').addEventListener('click', supplierPrint)
 function supplierPrint(){
   supplierTable.print(false, true);
 }

@@ -127,6 +127,7 @@ function view() {
         tableData[i].created_at = DateTime.fromISO(tableData[i].created_at).toFormat('yyyy-MM-dd')
       }
       tableView = new Tabulator("#ViewTable", {
+        printHeader:'<h1>Archived Inventory<h1>',
         resizableColumns:false,
         height:"309px",
         layout:"fitDataFill",
@@ -147,8 +148,7 @@ document.getElementById('btnxcel').addEventListener('click', excel)
 function excel(){
   tableView.download("xlsx", "archive.xlsx", {sheetName:"Log"})
 }
-
-document.getElementById("btnprint").addEventListener('click', () => {
+document.getElementById('btnprint').addEventListener('click', () => {
   tableView.print(false, true);
 })
 

@@ -87,6 +87,7 @@ function viewBrandBrew() {
       let tableData = res.data
 
       viewBrandBrwTable = new Tabulator("#viewBrandBrw", {
+        printHeader:'<h1>Brew Brands<h1>',
         resizableColumns:false,
         height:"330px",
         layout:"fitDataFill",
@@ -123,6 +124,7 @@ function viewBrandFin() {
     .then(res => {
       let tableData = res.data
       viewBrandFinTable = new Tabulator("#viewBrandFin", {
+        printHeader:'<h1>Finishing Brands<h1>',
         resizableColumns:false,
         height:"330px",
         layout:"fitDataFill",
@@ -158,6 +160,7 @@ function viewBrandPck() {
     .then(res => {
       let tableData = res.data
       viewBrandPckTable = new Tabulator("#viewBrandPck", {
+        printHeader:'<h1>Packaging Brands<h1>',
         resizableColumns:false,
         height:"330px",
         layout:"fitDataFill",
@@ -239,6 +242,7 @@ function detailBrandBrewPre(name) {
       tableData = convert2(tableData, labels)
       
       detailBrandBrwTablePre = new Tabulator('#detailBrandBrwPre', {
+        printHeader:'<h1>Pre CSX<h1>',
         resizableColumns:false,
         height:'300px',
         layout:'fitDataFill',
@@ -260,6 +264,7 @@ function detailBrandBrewPost(name) {
       tableData = convert2(tableData, labels)
       
       detailBrandBrwTablePost = new Tabulator('#detailBrandBrwPost', {
+        printHeader:'<h1>Post CSX<h1>',
         resizableColumns:false,
         height:'218px',
         layout:'fitDataFill',
@@ -313,6 +318,7 @@ function detailBrandFinPre(name) {
       tableData = convert2(tableData, labels)
       
       detailBrandFinTablePre = new Tabulator('#detailBrandFinPre', {
+        printHeader:'<h1>Pre Filter<h1>',
         resizableColumns:false,
         height:'272px',
         layout:'fitDataFill',
@@ -334,6 +340,7 @@ function detailBrandFinPost(name) {
       tableData = convert2(tableData, labels)
       
       detailBrandFinTablePost = new Tabulator('#detailBrandFinPost', {
+        printHeader:'<h1>Post FIlter<h1>',
         resizableColumns:false,
         height:'218px',
         layout:'fitDataFill',
@@ -386,6 +393,7 @@ function detailBrandPckPre(name) {
       let tableData = res.data
       tableData = convert2(tableData, labels)
       detailBrandPckTablePre = new Tabulator('#detailBrandPckPre', {
+        printHeader:'<h1>Pre Release<h1>',
         resizableColumns:false,
         height:'272px',
         layout:'fitDataFill',
@@ -405,6 +413,7 @@ function detailBrandPckPost(name) {
       let tableData = res.data
       tableData = convert2(tableData, labels)
       detailBrandPckTablePost = new Tabulator('#detailBrandPckPost', {
+        printHeader:'<h1>Post Release<h1>',
         resizableColumns:false,
         height:'218px',
         layout:'fitDataFill',
@@ -495,6 +504,7 @@ function recipeBrandChpDetail(name) {
       let tableData = res.data
       tableData = convert2(tableData, labels)
       recipeBrandChpTable = new Tabulator("#recipeBrandChp", {
+        printHeader:'<h1>Chip Recipe<h1>',
         resizableColumns:false,
         height:"300px",
         layout:"fitDataFill",
@@ -541,6 +551,7 @@ function recipeBrandSchDetail(name) {
       let tableData = res.data
       tableData = convert2(tableData, labels)
       recipeBrandSchTable = new Tabulator("#recipeBrandSch", {
+        printHeader:'<h1>Schoene Recipe<h1>',
         resizableColumns:false,
         height:"300px",
         layout:"fitDataFill",
@@ -620,6 +631,7 @@ function recipeBrandFinDetail(name) {
       let tableData = res.data
       tableData = convert2(tableData, labels)
       recipeBrandFinTable = new Tabulator("#recipeBrandFinTbl", {
+        printHeader:'<h1>FIlter Release Recipe<h1>',
         resizableColumns:false,
         height:"1025px",
         layout:"fitDataFill",
@@ -672,6 +684,7 @@ function injectionBrandFin() {
     .then(res => {
       let tableData = res.data
       injectionTable = new Tabulator("#injectionTable", {
+        printHeader:'<h1>Injection Rates<h1>',
         resizableColumns:false,
         height:"120x",
         layout:"fitDataFill",

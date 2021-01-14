@@ -1,5 +1,124 @@
 const db = require('../dbConfig')
 
+
+function getByDateCombinedBrwWeekly(data) {
+  return db.raw(`
+  SELECT z.commodity, z.sap, SUM(z.total) AS total, z.uom, null AS complete
+  FROM
+    (SELECT com.commodity, com.sap, inv.lbs AS total, uom.uom
+    FROM inv_hop_weekly AS inv
+    JOIN mtl_commodity AS com ON inv.com_id = com.id
+    JOIN mtl_uom AS uom on com.uom_id = uom.id
+    WHERE inv.created_at > '${data.startHop}' AND inv.created_at < '${data.endHop}' AND com.inventory = 'Brw'
+    UNION ALL
+    SELECT com.commodity, com.sap, inv.total_end AS total, uom.uom
+    FROM inv_mat_weekly AS inv
+    JOIN mtl_commodity AS com ON inv.com_id = com.id
+    JOIN mtl_uom AS uom on com.uom_id = uom.id
+    WHERE inv.created_at > '${data.startMat}' AND inv.created_at < '${data.endMat}' AND com.inventory = 'Brw') AS z
+  GROUP BY z.commodity, z.sap, z.uom
+  ORDER BY z.sap DESC
+  `)
+}
+function getByDateCombinedFinWeekly(data) {
+  return db.raw(`
+  SELECT z.commodity, z.sap, SUM(z.total) AS total, z.uom, null AS complete
+  FROM
+    (SELECT com.commodity, com.sap, inv.lbs AS total, uom.uom
+    FROM inv_hop_weekly AS inv
+    JOIN mtl_commodity AS com ON inv.com_id = com.id
+    JOIN mtl_uom AS uom on com.uom_id = uom.id
+    WHERE inv.created_at > '${data.startHop}' AND inv.created_at < '${data.endHop}' AND com.inventory = 'Fin'
+    UNION ALL
+    SELECT com.commodity, com.sap, inv.total_end AS total, uom.uom
+    FROM inv_mat_weekly AS inv
+    JOIN mtl_commodity AS com ON inv.com_id = com.id
+    JOIN mtl_uom AS uom on com.uom_id = uom.id
+    WHERE inv.created_at > '${data.startMat}' AND inv.created_at < '${data.endMat}' AND com.inventory = 'Fin') AS z
+  GROUP BY z.commodity, z.sap, z.uom
+  ORDER BY z.sap DESC
+  `)
+}
+function getByDateCombinedLogWeekly(data) {
+  return db.raw(`
+  SELECT z.commodity, z.sap, SUM(z.total) AS total, z.uom, null AS complete
+  FROM
+    (SELECT com.commodity, com.sap, inv.lbs AS total, uom.uom
+    FROM inv_hop_weekly AS inv
+    JOIN mtl_commodity AS com ON inv.com_id = com.id
+    JOIN mtl_uom AS uom on com.uom_id = uom.id
+    WHERE inv.created_at > '${data.startHop}' AND inv.created_at < '${data.endHop}' AND com.inventory = 'Log'
+    UNION ALL
+    SELECT com.commodity, com.sap, inv.total_end AS total, uom.uom
+    FROM inv_mat_weekly AS inv
+    JOIN mtl_commodity AS com ON inv.com_id = com.id
+    JOIN mtl_uom AS uom on com.uom_id = uom.id
+    WHERE inv.created_at > '${data.startMat}' AND inv.created_at < '${data.endMat}' AND com.inventory = 'Log') AS z
+  GROUP BY z.commodity, z.sap, z.uom
+  ORDER BY z.sap DESC
+  `)
+}
+
+function getByDateCombinedBrwMonthly(data) {
+  return db.raw(`
+  SELECT z.commodity, z.sap, SUM(z.total) AS total, z.uom, null AS complete
+  FROM
+    (SELECT com.commodity, com.sap, inv.lbs AS total, uom.uom
+    FROM inv_hop_monthly AS inv
+    JOIN mtl_commodity AS com ON inv.com_id = com.id
+    JOIN mtl_uom AS uom on com.uom_id = uom.id
+    WHERE inv.created_at > '${data.startHop}' AND inv.created_at < '${data.endHop}' AND com.inventory = 'Brw'
+    UNION ALL
+    SELECT com.commodity, com.sap, inv.total_end AS total, uom.uom
+    FROM inv_mat_monthly AS inv
+    JOIN mtl_commodity AS com ON inv.com_id = com.id
+    JOIN mtl_uom AS uom on com.uom_id = uom.id
+    WHERE inv.created_at > '${data.startMat}' AND inv.created_at < '${data.endMat}' AND com.inventory = 'Brw') AS z
+  GROUP BY z.commodity, z.sap, z.uom
+  ORDER BY z.sap DESC
+  `)
+}
+function getByDateCombinedFinMonthly(data) {
+  return db.raw(`
+  SELECT z.commodity, z.sap, SUM(z.total) AS total, z.uom, null AS complete
+  FROM
+    (SELECT com.commodity, com.sap, inv.lbs AS total, uom.uom
+    FROM inv_hop_monthly AS inv
+    JOIN mtl_commodity AS com ON inv.com_id = com.id
+    JOIN mtl_uom AS uom on com.uom_id = uom.id
+    WHERE inv.created_at > '${data.startHop}' AND inv.created_at < '${data.endHop}' AND com.inventory = 'Fin'
+    UNION ALL
+    SELECT com.commodity, com.sap, inv.total_end AS total, uom.uom
+    FROM inv_mat_monthly AS inv
+    JOIN mtl_commodity AS com ON inv.com_id = com.id
+    JOIN mtl_uom AS uom on com.uom_id = uom.id
+    WHERE inv.created_at > '${data.startMat}' AND inv.created_at < '${data.endMat}' AND com.inventory = 'Fin') AS z
+  GROUP BY z.commodity, z.sap, z.uom
+  ORDER BY z.sap DESC
+  `)
+}
+function getByDateCombinedLogMonthly(data) {
+  return db.raw(`
+  SELECT z.commodity, z.sap, SUM(z.total) AS total, z.uom, null AS complete
+  FROM
+    (SELECT com.commodity, com.sap, inv.lbs AS total, uom.uom
+    FROM inv_hop_monthly AS inv
+    JOIN mtl_commodity AS com ON inv.com_id = com.id
+    JOIN mtl_uom AS uom on com.uom_id = uom.id
+    WHERE inv.created_at > '${data.startHop}' AND inv.created_at < '${data.endHop}' AND com.inventory = 'Log'
+    UNION ALL
+    SELECT com.commodity, com.sap, inv.total_end AS total, uom.uom
+    FROM inv_mat_monthly AS inv
+    JOIN mtl_commodity AS com ON inv.com_id = com.id
+    JOIN mtl_uom AS uom on com.uom_id = uom.id
+    WHERE inv.created_at > '${data.startMat}' AND inv.created_at < '${data.endMat}' AND com.inventory = 'Log') AS z
+  GROUP BY z.commodity, z.sap, z.uom
+  ORDER BY z.sap DESC
+  `)
+}
+
+
+
 //Material weekly
 async function com(data){
   let rtn = await db('mtl_commodity').select('id').where('commodity', data['com_id'])
@@ -113,14 +232,14 @@ function getByDateMonthly(data) {
 }
 function getInvDateMaterialMonthly() {
   return db.raw(`
-  SELECT DISTINCT DATE_TRUNC('day',created_at) 
+  SELECT DISTINCT DATE_TRUNC('month',created_at) 
   FROM inv_mat_monthly
-  WHERE EXTRACT(DAY FROM created_at) = 1
-    AND created_at > NOW() - INTERVAL '365 days'
-  ORDER BY DATE_TRUNC('day',created_at) DESC
+  ORDER BY DATE_TRUNC('month',created_at) DESC
   `)
 }
 
+
+// hop inv weekly
 async function addInvHopWeekly(data) {
   await com(data)
   const [{id}] = await db('inv_hop_weekly').insert(data, ['id'])
@@ -153,7 +272,7 @@ function getHopWeeklyInvCombined(data) {
     )
     .groupBy('com.commodity')
     .where('typ.type', 'hop')
-    .andWhere('com.active', 'Yes')
+    // .andWhere('com.active', 'Yes')
     .orderBy('com.commodity')
 
 }
@@ -188,12 +307,61 @@ async function getInvHopWeeklyDate() {
   `)
   return rows
 }
-async function destroyHopInv(id) {
+async function destroyHopInvWeekly(id) {
   let remove = await db('inv_hop_weekly').where('id', id).del()
   return getByIDHopWeekly(id)
 }
 
 
+// hop inv monthly
+async function addInvHopMonthly(data) {
+  await com(data)
+  const [{id}] = await db('inv_hop_monthly').insert(data, ['id'])
+  return getByIDHopMonthly(id)
+}
+function getByIDHopMonthly(id) {
+  return db('inv_hop_monthly as inv')
+    .join('mtl_commodity as com', 'inv.com_id', '=', 'com.id')
+    .join('mtl_uom as uom', 'com.uom_id', '=', 'uom.id')
+    .select(
+      'com.commodity',
+      'inv.lbs',
+      'uom.uom'
+    )
+    .where({'inv.id': id})
+}
+function getHopMonthlyInvHard(data) {
+  return db('inv_hop_monthly as inv')
+    .join('mtl_commodity as com', function(){
+      this.on(function(){
+        this.on('inv.com_id', '=', 'com.id')
+        this.andOnVal('inv.created_at', '>', data.startDate)
+        this.andOnVal('inv.created_at', '<', data.endDate)
+      })
+    })
+    .select(
+      'inv.id',
+      'com.commodity',
+      'com.sap',
+      'inv.lot',
+      'inv.lbs',
+      'inv.username',
+      'inv.created_at'
+    )
+    .orderBy('com.commodity')
+}
+async function getInvHopMonthlyDate() {
+  let {rows} = await db.raw(`
+  SELECT DISTINCT DATE_TRUNC('month',created_at) 
+  FROM inv_hop_monthly
+  ORDER BY DATE_TRUNC('month',created_at) DESC
+  `)
+  return rows
+}
+async function destroyHopInvMonthly(id) {
+  let remove = await db('inv_hop_monthly').where('id', id).del()
+  return getByIDHopWeekly(id)
+}
 
 
 //hop daily
@@ -241,6 +409,8 @@ async function addInvHopDaily(data, user) {
   await addSets(data)
   await addBrews(brews)
 }
+
+
 
 
 //hop view
@@ -558,6 +728,12 @@ function getProcessLoss() {
 
 
 module.exports = {
+  getByDateCombinedBrwWeekly,
+  getByDateCombinedFinWeekly,
+  getByDateCombinedLogWeekly,
+  getByDateCombinedBrwMonthly,
+  getByDateCombinedFinMonthly,
+  getByDateCombinedLogMonthly,
   add, 
   getInvDateMaterial, 
   getByID, 
@@ -574,7 +750,8 @@ module.exports = {
   getHopWeeklyInvHard,
   getSetsCombined,
   destroy,
-  destroyHopInv,
+  destroyHopInvWeekly,
+  destroyHopInvMonthly,
   addMonthly,
   getByIDMonthly,
   destroyMonthly,
@@ -592,5 +769,8 @@ module.exports = {
   addProcessLoss,
   getProcessWad,
   getProcessTrans,
-  getProcessLoss
+  getProcessLoss,
+  getHopMonthlyInvHard,
+  addInvHopMonthly,
+  getInvHopMonthlyDate
 }

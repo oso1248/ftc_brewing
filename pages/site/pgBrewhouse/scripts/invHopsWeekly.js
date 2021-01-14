@@ -1,5 +1,18 @@
 let DateTime = luxon.DateTime
 
+let api
+function setAPI() {
+  let current = DateTime.local().startOf('day').toFormat('yyyy-MM-dd HH:mm')
+  let month = DateTime.local().startOf('month').toFormat('yyyy-MM-dd HH:mm')
+  if (month === current) {
+    api = '/api/inventory/hop/monthly/'
+  } else {
+    api = '/api/inventory/hop/weekly/'
+  }
+  console.log(api)
+}
+
+
 function openQRCamera(node) {
   let reader = new FileReader();
   reader.onload = function() {
@@ -73,13 +86,14 @@ async function deleteOnLoad() {
   let data = {}
   data.startDate = DateTime.local().startOf('day').minus({minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
   data.endDate = DateTime.local().endOf('day').minus({minutes: 29}).toFormat('yyyy-MM-dd HH:mm')
-  axios.post('/api/inventory/hop/weekly/view', data)
+  axios.post(api+'view', data)
     .then(res => {
+      
       res.data.forEach(async (item) => {
         setTimeout(function(){
           deleteRow(item.commodity)
         }, 5);
-    }) 
+      }) 
   })
     .catch(err => console.log(err))
 }
@@ -124,7 +138,7 @@ function inventoryList() {
   let data = {}
   data.startDate = DateTime.local().startOf('day').minus({minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
   data.endDate = DateTime.local().endOf('day').minus({minutes: 29}).toFormat('yyyy-MM-dd HH:mm')
-  axios.post('/api/inventory/hop/weekly/view', data)
+  axios.post(api+'view', data)
     .then(res => {
     for(let i = 0; i < res.data.length; i++) {
       res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd')
@@ -163,7 +177,7 @@ async function deleteRowInv(ev) {
   if (!confirm(`Are you sure you want to delete\n\n ${selectedData[0].commodity} \n\nfrom the inventory?`)) {
    return
   }
-  await axios.delete('/api/inventory/hop/weekly/'+ selectedData[0].id)
+  await axios.delete(api + selectedData[0].id)
     .then(data => {
       alert(data.data.msg)
     })
@@ -234,7 +248,7 @@ async function sendAdd(ev){
   let fails = await validateAdd(data)
   
   if(fails.length === 0) {
-    axios.post('/api/inventory/hop/weekly', data)
+    axios.post(api, data)
       .then(data => {
         let msg = `${data.data[0].commodity}\n ${data.data[0].lbs} ${data.data[0].uom}\n Added to Inventory`
         alert(msg)
@@ -314,6 +328,7 @@ document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
 document.getElementById('com_id').addEventListener('change', selectCommodity)
 
 window.addEventListener('DOMContentLoaded',async (ev) => {
+  await setAPI()
   await loadCommodities()
   await commodityList()
   await inventoryList()

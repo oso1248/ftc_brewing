@@ -149,7 +149,6 @@ function invDatesWeek() {
       return invDate.map(listItem => {
         let invDate = createNode('option')
         invDate.innerHTML = DateTime.fromISO(listItem.date_trunc).plus({days: 1}).toFormat('yyyy-MM-dd')
-        // invDate.innerHTML = DateTime.fromISO(listItem.date_trunc).toFormat('yyyy-MM-dd')
         append(invDates, invDate)
       })
     })

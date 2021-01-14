@@ -59,6 +59,17 @@ exports.up = async function(knex) {
     END;
     $$;
   `)
+  await knex.raw(`
+    CREATE OR REPLACE FUNCTION delete_old_rows_inv_hop_monthly() RETURNS TRIGGER
+    LANGUAGE plpgsql
+    AS
+    $$
+    BEGIN
+      DELETE FROM inv_hop_monthly WHERE created_at < NOW() - INTERVAL '1095 days';
+      RETURN NULL;
+    END;
+    $$;
+  `)
   // inv_last_brews delete old records
   await knex.raw(`
     CREATE OR REPLACE FUNCTION delete_old_rows_inv_last_brews() RETURNS TRIGGER
@@ -158,6 +169,9 @@ exports.down = async function(knex) {
     DROP FUNCTION IF EXISTS delete_old_rows_inv_hop_weekly() CASCADE;
   `)
   await knex.raw(`
+    DROP FUNCTION IF EXISTS delete_old_rows_inv_hop_monthly() CASCADE;
+  `)
+  await knex.raw(`
     DROP FUNCTION IF EXISTS delete_old_rows_inv_last_brews() CASCADE;
   `)
   await knex.raw(`
@@ -169,8 +183,6 @@ exports.down = async function(knex) {
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_old_rows_fin_injection_log() CASCADE;
   `)
-
-
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_old_rows_fin_wad_add() CASCADE;
   `)

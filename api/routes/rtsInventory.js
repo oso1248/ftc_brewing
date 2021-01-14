@@ -5,6 +5,75 @@ const router = express.Router()
 // -> /api/inventory
 
 
+// combined inventories
+router.post('/combined/weekly/brw/view', (req, res) => {
+  db.getByDateCombinedBrwWeekly(req.body)
+    .then(data => {
+      if(data) {
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/combined/weekly/fin/view', (req, res) => {
+  db.getByDateCombinedFinWeekly(req.body)
+    .then(data => {
+      if(data) {
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/combined/weekly/log/view', (req, res) => {
+  db.getByDateCombinedBrwWeekly(req.body)
+    .then(data => {
+      if(data) {
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+
+router.post('/combined/monthly/brw/view', (req, res) => {
+  db.getByDateCombinedBrwMonthly(req.body)
+    .then(data => {
+      if(data) {
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/combined/monthly/fin/view', (req, res) => {
+  db.getByDateCombinedFinMonthly(req.body)
+    .then(data => {
+      if(data) {
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/combined/monthly/log/view', (req, res) => {
+  db.getByDateCombinedBrwMonthly(req.body)
+    .then(data => {
+      if(data) {
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+
 //mat inv weekly
 router.post('/material/weekly', (req, res) => {
   req.body.username = req.session.user.username
@@ -69,6 +138,8 @@ router.delete('/material/weekly/:id', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
+
+
 
 //mat inv monthly
 router.post('/material/monthly', (req, res) => {
@@ -175,7 +246,7 @@ router.post('/hop/weekly/dates', (req, res) => {
     .catch(err => res.status(500).json({msg: err.detail}))
 })
 router.delete('/hop/weekly/:id', (req, res) => {
-  db.destroyHopInv(req.params.id)
+  db.destroyHopInvWeekly(req.params.id)
     .then(data => {
       if(data.length === 0) {
         res.status(200).json({msg: 'deleted'})
@@ -185,6 +256,47 @@ router.delete('/hop/weekly/:id', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
+
+
+// hop inv monthly
+router.post('/hop/monthly', (req, res) => {
+  req.body.username = req.session.user.username
+  db.addInvHopMonthly(req.body)
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/hop/monthly/view', (req, res) => {
+  db.getHopMonthlyInvHard(req.body)
+    .then(data => {
+      if(data) {
+        res.status(200).json(data)
+      } else {
+        res.status(200).json({msg: 'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.post('/hop/monthly/dates', (req, res) => {
+  db.getInvHopMonthlyDate()
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+router.delete('/hop/monthly/:id', (req, res) => {
+  db.destroyHopInvMonthly(req.params.id)
+    .then(data => {
+      if(data.length === 0) {
+        res.status(200).json({msg: 'deleted'})
+      } else {
+        res.status(200).json({msg: 'error: not deleted'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+
 
 //hop inv daily
 router.post('/hop/daily', (req, res) => {

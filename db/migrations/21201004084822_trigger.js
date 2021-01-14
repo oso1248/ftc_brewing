@@ -1,4 +1,4 @@
-const tableName = 'mtl_commodity';
+// const tableName = 'mtl_commodity';
 
 exports.up = async function(knex) {
   //users
@@ -230,6 +230,11 @@ exports.up = async function(knex) {
     CREATE TRIGGER trigger_delete_old_rows_inv_hop_weekly
     AFTER INSERT ON inv_hop_weekly
     EXECUTE PROCEDURE delete_old_rows_inv_hop_weekly();
+  `);
+  await knex.raw(`
+    CREATE TRIGGER trigger_delete_old_rows_inv_hop_monthly
+    AFTER INSERT ON inv_hop_monthly
+    EXECUTE PROCEDURE delete_old_rows_inv_hop_monthly();
   `);
   await knex.raw(`
     CREATE TRIGGER trigger_delete_old_rows_inv_last_brews

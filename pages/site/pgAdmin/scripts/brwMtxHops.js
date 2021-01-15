@@ -1,5 +1,5 @@
-document.getElementById('updateBoxes').style.display="none"
-document.getElementById('viewBoxes').style.display="none"
+document.getElementById('updateBoxes').style.display='none'
+document.getElementById('viewBoxes').style.display='none'
 
 
 function createNode(element) {
@@ -63,18 +63,15 @@ function selectBrwBrandUpdate(){
     .then(res => {
       let tableData = res.data
       res.data.unshift({Hop:'Brand', Pounds:`${brwBrand}`})
-      hopTableUpdate = new Tabulator("#updateHop", {
+      hopTableUpdate = new Tabulator('#updateHop', {
         resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:"Hop", field:"Hop",hozAlign:"center", frozen:true},
-        {title:"Pounds", field:"Pounds",hozAlign:"center", editor:true, validator:["numeric"]},
-        ],
-        // validationFailed:function(cell, value, validators){
-
-        // }
+        {title:'Hop', field:'Hop',hozAlign:'center', frozen:true},
+        {title:'Pounds', field:'Pounds',hozAlign:'center', editor:true, validator:['numeric']},
+        ],        
       })
     })
     .catch(err => console.log(err))
@@ -86,14 +83,14 @@ function selectBrwBrandView(){
     .then(res => {
       let tableData = res.data
       res.data.unshift({Hop:'Brand', Pounds:`${brwBrand}`})
-      hopTableView = new Tabulator("#viewHop", {
+      hopTableView = new Tabulator('#viewHop', {
         resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:"Hop", field:"Hop",hozAlign:"center", frozen:true},
-        {title:"Pounds", field:"Pounds",hozAlign:"center"},
+        {title:'Hop', field:'Hop',hozAlign:'center', frozen:true},
+        {title:'Pounds', field:'Pounds',hozAlign:'center'},
         ],
       })
     })
@@ -103,8 +100,8 @@ function selectBrwBrandView(){
 
 // Views
 function update() {
-  document.getElementById('viewBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="block"
+  document.getElementById('viewBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='block'
   
   let dropDown = document.getElementById('brwBrandUpdate')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
@@ -115,8 +112,8 @@ function update() {
   }
 }
 function view() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('viewBoxes').style.display="block"
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('viewBoxes').style.display='block'
   
   let dropDown = document.getElementById('brwBrandView')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
@@ -138,22 +135,19 @@ document.getElementById('btnViewClear').addEventListener('click', resetView)
 document.getElementById('add').onclick = update
 document.getElementById('update').onclick = view
 
-// document.getElementById('download_xlsx_Hop_Update').addEventListener('click', HopUpdate)
+
 function HopUpdate(){
-  hopTableUpdate.download("xlsx", "HopUpdate.xlsx", {sheetName:"HopUpdate"})
+  hopTableUpdate.download('xlsx', 'HopUpdate.xlsx', {sheetName:'HopUpdate'})
 }
 
-// document.getElementById('print_table_Hop_Update').addEventListener('click', HopUpdatePrint)
 function HopUpdatePrint(){
   hopTableUpdate.print(false, true);
 }
 
-// document.getElementById('download_xlsx_Hop_View').addEventListener('click', HopView)
 function HopView(){
-  hopTableView.download("xlsx", "HopView.xlsx", {sheetName:"HopView"})
+  hopTableView.download('xlsx', 'HopView.xlsx', {sheetName:'HopView'})
 }
 
-// document.getElementById('print_table_Hop_View').addEventListener('click', HopViewPrint)
 function HopViewPrint(){
   hopTableView.print(false, true);
 }

@@ -11,11 +11,10 @@
   <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
   <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
 
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <link rel="stylesheet" href="../../commonCSS/styles.css">
-  <link rel="stylesheet" href="../styles/invView.css">
+  <link rel="stylesheet" href="../styles/invBrw.css">
 
 
 </head>
@@ -72,11 +71,19 @@
         </div>
       </form>
       <div id="tableWeeklyDiv">
-          <div class="button btnLabel">
-            <button class ="btn" id ="weeklyDownload-xlsx">Save XLSX</button>
-            <button class ="btn" id="weeklyPrint-table">Print Table</button>
+          <div class="gridWeekly">
+            <div class="tables" id="tableHopWeekly"></div>  
+            <div class="tables" id="tableMatWeekly"></div>                
+            <div class="tables" id="tableGrnWeekly"></div>                
           </div>
-          <div id="tableWeekly"></div>
+          <div>
+            <div class="button btnLabel">
+              <h3>Weekly Combined Finishing Inventory</h3>
+              <button class ="btn" id ="weeklyCombinedDownload-xlsx">Save XLSX</button>
+              <button class ="btn" id="weeklyCombinedPrint-table">Print Table</button>
+            </div>
+            <div class="tables" id="tableCombinedWeekly"></div>
+          </div>
       </div>
     </div>
 
@@ -88,11 +95,19 @@
         </div>
       </form>
       <div id="tableMonthlyDiv">
+        <div class="gridMonthly">         
+          <div class="tables" id="tableHopMonthly"></div>            
+          <div class="tables" id="tableMatMonthly"></div>          
+          <div class="tables" id="tableGrnMonthly"></div>          
+        </div>
+        <div>
           <div class="button btnLabel">
-            <button class ="btn" id ="monthlyDownload-xlsx">Save XLSX</button>
-            <button class ="btn" id="monthlyPrint-table">Print Table</button>
+            <h3>Monthly Combined Finishing Inventory</h3>
+            <button class ="btn" id ="monthlyCombinedDownload-xlsx">Save XLSX</button>
+            <button class ="btn" id="monthlyCombinedPrint-table">Print Table</button>
           </div>
-          <div id="tableMonthly"></div>
+          <div class="tables" id="tableCombinedMonthly"></div>
+        </div>
       </div>
     </div>
 

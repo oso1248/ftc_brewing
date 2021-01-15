@@ -179,14 +179,14 @@ function loadTableWeeklyHard(date) {
       let tableData = res.data
       weeklyTableHard = new Tabulator('#weeklyHard', {
         resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:"Hop", field:"commodity",hozAlign:"center", frozen:true},
-        {title:"lbs", field:"lbs",hozAlign:"center"},
-        {title:"Lot", field:"lot",hozAlign:"center"},
-        {title:"Name", field:"username",hozAlign:"center"},
+        {title:'Hop', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'lbs', field:'lbs',hozAlign:'center'},
+        {title:'Lot', field:'lot',hozAlign:'center'},
+        {title:'Name', field:'username',hozAlign:'center'},
         ],
       })
     })
@@ -221,12 +221,12 @@ function loadTableWeeklySets(date) {
       let tableData = res.data
       weeklyTableSets = new Tabulator('#weeklySets', {
         resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-          {title:"Brand", field:"brand",hozAlign:"center", frozen:true},
-          {title:"Sets", field:"sets",hozAlign:"center"},
+          {title:'Brand', field:'brand',hozAlign:'center', frozen:true},
+          {title:'Sets', field:'sets',hozAlign:'center'},
         ],
       })
     })
@@ -267,12 +267,12 @@ function loadTableWeeklyRolling(date) {
 
       weeklyTableRolling = new Tabulator('#weeklyRolling', {
         resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-          {title:"Hop", field:"commodity",hozAlign:"center", frozen:true},
-          {title:"lbs", field:"lbs",hozAlign:"center"},
+          {title:'Hop', field:'commodity',hozAlign:'center', frozen:true},
+          {title:'lbs', field:'lbs',hozAlign:'center'},
         ],
       })
     })

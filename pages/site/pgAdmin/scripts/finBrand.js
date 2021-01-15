@@ -1,7 +1,7 @@
-document.getElementById('addBoxes').style.display="none"
-document.getElementById('updateBoxes').style.display="none"
-document.getElementById('injectionBoxes').style.display="none"
-document.getElementById('attView').style.display="none"
+document.getElementById('addBoxes').style.display='none'
+document.getElementById('updateBoxes').style.display='none'
+document.getElementById('injectionBoxes').style.display='none'
+document.getElementById('attView').style.display='none'
 
 function createNode(element) {
   return document.createElement(element)
@@ -41,28 +41,28 @@ String.prototype.testLengthFour = function () {
 document.getElementById('view').onclick = view
 let brandTable
 function view() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('injectionBoxes').style.display="none"
-  document.getElementById('attView').style.display="grid"
-  document.getElementById('addBoxes').style.display="none"
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('injectionBoxes').style.display='none'
+  document.getElementById('attView').style.display='grid'
+  document.getElementById('addBoxes').style.display='none'
 
   axios.post('/api/brand/fin/get', {active: false})
     .then(res => {
       let tableData = res.data
-      brandTable = new Tabulator("#list", {
+      brandTable = new Tabulator('#list', {
         resizableColumns:false,
-        height:"309px",
-        layout:"fitDataFill",
+        height:'309px',
+        layout:'fitDataFill',
+        resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
-        // {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
-        {title:"Fin Brand", field:"brndFin",hozAlign:"center", frozen:true},
-        {title:"Active", field:"active",hozAlign:"center"},
-        {title:"Injection", field:"injection",hozAlign:"center"},
-        {title:"Brw Brand", field:"brndBrw",hozAlign:"center"},
-        {title:"Pck Brand", field:"brndPck",hozAlign:"center"},
-        {title:"Note", field:"note", hozAlign:"center"},
+        {title:'Fin Brand', field:'brndFin',hozAlign:'center', frozen:true},
+        {title:'Active', field:'active',hozAlign:'center'},
+        {title:'Injection', field:'injection',hozAlign:'center'},
+        {title:'Brw Brand', field:'brndBrw',hozAlign:'center'},
+        {title:'Pck Brand', field:'brndPck',hozAlign:'center'},
+        {title:'Note', field:'note', hozAlign:'center'},
         ],
       })
     })
@@ -74,10 +74,10 @@ function view() {
 //Routes Add
 document.getElementById('add').onclick = add
 function add() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('injectionBoxes').style.display="none"
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="grid"
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('injectionBoxes').style.display='none'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='grid'
 
   let dropDown = document.getElementById('brw_id')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brew Brand</option>`
@@ -115,7 +115,6 @@ async function sendAdd(ev){
         alert(data.data.brndFin + ' has been added')
       })
       .catch(err => alert(err))
-      // .catch(err => console.log(err))
   } else {
     let msg = 'Problems:\n'
     for(i = 0; i < fails.length; i++) {
@@ -162,10 +161,10 @@ async function validateAdd(data){
 //Routes Update
 document.getElementById('update').onclick = update
 function update() {
-  document.getElementById('injectionBoxes').style.display="none"
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="grid"
+  document.getElementById('injectionBoxes').style.display='none'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='grid'
 
   let dropDown = document.getElementsByName('fin_id')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Fin Brand</option>`
@@ -255,10 +254,10 @@ function selectBrand(){
 //Routes ingredient
 document.getElementById('ingredientBox').onclick = ingredient
 function ingredient() {
-  document.getElementById('injectionBoxes').style.display="block"
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="none"
+  document.getElementById('injectionBoxes').style.display='block'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='none'
 
   let dropDown = document.getElementsByName('fin_idAdd')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
@@ -331,17 +330,17 @@ function selectBrandIngredientUpdate() {
   axios.post('/api/commodity/ingredient/bridge/get/' + id)
     .then(res => {
       let tableData = res.data
-      ingredientTable = new Tabulator("#injRateTable", {
+      ingredientTable = new Tabulator('#injRateTable', {
         resizableColumns:false,
-        height:"120x",
-        layout:"fitDataFill",
+        height:'120x',
+        layout:'fitDataFill',
+        resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
-        // {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
-        {title:"Brand", field:"brand",hozAlign:"center", frozen:true},
-        {title:"Commodity", field:"commodity",hozAlign:"center"},
-        {title:"Rate", field:"rate",hozAlign:"center", width: "25px", editor:true, validator:["float"]},
+        {title:'Brand', field:'brand',hozAlign:'center', frozen:true},
+        {title:'Commodity', field:'commodity',hozAlign:'center'},
+        {title:'Rate', field:'rate',hozAlign:'center', width: '25px', editor:true, validator:['float']},
         ],
       })
     })

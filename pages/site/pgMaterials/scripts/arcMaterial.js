@@ -1,8 +1,8 @@
 let DateTime = luxon.DateTime
 
-document.getElementById('addBoxes').style.display="none"
-document.getElementById('viewBoxes').style.display="none"
-document.getElementById('deleteBoxes').style.display="none"
+document.getElementById('addBoxes').style.display='none'
+document.getElementById('viewBoxes').style.display='none'
+document.getElementById('deleteBoxes').style.display='none'
 
 
 function createNode(element) {
@@ -48,9 +48,9 @@ function resetAdd(ev){
 }
 document.getElementById('add').onclick = add
 function add() {
-  document.getElementById('addBoxes').style.display="block"
-  document.getElementById('viewBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="none"
+  document.getElementById('addBoxes').style.display='block'
+  document.getElementById('viewBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='none'
 
   let api = '/api/commodity/get'
   let title = 'commodity'
@@ -116,9 +116,9 @@ async function validateAdd (data){
 document.getElementById('view').onclick = view
 let tableView
 function view() {
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('viewBoxes').style.display="block"
-  document.getElementById('deleteBoxes').style.display="none"
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('viewBoxes').style.display='block'
+  document.getElementById('deleteBoxes').style.display='none'
   
   axios.post('/api/inventory/material/archive/log/get')
     .then(res => {
@@ -126,19 +126,19 @@ function view() {
       for(let i = 0; i < res.data.length; i++) {
         tableData[i].created_at = DateTime.fromISO(tableData[i].created_at).toFormat('yyyy-MM-dd')
       }
-      tableView = new Tabulator("#ViewTable", {
+      tableView = new Tabulator('#ViewTable', {
         printHeader:'<h1>Archived Inventory<h1>',
         resizableColumns:false,
-        height:"309px",
-        layout:"fitDataFill",
+        height:'309px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:"Commodity", field:"commodity",hozAlign:"center", frozen:true},
-        {title:"Final Count", field:"count_final", hozAlign:"center"},
-        {title:"End Total", field:"total_end",hozAlign:"center"},
-        {title:"Username", field:"username",hozAlign:"center"},
-        {title:"Date", field:"created_at",hozAlign:"center"},
-        {title:"Note", field:"note",hozAlign:"center"},
+        {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'Final Count', field:'count_final', hozAlign:'center'},
+        {title:'End Total', field:'total_end',hozAlign:'center'},
+        {title:'Username', field:'username',hozAlign:'center'},
+        {title:'Date', field:'created_at',hozAlign:'center'},
+        {title:'Note', field:'note',hozAlign:'center'},
         ],
       })
     })
@@ -146,7 +146,7 @@ function view() {
 }
 document.getElementById('btnxcel').addEventListener('click', excel)
 function excel(){
-  tableView.download("xlsx", "archive.xlsx", {sheetName:"Log"})
+  tableView.download('xlsx', 'archive.xlsx', {sheetName:'Log'})
 }
 document.getElementById('btnprint').addEventListener('click', () => {
   tableView.print(false, true);
@@ -157,9 +157,9 @@ document.getElementById('btnprint').addEventListener('click', () => {
 let deleteTable
 document.getElementById('delete').onclick = deleteView
 function deleteView() {
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('viewBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="block"
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('viewBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='block'
 
   loadDeleteView()
 
@@ -171,19 +171,19 @@ function loadDeleteView() {
       for(let i = 0; i < res.data.length; i++) {
         tableData[i].created_at = DateTime.fromISO(tableData[i].created_at).toFormat('yyyy-MM-dd')
       }
-      deleteTable = new Tabulator("#DeleteTable", {
+      deleteTable = new Tabulator('#DeleteTable', {
         resizableColumns:false,
-        height:"309px",
+        height:'309px',
         selectable:true,
-        layout:"fitDataFill",
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:"Commodity", field:"commodity",hozAlign:"center", frozen:true},
-        {title:"Final Count", field:"count_final", hozAlign:"center"},
-        {title:"End Total", field:"total_end",hozAlign:"center"},
-        {title:"Username", field:"username",hozAlign:"center"},
-        {title:"Date", field:"created_at",hozAlign:"center"},
-        {title:"Note", field:"note",hozAlign:"center"},
+        {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'Final Count', field:'count_final', hozAlign:'center'},
+        {title:'End Total', field:'total_end',hozAlign:'center'},
+        {title:'Username', field:'username',hozAlign:'center'},
+        {title:'Date', field:'created_at',hozAlign:'center'},
+        {title:'Note', field:'note',hozAlign:'center'},
         ],
       })
     })

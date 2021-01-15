@@ -29,7 +29,7 @@ router.post('/combined/weekly/fin/view', (req, res) => {
     .catch(err => res.status(500).json({msg: err.detail}))
 })
 router.post('/combined/weekly/log/view', (req, res) => {
-  db.getByDateCombinedBrwWeekly(req.body)
+  db.getByDateCombinedLogWeekly(req.body)
     .then(data => {
       if(data) {
         res.status(200).json(data)
@@ -63,7 +63,7 @@ router.post('/combined/monthly/fin/view', (req, res) => {
     .catch(err => res.status(500).json({msg: err.detail}))
 })
 router.post('/combined/monthly/log/view', (req, res) => {
-  db.getByDateCombinedBrwMonthly(req.body)
+  db.getByDateCombinedLogMonthly(req.body)
     .then(data => {
       if(data) {
         res.status(200).json(data)

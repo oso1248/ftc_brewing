@@ -1,7 +1,7 @@
-document.getElementById('brndViewHide').style.display="none"
-document.getElementById('stdHopHide').style.display="none"
-document.getElementById('dryHopHide').style.display="none"
-document.getElementById('sprSacHide').style.display="none"
+document.getElementById('brndViewHide').style.display='none'
+document.getElementById('stdHopHide').style.display='none'
+document.getElementById('dryHopHide').style.display='none'
+document.getElementById('sprSacHide').style.display='none'
 
 
 function createNode(element) {
@@ -37,10 +37,10 @@ function brwBrand(dropDown){
 let viewBrandBrwTable
 document.getElementById('brndView').onclick = brandView
 function brandView() {
-document.getElementById('brndViewHide').style.display="block"
-document.getElementById('stdHopHide').style.display="none"
-document.getElementById('dryHopHide').style.display="none"
-document.getElementById('sprSacHide').style.display="none"
+document.getElementById('brndViewHide').style.display='block'
+document.getElementById('stdHopHide').style.display='none'
+document.getElementById('dryHopHide').style.display='none'
+document.getElementById('sprSacHide').style.display='none'
 if(viewBrandBrwTable) {
   viewBrandBrwTable.clearData()
 }
@@ -51,19 +51,19 @@ function viewBrandBrew() {
     .then(res => {
       let tableData = res.data
 
-      viewBrandBrwTable = new Tabulator("#brndViewTbl", {
+      viewBrandBrwTable = new Tabulator('#brndViewTbl', {
         printHeader:'<h1>Brew Brands<h1>',
         resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:"Brand", field:"brand",hozAlign:"center", frozen:true},
-        {title:"Active", field:"active",hozAlign:"center"},
-        {title:"Standard Hops", field:"hop_std",hozAlign:"center"},
-        {title:"Craft Hops", field:"hop_crft",hozAlign:"center"},
-        {title:"Dry Hops", field:"hop_dry",hozAlign:"center"},
-        {title:"Super Sacks", field:"supr_sac",hozAlign:"center"},
+        {title:'Brand', field:'brand',hozAlign:'center', frozen:true},
+        {title:'Active', field:'active',hozAlign:'center'},
+        {title:'Standard Hops', field:'hop_std',hozAlign:'center'},
+        {title:'Craft Hops', field:'hop_crft',hozAlign:'center'},
+        {title:'Dry Hops', field:'hop_dry',hozAlign:'center'},
+        {title:'Super Sacks', field:'supr_sac',hozAlign:'center'},
         ],
       })
     })
@@ -71,7 +71,7 @@ function viewBrandBrew() {
 }
 document.getElementById('xlsxBrndView').addEventListener('click', xlsxBrndView)
 function xlsxBrndView(){
-  viewBrandBrwTable.download("xlsx", "brew_brands.xlsx", {sheetName:"Brands"})
+  viewBrandBrwTable.download('xlsx', 'brew_brands.xlsx', {sheetName:'Brands'})
 }
 document.getElementById('printBrndView').addEventListener('click', printBrndView)
 function printBrndView(){
@@ -84,11 +84,11 @@ function printBrndView(){
 let viewStdHopTable
 document.getElementById('stdHopView').onclick = stdHopView
 function stdHopView() {
-  document.getElementById('stdHopBtn').style.display="none"
-  document.getElementById('brndViewHide').style.display="none"
-  document.getElementById('stdHopHide').style.display="block"
-  document.getElementById('dryHopHide').style.display="none"
-  document.getElementById('sprSacHide').style.display="none"
+  document.getElementById('stdHopBtn').style.display='none'
+  document.getElementById('brndViewHide').style.display='none'
+  document.getElementById('stdHopHide').style.display='block'
+  document.getElementById('dryHopHide').style.display='none'
+  document.getElementById('sprSacHide').style.display='none'
   stdHopList()
   if(viewStdHopTable) {
     viewStdHopTable.clearData()
@@ -103,22 +103,22 @@ function stdHopList() {
 }
 document.getElementById('stdHopSel').addEventListener('change', stdHopTbl)
 async function stdHopTbl() {
-  document.getElementById('stdHopBtn').style.display="block"
+  document.getElementById('stdHopBtn').style.display='block'
   let name = document.getElementById('stdHopSel').value
   axios.post('/api/mtx/brnd', {brand: `${name}`, method: 'view'})
     .then(res => {
       res.data.unshift({Hop:'Brand', Pounds:`${name}`})
       let tableData = res.data
 
-      viewStdHopTable = new Tabulator("#stdHopTbl", {
+      viewStdHopTable = new Tabulator('#stdHopTbl', {
         printHeader:'<h1>Standard Hops<h1>',
         resizableColumns:false,
-        height:"300px",
-        layout:"fitDataFill",
+        height:'300px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-          {title:"Hop", field:"Hop", hozAlign:"Left"},
-          {title:"Pounds", field:"Pounds", hozAlign:"Left"},
+          {title:'Hop', field:'Hop', hozAlign:'Left'},
+          {title:'Pounds', field:'Pounds', hozAlign:'Left'},
         ],
     })
     })
@@ -126,7 +126,7 @@ async function stdHopTbl() {
 }
 document.getElementById('xlsxStdHop').addEventListener('click', xlsxStdHop)
 function xlsxStdHop(){
-  viewStdHopTable.download("xlsx", "standard_hops.xlsx", {sheetName:"Standard Hops"})
+  viewStdHopTable.download('xlsx', 'standard_hops.xlsx', {sheetName:'Standard Hops'})
 }
 document.getElementById('printStdHop').addEventListener('click', printStdHop)
 function printStdHop(){
@@ -140,11 +140,11 @@ function printStdHop(){
 let viewDryHopTable
 document.getElementById('dryHopView').onclick = dryHopView
 function dryHopView() {
-  document.getElementById('dryHopBtn').style.display="none"
-  document.getElementById('brndViewHide').style.display="none"
-  document.getElementById('stdHopHide').style.display="none"
-  document.getElementById('dryHopHide').style.display="block"
-  document.getElementById('sprSacHide').style.display="none"
+  document.getElementById('dryHopBtn').style.display='none'
+  document.getElementById('brndViewHide').style.display='none'
+  document.getElementById('stdHopHide').style.display='none'
+  document.getElementById('dryHopHide').style.display='block'
+  document.getElementById('sprSacHide').style.display='none'
   dryHopList()
   if(viewDryHopTable) {
     viewDryHopTable.clearData()
@@ -159,22 +159,22 @@ function dryHopList() {
 }
 document.getElementById('dryHopSel').addEventListener('change', dryHopTbl)
 async function dryHopTbl() {
-  document.getElementById('dryHopBtn').style.display="block"
+  document.getElementById('dryHopBtn').style.display='block'
   let name = document.getElementById('dryHopSel').value
   axios.post('/api/mtx/dry', {brand: `${name}`, method: 'view'})
     .then(res => {
       res.data.unshift({Hop:'Brand', Pounds:`${name}`})
       let tableData = res.data
 
-      viewDryHopTable = new Tabulator("#dryHopTbl", {
+      viewDryHopTable = new Tabulator('#dryHopTbl', {
         printHeader:'<h1>Dry Hops<h1>',
         resizableColumns:false,
-        height:"300px",
-        layout:"fitDataFill",
+        height:'300px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-          {title:"Hop", field:"Hop", hozAlign:"Left"},
-          {title:"Pounds", field:"Pounds", hozAlign:"Left"},
+          {title:'Hop', field:'Hop', hozAlign:'Left'},
+          {title:'Pounds', field:'Pounds', hozAlign:'Left'},
         ],
     })
     })
@@ -182,7 +182,7 @@ async function dryHopTbl() {
 }
 document.getElementById('xlsxDryHop').addEventListener('click', xlsxDryHop)
 function xlsxDryHop(){
-  viewDryHopTable.download("xlsx", "dry_hop.xlsx", {sheetName:"Dry Hops"})
+  viewDryHopTable.download('xlsx', 'dry_hop.xlsx', {sheetName:'Dry Hops'})
 }
 document.getElementById('printDryHop').addEventListener('click', printDryHop)
 function printDryHop(){
@@ -198,11 +198,11 @@ function printDryHop(){
 let viewSprSacTable
 document.getElementById('sprSacView').onclick = sprSacView
 function sprSacView() {
-  document.getElementById('sprSacBtn').style.display="none"
-  document.getElementById('brndViewHide').style.display="none"
-  document.getElementById('stdHopHide').style.display="none"
-  document.getElementById('dryHopHide').style.display="none"
-  document.getElementById('sprSacHide').style.display="block"
+  document.getElementById('sprSacBtn').style.display='none'
+  document.getElementById('brndViewHide').style.display='none'
+  document.getElementById('stdHopHide').style.display='none'
+  document.getElementById('dryHopHide').style.display='none'
+  document.getElementById('sprSacHide').style.display='block'
   sprSacList()
   if(viewSprSacTable) {
     viewSprSacTable.clearData()
@@ -217,21 +217,21 @@ function sprSacList() {
 }
 document.getElementById('sprSacSel').addEventListener('change', sprSacTbl)
 async function sprSacTbl() {
-  document.getElementById('sprSacBtn').style.display="block"
+  document.getElementById('sprSacBtn').style.display='block'
   let name = document.getElementById('sprSacSel').value
   axios.post('/api/mtx/sac', {brand: `${name}`, method: 'view'})
     .then(res => {
       res.data.unshift({commodity:'Brand', Units:`${name}`})
       let tableData = res.data
-      viewSprSacTable = new Tabulator("#sprSacTbl", {
+      viewSprSacTable = new Tabulator('#sprSacTbl', {
         printHeader:'<h1>Super Sacks<h1>',
         resizableColumns:false,
-        height:"300px",
-        layout:"fitDataFill",
+        height:'300px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-          {title:"Commodity", field:"commodity", hozAlign:"Left"},
-          {title:"Units", field:"Units", hozAlign:"Left"},
+          {title:'Commodity', field:'commodity', hozAlign:'Left'},
+          {title:'Units', field:'Units', hozAlign:'Left'},
         ],
     })
     })
@@ -239,7 +239,7 @@ async function sprSacTbl() {
 }
 document.getElementById('xlsxSprSac').addEventListener('click', xlsxSprSac)
 function xlsxSprSac(){
-  viewSprSacTable.download("xlsx", "super_sacks.xlsx", {sheetName:"Super Sacks"})
+  viewSprSacTable.download('xlsx', 'super_sacks.xlsx', {sheetName:'Super Sacks'})
 }
 document.getElementById('printSprSac').addEventListener('click', printSprSac)
 function printSprSac(){

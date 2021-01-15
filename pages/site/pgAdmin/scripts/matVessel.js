@@ -1,7 +1,7 @@
-document.getElementById('addBoxes').style.display="none"
-document.getElementById('updateBoxes').style.display="none"
-document.getElementById('deleteBoxes').style.display="none"
-document.getElementById('attView').style.display="none"
+document.getElementById('addBoxes').style.display='none'
+document.getElementById('updateBoxes').style.display='none'
+document.getElementById('deleteBoxes').style.display='none'
+document.getElementById('attView').style.display='none'
 
 function createNode(element) {
   return document.createElement(element)
@@ -38,10 +38,10 @@ String.prototype.testLengthFour = function () {
 
 //views
 function del() {
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="grid"
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='grid'
 
   let dropDown = document.getElementsByName('delete')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
@@ -54,10 +54,10 @@ function del() {
 //Routes Add
 document.getElementById('add').onclick = add
 function add() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="grid"
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='grid'
 
   let dropDown = document.getElementById('type_id')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Type</option>`
@@ -147,10 +147,10 @@ async function validateAdd(data){
 //Routes Update
 document.getElementById('update').onclick = update
 function update() {
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="grid"
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='grid'
 
   let dropDown = document.getElementsByName('updateVessel')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Vessel</option>`
@@ -246,28 +246,28 @@ function selectBrand(){
 document.getElementById('view').onclick = view
 let vesselTable
 function view() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="grid"
-  document.getElementById('addBoxes').style.display="none"
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='grid'
+  document.getElementById('addBoxes').style.display='none'
 
   axios.post('/api/vessel/get', {active: false})
     .then(res => {
       let tableData = res.data
-      vesselTable = new Tabulator("#list", {
+      vesselTable = new Tabulator('#list', {
         resizableColumns:false,
-        height:"309px",
-        layout:"fitDataStretch",
+        height:'309px',
+        layout:'fitDataStretch',
+        resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
-        columns:[
-        // {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
-        {title:"Vessel", field:"vessel",hozAlign:"center", frozen:true},
-        {title:"Active", field:"active",hozAlign:"center"},
-        {title:"Type", field:"type",hozAlign:"center"},
-        {title:"Volume", field:"volume",hozAlign:"center"},
-        {title:"Location", field:"location",hozAlign:"center"},
-        {title:"Note", field:"note", hozAlign:"center"},
+        columns:[        
+        {title:'Vessel', field:'vessel',hozAlign:'center', frozen:true},
+        {title:'Active', field:'active',hozAlign:'center'},
+        {title:'Type', field:'type',hozAlign:'center'},
+        {title:'Volume', field:'volume',hozAlign:'center'},
+        {title:'Location', field:'location',hozAlign:'center'},
+        {title:'Note', field:'note', hozAlign:'center'},
         ],
       })
     })

@@ -1,9 +1,9 @@
 let DateTime = luxon.DateTime
 
-document.getElementById('tableWeeklyDiv').style.display="none"
-document.getElementById('tableMonthlyDiv').style.display="none"
-document.getElementById('invWeekly').style.display="none"
-document.getElementById('invMonthly').style.display="none"
+document.getElementById('tableWeeklyDiv').style.display='none'
+document.getElementById('tableMonthlyDiv').style.display='none'
+document.getElementById('invWeekly').style.display='none'
+document.getElementById('invMonthly').style.display='none'
 
 
 function createNode(element) {
@@ -28,8 +28,8 @@ String.prototype.toNonAlpha = function (spaces) {
 // View weekly
 document.getElementById('viewWeekly').onclick = viewWeekly
 function viewWeekly() {
-  document.getElementById('invWeekly').style.display="block"
-  document.getElementById('invMonthly').style.display="none"
+  document.getElementById('invWeekly').style.display='block'
+  document.getElementById('invMonthly').style.display='none'
   weeklyDates()
 }
 function weeklyDates() {
@@ -60,29 +60,29 @@ function weeklyMatTable() {
       res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd')
     }
       let tableData = res.data
-      weeklyTable = new Tabulator("#tableWeekly", {
+      weeklyTable = new Tabulator('#tableWeekly', {
         printHeader:'<h1>Weekly Material Inventory<h1>',
-        height:"309px",
-        layout:"fitDataFill",
+        height:'309px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:"Commodity", field:"commodity",hozAlign:"center", frozen:true},
-        {title:"SAP", field:"sap", hozAlign:"center"},
-        {title:"Per Unit", field:"total_per_unit",hozAlign:"center"},
-        {title:"Units", field:"total_count",hozAlign:"center"},
-        {title:"Total", field:"total_end",hozAlign:"center"},
-        {title:"Username", field:"username",hozAlign:"center"},
-        {title:"Date", field:"created_at",hozAlign:"center"},
-        {title:"Note", field:"note",hozAlign:"center"},
+        {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'SAP', field:'sap', hozAlign:'center'},
+        {title:'Per Unit', field:'total_per_unit',hozAlign:'center'},
+        {title:'Units', field:'total_count',hozAlign:'center'},
+        {title:'Total', field:'total_end',hozAlign:'center'},
+        {title:'Username', field:'username',hozAlign:'center'},
+        {title:'Date', field:'created_at',hozAlign:'center'},
+        {title:'Note', field:'note',hozAlign:'center'},
         ],
       })
     })
     .catch(err => console.log(err.detail))
-    document.getElementById('tableWeeklyDiv').style.display="block"
+    document.getElementById('tableWeeklyDiv').style.display='block'
 }
 document.getElementById('weeklyDownload-xlsx').addEventListener('click', weeklyExcel)
 function weeklyExcel(){
-  weeklyTable.download("xlsx", "weekly_inv.xlsx", {sheetName:"inv"})
+  weeklyTable.download('xlsx', 'weekly_inv.xlsx', {sheetName:'inv'})
 }
 document.getElementById('weeklyPrint-table').addEventListener('click', weeklyPrint)
 function weeklyPrint(){
@@ -94,8 +94,8 @@ function weeklyPrint(){
 // view monthly
 document.getElementById('viewMonthly').onclick = viewMonthly
 function viewMonthly() {
-  document.getElementById('invWeekly').style.display="none"
-  document.getElementById('invMonthly').style.display="block"
+  document.getElementById('invWeekly').style.display='none'
+  document.getElementById('invMonthly').style.display='block'
   monthlyDates()
 }
 function monthlyDates() {
@@ -126,40 +126,33 @@ function monthlyMatTable() {
       res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd')
     }
       let tableData = res.data
-      monthlyTable = new Tabulator("#tableMonthly", {
+      monthlyTable = new Tabulator('#tableMonthly', {
         printHeader:'<h1>Monthly Material Inventory<h1>',
-        height:"309px",
-        layout:"fitDataFill",
+        height:'309px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:"Commodity", field:"commodity",hozAlign:"center", frozen:true},
-        {title:"SAP", field:"sap", hozAlign:"center"},
-        {title:"Per Unit", field:"total_per_unit",hozAlign:"center"},
-        {title:"Units", field:"total_count",hozAlign:"center"},
-        {title:"Total", field:"total_end",hozAlign:"center"},
-        {title:"Username", field:"username",hozAlign:"center"},
-        {title:"Date", field:"created_at",hozAlign:"center"},
-        {title:"Note", field:"note",hozAlign:"center"},
+        {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'SAP', field:'sap', hozAlign:'center'},
+        {title:'Per Unit', field:'total_per_unit',hozAlign:'center'},
+        {title:'Units', field:'total_count',hozAlign:'center'},
+        {title:'Total', field:'total_end',hozAlign:'center'},
+        {title:'Username', field:'username',hozAlign:'center'},
+        {title:'Date', field:'created_at',hozAlign:'center'},
+        {title:'Note', field:'note',hozAlign:'center'},
         ],
       })
     })
     .catch(err => console.log(err.detail))
-    document.getElementById('tableMonthlyDiv').style.display="block"
+    document.getElementById('tableMonthlyDiv').style.display='block'
 }
 document.getElementById('monthlyDownload-xlsx').addEventListener('click', monthlyExcel)
 function monthlyExcel(){
-  monthlyTable.download("xlsx", "monthly_inv.xlsx", {sheetName:"inv"})
+  monthlyTable.download('xlsx', 'monthly_inv.xlsx', {sheetName:'inv'})
 }
 document.getElementById('monthlyPrint-table').addEventListener('click', monthlyPrint)
 function monthlyPrint(){
   monthlyTable.print(false, true);
 }
-
-
-
-
-
-
-
 
 // window.addEventListener('DOMContentLoaded', (ev) => { invDates() }) 

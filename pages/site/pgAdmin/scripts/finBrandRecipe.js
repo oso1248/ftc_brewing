@@ -1,5 +1,5 @@
-document.getElementById('updateBoxes').style.display="none"
-document.getElementById('viewBoxes').style.display="none"
+document.getElementById('updateBoxes').style.display='none'
+document.getElementById('viewBoxes').style.display='none'
 
 
 function createNode(element) {
@@ -41,7 +41,6 @@ function convert2(obj) {
   return data
 }
 function convert(obj, labels) {
-  // console.log(obj)
   let id = obj.id
   delete obj['id']
   let json = {}
@@ -59,7 +58,6 @@ function convert(obj, labels) {
       i++
     }  
   }
-  // console.log(data)
   return data
 }
 
@@ -71,11 +69,11 @@ let tableUpdateBrandFin
 
 document.getElementById('add').onclick = updateView
 function updateView() {
-  document.getElementById('viewBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="block"
+  document.getElementById('viewBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='block'
 
-  document.getElementById('updateLineageBoxChp').style.display="none"
-  document.getElementById('updateLineageBoxFin').style.display="none"
+  document.getElementById('updateLineageBoxChp').style.display='none'
+  document.getElementById('updateLineageBoxFin').style.display='none'
   
 
   let dropDown = document.getElementById('finBrandUpdate')
@@ -116,8 +114,8 @@ function resetUpdateFin(ev){
 
 document.getElementById('brwBrandUpdate').addEventListener('change', selectUpdateBrw)
 function selectUpdateBrw() {
-  document.getElementById('updateLineageBoxChp').style.display="block"
-  document.getElementById('updateLineageBoxFin').style.display="none"
+  document.getElementById('updateLineageBoxChp').style.display='block'
+  document.getElementById('updateLineageBoxFin').style.display='none'
 
   let brand = document.getElementById('brwBrandUpdate').value
   
@@ -182,8 +180,8 @@ async function schBrandUpdate(name) {
 
 document.getElementById('finBrandUpdate').addEventListener('change', selectUpdateFin)
 function selectUpdateFin() {
-  document.getElementById('updateLineageBoxFin').style.display="block"
-  document.getElementById('updateLineageBoxChp').style.display="none"
+  document.getElementById('updateLineageBoxFin').style.display='block'
+  document.getElementById('updateLineageBoxChp').style.display='none'
 
   let brand = document.getElementById('finBrandUpdate').value
   
@@ -257,10 +255,8 @@ async function sendUpdateChp(ev){
   ev.stopPropagation()
   
   let tableData = tableUpdateBrandChp.getData()
-  // console.log(tableData)
   await axios.patch('/api/brand/detail/updaterecipe/chip', tableData)
-    .then(data => {
-      // console.log(data.data)
+    .then(data => {      
       alert('Updated')
     })
     .catch(err => alert(err))
@@ -271,10 +267,9 @@ async function sendUpdateSch(ev){
   ev.stopPropagation()
   
   let tableData = tableUpdateBrandSch.getData()
-  // console.log(tableData)
+  
   await axios.patch('/api/brand/detail/updaterecipe/schoene', tableData)
-    .then(data => {
-      // console.log(data.data)
+    .then(data => {  
       alert('Updated')
     })
     .catch(err => alert(err))
@@ -285,10 +280,9 @@ async function sendUpdateFin(ev){
   ev.stopPropagation()
   
   let tableData = tableUpdateBrandFin.getData()
-  // console.log(tableData)
+  
   await axios.patch('/api/brand/detail/updaterecipe/filtered', tableData)
-    .then(data => {
-      // console.log(data.data)
+    .then(data => {  
       alert('Updated')
     })
     .catch(err => alert(err))
@@ -303,11 +297,11 @@ let tableViewBrandFin
 
 document.getElementById('update').onclick = viewView
 function viewView() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('viewBoxes').style.display="block"
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('viewBoxes').style.display='block'
 
-  document.getElementById('viewLineageBoxChp').style.display="none"
-  document.getElementById('viewLineageBoxFin').style.display="none"
+  document.getElementById('viewLineageBoxChp').style.display='none'
+  document.getElementById('viewLineageBoxFin').style.display='none'
 
   let api = '/api/brand/fin/get/'
   let title = 'brndFin'
@@ -324,8 +318,8 @@ function viewView() {
 
 document.getElementById('brwBrandView').addEventListener('change', selectViewBrw)
 function selectViewBrw() {
-  document.getElementById('viewLineageBoxChp').style.display="block"
-  document.getElementById('viewLineageBoxFin').style.display="none"
+  document.getElementById('viewLineageBoxChp').style.display='block'
+  document.getElementById('viewLineageBoxFin').style.display='none'
 
   let brand = document.getElementById('brwBrandView').value
   
@@ -391,8 +385,8 @@ async function schBrandView(name) {
 
 document.getElementById('finBrandView').addEventListener('change', selectViewFin)
 function selectViewFin() {
-  document.getElementById('viewLineageBoxFin').style.display="block"
-  document.getElementById('viewLineageBoxChp').style.display="none"
+  document.getElementById('viewLineageBoxFin').style.display='block'
+  document.getElementById('viewLineageBoxChp').style.display='none'
 
   let brand = document.getElementById('finBrandView').value
 

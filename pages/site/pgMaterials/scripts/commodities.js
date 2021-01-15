@@ -1,7 +1,7 @@
-document.getElementById('addBoxes').style.display="none"
-document.getElementById('updateBoxes').style.display="none"
-document.getElementById('deleteBoxes').style.display="none"
-document.getElementById('attView').style.display="none"
+document.getElementById('addBoxes').style.display='none'
+document.getElementById('updateBoxes').style.display='none'
+document.getElementById('deleteBoxes').style.display='none'
+document.getElementById('attView').style.display='none'
 const api = '/api/brewery'
 
 
@@ -112,10 +112,10 @@ function uom(dropDown, func){
 
 // Views
 function add() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="block"
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='block'
   
   let dropDown = document.getElementById('supplier_id')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Supplier</option>`
@@ -137,10 +137,10 @@ function add() {
   uom(dropDown, createList)
 }
 function update() {
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="grid"
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='grid'
 
   let dropDown = document.getElementsByName('updateCommodity')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Commodity</option>`
@@ -166,47 +166,47 @@ function update() {
 }
 let commodityTable
 function view() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="block"
-  document.getElementById('addBoxes').style.display="none"
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='block'
+  document.getElementById('addBoxes').style.display='none'
 
   axios.post('/api/commodity/get', {active: false})
     .then(res => {
       let tableData = res.data
 
-      commodityTable = new Tabulator("#list", {
+      commodityTable = new Tabulator('#list', {
         printHeader:'<h1>Commodity List<h1>',
         resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:"Commodity", field:"commodity",hozAlign:"center", frozen:true},
-        {title:"SAP", field:"sap",hozAlign:"center"},
-        {title:"Active", field:"active",hozAlign:"center"},
-        {title:"Inventory", field:"inventory",hozAlign:"center"},
-        {title:"Location", field:"location",hozAlign:"center"},
-        {title:"Company", field:"company",hozAlign:"center"},
-        {title:"Type", field:"type",hozAlign:"center"},
-        {title:"Container", field:"container",hozAlign:"center"},
-        {title:"Environmental", field:"enviro",hozAlign:"center"},
-        {title:"Threshold", field:"threshold",hozAlign:"center"},
-        {title:"Per Pallet", field:"per_pallet",hozAlign:"center"},
-        {title:"Unit Total", field:"unit_total",hozAlign:"center"},
-        {title:"UOM", field:"uom",hozAlign:"center"},
-        {title:"Note", field:"note",hozAlign:"center"},
+        {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'SAP', field:'sap',hozAlign:'center'},
+        {title:'Active', field:'active',hozAlign:'center'},
+        {title:'Inventory', field:'inventory',hozAlign:'center'},
+        {title:'Location', field:'location',hozAlign:'center'},
+        {title:'Company', field:'company',hozAlign:'center'},
+        {title:'Type', field:'type',hozAlign:'center'},
+        {title:'Container', field:'container',hozAlign:'center'},
+        {title:'Environmental', field:'enviro',hozAlign:'center'},
+        {title:'Threshold', field:'threshold',hozAlign:'center'},
+        {title:'Per Pallet', field:'per_pallet',hozAlign:'center'},
+        {title:'Unit Total', field:'unit_total',hozAlign:'center'},
+        {title:'UOM', field:'uom',hozAlign:'center'},
+        {title:'Note', field:'note',hozAlign:'center'},
         ],
       })
     })
     .catch(err => console.log(err))
-  document.getElementById('list').style.display="block"
+  document.getElementById('list').style.display='block'
 }
 function del() {
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="block"
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='block'
 
   const users = document.getElementsByName('deleteCommodity')[0]
   users.innerHTML = `<option value="" disabled selected hidden>Select Commodity</option>`
@@ -251,9 +251,9 @@ async function sendAdd(ev){
       })
       .catch(err => alert(err))
   } else {
-    let msg = "Problems:\n"
+    let msg = 'Problems:\n'
     for(i = 0; i < fails.length; i++) {
-       msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
+       msg = msg + '\n' +fails[i]['input'] + ' ' + fails[i]['msg'] 
     }
     alert(msg)
   }
@@ -272,44 +272,44 @@ async function validateAdd (data){
     }
   }
 
-  if(data.sap === ""){
+  if(data.sap === ''){
       failures.push({input:'sap', msg:'Required'})
       data.sap = null
   } else {
     data.sap = data.sap.toNonAlpha()
   }
 
-  if(data.active === ""){
+  if(data.active === ''){
     failures.push({input:'active', msg:'Required'})
     data.active = null
   }
 
-  if(data.inventory === ""){
+  if(data.inventory === ''){
     failures.push({input:'inventory', msg:'Required'})
     data.inventory = null
   } 
-  if(data.location_id === ""){
+  if(data.location_id === ''){
     failures.push({input:'location', msg:'Required'})
     data.location_id = null
   } 
-  if(data.supplier_id === ""){
+  if(data.supplier_id === ''){
     failures.push({input:'supplier', msg:'Required'})
     data.supplier_id = null
   } 
-  if(data.type_id === ""){
+  if(data.type_id === ''){
     failures.push({input:'type', msg:'Required'})
     data.type_id = null
   } 
-  if(data.container_id === ""){
+  if(data.container_id === ''){
     failures.push({input:'container', msg:'Required'})
     data.container_id = null
   } 
-  if(data.enviro_id === ""){
+  if(data.enviro_id === ''){
     failures.push({input:'enviro', msg:'Required'})
     data.enviro_id = null
   }
 
-  if(data.threshold === ""){
+  if(data.threshold === ''){
     failures.push({input:'threshold', msg:'Required'})
     data.threshold = null
   } else if(!data.threshold.testNanFormat()) {
@@ -317,7 +317,7 @@ async function validateAdd (data){
     data.threshold = null
   } 
   
-  if(data.per_pallet === ""){
+  if(data.per_pallet === ''){
     failures.push({input:'pallet', msg:'Required'})
     data.per_pallet = null
   } else if(!data.per_pallet.testNanFormat()) {
@@ -325,14 +325,14 @@ async function validateAdd (data){
     data.per_pallet = null
   }
   
-  if(data.unit_total === ""){
+  if(data.unit_total === ''){
     failures.push({input:'unit', msg:'Required'})
     data.unit_total = null
   } else if(!data.unit_total.testNanFormat()) {
     failures.push({input:'unit total', msg:'To 2 Decimals Only'})
   } 
   
-  if(data.uom_id === ""){
+  if(data.uom_id === ''){
     failures.push({input:'uom', msg:'Required'})
     data.uom_id = null
   } 
@@ -367,9 +367,9 @@ async function sendUpdate(ev){
       })
       .catch(err => alert(err))
     } else {
-      let msg = "Problems:\n"
+      let msg = 'Problems:\n'
       for(i = 0; i < fails.length; i++) {
-        msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
+        msg = msg + '\n' +fails[i]['input'] + ' ' + fails[i]['msg'] 
       }
       alert(msg)
     }
@@ -417,7 +417,7 @@ function validateUpdate(data){
     data.enviro_id = null
   }
 
-  if(data.threshold === ""){
+  if(data.threshold === ''){
     failures.push({input:'threshold', msg:'Required'})
     data.threshold = null
   } else if(!data.threshold.testNanFormat()) {
@@ -425,7 +425,7 @@ function validateUpdate(data){
     data.threshold = null
   }
 
-  if(data.per_pallet === ""){
+  if(data.per_pallet === ''){
     failures.push({input:'pallet', msg:'Required'})
     data.per_pallet = null
   } else if(!data.per_pallet.testNanFormat()) {
@@ -433,7 +433,7 @@ function validateUpdate(data){
     data.per_pallet = null
   }
 
-  if(data.unit_total === ""){
+  if(data.unit_total === ''){
     failures.push({input:'unit', msg:'Required'})
     data.unit_total = null
   } else if(!data.unit_total.testNanFormat()) {
@@ -499,14 +499,13 @@ document.getElementById('btnDeleteSubmit').addEventListener('click', sendDelete)
 document.getElementById('add').onclick = add
 document.getElementById('update').onclick = update
 document.getElementById('view').onclick = view
-// document.getElementById('delete').onclick = del
 
 document.getElementById('download-xlsx').addEventListener('click', supplierExcel)
 function supplierExcel(){
-  commodityTable.download("xlsx", "commodities.xlsx", {sheetName:"Commodities"})
+  commodityTable.download('xlsx', 'commodities.xlsx', {sheetName:'Commodities'})
 }
 
-document.getElementById("print-table").addEventListener('click', supplierPrint)
+document.getElementById('print-table').addEventListener('click', supplierPrint)
 function supplierPrint(){
   commodityTable.print(false, true);
 }

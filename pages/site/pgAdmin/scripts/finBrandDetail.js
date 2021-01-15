@@ -1,5 +1,5 @@
-document.getElementById('updateBoxes').style.display="none"
-document.getElementById('viewBoxes').style.display="none"
+document.getElementById('updateBoxes').style.display='none'
+document.getElementById('viewBoxes').style.display='none'
 
 
 function createNode(element) {
@@ -104,10 +104,10 @@ function resetUpdate(ev){
   }
 }
 function updateView() {
-  document.getElementById('viewBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="block"
+  document.getElementById('viewBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='block'
 
-  document.getElementById('updateLineageBox').style.display="none"
+  document.getElementById('updateLineageBox').style.display='none'
   
   let dropDown = document.getElementById('brwBrandUpdate')
   let api = '/api/brand/fin/get/'
@@ -116,7 +116,7 @@ function updateView() {
   createListBrwBrand(api, dropDown, title)
 }
 async function selectUpdate() {
-  document.getElementById('updateLineageBox').style.display="block"
+  document.getElementById('updateLineageBox').style.display='block'
   let methods = await method()
   await updateBrandLineage()
   let data = tableUpdateBrandLineage.getData()[0]
@@ -149,6 +149,7 @@ async function updateBrandLineage() {
         resizableColumns:false,
         height:'55px',
         layout:'fitDataFill',
+        resizableColumns:false,
         data:tableData,
         columns:[
         {title:'Schoene', field:'brndBrw',hozAlign:'center', frozen:true},        
@@ -161,21 +162,19 @@ async function updateBrandLineage() {
     .catch(err => console.log(err))
 }
 async function updateFinDetailPreCsx(name, method) {
-  // console.log('preCSX', name)
   let labels = ['Brand','Chip Tank', 'UniTank', 'Lines','Cooler', 'Seperators','ACP', 'Schoene Tank','Fill Tank', 'Note']
   await axios.post('/api/brand/detail/csxpre', {name: name})
     .then(res => {
       let data = res.data
       let tableData = convert(data, labels)
-      // console.log(tableData)
       tableUpdateFinDetailPreCsx = new Tabulator('#updateFinDetailPreCsxTable', {
         resizableColumns:false,
         height:'330px',
         layout:'fitDataStretch',
+        resizableColumns:false,
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'center', frozen:true},        
-        // {title:'Method', field:'method',hozAlign:'center'},
         {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}, formatter:'textarea'}
         ],
       })
@@ -183,7 +182,6 @@ async function updateFinDetailPreCsx(name, method) {
     .catch(err => console.log(err))
 }
 async function updateFinDetailPostCsx(name, method) {
-  // console.log('postCSX', name)
   let labels = ['Brand','Chip Tank', 'UniTank', 'Lines', 'Seperators', 'Schoene Tank', 'Note']
   await axios.post('/api/brand/detail/csxpost', {name: name})
     .then(res => {
@@ -193,10 +191,10 @@ async function updateFinDetailPostCsx(name, method) {
         resizableColumns:false,
         height:'330px',
         layout:'fitDataStretch',
+        resizableColumns:false,
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'center', frozen:true},        
-        // {title:'Method', field:'method',hozAlign:'center'},
         {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}, formatter:'textarea'}
         ],
       })
@@ -204,7 +202,6 @@ async function updateFinDetailPostCsx(name, method) {
     .catch(err => console.log(err))
 }
 async function updateFinDetailPreFil(name, method) {
-  // console.log('preFil', name)
   let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Fill Tank', 'Injection', 'Control', 'Note']
   await axios.post('/api/brand/detail/filpre', {name: name})
     .then(res => {
@@ -214,10 +211,10 @@ async function updateFinDetailPreFil(name, method) {
         resizableColumns:false,
         height:'330px',
         layout:'fitDataStretch',
+        resizableColumns:false,
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'center', frozen:true},        
-        // {title:'Method', field:'method',hozAlign:'center'},
         {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}, formatter:'textarea'}
         ],
       })
@@ -225,7 +222,6 @@ async function updateFinDetailPreFil(name, method) {
     .catch(err => console.log(err))
 }
 async function updateFinDetailPostFil(name, method) {
-  // console.log('postFil', name)
   let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Recover', 'Note']
   await axios.post('/api/brand/detail/filpost', {name: name})
     .then(res => {
@@ -237,8 +233,7 @@ async function updateFinDetailPostFil(name, method) {
         layout:'fitDataStretch',
         data:tableData,
         columns:[
-        {title:'Object', field:'object',hozAlign:'center', frozen:true},        
-        // {title:'Method', field:'method',hozAlign:'center'},
+        {title:'Object', field:'object',hozAlign:'center', frozen:true},
         {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}, formatter:'textarea'}
         ],
       })
@@ -246,7 +241,6 @@ async function updateFinDetailPostFil(name, method) {
     .catch(err => console.log(err))
 }
 async function updateFinDetailPreRel(name, method) {
-  // console.log('preRel', name)
   let labels = ['Brand','Filter Beer Tank','Release Line','Package Line','Draft Line','Recover','Control','Note']
   await axios.post('/api/brand/detail/relpre', {name: name})
     .then(res => {
@@ -256,10 +250,10 @@ async function updateFinDetailPreRel(name, method) {
         resizableColumns:false,
         height:'330px',
         layout:'fitDataStretch',
+        resizableColumns:false,
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'center', frozen:true},        
-        // {title:'Method', field:'method',hozAlign:'center'},
         {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}, formatter:'textarea'}
         ],
       })
@@ -267,7 +261,6 @@ async function updateFinDetailPreRel(name, method) {
     .catch(err => console.log(err))
 }
 async function updateFinDetailPostRel(name, method) {
-  // console.log('postRel', name)
   let labels = ['Brand','Filter Beer Tank','System Lines','Package','Draft','Recover','Note']
   await axios.post('/api/brand/detail/relpost', {name: name})
     .then(res => {
@@ -277,10 +270,10 @@ async function updateFinDetailPostRel(name, method) {
         resizableColumns:false,
         height:'330px',
         layout:'fitDataStretch',
+        resizableColumns:false,
         data:tableData,
         columns:[
         {title:'Object',field:'object',hozAlign:'center',frozen:true},        
-        // {title:'Method', field:'method',hozAlign:'left', editor:'select', editorParams:{values:method}},
         {title:'Method',field:'method',hozAlign:'left',editor:'autocomplete',editorParams:{showListOnEmpty:true,freetext:true,values:method}, formatter:'textarea'}
         ]
       })
@@ -299,7 +292,6 @@ async function sendUpdate(ev){
     tableUpdateFinDetailPostRel,
   ]
   let tablesData = []
-  // let tableData = tables[0].getData()
   let tableData = []
   
   for (let index = 0; index < tables.length; index++) {
@@ -318,9 +310,6 @@ async function sendUpdate(ev){
       // }
     })
     .catch(err => alert(err))
-
-  // console.log(tablesData)
-  // console.log(tablesData[0])
 }
 
 
@@ -350,9 +339,9 @@ function resetView(ev){
   }
 }
 function viewView() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('viewBoxes').style.display="block"
-  document.getElementById('viewLineageBox').style.display="none"
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('viewBoxes').style.display='block'
+  document.getElementById('viewLineageBox').style.display='none'
 
   let api = '/api/brand/fin/get/'
   let title = 'brndFin'
@@ -361,7 +350,7 @@ function viewView() {
   createListBrwBrand(api, dropDown, title)
 }
 async function selectView() {
-  document.getElementById('viewLineageBox').style.display="block"
+  document.getElementById('viewLineageBox').style.display='block'
 
   await viewBrandLineage()
   let data = tableViewBrandLineage.getData()[0]
@@ -381,16 +370,17 @@ async function viewBrandLineage() {
   await axios.post('/api/brand/fin/get/name', {name:name})
     .then(res => {
       let tableData = [res.data]
-      tableViewBrandLineage = new Tabulator("#viewLineageTable", {
+      tableViewBrandLineage = new Tabulator('#viewLineageTable', {
         resizableColumns:false,
-        height:"55px",
-        layout:"fitDataFill",
+        height:'55px',
+        layout:'fitDataFill',
+        resizableColumns:false,
         data:tableData,
         columns:[
-        {title:"Schoene", field:"brndBrw",hozAlign:"left", frozen:true},        
-        {title:"Finished", field:"brndFin",hozAlign:"left"},
-        {title:"Package", field:"brndPck",hozAlign:"left"},
-        {title:"Active", field:"active",hozAlign:"left"},
+        {title:'Schoene', field:'brndBrw',hozAlign:'left', frozen:true},        
+        {title:'Finished', field:'brndFin',hozAlign:'left'},
+        {title:'Package', field:'brndPck',hozAlign:'left'},
+        {title:'Active', field:'active',hozAlign:'left'},
         ],
       })
     })

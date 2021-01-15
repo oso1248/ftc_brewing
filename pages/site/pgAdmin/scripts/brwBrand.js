@@ -1,7 +1,7 @@
-document.getElementById('addBoxes').style.display="none"
-document.getElementById('updateBoxes').style.display="none"
-document.getElementById('deleteBoxes').style.display="none"
-document.getElementById('attView').style.display="none"
+document.getElementById('addBoxes').style.display='none'
+document.getElementById('updateBoxes').style.display='none'
+document.getElementById('deleteBoxes').style.display='none'
+document.getElementById('attView').style.display='none'
 
 
 function createNode(element) {
@@ -36,16 +36,16 @@ String.prototype.toNonAlpha = function () {
 
 //Views
 function add() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="grid"
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='grid'
 }
 function update() {
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="grid"
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='grid'
 
   let dropDown = document.getElementsByName('updateBrand')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
@@ -55,27 +55,27 @@ function update() {
 
 }
 function view() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="grid"
-  document.getElementById('addBoxes').style.display="none"
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='grid'
+  document.getElementById('addBoxes').style.display='none'
 
   axios.post('/api/brand/brw/get', {active:false})
     .then(res => {
       let tableData = res.data
-      var table = new Tabulator("#list", {
+      var table = new Tabulator('#list', {
         resizableColumns:false,
-        height:"309px",
-        layout:"fitDataFill",
+        height:'309px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:"Brand", field:"brand",hozAlign:"center"},
-        {title:"Active", field:"active",hozAlign:"center"},
-        {title:"Standard Hops", field:"hop_std",hozAlign:"center"},
-        {title:"Craft Hops", field:"hop_crft",hozAlign:"center"},
-        {title:"Dry Hops", field:"hop_dry",hozAlign:"center"},
-        {title:"Super Sacks", field:"supr_sac",hozAlign:"center"},
-        {title:"Note", field:"note", hozAlign:"center"},
+        {title:'Brand', field:'brand',hozAlign:'center'},
+        {title:'Active', field:'active',hozAlign:'center'},
+        {title:'Standard Hops', field:'hop_std',hozAlign:'center'},
+        {title:'Craft Hops', field:'hop_crft',hozAlign:'center'},
+        {title:'Dry Hops', field:'hop_dry',hozAlign:'center'},
+        {title:'Super Sacks', field:'supr_sac',hozAlign:'center'},
+        {title:'Note', field:'note', hozAlign:'center'},
         ],
       })
     })
@@ -83,10 +83,10 @@ function view() {
 
 }
 function del() {
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="grid"
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='grid'
 
   let dropDown = document.getElementsByName('delete')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`

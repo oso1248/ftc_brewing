@@ -1,7 +1,7 @@
-document.getElementById('addBoxes').style.display="none"
-document.getElementById('updateBoxes').style.display="none"
-document.getElementById('deleteBoxes').style.display="none"
-document.getElementById('attView').style.display="none"
+document.getElementById('addBoxes').style.display='none'
+document.getElementById('updateBoxes').style.display='none'
+document.getElementById('deleteBoxes').style.display='none'
+document.getElementById('attView').style.display='none'
 
 
 function createNode(element) {
@@ -29,16 +29,16 @@ function createList(api, parent, title) {
 
 //Views
 function add() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="grid"
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='grid'
 }
 function update() {
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="grid"
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='grid'
 
 
   let dropDown = document.getElementsByName('updateLocation')[0]
@@ -72,25 +72,26 @@ function update() {
   createList(api, dropDown, title)
 }
 function view() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="grid"
-  document.getElementById('addBoxes').style.display="none"
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='grid'
+  document.getElementById('addBoxes').style.display='none'
 
 
   axios.post('/api/location/all')
     .then(res => {
       let tableData = res.data
-      var table = new Tabulator("#listLocation", {
-        height:"309px",
-        layout:"fitDataFill",
-        responsiveLayout:"collapse",
+      var table = new Tabulator('#listLocation', {
+        height:'309px',
+        layout:'fitDataFill',
+        responsiveLayout:'collapse',
+        resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
-        {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
-        {title:"Location", field:"location", width:200,hozAlign:"center", responsive:0},
-        {title:"Note", field:"note", hozAlign:"center", width:250},
+        {formatter:'responsiveCollapse', width:30, minWidth:30, hozAlign:'center', resizable:false, headerSort:false},
+        {title:'Location', field:'location', width:200,hozAlign:'center', responsive:0},
+        {title:'Note', field:'note', hozAlign:'center', width:250},
         ],
       })
     })
@@ -99,16 +100,17 @@ function view() {
     axios.post('/api/Type/all')
     .then(res => {
       let tableData = res.data
-      var table = new Tabulator("#listType", {
-        height:"309px",
-        layout:"fitDataFill",
-        responsiveLayout:"collapse",
+      var table = new Tabulator('#listType', {
+        height:'309px',
+        layout:'fitDataFill',
+        responsiveLayout:'collapse',
+        resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
-        {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
-        {title:"Type", field:"type", width:200,hozAlign:"center", responsive:0},
-        {title:"Note", field:"note", hozAlign:"center", width:250},
+        {formatter:'responsiveCollapse', width:30, minWidth:30, hozAlign:'center', resizable:false, headerSort:false},
+        {title:'Type', field:'type', width:200,hozAlign:'center', responsive:0},
+        {title:'Note', field:'note', hozAlign:'center', width:250},
         ],
       })
     })
@@ -117,16 +119,17 @@ function view() {
     axios.post('/api/Enviro/all')
     .then(res => {
       let tableData = res.data
-      var table = new Tabulator("#listEnviro", {
-        height:"309px",
-        layout:"fitDataFill",
-        responsiveLayout:"collapse",
+      var table = new Tabulator('#listEnviro', {
+        height:'309px',
+        layout:'fitDataFill',
+        responsiveLayout:'collapse',
+        resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
-        {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
-        {title:"Enviro", field:"enviro", width:200,hozAlign:"center", responsive:0},
-        {title:"Note", field:"note", hozAlign:"center", width:250},
+        {formatter:'responsiveCollapse', width:30, minWidth:30, hozAlign:'center', resizable:false, headerSort:false},
+        {title:'Enviro', field:'enviro', width:200,hozAlign:'center', responsive:0},
+        {title:'Note', field:'note', hozAlign:'center', width:250},
         ],
       })
     })
@@ -135,16 +138,17 @@ function view() {
     axios.post('/api/Container/all')
     .then(res => {
       let tableData = res.data
-      var table = new Tabulator("#listContainer", {
-        height:"309px",
-        layout:"fitDataFill",
-        responsiveLayout:"collapse",
+      var table = new Tabulator('#listContainer', {
+        height:'309px',
+        layout:'fitDataFill',
+        responsiveLayout:'collapse',
+        resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
-        {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
-        {title:"Container", field:"container", width:200,hozAlign:"center", responsive:0},
-        {title:"Note", field:"note", hozAlign:"center", width:250},
+        {formatter:'responsiveCollapse', width:30, minWidth:30, hozAlign:'center', resizable:false, headerSort:false},
+        {title:'Container', field:'container', width:200,hozAlign:'center', responsive:0},
+        {title:'Note', field:'note', hozAlign:'center', width:250},
         ],
       })
     })
@@ -153,16 +157,17 @@ function view() {
     axios.post('/api/uom/all')
     .then(res => {
       let tableData = res.data
-      var table = new Tabulator("#listUOM", {
-        height:"309px",
-        layout:"fitDataFill",
-        responsiveLayout:"collapse",
+      var table = new Tabulator('#listUOM', {
+        height:'309px',
+        layout:'fitDataFill',
+        responsiveLayout:'collapse',
+        resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
-        {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
-        {title:"UOM", field:"uom", width:200,hozAlign:"center", responsive:0},
-        {title:"Note", field:"note", hozAlign:"center", width:250},
+        {formatter:'responsiveCollapse', width:30, minWidth:30, hozAlign:'center', resizable:false, headerSort:false},
+        {title:'UOM', field:'uom', width:200,hozAlign:'center', responsive:0},
+        {title:'Note', field:'note', hozAlign:'center', width:250},
         ],
       })
     })
@@ -172,10 +177,10 @@ function view() {
 
 }
 function del() {
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="grid"
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='grid'
 
   let dropDown = document.getElementsByName('deleteLocation')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Location</option>`
@@ -305,7 +310,6 @@ async function sendAddType(ev){
         msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
       }
       alert(msg)
-      // alert(JSON.stringify(fails))
     }
 }
 async function validateAddType (ev){
@@ -353,7 +357,6 @@ async function sendAddEnviro(ev){
         msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
       }
       alert(msg)
-      // alert(JSON.stringify(fails))
     }
 }
 async function validateAddEnviro (ev){
@@ -401,7 +404,6 @@ async function sendAddContainer(ev){
         msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
       }
       alert(msg)
-      // alert(JSON.stringify(fails))
     }
 }
 async function validateAddContainer (ev){
@@ -450,7 +452,6 @@ async function sendAddUom(ev){
         msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
       }
       alert(msg)
-      // alert(JSON.stringify(fails))
     }
 }
 async function validateAddUom (ev){
@@ -766,4 +767,3 @@ document.getElementById('btnDeleteSubmitUOM').addEventListener('click', sendDele
 document.getElementById('add').onclick = add
 document.getElementById('update').onclick = update
 document.getElementById('view').onclick = view
-// document.getElementById('delete').onclick = del

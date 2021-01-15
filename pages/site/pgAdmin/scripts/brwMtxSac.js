@@ -1,7 +1,5 @@
-// const { table } = require("../../../../api/dbConfig")
-
-document.getElementById('updateBoxes').style.display="none"
-document.getElementById('viewBoxes').style.display="none"
+document.getElementById('updateBoxes').style.display='none'
+document.getElementById('viewBoxes').style.display='none'
 
 
 function createNode(element) {
@@ -65,18 +63,15 @@ function selectBrwBrandUpdate(){
     .then(res => {
       let tableData = res.data
       res.data.unshift({commodity:'Brand', Units:`${brwBrand}`})
-      hopTableUpdate = new Tabulator("#updateHop", {
+      hopTableUpdate = new Tabulator('#updateHop', {
         resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:"Commodity", field:"commodity",hozAlign:"center", frozen:true},
-        {title:"Units", field:"Units",hozAlign:"center", editor:true, validator:["numeric"]},
+        {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'Units', field:'Units',hozAlign:'center', editor:true, validator:['numeric']},
         ],
-        // validationFailed:function(cell, value, validators){
-
-        // }
       })
     })
     .catch(err => console.log(err))
@@ -88,14 +83,14 @@ function selectBrwBrandView(){
     .then(res => {
       let tableData = res.data
       res.data.unshift({commodity:'Brand', Units:`${brwBrand}`})
-      hopTableView = new Tabulator("#viewHop", {
+      hopTableView = new Tabulator('#viewHop', {
         resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:"Commodity", field:"commodity",hozAlign:"center", frozen:true},
-        {title:"Units", field:"Units",hozAlign:"center"},
+        {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'Units', field:'Units',hozAlign:'center'},
         ],
       })
     })
@@ -105,8 +100,8 @@ function selectBrwBrandView(){
 
 // Views
 function update() {
-  document.getElementById('viewBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="block"
+  document.getElementById('viewBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='block'
   
   let dropDown = document.getElementById('brwBrandUpdate')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
@@ -117,8 +112,8 @@ function update() {
   }
 }
 function view() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('viewBoxes').style.display="block"
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('viewBoxes').style.display='block'
 
   let dropDown = document.getElementById('brwBrandView')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
@@ -140,22 +135,19 @@ document.getElementById('btnViewClear').addEventListener('click', resetView)
 document.getElementById('add').onclick = update
 document.getElementById('update').onclick = view
 
-// document.getElementById('download_xlsx_Hop_Update').addEventListener('click', HopUpdate)
+
 function HopUpdate(){
-  hopTableUpdate.download("xlsx", "DryUpdate.xlsx", {sheetName:"DryUpdate"})
+  hopTableUpdate.download('xlsx', 'DryUpdate.xlsx', {sheetName:'DryUpdate'})
 }
 
-// document.getElementById('print_table_Hop_Update').addEventListener('click', HopUpdatePrint)
 function HopUpdatePrint(){
   hopTableUpdate.print(false, true);
 }
 
-// document.getElementById('download_xlsx_Hop_View').addEventListener('click', HopView)
 function HopView(){
-  hopTableView.download("xlsx", "DryView.xlsx", {sheetName:"DryView"})
+  hopTableView.download('xlsx', 'DryView.xlsx', {sheetName:'DryView'})
 }
 
-// document.getElementById('print_table_Hop_View').addEventListener('click', HopViewPrint)
 function HopViewPrint(){
   hopTableView.print(false, true);
 }

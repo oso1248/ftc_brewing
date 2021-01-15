@@ -74,7 +74,7 @@ router.post('/combined/monthly/log/view', (req, res) => {
     .catch(err => res.status(500).json({msg: err.detail}))
 })
 
-//mat inv weekly
+// mat inv weekly
 router.post('/material/weekly', (req, res) => {
   req.body.username = req.session.user.username
   db.add(req.body)

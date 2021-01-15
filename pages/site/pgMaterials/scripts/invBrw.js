@@ -24,12 +24,12 @@ function viewWeekly() {
 function weeklyDates() {
   let invDates = document.getElementById('selWeekly')
   invDates.innerHTML = `<option value="" disabled selected hidden>Select Date</option>`
-  axios.post('/api/inventory/hop/weekly/dates')
+  axios.post('/api/inventory/material/weekly/date')
     .then(data => {
-      let invDate = data.data
+      let invDate = data.data.rows
       return invDate.map(listItem => {
         let invDate = createNode('option')
-        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc).plus({day: 1}).toFormat('yyyy-MM-dd')
+        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc).plus({day: 0}).toFormat('yyyy-MM-dd')
         append(invDates, invDate)
       })
     })
@@ -55,12 +55,13 @@ function weeklyHopTableFunc(dt) {
     }
       let tableData = res.data
       weeklyHopTable = new Tabulator('#tableHopWeekly', {
-        printHeader:'<h1>Weekly Hop Inventory<h1>',
+        printHeader:'<h3>Weekly Hop Inventory<h3>',
+        resizableColumns:false,
         height:'309px',
         layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'Hop Inv', field:'commodity',hozAlign:'center', frozen:true},
         {title:'SAP', field:'sap', hozAlign:'center'},
         {title:'Total', field:'lbs',hozAlign:'center'},
         {title:'Username', field:'username',hozAlign:'center'},
@@ -70,13 +71,6 @@ function weeklyHopTableFunc(dt) {
     })
     .catch(err => console.log(err.detail))
 }
-document.getElementById('weeklyHopDownload-xlsx').addEventListener('click', ()=> {
-  weeklyHopTable.download('xlsx', 'weekly_inv.xlsx', {sheetName:'inv'})
-})
-document.getElementById('weeklyHopPrint-table').addEventListener('click', () => {
-  weeklyHopTable.print(false, true);
-})
-
 
 let weeklyMatTable
 function weeklyMatTableFunc(dt) {
@@ -91,12 +85,13 @@ function weeklyMatTableFunc(dt) {
     }
       let tableData = res.data    
       weeklyMatTable = new Tabulator('#tableMatWeekly', {
-        printHeader:'<h1>Weekly Hop Inventory<h1>',
+        printHeader:'<h3>Weekly Material Inventory<h3>',
+        resizableColumns:false,
         height:'309px',
         layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'Mat Inv', field:'commodity',hozAlign:'center', frozen:true},
         {title:'SAP', field:'sap', hozAlign:'center'},
         {title:'Total', field:'total_end',hozAlign:'center'},
         {title:'Username', field:'username',hozAlign:'center'},
@@ -106,14 +101,6 @@ function weeklyMatTableFunc(dt) {
     })
     .catch(err => console.log(err.detail))
 }
-document.getElementById('weeklyMatDownload-xlsx').addEventListener('click', ()=> {
-  weeklyMatTable.download('xlsx', 'weekly_inv.xlsx', {sheetName:'inv'})
-})
-document.getElementById('weeklyMatPrint-table').addEventListener('click', () => {
-  weeklyMatTable.print(false, true);
-})
-
-
 
 let weeklyCombinedTable
 function weeklyCombinedTableFunc(dt) {
@@ -130,7 +117,8 @@ function weeklyCombinedTableFunc(dt) {
     }
       let tableData = res.data.rows    
       weeklyCombinedTable = new Tabulator('#tableCombinedWeekly', {
-        printHeader:'<h1>Weekly Combined Inventory<h1>',
+        printHeader:'<h3>Weekly Combined Inventory<h3>',
+        resizableColumns:false,
         height:'309px',
         layout:'fitDataFill',
         data:tableData,
@@ -195,12 +183,13 @@ function monthlyHopTableFunc(dt) {
     }
       let tableData = res.data
       monthlyHopTable = new Tabulator('#tableHopMonthly', {
-        printHeader:'<h1>Monthly Hop Inventory<h1>',
+        printHeader:'<h3>Monthly Hop Inventory<h3>',
+        resizableColumns:false,
         height:'309px',
         layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'Hop Inv', field:'commodity',hozAlign:'center', frozen:true},
         {title:'SAP', field:'sap', hozAlign:'center'},
         {title:'Total', field:'lbs',hozAlign:'center'},
         {title:'Username', field:'username',hozAlign:'center'},
@@ -210,13 +199,6 @@ function monthlyHopTableFunc(dt) {
     })
     .catch(err => console.log(err.detail))
 }
-document.getElementById('monthlyHopDownload-xlsx').addEventListener('click', ()=> {
-  monthlyHopTable.download('xlsx', 'monthly_inv.xlsx', {sheetName:'inv'})
-})
-document.getElementById('monthlyHopPrint-table').addEventListener('click', () => {
-  monthlyHopTable.print(false, true);
-})
-
 
 let monthlyMatTable
 function monthlyMatTableFunc(dt) {
@@ -231,12 +213,13 @@ function monthlyMatTableFunc(dt) {
     }
       let tableData = res.data
       monthlyMatTable = new Tabulator('#tableMatMonthly', {
-        printHeader:'<h1>Weekly Hop Inventory<h1>',
+        printHeader:'<h3>Monthly Material Inventory<h3>',
+        resizableColumns:false,
         height:'309px',
         layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'Mat Inv', field:'commodity',hozAlign:'center', frozen:true},
         {title:'SAP', field:'sap', hozAlign:'center'},
         {title:'Total', field:'total_end',hozAlign:'center'},
         {title:'Username', field:'username',hozAlign:'center'},
@@ -246,14 +229,6 @@ function monthlyMatTableFunc(dt) {
     })
     .catch(err => console.log(err.detail))
 }
-document.getElementById('monthlyMatDownload-xlsx').addEventListener('click', ()=> {
-  monthlyMatTable.download('xlsx', 'monthly_inv.xlsx', {sheetName:'inv'})
-})
-document.getElementById('monthlyMatPrint-table').addEventListener('click', () => {
-  monthlyMatTable.print(false, true);
-})
-
-
 
 let monthlyCombinedTable
 function monthlyCombinedTableFunc(dt) {
@@ -270,7 +245,7 @@ function monthlyCombinedTableFunc(dt) {
     }
       let tableData = res.data.rows    
       monthlyCombinedTable = new Tabulator('#tableCombinedMonthly', {
-        printHeader:'<h1>Weekly Combined Inventory<h1>',
+        printHeader:'<h3>Monthly Combined Inventory<h3>',
         height:'309px',
         layout:'fitDataFill',
         data:tableData,

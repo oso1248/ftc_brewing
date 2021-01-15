@@ -1,17 +1,17 @@
 let DateTime = luxon.DateTime
 
-document.getElementById('weeklyBoxesBox').style.display="none"
-document.getElementById('monthlyBoxesBox').style.display="none"
-document.getElementById('addBoxes').style.display="none"
-document.getElementById('weeklyBoxes').style.display="none"
-document.getElementById('monthlyBoxes').style.display="none"
+document.getElementById('weeklyBoxesBox').style.display='none'
+document.getElementById('monthlyBoxesBox').style.display='none'
+document.getElementById('addBoxes').style.display='none'
+document.getElementById('weeklyBoxes').style.display='none'
+document.getElementById('monthlyBoxes').style.display='none'
 
 
 
 function setCookie(cookieName,cookieValue,hoursToExpire,path,domain) {
   let date = new Date();
-	date.setTime(date.getTime()+(hoursToExpire*60*60*1000)); //(daysToExpire*24*60*60*1000));
-	document.cookie = cookieName + "=" + cookieValue + "; expires=" + date.toGMTString() + 'path=' + path + 'domain=' + domain;
+	date.setTime(date.getTime()+(hoursToExpire*60*60*1000))
+	document.cookie = cookieName + '=' + cookieValue + '; expires=' + date.toGMTString() + 'path=' + path + 'domain=' + domain;
 }
 function getCookie(cookieName) {
   
@@ -91,7 +91,7 @@ function hardReset() {
   
     let pumpCount = document.getElementsByName('pump')
     for(let i = 0; i < pumpCount.length; i++) {
-      document.getElementsByName('pump')[i].style.display="none"
+      document.getElementsByName('pump')[i].style.display='none'
     }
   } else {
     return
@@ -117,9 +117,9 @@ function softReset() {
 }
 document.getElementById('add').onclick = add
 function add() {
-  document.getElementById('addBoxes').style.display="block"
-  document.getElementById('weeklyBoxes').style.display="none"
-  document.getElementById('monthlyBoxes').style.display="none"
+  document.getElementById('addBoxes').style.display='block'
+  document.getElementById('weeklyBoxes').style.display='none'
+  document.getElementById('monthlyBoxes').style.display='none'
   
   let pumpCount = document.getElementsByName('pump')
   let pump = document.getElementsByName('injPump')
@@ -127,7 +127,7 @@ function add() {
   
   for(let i = 0; i < pumpCount.length; i++) {
     if(pump[i].value === '') {
-    document.getElementsByName('pump')[i].style.display="none"
+    document.getElementsByName('pump')[i].style.display='none'
     }
   }
 
@@ -153,7 +153,7 @@ async function loadIngredients() {
   let pumpCount = document.getElementsByName('pump')
 
   for(let i = 0; i < pumpCount.length; i++) {
-    document.getElementsByName('pump')[i].style.display="none"
+    document.getElementsByName('pump')[i].style.display='none'
   }
 
   let brand = document.getElementsByName('brand')[0].value
@@ -163,7 +163,7 @@ async function loadIngredients() {
     .then(data => {
       let res = data.data
       for(let i = 0; i < res.length; i++) {
-        document.getElementsByName('pump')[i].style.display="grid"
+        document.getElementsByName('pump')[i].style.display='grid'
         document.getElementsByName('injPump')[i].value = res[i].commodity
         document.getElementsByName('injPump')[i].id = res[i].com_id
       }
@@ -212,9 +212,9 @@ async function submit() {
   await validatePumps(pumps, failures)
 
   if(failures.length != 0) {
-    let msg = "Problems:\n"
+    let msg = 'Problems:\n'
     for(i = 0; i < failures.length; i++) {
-       msg = msg + "\n" +failures[i]['input'] + " " + failures[i]['msg'] 
+       msg = msg + '\n' +failures[i]['input'] + ' ' + failures[i]['msg'] 
     }
     alert(msg)
     return
@@ -246,7 +246,7 @@ function loadTanks(tanks) {
 function validateTanks(tanks, failures) { 
   for(let i = 0; i < tanks.length; i++) {
 
-    if(!tanks[i].fin_id || tanks[i].fin_id === "Selected"){
+    if(!tanks[i].fin_id || tanks[i].fin_id === 'Selected'){
       failures.push({input:tanks[i].fbt, msg:'Brand Required'})
     }
     if(!tanks[i].fbt.testNanFormat()){
@@ -272,7 +272,6 @@ function loadPumps(pumps) {
   }
 }
 function validatePumps(pumps, failures) {
-  // let lotCookies = document.getElementsByName('lotCookie')
   for(let i = 0; i < pumps.length; i++) {
     if(!pumps[i].lot){
       failures.push({input:pumps[i].com_id, msg:'Lot Required'})
@@ -309,9 +308,9 @@ function combineTanksPumps(data, tanks) {
 // view weekly
 document.getElementById('weekly').onclick = weeklyLog
 function weeklyLog() {
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('weeklyBoxes').style.display="block"
-  document.getElementById('monthlyBoxes').style.display="none"
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('weeklyBoxes').style.display='block'
+  document.getElementById('monthlyBoxes').style.display='none'
 
   invFinInjectDatesWeek()
 }
@@ -343,32 +342,32 @@ function finInjectionWeekly() {
       tableData.map(elem => {
         elem.created_at = DateTime.fromISO(elem.created_at).toFormat('yyyy-MM-dd HH:mm')
       })
-      tableWeekly = new Tabulator("#tableWeekly", {
+      tableWeekly = new Tabulator('#tableWeekly', {
         printHeader:'<h1>Weekly Ing Addition<h1>',
         resizableColumns:false,
-        height:"500px",
-        layout:"fitDataFill",
+        height:'500px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-          {title:"FBT", frozen: true, field:"fbt", hozAlign:"Left"},
-          {title:"Brand", field:"brand", hozAlign:"Left"},
-          {title:"Bbls", field:"vol_fbt", hozAlign:"Left"},
-          {title:"Commodity", field:"commodity", hozAlign:"Left"},
-          {title:"Commodity", field:"commodity", hozAlign:"Left"},
-          {title:"Gals", field:"vol_ing", hozAlign:"Left"},
-          {title:"Lot", field:"lot", hozAlign:"Left"},
-          {title:"User", field:"username", hozAlign:"Left"},
-          {title:"Date", field:"created_at", hozAlign:"Left"},
+          {title:'FBT', frozen: true, field:'fbt', hozAlign:'Left'},
+          {title:'Brand', field:'brand', hozAlign:'Left'},
+          {title:'Bbls', field:'vol_fbt', hozAlign:'Left'},
+          {title:'Commodity', field:'commodity', hozAlign:'Left'},
+          {title:'Commodity', field:'commodity', hozAlign:'Left'},
+          {title:'Gals', field:'vol_ing', hozAlign:'Left'},
+          {title:'Lot', field:'lot', hozAlign:'Left'},
+          {title:'User', field:'username', hozAlign:'Left'},
+          {title:'Date', field:'created_at', hozAlign:'Left'},
           
         ],
       })
     })
     .catch(err => console.log(err))  
-    document.getElementById('weeklyBoxesBox').style.display="block"
+    document.getElementById('weeklyBoxesBox').style.display='block'
 }
 document.getElementById('weeklyDownload-xlsx').addEventListener('click', xlsxWeeklyLog)
 function xlsxWeeklyLog(){
-  tableWeekly.download("xlsx", "fin_inj_weekly.xlsx", {sheetName:"Log"})
+  tableWeekly.download('xlsx', 'fin_inj_weekly.xlsx', {sheetName:'Log'})
 }
 document.getElementById('weeklyPrint-table').addEventListener('click', tableWeeklyPrint)
 function tableWeeklyPrint(){
@@ -381,9 +380,9 @@ function tableWeeklyPrint(){
 // view monthly
 document.getElementById('monthly').onclick = monthlyLog
 function monthlyLog() {
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('weeklyBoxes').style.display="none"
-  document.getElementById('monthlyBoxes').style.display="block"
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('weeklyBoxes').style.display='none'
+  document.getElementById('monthlyBoxes').style.display='block'
 
   invFinInjectDatesMonth()
 }
@@ -415,37 +414,31 @@ function finInjectionMonthly() {
       tableData.map(elem => {
         elem.created_at = DateTime.fromISO(elem.created_at).toFormat('yyyy-MM-dd HH:mm')
       })
-      tableMonthly = new Tabulator("#tableMonthly", {
+      tableMonthly = new Tabulator('#tableMonthly', {
         printHeader:'<h1>Monthly Ing Addition<h1>',
         resizableColumns:false,
-        height:"500px",
-        layout:"fitDataFill",
+        height:'500px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-          {title:"FBT", frozen: true, field:"fbt", hozAlign:"Left"},
-          {title:"Brand", field:"brand", hozAlign:"Left"},
-          {title:"Bbls", field:"vol_fbt", hozAlign:"Left"},
-          {title:"Commodity", field:"commodity", hozAlign:"Left"},
-          {title:"Commodity", field:"commodity", hozAlign:"Left"},
-          {title:"Gals", field:"vol_ing", hozAlign:"Left"},
-          {title:"Lot", field:"lot", hozAlign:"Left"},
-          {title:"User", field:"username", hozAlign:"Left"},
-          {title:"Date", field:"created_at", hozAlign:"Left"},
-          
+          {title:'FBT', frozen: true, field:'fbt', hozAlign:'Left'},
+          {title:'Brand', field:'brand', hozAlign:'Left'},
+          {title:'Bbls', field:'vol_fbt', hozAlign:'Left'},
+          {title:'Commodity', field:'commodity', hozAlign:'Left'},
+          {title:'Commodity', field:'commodity', hozAlign:'Left'},
+          {title:'Gals', field:'vol_ing', hozAlign:'Left'},
+          {title:'Lot', field:'lot', hozAlign:'Left'},
+          {title:'User', field:'username', hozAlign:'Left'},
+          {title:'Date', field:'created_at', hozAlign:'Left'},
         ],
       })
     })
     .catch(err => console.log(err))  
-    document.getElementById('monthlyBoxesBox').style.display="block"  
-
-
-
-
-
+    document.getElementById('monthlyBoxesBox').style.display='block'  
 }
 document.getElementById('monthlyDownload-xlsx').addEventListener('click', xlsxMonthlyLog)
 function xlsxMonthlyLog(){
-  tableMonthly.download("xlsx", "fin_inj_monthly.xlsx", {sheetName:"Log"})
+  tableMonthly.download('xlsx', 'fin_inj_monthly.xlsx', {sheetName:'Log'})
 }
 document.getElementById('monthlyPrint-table').addEventListener('click', tableMonthlyPrint)
 function tableMonthlyPrint(){

@@ -1,7 +1,7 @@
-document.getElementById('addBoxes').style.display="none"
-document.getElementById('updateBoxes').style.display="none"
-document.getElementById('deleteBoxes').style.display="none"
-document.getElementById('attView').style.display="none"
+document.getElementById('addBoxes').style.display='none'
+document.getElementById('updateBoxes').style.display='none'
+document.getElementById('deleteBoxes').style.display='none'
+document.getElementById('attView').style.display='none'
 
 function createNode(element) {
   return document.createElement(element)
@@ -38,10 +38,10 @@ String.prototype.testLengthFour = function () {
 
 //Views
 function add() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="grid"
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='grid'
 
   let dropDown = document.getElementById('fin_id')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Fin Brand</option>`
@@ -50,10 +50,10 @@ function add() {
   createList(api, dropDown, title)
 }
 function update() {
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="grid"
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='grid'
 
   let dropDown = document.getElementsByName('updatePckBrnd')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Pck Brand</option>`
@@ -69,27 +69,26 @@ function update() {
 }
 let brandTable
 function view() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="grid"
-  document.getElementById('addBoxes').style.display="none"
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='grid'
+  document.getElementById('addBoxes').style.display='none'
 
   axios.post('/api/brand/pck/get', {active: false})
     .then(res => {
       let tableData = res.data
-      brandTable = new Tabulator("#list", {
+      brandTable = new Tabulator('#list', {
         resizableColumns:false,
-        height:"309px",
-        layout:"fitDataFill",
+        height:'309px',
+        layout:'fitDataFill',
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
-        columns:[
-        // {formatter:"responsiveCollapse", width:30, minWidth:30, hozAlign:"center", resizable:false, headerSort:false},
-        {title:"Pck Brand", field:"brndPck",hozAlign:"center", frozen:true},
-        {title:"Active", field:"active",hozAlign:"center"},
-        {title:"Fin Brand", field:"brndFin",hozAlign:"center"},
-        {title:"Brw Brand", field:"brndBrw",hozAlign:"center"},
-        {title:"Note", field:"note", hozAlign:"center"},
+        columns:[        
+        {title:'Pck Brand', field:'brndPck',hozAlign:'center', frozen:true},
+        {title:'Active', field:'active',hozAlign:'center'},
+        {title:'Fin Brand', field:'brndFin',hozAlign:'center'},
+        {title:'Brw Brand', field:'brndBrw',hozAlign:'center'},
+        {title:'Note', field:'note', hozAlign:'center'},
         ],
       })
     })
@@ -97,10 +96,10 @@ function view() {
 
 }
 function del() {
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="grid"
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='grid'
 
   let dropDown = document.getElementsByName('delete')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
@@ -140,7 +139,6 @@ async function sendAdd(ev){
         alert(data.data.brndPck + ' has been added')
       })
       .catch(err => alert(err))
-      // .catch(err => console.log(err))
   } else {
     let msg = 'Problems:\n'
     for(i = 0; i < fails.length; i++) {
@@ -287,11 +285,10 @@ document.getElementsByName('updatePckBrnd')[0].addEventListener('change', select
 document.getElementById('add').onclick = add
 document.getElementById('update').onclick = update
 document.getElementById('view').onclick = view
-// document.getElementById('delete').onclick = del
 
 // document.getElementById('download-xlsx').addEventListener('click', brandExcel)
 function brandExcel(){
-  brandTable.download("xlsx", "brands.xlsx", {sheetName:"Brands"})
+  brandTable.download('xlsx', 'brands.xlsx', {sheetName:'Brands'})
 }
 
 // document.getElementById("print-table").addEventListener('click', brandPrint)

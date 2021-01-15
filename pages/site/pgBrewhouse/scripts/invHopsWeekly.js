@@ -19,7 +19,7 @@ function openQRCamera(node) {
     node.value = "";
     qrcode.callback = function(res) {
       if(res instanceof Error) {
-        alert("No QR code found. Please make sure the QR code is within the camera's frame and try again.")
+        alert(`No QR code found. Please make sure the QR code is within the camera's frame and try again.`)
       } else {
         // alert(res)
         // document.getElementById('comm').value = res
@@ -119,15 +119,15 @@ function commodityList() {
     .then(res => {
       let tableData = res.data
 
-      commodityTable = new Tabulator("#list", {
+      commodityTable = new Tabulator('#list', {
         resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:"Commodity", field:"commodity",hozAlign:"left", frozen:true},
-        {title:"Location", field:"location",hozAlign:"left"},
-        {title:"Active", field:"active",hozAlign:"left"},
+        {title:'Commodity', field:'commodity',hozAlign:'left', frozen:true},
+        {title:'Location', field:'location',hozAlign:'left'},
+        {title:'Active', field:'active',hozAlign:'left'},
         ],
       })
     })
@@ -144,20 +144,20 @@ function inventoryList() {
       res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd')
     }
       let tableData = res.data
-      inventoryTable = new Tabulator("#invList", {
+      inventoryTable = new Tabulator('#invList', {
         resizableColumns:false,
         selectable:true,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:"Commodity", field:"commodity",hozAlign:"center", frozen:true},
-        {title:"SAP", field:"sap", hozAlign:"center"},
-        {title:"Pounds", field:"lbs",hozAlign:"center"},
-        {title:"Lot", field:"lot",hozAlign:"center"},
-        {title:"Username", field:"username",hozAlign:"center"},
-        {title:"Date", field:"created_at",hozAlign:"center"},
-        {title:"Note", field:"note",hozAlign:"center"},
+        {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'SAP', field:'sap', hozAlign:'center'},
+        {title:'Pounds', field:'lbs',hozAlign:'center'},
+        {title:'Lot', field:'lot',hozAlign:'center'},
+        {title:'Username', field:'username',hozAlign:'center'},
+        {title:'Date', field:'created_at',hozAlign:'center'},
+        {title:'Note', field:'note',hozAlign:'center'},
         ],
       })
     })
@@ -206,9 +206,9 @@ function loadForm(commodity) {
       document.getElementById('per_unit').value = data.data.unit_total
       document.getElementById('note').value = data.data.note
 
-      document.getElementById('pallet_count').value = ""
-      document.getElementById('lbs').value = ""
-      document.getElementById('lot').value = ""
+      document.getElementById('pallet_count').value = ''
+      document.getElementById('lbs').value = ''
+      document.getElementById('lot').value = ''
       
       if(data.data.active === 'No') {
         let msg = `${data.data.commodity} is Active No.\nOnly Add to Inventory if Needed.`
@@ -258,9 +258,9 @@ async function sendAdd(ev){
       })
       .catch(err => alert(err))
   } else {
-    let msg = "Problems:\n"
+    let msg = 'Problems:\n'
     for(i = 0; i < fails.length; i++) {
-      msg = msg + "\n" +fails[i].input + " " + fails[i].msg 
+      msg = msg + '\n' +fails[i].input + ' ' + fails[i].msg 
     }
     alert(msg)
   }
@@ -268,7 +268,7 @@ async function sendAdd(ev){
 async function validateAdd (data){
   let failures = []
    
-  if(data.com_id === ""){
+  if(data.com_id === ''){
       failures.push({input:'commodity', msg:'Required'})
       data.com_id = null
   }
@@ -312,9 +312,6 @@ async function validateAdd (data){
   delete data.per_pallet
   delete data.per_unit
   delete data.unit_count
-  // if (Object.is(data.lbs, NaN)) {
-  //   failures.push({input:'ALERT', msg:'No Pounds To Add'})
-  // }
   if (data.lbs === 0) {
     failures.push({input:'ALERT', msg:'No Pounds To Add'})
   }

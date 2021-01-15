@@ -1,8 +1,8 @@
 let DateTime = luxon.DateTime
 
-document.getElementById('addBoxes').style.display="none"
-document.getElementById('updateBoxes').style.display="none"
-document.getElementById('attView').style.display="none"
+document.getElementById('addBoxes').style.display='none'
+document.getElementById('updateBoxes').style.display='none'
+document.getElementById('attView').style.display='none'
 
 
 String.prototype.toProperCase = function () {
@@ -82,9 +82,9 @@ function createListType(api, parent, title, type) {
 // routes add
 document.getElementById('add').onclick = add
 async function add() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="block"
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='block'
   
   let dropDown = document.getElementById('org_vessel')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select From Tank</option>`
@@ -139,9 +139,9 @@ async function sendAdd(ev){
       })
       .catch(err => alert(err))
   } else {
-    let msg = "Problems:\n"
+    let msg = 'Problems:\n'
     for(i = 0; i < fails.length; i++) {
-       msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
+       msg = msg + '\n' +fails[i]['input'] + ' ' + fails[i]['msg'] 
     }
     alert(msg)
   }
@@ -149,24 +149,24 @@ async function sendAdd(ev){
 async function validateAdd (data){
   let failures = []
 
-  if(data.org_vessel === ""){
+  if(data.org_vessel === ''){
     failures.push({input:'from tank', msg:'Required'})
     data.org_vessel = null
   }
 
-  if(data.org_vol === ""){
+  if(data.org_vol === ''){
     failures.push({input:'start tank vol', msg:'Required'})
     data.org_vol = null
   } else if(!data.org_vol.testNanFormat()) {
     failures.push({input:'start tank vol', msg:'To 2 Decimals Only'})
   } 
 
-  if(data.int_vessel === ""){
+  if(data.int_vessel === ''){
     failures.push({input:'to tank', msg:'Required'})
     data.int_vessel = null
   }
 
-  if(data.int_vol === ""){
+  if(data.int_vol === ''){
     failures.push({input:'end tank vol', msg:'Required'})
     data.int_vol = null
   } else if(!data.int_vol.testNanFormat()) {
@@ -177,7 +177,7 @@ async function validateAdd (data){
     failures.push({input:'from & to tanks', msg:'Cannot be same'})
     data.org_vessel = null
   }
-  if(data.brw_id === ""){
+  if(data.brw_id === ''){
     failures.push({input:'brand', msg:'Required'})
     data.brw_id = null
   }
@@ -189,9 +189,9 @@ async function validateAdd (data){
 // routes update
 document.getElementById('update').onclick = update
 function update() {
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="grid"
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='grid'
 
   let dropDown = document.getElementsByName('int_vessel')[0]
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select From Tank</option>`
@@ -284,9 +284,9 @@ function selectTank(){
 document.getElementById('view').onclick = view
 let hibernateTable
 function view() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('attView').style.display="block"
-  document.getElementById('addBoxes').style.display="none"
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('attView').style.display='block'
+  document.getElementById('addBoxes').style.display='none'
 
   axios.post('/api/hibernate//hibernated/log/get')
     .then(res => {
@@ -299,37 +299,37 @@ function view() {
       }
       let tableData = res.data
       
-      hibernateTable = new Tabulator("#list", {
+      hibernateTable = new Tabulator('#list', {
         printHeader:'<h1>Hibernation Log<h1>',
         resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-          {title:"Brand", field:"brand",hozAlign:"center", frozen:true},
-          {title:"Org Tk", field:"org_vessel",hozAlign:"center", frozen:true},
-          {title:"Volume", field:"org_vol",hozAlign:"center"},
-          {title:"Chp Tk", field:"int_vessel",hozAlign:"center"},
-          {title:"Volume", field:"int_vol",hozAlign:"center"},
-          {title:"Sch Tk", field:"end_vessel",hozAlign:"center"},
-          {title:"Volume", field:"end_vol",hozAlign:"center"},
-          {title:"Username", field:"username1",hozAlign:"center"},
-          {title:"Hibernate Date", field:"created_at",hozAlign:"center"},
-          {title:"Username", field:"username2",hozAlign:"center"},
-          {title:"Pump Date", field:"updated_at",hozAlign:"center"},
-          {title:"Note", field:"note",hozAlign:"center"},
+          {title:'Brand', field:'brand',hozAlign:'center', frozen:true},
+          {title:'Org Tk', field:'org_vessel',hozAlign:'center', frozen:true},
+          {title:'Volume', field:'org_vol',hozAlign:'center'},
+          {title:'Chp Tk', field:'int_vessel',hozAlign:'center'},
+          {title:'Volume', field:'int_vol',hozAlign:'center'},
+          {title:'Sch Tk', field:'end_vessel',hozAlign:'center'},
+          {title:'Volume', field:'end_vol',hozAlign:'center'},
+          {title:'Username', field:'username1',hozAlign:'center'},
+          {title:'Hibernate Date', field:'created_at',hozAlign:'center'},
+          {title:'Username', field:'username2',hozAlign:'center'},
+          {title:'Pump Date', field:'updated_at',hozAlign:'center'},
+          {title:'Note', field:'note',hozAlign:'center'},
         ],
       })
     })
     .catch(err => console.log(err))
-  document.getElementById('list').style.display="block"
+  document.getElementById('list').style.display='block'
 }
 
 document.getElementById('download-xlsx').addEventListener('click', hibernateExcel)
 function hibernateExcel(){
-  hibernateTable.download("xlsx", "hibernation_log.xlsx", {sheetName:"hibernate"})
+  hibernateTable.download('xlsx', 'hibernation_log.xlsx', {sheetName:'hibernate'})
 }
-document.getElementById("print-table").addEventListener('click', hibernatePrint)
+document.getElementById('print-table').addEventListener('click', hibernatePrint)
 function hibernatePrint(){
   hibernateTable.print(false, true);
 }

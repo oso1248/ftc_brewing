@@ -1,9 +1,9 @@
 let DateTime = luxon.DateTime
 
-document.getElementById('tableWeeklyDiv').style.display="none"
-document.getElementById('tableMonthlyDiv').style.display="none"
-document.getElementById('invWeekly').style.display="none"
-document.getElementById('invMonthly').style.display="none"
+document.getElementById('tableWeeklyDiv').style.display='none'
+document.getElementById('tableMonthlyDiv').style.display='none'
+document.getElementById('invWeekly').style.display='none'
+document.getElementById('invMonthly').style.display='none'
 
 
 function createNode(element) {

@@ -21,13 +21,13 @@ function setsTable() {
   axios.post('/api/brand/brw/get', {active: true})
     .then(res => {
       let tableData = res.data
-      hopsTable = new Tabulator("#invHopDaily", {
-        height:"330px",
-        layout:"fitDataFill",
+      hopsTable = new Tabulator('#invHopDaily', {
+        height:'330px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:"Brand", field:"brand",hozAlign:"center", frozen:true},
-        {title:"Sets Made", field:"sets",hozAlign:"center", editor:true, validator:["integer"]},
+        {title:'Brand', field:'brand',hozAlign:'center', frozen:true},
+        {title:'Sets Made', field:'sets',hozAlign:'center', editor:true, validator:['integer']},
         ],
       })
     })
@@ -56,7 +56,7 @@ async function sendUpdate() {
 
   await getShift(shift)
   if(shift === 'undefined' || Object.keys(shift).length < 2) {
-    alert('please wait until after Mignight')
+    alert('please wait until after Midnight')
     return
   } else {
     data.unshift(shift)
@@ -81,7 +81,7 @@ function getSets(data) {
 }
 function getBrews(houses) {
   let bh1 = prompt('Last Brew BH-1')
-  if (bh1 == null || bh1 == "") {
+  if (bh1 == null || bh1 == '') {
      alert('Last Brew Required')
      return
   } else {
@@ -89,7 +89,7 @@ function getBrews(houses) {
   }
 
   let bh2 = prompt('Last Brew BH-2')
-  if (bh2 == null || bh2 == "") {
+  if (bh2 == null || bh2 == '') {
     alert('Last Brew Required')
     return
   } else {

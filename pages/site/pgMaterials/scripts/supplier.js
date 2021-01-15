@@ -1,7 +1,7 @@
-document.getElementById('addBoxes').style.display="none"
-document.getElementById('updateBoxes').style.display="none"
-document.getElementById('deleteBoxes').style.display="none"
-document.getElementById('attView').style.display="none"
+document.getElementById('addBoxes').style.display='none'
+document.getElementById('updateBoxes').style.display='none'
+document.getElementById('deleteBoxes').style.display='none'
+document.getElementById('attView').style.display='none'
 const api = '/api/brewery'
 
 
@@ -26,16 +26,16 @@ String.prototype.toNonAlpha = function (spaces) {
 
 // Views
 function add() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="grid"
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='grid'
 }
 function update() {
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="grid"
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='grid'
   
   const suppliers = document.getElementsByName('updateCompany')[0]
   suppliers.innerHTML = `<option value="" disabled selected hidden>Select Supplier</option>`
@@ -55,38 +55,38 @@ function update() {
 let supplierTable
 function view() {
   document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="none"
-  document.getElementById('attView').style.display="block"
-  document.getElementById('addBoxes').style.display="none"
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='block'
+  document.getElementById('addBoxes').style.display='none'
   
   axios.post('/api/supplier/name/all')
     .then(res => {
       let tableData = res.data
-      supplierTable = new Tabulator("#list", {
+      supplierTable = new Tabulator('#list', {
         printHeader:'<h1>Suppliers<h1>',
         resizableColumns:false,
-        height:"309px",
-        layout:"fitDataFill",
+        height:'309px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:"Company", field:"company",hozAlign:"center", frozen:true},
-        {title:"Contact", field:"contact", hozAlign:"center"},
-        {title:"Email", field:"email",hozAlign:"center"},
-        {title:"Phone", field:"phone",hozAlign:"center"},
-        {title:"Address", field:"address",hozAlign:"center"},
-        {title:"Note", field:"note",hozAlign:"center"},
+        {title:'Company', field:'company',hozAlign:'center', frozen:true},
+        {title:'Contact', field:'contact', hozAlign:'center'},
+        {title:'Email', field:'email',hozAlign:'center'},
+        {title:'Phone', field:'phone',hozAlign:'center'},
+        {title:'Address', field:'address',hozAlign:'center'},
+        {title:'Note', field:'note',hozAlign:'center'},
         ],
       })
     })
     .catch(err => console.log(err.detail))
 
-  document.getElementById('list').style.display="block"
+  document.getElementById('list').style.display='block'
 }
 function del() {
-  document.getElementById('attView').style.display="none"
-  document.getElementById('addBoxes').style.display="none"
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display="grid"
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='grid'
 
   const users = document.getElementsByName('deleteCompany')[0]
   users.innerHTML = `<option value="" disabled selected hidden>Select Supplier</option>`
@@ -131,9 +131,9 @@ async function sendAdd(ev){
       })
       .catch(err => alert(err))
   } else {
-    let msg = "Problems:\n"
+    let msg = 'Problems:\n'
     for(i = 0; i < fails.length; i++) {
-      msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
+      msg = msg + '\n' +fails[i]['input'] + ' ' + fails[i]['msg'] 
     }
     alert(msg)
   }
@@ -148,25 +148,25 @@ async function validateAdd (data){
     failures.push({input:'name', msg:'Taken'})
   } 
 
-  if(data.company === ""){
+  if(data.company === ''){
       failures.push({input:'company', msg:'Required'})
       data.company = null
   } 
-  if(data.contact === ""){
+  if(data.contact === ''){
     failures.push({input:'contact', msg:'Required'})
     data.contact = null
   } else {
     data.contact = data.contact.toProperCase()
   }
   
-  if(data.email === ""){
+  if(data.email === ''){
     failures.push({input:'email', msg:'Required'})
     data.email = null
   } else {
     data.email = data.email.toLowerCase()
   }
 
-  if(data.phone === ""){
+  if(data.phone === ''){
     failures.push({input:'phone', msg:'Required'})
     data.phone = null
   } else {

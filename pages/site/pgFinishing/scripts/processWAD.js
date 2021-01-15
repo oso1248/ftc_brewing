@@ -1,8 +1,8 @@
 let DateTime = luxon.DateTime
 
 window.addEventListener('load', (event) => {
-  let formBlock = document.getElementsByName("formblock")
-  formBlock.forEach(elem => elem.style.display="none")
+  let formBlock = document.getElementsByName('formblock')
+  formBlock.forEach(elem => elem.style.display='none')
 })
 
 String.prototype.testNanFormat = function () {
@@ -52,10 +52,10 @@ function createListType(api, parent, title, type) {
 ///WAD Additions
 document.getElementById('addWAD').onclick = viewWad
 function viewWad() {
-  document.getElementById('wadAdd').style.display = "block"
-  document.getElementById('transAdd').style.display = "none"
-  document.getElementById('lossAdd').style.display = "none"
-  document.getElementById('viewTables2').style.display = "none"
+  document.getElementById('wadAdd').style.display = 'block'
+  document.getElementById('transAdd').style.display = 'none'
+  document.getElementById('lossAdd').style.display = 'none'
+  document.getElementById('viewTables2').style.display = 'none'
   
   
   let dropDown = document.getElementById('wadSelbrand')
@@ -105,7 +105,7 @@ async function sendWad(ev) {
   } else {
     let msg = "Problems:\n"
     for(i = 0; i < fails.length; i++) {
-       msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
+       msg = msg + '\n' +fails[i]['input'] + ' ' + fails[i]['msg'] 
     }
     alert(msg)
   }
@@ -113,21 +113,21 @@ async function sendWad(ev) {
 function validateWad(data) {
   let failures = []
   
-  if(data.brnd_fin === ""){
+  if(data.brnd_fin === ''){
     failures.push({input:'brand', msg:'Required'})
     data.brnd_fin = null
   }
-  if(data.tank === ""){
+  if(data.tank === ''){
     failures.push({input:'tank', msg:'Required'})
     data.tank = null
   }
-  if(data.vol_start === ""){
+  if(data.vol_start === ''){
     failures.push({input:'start volume', msg:'Required'})
     data.vol_start = null
   } else if(!data.vol_start.testNanFormat()) {
     failures.push({input:'start volume', msg:'To 2 Decimals Only'})
   }
-  if(data.vol_stop === ""){
+  if(data.vol_stop === ''){
     failures.push({input:'stop volume', msg:'Required'})
     data.vol_stop = null
   } else if(!data.vol_stop.testNanFormat()) {
@@ -140,10 +140,10 @@ function validateWad(data) {
 // Trans Add
 document.getElementById('addTrans').onclick = viewTrans
 async function viewTrans() {
-  document.getElementById('wadAdd').style.display = "none"
-  document.getElementById('transAdd').style.display = "block"
-  document.getElementById('lossAdd').style.display = "none"
-  document.getElementById('viewTables2').style.display = "none"
+  document.getElementById('wadAdd').style.display = 'none'
+  document.getElementById('transAdd').style.display = 'block'
+  document.getElementById('lossAdd').style.display = 'none'
+  document.getElementById('viewTables2').style.display = 'none'
   
   
   let api = '/api/brand/fin/get'
@@ -218,9 +218,9 @@ async function sendTrans(ev) {
       })
       .catch(err => alert(err))
   } else {
-    let msg = "Problems:\n"
+    let msg = 'Problems:\n'
     for(i = 0; i < fails.length; i++) {
-       msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
+       msg = msg + '\n' +fails[i]['input'] + ' ' + fails[i]['msg'] 
     }
     alert(msg)
   }
@@ -228,24 +228,24 @@ async function sendTrans(ev) {
 function validateTrans(data) {
   let failures = []
   
-  if(data.brand_from === ""){
+  if(data.brand_from === ''){
     failures.push({input:'brand from', msg:'Required'})
     data.brand_from = null
   }
-  if(data.brand_to === ""){
+  if(data.brand_to === ''){
     failures.push({input:'brand_to', msg:'Required'})
     data.tank = null
   }
-  if(data.tank_from === ""){
+  if(data.tank_from === ''){
     failures.push({input:'tank from', msg:'Required'})
     data.tank_from = null
   } 
-  if(data.tank_to === ""){
+  if(data.tank_to === ''){
     failures.push({input:'tank to', msg:'Required'})
     data.tank_to = null
   }
   
-  if(data.volume === ""){
+  if(data.volume === ''){
     failures.push({input:'volume', msg:'Required'})
     data.volume = null
   } else if(!data.volume.testNanFormat()) {
@@ -259,10 +259,10 @@ function validateTrans(data) {
 // Loss Add
 document.getElementById('addLoss').onclick = viewLoss
 async function viewLoss() {
-  document.getElementById('wadAdd').style.display = "none"
-  document.getElementById('transAdd').style.display = "none"
-  document.getElementById('lossAdd').style.display = "block"
-  document.getElementById('viewTables2').style.display = "none"
+  document.getElementById('wadAdd').style.display = 'none'
+  document.getElementById('transAdd').style.display = 'none'
+  document.getElementById('lossAdd').style.display = 'block'
+  document.getElementById('viewTables2').style.display = 'none'
   
   let api = '/api/brand/fin/get'
   let title = 'brndFin'
@@ -363,10 +363,10 @@ let transTable
 let lossTable 
 document.getElementById('viewView').onclick = viewView
 function viewView() {
-  document.getElementById('wadAdd').style.display = "none"
-  document.getElementById('transAdd').style.display = "none"
-  document.getElementById('lossAdd').style.display = "none"
-  document.getElementById('viewTables2').style.display = "block"
+  document.getElementById('wadAdd').style.display = 'none'
+  document.getElementById('transAdd').style.display = 'none'
+  document.getElementById('lossAdd').style.display = 'none'
+  document.getElementById('viewTables2').style.display = 'block'
   
   wadAdditionTable()
   transAdditionTable()
@@ -380,20 +380,20 @@ function wadAdditionTable() {
       tableData.map(elem => {
         elem.created_at = DateTime.fromISO(elem.created_at).toFormat('yyyy-MM-dd HH:mm')
       })
-      wadTable = new Tabulator("#wadTable", {
+      wadTable = new Tabulator('#wadTable', {
         printHeader:'<h1>WAD Additions<h1>',
         resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-          {title:"Tank", frozen: true, field:"tank", hozAlign:"Left"},
-          {title:"Brand", field:"brand", hozAlign:"Left"},
-          {title:"Start Vol", field:"vol_start", hozAlign:"Left"},
-          {title:"Stop Vol", field:"vol_stop", hozAlign:"Left"},
-          {title:"Username", field:"username", hozAlign:"Left"},
-          {title:"Date", field:"created_at", hozAlign:"Left"},
-          {title:"Note", field:"note", hozAlign:"Left"},
+          {title:'Tank', frozen: true, field:'tank', hozAlign:'Left'},
+          {title:'Brand', field:'brand', hozAlign:'Left'},
+          {title:'Start Vol', field:'vol_start', hozAlign:'Left'},
+          {title:'Stop Vol', field:'vol_stop', hozAlign:'Left'},
+          {title:'Username', field:'username', hozAlign:'Left'},
+          {title:'Date', field:'created_at', hozAlign:'Left'},
+          {title:'Note', field:'note', hozAlign:'Left'},
         ],
       })
     })
@@ -403,7 +403,7 @@ document.getElementById('wadPrint-table').addEventListener('click', () => {
   wadTable.print(false, true);
 })
 document.getElementById('wadDownload-xlsx').addEventListener('click', () => {
-  wadTable.download("xlsx", "wad_addition.xlsx", {sheetName:"Log"})
+  wadTable.download('xlsx', 'wad_addition.xlsx', {sheetName:'Log'})
 })
 
 
@@ -414,21 +414,21 @@ function transAdditionTable() {
       tableData.map(elem => {
         elem.created_at = DateTime.fromISO(elem.created_at).toFormat('yyyy-MM-dd HH:mm')
       })
-      transTable = new Tabulator("#transTable", {
+      transTable = new Tabulator('#transTable', {
         printHeader:'<h1>Transfers<h1>',
         resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-          {title:"From", frozen: true, field:"tank_from", hozAlign:"Left"},
-          {title:"Brand", field:"brand_from", hozAlign:"Left"},
-          {title:"To", field:"tank_to", hozAlign:"Left"},
-          {title:"Brand", field:"brand_to", hozAlign:"Left"},
-          {title:"Volume", field:"volume", hozAlign:"Left"},
-          {title:"Username", field:"username", hozAlign:"Left"},
-          {title:"Date", field:"created_at", hozAlign:"Left"},
-          {title:"Note", field:"note", hozAlign:"Left"},
+          {title:'From', frozen: true, field:'tank_from', hozAlign:'Left'},
+          {title:'Brand', field:'brand_from', hozAlign:'Left'},
+          {title:'To', field:'tank_to', hozAlign:'Left'},
+          {title:'Brand', field:'brand_to', hozAlign:'Left'},
+          {title:'Volume', field:'volume', hozAlign:'Left'},
+          {title:'Username', field:'username', hozAlign:'Left'},
+          {title:'Date', field:'created_at', hozAlign:'Left'},
+          {title:'Note', field:'note', hozAlign:'Left'},
         ],
       })
     })
@@ -438,7 +438,7 @@ document.getElementById('transPrint-table').addEventListener('click', () => {
   transTable.print(false, true);
 })
 document.getElementById('transDownload-xlsx').addEventListener('click', () => {
-  transTable.download("xlsx", "transfer.xlsx", {sheetName:"Log"})
+  transTable.download('xlsx', 'transfer.xlsx', {sheetName:'Log'})
 })
 
 function lossAdditionTable() {
@@ -448,19 +448,19 @@ function lossAdditionTable() {
       tableData.map(elem => {
         elem.created_at = DateTime.fromISO(elem.created_at).toFormat('yyyy-MM-dd HH:mm')
       })
-      lossTable = new Tabulator("#lossTable", {
+      lossTable = new Tabulator('#lossTable', {
         printHeader:'<h1>Process Loss<h1>',
         resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-          {title:"Tank", frozen: true, field:"tank", hozAlign:"Left"},
-          {title:"Brand", field:"brand", hozAlign:"Left"},
-          {title:"Volume", field:"volume", hozAlign:"Left"},
-          {title:"Username", field:"username", hozAlign:"Left"},
-          {title:"Date", field:"created_at", hozAlign:"Left"},
-          {title:"Note", field:"note", hozAlign:"Left"},
+          {title:'Tank', frozen: true, field:'tank', hozAlign:'Left'},
+          {title:'Brand', field:'brand', hozAlign:'Left'},
+          {title:'Volume', field:'volume', hozAlign:'Left'},
+          {title:'Username', field:'username', hozAlign:'Left'},
+          {title:'Date', field:'created_at', hozAlign:'Left'},
+          {title:'Note', field:'note', hozAlign:'Left'},
         ],
       })
     })
@@ -470,5 +470,5 @@ document.getElementById('lossPrint-table').addEventListener('click', () => {
   lossTable.print(false, true);
 })
 document.getElementById('lossDownload-xlsx').addEventListener('click', () => {
-  lossTable.download("xlsx", "process_loss.xlsx", {sheetName:"Log"})
+  lossTable.download('xlsx', 'process_loss.xlsx', {sheetName:'Log'})
 })

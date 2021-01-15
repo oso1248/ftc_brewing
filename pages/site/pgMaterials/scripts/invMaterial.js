@@ -15,10 +15,10 @@ function setAPI() {
 function openQRCamera(node) {
   let reader = new FileReader();
   reader.onload = function() {
-    node.value = "";
+    node.value = '';
     qrcode.callback = function(res) {
       if(res instanceof Error) {
-        alert("No QR code found. Please make sure the QR code is within the camera's frame and try again.")
+        alert(`No QR code found. Please make sure the QR code is within the camera's frame and try again.`)
       } else {
         // alert(res)
         // document.getElementById('comm').value = res
@@ -99,15 +99,15 @@ function commodityList() {
     .then(res => {
       let tableData = res.data
 
-      commodityTable = new Tabulator("#list", {
+      commodityTable = new Tabulator('#list', {
         resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:"Commodity", field:"commodity",hozAlign:"left", frozen:true},
-        {title:"Location", field:"location",hozAlign:"left"},
-        {title:"Active", field:"active",hozAlign:"left"},
+        {title:'Commodity', field:'commodity',hozAlign:'left', frozen:true},
+        {title:'Location', field:'location',hozAlign:'left'},
+        {title:'Active', field:'active',hozAlign:'left'},
         ],
       })
     })
@@ -119,28 +119,27 @@ function inventoryList() {
   data.startDate = DateTime.local().endOf('day').minus({days: 1}).toFormat('yyyy-MM-dd TTT')
   data.endDate = DateTime.local().endOf('day').toFormat('yyyy-MM-dd TTT')
   
-  // axios.post('/api/inventory/material/weekly/view', data)
   axios.post(api + 'view', data)
     .then(res => {
     for(let i = 0; i < res.data.length; i++) {
       res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd')
     }
       let tableData = res.data
-      inventoryTable = new Tabulator("#invList", {
+      inventoryTable = new Tabulator('#invList', {
         resizableColumns:false,
         selectable:true,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
-        {title:"Commodity", field:"commodity",hozAlign:"center", frozen:true},
-        {title:"SAP", field:"sap", hozAlign:"center"},
-        {title:"Per Unit", field:"total_per_unit",hozAlign:"center"},
-        {title:"Units", field:"total_count",hozAlign:"center"},
-        {title:"Total", field:"total_end",hozAlign:"center"},
-        {title:"Username", field:"username",hozAlign:"center"},
-        {title:"Date", field:"created_at",hozAlign:"center"},
-        {title:"Note", field:"note",hozAlign:"center"},
+        {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'SAP', field:'sap', hozAlign:'center'},
+        {title:'Per Unit', field:'total_per_unit',hozAlign:'center'},
+        {title:'Units', field:'total_count',hozAlign:'center'},
+        {title:'Total', field:'total_end',hozAlign:'center'},
+        {title:'Username', field:'username',hozAlign:'center'},
+        {title:'Date', field:'created_at',hozAlign:'center'},
+        {title:'Note', field:'note',hozAlign:'center'},
         ],
       })
     })
@@ -238,9 +237,9 @@ async function sendAdd(ev){
       })
       .catch(err => alert(err))
     } else {
-      let msg = "Problems:\n"
+      let msg = 'Problems:\n'
       for(i = 0; i < fails.length; i++) {
-        msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
+        msg = msg + '\n' +fails[i]['input'] + ' ' + fails[i]['msg'] 
       }
       alert(msg)
     }
@@ -248,29 +247,29 @@ async function sendAdd(ev){
 async function validateAdd (data){
   let failures = []
    
-  if(data.com_id === ""){
+  if(data.com_id === ''){
       failures.push({input:'commodity', msg:'Required'})
       data.com_id = null
   }
-  if(data.per_pallet === ""){
+  if(data.per_pallet === ''){
     failures.push({input:'per pallet', msg:'Required'})
     data.per_pallet = null
   } else if (!data.per_pallet.testNanFormat()) {
       failures.push({input:'per pallet', msg:'To 2 Decimals Only'})
   }
-  if(data.pallets === ""){
+  if(data.pallets === ''){
     failures.push({input:'pallets', msg:'Required'})
     data.pallets = null
   } else if (!data.pallets.testNanFormat()) {
       failures.push({input:'pallets', msg:'To 2 Decimals Only'})
   }
-  if(data.total_per_unit === ""){
+  if(data.total_per_unit === ''){
     failures.push({input:'unit total', msg:'Required'})
     data.total_per_unit = null
   } else if (!data.total_per_unit.testNanFormat()) {
       failures.push({input:'unit total', msg:'To 2 Decimals Only'})
   }
-  if(data.total_count === ""){
+  if(data.total_count === ''){
     failures.push({input:'count', msg:'Required'})
     data.total_count = null
   } else if (!data.total_count.testNanFormat()) {

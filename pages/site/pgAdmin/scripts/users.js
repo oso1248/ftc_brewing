@@ -1,7 +1,7 @@
-document.getElementById('frmAdd').style.display="none"
-document.getElementById('frmUpdate').style.display="none"
-document.getElementById('frmDelete').style.display="none"
-document.getElementById('list').style.display="none"
+document.getElementById('frmAdd').style.display='none'
+document.getElementById('frmUpdate').style.display='none'
+document.getElementById('frmDelete').style.display='none'
+document.getElementById('list').style.display='none'
 const api = '/api/brewery'
 
 
@@ -15,10 +15,10 @@ function append(parent, e1) {
 
 // Views
 function add() {
-  document.getElementById('frmUpdate').style.display="none"
-  document.getElementById('frmDelete').style.display="none"
-  document.getElementById('list').style.display="none"
-  document.getElementById('frmAdd').style.display="block"
+  document.getElementById('frmUpdate').style.display='none'
+  document.getElementById('frmDelete').style.display='none'
+  document.getElementById('list').style.display='none'
+  document.getElementById('frmAdd').style.display='block'
   let breweries = document.getElementById('brewery_id')
   breweries.innerHTML = `<option value="" id="updateBrewery" disabled selected hidden>Select Brewery</option>`
   axios.get('/api/brewery')
@@ -36,10 +36,10 @@ function add() {
   
 }
 function update() {
-  document.getElementById('frmAdd').style.display="none"
-  document.getElementById('frmDelete').style.display="none"
-  document.getElementById('list').style.display="none"
-  document.getElementById('frmUpdate').style.display="block"
+  document.getElementById('frmAdd').style.display='none'
+  document.getElementById('frmDelete').style.display='none'
+  document.getElementById('list').style.display='none'
+  document.getElementById('frmUpdate').style.display='block'
   
   const users = document.getElementsByName('updateUsers')[0]
   users.innerHTML = `<option value="" disabled selected hidden>Select User</option>`
@@ -74,24 +74,25 @@ function update() {
 }
 let userTable
 function view() {
-  document.getElementById('frmAdd').style.display="none"
-  document.getElementById('frmDelete').style.display="none"
-  document.getElementById('frmUpdate').style.display="none"
-  document.getElementById('list').style.display="block"
+  document.getElementById('frmAdd').style.display='none'
+  document.getElementById('frmDelete').style.display='none'
+  document.getElementById('frmUpdate').style.display='none'
+  document.getElementById('list').style.display='block'
   
   axios.get('/api/user')
     .then(res => {
       let tableData = res.data
       
-      userTable = new Tabulator("#list", {
-        height:"309px",
-        layout:"fitDataFill",
+      userTable = new Tabulator('#list', {
+        height:'309px',
+        layout:'fitDataFill',
+        resizableColumns:false,
         data:tableData,
         columns:[
-        {title:"Name", field:"username",hozAlign:"center", frozen:true},
-        {title:"Email", field:"email", hozAlign:"center"},
-        {title:"Permissions", field:"permissions",hozAlign:"center"},
-        {title:"Brewery", field:"brewery",hozAlign:"center"},
+        {title:'Name', field:'username',hozAlign:'center', frozen:true},
+        {title:'Email', field:'email', hozAlign:'center'},
+        {title:'Permissions', field:'permissions',hozAlign:'center'},
+        {title:'Brewery', field:'brewery',hozAlign:'center'},
         ],
       })
     })

@@ -80,7 +80,7 @@ function view() {
       brandTable = new Tabulator('#list', {
         resizableColumns:false,
         height:'309px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[        
@@ -88,7 +88,7 @@ function view() {
         {title:'Active', field:'active',hozAlign:'center'},
         {title:'Fin Brand', field:'brndFin',hozAlign:'center'},
         {title:'Brw Brand', field:'brndBrw',hozAlign:'center'},
-        {title:'Note', field:'note', hozAlign:'center'},
+        {title:'Note', field:'note', hozAlign:'left'},
         ],
       })
     })

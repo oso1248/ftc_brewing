@@ -23,11 +23,11 @@ function setsTable() {
       let tableData = res.data
       hopsTable = new Tabulator('#invHopDaily', {
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Brand', field:'brand',hozAlign:'center', frozen:true},
-        {title:'Sets Made', field:'sets',hozAlign:'center', editor:true, validator:['integer']},
+        {title:'Sets Made', field:'sets',hozAlign:'left', editor:true, validator:['integer']},
         ],
       })
     })

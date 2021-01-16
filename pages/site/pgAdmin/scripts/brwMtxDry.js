@@ -66,11 +66,11 @@ function selectBrwBrandUpdate(){
       hopTableUpdate = new Tabulator('#updateHop', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Hop', field:'Hop',hozAlign:'center', frozen:true},
-        {title:'Pounds', field:'Pounds',hozAlign:'center', editor:true, validator:['numeric']},
+        {title:'Pounds', field:'Pounds',hozAlign:'left', editor:true, validator:['numeric']},
         ],        
       })
     })
@@ -86,11 +86,11 @@ function selectBrwBrandView(){
       hopTableView = new Tabulator('#viewHop', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Hop', field:'Hop',hozAlign:'center', frozen:true},
-        {title:'Pounds', field:'Pounds',hozAlign:'center'},
+        {title:'Pounds', field:'Pounds',hozAlign:'left'},
         ],
       })
     })

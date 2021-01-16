@@ -179,7 +179,7 @@ function view() {
         printHeader:'<h1>Commodity List<h1>',
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
@@ -195,7 +195,7 @@ function view() {
         {title:'Per Pallet', field:'per_pallet',hozAlign:'center'},
         {title:'Unit Total', field:'unit_total',hozAlign:'center'},
         {title:'UOM', field:'uom',hozAlign:'center'},
-        {title:'Note', field:'note',hozAlign:'center'},
+        {title:'Note', field:'note',hozAlign:'left'},
         ],
       })
     })

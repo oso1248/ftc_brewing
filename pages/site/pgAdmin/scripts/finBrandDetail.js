@@ -148,14 +148,14 @@ async function updateBrandLineage() {
       tableUpdateBrandLineage = new Tabulator('#updateLineageTable', {
         resizableColumns:false,
         height:'55px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         resizableColumns:false,
         data:tableData,
         columns:[
         {title:'Schoene', field:'brndBrw',hozAlign:'center', frozen:true},        
         {title:'Finished', field:'brndFin',hozAlign:'center'},
         {title:'Package', field:'brndPck',hozAlign:'center'},
-        {title:'Active', field:'active',hozAlign:'center'},
+        {title:'Active', field:'active',hozAlign:'left'},
         ],
       })
     })
@@ -373,7 +373,7 @@ async function viewBrandLineage() {
       tableViewBrandLineage = new Tabulator('#viewLineageTable', {
         resizableColumns:false,
         height:'55px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         resizableColumns:false,
         data:tableData,
         columns:[
@@ -395,7 +395,7 @@ async function viewFinDetailPreCsx(name) {
       tableViewFinDetailPreCsx = new Tabulator('#viewFinDetailPreCsxTable', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
@@ -414,7 +414,7 @@ async function viewFinDetailPostCsx(name) {
       tableViewFinDetailPostCsx = new Tabulator('#viewFinDetailPostCsxTable', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
@@ -433,7 +433,7 @@ async function viewFinDetailPreFil(name) {
       tableViewFinDetailPreFil = new Tabulator('#viewFinDetailPreFilTable', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
@@ -452,7 +452,7 @@ async function viewFinDetailPostFil(name) {
       tableViewFinDetailPostFil = new Tabulator('#viewFinDetailPostFilTable', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
@@ -471,7 +471,7 @@ async function viewFinDetailPreRel(name) {
       tableViewFinDetailPreRel = new Tabulator('#viewFinDetailPreRelTable', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
@@ -490,7 +490,7 @@ async function viewFinDetailPostRel(name) {
       tableViewFinDetailPostRel = new Tabulator('#viewFinDetailPostRelTable', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        

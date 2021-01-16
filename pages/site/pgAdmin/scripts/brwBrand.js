@@ -66,7 +66,7 @@ function view() {
       var table = new Tabulator('#list', {
         resizableColumns:false,
         height:'309px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Brand', field:'brand',hozAlign:'center'},
@@ -75,7 +75,7 @@ function view() {
         {title:'Craft Hops', field:'hop_crft',hozAlign:'center'},
         {title:'Dry Hops', field:'hop_dry',hozAlign:'center'},
         {title:'Super Sacks', field:'supr_sac',hozAlign:'center'},
-        {title:'Note', field:'note', hozAlign:'center'},
+        {title:'Note', field:'note', hozAlign:'left'},
         ],
       })
     })

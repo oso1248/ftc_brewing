@@ -130,7 +130,7 @@ function view() {
         printHeader:'<h1>Archived Inventory<h1>',
         resizableColumns:false,
         height:'309px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
@@ -138,7 +138,7 @@ function view() {
         {title:'End Total', field:'total_end',hozAlign:'center'},
         {title:'Username', field:'username',hozAlign:'center'},
         {title:'Date', field:'created_at',hozAlign:'center'},
-        {title:'Note', field:'note',hozAlign:'center'},
+        {title:'Note', field:'note',hozAlign:'left'},
         ],
       })
     })
@@ -175,7 +175,7 @@ function loadDeleteView() {
         resizableColumns:false,
         height:'309px',
         selectable:true,
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
@@ -183,7 +183,7 @@ function loadDeleteView() {
         {title:'End Total', field:'total_end',hozAlign:'center'},
         {title:'Username', field:'username',hozAlign:'center'},
         {title:'Date', field:'created_at',hozAlign:'center'},
-        {title:'Note', field:'note',hozAlign:'center'},
+        {title:'Note', field:'note',hozAlign:'left'},
         ],
       })
     })

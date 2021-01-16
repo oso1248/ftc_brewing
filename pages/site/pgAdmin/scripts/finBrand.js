@@ -52,7 +52,7 @@ function view() {
       brandTable = new Tabulator('#list', {
         resizableColumns:false,
         height:'309px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
@@ -62,7 +62,7 @@ function view() {
         {title:'Injection', field:'injection',hozAlign:'center'},
         {title:'Brw Brand', field:'brndBrw',hozAlign:'center'},
         {title:'Pck Brand', field:'brndPck',hozAlign:'center'},
-        {title:'Note', field:'note', hozAlign:'center'},
+        {title:'Note', field:'note', hozAlign:'left'},
         ],
       })
     })
@@ -333,14 +333,14 @@ function selectBrandIngredientUpdate() {
       ingredientTable = new Tabulator('#injRateTable', {
         resizableColumns:false,
         height:'120x',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
         {title:'Brand', field:'brand',hozAlign:'center', frozen:true},
         {title:'Commodity', field:'commodity',hozAlign:'center'},
-        {title:'Rate', field:'rate',hozAlign:'center', width: '25px', editor:true, validator:['float']},
+        {title:'Rate', field:'rate',hozAlign:'left', editor:true, validator:['float']},
         ],
       })
     })

@@ -267,11 +267,10 @@ function view() {
         {title:'Type', field:'type',hozAlign:'center'},
         {title:'Volume', field:'volume',hozAlign:'center'},
         {title:'Location', field:'location',hozAlign:'center'},
-        {title:'Note', field:'note', hozAlign:'center'},
+        {title:'Note', field:'note', hozAlign:'left'},
         ],
       })
     })
     .catch(err => console.log(err))
-
 }
 

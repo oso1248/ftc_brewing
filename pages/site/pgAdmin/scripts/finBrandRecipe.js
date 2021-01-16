@@ -142,7 +142,7 @@ async function chpBrandUpdate(name) {
       tableUpdateBrandChp = new Tabulator('#updateFinRecipeChpTable', {
         resizableColumns:false,
         height:'1000x',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
@@ -167,7 +167,7 @@ async function schBrandUpdate(name) {
       tableUpdateBrandSch = new Tabulator('#updateFinRecipeSchTable', {
         resizableColumns:false,
         height:'1000x',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
@@ -238,7 +238,7 @@ async function finBrandUpdate(name) {
       tableUpdateBrandFin = new Tabulator('#updateFinRecipeFinTable', {
         resizableColumns:false,
         height:'1000x',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
@@ -347,7 +347,7 @@ async function chpBrandView(name) {
       tableViewBrandChp = new Tabulator('#viewFinRecipeChpTable', {
         resizableColumns:false,
         height:'1000x',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
@@ -372,7 +372,7 @@ async function schBrandView(name) {
       tableViewBrandSch = new Tabulator('#viewFinRecipeSchTable', {
         resizableColumns:false,
         height:'1000x',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
@@ -443,7 +443,7 @@ async function finBrandView(name) {
       tableViewBrandFin = new Tabulator('#viewFinRecipeFinTable', {
         resizableColumns:false,
         height:'1000x',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        

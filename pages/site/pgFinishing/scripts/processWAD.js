@@ -384,7 +384,7 @@ function wadAdditionTable() {
         printHeader:'<h1>WAD Additions<h1>',
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'Tank', frozen: true, field:'tank', hozAlign:'Left'},
@@ -418,7 +418,7 @@ function transAdditionTable() {
         printHeader:'<h1>Transfers<h1>',
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'From', frozen: true, field:'tank_from', hozAlign:'Left'},
@@ -452,7 +452,7 @@ function lossAdditionTable() {
         printHeader:'<h1>Process Loss<h1>',
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'Tank', frozen: true, field:'tank', hozAlign:'Left'},

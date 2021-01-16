@@ -102,7 +102,7 @@ function commodityList() {
       commodityTable = new Tabulator('#list', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Commodity', field:'commodity',hozAlign:'left', frozen:true},
@@ -129,7 +129,7 @@ function inventoryList() {
         resizableColumns:false,
         selectable:true,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
@@ -139,7 +139,7 @@ function inventoryList() {
         {title:'Total', field:'total_end',hozAlign:'center'},
         {title:'Username', field:'username',hozAlign:'center'},
         {title:'Date', field:'created_at',hozAlign:'center'},
-        {title:'Note', field:'note',hozAlign:'center'},
+        {title:'Note', field:'note',hozAlign:'left'},
         ],
       })
     })

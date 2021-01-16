@@ -83,15 +83,15 @@ function view() {
       let tableData = res.data
       var table = new Tabulator('#listLocation', {
         height:'309px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         responsiveLayout:'collapse',
         resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
-        {formatter:'responsiveCollapse', width:30, minWidth:30, hozAlign:'center', resizable:false, headerSort:false},
-        {title:'Location', field:'location', width:200,hozAlign:'center', responsive:0},
-        {title:'Note', field:'note', hozAlign:'center', width:250},
+        {formatter:'responsiveCollapse', width:30, minWidth:30, hozAlign:'left', resizable:false, headerSort:false},
+        {title:'Location', field:'location', width:200,hozAlign:'left', responsive:0},
+        {title:'Note', field:'note', hozAlign:'left', width:250},
         ],
       })
     })
@@ -102,15 +102,15 @@ function view() {
       let tableData = res.data
       var table = new Tabulator('#listType', {
         height:'309px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         responsiveLayout:'collapse',
         resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
-        {formatter:'responsiveCollapse', width:30, minWidth:30, hozAlign:'center', resizable:false, headerSort:false},
-        {title:'Type', field:'type', width:200,hozAlign:'center', responsive:0},
-        {title:'Note', field:'note', hozAlign:'center', width:250},
+        {formatter:'responsiveCollapse', width:30, minWidth:30, hozAlign:'left', resizable:false, headerSort:false},
+        {title:'Type', field:'type', width:200,hozAlign:'left', responsive:0},
+        {title:'Note', field:'note', hozAlign:'left', width:250},
         ],
       })
     })
@@ -121,15 +121,15 @@ function view() {
       let tableData = res.data
       var table = new Tabulator('#listEnviro', {
         height:'309px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         responsiveLayout:'collapse',
         resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
-        {formatter:'responsiveCollapse', width:30, minWidth:30, hozAlign:'center', resizable:false, headerSort:false},
-        {title:'Enviro', field:'enviro', width:200,hozAlign:'center', responsive:0},
-        {title:'Note', field:'note', hozAlign:'center', width:250},
+        {formatter:'responsiveCollapse', width:30, minWidth:30, hozAlign:'left', resizable:false, headerSort:false},
+        {title:'Enviro', field:'enviro', width:200,hozAlign:'left', responsive:0},
+        {title:'Note', field:'note', hozAlign:'left', width:250},
         ],
       })
     })
@@ -140,15 +140,15 @@ function view() {
       let tableData = res.data
       var table = new Tabulator('#listContainer', {
         height:'309px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         responsiveLayout:'collapse',
         resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
-        {formatter:'responsiveCollapse', width:30, minWidth:30, hozAlign:'center', resizable:false, headerSort:false},
-        {title:'Container', field:'container', width:200,hozAlign:'center', responsive:0},
-        {title:'Note', field:'note', hozAlign:'center', width:250},
+        {formatter:'responsiveCollapse', width:30, minWidth:30, hozAlign:'left', resizable:false, headerSort:false},
+        {title:'Container', field:'container', width:200,hozAlign:'left', responsive:0},
+        {title:'Note', field:'note', hozAlign:'left', width:250},
         ],
       })
     })
@@ -159,15 +159,15 @@ function view() {
       let tableData = res.data
       var table = new Tabulator('#listUOM', {
         height:'309px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         responsiveLayout:'collapse',
         resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
-        {formatter:'responsiveCollapse', width:30, minWidth:30, hozAlign:'center', resizable:false, headerSort:false},
-        {title:'UOM', field:'uom', width:200,hozAlign:'center', responsive:0},
-        {title:'Note', field:'note', hozAlign:'center', width:250},
+        {formatter:'responsiveCollapse', width:30, minWidth:30, hozAlign:'left', resizable:false, headerSort:false},
+        {title:'UOM', field:'uom', width:200,hozAlign:'left', responsive:0},
+        {title:'Note', field:'note', hozAlign:'left', width:250},
         ],
       })
     })

@@ -58,14 +58,14 @@ function weeklyHopTableFunc(dt) {
         printHeader:'<h3>Weekly Hop Inventory<h3>',
         resizableColumns:false,
         height:'309px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Hop Inv', field:'commodity',hozAlign:'center', frozen:true},
         {title:'SAP', field:'sap', hozAlign:'center'},
         {title:'Total', field:'lbs',hozAlign:'center'},
         {title:'Username', field:'username',hozAlign:'center'},
-        {title:'Date', field:'created_at',hozAlign:'center'},
+        {title:'Date', field:'created_at',hozAlign:'left'},
         ],
       })
     })
@@ -88,14 +88,14 @@ function weeklyMatTableFunc(dt) {
         printHeader:'<h3>Weekly Material Inventory<h3>',
         resizableColumns:false,
         height:'309px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Mat Inv', field:'commodity',hozAlign:'center', frozen:true},
         {title:'SAP', field:'sap', hozAlign:'center'},
         {title:'Total', field:'total_end',hozAlign:'center'},
         {title:'Username', field:'username',hozAlign:'center'},
-        {title:'Date', field:'created_at',hozAlign:'center'},
+        {title:'Date', field:'created_at',hozAlign:'left'},
         ],
       })
     })
@@ -120,14 +120,14 @@ function weeklyCombinedTableFunc(dt) {
         printHeader:'<h3>Weekly Combined Inventory<h3>',
         resizableColumns:false,
         height:'309px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
           {title:'SAP', field:'sap', hozAlign:'center'},
           {title:'Total', field:'total',hozAlign:'center'},
           {title:'UOM', field:'uom', hozAlign:'center'},
-          {title:'Added To BIT', field:'complete', hozAlign:'center',editor:true, formatter:'tickCross'},
+          {title:'Added To BIT', field:'complete', hozAlign:'left',editor:true, formatter:'tickCross'},
         ],
       })
     })
@@ -186,14 +186,14 @@ function monthlyHopTableFunc(dt) {
         printHeader:'<h3>Monthly Hop Inventory<h3>',
         resizableColumns:false,
         height:'309px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Hop Inv', field:'commodity',hozAlign:'center', frozen:true},
         {title:'SAP', field:'sap', hozAlign:'center'},
         {title:'Total', field:'lbs',hozAlign:'center'},
         {title:'Username', field:'username',hozAlign:'center'},
-        {title:'Date', field:'created_at',hozAlign:'center'},
+        {title:'Date', field:'created_at',hozAlign:'left'},
         ],
       })
     })
@@ -216,14 +216,14 @@ function monthlyMatTableFunc(dt) {
         printHeader:'<h3>Monthly Material Inventory<h3>',
         resizableColumns:false,
         height:'309px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Mat Inv', field:'commodity',hozAlign:'center', frozen:true},
         {title:'SAP', field:'sap', hozAlign:'center'},
         {title:'Total', field:'total_end',hozAlign:'center'},
         {title:'Username', field:'username',hozAlign:'center'},
-        {title:'Date', field:'created_at',hozAlign:'center'},
+        {title:'Date', field:'created_at',hozAlign:'left'},
         ],
       })
     })
@@ -247,14 +247,14 @@ function monthlyCombinedTableFunc(dt) {
       monthlyCombinedTable = new Tabulator('#tableCombinedMonthly', {
         printHeader:'<h3>Monthly Combined Inventory<h3>',
         height:'309px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
           {title:'SAP', field:'sap', hozAlign:'center'},
           {title:'Total', field:'total',hozAlign:'center'},
           {title:'UOM', field:'uom', hozAlign:'center'},
-          {title:'Added To BIT', field:'complete', hozAlign:'center',editor:true, formatter:'tickCross'},
+          {title:'Added To BIT', field:'complete', hozAlign:'left',editor:true, formatter:'tickCross'},
         ],
       })
     })

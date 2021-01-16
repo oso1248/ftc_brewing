@@ -346,7 +346,7 @@ function finInjectionWeekly() {
         printHeader:'<h1>Weekly Ing Addition<h1>',
         resizableColumns:false,
         height:'500px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'FBT', frozen: true, field:'fbt', hozAlign:'Left'},
@@ -418,7 +418,7 @@ function finInjectionMonthly() {
         printHeader:'<h1>Monthly Ing Addition<h1>',
         resizableColumns:false,
         height:'500px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'FBT', frozen: true, field:'fbt', hozAlign:'Left'},

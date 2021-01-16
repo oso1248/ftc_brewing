@@ -66,7 +66,7 @@ function view() {
         printHeader:'<h1>Suppliers<h1>',
         resizableColumns:false,
         height:'309px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Company', field:'company',hozAlign:'center', frozen:true},
@@ -74,7 +74,7 @@ function view() {
         {title:'Email', field:'email',hozAlign:'center'},
         {title:'Phone', field:'phone',hozAlign:'center'},
         {title:'Address', field:'address',hozAlign:'center'},
-        {title:'Note', field:'note',hozAlign:'center'},
+        {title:'Note', field:'note',hozAlign:'left'},
         ],
       })
     })

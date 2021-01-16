@@ -236,9 +236,9 @@ async function sendUpdate(ev){
       })
       .catch(err => alert(err))
     } else {
-      let msg = "Problems:\n"
+      let msg = 'Problems:\n'
       for(i = 0; i < fails.length; i++) {
-        msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
+        msg = msg + '\n' +fails[i]['input'] + ' ' + fails[i]['msg'] 
       }
       alert(msg)
     }
@@ -303,7 +303,7 @@ function view() {
         printHeader:'<h1>Hibernation Log<h1>',
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'Brand', field:'brand',hozAlign:'center', frozen:true},
@@ -317,7 +317,7 @@ function view() {
           {title:'Hibernate Date', field:'created_at',hozAlign:'center'},
           {title:'Username', field:'username2',hozAlign:'center'},
           {title:'Pump Date', field:'updated_at',hozAlign:'center'},
-          {title:'Note', field:'note',hozAlign:'center'},
+          {title:'Note', field:'note',hozAlign:'left'},
         ],
       })
     })

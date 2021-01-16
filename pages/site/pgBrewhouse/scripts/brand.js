@@ -55,7 +55,7 @@ function viewBrandBrew() {
         printHeader:'<h1>Brew Brands<h1>',
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Brand', field:'brand',hozAlign:'center', frozen:true},
@@ -63,7 +63,7 @@ function viewBrandBrew() {
         {title:'Standard Hops', field:'hop_std',hozAlign:'center'},
         {title:'Craft Hops', field:'hop_crft',hozAlign:'center'},
         {title:'Dry Hops', field:'hop_dry',hozAlign:'center'},
-        {title:'Super Sacks', field:'supr_sac',hozAlign:'center'},
+        {title:'Super Sacks', field:'supr_sac',hozAlign:'left'},
         ],
       })
     })
@@ -114,7 +114,7 @@ async function stdHopTbl() {
         printHeader:'<h1>Standard Hops<h1>',
         resizableColumns:false,
         height:'300px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'Hop', field:'Hop', hozAlign:'Left'},
@@ -170,7 +170,7 @@ async function dryHopTbl() {
         printHeader:'<h1>Dry Hops<h1>',
         resizableColumns:false,
         height:'300px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'Hop', field:'Hop', hozAlign:'Left'},
@@ -227,7 +227,7 @@ async function sprSacTbl() {
         printHeader:'<h1>Super Sacks<h1>',
         resizableColumns:false,
         height:'300px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'Commodity', field:'commodity', hozAlign:'Left'},

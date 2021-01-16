@@ -90,7 +90,7 @@ function viewBrandBrew() {
         printHeader:'<h1>Brew Brands<h1>',
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Brand', field:'brand',hozAlign:'center', frozen:true},
@@ -98,7 +98,7 @@ function viewBrandBrew() {
         {title:'Hops', field:'hop_std',hozAlign:'center'},
         {title:'Craft Hops', field:'hop_crft',hozAlign:'center'},
         {title:'Dry Hops', field:'hop_dry',hozAlign:'center'},
-        {title:'Super Sacks', field:'supr_sac',hozAlign:'center'},
+        {title:'Super Sacks', field:'supr_sac',hozAlign:'left'},
         ],
       })
     })
@@ -127,14 +127,14 @@ function viewBrandFin() {
         printHeader:'<h1>Finishing Brands<h1>',
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Brand', field:'brndFin',hozAlign:'center', frozen:true},
         {title:'Active', field:'active',hozAlign:'center'},
         {title:'Schoene', field:'brndBrw',hozAlign:'center'},
         {title:'Package', field:'brndPck',hozAlign:'center'},
-        {title:'Note', field:'note',hozAlign:'center'},
+        {title:'Note', field:'note',hozAlign:'left'},
         ],
       })
     })
@@ -163,14 +163,14 @@ function viewBrandPck() {
         printHeader:'<h1>Packaging Brands<h1>',
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Brand', field:'brndPck',hozAlign:'center', frozen:true},
         {title:'Active', field:'active',hozAlign:'center'},
         {title:'Finish', field:'brndFin',hozAlign:'center'},
         {title:'Schoene', field:'brndPck',hozAlign:'center'},
-        {title:'Note', field:'note',hozAlign:'center'},
+        {title:'Note', field:'note',hozAlign:'left'},
         ],
       })
     })
@@ -245,7 +245,7 @@ function detailBrandBrewPre(name) {
         printHeader:'<h1>Pre CSX<h1>',
         resizableColumns:false,
         height:'300px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'Object', field:'object', hozAlign:'Left'},
@@ -266,7 +266,7 @@ function detailBrandBrewPost(name) {
         printHeader:'<h1>Post CSX<h1>',
         resizableColumns:false,
         height:'218px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'Object', field:'object', hozAlign:'Left'},
@@ -319,7 +319,7 @@ function detailBrandFinPre(name) {
         printHeader:'<h1>Pre Filter<h1>',
         resizableColumns:false,
         height:'272px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'Object', field:'object', hozAlign:'Left'},
@@ -340,7 +340,7 @@ function detailBrandFinPost(name) {
         printHeader:'<h1>Post FIlter<h1>',
         resizableColumns:false,
         height:'218px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'Object', field:'object', hozAlign:'Left'},
@@ -392,7 +392,7 @@ function detailBrandPckPre(name) {
         printHeader:'<h1>Pre Release<h1>',
         resizableColumns:false,
         height:'272px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'Object', field:'object', hozAlign:'Left'},
@@ -412,7 +412,7 @@ function detailBrandPckPost(name) {
         printHeader:'<h1>Post Release<h1>',
         resizableColumns:false,
         height:'218px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'Object', field:'object', hozAlign:'Left'},
@@ -503,7 +503,7 @@ function recipeBrandChpDetail(name) {
         printHeader:'<h1>Chip Recipe<h1>',
         resizableColumns:false,
         height:'300px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'Parameter', field:'object', hozAlign:'Left'},
@@ -550,7 +550,7 @@ function recipeBrandSchDetail(name) {
         printHeader:'<h1>Schoene Recipe<h1>',
         resizableColumns:false,
         height:'300px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'Parameter', field:'object', hozAlign:'Left'},
@@ -630,7 +630,7 @@ function recipeBrandFinDetail(name) {
         printHeader:'<h1>FIlter Release Recipe<h1>',
         resizableColumns:false,
         height:'1025px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'Object', field:'object', hozAlign:'Left'},
@@ -683,13 +683,13 @@ function injectionBrandFin() {
         printHeader:'<h1>Injection Rates<h1>',
         resizableColumns:false,
         height:'120x',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[
         {title:'Brand', field:'brand',hozAlign:'center', frozen:true},
         {title:'Commodity', field:'commodity',hozAlign:'center'},
-        {title:'Rate', field:'rate',hozAlign:'center', width: '25px'},
+        {title:'Rate', field:'rate',hozAlign:'left', width: '25px'},
         ],
       })
     })

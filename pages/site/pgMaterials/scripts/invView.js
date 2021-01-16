@@ -63,7 +63,7 @@ function weeklyMatTable() {
       weeklyTable = new Tabulator('#tableWeekly', {
         printHeader:'<h1>Weekly Material Inventory<h1>',
         height:'309px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
@@ -73,7 +73,7 @@ function weeklyMatTable() {
         {title:'Total', field:'total_end',hozAlign:'center'},
         {title:'Username', field:'username',hozAlign:'center'},
         {title:'Date', field:'created_at',hozAlign:'center'},
-        {title:'Note', field:'note',hozAlign:'center'},
+        {title:'Note', field:'note',hozAlign:'left'},
         ],
       })
     })
@@ -129,7 +129,7 @@ function monthlyMatTable() {
       monthlyTable = new Tabulator('#tableMonthly', {
         printHeader:'<h1>Monthly Material Inventory<h1>',
         height:'309px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
@@ -139,7 +139,7 @@ function monthlyMatTable() {
         {title:'Total', field:'total_end',hozAlign:'center'},
         {title:'Username', field:'username',hozAlign:'center'},
         {title:'Date', field:'created_at',hozAlign:'center'},
-        {title:'Note', field:'note',hozAlign:'center'},
+        {title:'Note', field:'note',hozAlign:'left'},
         ],
       })
     })

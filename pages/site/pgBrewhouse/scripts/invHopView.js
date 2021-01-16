@@ -60,13 +60,13 @@ function loadTableDailyMid(date) {
       brews.innerHTML = '1:'+lastBrews[0].bh1 + '  2: ' + lastBrews[0].bh2
       dailyTableMid = new Tabulator('#dailyMid', {
         resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
-        {title:"Hop", field:"commodity",hozAlign:"center", frozen:true},
-        {title:"lbs", field:"total",hozAlign:"center"},
-        {title:"Name", field:"username",hozAlign:"center"},
+        {title:'Hop', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'lbs', field:'total',hozAlign:'center'},
+        {title:'Name', field:'username',hozAlign:'left'},
         ],
       })
     })
@@ -88,13 +88,13 @@ function loadTableDailyDay(date) {
       brews.innerHTML = '1:'+lastBrews[0].bh1 + '  2: ' + lastBrews[0].bh2
       dailyTableDay = new Tabulator('#dailyDay', {
         resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
-        {title:"Hop", field:"commodity",hozAlign:"center", frozen:true},
-        {title:"lbs", field:"total",hozAlign:"center"},
-        {title:"Name", field:"username",hozAlign:"center"},
+        {title:'Hop', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'lbs', field:'total',hozAlign:'center'},
+        {title:'Name', field:'username',hozAlign:'left'},
         ],
       })
     })
@@ -115,13 +115,13 @@ function loadTableDailyAft(date) {
       brews.innerHTML = '1:'+lastBrews[0].bh1 + '  2: ' + lastBrews[0].bh2
       dailyTableAft = new Tabulator('#dailyAft', {
         resizableColumns:false,
-        height:"330px",
-        layout:"fitDataFill",
+        height:'330px',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
-        {title:"Hop", field:"commodity",hozAlign:"center", frozen:true},
-        {title:"lbs", field:"total",hozAlign:"center"},
-        {title:"Name", field:"username",hozAlign:"center"},
+        {title:'Hop', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'lbs', field:'total',hozAlign:'center'},
+        {title:'Name', field:'username',hozAlign:'left'},
         ],
       })
     })
@@ -180,13 +180,13 @@ function loadTableWeeklyHard(date) {
       weeklyTableHard = new Tabulator('#weeklyHard', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
         {title:'Hop', field:'commodity',hozAlign:'center', frozen:true},
         {title:'lbs', field:'lbs',hozAlign:'center'},
         {title:'Lot', field:'lot',hozAlign:'center'},
-        {title:'Name', field:'username',hozAlign:'center'},
+        {title:'Name', field:'username',hozAlign:'left'},
         ],
       })
     })
@@ -222,11 +222,11 @@ function loadTableWeeklySets(date) {
       weeklyTableSets = new Tabulator('#weeklySets', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'Brand', field:'brand',hozAlign:'center', frozen:true},
-          {title:'Sets', field:'sets',hozAlign:'center'},
+          {title:'Sets', field:'sets',hozAlign:'left'},
         ],
       })
     })
@@ -268,11 +268,11 @@ function loadTableWeeklyRolling(date) {
       weeklyTableRolling = new Tabulator('#weeklyRolling', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataFill',
+        layout:'fitDataStretch',
         data:tableData,
         columns:[
           {title:'Hop', field:'commodity',hozAlign:'center', frozen:true},
-          {title:'lbs', field:'lbs',hozAlign:'center'},
+          {title:'lbs', field:'lbs',hozAlign:'left'},
         ],
       })
     })

@@ -79,30 +79,7 @@ function convertBrand(obj) {
 
 
 // Update
-let tableUpdateBrandLineage
-let tableUpdateFinDetailPreCsx
-let tableUpdateFinDetailPostCsx
-let tableUpdateFinDetailPreFil
-let tableUpdateFinDetailPostFil
-let tableUpdateFinDetailPreRel
-let tableUpdateFinDetailPostRel
 document.getElementById('add').onclick = updateView
-document.getElementById('btnUpdateClear').addEventListener('click', resetUpdate)
-document.getElementById('brwBrandUpdate').addEventListener('change', selectUpdate)
-document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
-function resetUpdate(ev){
-  ev.preventDefault()
-  document.getElementById('frmUpdate').reset()
-  if (tableUpdateBrandLineage) {
-    tableUpdateBrandLineage.clearData()
-    tableUpdateFinDetailPreCsx.clearData()
-    tableUpdateFinDetailPostCsx.clearData()
-    tableUpdateFinDetailPreFil.clearData()
-    tableUpdateFinDetailPostFil.clearData()
-    tableUpdateFinDetailPreRel.clearData()
-    tableUpdateFinDetailPostRel.clearData()
-  }
-}
 function updateView() {
   document.getElementById('viewBoxes').style.display='none'
   document.getElementById('updateBoxes').style.display='block'
@@ -115,6 +92,20 @@ function updateView() {
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Finishing Brand</option>`
   createListBrwBrand(api, dropDown, title)
 }
+document.getElementById('btnUpdateClear').addEventListener('click', (ev) => {
+  ev.preventDefault()
+  document.getElementById('frmUpdate').reset()
+  if (tableUpdateBrandLineage) {
+    tableUpdateBrandLineage.clearData()
+    tableUpdateFinDetailPreCsx.clearData()
+    tableUpdateFinDetailPostCsx.clearData()
+    tableUpdateFinDetailPreFil.clearData()
+    tableUpdateFinDetailPostFil.clearData()
+    tableUpdateFinDetailPreRel.clearData()
+    tableUpdateFinDetailPostRel.clearData()
+  }
+})
+document.getElementById('brwBrandUpdate').addEventListener('change', selectUpdate)
 async function selectUpdate() {
   document.getElementById('updateLineageBox').style.display='block'
   let methods = await method()
@@ -140,6 +131,7 @@ async function method() {
     .catch(err => console.log(err))
   return res
 }
+let tableUpdateBrandLineage
 async function updateBrandLineage() {
   let name = document.getElementById('brwBrandUpdate').value
   await axios.post('/api/brand/fin/get/name', {name:name})
@@ -148,7 +140,7 @@ async function updateBrandLineage() {
       tableUpdateBrandLineage = new Tabulator('#updateLineageTable', {
         resizableColumns:false,
         height:'55px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         resizableColumns:false,
         data:tableData,
         columns:[
@@ -161,6 +153,7 @@ async function updateBrandLineage() {
     })
     .catch(err => console.log(err))
 }
+let tableUpdateFinDetailPreCsx
 async function updateFinDetailPreCsx(name, method) {
   let labels = ['Brand','Chip Tank', 'UniTank', 'Lines','Cooler', 'Seperators','ACP', 'Schoene Tank','Fill Tank', 'Note']
   await axios.post('/api/brand/detail/csxpre', {name: name})
@@ -170,7 +163,7 @@ async function updateFinDetailPreCsx(name, method) {
       tableUpdateFinDetailPreCsx = new Tabulator('#updateFinDetailPreCsxTable', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         resizableColumns:false,
         data:tableData,
         columns:[
@@ -181,6 +174,7 @@ async function updateFinDetailPreCsx(name, method) {
     })
     .catch(err => console.log(err))
 }
+let tableUpdateFinDetailPostCsx
 async function updateFinDetailPostCsx(name, method) {
   let labels = ['Brand','Chip Tank', 'UniTank', 'Lines', 'Seperators', 'Schoene Tank', 'Note']
   await axios.post('/api/brand/detail/csxpost', {name: name})
@@ -190,7 +184,7 @@ async function updateFinDetailPostCsx(name, method) {
       tableUpdateFinDetailPostCsx = new Tabulator('#updateFinDetailPostCsxTable', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         resizableColumns:false,
         data:tableData,
         columns:[
@@ -201,6 +195,7 @@ async function updateFinDetailPostCsx(name, method) {
     })
     .catch(err => console.log(err))
 }
+let tableUpdateFinDetailPreFil
 async function updateFinDetailPreFil(name, method) {
   let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Fill Tank', 'Injection', 'Control', 'Note']
   await axios.post('/api/brand/detail/filpre', {name: name})
@@ -210,7 +205,7 @@ async function updateFinDetailPreFil(name, method) {
       tableUpdateFinDetailPreFil = new Tabulator('#updateFinDetailPreFilTable', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         resizableColumns:false,
         data:tableData,
         columns:[
@@ -221,6 +216,7 @@ async function updateFinDetailPreFil(name, method) {
     })
     .catch(err => console.log(err))
 }
+let tableUpdateFinDetailPostFil
 async function updateFinDetailPostFil(name, method) {
   let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Recover', 'Note']
   await axios.post('/api/brand/detail/filpost', {name: name})
@@ -230,7 +226,7 @@ async function updateFinDetailPostFil(name, method) {
       tableUpdateFinDetailPostFil = new Tabulator('#updateFinDetailPostFilTable', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'center', frozen:true},
@@ -240,6 +236,7 @@ async function updateFinDetailPostFil(name, method) {
     })
     .catch(err => console.log(err))
 }
+let tableUpdateFinDetailPreRel
 async function updateFinDetailPreRel(name, method) {
   let labels = ['Brand','Filter Beer Tank','Release Line','Package Line','Draft Line','Recover','Control','Note']
   await axios.post('/api/brand/detail/relpre', {name: name})
@@ -249,7 +246,7 @@ async function updateFinDetailPreRel(name, method) {
       tableUpdateFinDetailPreRel = new Tabulator('#updateFinDetailPreRelTable', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         resizableColumns:false,
         data:tableData,
         columns:[
@@ -260,6 +257,7 @@ async function updateFinDetailPreRel(name, method) {
     })
     .catch(err => console.log(err))
 }
+let tableUpdateFinDetailPostRel
 async function updateFinDetailPostRel(name, method) {
   let labels = ['Brand','Filter Beer Tank','System Lines','Package','Draft','Recover','Note']
   await axios.post('/api/brand/detail/relpost', {name: name})
@@ -269,7 +267,7 @@ async function updateFinDetailPostRel(name, method) {
       tableUpdateFinDetailPostRel = new Tabulator('#updateFinDetailPostRelTable', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         resizableColumns:false,
         data:tableData,
         columns:[
@@ -280,6 +278,7 @@ async function updateFinDetailPostRel(name, method) {
     })
     .catch(err => console.log(err))
 }
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
 async function sendUpdate(ev){
   ev.preventDefault() 
   ev.stopPropagation()
@@ -315,29 +314,7 @@ async function sendUpdate(ev){
 
 
 // view
-let tableViewBrandLineage
-let tableViewFinDetailPreCsx
-let tableViewFinDetailPostCsx
-let tableViewFinDetailPreFil
-let tableViewFinDetailPostFil
-let tableViewFinDetailPreRel
-let tableViewFinDetailPostRel
 document.getElementById('update').onclick = viewView
-document.getElementById('btnViewClear').addEventListener('click', resetView)
-document.getElementById('brwBrandView').addEventListener('change', selectView)
-function resetView(ev){
-  ev.preventDefault()
-  document.getElementById('frmView').reset()
-  if (tableViewBrandLineage) {
-    tableViewBrandLineage.clearData()
-    tableViewFinDetailPreCsx.clearData()
-    tableViewFinDetailPostCsx.clearData()
-    tableViewFinDetailPreFil.clearData()
-    tableViewFinDetailPostFil.clearData()
-    tableViewFinDetailPreRel.clearData()
-    tableViewFinDetailPostRel.clearData()
-  }
-}
 function viewView() {
   document.getElementById('updateBoxes').style.display='none'
   document.getElementById('viewBoxes').style.display='block'
@@ -349,6 +326,20 @@ function viewView() {
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Finishing Brand</option>`
   createListBrwBrand(api, dropDown, title)
 }
+document.getElementById('btnViewClear').addEventListener('click', (ev) => {
+  ev.preventDefault()
+  document.getElementById('frmView').reset()
+  if (tableViewBrandLineage) {
+    tableViewBrandLineage.clearData()
+    tableViewFinDetailPreCsx.clearData()
+    tableViewFinDetailPostCsx.clearData()
+    tableViewFinDetailPreFil.clearData()
+    tableViewFinDetailPostFil.clearData()
+    tableViewFinDetailPreRel.clearData()
+    tableViewFinDetailPostRel.clearData()
+  }
+})
+document.getElementById('brwBrandView').addEventListener('change', selectView)
 async function selectView() {
   document.getElementById('viewLineageBox').style.display='block'
 
@@ -364,7 +355,7 @@ async function selectView() {
   let row = tableViewFinDetailPostRel.getRow(2)
   let rowData = row.getData()
 }
-
+let tableViewBrandLineage
 async function viewBrandLineage() {
   let name = document.getElementById('brwBrandView').value
   await axios.post('/api/brand/fin/get/name', {name:name})
@@ -373,7 +364,7 @@ async function viewBrandLineage() {
       tableViewBrandLineage = new Tabulator('#viewLineageTable', {
         resizableColumns:false,
         height:'55px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         resizableColumns:false,
         data:tableData,
         columns:[
@@ -386,6 +377,7 @@ async function viewBrandLineage() {
     })
     .catch(err => console.log(err))
 }
+let tableViewFinDetailPreCsx
 async function viewFinDetailPreCsx(name) {
   let labels = ['Brand','Chip Tank', 'UniTank', 'Lines','Cooler', 'Seperators','ACP', 'Schoene Tank','Fill Tank', 'Note']
   await axios.post('/api/brand/detail/csxpre', {name:name})
@@ -395,7 +387,7 @@ async function viewFinDetailPreCsx(name) {
       tableViewFinDetailPreCsx = new Tabulator('#viewFinDetailPreCsxTable', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
@@ -405,6 +397,7 @@ async function viewFinDetailPreCsx(name) {
     })
     .catch(err => console.log(err))
 }
+let tableViewFinDetailPostCsx
 async function viewFinDetailPostCsx(name) {
   let labels = ['Brand','Chip Tank', 'UniTank', 'Lines', 'Seperators', 'Schoene Tank', 'Note']
   await axios.post('/api/brand/detail/csxpost', {name:name})
@@ -414,7 +407,7 @@ async function viewFinDetailPostCsx(name) {
       tableViewFinDetailPostCsx = new Tabulator('#viewFinDetailPostCsxTable', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
@@ -424,6 +417,7 @@ async function viewFinDetailPostCsx(name) {
     })
     .catch(err => console.log(err))
 }
+let tableViewFinDetailPreFil
 async function viewFinDetailPreFil(name) {
   let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Fill Tank', 'Injection', 'Control', 'Note']
   await axios.post('/api/brand/detail/filpre', {name:name})
@@ -433,7 +427,7 @@ async function viewFinDetailPreFil(name) {
       tableViewFinDetailPreFil = new Tabulator('#viewFinDetailPreFilTable', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
@@ -443,6 +437,7 @@ async function viewFinDetailPreFil(name) {
     })
     .catch(err => console.log(err))
 }
+let tableViewFinDetailPostFil
 async function viewFinDetailPostFil(name) {
   let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Recover', 'Note']
   await axios.post('/api/brand/detail/filpost', {name:name})
@@ -462,6 +457,7 @@ async function viewFinDetailPostFil(name) {
     })
     .catch(err => console.log(err))
 }
+let tableViewFinDetailPreRel
 async function viewFinDetailPreRel(name) {
   let labels = ['Brand','Filter Beer Tank','Release Line','Package Line','Draft Line','Recover','Control','Note']
   await axios.post('/api/brand/detail/relpre', {name:name})
@@ -481,6 +477,7 @@ async function viewFinDetailPreRel(name) {
     })
     .catch(err => console.log(err))
 }
+let tableViewFinDetailPostRel
 async function viewFinDetailPostRel(name) {
   let labels = ['Brand','Filter Beer Tank','System Lines','Package','Draft','Recover','Note']
   await axios.post('/api/brand/detail/relpost', {name:name})

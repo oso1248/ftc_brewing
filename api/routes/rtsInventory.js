@@ -391,6 +391,21 @@ router.post('/material/archive/log/get', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
+router.post('/material/archive/name/get', (req, res) => {
+  db.getMatArchiveByName(req.body.commodity)
+    .then(data => {
+      console.log(data)
+      if(data.length != 0) {
+        console.log(data)
+        res.status(200).json(data)
+      } else {
+        console.log('no data')
+        res.status(200).json({msg:'null'})
+      }
+    })
+    .catch(err => res.status(500).json({msg: err.detail}))
+})
+
 router.delete('/material/archive/:id', (req, res) => {
   db.destroyArchive(req.params.id)
     .then(data => {

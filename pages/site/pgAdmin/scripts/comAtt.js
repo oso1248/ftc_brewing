@@ -83,7 +83,7 @@ function view() {
       let tableData = res.data
       var table = new Tabulator('#listLocation', {
         height:'309px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         responsiveLayout:'collapse',
         resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
@@ -102,7 +102,7 @@ function view() {
       let tableData = res.data
       var table = new Tabulator('#listType', {
         height:'309px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         responsiveLayout:'collapse',
         resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
@@ -121,7 +121,7 @@ function view() {
       let tableData = res.data
       var table = new Tabulator('#listEnviro', {
         height:'309px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         responsiveLayout:'collapse',
         resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
@@ -140,7 +140,7 @@ function view() {
       let tableData = res.data
       var table = new Tabulator('#listContainer', {
         height:'309px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         responsiveLayout:'collapse',
         resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
@@ -159,7 +159,7 @@ function view() {
       let tableData = res.data
       var table = new Tabulator('#listUOM', {
         height:'309px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         responsiveLayout:'collapse',
         resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
@@ -265,7 +265,7 @@ async function sendAddLocation(ev){
       // alert(JSON.stringify(fails))
     }
 }
-async function validateAddLocation (ev){
+function validateAddLocation (ev){
   
   let failures = [];
   
@@ -312,7 +312,7 @@ async function sendAddType(ev){
       alert(msg)
     }
 }
-async function validateAddType (ev){
+function validateAddType (ev){
   
   let failures = [];
   
@@ -359,7 +359,7 @@ async function sendAddEnviro(ev){
       alert(msg)
     }
 }
-async function validateAddEnviro (ev){
+function validateAddEnviro (ev){
   
   let failures = [];
   
@@ -406,7 +406,7 @@ async function sendAddContainer(ev){
       alert(msg)
     }
 }
-async function validateAddContainer (ev){
+function validateAddContainer (ev){
   
   let failures = [];
   
@@ -454,7 +454,7 @@ async function sendAddUom(ev){
       alert(msg)
     }
 }
-async function validateAddUom (ev){
+function validateAddUom (ev){
   
   let failures = [];
   
@@ -496,6 +496,7 @@ function resetUpdateUOM(ev){
   ev.preventDefault();
   document.getElementById('frmUpdateUOM').reset();
 }
+
 //Routes Update
 async function sendUpdateLocation(ev){
   ev.preventDefault() 
@@ -638,6 +639,7 @@ function resetDeleteUOM(ev){
   ev.preventDefault();
   document.getElementById('frmDeleteUOM').reset();
 }
+
 // Routes delete
 async function sendDeleteLocation(ev){
   ev.preventDefault() 
@@ -739,10 +741,6 @@ document.getElementById('btnDeleteClearType').addEventListener('click', resetDel
 document.getElementById('btnDeleteClearEnviro').addEventListener('click', resetDeleteEnviro)
 document.getElementById('btnDeleteClearContainer').addEventListener('click', resetDeleteContainer)
 document.getElementById('btnDeleteClearUOM').addEventListener('click', resetDeleteUOM)
-
-
-
-
 //Send forms add
 document.getElementById('btnAddSubmitLocation').addEventListener('click', sendAddLocation)
 document.getElementById('btnAddSubmitType').addEventListener('click', sendAddType)
@@ -761,9 +759,7 @@ document.getElementById('btnDeleteSubmitType').addEventListener('click', sendDel
 document.getElementById('btnDeleteSubmitEnviro').addEventListener('click', sendDeleteEnviro)
 document.getElementById('btnDeleteSubmitContainer').addEventListener('click', sendDeleteContainer)
 document.getElementById('btnDeleteSubmitUOM').addEventListener('click', sendDeleteUOM)
-
-
-
+// view
 document.getElementById('add').onclick = add
 document.getElementById('update').onclick = update
 document.getElementById('view').onclick = view

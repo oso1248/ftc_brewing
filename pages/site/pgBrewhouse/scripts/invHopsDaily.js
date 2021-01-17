@@ -17,13 +17,14 @@ String.prototype.toNonAlpha = function (spaces) {
 
 
 let hopsTable
+document.getElementById('btnAddClear').onclick = setsTable
 function setsTable() {
   axios.post('/api/brand/brw/get', {active: true})
     .then(res => {
       let tableData = res.data
       hopsTable = new Tabulator('#invHopDaily', {
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Brand', field:'brand',hozAlign:'center', frozen:true},
@@ -33,7 +34,7 @@ function setsTable() {
     })
     .catch(err => console.log(err))
 }
-
+document.getElementById('btnAddSubmit').addEventListener('click', sendUpdate)
 async function sendUpdate() {
   tableData = hopsTable.getData()
   let data = []
@@ -41,7 +42,6 @@ async function sendUpdate() {
   let shift = {}
   
   await getSets(data)
-
   if (data === 'undefined' || data.length == 0) {
     alert('No Sets To Upload')
     return
@@ -49,6 +49,7 @@ async function sendUpdate() {
 
   await getBrews(houses)
   if(houses === 'undefined' || Object.keys(houses).length < 2) {
+    alert('Last Brews Required')
     return
   } else {
     data.unshift(houses)
@@ -62,7 +63,7 @@ async function sendUpdate() {
     data.unshift(shift)
   }
   
-  await axios.post('/api/inventory/hop/daily', data)
+  axios.post('/api/inventory/hop/daily', data)
     .then(data => {
     alert('Added')
     setsTable()
@@ -111,9 +112,6 @@ function getShift(shift) {
   } 
 }
 
-
-document.getElementById('btnAddSubmit').addEventListener('click', sendUpdate)
-document.getElementById('btnAddClear').addEventListener('click', setsTable)
 
 window.addEventListener('DOMContentLoaded',async (ev) => {
   setsTable()

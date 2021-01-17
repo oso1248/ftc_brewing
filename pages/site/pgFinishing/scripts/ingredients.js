@@ -9,12 +9,11 @@ document.getElementById('monthlyBoxes').style.display='none'
 
 
 function setCookie(cookieName,cookieValue,hoursToExpire,path,domain) {
-  let date = new Date();
+  let date = new Date()
 	date.setTime(date.getTime()+(hoursToExpire*60*60*1000))
-	document.cookie = cookieName + '=' + cookieValue + '; expires=' + date.toGMTString() + 'path=' + path + 'domain=' + domain;
+	document.cookie = cookieName + '=' + cookieValue + '; expires=' + date.toGMTString() + 'path=' + path + 'domain=' + domain
 }
 function getCookie(cookieName) {
-  
   var cookieValue = document.cookie.match('(^|;)\\s*' + cookieName + '\\s*=\\s*([^;]+)');
 	return cookieValue ? cookieValue.pop() : ''
 }
@@ -82,7 +81,7 @@ function removeChildren(parent) {
 }
 
 
-// routes add
+// add
 document.getElementById('btnAddClear').onclick = hardReset
 function hardReset() {
   if (confirm('Do You Want To Clear The Form?')) {
@@ -146,9 +145,13 @@ function add() {
   createListType(api, dropDown, title, type)
 }
 
-
-document.getElementsByName('brand')[0].addEventListener('change', loadIngredients)
-async function loadIngredients() {
+// load new tank
+document.getElementsByName('brand')[0].addEventListener('change', newTank)
+async function newTank() {
+  await loadIngredients()
+  await loadLots()
+}
+function loadIngredients() {
   document.getElementById('pumps').reset()
   let pumpCount = document.getElementsByName('pump')
 
@@ -159,7 +162,7 @@ async function loadIngredients() {
   let brand = document.getElementsByName('brand')[0].value
   document.getElementsByName('brand')[1].value = brand
   
-  await axios.post('/api/brand/fin/ingredient/brand/get/', {brand: brand})
+  axios.post('/api/brand/fin/ingredient/brand/get/', {brand: brand})
     .then(data => {
       let res = data.data
       for(let i = 0; i < res.length; i++) {
@@ -171,7 +174,6 @@ async function loadIngredients() {
     .catch(err => {
       console.error(err)
     })
-    loadLots()
 }
 function loadLots() {
   let ingredient = document.getElementsByName('injPump')
@@ -188,7 +190,7 @@ function loadLots() {
   }
 }
 
-
+// submit tank
 document.getElementById('btnAdd').addEventListener('click', submit)
 async function submit() {
   let tanks = []
@@ -229,7 +231,6 @@ async function submit() {
       })
       .catch(err => alert(err))
 }
-
 function loadTanks(tanks) {
   let tank = document.getElementById('tanks')
   
@@ -346,7 +347,7 @@ function finInjectionWeekly() {
         printHeader:'<h1>Weekly Ing Addition<h1>',
         resizableColumns:false,
         height:'500px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'FBT', frozen: true, field:'fbt', hozAlign:'Left'},
@@ -365,15 +366,12 @@ function finInjectionWeekly() {
     .catch(err => console.log(err))  
     document.getElementById('weeklyBoxesBox').style.display='block'
 }
-document.getElementById('weeklyDownload-xlsx').addEventListener('click', xlsxWeeklyLog)
-function xlsxWeeklyLog(){
+document.getElementById('weeklyDownload-xlsx').addEventListener('click', () => {
   tableWeekly.download('xlsx', 'fin_inj_weekly.xlsx', {sheetName:'Log'})
-}
-document.getElementById('weeklyPrint-table').addEventListener('click', tableWeeklyPrint)
-function tableWeeklyPrint(){
+})
+document.getElementById('weeklyPrint-table').addEventListener('click', () => {
   tableWeekly.print(false, true)
-}
-
+})
 
 
 
@@ -418,7 +416,7 @@ function finInjectionMonthly() {
         printHeader:'<h1>Monthly Ing Addition<h1>',
         resizableColumns:false,
         height:'500px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'FBT', frozen: true, field:'fbt', hozAlign:'Left'},
@@ -436,14 +434,13 @@ function finInjectionMonthly() {
     .catch(err => console.log(err))  
     document.getElementById('monthlyBoxesBox').style.display='block'  
 }
-document.getElementById('monthlyDownload-xlsx').addEventListener('click', xlsxMonthlyLog)
-function xlsxMonthlyLog(){
+document.getElementById('monthlyDownload-xlsx').addEventListener('click', () => {
   tableMonthly.download('xlsx', 'fin_inj_monthly.xlsx', {sheetName:'Log'})
-}
-document.getElementById('monthlyPrint-table').addEventListener('click', tableMonthlyPrint)
-function tableMonthlyPrint(){
+})
+document.getElementById('monthlyPrint-table').addEventListener('click', () => {
   tableMonthly.print(false, true)
-}
+})
+
 
 
 

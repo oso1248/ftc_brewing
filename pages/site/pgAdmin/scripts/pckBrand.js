@@ -36,7 +36,9 @@ String.prototype.testLengthFour = function () {
   return (/^[^\s]{4}$/).test(this)
 }
 
-//Views
+
+// Add
+document.getElementById('add').onclick = add
 function add() {
   document.getElementById('updateBoxes').style.display='none'
   document.getElementById('deleteBoxes').style.display='none'
@@ -49,71 +51,11 @@ function add() {
   title = 'brndFin'
   createList(api, dropDown, title)
 }
-function update() {
-  document.getElementById('deleteBoxes').style.display='none'
-  document.getElementById('attView').style.display='none'
-  document.getElementById('addBoxes').style.display='none'
-  document.getElementById('updateBoxes').style.display='grid'
-
-  let dropDown = document.getElementsByName('updatePckBrnd')[0]
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Pck Brand</option>`
-  let api = '/api/brand/pck/get'
-  let title = 'brndPck'
-  createList(api, dropDown, title)
-
-  dropDown = document.getElementsByName('updateFinBrnd')[0]
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Fin Brand</option>`
-  api = '/api/brand/fin/get'
-  title = 'brndFin'
-  createList(api, dropDown, title)
-}
-let brandTable
-function view() {
-  document.getElementById('updateBoxes').style.display='none'
-  document.getElementById('deleteBoxes').style.display='none'
-  document.getElementById('attView').style.display='grid'
-  document.getElementById('addBoxes').style.display='none'
-
-  axios.post('/api/brand/pck/get', {active: false})
-    .then(res => {
-      let tableData = res.data
-      brandTable = new Tabulator('#list', {
-        resizableColumns:false,
-        height:'309px',
-        layout:'fitDataStretch',
-        responsiveLayoutCollapseStartOpen:false,
-        data:tableData,
-        columns:[        
-        {title:'Pck Brand', field:'brndPck',hozAlign:'center', frozen:true},
-        {title:'Active', field:'active',hozAlign:'center'},
-        {title:'Fin Brand', field:'brndFin',hozAlign:'center'},
-        {title:'Brw Brand', field:'brndBrw',hozAlign:'center'},
-        {title:'Note', field:'note', hozAlign:'left'},
-        ],
-      })
-    })
-    .catch(err => console.log(err))
-
-}
-function del() {
-  document.getElementById('attView').style.display='none'
-  document.getElementById('addBoxes').style.display='none'
-  document.getElementById('updateBoxes').style.display='none'
-  document.getElementById('deleteBoxes').style.display='grid'
-
-  let dropDown = document.getElementsByName('delete')[0]
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
-  let api = '/api/brand/brw'
-  let title = 'brand'
-  createList(api, dropDown, title)
-
-}
-
-//Routes Add
-function resetAdd(ev){
+document.getElementById('btnAddClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmAdd').reset();
-}
+})
+document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
 async function sendAdd(ev){
   ev.preventDefault() 
   ev.stopPropagation()
@@ -147,7 +89,7 @@ async function sendAdd(ev){
     alert(msg)
   }
 }
-async function validateAdd(data){
+function validateAdd(data){
   let failures = []
   let name = data.brand
   if(!data.brand) {
@@ -176,11 +118,44 @@ async function validateAdd(data){
   return failures
 }
 
-//Routes Update
-function resetUpdate(ev){
+
+
+// Update
+document.getElementById('update').onclick = update
+function update() {
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='grid'
+
+  let dropDown = document.getElementsByName('updatePckBrnd')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Pck Brand</option>`
+  let api = '/api/brand/pck/get'
+  let title = 'brndPck'
+  createList(api, dropDown, title)
+
+  dropDown = document.getElementsByName('updateFinBrnd')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Fin Brand</option>`
+  api = '/api/brand/fin/get'
+  title = 'brndFin'
+  createList(api, dropDown, title)
+}
+document.getElementById('btnUpdateClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmUpdate').reset()
+})
+document.getElementsByName('updatePckBrnd')[0].addEventListener('change', selectBrand)
+function selectBrand(){
+  let brand = document.getElementsByName('updatePckBrnd')[0].value
+  
+  axios.post('/api/brand/pck/get/name', {name: brand})
+    .then(data => {
+      document.getElementsByName('updateFinBrnd')[0].value = data.data.brndFin
+      document.getElementsByName('updateActive')[0].value = data.data.active
+      document.getElementsByName('updateNote')[0].value = data.data.note
+    })
 }
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
 async function sendUpdate(ev){
   ev.preventDefault() 
   ev.stopPropagation()
@@ -211,7 +186,7 @@ async function sendUpdate(ev){
     alert(msg)
   }
 }
-async function validateUpdate(data){
+function validateUpdate(data){
   let failures = [];
   let name = document.getElementsByName('updatePckBrnd')[0].value
   
@@ -231,67 +206,36 @@ async function validateUpdate(data){
   }
   return failures
 }
-function selectBrand(){
-  let brand = document.getElementsByName('updatePckBrnd')[0].value
-  
-  axios.post('/api/brand/pck/get/name', {name: brand})
-    .then(data => {
-      document.getElementsByName('updateFinBrnd')[0].value = data.data.brndFin
-      document.getElementsByName('updateActive')[0].value = data.data.active
-      document.getElementsByName('updateNote')[0].value = data.data.note
-    })
-}
-
-//Routes Delete
-function resetDelete(ev){
-  ev.preventDefault();
-  document.getElementById('frmDelete').reset();
-}
-async function sendDelete(ev){
-  ev.preventDefault() 
-  ev.stopPropagation()
-  let name = document.getElementsByName('delete')[0].value
-  if(name === '') {
-    alert('brand Required')
-    return
-  }
-
-  axios.delete('/api/brand/brw/' + name)
-    .then(data => {
-      alert(data.data.msg)
-    })
-    .catch(err => alert(err.detail))
-}
-
-//Clear forms add
-document.getElementById('btnAddClear').addEventListener('click', resetAdd)
-//Clear forms update
-document.getElementById('btnUpdateClear').addEventListener('click', resetUpdate)
-//Clear forms delete
-document.getElementById('btnDeleteClear').addEventListener('click', resetDelete)
 
 
-//Send forms add
-document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
-//Send forms Update
-document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
-// Send forms delete
-document.getElementById('btnDeleteSubmit').addEventListener('click', sendDelete)
 
-
-document.getElementsByName('updatePckBrnd')[0].addEventListener('change', selectBrand)
-
-
-document.getElementById('add').onclick = add
-document.getElementById('update').onclick = update
+// View
 document.getElementById('view').onclick = view
+let brandTable
+function view() {
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='grid'
+  document.getElementById('addBoxes').style.display='none'
 
-// document.getElementById('download-xlsx').addEventListener('click', brandExcel)
-function brandExcel(){
-  brandTable.download('xlsx', 'brands.xlsx', {sheetName:'Brands'})
-}
+  axios.post('/api/brand/pck/get', {active: false})
+    .then(res => {
+      let tableData = res.data
+      brandTable = new Tabulator('#list', {
+        resizableColumns:false,
+        height:'309px',
+        layout:'fitDataFill',
+        responsiveLayoutCollapseStartOpen:false,
+        data:tableData,
+        columns:[        
+        {title:'Pck Brand', field:'brndPck',hozAlign:'center', frozen:true},
+        {title:'Active', field:'active',hozAlign:'center'},
+        {title:'Fin Brand', field:'brndFin',hozAlign:'center'},
+        {title:'Brw Brand', field:'brndBrw',hozAlign:'center'},
+        {title:'Note', field:'note', hozAlign:'left'},
+        ],
+      })
+    })
+    .catch(err => console.log(err))
 
-// document.getElementById("print-table").addEventListener('click', brandPrint)
-function brandPrint(){
-  brandTable.print(false, true);
 }

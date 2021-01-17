@@ -37,6 +37,5 @@ module.exports = {
       password: process.env.ORACLE_PASSWORD,
       database: process.env.ORACLE_DATABASE,
     }
-
   }
 }

@@ -74,6 +74,14 @@ select {
   margin-right: auto;
 }
 
+@media (max-width: 850px) {
+  .form input, textarea, select, option {
+  width: 70%;  
+  }
+}
+
+
+
 @media print {
   @page {
     size:  auto;   /* auto is the initial value */

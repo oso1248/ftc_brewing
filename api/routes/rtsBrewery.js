@@ -2,8 +2,6 @@ const express = require('express')
 const db = require('../queries/qryBrewery')
 const router = express.Router()
 
-// -> /api/brewery
-
 router.post('/', (req, res) => {
   db.add(req.body)
     .then(data => {
@@ -11,8 +9,7 @@ router.post('/', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-
-router.get('/', (req, res) => {
+router.post('/get', (req, res) => {
   db.getAll()
     .then(data => {
       if(data) {
@@ -23,7 +20,6 @@ router.get('/', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-
 router.get('/:name', (req, res) => {
   db.getByName(req.params.name)
     .then(data => {
@@ -35,7 +31,6 @@ router.get('/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-
 router.patch('/:name', (req, res) => {
   db.change(req.params.name, req.body)
     .then(data => {
@@ -47,7 +42,6 @@ router.patch('/:name', (req, res) => {
     })
     .catch(err => res.status(500).json({msg: err.detail}))
 })
-
 router.delete('/:name', (req, res) => {
   db.destroy(req.params.name)
     .then(data => {

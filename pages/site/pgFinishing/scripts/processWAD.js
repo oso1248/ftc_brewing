@@ -48,7 +48,6 @@ function createListType(api, parent, title, type) {
 }
 
 
-
 ///WAD Additions
 document.getElementById('addWAD').onclick = viewWad
 function viewWad() {
@@ -255,7 +254,6 @@ function validateTrans(data) {
 }
 
 
-
 // Loss Add
 document.getElementById('addLoss').onclick = viewLoss
 async function viewLoss() {
@@ -357,10 +355,7 @@ function validateLoss(data) {
 }
 
 
-// View
-let wadTable 
-let transTable 
-let lossTable 
+// View 
 document.getElementById('viewView').onclick = viewView
 function viewView() {
   document.getElementById('wadAdd').style.display = 'none'
@@ -372,7 +367,7 @@ function viewView() {
   transAdditionTable()
   lossAdditionTable()
 }
-
+let wadTable
 function wadAdditionTable() {
   axios.post('/api/inventory/process/wad/get')
     .then(res => {
@@ -384,7 +379,7 @@ function wadAdditionTable() {
         printHeader:'<h1>WAD Additions<h1>',
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'Tank', frozen: true, field:'tank', hozAlign:'Left'},
@@ -406,7 +401,7 @@ document.getElementById('wadDownload-xlsx').addEventListener('click', () => {
   wadTable.download('xlsx', 'wad_addition.xlsx', {sheetName:'Log'})
 })
 
-
+let transTable
 function transAdditionTable() {
   axios.post('/api/inventory/process/trans/get')
     .then(res => {
@@ -418,7 +413,7 @@ function transAdditionTable() {
         printHeader:'<h1>Transfers<h1>',
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'From', frozen: true, field:'tank_from', hozAlign:'Left'},
@@ -440,7 +435,7 @@ document.getElementById('transPrint-table').addEventListener('click', () => {
 document.getElementById('transDownload-xlsx').addEventListener('click', () => {
   transTable.download('xlsx', 'transfer.xlsx', {sheetName:'Log'})
 })
-
+let lossTable
 function lossAdditionTable() {
   axios.post('/api/inventory/process/loss/get')
     .then(res => {
@@ -452,7 +447,7 @@ function lossAdditionTable() {
         printHeader:'<h1>Process Loss<h1>',
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'Tank', frozen: true, field:'tank', hozAlign:'Left'},

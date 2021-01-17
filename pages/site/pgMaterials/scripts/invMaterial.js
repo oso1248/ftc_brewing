@@ -1,46 +1,5 @@
 let DateTime = luxon.DateTime
 
-let api
-function setAPI() {
-  let current = DateTime.local().startOf('day').toFormat('yyyy-MM-dd HH:mm')
-  let month = DateTime.local().startOf('month').toFormat('yyyy-MM-dd HH:mm')
-  if (month === current) {
-    api = '/api/inventory/material/monthly/'
-  } else {
-    api = '/api/inventory/material/weekly/'
-  }
-  console.log(api)
-}
-
-function openQRCamera(node) {
-  let reader = new FileReader();
-  reader.onload = function() {
-    node.value = '';
-    qrcode.callback = function(res) {
-      if(res instanceof Error) {
-        alert(`No QR code found. Please make sure the QR code is within the camera's frame and try again.`)
-      } else {
-        // alert(res)
-        // document.getElementById('comm').value = res
-        document.getElementById(res).selected = true
-        selectCommodity()
-        
-      }
-    }
-    qrcode.decode(reader.result)
-  }
-  reader.readAsDataURL(node.files[0])
-  
-}
-
-function createNode(element) {
-  return document.createElement(element)
-}
-function append(parent, e1) {
-  return parent.appendChild(e1)
-}
-
-
 String.prototype.toProperCase = function () {
   return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + 
     txt.substr(1).toLowerCase()})
@@ -56,26 +15,55 @@ String.prototype.testNanFormat = function () {
     return (/^\d+(\.\d{1,2})?$/).test(this)
 }
 
-
-async function processArray(array) {
-  for (const item of array) {
-    await deleteRow(item.commodity)
-    console.log(item.commodity)
-  }
+function createNode(element) {
+  return document.createElement(element)
 }
-async function deleteOnLoad() {
-  let data = {}
-  data.startDate = DateTime.local().startOf('day').minus({minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
-  data.endDate = DateTime.local().endOf('day').minus({minutes: 20}).toFormat('yyyy-MM-dd HH:mm')
-  axios.post(api +'view', data)
-    .then(res => {
-      res.data.forEach(async (item) => {
-        setTimeout(function(){
-          deleteRow(item.commodity)
-        }, 5);
-    }) 
+function append(parent, e1) {
+  return parent.appendChild(e1)
+}
+function createList(api, parent, title, data) {
+  axios.post(api, data)
+  .then(res => {
+    let list = res.data
+    list.forEach((elem) => {
+    let listItem = elem[title]
+    let option = createNode('option')
+    option.innerHTML = listItem
+    append(parent, option)
+    });
   })
-    .catch(err => console.log(err))
+  .catch(err => {
+    console.error(err)
+  })
+}
+function createListRows(api, parent, title, data) {
+  axios.post(api, data)
+  .then(res => {
+    let list = res.data.rows
+    list.forEach((elem) => {
+    let listItem = elem[title]
+    let option = createNode('option')
+    option.innerHTML = listItem
+    append(parent, option)
+    });
+  })
+  .catch(err => {
+    console.error(err)
+  })
+}
+
+
+// On Window Load
+let api
+function setAPI() {
+  let current = DateTime.local().startOf('day').toFormat('yyyy-MM-dd HH:mm')
+  let month = DateTime.local().startOf('month').toFormat('yyyy-MM-dd HH:mm')
+  if (month === current) {
+    api = '/api/inventory/material/monthly/'
+  } else {
+    api = '/api/inventory/material/weekly/'
+  }
+  console.log(api)
 }
 function loadCommodities() {
   const commodities = document.getElementsByName('addCommodity')[0]
@@ -102,7 +90,7 @@ function commodityList() {
       commodityTable = new Tabulator('#list', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Commodity', field:'commodity',hozAlign:'left', frozen:true},
@@ -129,7 +117,7 @@ function inventoryList() {
         resizableColumns:false,
         selectable:true,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
@@ -145,42 +133,40 @@ function inventoryList() {
     })
     .catch(err => console.log(err.detail))
 }
-document.getElementById('btnDeleteInv').addEventListener('click', deleteRowInv)
-async function deleteRowInv(ev) {
-  ev.preventDefault() 
-  ev.stopPropagation()
-  
-  let selectedData = inventoryTable.getSelectedData()
-  if (selectedData.length > 1) {
-    alert('Can only delete 1 row at a time.')
-    return
-  }
-  
-  if (!confirm(`Are you sure you want to delete\n\n ${selectedData[0].commodity} \n\nfrom the inventory?`)) {
-   return
-  }
-
-  await axios.delete(api + selectedData[0].id)
-    .then(data => {
-      alert(data.data.msg)
-    })
-    .catch(err => alert(err))
-  
-  await commodityList()
-  await inventoryList()
-  await deleteOnLoad()
+async function deleteOnLoad() {
+  let data = {}
+  data.startDate = DateTime.local().startOf('day').minus({minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
+  data.endDate = DateTime.local().endOf('day').minus({minutes: 20}).toFormat('yyyy-MM-dd HH:mm')
+  axios.post(api +'view', data)
+    .then(res => {
+      res.data.forEach(async (item) => {
+        setTimeout(function(){
+          deleteRow(item.commodity)
+        }, 5);
+    }) 
+  })
+    .catch(err => console.log(err))
+}
+async function deleteRow(commodity) {
+  commodityTable.getRows()
+    .filter(row => row.getData().commodity == commodity)
+    .forEach(row => row.delete())
 }
 
-document.getElementById('btnAddClear').addEventListener('click', resetAdd)
-function resetAdd(ev){
+
+// Add Form
+document.getElementById('btnAddClear').addEventListener('click', (ev) => {
   ev.preventDefault() 
   ev.stopPropagation()
   document.getElementById('frmAdd').reset()
-}
-
+})
 document.getElementById('com_id').addEventListener('change', selectCommodity)
 async function selectCommodity(){
   let commodity = document.getElementById('com_id').value
+  
+  loadForm(commodity)
+}
+function loadForm(commodity) {
   axios.post('/api/commodity/name', {name: `${commodity}`})
     .then(data => {
       document.getElementById('per_pallet').value = data.data.per_pallet
@@ -195,14 +181,11 @@ async function selectCommodity(){
         alert(msg)
       }
     })
+    .catch(err => alert(err))
 }
 
-async function deleteRow(commodity) {
-    commodityTable.getRows()
-      .filter(row => row.getData().commodity == commodity)
-      .forEach(row => row.delete())
-}
 
+// Send
 document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
 async function sendAdd(ev){
   ev.preventDefault() 
@@ -278,12 +261,61 @@ async function validateAdd (data){
   return failures
 }
 
-document.getElementById('btnBack').addEventListener('click', goBack)
-function goBack() {
-  window.history.back();
+
+// Delete
+document.getElementById('btnDeleteInv').addEventListener('click', deleteRowInv)
+async function deleteRowInv(ev) {
+  ev.preventDefault() 
+  ev.stopPropagation()
+  
+  let selectedData = inventoryTable.getSelectedData()
+  if (selectedData.length > 1) {
+    alert('Can only delete 1 row at a time.')
+    return
+  }
+  
+  if (!confirm(`Are you sure you want to delete\n\n ${selectedData[0].commodity} \n\nfrom the inventory?`)) {
+   return
+  }
+
+  await axios.delete(api + selectedData[0].id)
+    .then(data => {
+      alert(data.data.msg)
+    })
+    .catch(err => alert(err))
+  
+  await commodityList()
+  await inventoryList()
+  await deleteOnLoad()
 }
 
 
+// called from ./invMaterial.html
+function openQRCamera(node) {
+  let reader = new FileReader();
+  reader.onload = function() {
+    node.value = '';
+    qrcode.callback = function(res) {
+      if(res instanceof Error) {
+        alert(`No QR code found. Please make sure the QR code is within the camera's frame and try again.`)
+      } else {
+        // alert(res)
+        // document.getElementById('comm').value = res
+        document.getElementById(res).selected = true
+        selectCommodity()
+        
+      }
+    }
+    qrcode.decode(reader.result)
+  }
+  reader.readAsDataURL(node.files[0])
+  
+}
+
+
+document.getElementById('btnBack').addEventListener('click', () => {
+  window.history.back();
+})
 window.addEventListener('DOMContentLoaded',async (ev) => {
   await setAPI()
   await loadCommodities()

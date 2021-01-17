@@ -36,22 +36,8 @@ String.prototype.testLengthFour = function () {
   return (/^[^\s]{4}$/).test(this)
 }
 
-//views
-function del() {
-  document.getElementById('attView').style.display='none'
-  document.getElementById('addBoxes').style.display='none'
-  document.getElementById('updateBoxes').style.display='none'
-  document.getElementById('deleteBoxes').style.display='grid'
 
-  let dropDown = document.getElementsByName('delete')[0]
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
-  let api = '/api/brand/brw'
-  let title = 'brand'
-  createList(api, dropDown, title)
-
-}
-
-//Routes Add
+// Add
 document.getElementById('add').onclick = add
 function add() {
   document.getElementById('updateBoxes').style.display='none'
@@ -71,11 +57,10 @@ function add() {
   title = 'location'
   createList(api, dropDown, title)
 }
-document.getElementById('btnAddClear').addEventListener('click', resetAdd)
-function resetAdd(ev){
+document.getElementById('btnAddClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmAdd').reset();
-}
+})
 document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
 async function sendAdd(ev){
   ev.preventDefault() 
@@ -144,7 +129,7 @@ async function validateAdd(data){
   return failures
 }
 
-//Routes Update
+// Update
 document.getElementById('update').onclick = update
 function update() {
   document.getElementById('deleteBoxes').style.display='none'
@@ -170,11 +155,23 @@ function update() {
   title = 'location'
   createList(api, dropDown, title)
 }
-document.getElementById('btnUpdateClear').addEventListener('click', resetUpdate)
-function resetUpdate(ev){
+document.getElementsByName('updateVessel')[0].addEventListener('change', selectBrand)
+function selectBrand(){
+  let vessel = document.getElementsByName('updateVessel')[0].value
+  
+  axios.post('/api/vessel/name', {name: vessel})
+    .then(data => {
+      document.getElementsByName('updateType')[0].value = data.data.type
+      document.getElementsByName('updateLocation')[0].value = data.data.location
+      document.getElementsByName('updateVolume')[0].value = data.data.volume
+      document.getElementsByName('updateActive')[0].value = data.data.active
+      document.getElementsByName('updateNote')[0].value = data.data.note
+    })
+}
+document.getElementById('btnUpdateClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmUpdate').reset()
-}
+})
 document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
 async function sendUpdate(ev){
   ev.preventDefault() 
@@ -227,19 +224,7 @@ async function validateUpdate(data){
   }
   return failures
 }
-document.getElementsByName('updateVessel')[0].addEventListener('change', selectBrand)
-function selectBrand(){
-  let vessel = document.getElementsByName('updateVessel')[0].value
-  
-  axios.post('/api/vessel/name', {name: vessel})
-    .then(data => {
-      document.getElementsByName('updateType')[0].value = data.data.type
-      document.getElementsByName('updateLocation')[0].value = data.data.location
-      document.getElementsByName('updateVolume')[0].value = data.data.volume
-      document.getElementsByName('updateActive')[0].value = data.data.active
-      document.getElementsByName('updateNote')[0].value = data.data.note
-    })
-}
+
 
 
 //View
@@ -257,7 +242,7 @@ function view() {
       vesselTable = new Tabulator('#list', {
         resizableColumns:false,
         height:'309px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,

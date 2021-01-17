@@ -41,11 +41,6 @@ String.prototype.toNonAlpha = function (spaces) {
 
 
 // routes add
-document.getElementById('btnAddClear').addEventListener('click', resetAdd)
-function resetAdd(ev){
-  ev.preventDefault();
-  document.getElementById('frmAdd').reset()
-}
 document.getElementById('add').onclick = add
 function add() {
   document.getElementById('addBoxes').style.display='block'
@@ -59,10 +54,15 @@ function add() {
   createList(api, dropDown, title)
 
 }
+document.getElementById('btnAddClear').addEventListener('click', (ev) => {
+  ev.preventDefault();
+  document.getElementById('frmAdd').reset()
+})
 document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
 async function sendAdd(ev){
   ev.preventDefault() 
   ev.stopPropagation()
+
   const form = document.getElementById('frmAdd')
   let data = {}
   let i
@@ -78,24 +78,30 @@ async function sendAdd(ev){
     axios.post('/api/inventory/material/archive/log/add', data)
       .then(data => {
         alert(data.data[0].commodity + ' has been added')
-        // document.getElementById('frmAdd').reset()
+        document.getElementById('frmAdd').reset()
       })
       .catch(err => alert(err))
   } else {
-    let msg = "Problems:\n"
+    let msg = 'Problems:\n'
     for(i = 0; i < fails.length; i++) {
-      msg = msg + "\n" +fails[i]['input'] + " " + fails[i]['msg'] 
+      msg = msg + '\n' +fails[i]['input'] + ' ' + fails[i]['msg'] 
     }
     alert(msg)
   }
 }
 async function validateAdd (data){
   let failures = [];
-   
-  if(data.com_id === ""){
-      failures.push({input:'commodity', msg:'Required'})
-      data.com_id = null
-  } 
+  
+  if(!data.com_id) {
+    failures.push({input:'commodity', msg:'Required'})
+    data.com_id = null
+  } else {
+    let query = '/api/inventory/material/archive/name/get'
+    let res = await axios.post(query, {commodity: data.com_id}).catch(err => alert(err.detail))
+    if(res.data.msg !== 'null') {
+      failures.push({input:'commodity', msg:'Already Archived'})
+    }
+  }
   if(data.count_final === ""){
     failures.push({input:'final count', msg:'Required'})
     data.count_final = null
@@ -113,13 +119,16 @@ async function validateAdd (data){
 
 
 // routes View
-document.getElementById('view').onclick = view
-let tableView
-function view() {
+document.getElementById('view').onclick = viewView
+function viewView() {
   document.getElementById('addBoxes').style.display='none'
   document.getElementById('viewBoxes').style.display='block'
   document.getElementById('deleteBoxes').style.display='none'
   
+  loadViewView()
+}
+let tableView
+function loadViewView() {
   axios.post('/api/inventory/material/archive/log/get')
     .then(res => {
       let tableData = res.data
@@ -130,7 +139,7 @@ function view() {
         printHeader:'<h1>Archived Inventory<h1>',
         resizableColumns:false,
         height:'309px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
@@ -144,10 +153,9 @@ function view() {
     })
     .catch(err => console.log(err.detail))
 }
-document.getElementById('btnxcel').addEventListener('click', excel)
-function excel(){
+document.getElementById('btnxcel').addEventListener('click', () => {
   tableView.download('xlsx', 'archive.xlsx', {sheetName:'Log'})
-}
+})
 document.getElementById('btnprint').addEventListener('click', () => {
   tableView.print(false, true);
 })
@@ -162,7 +170,6 @@ function deleteView() {
   document.getElementById('deleteBoxes').style.display='block'
 
   loadDeleteView()
-
 }
 function loadDeleteView() {
   axios.post('/api/inventory/material/archive/log/get')
@@ -175,7 +182,7 @@ function loadDeleteView() {
         resizableColumns:false,
         height:'309px',
         selectable:true,
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
@@ -207,7 +214,7 @@ async function deleteRowInv(ev) {
 
   await axios.delete('/api/inventory/material/archive/' + selectedData[0].id)
     .then(data => {
-      alert(data.data.msg)
+      alert(data.data.msg + '\n\n Commodity Still Set To Active No')
     })
     .catch(err => alert(err))
 

@@ -62,10 +62,17 @@
   display: grid;
   grid-gap: 20px;
   padding: 0;
-  /* grid-template-areas:"tableHard tableSets tableRolling"; */
   grid-template-columns: repeat(3, 1fr);
 }
-
+@media (max-width: 1000px) {
+  
+  .tableDaily {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .tableWeekly {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
 @media (max-width: 850px) {
   .form input, textarea, select, option {

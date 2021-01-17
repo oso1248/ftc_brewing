@@ -26,11 +26,6 @@ function createList(api, parent, title) {
     console.error(err)
   })
 }
-function brwBrand(dropDown){
-  const api = '/api/brand/brw/get/std'
-  let title = 'brand'
-  createListBrwBrand(api, dropDown, title)
-}
 
 
 //Brand view
@@ -55,7 +50,7 @@ function viewBrandBrew() {
         printHeader:'<h1>Brew Brands<h1>',
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Brand', field:'brand',hozAlign:'center', frozen:true},
@@ -81,7 +76,6 @@ function printBrndView(){
 
 
 // Standard hops
-let viewStdHopTable
 document.getElementById('stdHopView').onclick = stdHopView
 function stdHopView() {
   document.getElementById('stdHopBtn').style.display='none'
@@ -89,10 +83,8 @@ function stdHopView() {
   document.getElementById('stdHopHide').style.display='block'
   document.getElementById('dryHopHide').style.display='none'
   document.getElementById('sprSacHide').style.display='none'
+
   stdHopList()
-  if(viewStdHopTable) {
-    viewStdHopTable.clearData()
-  }
 }
 function stdHopList() {
   let dropDown = document.getElementById('stdHopSel')
@@ -101,8 +93,9 @@ function stdHopList() {
   let title = 'brand'
   createList(api, dropDown, title)
 }
+let viewStdHopTable
 document.getElementById('stdHopSel').addEventListener('change', stdHopTbl)
-async function stdHopTbl() {
+function stdHopTbl() {
   document.getElementById('stdHopBtn').style.display='block'
   let name = document.getElementById('stdHopSel').value
   axios.post('/api/mtx/brnd', {brand: `${name}`, method: 'view'})
@@ -114,7 +107,7 @@ async function stdHopTbl() {
         printHeader:'<h1>Standard Hops<h1>',
         resizableColumns:false,
         height:'300px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'Hop', field:'Hop', hozAlign:'Left'},
@@ -124,20 +117,16 @@ async function stdHopTbl() {
     })
     .catch(err => console.log(err))  
 }
-document.getElementById('xlsxStdHop').addEventListener('click', xlsxStdHop)
-function xlsxStdHop(){
+document.getElementById('xlsxStdHop').addEventListener('click', () => {
   viewStdHopTable.download('xlsx', 'standard_hops.xlsx', {sheetName:'Standard Hops'})
-}
-document.getElementById('printStdHop').addEventListener('click', printStdHop)
-function printStdHop(){
+})
+document.getElementById('printStdHop').addEventListener('click', () => {
   viewStdHopTable.print(false, true);
-}
-
+})
 
 
 
 // Dry Hops
-let viewDryHopTable
 document.getElementById('dryHopView').onclick = dryHopView
 function dryHopView() {
   document.getElementById('dryHopBtn').style.display='none'
@@ -145,20 +134,16 @@ function dryHopView() {
   document.getElementById('stdHopHide').style.display='none'
   document.getElementById('dryHopHide').style.display='block'
   document.getElementById('sprSacHide').style.display='none'
-  dryHopList()
-  if(viewDryHopTable) {
-    viewDryHopTable.clearData()
-  }
-}
-function dryHopList() {
+
   let dropDown = document.getElementById('dryHopSel')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Brand</option>`
   let api = '/api/brand/brw/get/dry'
   let title = 'brand'
   createList(api, dropDown, title)
 }
+let viewDryHopTable
 document.getElementById('dryHopSel').addEventListener('change', dryHopTbl)
-async function dryHopTbl() {
+function dryHopTbl() {
   document.getElementById('dryHopBtn').style.display='block'
   let name = document.getElementById('dryHopSel').value
   axios.post('/api/mtx/dry', {brand: `${name}`, method: 'view'})
@@ -170,7 +155,7 @@ async function dryHopTbl() {
         printHeader:'<h1>Dry Hops<h1>',
         resizableColumns:false,
         height:'300px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'Hop', field:'Hop', hozAlign:'Left'},
@@ -180,17 +165,12 @@ async function dryHopTbl() {
     })
     .catch(err => console.log(err))  
 }
-document.getElementById('xlsxDryHop').addEventListener('click', xlsxDryHop)
-function xlsxDryHop(){
+document.getElementById('xlsxDryHop').addEventListener('click', () => {
   viewDryHopTable.download('xlsx', 'dry_hop.xlsx', {sheetName:'Dry Hops'})
-}
-document.getElementById('printDryHop').addEventListener('click', printDryHop)
-function printDryHop(){
+})
+document.getElementById('printDryHop').addEventListener('click', () => {
   viewDryHopTable.print(false, true);
-}
-
-
-
+})
 
 
 
@@ -203,12 +183,7 @@ function sprSacView() {
   document.getElementById('stdHopHide').style.display='none'
   document.getElementById('dryHopHide').style.display='none'
   document.getElementById('sprSacHide').style.display='block'
-  sprSacList()
-  if(viewSprSacTable) {
-    viewSprSacTable.clearData()
-  }
-}
-function sprSacList() {
+  
   let dropDown = document.getElementById('sprSacSel')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Brand</option>`
   let api = '/api/brand/brw/get/sac'
@@ -216,7 +191,7 @@ function sprSacList() {
   createList(api, dropDown, title)
 }
 document.getElementById('sprSacSel').addEventListener('change', sprSacTbl)
-async function sprSacTbl() {
+function sprSacTbl() {
   document.getElementById('sprSacBtn').style.display='block'
   let name = document.getElementById('sprSacSel').value
   axios.post('/api/mtx/sac', {brand: `${name}`, method: 'view'})
@@ -227,7 +202,7 @@ async function sprSacTbl() {
         printHeader:'<h1>Super Sacks<h1>',
         resizableColumns:false,
         height:'300px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'Commodity', field:'commodity', hozAlign:'Left'},
@@ -237,11 +212,10 @@ async function sprSacTbl() {
     })
     .catch(err => console.log(err))  
 }
-document.getElementById('xlsxSprSac').addEventListener('click', xlsxSprSac)
-function xlsxSprSac(){
+document.getElementById('xlsxSprSac').addEventListener('click', () => {
   viewSprSacTable.download('xlsx', 'super_sacks.xlsx', {sheetName:'Super Sacks'})
-}
-document.getElementById('printSprSac').addEventListener('click', printSprSac)
-function printSprSac(){
+})
+document.getElementById('printSprSac').addEventListener('click', () => {
   viewSprSacTable.print(false, true);
-}
+})
+

@@ -63,7 +63,7 @@ function weeklyMatTable() {
       weeklyTable = new Tabulator('#tableWeekly', {
         printHeader:'<h1>Weekly Material Inventory<h1>',
         height:'309px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
@@ -129,7 +129,7 @@ function monthlyMatTable() {
       monthlyTable = new Tabulator('#tableMonthly', {
         printHeader:'<h1>Monthly Material Inventory<h1>',
         height:'309px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
@@ -154,5 +154,3 @@ document.getElementById('monthlyPrint-table').addEventListener('click', monthlyP
 function monthlyPrint(){
   monthlyTable.print(false, true);
 }
-
-// window.addEventListener('DOMContentLoaded', (ev) => { invDates() }) 

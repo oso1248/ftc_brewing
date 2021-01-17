@@ -62,11 +62,7 @@ function convert(obj, labels) {
 }
 
 
-// Update
-let tableUpdateBrandChp
-let tableUpdateBrandSch
-let tableUpdateBrandFin
-
+// Update ////////////////
 document.getElementById('add').onclick = updateView
 function updateView() {
   document.getElementById('viewBoxes').style.display='none'
@@ -89,29 +85,7 @@ function updateView() {
   createListBrwBrand(api, dropDown, title)
 
 }
-
-document.getElementById('btnUpdateClearChp').addEventListener('click', resetUpdateChp)
-function resetUpdateChp(ev){
-  ev.preventDefault()
-  if (tableUpdateBrandChp) {
-    tableUpdateBrandChp.clearData()
-  }
-}
-document.getElementById('btnUpdateClearSch').addEventListener('click', resetUpdateSch)
-function resetUpdateSch(ev){
-  ev.preventDefault()
-  if (tableUpdateBrandSch) {
-    tableUpdateBrandSch.clearData()
-  }
-}
-document.getElementById('btnUpdateClearFin').addEventListener('click', resetUpdateFin)
-function resetUpdateFin(ev){
-  ev.preventDefault()
-  if (tableUpdateBrandFin) {
-    tableUpdateBrandFin.clearData()
-  }
-}
-
+//Select Brew Brand Update
 document.getElementById('brwBrandUpdate').addEventListener('change', selectUpdateBrw)
 function selectUpdateBrw() {
   document.getElementById('updateLineageBoxChp').style.display='block'
@@ -124,6 +98,9 @@ function selectUpdateBrw() {
 
   document.getElementById('finBrandUpdate').selectedIndex = 0
 }
+
+
+let tableUpdateBrandChp
 async function chpBrandUpdate(name) {
   let labels = [
     'Brand',
@@ -142,7 +119,7 @@ async function chpBrandUpdate(name) {
       tableUpdateBrandChp = new Tabulator('#updateFinRecipeChpTable', {
         resizableColumns:false,
         height:'1000x',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
@@ -152,6 +129,27 @@ async function chpBrandUpdate(name) {
     })
     .catch(err => console.log(err))
 }
+document.getElementById('btnUpdateClearChp').addEventListener('click', (ev) => {
+  ev.preventDefault()
+  if (tableUpdateBrandChp) {
+    tableUpdateBrandChp.clearData()
+  }
+})
+document.getElementById('btnUpdateSubmitChp').addEventListener('click', sendUpdateChp)
+async function sendUpdateChp(ev){
+  ev.preventDefault() 
+  ev.stopPropagation()
+  
+  let tableData = tableUpdateBrandChp.getData()
+  await axios.patch('/api/brand/detail/updaterecipe/chip', tableData)
+    .then(data => {      
+      alert('Updated')
+    })
+    .catch(err => alert(err))
+}
+
+
+let tableUpdateBrandSch
 async function schBrandUpdate(name) {
   let labels = [
     'Brand',
@@ -167,7 +165,7 @@ async function schBrandUpdate(name) {
       tableUpdateBrandSch = new Tabulator('#updateFinRecipeSchTable', {
         resizableColumns:false,
         height:'1000x',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
@@ -177,7 +175,27 @@ async function schBrandUpdate(name) {
     })
     .catch(err => console.log(err))
 }
+document.getElementById('btnUpdateClearSch').addEventListener('click', (ev) => {
+  ev.preventDefault()
+  if (tableUpdateBrandSch) {
+    tableUpdateBrandSch.clearData()
+  }
+})
+document.getElementById('btnUpdateSubmitSch').addEventListener('click', sendUpdateSch)
+async function sendUpdateSch(ev){
+  ev.preventDefault() 
+  ev.stopPropagation()
+  
+  let tableData = tableUpdateBrandSch.getData()
+  
+  await axios.patch('/api/brand/detail/updaterecipe/schoene', tableData)
+    .then(data => {  
+      alert('Updated')
+    })
+    .catch(err => alert(err))
+}
 
+// Select Fin Brand Update
 document.getElementById('finBrandUpdate').addEventListener('change', selectUpdateFin)
 function selectUpdateFin() {
   document.getElementById('updateLineageBoxFin').style.display='block'
@@ -190,6 +208,9 @@ function selectUpdateFin() {
   document.getElementById('brwBrandUpdate').selectedIndex = 0
   
 }
+
+
+let tableUpdateBrandFin
 async function finBrandUpdate(name) {
   let labels = [
     'Brand',
@@ -238,7 +259,7 @@ async function finBrandUpdate(name) {
       tableUpdateBrandFin = new Tabulator('#updateFinRecipeFinTable', {
         resizableColumns:false,
         height:'1000x',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
@@ -248,32 +269,12 @@ async function finBrandUpdate(name) {
     })
     .catch(err => console.log(err))
 }
-
-document.getElementById('btnUpdateSubmitChp').addEventListener('click', sendUpdateChp)
-async function sendUpdateChp(ev){
-  ev.preventDefault() 
-  ev.stopPropagation()
-  
-  let tableData = tableUpdateBrandChp.getData()
-  await axios.patch('/api/brand/detail/updaterecipe/chip', tableData)
-    .then(data => {      
-      alert('Updated')
-    })
-    .catch(err => alert(err))
-}
-document.getElementById('btnUpdateSubmitSch').addEventListener('click', sendUpdateSch)
-async function sendUpdateSch(ev){
-  ev.preventDefault() 
-  ev.stopPropagation()
-  
-  let tableData = tableUpdateBrandSch.getData()
-  
-  await axios.patch('/api/brand/detail/updaterecipe/schoene', tableData)
-    .then(data => {  
-      alert('Updated')
-    })
-    .catch(err => alert(err))
-}
+document.getElementById('btnUpdateClearFin').addEventListener('click', (ev) => {
+  ev.preventDefault()
+  if (tableUpdateBrandFin) {
+    tableUpdateBrandFin.clearData()
+  }
+})
 document.getElementById('btnUpdateSubmitFin').addEventListener('click', sendUpdateFin)
 async function sendUpdateFin(ev){
   ev.preventDefault() 
@@ -290,11 +291,7 @@ async function sendUpdateFin(ev){
 
 
 
-// view
-let tableViewBrandChp
-let tableViewBrandSch
-let tableViewBrandFin
-
+// View //////////////////
 document.getElementById('update').onclick = viewView
 function viewView() {
   document.getElementById('updateBoxes').style.display='none'
@@ -316,6 +313,7 @@ function viewView() {
   createListBrwBrand(api, dropDown, title)
 }
 
+//Select Brew Brand View
 document.getElementById('brwBrandView').addEventListener('change', selectViewBrw)
 function selectViewBrw() {
   document.getElementById('viewLineageBoxChp').style.display='block'
@@ -329,6 +327,7 @@ function selectViewBrw() {
   document.getElementById('finBrandView').selectedIndex = 0
   
 }
+let tableViewBrandChp
 async function chpBrandView(name) {
   let labels = [
     'Brand',
@@ -347,7 +346,7 @@ async function chpBrandView(name) {
       tableViewBrandChp = new Tabulator('#viewFinRecipeChpTable', {
         resizableColumns:false,
         height:'1000x',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
@@ -357,6 +356,7 @@ async function chpBrandView(name) {
     })
     .catch(err => console.log(err))
 }
+let tableViewBrandSch
 async function schBrandView(name) {
   let labels = [
     'Brand',
@@ -372,7 +372,7 @@ async function schBrandView(name) {
       tableViewBrandSch = new Tabulator('#viewFinRecipeSchTable', {
         resizableColumns:false,
         height:'1000x',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        
@@ -383,6 +383,7 @@ async function schBrandView(name) {
     .catch(err => console.log(err))
 }
 
+// Select Fin Brand View
 document.getElementById('finBrandView').addEventListener('change', selectViewFin)
 function selectViewFin() {
   document.getElementById('viewLineageBoxFin').style.display='block'
@@ -395,6 +396,7 @@ function selectViewFin() {
   document.getElementById('brwBrandView').selectedIndex = 0
   
 }
+let tableViewBrandFin
 async function finBrandView(name) {
   let labels = [
     'Brand',
@@ -443,7 +445,7 @@ async function finBrandView(name) {
       tableViewBrandFin = new Tabulator('#viewFinRecipeFinTable', {
         resizableColumns:false,
         height:'1000x',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Object', field:'object',hozAlign:'left', frozen:true},        

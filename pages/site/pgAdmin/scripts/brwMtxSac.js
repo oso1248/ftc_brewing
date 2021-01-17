@@ -30,18 +30,48 @@ function brwBrand(dropDown){
 }
 
 
-// routes hops
-function resetUpdate(ev){
+// Update
+document.getElementById('add').onclick = update
+function update() {
+  document.getElementById('viewBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='block'
+  
+  let dropDown = document.getElementById('brwBrandUpdate')
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
+  brwBrand(dropDown)
+
+  if(hopTableUpdate) {
+    hopTableUpdate.clearData()
+  }
+}
+document.getElementById('btnUpdateClear').addEventListener('click', (ev) => {
   ev.preventDefault()
   document.getElementById('frmUpdate').reset()
   hopTableUpdate.clearData()
+})
+document.getElementById('brwBrandUpdate').addEventListener('change', selectBrwBrandUpdate)
+let hopTableUpdate
+function selectBrwBrandUpdate(){
+  let brwBrand = document.getElementById('brwBrandUpdate').value
+  axios.post('/api/mtx/sac', {brand: `${brwBrand}`, method: 'update'})
+    .then(res => {
+      let tableData = res.data
+      res.data.unshift({commodity:'Brand', Units:`${brwBrand}`})
+      hopTableUpdate = new Tabulator('#updateHop', {
+        resizableColumns:false,
+        height:'330px',
+        layout:'fitDataFill',
+        data:tableData,
+        columns:[
+        {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'Units', field:'Units',hozAlign:'left', editor:true, validator:['numeric']},
+        ],
+      })
+    })
+    .catch(err => console.log(err))
 }
-function resetView(ev){
-  ev.preventDefault()
-  document.getElementById('frmView').reset()
-  hopTableView.clearData()
-}
-async function sendUpdate(ev){
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
+function sendUpdate(ev){
   ev.preventDefault() 
   ev.stopPropagation()
 
@@ -56,61 +86,11 @@ async function sendUpdate(ev){
     })
     .catch(err => alert(err))
 }
-let hopTableUpdate
-function selectBrwBrandUpdate(){
-  let brwBrand = document.getElementById('brwBrandUpdate').value
-  axios.post('/api/mtx/sac', {brand: `${brwBrand}`, method: 'update'})
-    .then(res => {
-      let tableData = res.data
-      res.data.unshift({commodity:'Brand', Units:`${brwBrand}`})
-      hopTableUpdate = new Tabulator('#updateHop', {
-        resizableColumns:false,
-        height:'330px',
-        layout:'fitDataStretch',
-        data:tableData,
-        columns:[
-        {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
-        {title:'Units', field:'Units',hozAlign:'left', editor:true, validator:['numeric']},
-        ],
-      })
-    })
-    .catch(err => console.log(err))
-}
-let hopTableView
-function selectBrwBrandView(){
-  let brwBrand = document.getElementById('brwBrandView').value
-  axios.post('/api/mtx/sac', {brand: `${brwBrand}`, method: 'view'})
-    .then(res => {
-      let tableData = res.data
-      res.data.unshift({commodity:'Brand', Units:`${brwBrand}`})
-      hopTableView = new Tabulator('#viewHop', {
-        resizableColumns:false,
-        height:'330px',
-        layout:'fitDataStretch',
-        data:tableData,
-        columns:[
-        {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
-        {title:'Units', field:'Units',hozAlign:'left'},
-        ],
-      })
-    })
-    .catch(err => console.log(err))
-}
 
 
-// Views
-function update() {
-  document.getElementById('viewBoxes').style.display='none'
-  document.getElementById('updateBoxes').style.display='block'
-  
-  let dropDown = document.getElementById('brwBrandUpdate')
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
-  brwBrand(dropDown)
 
-  if(hopTableUpdate) {
-    hopTableUpdate.clearData()
-  }
-}
+// View
+document.getElementById('update').onclick = view
 function view() {
   document.getElementById('updateBoxes').style.display='none'
   document.getElementById('viewBoxes').style.display='block'
@@ -123,31 +103,29 @@ function view() {
     hopTableView.clearData()
   }
 }
-
-
-document.getElementById('btnUpdateClear').addEventListener('click', resetUpdate)
-document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
-document.getElementById('brwBrandUpdate').addEventListener('change', selectBrwBrandUpdate)
+document.getElementById('btnViewClear').addEventListener('click', (ev) => {
+  ev.preventDefault()
+  document.getElementById('frmView').reset()
+  hopTableView.clearData()
+})
 document.getElementById('brwBrandView').addEventListener('change', selectBrwBrandView)
-
-document.getElementById('btnViewClear').addEventListener('click', resetView)
-
-document.getElementById('add').onclick = update
-document.getElementById('update').onclick = view
-
-
-function HopUpdate(){
-  hopTableUpdate.download('xlsx', 'DryUpdate.xlsx', {sheetName:'DryUpdate'})
-}
-
-function HopUpdatePrint(){
-  hopTableUpdate.print(false, true);
-}
-
-function HopView(){
-  hopTableView.download('xlsx', 'DryView.xlsx', {sheetName:'DryView'})
-}
-
-function HopViewPrint(){
-  hopTableView.print(false, true);
+let hopTableView
+function selectBrwBrandView(){
+  let brwBrand = document.getElementById('brwBrandView').value
+  axios.post('/api/mtx/sac', {brand: `${brwBrand}`, method: 'view'})
+    .then(res => {
+      let tableData = res.data
+      res.data.unshift({commodity:'Brand', Units:`${brwBrand}`})
+      hopTableView = new Tabulator('#viewHop', {
+        resizableColumns:false,
+        height:'330px',
+        layout:'fitDataFill',
+        data:tableData,
+        columns:[
+        {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'Units', field:'Units',hozAlign:'left'},
+        ],
+      })
+    })
+    .catch(err => console.log(err))
 }

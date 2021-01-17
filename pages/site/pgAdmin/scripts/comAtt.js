@@ -265,7 +265,7 @@ async function sendAddLocation(ev){
       // alert(JSON.stringify(fails))
     }
 }
-function validateAddLocation (ev){
+async function validateAddLocation (ev){
   
   let failures = [];
   
@@ -273,7 +273,7 @@ function validateAddLocation (ev){
   
   let query = '/api/location/' + location
 
-  let res = await axios.get(query)
+  let res = await axios.get(query).catch(err => console.log(err))
   
   if(res.data.msg !== 'null') {
     failures.push({input:'name', msg:'Taken'})
@@ -312,7 +312,7 @@ async function sendAddType(ev){
       alert(msg)
     }
 }
-function validateAddType (ev){
+async function validateAddType (ev){
   
   let failures = [];
   
@@ -320,7 +320,7 @@ function validateAddType (ev){
   
   let query = '/api/type/' + Type
 
-  let res = await axios.get(query)
+  let res = await axios.get(query).catch(err => console.log(err))
   
   if(res.data.msg !== 'null') {
     failures.push({input:'name', msg:'Taken'})
@@ -359,7 +359,7 @@ async function sendAddEnviro(ev){
       alert(msg)
     }
 }
-function validateAddEnviro (ev){
+async function validateAddEnviro (ev){
   
   let failures = [];
   
@@ -367,7 +367,7 @@ function validateAddEnviro (ev){
   
   let query = '/api/enviro/' + Enviro
 
-  let res = await axios.get(query)
+  let res = await axios.get(query).catch(err => console.log(err))
   
   if(res.data.msg !== 'null') {
     failures.push({input:'name', msg:'Taken'})
@@ -406,7 +406,7 @@ async function sendAddContainer(ev){
       alert(msg)
     }
 }
-function validateAddContainer (ev){
+async function validateAddContainer (ev){
   
   let failures = [];
   
@@ -414,7 +414,7 @@ function validateAddContainer (ev){
   
   let query = '/api/container/' + Container
 
-  let res = await axios.get(query)
+  let res = await axios.get(query).catch(err => console.log(err))
   
   if(res.data.msg !== 'null') {
     failures.push({input:'name', msg:'Taken'})
@@ -454,7 +454,7 @@ async function sendAddUom(ev){
       alert(msg)
     }
 }
-function validateAddUom (ev){
+async function validateAddUom (ev){
   
   let failures = [];
   
@@ -462,7 +462,7 @@ function validateAddUom (ev){
   
   let query = '/api/uom/' + Uom
 
-  let res = await axios.get(query)
+  let res = await axios.get(query).catch(err => console.log(err))
   
   if(res.data.msg !== 'null') {
     failures.push({input:'name', msg:'Taken'})

@@ -34,75 +34,19 @@ String.prototype.toNonAlpha = function () {
   return this.replace(/[^0-9a-z]/gi, '')
 }
 
-//Views
+//Add
+document.getElementById('add').onclick = add
 function add() {
   document.getElementById('updateBoxes').style.display='none'
   document.getElementById('deleteBoxes').style.display='none'
   document.getElementById('attView').style.display='none'
   document.getElementById('addBoxes').style.display='grid'
 }
-function update() {
-  document.getElementById('deleteBoxes').style.display='none'
-  document.getElementById('attView').style.display='none'
-  document.getElementById('addBoxes').style.display='none'
-  document.getElementById('updateBoxes').style.display='grid'
-
-  let dropDown = document.getElementsByName('updateBrand')[0]
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
-  let api = '/api/brand/brw/get'
-  let title = 'brand'
-  createList(api, dropDown, title)
-
-}
-function view() {
-  document.getElementById('updateBoxes').style.display='none'
-  document.getElementById('deleteBoxes').style.display='none'
-  document.getElementById('attView').style.display='grid'
-  document.getElementById('addBoxes').style.display='none'
-
-  axios.post('/api/brand/brw/get', {active:false})
-    .then(res => {
-      let tableData = res.data
-      var table = new Tabulator('#list', {
-        resizableColumns:false,
-        height:'309px',
-        layout:'fitDataStretch',
-        data:tableData,
-        columns:[
-        {title:'Brand', field:'brand',hozAlign:'center'},
-        {title:'Active', field:'active',hozAlign:'center'},
-        {title:'Standard Hops', field:'hop_std',hozAlign:'center'},
-        {title:'Craft Hops', field:'hop_crft',hozAlign:'center'},
-        {title:'Dry Hops', field:'hop_dry',hozAlign:'center'},
-        {title:'Super Sacks', field:'supr_sac',hozAlign:'center'},
-        {title:'Note', field:'note', hozAlign:'left'},
-        ],
-      })
-    })
-    .catch(err => console.log(err))
-
-}
-function del() {
-  document.getElementById('attView').style.display='none'
-  document.getElementById('addBoxes').style.display='none'
-  document.getElementById('updateBoxes').style.display='none'
-  document.getElementById('deleteBoxes').style.display='grid'
-
-  let dropDown = document.getElementsByName('delete')[0]
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
-  let api = '/api/brand/brw'
-  let title = 'brand'
-  createList(api, dropDown, title)
-
-}
-
-
-//Routes Add Clear Form
-function resetAdd(ev){
+document.getElementById('btnAddClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmAdd').reset()
-}
-//Routes Add
+})
+document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
 async function sendAdd(ev){
   ev.preventDefault() 
   ev.stopPropagation()
@@ -177,12 +121,40 @@ async function validateAdd(data){
 }
 
 
-//Routes Update Clear form
-function resetUpdate(ev){
+// Update
+document.getElementById('update').onclick = update
+function update() {
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='grid'
+
+  let dropDown = document.getElementsByName('updateBrand')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`
+  let api = '/api/brand/brw/get'
+  let title = 'brand'
+  createList(api, dropDown, title)
+
+}
+document.getElementById('btnUpdateClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmUpdate').reset()
+})
+document.getElementsByName('updateBrand')[0].addEventListener('change', selectBrand)
+function selectBrand(){
+  let brand = document.getElementsByName('updateBrand')[0].value
+  
+  axios.post('/api/brand/brw/name', {name: brand})
+    .then(data => {
+      document.getElementsByName('updateStandard')[0].value = data.data.hop_std
+      document.getElementsByName('updateCraft')[0].value = data.data.hop_crft
+      document.getElementsByName('updateDry')[0].value = data.data.hop_dry
+      document.getElementsByName('updateSuper')[0].value = data.data.supr_sac
+      document.getElementsByName('updateActive')[0].value = data.data.active
+      document.getElementsByName('updateNote')[0].value = data.data.note
+    })
 }
-//Routes Update
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
 async function sendUpdate(ev){
   ev.preventDefault() 
   ev.stopPropagation()
@@ -242,64 +214,36 @@ async function validateUpdate(data){
   }
   return failures
 }
-function selectBrand(){
-  let brand = document.getElementsByName('updateBrand')[0].value
-  
-  axios.post('/api/brand/brw/name', {name: brand})
-    .then(data => {
-      document.getElementsByName('updateStandard')[0].value = data.data.hop_std
-      document.getElementsByName('updateCraft')[0].value = data.data.hop_crft
-      document.getElementsByName('updateDry')[0].value = data.data.hop_dry
-      document.getElementsByName('updateSuper')[0].value = data.data.supr_sac
-      document.getElementsByName('updateActive')[0].value = data.data.active
-      document.getElementsByName('updateNote')[0].value = data.data.note
-    })
-}
 
 
-//Routes Delete Clear Form
-function resetDelete(ev){
-  ev.preventDefault();
-  document.getElementById('frmDelete').reset();
-}
-// Routes delete
-async function sendDelete(ev){
-  ev.preventDefault() 
-  ev.stopPropagation()
-  let name = document.getElementsByName('delete')[0].value
-  if(name === '') {
-    alert('brand Required')
-    return
-  }
-
-  axios.delete('/api/brand/brw/' + name)
-    .then(data => {
-      alert(data.data.msg)
-    })
-    .catch(err => alert(err.detail))
-}
-
-
-//Clear forms add
-document.getElementById('btnAddClear').addEventListener('click', resetAdd)
-//Clear forms update
-document.getElementById('btnUpdateClear').addEventListener('click', resetUpdate)
-//Clear forms delete
-document.getElementById('btnDeleteClear').addEventListener('click', resetDelete)
-
-
-//Send forms add
-document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
-//Send forms Update
-document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
-// Send forms delete
-document.getElementById('btnDeleteSubmit').addEventListener('click', sendDelete)
-
-
-document.getElementsByName('updateBrand')[0].addEventListener('change', selectBrand)
-
-
-document.getElementById('add').onclick = add
-document.getElementById('update').onclick = update
+//View
+let brewTable
 document.getElementById('view').onclick = view
-// document.getElementById('delete').onclick = del
+function view() {
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='grid'
+  document.getElementById('addBoxes').style.display='none'
+
+  axios.post('/api/brand/brw/get', {active:false})
+    .then(res => {
+      let tableData = res.data
+      brewTable = new Tabulator('#list', {
+        resizableColumns:false,
+        height:'309px',
+        layout:'fitDataFill',
+        data:tableData,
+        columns:[
+        {title:'Brand', field:'brand',hozAlign:'center'},
+        {title:'Active', field:'active',hozAlign:'center'},
+        {title:'Standard Hops', field:'hop_std',hozAlign:'center'},
+        {title:'Craft Hops', field:'hop_crft',hozAlign:'center'},
+        {title:'Dry Hops', field:'hop_dry',hozAlign:'center'},
+        {title:'Super Sacks', field:'supr_sac',hozAlign:'center'},
+        {title:'Note', field:'note', hozAlign:'left'},
+        ],
+      })
+    })
+    .catch(err => console.log(err))
+
+}

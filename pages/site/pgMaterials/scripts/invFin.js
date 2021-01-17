@@ -58,7 +58,7 @@ function weeklyHopTableFunc(dt) {
         printHeader:'<h3>Weekly Hop Inventory<h3>',
         resizableColumns:false,
         height:'309px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Hop Inv', field:'commodity',hozAlign:'center', frozen:true},
@@ -88,7 +88,7 @@ function weeklyMatTableFunc(dt) {
         printHeader:'<h3>Weekly Material Inventory<h3>',
         resizableColumns:false,
         height:'309px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Mat Inv', field:'commodity',hozAlign:'center', frozen:true},
@@ -120,7 +120,7 @@ function weeklyCombinedTableFunc(dt) {
         printHeader:'<h3>Weekly Combined Inventory<h3>',
         resizableColumns:false,
         height:'309px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
@@ -186,7 +186,7 @@ function monthlyHopTableFunc(dt) {
         printHeader:'<h3>Monthly Hop Inventory<h3>',
         resizableColumns:false,
         height:'309px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Hop Inv', field:'commodity',hozAlign:'center', frozen:true},
@@ -216,7 +216,7 @@ function monthlyMatTableFunc(dt) {
         printHeader:'<h3>Monthly Material Inventory<h3>',
         resizableColumns:false,
         height:'309px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Mat Inv', field:'commodity',hozAlign:'center', frozen:true},
@@ -247,7 +247,7 @@ function monthlyCombinedTableFunc(dt) {
       monthlyCombinedTable = new Tabulator('#tableCombinedMonthly', {
         printHeader:'<h3>Monthly Combined Inventory<h3>',
         height:'309px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},

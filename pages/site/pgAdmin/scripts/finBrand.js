@@ -52,7 +52,7 @@ function view() {
       brandTable = new Tabulator('#list', {
         resizableColumns:false,
         height:'309px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
@@ -333,7 +333,7 @@ function selectBrandIngredientUpdate() {
       ingredientTable = new Tabulator('#injRateTable', {
         resizableColumns:false,
         height:'120x',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         resizableColumns:false,
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,

@@ -74,7 +74,7 @@ function viewBrands() {
   document.getElementById('viewPckBrand').style.display='none'
 
 }
-// View Brw
+// Brw
 document.getElementById('viewSchoene').addEventListener('click', viewBrandBrew)
 let viewBrandBrwTable
 function viewBrandBrew() {
@@ -90,7 +90,7 @@ function viewBrandBrew() {
         printHeader:'<h1>Brew Brands<h1>',
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Brand', field:'brand',hozAlign:'center', frozen:true},
@@ -104,15 +104,14 @@ function viewBrandBrew() {
     })
     .catch(err => console.log(err))
 }
-document.getElementById('xlsxViewBrandBrwTable').addEventListener('click', xlsxViewBrandBrwTable)
-function xlsxViewBrandBrwTable(){
+document.getElementById('xlsxViewBrandBrwTable').addEventListener('click', () => {
   viewBrandBrwTable.download('xlsx', 'brand_brw.xlsx', {sheetName:'Brands'})
-}
-document.getElementById('printViewBrandBrwTable').addEventListener('click', printViewBrandBrwTable)
-function printViewBrandBrwTable(){
+})
+document.getElementById('printViewBrandBrwTable').addEventListener('click', () => {
   viewBrandBrwTable.print(false, true);
-}
-// View Fin
+})
+
+// Fin
 document.getElementById('viewFinish').addEventListener('click', viewBrandFin)
 let viewBrandFinTable
 function viewBrandFin() {
@@ -127,7 +126,7 @@ function viewBrandFin() {
         printHeader:'<h1>Finishing Brands<h1>',
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Brand', field:'brndFin',hozAlign:'center', frozen:true},
@@ -140,15 +139,14 @@ function viewBrandFin() {
     })
     .catch(err => console.log(err))
 }
-document.getElementById('xlsxViewBrandFinTable').addEventListener('click', xlsxViewBrandFinTable)
-function xlsxViewBrandFinTable(){
+document.getElementById('xlsxViewBrandFinTable').addEventListener('click', () => {
   viewBrandFinTable.download('xlsx', 'brand_fin.xlsx', {sheetName:'Brands'})
-}
-document.getElementById('printViewBrandFinTable').addEventListener('click', printViewBrandFinTable)
-function printViewBrandFinTable(){
+})
+document.getElementById('printViewBrandFinTable').addEventListener('click', () => {
   viewBrandFinTable.print(false, true);
-}
-// View Pck
+})
+
+// Pck
 document.getElementById('viewPackage').addEventListener('click', viewBrandPck)
 let viewBrandPckTable
 function viewBrandPck() {
@@ -163,7 +161,7 @@ function viewBrandPck() {
         printHeader:'<h1>Packaging Brands<h1>',
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Brand', field:'brndPck',hozAlign:'center', frozen:true},
@@ -177,14 +175,12 @@ function viewBrandPck() {
     .catch(err => console.log(err))
 
 }
-document.getElementById('xlsxViewBrandPckTable').addEventListener('click', xlsxViewBrandPckTable)
-function xlsxViewBrandPckTable(){
+document.getElementById('xlsxViewBrandPckTable').addEventListener('click', () => {
   viewBrandPckTable.download('xlsx', 'brand_pck.xlsx', {sheetName:'Brands'})
-}
-document.getElementById('printViewBrandPckTable').addEventListener('click', printViewBrandPckTable)
-function printViewBrandPckTable(){
-  viewBrandPckTable.print(false, true);
-}
+})
+document.getElementById('printViewBrandPckTable').addEventListener('click', () => {
+  viewBrandPckTable.print(false, true)
+})
 
 
 
@@ -217,11 +213,9 @@ function detailBrands() {
   title = 'brndFin'
   createList(api, dropDown, title)
 }
-// Details Band Brw
+// Brw
 document.getElementById('brwBrandDetail').addEventListener('change', detailBrandBrew)
-let detailBrandBrwTablePre
-let detailBrandBrwTablePost
-async function detailBrandBrew() {
+function detailBrandBrew() {
   document.getElementById('detailPckBrand').style.display='none'
   document.getElementById('detailFinBrand').style.display='none'
   document.getElementById('detailBrwBrand').style.display='block'
@@ -231,9 +225,10 @@ async function detailBrandBrew() {
   document.getElementById('finBrandDetail').selectedIndex = 0
   document.getElementById('pckBrandDetail').selectedIndex = 0
 
-  await detailBrandBrewPre(name)
-  await detailBrandBrewPost(name)
+  detailBrandBrewPre(name)
+  detailBrandBrewPost(name)
 }
+let detailBrandBrwTablePre
 function detailBrandBrewPre(name) {
   let labels = ['Brand','Chip Tank', 'UniTank', 'Lines','Cooler', 'Seperators','ACP', 'Schoene Tank','Fill Tank', 'Note']
   axios.post('/api/brand/detail/csxpre',{name:`${name}`})
@@ -245,7 +240,7 @@ function detailBrandBrewPre(name) {
         printHeader:'<h1>Pre CSX<h1>',
         resizableColumns:false,
         height:'300px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'Object', field:'object', hozAlign:'Left'},
@@ -255,6 +250,13 @@ function detailBrandBrewPre(name) {
     })
     .catch(err => console.log(err))
 }
+document.getElementById('xlsxDetailBrandBrwTablePre').addEventListener('click', () => {
+  detailBrandBrwTablePre.download('xlsx', 'pre_csx.xlsx', {sheetName:'Pre Csx'})
+})
+document.getElementById('printDetailBrandBrwTablePre').addEventListener('click', () => {
+  detailBrandBrwTablePre.print(false, true)
+})
+let detailBrandBrwTablePost
 function detailBrandBrewPost(name) {
   let labels = ['Brand','Chip Tank', 'UniTank', 'Lines', 'Seperators', 'Schoene Tank', 'Note']
   axios.post('/api/brand/detail/csxpost/', {name: `${name}`})
@@ -266,7 +268,7 @@ function detailBrandBrewPost(name) {
         printHeader:'<h1>Post CSX<h1>',
         resizableColumns:false,
         height:'218px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'Object', field:'object', hozAlign:'Left'},
@@ -276,26 +278,15 @@ function detailBrandBrewPost(name) {
     })
     .catch(err => console.log(err))
 }
-document.getElementById('xlsxDetailBrandBrwTablePre').addEventListener('click', xlsxDetailBrandBrwTablePre)
-function xlsxDetailBrandBrwTablePre(){
-  detailBrandBrwTablePre.download('xlsx', 'pre_csx.xlsx', {sheetName:'Pre Csx'})
-}
-document.getElementById('printDetailBrandBrwTablePre').addEventListener('click', printDetailBrandBrwTablePre)
-function printDetailBrandBrwTablePre(){
-  detailBrandBrwTablePre.print(false, true);
-}
-document.getElementById('xlsxDetailBrandBrwTablePost').addEventListener('click', xlsxDetailBrandBrwTablePost)
-function xlsxDetailBrandBrwTablePost(){
+document.getElementById('xlsxDetailBrandBrwTablePost').addEventListener('click', () => {
   detailBrandBrwTablePost.download('xlsx', 'post_csx.xlsx', {sheetName:'Post Csx'})
-}
-document.getElementById('printDetailBrandBrwTablePost').addEventListener('click', printDetailBrandBrwTablePost)
-function printDetailBrandBrwTablePost(){
+})
+document.getElementById('printDetailBrandBrwTablePost').addEventListener('click', () =>{
   detailBrandBrwTablePost.print(false, true);
-}
-// Details Brand Fin
+})
+
+// Fin
 document.getElementById('finBrandDetail').addEventListener('change', detailBrandFin)
-let detailBrandFinTablePre
-let detailBrandFinTablePost
 async function detailBrandFin() {
   document.getElementById('detailPckBrand').style.display='none'
   document.getElementById('detailBrwBrand').style.display='none'
@@ -308,6 +299,7 @@ async function detailBrandFin() {
   await detailBrandFinPre(name)
   await detailBrandFinPost(name)
 }
+let detailBrandFinTablePre
 function detailBrandFinPre(name) {
   let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Fill Tank', 'Injection', 'Control', 'Note']
   axios.post('/api/brand/detail/filpre/', {name: `${name}`})
@@ -319,7 +311,7 @@ function detailBrandFinPre(name) {
         printHeader:'<h1>Pre Filter<h1>',
         resizableColumns:false,
         height:'272px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'Object', field:'object', hozAlign:'Left'},
@@ -329,6 +321,13 @@ function detailBrandFinPre(name) {
     })
     .catch(err => console.log(err))
 }
+document.getElementById('xlsxDetailBrandFinTablePre').addEventListener('click', () => {
+  detailBrandFinTablePre.download('xlsx', 'pre_filter.xlsx', {sheetName:'Pre Filter'})
+})
+document.getElementById('printDetailBrandFinTablePre').addEventListener('click', () =>{
+  detailBrandFinTablePre.print(false, true)
+})
+let detailBrandFinTablePost
 function detailBrandFinPost(name) {
   let labels = ['Brand','Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Recover', 'Note']
   axios.post('/api/brand/detail/filpost/', {name: `${name}`})
@@ -340,7 +339,7 @@ function detailBrandFinPost(name) {
         printHeader:'<h1>Post FIlter<h1>',
         resizableColumns:false,
         height:'218px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'Object', field:'object', hozAlign:'Left'},
@@ -350,26 +349,15 @@ function detailBrandFinPost(name) {
     })
     .catch(err => console.log(err))
 }
-document.getElementById('xlsxDetailBrandFinTablePre').addEventListener('click', xlsxDetailBrandFinTablePre)
-function xlsxDetailBrandFinTablePre(){
-  detailBrandFinTablePre.download('xlsx', 'pre_filter.xlsx', {sheetName:'Pre Filter'})
-}
-document.getElementById('printDetailBrandFinTablePre').addEventListener('click', printDetailBrandFinTablePre)
-function printDetailBrandFinTablePre(){
-  detailBrandFinTablePre.print(false, true)
-}
-document.getElementById('xlsxDetailBrandFinTablePost').addEventListener('click', xlsxDetailBrandFinTablePost)
-function xlsxDetailBrandFinTablePost(){
+document.getElementById('xlsxDetailBrandFinTablePost').addEventListener('click', () => {
   detailBrandFinTablePost.download('xlsx', 'post_filter.xlsx', {sheetName:'Post Filter'})
-}
-document.getElementById('printDetailBrandFinTablePost').addEventListener('click', printDetailBrandFinTablePost)
-function printDetailBrandFinTablePost(){
+})
+document.getElementById('printDetailBrandFinTablePost').addEventListener('click', () => {
   detailBrandFinTablePost.print(false, true)
-}
-// Details Brand Pck
+})
+
+// Pck
 document.getElementById('pckBrandDetail').addEventListener('change', detailBrandPck)
-let detailBrandPckTablePre
-let detailBrandPckTablePost
 async function detailBrandPck() {
   document.getElementById('detailBrwBrand').style.display='none'
   document.getElementById('detailFinBrand').style.display='none'
@@ -382,6 +370,7 @@ async function detailBrandPck() {
   await detailBrandPckPre(name)
   await detailBrandPckPost(name)
 }
+let detailBrandPckTablePre
 function detailBrandPckPre(name) {
   let labels = ['Brand','Filter Beer Tank','Release Line','Package Line','Draft Line','Recover','Control','Note']
   axios.post('/api/brand/detail/relpre/', {name: `${name}`})
@@ -392,7 +381,7 @@ function detailBrandPckPre(name) {
         printHeader:'<h1>Pre Release<h1>',
         resizableColumns:false,
         height:'272px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'Object', field:'object', hozAlign:'Left'},
@@ -402,6 +391,13 @@ function detailBrandPckPre(name) {
     })
     .catch(err => console.log(err))
 }
+document.getElementById('xlsxDetailBrandPckTablePre').addEventListener('click', () => {
+  detailBrandPckTablePre.download('xlsx', 'pre_release.xlsx', {sheetName:'Pre Release'})
+})
+document.getElementById('printDetailBrandPckTablePre').addEventListener('click', () => {
+  detailBrandPckTablePre.print(false, true)
+})
+let detailBrandPckTablePost
 function detailBrandPckPost(name) {
   let labels = ['Brand','Filter Beer Tank','System Lines','Package','Draft','Recover','Note']
   axios.post('/api/brand/detail/relpost/', {name: `${name}`})
@@ -412,7 +408,7 @@ function detailBrandPckPost(name) {
         printHeader:'<h1>Post Release<h1>',
         resizableColumns:false,
         height:'218px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'Object', field:'object', hozAlign:'Left'},
@@ -422,23 +418,12 @@ function detailBrandPckPost(name) {
     })
     .catch(err => console.log(err))
 }
-document.getElementById('xlsxDetailBrandPckTablePre').addEventListener('click', xlsxDetailBrandPckTablePre)
-function xlsxDetailBrandPckTablePre(){
-  detailBrandPckTablePre.download('xlsx', 'pre_release.xlsx', {sheetName:'Pre Release'})
-}
-document.getElementById('printDetailBrandPckTablePre').addEventListener('click', printDetailBrandPckTablePre)
-function printDetailBrandPckTablePre(){
-  detailBrandPckTablePre.print(false, true)
-}
-document.getElementById('xlsxDetailBrandPckTablePost').addEventListener('click', xlsxDetailBrandPckTablePost)
-function xlsxDetailBrandPckTablePost(){
+document.getElementById('xlsxDetailBrandPckTablePost').addEventListener('click', () => {
   detailBrandPckTablePost.download('xlsx', 'post_release.xlsx', {sheetName:'Post Release'})
-}
-document.getElementById('printDetailBrandPckTablePost').addEventListener('click', printDetailBrandPckTablePost)
-function printDetailBrandPckTablePost(){
+})
+document.getElementById('printDetailBrandPckTablePost').addEventListener('click', () => {
   detailBrandPckTablePost.print(false, true)
-}
-
+})
 
 
 
@@ -471,10 +456,10 @@ function recipeBrands() {
   title = 'brndFin'
   createList(api, dropDown, title)
 }
-// Recipe Chp
+// Chp
 document.getElementById('chpBrandRecipe').addEventListener('change', recipeBrandChp)
 let recipeBrandChpTable
-async function recipeBrandChp() {
+function recipeBrandChp() {
   document.getElementById('recipeChpBrand').style.display='block'
   document.getElementById('recipeSchBrand').style.display='none'
   document.getElementById('recipeFinBrand').style.display='none'
@@ -483,7 +468,7 @@ async function recipeBrandChp() {
   let name = document.getElementById('chpBrandRecipe').value
   document.getElementById('schBrandRecipe').selectedIndex = 0
   document.getElementById('finBrandRecipe').selectedIndex = 0
-  await recipeBrandChpDetail(name)
+  recipeBrandChpDetail(name)
 }
 function recipeBrandChpDetail(name) {
   let labels = [
@@ -503,7 +488,7 @@ function recipeBrandChpDetail(name) {
         printHeader:'<h1>Chip Recipe<h1>',
         resizableColumns:false,
         height:'300px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'Parameter', field:'object', hozAlign:'Left'},
@@ -513,18 +498,17 @@ function recipeBrandChpDetail(name) {
     })
     .catch(err => console.log(err))
 }
-document.getElementById('xlsxRecipeBrandChp').addEventListener('click', xlsxRecipeBrandChp)
-function xlsxRecipeBrandChp(){
+document.getElementById('xlsxRecipeBrandChp').addEventListener('click', () => {
   recipeBrandChpTable.download('xlsx', 'param_chp.xlsx', {sheetName:'Chip'})
-}
-document.getElementById('printRecipeBrandChp').addEventListener('click', printRecipeBrandChp)
-function printRecipeBrandChp(){
+})
+document.getElementById('printRecipeBrandChp').addEventListener('click', () => {
   recipeBrandChpTable.print(false, true)
-}
-// Recipe Sch
+})
+
+// Sch
 document.getElementById('schBrandRecipe').addEventListener('change', recipeBrandSch)
 let recipeBrandSchTable
-async function recipeBrandSch() {
+function recipeBrandSch() {
   document.getElementById('recipeChpBrand').style.display='none'
   document.getElementById('recipeSchBrand').style.display='block'
   document.getElementById('recipeFinBrand').style.display='none'
@@ -533,7 +517,7 @@ async function recipeBrandSch() {
   let name = document.getElementById('schBrandRecipe').value
   document.getElementById('chpBrandRecipe').selectedIndex = 0
   document.getElementById('finBrandRecipe').selectedIndex = 0
-  await recipeBrandSchDetail(name)
+  recipeBrandSchDetail(name)
 }
 function recipeBrandSchDetail(name) {
   let labels = [
@@ -550,7 +534,7 @@ function recipeBrandSchDetail(name) {
         printHeader:'<h1>Schoene Recipe<h1>',
         resizableColumns:false,
         height:'300px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'Parameter', field:'object', hozAlign:'Left'},
@@ -560,18 +544,17 @@ function recipeBrandSchDetail(name) {
     })
     .catch(err => console.log(err))
 }
-document.getElementById('xlsxRecipeBrandSch').addEventListener('click', xlsxRecipeBrandSch)
-function xlsxRecipeBrandSch(){
+document.getElementById('xlsxRecipeBrandSch').addEventListener('click', () => {
   recipeBrandSchTable.download('xlsx', 'param_sch.xlsx', {sheetName:'Schoene'})
-}
-document.getElementById('printRecipeBrandSch').addEventListener('click', printRecipeBrandSch)
-function printRecipeBrandSch(){
+})
+document.getElementById('printRecipeBrandSch').addEventListener('click', () => {
   recipeBrandSchTable.print(false, true)
-}
-// Recipe Fin
+})
+
+// Fin
 document.getElementById('finBrandRecipe').addEventListener('change', recipeBrandFin)
 let recipeBrandFinTable
-async function recipeBrandFin() {
+function recipeBrandFin() {
   document.getElementById('recipeChpBrand').style.display='none'
   document.getElementById('recipeSchBrand').style.display='none'
   document.getElementById('recipeFinBrand').style.display='block'
@@ -580,7 +563,7 @@ async function recipeBrandFin() {
   let name = document.getElementById('finBrandRecipe').value
   document.getElementById('chpBrandRecipe').selectedIndex = 0
   document.getElementById('schBrandRecipe').selectedIndex = 0
-  await recipeBrandFinDetail(name)
+  recipeBrandFinDetail(name)
 }
 function recipeBrandFinDetail(name) {
   let labels = [
@@ -630,7 +613,7 @@ function recipeBrandFinDetail(name) {
         printHeader:'<h1>FIlter Release Recipe<h1>',
         resizableColumns:false,
         height:'1025px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'Object', field:'object', hozAlign:'Left'},
@@ -640,14 +623,14 @@ function recipeBrandFinDetail(name) {
     })
     .catch(err => console.log(err))
 }
-document.getElementById('xlsxRecipeBrandFin').addEventListener('click', xlsxRecipeBrandFin)
-function xlsxRecipeBrandFin(){
+document.getElementById('xlsxRecipeBrandFin').addEventListener('click', () => {
   recipeBrandFinTable.download('xlsx', 'param_fin.xlsx', {sheetName:'Filtered'})
-}
-document.getElementById('printRecipeBrandFin').addEventListener('click', printRecipeBrandFin)
-function printRecipeBrandFin(){
+})
+document.getElementById('printRecipeBrandFin').addEventListener('click', () => {
   recipeBrandFinTable.print(false, true)
-}
+})
+
+
 
 //Injection
 document.getElementById('injectionBrands').onclick = injectionBrands
@@ -683,7 +666,7 @@ function injectionBrandFin() {
         printHeader:'<h1>Injection Rates<h1>',
         resizableColumns:false,
         height:'120x',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         responsiveLayoutCollapseStartOpen:false,
         data:tableData,
         columns:[

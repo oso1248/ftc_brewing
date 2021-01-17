@@ -2,7 +2,6 @@ document.getElementById('addBoxes').style.display='none'
 document.getElementById('updateBoxes').style.display='none'
 document.getElementById('deleteBoxes').style.display='none'
 document.getElementById('attView').style.display='none'
-const api = '/api/brewery'
 
 
 function createNode(element) {
@@ -24,92 +23,20 @@ String.prototype.toNonAlpha = function (spaces) {
 }
 
 
-// Views
+
+//Add
+document.getElementById('add').onclick = add
 function add() {
   document.getElementById('updateBoxes').style.display='none'
   document.getElementById('deleteBoxes').style.display='none'
   document.getElementById('attView').style.display='none'
   document.getElementById('addBoxes').style.display='grid'
 }
-function update() {
-  document.getElementById('deleteBoxes').style.display='none'
-  document.getElementById('attView').style.display='none'
-  document.getElementById('addBoxes').style.display='none'
-  document.getElementById('updateBoxes').style.display='grid'
-  
-  const suppliers = document.getElementsByName('updateCompany')[0]
-  suppliers.innerHTML = `<option value="" disabled selected hidden>Select Supplier</option>`
-  axios.post('/api/supplier/name/all')
-  .then(data => {
-    let supplier = data.data
-    return supplier.map(listItem => {
-
-      let supplier = createNode('option')
-      supplier.innerHTML = listItem.company
-      
-      append(suppliers, supplier)
-    })
-  })
-  .catch(err => console.log(err.detail))
-}
-let supplierTable
-function view() {
-  document.getElementById('updateBoxes').style.display="none"
-  document.getElementById('deleteBoxes').style.display='none'
-  document.getElementById('attView').style.display='block'
-  document.getElementById('addBoxes').style.display='none'
-  
-  axios.post('/api/supplier/name/all')
-    .then(res => {
-      let tableData = res.data
-      supplierTable = new Tabulator('#list', {
-        printHeader:'<h1>Suppliers<h1>',
-        resizableColumns:false,
-        height:'309px',
-        layout:'fitDataStretch',
-        data:tableData,
-        columns:[
-        {title:'Company', field:'company',hozAlign:'center', frozen:true},
-        {title:'Contact', field:'contact', hozAlign:'center'},
-        {title:'Email', field:'email',hozAlign:'center'},
-        {title:'Phone', field:'phone',hozAlign:'center'},
-        {title:'Address', field:'address',hozAlign:'center'},
-        {title:'Note', field:'note',hozAlign:'left'},
-        ],
-      })
-    })
-    .catch(err => console.log(err.detail))
-
-  document.getElementById('list').style.display='block'
-}
-function del() {
-  document.getElementById('attView').style.display='none'
-  document.getElementById('addBoxes').style.display='none'
-  document.getElementById('updateBoxes').style.display='none'
-  document.getElementById('deleteBoxes').style.display='grid'
-
-  const users = document.getElementsByName('deleteCompany')[0]
-  users.innerHTML = `<option value="" disabled selected hidden>Select Supplier</option>`
-  axios.get('/api/supplier')
-  .then(data => {
-    let user = data.data
-    return user.map(listItem => {
-
-      let username = createNode('option')
-      username.innerHTML = listItem.company
-      
-      append(users, username)
-    })
-  })
-  .catch(err => console.log(err.detail))
-}
-
-
-// routes add
-function resetAdd(ev){
+document.getElementById('btnAddClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmAdd').reset()
-}
+})
+document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
 async function sendAdd(ev){
   ev.preventDefault() 
   ev.stopPropagation()
@@ -193,11 +120,53 @@ async function validateAdd (data){
 }
 
 
-// routes update
-function resetUpdate(ev){
+
+// Update
+document.getElementById('update').onclick = update
+function update() {
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='grid'
+  
+  const suppliers = document.getElementsByName('updateCompany')[0]
+  suppliers.innerHTML = `<option value="" disabled selected hidden>Select Supplier</option>`
+  axios.post('/api/supplier/name/all')
+  .then(data => {
+    let supplier = data.data
+    return supplier.map(listItem => {
+
+      let supplier = createNode('option')
+      supplier.innerHTML = listItem.company
+      
+      append(suppliers, supplier)
+    })
+  })
+  .catch(err => console.log(err.detail))
+}
+document.getElementById('btnUpdateClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmUpdate').reset()
+})
+document.getElementsByName('updateCompany')[0].addEventListener('change', selectSupplier)
+function selectSupplier(){
+  let company = document.getElementsByName('updateCompany')[0].value
+  let contact = document.getElementsByName('updateContact')[0]
+  let email = document.getElementsByName('updateEmail')[0]
+  let phone = document.getElementsByName('updatePhone')[0]
+  let address = document.getElementsByName('updateAddress')[0]
+  let note = document.getElementsByName('updateNote')[0]
+  axios.post('/api/supplier/name', {name: `${company}`})
+    .then(data => {
+      contact.value = data.data.contact
+      email.value = data.data.email
+      phone.value = data.data.phone
+      address.value = data.data.address
+      note.value = data.data.note
+    })
+    .catch(err => alert(err))
 }
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
 async function sendUpdate(ev){
   ev.preventDefault() 
   ev.stopPropagation()
@@ -276,65 +245,44 @@ if(note === ""){
 }
   return failures
 }
-function selectSupplier(){
-  let company = document.getElementsByName('updateCompany')[0].value
-  let contact = document.getElementsByName('updateContact')[0]
-  let email = document.getElementsByName('updateEmail')[0]
-  let phone = document.getElementsByName('updatePhone')[0]
-  let address = document.getElementsByName('updateAddress')[0]
-  let note = document.getElementsByName('updateNote')[0]
-  axios.post('/api/supplier/name', {name: `${company}`})
-    .then(data => {
-      contact.value = data.data.contact
-      email.value = data.data.email
-      phone.value = data.data.phone
-      address.value = data.data.address
-      note.value = data.data.note
-    })
-}
-
-//  routes delete
-function resetDelete(ev){
-  ev.preventDefault();
-  document.getElementById('frmDelete').reset();
-}
-
-function sendDelete(ev) {
-  ev.preventDefault() 
-  ev.stopPropagation()
-
-  const user = document.getElementsByName('deleteCompany')[0].value
-
-  axios.delete('/api/supplier/' + user)
-    .then(data => alert(data.data.msg))
-  .catch(err => alert(err.detail))
-}
 
 
 
-document.getElementById('btnAddClear').addEventListener('click', resetAdd)
-document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
-
-document.getElementById('btnUpdateClear').addEventListener('click', resetUpdate)
-document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
-document.getElementsByName('updateCompany')[0].addEventListener('change', selectSupplier)
-
-
-document.getElementById('btnDeleteClear').addEventListener('click', resetDelete)
-document.getElementById('btnDeleteSubmit').addEventListener('click', sendDelete)
-
-
-document.getElementById('download-xlsx').addEventListener('click', supplierExcel)
-function supplierExcel(){
-  supplierTable.download('xlsx', 'suppliers.xlsx', {sheetName:'Suppliers'})
-}
-
-document.getElementById('print-table').addEventListener('click', supplierPrint)
-function supplierPrint(){
-  supplierTable.print(false, true);
-}
-
-document.getElementById('add').onclick = add
-document.getElementById('update').onclick = update
+// View
 document.getElementById('view').onclick = view
-// document.getElementById('delete').onclick = del
+let supplierTable
+function view() {
+  document.getElementById('updateBoxes').style.display="none"
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='block'
+  document.getElementById('addBoxes').style.display='none'
+  
+  axios.post('/api/supplier/name/all')
+    .then(res => {
+      let tableData = res.data
+      supplierTable = new Tabulator('#list', {
+        printHeader:'<h1>Suppliers<h1>',
+        resizableColumns:false,
+        height:'309px',
+        layout:'fitDataFill',
+        data:tableData,
+        columns:[
+        {title:'Company', field:'company',hozAlign:'center', frozen:true},
+        {title:'Contact', field:'contact', hozAlign:'center'},
+        {title:'Email', field:'email',hozAlign:'center'},
+        {title:'Phone', field:'phone',hozAlign:'center'},
+        {title:'Address', field:'address',hozAlign:'center'},
+        {title:'Note', field:'note',hozAlign:'left'},
+        ],
+      })
+    })
+    .catch(err => console.log(err.detail))
+
+  document.getElementById('list').style.display='block'
+}
+document.getElementById('download-xlsx').addEventListener('click', () => {
+  supplierTable.download('xlsx', 'suppliers.xlsx', {sheetName:'Suppliers'})
+})
+document.getElementById('print-table').addEventListener('click', () => {
+  supplierTable.print(false, true)
+})

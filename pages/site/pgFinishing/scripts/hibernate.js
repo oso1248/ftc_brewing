@@ -59,7 +59,6 @@ function createListHibernate(api, parent, title) {
     console.error(err)
   })
 }
-
 function createListType(api, parent, title, type) {
   axios.post(api, {active:true, type: `${type}`})
   .then(res => {
@@ -79,7 +78,7 @@ function createListType(api, parent, title, type) {
 
 
 
-// routes add
+// hibernate
 document.getElementById('add').onclick = add
 async function add() {
   document.getElementById('updateBoxes').style.display='none'
@@ -146,7 +145,7 @@ async function sendAdd(ev){
     alert(msg)
   }
 }
-async function validateAdd (data){
+function validateAdd (data){
   let failures = []
 
   if(data.org_vessel === ''){
@@ -186,7 +185,7 @@ async function validateAdd (data){
 }
 
 
-// routes update
+// pump to schoene
 document.getElementById('update').onclick = update
 function update() {
   document.getElementById('attView').style.display='none'
@@ -303,7 +302,7 @@ function view() {
         printHeader:'<h1>Hibernation Log<h1>',
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'Brand', field:'brand',hozAlign:'center', frozen:true},
@@ -324,12 +323,9 @@ function view() {
     .catch(err => console.log(err))
   document.getElementById('list').style.display='block'
 }
-
-document.getElementById('download-xlsx').addEventListener('click', hibernateExcel)
-function hibernateExcel(){
+document.getElementById('download-xlsx').addEventListener('click', () => {
   hibernateTable.download('xlsx', 'hibernation_log.xlsx', {sheetName:'hibernate'})
-}
-document.getElementById('print-table').addEventListener('click', hibernatePrint)
-function hibernatePrint(){
+})
+document.getElementById('print-table').addEventListener('click', () => {
   hibernateTable.print(false, true);
-}
+})

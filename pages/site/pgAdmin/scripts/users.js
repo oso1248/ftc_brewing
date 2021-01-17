@@ -2,7 +2,6 @@ document.getElementById('frmAdd').style.display='none'
 document.getElementById('frmUpdate').style.display='none'
 document.getElementById('frmDelete').style.display='none'
 document.getElementById('list').style.display='none'
-const api = '/api/brewery'
 
 
 function createNode(element) {
@@ -11,122 +10,43 @@ function createNode(element) {
 function append(parent, e1) {
   return parent.appendChild(e1)
 }
+function createList(api, parent, title) {
+  axios.post(api)
+  .then(res => {
+    let list = res.data
+    list.forEach((elem) => {
+    let listItem = elem[title]
+    let option = createNode('option')
+    option.innerHTML = listItem
+    option.id = listItem
+    append(parent, option)
+    });
+  })
+  .catch(err => {
+    console.error(err)
+  })
+}
 
 
-// Views
+// Add
+document.getElementById('add').onclick = add
 function add() {
   document.getElementById('frmUpdate').style.display='none'
   document.getElementById('frmDelete').style.display='none'
   document.getElementById('list').style.display='none'
   document.getElementById('frmAdd').style.display='block'
-  let breweries = document.getElementById('brewery_id')
-  breweries.innerHTML = `<option value="" id="updateBrewery" disabled selected hidden>Select Brewery</option>`
-  axios.get('/api/brewery')
-    // .then(res => res.json())
-    .then(data => {
-      let response = data.data
-      return response.map(elements => {
 
-        let option = createNode('option')
-        option.innerHTML = elements.brewery
-        
-        append(breweries, option)
-      })
-    })
-  
+  let dropDown = document.getElementById('brewery_id')
+  dropDown.innerHTML = `<option value="" id="updateBrewery" disabled selected hidden>Select Brewery</option>`
+  let api = '/api/brewery/get'
+  let title = 'brewery'
+  createList(api, dropDown, title)
 }
-function update() {
-  document.getElementById('frmAdd').style.display='none'
-  document.getElementById('frmDelete').style.display='none'
-  document.getElementById('list').style.display='none'
-  document.getElementById('frmUpdate').style.display='block'
-  
-  const users = document.getElementsByName('updateUsers')[0]
-  users.innerHTML = `<option value="" disabled selected hidden>Select User</option>`
-  axios.get('/api/user')
-  .then(data => {
-    let user = data.data
-    return user.map(listItem => {
-
-      let username = createNode('option')
-      username.innerHTML = listItem.username
-      
-      append(users, username)
-    })
-  })
-  .catch(err => console.log(err.detail))
-
-  const breweries = document.getElementsByName('updateBreweries')[0]
-  breweries.innerHTML = `<option value="" disabled selected hidden>Select Brewery</option>`
-  axios.get(api)
-  .then(data => {
-    let brewery = data.data
-    
-    return brewery.map(listItem => {
-
-      let breweryName = createNode('option')
-      breweryName.innerHTML = listItem.brewery
-      
-      append(breweries, breweryName)
-    })
-  })
-  .catch(err => console.log(err.detail))
-}
-let userTable
-function view() {
-  document.getElementById('frmAdd').style.display='none'
-  document.getElementById('frmDelete').style.display='none'
-  document.getElementById('frmUpdate').style.display='none'
-  document.getElementById('list').style.display='block'
-  
-  axios.get('/api/user')
-    .then(res => {
-      let tableData = res.data
-      
-      userTable = new Tabulator('#list', {
-        height:'309px',
-        layout:'fitDataFill',
-        resizableColumns:false,
-        data:tableData,
-        columns:[
-        {title:'Name', field:'username',hozAlign:'center', frozen:true},
-        {title:'Email', field:'email', hozAlign:'center'},
-        {title:'Permissions', field:'permissions',hozAlign:'center'},
-        {title:'Brewery', field:'brewery',hozAlign:'center'},
-        ],
-      })
-    })
-    .catch(err => console.log(err.detail))
-  document.getElementById('list').style.display="block"
-}
-function del() {
-  document.getElementById('frmAdd').style.display="none"
-  document.getElementById('frmUpdate').style.display="none"
-  document.getElementById('frmDelete').style.display="block"
-  document.getElementById('list').style.display="none"
-
-  const users = document.getElementsByName('deleteUsers')[0]
-  users.innerHTML = `<option value="" disabled selected hidden>Select User</option>`
-  axios.get('/api/user')
-  .then(data => {
-    let user = data.data
-    return user.map(listItem => {
-
-      let username = createNode('option')
-      username.innerHTML = listItem.username
-      
-      append(users, username)
-    })
-  })
-  .catch(err => console.log(err.detail))
-}
-
-
-// routes add
-function resetAdd(ev){
+document.getElementById('btnAddClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmAdd').reset();
-}
+})
+document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
 async function sendAdd(ev){
   ev.preventDefault() 
   ev.stopPropagation()
@@ -156,8 +76,8 @@ async function sendAdd(ev){
 }
 async function validateAdd (data){
   let failures = [];
-  let query = '/api/user/' + data.username
-  let res = await axios.get(query)
+  let route = '/api/user/' + data.username
+  let res = await axios.post(route).catch(err => alert(err.detail))
   
   if(res.data.msg !== 'null') {
     failures.push({input:'name', msg:'Taken'})
@@ -180,7 +100,8 @@ async function validateAdd (data){
       failures.push({input:'permissions', msg:'Required Field'})
       data.permissions = null
   } else {
-    data.permissions = parseInt(data.permissions)
+    // data.permissions = parseInt(data.permissions)
+    data.permissions = 1
   }
   if( data.brewery === ""){
       failures.push({input:'brewery', msg:'Required Field'})
@@ -190,11 +111,32 @@ async function validateAdd (data){
 }
 
 
-// routes update
-function resetUpdate(ev){
+
+// Update
+document.getElementById('update').onclick = update
+function update() {
+  document.getElementById('frmAdd').style.display='none'
+  document.getElementById('frmDelete').style.display='none'
+  document.getElementById('list').style.display='none'
+  document.getElementById('frmUpdate').style.display='block'
+  
+  let dropDown = document.getElementsByName('updateUsers')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select User</option>`
+  let api = '/api/user/get' 
+  let title = 'username'
+  createList(api, dropDown, title)
+
+  dropDown = document.getElementsByName('updateBreweries')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brewery</option>`
+  api = '/api/brewery/get'
+  title = 'brewery'
+  createList(api, dropDown, title)
+}
+document.getElementById('btnUpdateClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmUpdate').reset();
-}
+})
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
 async function sendUpdate(ev){
   ev.preventDefault() 
   ev.stopPropagation()
@@ -247,34 +189,67 @@ function validateUpdate(data){
 }
 
 
-//  routes delete
-function resetDelete(ev){
+
+// View
+document.getElementById('view').onclick = view
+function view() {
+  document.getElementById('frmAdd').style.display='none'
+  document.getElementById('frmDelete').style.display='none'
+  document.getElementById('frmUpdate').style.display='none'
+  document.getElementById('list').style.display='block'
+  
+  viewUsers()
+}
+let userTable
+function viewUsers() {
+  axios.post('/api/user/get')
+    .then(res => {
+      let tableData = res.data
+      
+      userTable = new Tabulator('#list', {
+        height:'309px',
+        layout:'fitDataFill',
+        resizableColumns:false,
+        data:tableData,
+        columns:[
+        {title:'Name', field:'username',hozAlign:'center', frozen:true},
+        {title:'Email', field:'email', hozAlign:'center'},
+        {title:'Permissions', field:'permissions',hozAlign:'center'},
+        {title:'Brewery', field:'brewery',hozAlign:'center'},
+        ],
+      })
+    })
+    .catch(err => console.log(err.detail))
+}
+
+
+
+// Delete
+document.getElementById('delete').onclick = del
+function del() {
+  document.getElementById('frmAdd').style.display="none"
+  document.getElementById('frmUpdate').style.display="none"
+  document.getElementById('frmDelete').style.display="block"
+  document.getElementById('list').style.display="none"
+
+  let dropDown = document.getElementsByName('deleteUsers')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select User</option>`
+  let api = '/api/user/get'
+  let title = 'username'
+  createList(api, dropDown, title)
+}
+document.getElementById('btnDeleteClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmDelete').reset();
-}
+})
+document.getElementById('btnDeleteSubmit').addEventListener('click', sendDelete)
 function sendDelete(ev) {
   ev.preventDefault() 
   ev.stopPropagation()
 
-  const user = document.getElementsByName('deleteUsers')[0].value
+  let user = document.getElementsByName('deleteUsers')[0].value
 
   axios.delete('/api/user/' + user)
     .then(data => alert(data.data.msg))
   .catch(err => alert(err.detail))
 }
-
-
-
-document.getElementById('btnAddClear').addEventListener('click', resetAdd)
-document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
-
-document.getElementById('btnUpdateClear').addEventListener('click', resetUpdate)
-document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
-
-document.getElementById('btnDeleteClear').addEventListener('click', resetDelete)
-document.getElementById('btnDeleteSubmit').addEventListener('click', sendDelete)
-
-document.getElementById('add').onclick = add
-document.getElementById('update').onclick = update
-document.getElementById('view').onclick = view
-document.getElementById('delete').onclick = del

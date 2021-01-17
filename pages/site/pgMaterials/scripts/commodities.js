@@ -2,7 +2,6 @@ document.getElementById('addBoxes').style.display='none'
 document.getElementById('updateBoxes').style.display='none'
 document.getElementById('deleteBoxes').style.display='none'
 document.getElementById('attView').style.display='none'
-const api = '/api/brewery'
 
 
 String.prototype.toProperCase = function () {
@@ -74,43 +73,11 @@ function createListID(api, parent, title) {
     console.error(err)
   })
 }
-function commodity(dropDown){
-  const api = '/api/commodity/get'
-  let title = 'commodity'
-  createListCommodity(api, dropDown, title)
-}
-function supplier(dropDown, func){
-  const api = '/api/supplier/name/all'
-  let title = 'company'
-  func(api, dropDown, title)
-}
-function locations(dropDown, func){
-  const api = '/api/location/all'
-  let title = 'location'
-  func(api, dropDown, title)
-}
-function type(dropDown, func){
-  const api = '/api/type/all'
-  let title = 'type'
-  func(api, dropDown, title)
-}
-function container(dropDown, func){
-  const api = '/api/container/all'
-  let title = 'container'
-  func(api, dropDown, title)
-}
-function environmental(dropDown, func){
-  const api = '/api/enviro/all'
-  let title = 'enviro'
-  func(api, dropDown, title)
-}
-function uom(dropDown, func){
-  const api = '/api/uom/all'
-  let title = 'uom'
-  func(api, dropDown, title)
-}
 
-// Views
+
+
+// Add
+document.getElementById('add').onclick = add
 function add() {
   document.getElementById('updateBoxes').style.display='none'
   document.getElementById('deleteBoxes').style.display='none'
@@ -119,117 +86,45 @@ function add() {
   
   let dropDown = document.getElementById('supplier_id')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Supplier</option>`
-  supplier(dropDown, createList)
+  let api = '/api/supplier/name/all'
+  let title = 'company'
+  createList(api, dropDown, title)
+
   dropDown = document.getElementById('location_id')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Location</option>`
-  locations(dropDown, createList)
+  api = '/api/location/all'
+  title = 'location'
+  createList(api, dropDown, title)
+
   dropDown = document.getElementById('type_id')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Type</option>`
-  type(dropDown, createList)
+  api = '/api/type/all'
+  title = 'type'
+  createList(api, dropDown, title)
+
   dropDown = document.getElementById('container_id')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Container</option>`
-  container(dropDown, createList)
+  api = '/api/container/all'
+  title = 'container'
+  createList(api, dropDown, title)
+
   dropDown = document.getElementById('enviro_id')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Environmental</option>`
-  environmental(dropDown, createList)
+  api = '/api/enviro/all'
+  title = 'enviro'
+  createList(api, dropDown, title)
+
   dropDown = document.getElementById('uom_id')
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select UOM</option>`
-  uom(dropDown, createList)
+  api = '/api/uom/all'
+  title = 'uom'
+  createList(api, dropDown, title)
 }
-function update() {
-  document.getElementById('deleteBoxes').style.display='none'
-  document.getElementById('attView').style.display='none'
-  document.getElementById('addBoxes').style.display='none'
-  document.getElementById('updateBoxes').style.display='grid'
-
-  let dropDown = document.getElementsByName('updateCommodity')[0]
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Commodity</option>`
-  commodity(dropDown)
-  dropDown = document.getElementsByName('updateSupplier_id')[0]
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Supplier</option>`
-  supplier(dropDown, createListID)
-  dropDown = document.getElementsByName('updateLocation_id')[0]
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Location</option>`
-  locations(dropDown, createListID)
-  dropDown = document.getElementsByName('updateType_id')[0]
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Type</option>`
-  type(dropDown, createListID)
-  dropDown = document.getElementsByName('updateContainer_id')[0]
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Container</option>`
-  container(dropDown, createListID)
-  dropDown = document.getElementsByName('updateEnviro_id')[0]
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Environmental</option>`
-  environmental(dropDown, createListID)
-  dropDown = document.getElementsByName('updateUom_id')[0]
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select UOM</option>`
-  uom(dropDown, createListID)
-}
-let commodityTable
-function view() {
-  document.getElementById('updateBoxes').style.display='none'
-  document.getElementById('deleteBoxes').style.display='none'
-  document.getElementById('attView').style.display='block'
-  document.getElementById('addBoxes').style.display='none'
-
-  axios.post('/api/commodity/get', {active: false})
-    .then(res => {
-      let tableData = res.data
-
-      commodityTable = new Tabulator('#list', {
-        printHeader:'<h1>Commodity List<h1>',
-        resizableColumns:false,
-        height:'330px',
-        layout:'fitDataStretch',
-        data:tableData,
-        columns:[
-        {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
-        {title:'SAP', field:'sap',hozAlign:'center'},
-        {title:'Active', field:'active',hozAlign:'center'},
-        {title:'Inventory', field:'inventory',hozAlign:'center'},
-        {title:'Location', field:'location',hozAlign:'center'},
-        {title:'Company', field:'company',hozAlign:'center'},
-        {title:'Type', field:'type',hozAlign:'center'},
-        {title:'Container', field:'container',hozAlign:'center'},
-        {title:'Environmental', field:'enviro',hozAlign:'center'},
-        {title:'Threshold', field:'threshold',hozAlign:'center'},
-        {title:'Per Pallet', field:'per_pallet',hozAlign:'center'},
-        {title:'Unit Total', field:'unit_total',hozAlign:'center'},
-        {title:'UOM', field:'uom',hozAlign:'center'},
-        {title:'Note', field:'note',hozAlign:'left'},
-        ],
-      })
-    })
-    .catch(err => console.log(err))
-  document.getElementById('list').style.display='block'
-}
-function del() {
-  document.getElementById('attView').style.display='none'
-  document.getElementById('addBoxes').style.display='none'
-  document.getElementById('updateBoxes').style.display='none'
-  document.getElementById('deleteBoxes').style.display='block'
-
-  const users = document.getElementsByName('deleteCommodity')[0]
-  users.innerHTML = `<option value="" disabled selected hidden>Select Commodity</option>`
-  axios.get('/api/commodity')
-  .then(data => {
-    let user = data.data
-    
-    return user.map(listItem => {
-      let username = createNode('option')
-      username.innerHTML = listItem.commodity
-      
-      append(users, username)
-    })
-  })
-  .catch(err => console.log(err))
-}
-
-
-// routes add
-function resetAdd(ev){
+document.getElementById('btnAddClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmAdd').reset()
-}
+})
+document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
 async function sendAdd(ev){
   ev.preventDefault() 
   ev.stopPropagation()
@@ -265,8 +160,8 @@ async function validateAdd (data){
   if(!data.commodity) {
     failures.push({input:'commodity', msg:'Taken'})
   } else {
-    let query = '/api/commodity/' + data.commodity
-    let res = await axios.get(query)
+    let query = '/api/commodity/name'
+    let res = await axios.post(query, {name: data.commodity}).catch(err => alert(err))
     if(res.data.msg !== 'null') {
       failures.push({input:'commodity', msg:'Taken'})  
     }
@@ -339,11 +234,85 @@ async function validateAdd (data){
   return failures
 }
 
-// routes update
-function resetUpdate(ev){
+
+
+// Update
+document.getElementById('update').onclick = update
+function update() {
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='none'
+  document.getElementById('addBoxes').style.display='none'
+  document.getElementById('updateBoxes').style.display='grid'
+
+  let dropDown = document.getElementsByName('updateCommodity')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Commodity</option>`
+  let api = '/api/commodity/get'
+  let title = 'commodity'
+  createListCommodity(api, dropDown, title)
+
+  dropDown = document.getElementsByName('updateSupplier_id')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Supplier</option>`
+  api = '/api/supplier/name/all'
+  title = 'company'
+  createListID(api, dropDown, title)
+
+  dropDown = document.getElementsByName('updateLocation_id')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Location</option>`
+  api = '/api/location/all'
+  title = 'location'
+  createListID(api, dropDown, title)
+
+  dropDown = document.getElementsByName('updateType_id')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Type</option>`
+  api = '/api/type/all'
+  title = 'type'
+  createListID(api, dropDown, title)
+
+  dropDown = document.getElementsByName('updateContainer_id')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Container</option>`
+  api = '/api/container/all'
+  title = 'container'
+  createListID(api, dropDown, title)
+
+  dropDown = document.getElementsByName('updateEnviro_id')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Environmental</option>`
+  api = '/api/enviro/all'
+  title = 'enviro'
+  createListID(api, dropDown, title)
+
+  dropDown = document.getElementsByName('updateUom_id')[0]
+  dropDown.innerHTML = `<option value="" disabled selected hidden>Select UOM</option>`
+  api = '/api/uom/all'
+  title = 'uom'
+  createListID(api, dropDown, title)
+}
+document.getElementById('btnUpdateClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmUpdate').reset()
+})
+document.getElementsByName('updateCommodity')[0].addEventListener('change', selectCommodity)
+function selectCommodity(){
+  let commodity = document.getElementsByName('updateCommodity')[0].value
+  
+  axios.post('/api/commodity/name', {name: `${commodity}`})
+    .then(data => {
+      document.getElementById(data.data.location).selected = 'selected'
+      document.getElementById(data.data.type).selected = 'selected'
+      document.getElementById(data.data.company).selected = 'selected'
+      document.getElementById(data.data.enviro).selected = 'selected'
+      document.getElementById(data.data.container).selected = 'selected'
+      document.getElementById(data.data.uom).selected = 'selected'
+      document.getElementById(data.data.inventory).selected = 'selected'
+      document.getElementsByName('updateSap')[0].value = data.data.sap
+      document.getElementsByName('updateActive')[0].value = data.data.active
+      document.getElementsByName('updateThreshold')[0].value = data.data.threshold
+      document.getElementsByName('updatePer_pallet')[0].value = data.data.per_pallet
+      document.getElementsByName('updateUnit_total')[0].value = data.data.unit_total
+      document.getElementsByName('updateNote')[0].value = data.data.note
+    })
+    .catch(err => alert(err))
 }
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
 async function sendUpdate(ev){
   ev.preventDefault() 
   ev.stopPropagation()
@@ -446,66 +415,91 @@ function validateUpdate(data){
   } 
   return failures
 }
-function selectCommodity(){
-  let commodity = document.getElementsByName('updateCommodity')[0].value
-  
-  axios.post('/api/commodity/name', {name: `${commodity}`})
-    .then(data => {
-      document.getElementById(data.data.location).selected = 'selected'
-      document.getElementById(data.data.type).selected = 'selected'
-      document.getElementById(data.data.company).selected = 'selected'
-      document.getElementById(data.data.enviro).selected = 'selected'
-      document.getElementById(data.data.container).selected = 'selected'
-      document.getElementById(data.data.uom).selected = 'selected'
-      document.getElementById(data.data.inventory).selected = 'selected'
-      document.getElementsByName('updateSap')[0].value = data.data.sap
-      document.getElementsByName('updateActive')[0].value = data.data.active
-      document.getElementsByName('updateThreshold')[0].value = data.data.threshold
-      document.getElementsByName('updatePer_pallet')[0].value = data.data.per_pallet
-      document.getElementsByName('updateUnit_total')[0].value = data.data.unit_total
-      document.getElementsByName('updateNote')[0].value = data.data.note
-    })
-}
-
-//  routes delete
-function resetDelete(ev){
-  ev.preventDefault();
-  document.getElementById('frmDelete').reset();
-}
-function sendDelete(ev) {
-  ev.preventDefault() 
-  ev.stopPropagation()
-
-  const name = document.getElementsByName('deleteCommodity')[0].value
-
-  axios.delete('/api/commodity/' + name)
-    .then(data => alert(data.data.msg))
-  .catch(err => alert(err))
-}
-
-
-document.getElementById('btnAddClear').addEventListener('click', resetAdd)
-document.getElementById('btnAddSubmit').addEventListener('click', sendAdd)
-
-document.getElementById('btnUpdateClear').addEventListener('click', resetUpdate)
-document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate)
-document.getElementsByName('updateCommodity')[0].addEventListener('change', selectCommodity)
 
 
 
-document.getElementById('btnDeleteClear').addEventListener('click', resetDelete)
-document.getElementById('btnDeleteSubmit').addEventListener('click', sendDelete)
-
-document.getElementById('add').onclick = add
-document.getElementById('update').onclick = update
+// View
 document.getElementById('view').onclick = view
+function view() {
+  document.getElementById('updateBoxes').style.display='none'
+  document.getElementById('deleteBoxes').style.display='none'
+  document.getElementById('attView').style.display='block'
+  document.getElementById('addBoxes').style.display='none'
 
-document.getElementById('download-xlsx').addEventListener('click', supplierExcel)
-function supplierExcel(){
+  loadView()
+  
+  // document.getElementById('list').style.display='block'
+}
+let commodityTable
+function loadView() {
+  axios.post('/api/commodity/get', {active: false})
+    .then(res => {
+      let tableData = res.data
+
+      commodityTable = new Tabulator('#list', {
+        printHeader:'<h1>Commodity List<h1>',
+        resizableColumns:false,
+        height:'330px',
+        layout:'fitDataFill',
+        data:tableData,
+        columns:[
+        {title:'Commodity', field:'commodity',hozAlign:'center', frozen:true},
+        {title:'SAP', field:'sap',hozAlign:'center'},
+        {title:'Active', field:'active',hozAlign:'center'},
+        {title:'Inventory', field:'inventory',hozAlign:'center'},
+        {title:'Location', field:'location',hozAlign:'center'},
+        {title:'Company', field:'company',hozAlign:'center'},
+        {title:'Type', field:'type',hozAlign:'center'},
+        {title:'Container', field:'container',hozAlign:'center'},
+        {title:'Environmental', field:'enviro',hozAlign:'center'},
+        {title:'Threshold', field:'threshold',hozAlign:'center'},
+        {title:'Per Pallet', field:'per_pallet',hozAlign:'center'},
+        {title:'Unit Total', field:'unit_total',hozAlign:'center'},
+        {title:'UOM', field:'uom',hozAlign:'center'},
+        {title:'Note', field:'note',hozAlign:'left'},
+        ],
+      })
+    })
+    .catch(err => console.log(err))
+}
+document.getElementById('download-xlsx').addEventListener('click', () => {
   commodityTable.download('xlsx', 'commodities.xlsx', {sheetName:'Commodities'})
-}
-
-document.getElementById('print-table').addEventListener('click', supplierPrint)
-function supplierPrint(){
+})
+document.getElementById('print-table').addEventListener('click', () => {
   commodityTable.print(false, true);
-}
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

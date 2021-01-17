@@ -9,17 +9,29 @@ function createNode(element) {
 function append(parent, e1) {
   return parent.appendChild(e1)
 }
-
+function createList(api, parent, title, data) {
+  axios.post(api, data)
+  .then(res => {
+    let list = res.data
+    list.forEach((elem) => {
+    let listItem = elem[title]
+    let option = createNode('option')
+    option.innerHTML = listItem
+    append(parent, option)
+    });
+  })
+  .catch(err => {
+    console.error(err)
+  })
+}
 
 // daily
-let dailyTableMid
-let dailyTableDay
-let dailyTableAft
 document.getElementById('day').addEventListener('click', viewDay)
 function viewDay() {
   document.getElementById('boxDay').style.display='block'
   document.getElementById('boxWeek').style.display='none'
   document.getElementById('dailyTables').style.display='none'
+
   invDatesDay()
 }
 function invDatesDay() {
@@ -45,6 +57,7 @@ function invDatesDaySelect() {
   loadTableDailyAft(date)
   document.getElementById('dailyTables').style.display='grid'
 }
+let dailyTableMid
 function loadTableDailyMid(date) {
   let mids = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
   let days = DateTime.fromISO(date).plus({hours: 7, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
@@ -61,7 +74,7 @@ function loadTableDailyMid(date) {
       dailyTableMid = new Tabulator('#dailyMid', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Hop', field:'commodity',hozAlign:'center', frozen:true},
@@ -73,6 +86,7 @@ function loadTableDailyMid(date) {
     .catch(err => console.log(err))
   
 }
+let dailyTableDay
 function loadTableDailyDay(date) {
   let days = DateTime.fromISO(date).plus({hours: 7, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
   let afts = DateTime.fromISO(date).plus({hours: 15, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
@@ -89,7 +103,7 @@ function loadTableDailyDay(date) {
       dailyTableDay = new Tabulator('#dailyDay', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Hop', field:'commodity',hozAlign:'center', frozen:true},
@@ -100,6 +114,7 @@ function loadTableDailyDay(date) {
     })
     .catch(err => console.log(err))
 }
+let dailyTableAft
 function loadTableDailyAft(date) {
   let afts = DateTime.fromISO(date).plus({hours: 15, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
   let ends = DateTime.fromISO(date).plus({hours: 23, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
@@ -116,7 +131,7 @@ function loadTableDailyAft(date) {
       dailyTableAft = new Tabulator('#dailyAft', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Hop', field:'commodity',hozAlign:'center', frozen:true},
@@ -130,9 +145,6 @@ function loadTableDailyAft(date) {
 
 
 // weekly
-let weeklyTableHard
-let weeklyTableSets
-let weeklyTableRolling
 document.getElementById('week').addEventListener('click', viewWeek)
 function viewWeek() {
   document.getElementById('boxDay').style.display='none'
@@ -167,7 +179,7 @@ function invDatesWeekSelect() {
 
   document.getElementById('weeklyTables').style.display='grid'
 }
-
+let weeklyTableHard
 function loadTableWeeklyHard(date) {
   let start = DateTime.fromISO(date).minus({hours: 8, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
   let end = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
@@ -180,7 +192,7 @@ function loadTableWeeklyHard(date) {
       weeklyTableHard = new Tabulator('#weeklyHard', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
         {title:'Hop', field:'commodity',hozAlign:'center', frozen:true},
@@ -209,7 +221,7 @@ function loadTableWeeklyLastBrewsHard(date) {
     })
     .catch(err => console.log(err))
 }
-
+let weeklyTableSets
 function loadTableWeeklySets(date) {
   let start = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
   let end = DateTime.fromISO(date).plus({hours: 167, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
@@ -222,11 +234,38 @@ function loadTableWeeklySets(date) {
       weeklyTableSets = new Tabulator('#weeklySets', {
         resizableColumns:false,
         height:'330px',
-        layout:'fitDataStretch',
+        layout:'fitDataFill',
         data:tableData,
         columns:[
           {title:'Brand', field:'brand',hozAlign:'center', frozen:true},
           {title:'Sets', field:'sets',hozAlign:'left'},
+        ],
+      })
+    })
+    .catch(err => console.log(err))
+}
+let weeklyTableRolling
+function loadTableWeeklyRolling(date) {
+  let start = DateTime.fromISO(date).minus({hours: 8, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
+  let startSets = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
+  let end = DateTime.fromISO(date).plus({hours: 159, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
+  
+  let timeSpan = {}
+  timeSpan.start = start
+  timeSpan.startSets = startSets
+  timeSpan.end = end
+  axios.post('/api/inventory/hop/weekly/view/rolling', timeSpan)
+    .then(res => {
+      let tableData = res.data
+
+      weeklyTableRolling = new Tabulator('#weeklyRolling', {
+        resizableColumns:false,
+        height:'330px',
+        layout:'fitDataFill',
+        data:tableData,
+        columns:[
+          {title:'Hop', field:'commodity',hozAlign:'center', frozen:true},
+          {title:'lbs', field:'lbs',hozAlign:'left'},
         ],
       })
     })
@@ -248,33 +287,6 @@ function loadTableWeeklyLastBrewsRolling(date) {
       }
       brews.innerHTML = '1:'+lastBrews[0].bh1 + '   2:'+lastBrews[0].bh2
       brews2.innerHTML = '1:'+lastBrews[0].bh1 + '   2:'+lastBrews[0].bh2
-    })
-    .catch(err => console.log(err))
-}
-
-function loadTableWeeklyRolling(date) {
-  let start = DateTime.fromISO(date).minus({hours: 8, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
-  let startSets = DateTime.fromISO(date).minus({hours: 0, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
-  let end = DateTime.fromISO(date).plus({hours: 159, minutes: 30}).toFormat('yyyy-MM-dd HH:mm')
-  
-  let timeSpan = {}
-  timeSpan.start = start
-  timeSpan.startSets = startSets
-  timeSpan.end = end
-  axios.post('/api/inventory/hop/weekly/view/rolling', timeSpan)
-    .then(res => {
-      let tableData = res.data
-
-      weeklyTableRolling = new Tabulator('#weeklyRolling', {
-        resizableColumns:false,
-        height:'330px',
-        layout:'fitDataStretch',
-        data:tableData,
-        columns:[
-          {title:'Hop', field:'commodity',hozAlign:'center', frozen:true},
-          {title:'lbs', field:'lbs',hozAlign:'left'},
-        ],
-      })
     })
     .catch(err => console.log(err))
 }

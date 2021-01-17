@@ -512,12 +512,15 @@ function getLastBrews(data) {
 
 }
 function getHopLots(data) {
-  return db('inv_hop_weekly as hop')
-    .join('mtl_commodity as com', 'com.id', '=','hop.com_id')
-    .select('hop.lot')
-    .where('com.commodity', data.commodity)
-    .limit(5)
-    .orderBy('hop.created_at', 'desc')
+  return db.raw(`
+    SELECT DISTINCT z.lot
+    FROM  (SELECT hop.lot
+          FROM inv_hop_weekly AS hop
+          JOIN mtl_commodity AS com ON hop.com_id = com.id
+          WHERE com.commodity = '${data.commodity}'
+          ORDER BY hop.created_at DESC) AS z
+    LIMIT 5
+  `)
 }
 
 // fin injection log
@@ -594,9 +597,20 @@ function getByIdArchive(id) {
       'inv.total_end',
       'inv.note',
       'inv.username',
-      
     )
     .where({'inv.id': id})
+}
+function getMatArchiveByName(name) {
+  return db('mat_archive as inv')
+    .join('mtl_commodity as com', 'inv.com_id', '=', 'com.id' )
+    .select(
+      'com.commodity',
+      'inv.count_final',
+      'inv.total_end',
+      'inv.note',
+      'inv.username',
+    )
+    .where({'com.commodity': name})
 }
 function setComActiveNo(id) {
   db('mtl_commodity')
@@ -728,6 +742,7 @@ function getProcessLoss() {
 
 
 module.exports = {
+  getMatArchiveByName,
   getByDateCombinedBrwWeekly,
   getByDateCombinedFinWeekly,
   getByDateCombinedLogWeekly,

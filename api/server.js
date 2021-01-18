@@ -49,6 +49,7 @@ const hibernateRouter = require('./routes/rtsHibernate')
 
 server.use(session(sessionConfig))
 
+
 server.use(express.static(path.join(__dirname, '../pages/site/login/')))
 server.use('/api/auth', loginRouter)
 server.use('/pgAdmin/', permissions5)

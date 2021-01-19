@@ -1,238 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-  <meta name="viewport" content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height">
-  <title>Admin Finsihing Brands</title>
-  
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta
+      name="viewport"
+      content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height"
+    />
+    <title>Admin Finsihing Brands</title>
 
-  <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
-  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
+    <link
+      href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"
+    ></script>
 
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <link rel="stylesheet" href="../../commonCSS/styles.css">
-  <link rel="stylesheet" href="../styles/finBrand.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../../commonCSS/styles.css" />
+    <link rel="stylesheet" href="../styles/finBrand.css" />
+  </head>
+  <body>
+    <div class="container1">
+      <! -- Start of Container1 -->
+      <header>
+        <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+        <h1>Admin Finishing Brands</h1>
+        <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+      </header>
+      <! -- Navigation -->
+      <nav class="main-nav">
+        <ul class="">
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../../pgBrewhouse/brewhouse.html">Brewhouse</a></li>
+          <li><a href="../../pgFinishing/finishing.html">Finishing</a></li>
+          <li><a href="../../pgMaterials/material.html">Materials</a></li>
+          <li><a href="../admin.html">Admin</a></li>
+          <li><a href="./fin.html" id="logout">Admin Fin</a></li>
+        </ul>
+      </nav>
 
-</head>
-<body>
-  <div class="container1"><! -- Start of Container1 -->
-    <header>
-      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
-      <h1>Admin Finishing Brands</h1>
-      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
-       
-    </header>
-    <! -- Navigation -->
-    <nav class="main-nav">
-      <ul class="">
-        <li><a href="../../index.html">Home</a></li>
-        <li><a href="../../pgBrewhouse/brewhouse.html">Brewhouse</a></li>
-        <li><a href="../../pgFinishing/finishing.html">Finishing</a></li>
-        <li><a href="../../pgMaterials/material.html">Materials</a></li>
-        <li><a href="../admin.html">Admin</a></li>
-        <li><a href="./fin.html" id="logout">Admin Fin</a></li>
-      </ul>
-    </nav>
-  
-   <!-- <div class="spacer"></div> -->
-    
-   <div class="boxes">
+      <!-- <div class="spacer"></div> -->
 
-    <div class="box" id="add">
-      <a style="display: block"><h3>Add Brand</h3></a>
-    </div>
-    
+      <div class="boxes">
+        <div class="box" id="add">
+          <a style="display: block"><h3>Add Brand</h3></a>
+        </div>
 
-    <div class="box" id="update">
-      <a style="display: block"><h3>Update Brand</h3></a>
-    </div>
+        <div class="box" id="update">
+          <a style="display: block"><h3>Update Brand</h3></a>
+        </div>
 
-    <div class="box" id="ingredientBox">
-      <a style="display: block"><h3>Ingredient Brand</h3></a>
-    </div>
+        <div class="box" id="ingredientBox">
+          <a style="display: block"><h3>Ingredient Brand</h3></a>
+        </div>
 
-    <div class="box" id="view">
-      <a style="display: block"><h3>View Brands</h3></a>
-    </div>
+        <div class="box" id="view">
+          <a style="display: block"><h3>View Brands</h3></a>
+        </div>
 
-    <!-- <div class="box" id="delete">
+        <!-- <div class="box" id="delete">
       <a style="display: block"><h3>Delete Brand</h3></a>
     </div> -->
-
-   </div> <!-- End Boxes   -->
-       
-  </div><! -- End of container1 -->
-
-<div class="spacer"></div>
-
-
-  <div class="container2"><!-- start container2 -->
-
-
-    <!-- start of add forms -->
-    <div id="addBoxes" class="boxxes">
-
-    <div class="formBox">
-      <form class="form" id="frmAdd" action="">
-        <h1>Add Brand</h1>
-
-        <div class="input">
-          <input type="text"  id="brand" Placeholder="Finishing Brand">
-        </div>
-
-        <div class="input">
-          <select name="add" id="brw_id">
-          </select>  
-        </div>
-
-        <div class="input">
-          <select name="add" id="active">
-            <option value="" disabled selected hidden>Active</option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>  
-        </div>
-
-        <div class="input">
-          <select name="add" id="injection">
-            <option value="" disabled selected hidden>Pre/Post Injection</option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>  
-        </div>
-
-
-        <div class="input">
-          <textarea class="note" id="note" cols="21" rows="5" placeholder="Note"></textarea>
-        </div>
-        <div class="button">
-          <button class="btn" id="btnAddClear">Clear</button>
-          <button class="btn" id="btnAddSubmit">Add</button>
-        </div>
-      </form>
-    </div>
-
-    </div>
-    <!-- end of add forms -->
-
-
-    <!-- start of update boxes -->
-    <div id="updateBoxes" class="boxxes">
-
-    <div class="formBox">
-      <form class="form" id="frmUpdate" action="">
-        <h1>Update Brand</h1>
-        <div class="input">
-          <!-- <select name="updateFinBrnd" id="brand"> -->
-          <select name="fin_id">
-            <option value="" disabled selected hidden>Select Finishing Brand</option>
-          </select>
-        </div>
-        
-        <div class="tooltip input">
-          <span class="tooltiptext">Brew Brand</span>
-          <!-- <select name="updateBrwBrnd" id="brw_id">   -->
-          <select name="brw_id">  
-          </select>  
-        </div>
-
-        <div class="tooltip input">
-          <span class="tooltiptext">Active</span>
-          <select name="active">
-            <option value="" disabled selected hidden>Active</option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>  
-        </div>
-
-        <div class="tooltip input">
-          <span class="tooltiptext">Injection</span>
-          <select name="injection">
-            <option value="" disabled selected hidden>Pre/Post Injection</option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>  
-        </div>
-        
-
-        <div class="input">
-          <textarea class="note" name="note" cols="21" rows="5" placeholder="Note"></textarea>
-        </div>
-        <div class="button">
-          <button class="btn" id="btnUpdateClear">Clear</button>
-          <button class="btn" id="btnUpdateSubmit">Update</button>
-        </div>
-      </form>
-    </div>
-
-    </div>
-    <!-- end of update boxes -->
-
-
-    <!-- start of ingredient boxes -->
-    <div id="injectionBoxes" class="boxxes">
-  
-    <div class="formBox">
-      <form class="form" id="frmIngredientAdd" action="">
-        <h1>Add Brand Ingredient</h1>
-        <div class="input">
-          <select name="fin_idAdd" id="fin_idAdd"></select>
-        </div>
-        <div class="input">
-          <select name="com_idAdd" id="com_id"></select>
-        </div>
-        <div class="button">
-          <button class="btn" id="btnIngredientAddClear">Clear</button>
-          <button class="btn" id="btnIngredientAddSubmit">Submit</button>
-        </div>
-      </form>
-
-      <div class="spacer"></div>
-      
-      <form class="form" id="frmIngredientUpdate" action="">
-        <h1>Update Injection Rates</h1>
-        <div class="input">
-          <select name="fin_idUpdate" id="fin_idUpdate"></select>
-        </div>
-        <div class="button">
-          <button class="btn" id="btnIngredientUpdateClear">Clear</button>
-          <button class="btn" id="btnIngredientUpdateSubmit">Update</button>
-        </div>
-      </form>
-
-      <div id="injRateTable"></div>
-      
-      <div class="spacer"></div>
-      <div class="spacer"></div>
-
-      <form class="form" id="frmIngredientDelete" action="">
-        <h1>Clear Brand Ingredients</h1>
-        <div class="input">
-          <select name="fin_idDelete" id="fin_idDelete"></select>
-        </div>
-        <div class="button">
-          <button class="btn" id="btnIngredientDeleteClear">Clear</button>
-          <button class="btn" id="btnIngredientDeleteSubmit">Submit</button>
-        </div>
-      </form>
-
-    </div>
-    
-    </div>
-    <!-- end of ingredient boxes -->
-
-
-    <div class="boxxes" id="attView">
-      <div class="button btnLabel">
-        <!-- <button class ="btn" id ="download-xlsx">Save XLSX</button> -->
-        <!-- <button class ="btn" id="print-table">Print Table</button> -->
       </div>
-      <div id="list"></div>
+      <!-- End Boxes   -->
     </div>
+    <! -- End of container1 -->
 
-  </div><!-- end container2 -->
+    <div class="spacer"></div>
 
-  <script src="../scripts/finBrand.js"></script>
-</body>
+    <div class="container2">
+      <!-- start container2 -->
+
+      <!-- start of add forms -->
+      <div id="addBoxes" class="boxxes">
+        <div class="formBox">
+          <form class="form" id="frmAdd" action="">
+            <h1>Add Brand</h1>
+
+            <div class="input">
+              <input type="text" id="brand" placeholder="Finishing Brand" />
+            </div>
+
+            <div class="input">
+              <select name="add" id="brw_id"></select>
+            </div>
+
+            <div class="input">
+              <select name="add" id="active">
+                <option value="" disabled selected hidden>Active</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </div>
+
+            <div class="input">
+              <select name="add" id="injection">
+                <option value="" disabled selected hidden>
+                  Pre/Post Injection
+                </option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </div>
+
+            <div class="input">
+              <textarea
+                class="note"
+                id="note"
+                cols="21"
+                rows="5"
+                placeholder="Note"
+              ></textarea>
+            </div>
+            <div class="button">
+              <button class="btn" id="btnAddClear">Clear</button>
+              <button class="btn" id="btnAddSubmit">Add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- end of add forms -->
+
+      <!-- start of update boxes -->
+      <div id="updateBoxes" class="boxxes">
+        <div class="formBox">
+          <form class="form" id="frmUpdate" action="">
+            <h1>Update Brand</h1>
+            <div class="input">
+              <!-- <select name="updateFinBrnd" id="brand"> -->
+              <select name="fin_id">
+                <option value="" disabled selected hidden>
+                  Select Finishing Brand
+                </option>
+              </select>
+            </div>
+
+            <div class="tooltip input">
+              <span class="tooltiptext">Brew Brand</span>
+              <!-- <select name="updateBrwBrnd" id="brw_id">   -->
+              <select name="brw_id"></select>
+            </div>
+
+            <div class="tooltip input">
+              <span class="tooltiptext">Active</span>
+              <select name="active">
+                <option value="" disabled selected hidden>Active</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </div>
+
+            <div class="tooltip input">
+              <span class="tooltiptext">Injection</span>
+              <select name="injection">
+                <option value="" disabled selected hidden>
+                  Pre/Post Injection
+                </option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </div>
+
+            <div class="input">
+              <textarea
+                class="note"
+                name="note"
+                cols="21"
+                rows="5"
+                placeholder="Note"
+              ></textarea>
+            </div>
+            <div class="button">
+              <button class="btn" id="btnUpdateClear">Clear</button>
+              <button class="btn" id="btnUpdateSubmit">Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- end of update boxes -->
+
+      <!-- start of ingredient boxes -->
+      <div id="injectionBoxes" class="boxxes">
+        <div class="formBox">
+          <form class="form" id="frmIngredientAdd" action="">
+            <h1>Add Brand Ingredient</h1>
+            <div class="input">
+              <select name="fin_idAdd" id="fin_idAdd"></select>
+            </div>
+            <div class="input">
+              <select name="com_idAdd" id="com_id"></select>
+            </div>
+            <div class="button">
+              <button class="btn" id="btnIngredientAddClear">Clear</button>
+              <button class="btn" id="btnIngredientAddSubmit">Submit</button>
+            </div>
+          </form>
+
+          <div class="spacer"></div>
+
+          <form class="form" id="frmIngredientUpdate" action="">
+            <h1>Update Injection Rates</h1>
+            <div class="input">
+              <select name="fin_idUpdate" id="fin_idUpdate"></select>
+            </div>
+            <div class="button">
+              <button class="btn" id="btnIngredientUpdateClear">Clear</button>
+              <button class="btn" id="btnIngredientUpdateSubmit">Update</button>
+            </div>
+          </form>
+
+          <div id="injRateTable"></div>
+
+          <div class="spacer"></div>
+          <div class="spacer"></div>
+
+          <form class="form" id="frmIngredientDelete" action="">
+            <h1>Clear Brand Ingredients</h1>
+            <div class="input">
+              <select name="fin_idDelete" id="fin_idDelete"></select>
+            </div>
+            <div class="button">
+              <button class="btn" id="btnIngredientDeleteClear">Clear</button>
+              <button class="btn" id="btnIngredientDeleteSubmit">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- end of ingredient boxes -->
+
+      <div class="boxxes" id="attView">
+        <div class="button btnLabel">
+          <!-- <button class ="btn" id ="download-xlsx">Save XLSX</button> -->
+          <!-- <button class ="btn" id="print-table">Print Table</button> -->
+        </div>
+        <div id="list"></div>
+      </div>
+    </div>
+    <!-- end container2 -->
+
+    <script src="../scripts/finBrand.js"></script>
+  </body>
 </html>

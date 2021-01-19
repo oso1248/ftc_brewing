@@ -1,6 +1,4 @@
-// const tableName = 'mtl_commodity';
-
-exports.up = async function(knex) {
+exports.up = async function (knex) {
   //users
   await knex.raw(`
     CREATE TRIGGER update_timestamp
@@ -17,7 +15,7 @@ exports.up = async function(knex) {
     EXECUTE PROCEDURE update_timestamp();
   `);
 
-//commodities
+  //commodities
   await knex.raw(`
     CREATE TRIGGER update_timestamp
     BEFORE UPDATE
@@ -68,7 +66,7 @@ exports.up = async function(knex) {
     EXECUTE PROCEDURE update_timestamp();
   `);
 
-//fin_data
+  //fin_data
   await knex.raw(`
     CREATE TRIGGER update_timestamp
     BEFORE UPDATE
@@ -209,8 +207,8 @@ exports.up = async function(knex) {
   FOR EACH ROW
   EXECUTE PROCEDURE update_timestamp();
   `);
-  
-//inventory
+
+  //inventory
   await knex.raw(`
     CREATE TRIGGER trigger_delete_old_rows_inv_mat_weekly
     AFTER INSERT ON inv_mat_weekly
@@ -285,9 +283,6 @@ exports.up = async function(knex) {
     AFTER INSERT ON fin_loss_add
     EXECUTE PROCEDURE delete_old_rows_fin_wad_add();
   `);
-
 };
 
-exports.down = function(knex) {
-
-};
+exports.down = function (knex) {};

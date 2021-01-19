@@ -1,23 +1,24 @@
-
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <meta name="viewport" content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height">
+    <meta
+      name="viewport"
+      content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height"
+    />
     <title>QR Codes</title>
-    
+
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="../../commonCSS/styles.css">
-    <link rel="stylesheet" href="../styles/invQR.css">
-  
+    <link rel="stylesheet" href="../../commonCSS/styles.css" />
+    <link rel="stylesheet" href="../styles/invQR.css" />
   </head>
   <body>
-    <div class="container1"><! -- Start of Container1 -->
+    <div class="container1">
+      <! -- Start of Container1 -->
       <header>
         <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
         <h1>QR Codes</h1>
         <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
-         
       </header>
       <! -- Navigation -->
       <nav class="main-nav">
@@ -30,32 +31,31 @@
           <li><a id="logout">Log Out</a></li>
         </ul>
       </nav>
-    
-     <!-- <div class="spacer"></div> -->
-      
-     <div class="boxes">  
-     </div> <!-- End Boxes   -->
-         
-    </div><! -- End of container1 -->
-  
-    <div class="container2">
 
-      <select id="selection"id="qrForm">
-      </select>
-      
+      <!-- <div class="spacer"></div> -->
+
+      <div class="boxes"></div>
+      <!-- End Boxes   -->
+    </div>
+    <! -- End of container1 -->
+
+    <div class="container2">
+      <select id="selection" id="qrForm"></select>
+
       <div class="qrbox" id="printableArea">
         <!-- <img src="https://picsum.photos/130"/> -->
-        <img src="../../login/256.png"/>
+        <img src="../../login/256.png" />
         <label></label>
       </div>
-      
+
       <!-- <input class="button" type="button" onclick="printDiv('printableArea')" value="print a div!" /> -->
       <div class="button btnLabel">
-        <button class ="btn" onclick="printDiv('printableArea')">Print QR Code</button>
+        <button class="btn" onclick="printDiv('printableArea')">
+          Print QR Code
+        </button>
       </div>
-
     </div>
     <script src="../../commonJS/index.js"></script>
     <script src="../scripts/invQR.js"></script>
   </body>
-  </html>
+</html>

@@ -3,12 +3,14 @@
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
 }
+
 .headers {
   text-align: center;
 }
+
 .form {
   margin: auto;
-  
+
   text-align: center;
   font-size: 1.3em;
   width: 20em;
@@ -17,20 +19,18 @@
   border-color: brown;
   border-style: solid;
 }
-.form label, input {
+
+.form label,
+input {
   width: 80%;
   text-align: center;
 }
 
-.bottom { 
+.bottom {
   width: 100%;
-  position: absolute; 
-  bottom: 5px; 
+  position: absolute;
+  bottom: 5px;
 }
-
-
-
-
 
 #frmWadSet {
   display: grid;
@@ -42,15 +42,15 @@
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 5px;
 }
+
 .blend .bottom {
   margin: auto;
 }
 
 .frmBtn {
   margin-top: 5px;
-  width: 48%
+  width: 48%;
 }
-
 
 @media (max-width: 1375px) {
   .form {
@@ -60,7 +60,6 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
 
 @media (max-width: 700px) {
   .form {

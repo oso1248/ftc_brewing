@@ -1,166 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-  <meta name="viewport" content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height">
-  <title>Hibernation</title>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta
+      name="viewport"
+      content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height"
+    />
+    <title>Hibernation</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
-  
-  <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
-  <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
-  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
 
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <link rel="stylesheet" href="../../commonCSS/styles.css">
-  <link rel="stylesheet" href="../styles/hibernate.css">
+    <script
+      type="text/javascript"
+      src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"
+    ></script>
+    <link
+      href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"
+    ></script>
 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../../commonCSS/styles.css" />
+    <link rel="stylesheet" href="../styles/hibernate.css" />
+  </head>
+  <body>
+    <div class="container1">
+      <! -- Start of Container1 -->
+      <header>
+        <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+        <h1>Hibernation</h1>
+        <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+      </header>
+      <! -- Navigation -->
+      <nav class="main-nav">
+        <ul class="">
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../../pgBrewhouse/brewhouse.html">Brewhouse</a></li>
+          <li><a href="../finishing.html">Finishing</a></li>
+          <li><a href="../../pgMaterials/material.html">Materials</a></li>
+          <li><a href="../../pgAdmin/admin.html">Admin</a></li>
+          <li><a id="logout">Log Out</a></li>
+        </ul>
+      </nav>
 
-</head>
-<body>
-  <div class="container1"><! -- Start of Container1 -->
-    <header>
-      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
-      <h1>Hibernation</h1>
-      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
-       
-    </header>
-    <! -- Navigation -->
-    <nav class="main-nav">
-      <ul class="">
-        <li><a href="../../index.html">Home</a></li>
-        <li><a href="../../pgBrewhouse/brewhouse.html">Brewhouse</a></li>
-        <li><a href="../finishing.html">Finishing</a></li>
-        <li><a href="../../pgMaterials/material.html">Materials</a></li>
-        <li><a href="../../pgAdmin/admin.html">Admin</a></li>
-        <li><a id="logout">Log Out</a></li>
-      </ul>
-    </nav>
-  
-   <!-- <div class="spacer"></div> -->
-    
-   <div class="boxes">
+      <!-- <div class="spacer"></div> -->
 
-    <div class="box" id="add">
-      <a style="display: block">  
-        <!-- <img src="" alt="">   -->
-        <h3>Hibernate Tank</h3>
-        <p></p>
-      </a>
-    </div>
-    
-
-    <div class="box" id="update">
-      <a style="display: block">  
-        <!-- <img src="" alt="">   -->
-        <h3>Pump To Schoene</h3>
-        <p></p>
-      </a>
-    </div>
-
-    <div class="box" id="view">
-      <a style="display: block">  
-        <h3>View Hibernation Log</h3>
-      </a>
-    </div>
-
-   </div> <!-- End Boxes   -->
-       
-  </div><! -- End of container1 -->
-
-  <div class="spacer"></div>
-  <div class="spacer"></div>
-
-  <div class="container2"><!-- start container2 -->
-
-    <div id="addBoxes" class="boxxes">
-      <form class="form" id="frmAdd" action="">
-        <h1>Hibernate Tank</h1>
-
-        <div class="input">
-          <select name="" id="org_vessel">      </select>
+      <div class="boxes">
+        <div class="box" id="add">
+          <a style="display: block">
+            <!-- <img src="" alt="">   -->
+            <h3>Hibernate Tank</h3>
+            <p></p>
+          </a>
         </div>
 
-        <div class="input">
-          <input type="number" id="org_vol" Placeholder="From Tank Fill Volume">
+        <div class="box" id="update">
+          <a style="display: block">
+            <!-- <img src="" alt="">   -->
+            <h3>Pump To Schoene</h3>
+            <p></p>
+          </a>
         </div>
 
-        <div class="input">
-          <select name="" id="int_vessel">      </select>
+        <div class="box" id="view">
+          <a style="display: block">
+            <h3>View Hibernation Log</h3>
+          </a>
         </div>
-
-        <div class="input">
-          <input type="number" id="int_vol" Placeholder="To Tank Fill Volume">
-        </div>
-
-        <div class="input">
-          <select name="" id="brw_id">     </select>
-        </div>
-
-        <div class="input">
-          <textarea name="" id="note" cols="21" rows="5" placeholder="Note"></textarea>
-        </div>
-        
-        <div class="button">
-          <button class="btn" id="btnAddClear">Clear</button>
-          <button class="btn" id="btnAddSubmit">Add</button>
-        </div>
-
-      </form>
-    </div>
-    
-    <div id="updateBoxes" class="boxxes">
-      <form class="form" id="frmUpdate" action="">
-        <h1>Move Hibernated Tank</h1>
-
-        <div class="tooltip input">
-          <select name="int_vessel" id="int_vessel">      </select>
-        </div>
-
-        <div class="tooltip input">
-          <span class="tooltiptext">Chip Tank Volume</span>
-          <input type="number" name="int_vol" id="int_vol" Placeholder="Tank Volume" readonly>  
-        </div>
-
-        <div class="tooltip input">
-          <span class="tooltiptext">Schoene Tank</span>
-          <select name="end_vessel" id="end_vessel">      </select>   
-        </div>
-
-        <div class="tooltip input">
-          <span class="tooltiptext">Schoene Tank Volume</span>
-          <input type="number" name="end_vol" id="end_vol" Placeholder="Schoene Tank Fill Volume">
-        </div>
-
-        <div class="tooltip input">
-          <span class="tooltiptext">Brand</span>
-          <input type="text" name="brw_id" id="brw_id" Placeholder="Brand" readonly>
-        </div>
-
-        <div class="input">
-          <textarea name="note" id="note" cols="21" rows="5" placeholder="Note"></textarea>
-        </div>
-
-        <div class="button">
-          <button class="btn" id="btnUpdateClear">Clear</button>
-          <button class="btn" id="btnUpdateSubmit">Update</button>
-        </div>
-
-      </form>
-    </div>
-
-    <div class="boxxes" id="attView">
-      <div class="button btnLabel">
-        <button class ="btn" id ="download-xlsx">Save XLSX</button>
-        <button class ="btn" id="print-table">Print Table</button>
       </div>
-      <div id="list"></div>
+      <!-- End Boxes   -->
     </div>
+    <! -- End of container1 -->
 
-  </div><!-- end container2 -->
+    <div class="spacer"></div>
+    <div class="spacer"></div>
 
-  <script src="../../commonJS/index.js"></script>
-  <script src="../scripts/hibernate.js"></script>
-</body>
+    <div class="container2">
+      <!-- start container2 -->
+
+      <div id="addBoxes" class="boxxes">
+        <form class="form" id="frmAdd" action="">
+          <h1>Hibernate Tank</h1>
+
+          <div class="input">
+            <select name="" id="org_vessel"></select>
+          </div>
+
+          <div class="input">
+            <input
+              type="number"
+              id="org_vol"
+              placeholder="From Tank Fill Volume"
+            />
+          </div>
+
+          <div class="input">
+            <select name="" id="int_vessel"></select>
+          </div>
+
+          <div class="input">
+            <input
+              type="number"
+              id="int_vol"
+              placeholder="To Tank Fill Volume"
+            />
+          </div>
+
+          <div class="input">
+            <select name="" id="brw_id"></select>
+          </div>
+
+          <div class="input">
+            <textarea
+              name=""
+              id="note"
+              cols="21"
+              rows="5"
+              placeholder="Note"
+            ></textarea>
+          </div>
+
+          <div class="button">
+            <button class="btn" id="btnAddClear">Clear</button>
+            <button class="btn" id="btnAddSubmit">Add</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="updateBoxes" class="boxxes">
+        <form class="form" id="frmUpdate" action="">
+          <h1>Move Hibernated Tank</h1>
+
+          <div class="tooltip input">
+            <select name="int_vessel" id="int_vessel"></select>
+          </div>
+
+          <div class="tooltip input">
+            <span class="tooltiptext">Chip Tank Volume</span>
+            <input
+              type="number"
+              name="int_vol"
+              id="int_vol"
+              placeholder="Tank Volume"
+              readonly
+            />
+          </div>
+
+          <div class="tooltip input">
+            <span class="tooltiptext">Schoene Tank</span>
+            <select name="end_vessel" id="end_vessel"></select>
+          </div>
+
+          <div class="tooltip input">
+            <span class="tooltiptext">Schoene Tank Volume</span>
+            <input
+              type="number"
+              name="end_vol"
+              id="end_vol"
+              placeholder="Schoene Tank Fill Volume"
+            />
+          </div>
+
+          <div class="tooltip input">
+            <span class="tooltiptext">Brand</span>
+            <input
+              type="text"
+              name="brw_id"
+              id="brw_id"
+              placeholder="Brand"
+              readonly
+            />
+          </div>
+
+          <div class="input">
+            <textarea
+              name="note"
+              id="note"
+              cols="21"
+              rows="5"
+              placeholder="Note"
+            ></textarea>
+          </div>
+
+          <div class="button">
+            <button class="btn" id="btnUpdateClear">Clear</button>
+            <button class="btn" id="btnUpdateSubmit">Update</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="boxxes" id="attView">
+        <div class="button btnLabel">
+          <button class="btn" id="download-xlsx">Save XLSX</button>
+          <button class="btn" id="print-table">Print Table</button>
+        </div>
+        <div id="list"></div>
+      </div>
+    </div>
+    <!-- end container2 -->
+
+    <script src="../../commonJS/index.js"></script>
+    <script src="../scripts/hibernate.js"></script>
+  </body>
 </html>

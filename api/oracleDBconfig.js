@@ -1,4 +1,4 @@
-const dbEngine = 'oracleDB'
-const config = require('../knexfile')[dbEngine]
+const dbEngine = 'oracleDB';
+const config = require('../knexfile')[dbEngine];
 
-module.exports = require('knex')(config)
+module.exports = require('knex')(config);

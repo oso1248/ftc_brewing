@@ -8,14 +8,16 @@
   border-radius: 10px;
 }
 
-.form input, select, option {
+.form input,
+select,
+option {
   text-align: center;
   margin: 5px;
   width: 100%;
   font-size: 20px;
   height: 44px;
   text-align-last: center;
-  border-radius: 10px; 
+  border-radius: 10px;
 }
 
 .form {
@@ -23,11 +25,11 @@
 }
 .frm {
   width: 25%;
-  margin:auto;
+  margin: auto;
 }
 
 .headers {
- text-align: center;
+  text-align: center;
 }
 /* .notes {
   background-color: green;
@@ -37,8 +39,8 @@
   background-color: cornflowerblue;
   border: 1px solid green;
   color: white;
-  padding: 10px 24px; 
-  cursor: pointer; 
+  padding: 10px 24px;
+  cursor: pointer;
   width: 45%;
   margin: 5px;
   border-radius: 10px;
@@ -52,40 +54,46 @@
   margin-top: 30px;
 }
 
-.button .btntbl { 
+.button .btntbl {
   width: 25%;
 }
 
 @media (max-width: 1050px) {
-  .form input, textarea, select, option {
-  width: 70%;  
+  .form input,
+  textarea,
+  select,
+  option {
+    width: 70%;
   }
   .button button {
-  width: 35%;
+    width: 35%;
   }
   .frm {
-  width: 70%;
-  margin:auto;
+    width: 70%;
+    margin: auto;
   }
   #note {
     width: 70%;
   }
-  
-  .button .btntbl { 
-  width: 35%;
+
+  .button .btntbl {
+    width: 35%;
   }
-}  
+}
 
 @media (max-width: 700px) {
-  .form input, textarea, select, option {
-  width: 90%; 
+  .form input,
+  textarea,
+  select,
+  option {
+    width: 90%;
   }
   .frm {
-  width: 100%;
-  margin:auto;
+    width: 100%;
+    margin: auto;
   }
   .button button {
-  width: 45%;
+    width: 45%;
   }
   #note {
     width: 90%;
@@ -93,9 +101,8 @@
   .supplier {
     font-size: 12px;
   }
-  
-  .button .btntbl { 
-  width: 45%;
+
+  .button .btntbl {
+    width: 45%;
   }
 }
-

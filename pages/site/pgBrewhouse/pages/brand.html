@@ -1,147 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-  <meta name="viewport" content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height">
-  <title>Brewhouse Brands</title>
-  
-  <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
-  <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
-  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta
+      name="viewport"
+      content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height"
+    />
+    <title>Brewhouse Brands</title>
 
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <link rel="stylesheet" href="../../commonCSS/styles.css">
-  <link rel="stylesheet" href="../styles/brand.css">
+    <script
+      type="text/javascript"
+      src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"
+    ></script>
+    <link
+      href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"
+    ></script>
 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../../commonCSS/styles.css" />
+    <link rel="stylesheet" href="../styles/brand.css" />
+  </head>
+  <body>
+    <div class="container1">
+      <!-- Start of Container1 -->
+      <header>
+        <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+        <h1>Brewhouse Brands</h1>
+        <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+      </header>
+      <! -- Navigation -->
+      <nav class="main-nav">
+        <ul class="">
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../../pgBrewhouse/brewhouse.html">Brewhouse</a></li>
+          <li><a href="../../pgFinishing/finishing.html">Finishing</a></li>
+          <li><a href="../../pgMaterials/material.html">Materials</a></li>
+          <li><a href="../../pgAdmin/admin.html">Admin</a></li>
+          <li><a id="logout">Log Out</a></li>
+        </ul>
+      </nav>
 
-</head>
-<body>
-  <div class="container1"> <!-- Start of Container1 -->
-    <header>
-      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
-      <h1>Brewhouse Brands</h1>
-      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
-       
-    </header>
-    <! -- Navigation -->
-    <nav class="main-nav">
-      <ul class="">
-        <li><a href="../../index.html">Home</a></li>
-        <li><a href="../../pgBrewhouse/brewhouse.html">Brewhouse</a></li>
-        <li><a href="../../pgFinishing/finishing.html">Finishing</a></li>
-        <li><a href="../../pgMaterials/material.html">Materials</a></li>
-        <li><a href="../../pgAdmin/admin.html">Admin</a></li>
-        <li><a id="logout">Log Out</a></li>
-      </ul>
-    </nav>
-  
-   <!-- <div class="spacer"></div> -->
-    
-   <div class="boxes">
+      <!-- <div class="spacer"></div> -->
 
-    <div class="box" id="brndView">
-      <a style="display: block">  
-        <h3>Brand View</h3>
-        <p></p>
-      </a>
-    </div>
-    
+      <div class="boxes">
+        <div class="box" id="brndView">
+          <a style="display: block">
+            <h3>Brand View</h3>
+            <p></p>
+          </a>
+        </div>
 
-    <div class="box" id="stdHopView">
-      <a style="display: block">  
-        <h3>Standard Hops</h3>
-        <p></p>
-      </a>
-    </div>
+        <div class="box" id="stdHopView">
+          <a style="display: block">
+            <h3>Standard Hops</h3>
+            <p></p>
+          </a>
+        </div>
 
-    <div class="box" id="dryHopView">
-      <a style="display: block">  
-        <h3>Dry Hops</h3>
-      </a>
-    </div>
+        <div class="box" id="dryHopView">
+          <a style="display: block">
+            <h3>Dry Hops</h3>
+          </a>
+        </div>
 
-    <div class="box" id="sprSacView">
-      <a style="display: block">  
-        <h3>Super Sacks</h3>
-      </a>
-    </div>
-
-
-
-   </div> <!-- End Boxes   -->
-       
-  </div>  <!-- End of Container1 -->
- 
-  <div class="spacer"></div>
-  <div class="spacer"></div>
-
-  <div id="class2" class="container2"><!-- start container2 -->
-
-    <div id="brndViewHide">
-    <div id="brndView" class="boxxes"> <!-- Brand View -->
-      <h1 class="headers">Brand View</h1>
-      <div class="button btnLabel">
-        <button class ="btn" id ="xlsxBrndView">Save XLSX</button>
-        <button class ="btn" id="printBrndView">Print Table</button>
+        <div class="box" id="sprSacView">
+          <a style="display: block">
+            <h3>Super Sacks</h3>
+          </a>
+        </div>
       </div>
-      <div id="brndViewTbl"></div>
+      <!-- End Boxes   -->
     </div>
-    </div>
+    <!-- End of Container1 -->
 
+    <div class="spacer"></div>
+    <div class="spacer"></div>
 
-    <div id="stdHopHide">
-    <div id="stdHop" class="boxxes"> <!-- Standard Hops -->
-      <h1 class="headers">Standard Hops</h1>
-      <form class="form formList" id="stdHopFrm" action="">
-        <div class="input">
-          <select name="" id="stdHopSel"></select>
-        </div> 
-      </form>
-      <div id="stdHopBtn" class="button btnLabel">
-        <button class ="btn" id ="xlsxStdHop">Save XLSX</button>
-        <button class ="btn" id="printStdHop">Print Table</button>
+    <div id="class2" class="container2">
+      <!-- start container2 -->
+
+      <div id="brndViewHide">
+        <div id="brndView" class="boxxes">
+          <!-- Brand View -->
+          <h1 class="headers">Brand View</h1>
+          <div class="button btnLabel">
+            <button class="btn" id="xlsxBrndView">Save XLSX</button>
+            <button class="btn" id="printBrndView">Print Table</button>
+          </div>
+          <div id="brndViewTbl"></div>
+        </div>
       </div>
-      <div id="stdHopTbl"></div>
-    </div>
-    </div>
-    
 
-    <div id="dryHopHide">
-    <div id="dryHop" class="boxxes"> <!-- Dry Hops -->
-      <h1 class="headers">Dry Hops</h1>
-      <form class="form formList" id="dryHopFrm" action="">
-        <div class="input">
-          <select name="" id="dryHopSel"></select>
-        </div> 
-      </form>
-      <div id="dryHopBtn" class="button btnLabel">
-        <button class ="btn" id ="xlsxDryHop">Save XLSX</button>
-        <button class ="btn" id="printDryHop">Print Table</button>
+      <div id="stdHopHide">
+        <div id="stdHop" class="boxxes">
+          <!-- Standard Hops -->
+          <h1 class="headers">Standard Hops</h1>
+          <form class="form formList" id="stdHopFrm" action="">
+            <div class="input">
+              <select name="" id="stdHopSel"></select>
+            </div>
+          </form>
+          <div id="stdHopBtn" class="button btnLabel">
+            <button class="btn" id="xlsxStdHop">Save XLSX</button>
+            <button class="btn" id="printStdHop">Print Table</button>
+          </div>
+          <div id="stdHopTbl"></div>
+        </div>
       </div>
-      <div id="dryHopTbl"></div>
-    </div>
-    </div>
 
-    <div id="sprSacHide">
-    <div id="sprSac" class="boxxes"> <!-- Super Sacks -->
-      <h1 class="headers">Super Sacks</h1>
-      <form class="form formList" id="sprSacFrm" action="">
-        <div class="input">
-          <select name="" id="sprSacSel"></select>
-        </div> 
-      </form>
-      <div id="sprSacBtn" class="button btnLabel">
-        <button class ="btn" id ="xlsxSprSac">Save XLSX</button>
-        <button class ="btn" id="printSprSac">Print Table</button>
+      <div id="dryHopHide">
+        <div id="dryHop" class="boxxes">
+          <!-- Dry Hops -->
+          <h1 class="headers">Dry Hops</h1>
+          <form class="form formList" id="dryHopFrm" action="">
+            <div class="input">
+              <select name="" id="dryHopSel"></select>
+            </div>
+          </form>
+          <div id="dryHopBtn" class="button btnLabel">
+            <button class="btn" id="xlsxDryHop">Save XLSX</button>
+            <button class="btn" id="printDryHop">Print Table</button>
+          </div>
+          <div id="dryHopTbl"></div>
+        </div>
       </div>
-      <div id="sprSacTbl"></div>
-    </div>
-    </div>
 
-  </div><!-- end container2 -->
+      <div id="sprSacHide">
+        <div id="sprSac" class="boxxes">
+          <!-- Super Sacks -->
+          <h1 class="headers">Super Sacks</h1>
+          <form class="form formList" id="sprSacFrm" action="">
+            <div class="input">
+              <select name="" id="sprSacSel"></select>
+            </div>
+          </form>
+          <div id="sprSacBtn" class="button btnLabel">
+            <button class="btn" id="xlsxSprSac">Save XLSX</button>
+            <button class="btn" id="printSprSac">Print Table</button>
+          </div>
+          <div id="sprSacTbl"></div>
+        </div>
+      </div>
+    </div>
+    <!-- end container2 -->
 
-  <script src="../../commonJS/index.js"></script>
-  <script src="../scripts/brand.js"></script>
-</body>
+    <script src="../../commonJS/index.js"></script>
+    <script src="../scripts/brand.js"></script>
+  </body>
 </html>

@@ -3,7 +3,6 @@
   margin: 0 auto;
 }
 
-
 #note {
   resize: none;
   line-height: 1.4;
@@ -14,7 +13,9 @@
   border-radius: 10px;
 }
 
-.form input, select, option {
+.form input,
+select,
+option {
   text-align: center;
   margin: 5px;
   margin-bottom: 40px;
@@ -23,7 +24,7 @@
   font-size: 20px;
   height: 44px;
   text-align-last: center;
-  border-radius: 10px; 
+  border-radius: 10px;
 }
 
 .form {
@@ -34,8 +35,8 @@
   background-color: cornflowerblue;
   border: 1px solid green;
   color: white;
-  padding: 10px 24px; 
-  cursor: pointer; 
+  padding: 10px 24px;
+  cursor: pointer;
   width: 40%;
   margin: 0px;
   margin-bottom: 10px;
@@ -51,22 +52,28 @@
 }
 
 @media (max-width: 850px) {
-  .form input, textarea, select, option {
-  width: 70%;  
+  .form input,
+  textarea,
+  select,
+  option {
+    width: 70%;
   }
   .button button {
     width: 35%;
-    }
+  }
   #note {
     width: 70%;
   }
-}  
+}
 @media (max-width: 700px) {
-  .form input, textarea, select, option {
-  width: 90%; 
+  .form input,
+  textarea,
+  select,
+  option {
+    width: 90%;
   }
   .button button {
-  width: 45%;
+    width: 45%;
   }
   #note {
     width: 90%;

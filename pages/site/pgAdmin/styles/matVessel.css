@@ -12,7 +12,6 @@
   grid-template-columns: repeat(1, 1fr);
 }
 
-
 #note {
   resize: none;
   line-height: 1.4;
@@ -23,26 +22,28 @@
   border-radius: 10px;
 }
 
-.form input, select, option {
+.form input,
+select,
+option {
   text-align: center;
   margin: 5px;
   width: 30%;
   font-size: 20px;
   height: 44px;
   text-align-last: center;
-  border-radius: 10px; 
+  border-radius: 10px;
 }
 
 .form {
-  text-align: center;  
+  text-align: center;
 }
 
 .button button {
   background-color: cornflowerblue;
   border: 1px solid green;
   color: white;
-  padding: 10px 24px; 
-  cursor: pointer; 
+  padding: 10px 24px;
+  cursor: pointer;
   width: 15%;
   margin: 0px;
   border-radius: 10px;
@@ -52,36 +53,35 @@
   background-color: #3e8e41;
 }
 
-
 @media (max-width: 850px) {
-  .container2 {
-    
-  }
   .boxxes {
     grid-template-columns: repeat(1, 1fr);
   }
-  .form input, textarea, select, option {
-  width: 70%;  
+  .form input,
+  textarea,
+  select,
+  option {
+    width: 70%;
   }
   .button button {
-  width: 35%;
+    width: 35%;
   }
   #note {
     width: 70%;
   }
-}  
+}
 @media (max-width: 700px) {
-  .container2 {
-    
-  }
   .boxxes {
     grid-template-columns: repeat(1, 1fr);
   }
-  .form input, textarea, select, option {
-  width: 90%; 
+  .form input,
+  textarea,
+  select,
+  option {
+    width: 90%;
   }
   .button button {
-  width: 45%;
+    width: 45%;
   }
   #note {
     width: 90%;

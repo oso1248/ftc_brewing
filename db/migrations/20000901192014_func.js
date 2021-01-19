@@ -1,4 +1,4 @@
-exports.up = async function(knex) {
+exports.up = async function (knex) {
   // updated_at Function
   await knex.raw(`
     CREATE OR REPLACE FUNCTION update_timestamp() RETURNS TRIGGER
@@ -10,7 +10,7 @@ exports.up = async function(knex) {
         RETURN NEW;
     END;
     $$;
-  `)
+  `);
   // inv_mat_weekly delete old records
   await knex.raw(`
     CREATE OR REPLACE FUNCTION delete_old_rows_inv_mat_weekly() RETURNS TRIGGER
@@ -22,7 +22,7 @@ exports.up = async function(knex) {
       RETURN NULL;
     END;
     $$;
-  `)
+  `);
   // inv_mat_monthly delete old records
   await knex.raw(`
     CREATE OR REPLACE FUNCTION delete_old_rows_inv_mat_monthly() RETURNS TRIGGER
@@ -34,7 +34,7 @@ exports.up = async function(knex) {
       RETURN NULL;
     END;
     $$;
-  `)
+  `);
   // inv_hop_daily delete old records
   await knex.raw(`
     CREATE OR REPLACE FUNCTION delete_old_rows_inv_hop_daily() RETURNS TRIGGER
@@ -46,7 +46,7 @@ exports.up = async function(knex) {
       RETURN NULL;
     END;
     $$;
-  `)
+  `);
   // inv_hop_weekly delete old records
   await knex.raw(`
     CREATE OR REPLACE FUNCTION delete_old_rows_inv_hop_weekly() RETURNS TRIGGER
@@ -58,7 +58,7 @@ exports.up = async function(knex) {
       RETURN NULL;
     END;
     $$;
-  `)
+  `);
   await knex.raw(`
     CREATE OR REPLACE FUNCTION delete_old_rows_inv_hop_monthly() RETURNS TRIGGER
     LANGUAGE plpgsql
@@ -69,7 +69,7 @@ exports.up = async function(knex) {
       RETURN NULL;
     END;
     $$;
-  `)
+  `);
   // inv_last_brews delete old records
   await knex.raw(`
     CREATE OR REPLACE FUNCTION delete_old_rows_inv_last_brews() RETURNS TRIGGER
@@ -81,7 +81,7 @@ exports.up = async function(knex) {
       RETURN NULL;
     END;
     $$;
-  `)
+  `);
   // session delete orphan sessions
   await knex.raw(`
     CREATE OR REPLACE FUNCTION delete_orphan_sessions() RETURNS TRIGGER
@@ -93,7 +93,7 @@ exports.up = async function(knex) {
       RETURN NULL;
     END;
     $$;
-  `)
+  `);
   await knex.raw(`
     CREATE OR REPLACE FUNCTION delete_old_rows_hibernated() RETURNS TRIGGER
     LANGUAGE plpgsql
@@ -104,7 +104,7 @@ exports.up = async function(knex) {
       RETURN NULL;
     END;
     $$;
-  `)
+  `);
   await knex.raw(`
     CREATE OR REPLACE FUNCTION delete_old_rows_fin_injection_log() RETURNS TRIGGER
     LANGUAGE plpgsql
@@ -115,7 +115,7 @@ exports.up = async function(knex) {
       RETURN NULL;
     END;
     $$;
-  `)
+  `);
   await knex.raw(`
     CREATE OR REPLACE FUNCTION delete_old_rows_fin_wad_add() RETURNS TRIGGER
     LANGUAGE plpgsql
@@ -126,7 +126,7 @@ exports.up = async function(knex) {
       RETURN NULL;
     END;
     $$;
-  `)
+  `);
   await knex.raw(`
     CREATE OR REPLACE FUNCTION delete_old_rows_fin_trans_add() RETURNS TRIGGER
     LANGUAGE plpgsql
@@ -137,7 +137,7 @@ exports.up = async function(knex) {
       RETURN NULL;
     END;
     $$;
-  `)
+  `);
   await knex.raw(`
     CREATE OR REPLACE FUNCTION delete_old_rows_fin_loss_add() RETURNS TRIGGER
     LANGUAGE plpgsql
@@ -148,48 +148,47 @@ exports.up = async function(knex) {
       RETURN NULL;
     END;
     $$;
-  `)
+  `);
+};
 
-}
-
-exports.down = async function(knex) {
+exports.down = async function (knex) {
   await knex.raw(`
     DROP FUNCTION IF EXISTS update_timestamp() CASCADE;
-  `)
+  `);
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_old_rows_inv_mat_weekly() CASCADE;
-  `)
+  `);
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_old_rows_inv_mat_monthly() CASCADE;
-  `)
+  `);
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_old_rows_inv_hop_daily() CASCADE;
-  `)
+  `);
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_old_rows_inv_hop_weekly() CASCADE;
-  `)
+  `);
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_old_rows_inv_hop_monthly() CASCADE;
-  `)
+  `);
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_old_rows_inv_last_brews() CASCADE;
-  `)
+  `);
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_orphan_sessions() CASCADE;
-  `)
+  `);
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_old_rows_hibernated() CASCADE;
-  `)
+  `);
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_old_rows_fin_injection_log() CASCADE;
-  `)
+  `);
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_old_rows_fin_wad_add() CASCADE;
-  `)
+  `);
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_old_rows_fin_trans_add() CASCADE;
-  `)
+  `);
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_old_rows_fin_loss_add() CASCADE;
-  `)
-}
+  `);
+};

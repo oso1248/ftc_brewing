@@ -1,150 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-  <meta name="viewport" content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height">
-  <title>Fin Brand Details</title>
-  
-  <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
-  <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
-  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta
+      name="viewport"
+      content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height"
+    />
+    <title>Fin Brand Details</title>
 
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <link rel="stylesheet" href="../../commonCSS/styles.css">
-  <link rel="stylesheet" href="../styles/brwMtx.css">
+    <script
+      type="text/javascript"
+      src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"
+    ></script>
+    <link
+      href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"
+    ></script>
 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../../commonCSS/styles.css" />
+    <link rel="stylesheet" href="../styles/brwMtx.css" />
+  </head>
+  <body>
+    <div class="container1">
+      <! -- Start of Container1 -->
+      <header>
+        <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+        <h1>Finishing Brand Details</h1>
+        <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+      </header>
+      <! -- Navigation -->
+      <nav class="main-nav">
+        <ul class="">
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../../pgBrewhouse/brewhouse.html">Brewhouse</a></li>
+          <li><a href="../../pgFinishing/finishing.html">Finishing</a></li>
+          <li><a href="../material.html">Materials</a></li>
+          <li><a href="../admin.html">Admin</a></li>
+          <li><a href="./fin.html" id="logout">Admin Fin</a></li>
+        </ul>
+      </nav>
 
-</head>
-<body>
-  <div class="container1"><! -- Start of Container1 -->
-    <header>
-      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
-      <h1>Finishing Brand Details</h1>
-      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
-       
-    </header>
-    <! -- Navigation -->
-    <nav class="main-nav">
-      <ul class="">
-        <li><a href="../../index.html">Home</a></li>
-        <li><a href="../../pgBrewhouse/brewhouse.html">Brewhouse</a></li>
-        <li><a href="../../pgFinishing/finishing.html">Finishing</a></li>
-        <li><a href="../material.html">Materials</a></li>
-        <li><a href="../admin.html">Admin</a></li>
-        <li><a href="./fin.html" id="logout">Admin Fin</a></li>
-      </ul>
-    </nav>
-  
-   <!-- <div class="spacer"></div> -->
-    
-   <div class="boxes">
+      <!-- <div class="spacer"></div> -->
 
-    <div class="box" id="add">
-      <a style="display: block">  
-        <!-- <img src="" alt="">   -->
-        <h3>Update Brand Details</h3>
-        <p></p>
-      </a>
-    </div>
-    
-
-    <div class="box" id="update">
-      <a style="display: block">  
-        <!-- <img src="" alt="">   -->
-        <h3>View Brand Details</h3>
-        <p></p>
-      </a>
-    </div>
-
-   </div> <!-- End Boxes   -->
-       
-  </div><! -- End of container1 -->
-
-  <div class="spacer"></div>
-  <div class="spacer"></div>
-
-  <div class="container2"><!-- start container2 -->
-
-
-
-    <div id="updateBoxes" class="boxxes">
-      <form class="form" id="frmUpdate" action="">
-        <h1>Update Brand Details</h1>
-        
-        <div class="input">
-          <select name="updateHops" id="brwBrandUpdate">
-          </select>
+      <div class="boxes">
+        <div class="box" id="add">
+          <a style="display: block">
+            <!-- <img src="" alt="">   -->
+            <h3>Update Brand Details</h3>
+            <p></p>
+          </a>
         </div>
 
-        <div class="button">
-          <button class="btn" id="btnUpdateClear">Clear</button>
-          <button class="btn" id="btnUpdateSubmit">Update</button>
+        <div class="box" id="update">
+          <a style="display: block">
+            <!-- <img src="" alt="">   -->
+            <h3>View Brand Details</h3>
+            <p></p>
+          </a>
         </div>
-      </form>
+      </div>
+      <!-- End Boxes   -->
+    </div>
+    <! -- End of container1 -->
 
-      <div class="boxxes" id="updateLineageBox">
-        <h3>Brand Lineage</h3>
-        <div id="updateLineageTable"></div>
-        <h3>Pre CSX</h3>
-        <div id="updateFinDetailPreCsxTable"></div>
-        <h3>Post CSX</h3>
-        <div id="updateFinDetailPostCsxTable"></div>
-        <h3>Pre Filter</h3>
-        <div id="updateFinDetailPreFilTable"></div>
-        <h3>Post Filter</h3>
-        <div id="updateFinDetailPostFilTable"></div>
-        <h3>Pre Release</h3>
-        <div id="updateFinDetailPreRelTable"></div>
-        <h3>Post Release</h3>
-        <div id="updateFinDetailPostRelTable"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
 
+    <div class="container2">
+      <!-- start container2 -->
+
+      <div id="updateBoxes" class="boxxes">
+        <form class="form" id="frmUpdate" action="">
+          <h1>Update Brand Details</h1>
+
+          <div class="input">
+            <select name="updateHops" id="brwBrandUpdate"></select>
+          </div>
+
+          <div class="button">
+            <button class="btn" id="btnUpdateClear">Clear</button>
+            <button class="btn" id="btnUpdateSubmit">Update</button>
+          </div>
+        </form>
+
+        <div class="boxxes" id="updateLineageBox">
+          <h3>Brand Lineage</h3>
+          <div id="updateLineageTable"></div>
+          <h3>Pre CSX</h3>
+          <div id="updateFinDetailPreCsxTable"></div>
+          <h3>Post CSX</h3>
+          <div id="updateFinDetailPostCsxTable"></div>
+          <h3>Pre Filter</h3>
+          <div id="updateFinDetailPreFilTable"></div>
+          <h3>Post Filter</h3>
+          <div id="updateFinDetailPostFilTable"></div>
+          <h3>Pre Release</h3>
+          <div id="updateFinDetailPreRelTable"></div>
+          <h3>Post Release</h3>
+          <div id="updateFinDetailPostRelTable"></div>
+        </div>
       </div>
 
-    </div>
-    
+      <div id="viewBoxes" class="boxxes">
+        <form class="form" id="frmView" action="">
+          <h1>View Brand Details</h1>
+          <div class="input">
+            <select name="" id="brwBrandView"></select>
+          </div>
 
+          <div class="button">
+            <button class="btn" id="btnViewClear">Clear</button>
+            <!-- <button class="btn" id="btnViewSubmit">Update</button> -->
+          </div>
+        </form>
 
-    <div id="viewBoxes" class="boxxes">
-      <form class="form" id="frmView" action="">
-        <h1>View Brand Details</h1>
-        <div class="input">
-          <select name="" id="brwBrandView">
-          </select>
+        <div class="boxxes" id="viewLineageBox">
+          <h3>Brand Lineage</h3>
+          <div id="viewLineageTable"></div>
+          <h3>Pre CSX</h3>
+          <div id="viewFinDetailPreCsxTable"></div>
+          <h3>Post CSX</h3>
+          <div id="viewFinDetailPostCsxTable"></div>
+          <h3>Pre Filter</h3>
+          <div id="viewFinDetailPreFilTable"></div>
+          <h3>Post Filter</h3>
+          <div id="viewFinDetailPostFilTable"></div>
+          <h3>Pre Release</h3>
+          <div id="viewFinDetailPreRelTable"></div>
+          <h3>Post Release</h3>
+          <div id="viewFinDetailPostRelTable"></div>
         </div>
-        
-        <div class="button">
-          <button class="btn" id="btnViewClear">Clear</button>
-          <!-- <button class="btn" id="btnViewSubmit">Update</button> -->
-        </div>
-      </form>
-
-      <div class="boxxes" id="viewLineageBox">
-        <h3>Brand Lineage</h3>
-        <div id="viewLineageTable"></div>
-        <h3>Pre CSX</h3>
-        <div id="viewFinDetailPreCsxTable"></div>
-        <h3>Post CSX</h3>
-        <div id="viewFinDetailPostCsxTable"></div>
-        <h3>Pre Filter</h3>
-        <div id="viewFinDetailPreFilTable"></div>
-        <h3>Post Filter</h3>
-        <div id="viewFinDetailPostFilTable"></div>
-        <h3>Pre Release</h3>
-        <div id="viewFinDetailPreRelTable"></div>
-        <h3>Post Release</h3>
-        <div id="viewFinDetailPostRelTable"></div>
-
       </div>
-      
-
     </div>
-  
-    
+    <!-- end container2 -->
 
-  </div><!-- end container2 -->
-
-  <!-- <script src="../../commonJS/index.js"></script> -->
-  <script src="../scripts/finBrandDetail.js"></script>
-</body>
+    <!-- <script src="../../commonJS/index.js"></script> -->
+    <script src="../scripts/finBrandDetail.js"></script>
+  </body>
 </html>

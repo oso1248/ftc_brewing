@@ -1,156 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-  <meta name="viewport" content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height">
-  <title>Fin Brand Recipe</title>
-  
-  <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
-  <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
-  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta
+      name="viewport"
+      content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height"
+    />
+    <title>Fin Brand Recipe</title>
 
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <link rel="stylesheet" href="../../commonCSS/styles.css">
-  <link rel="stylesheet" href="../styles/finBrandRecipe.css">
+    <script
+      type="text/javascript"
+      src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"
+    ></script>
+    <link
+      href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"
+    ></script>
 
-</head>
-<body>
-  <div class="container1"><! -- Start of Container1 -->
-    <header>
-      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
-      <h1>Finishing Brand Recipe</h1>
-      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
-       
-    </header>
-    <! -- Navigation -->
-    <nav class="main-nav">
-      <ul class="">
-        <li><a href="../../index.html">Home</a></li>
-        <li><a href="../../pgBrewhouse/brewhouse.html">Brewhouse</a></li>
-        <li><a href="../../pgFinishing/finishing.html">Finishing</a></li>
-        <li><a href="../material.html">Materials</a></li>
-        <li><a href="../admin.html">Admin</a></li>
-        <li><a href="./fin.html" id="logout">Admin Fin</a></li>
-      </ul>
-    </nav>
-  
-   <!-- <div class="spacer"></div> -->
-    
-   <div class="boxes">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../../commonCSS/styles.css" />
+    <link rel="stylesheet" href="../styles/finBrandRecipe.css" />
+  </head>
+  <body>
+    <div class="container1">
+      <! -- Start of Container1 -->
+      <header>
+        <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+        <h1>Finishing Brand Recipe</h1>
+        <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+      </header>
+      <! -- Navigation -->
+      <nav class="main-nav">
+        <ul class="">
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../../pgBrewhouse/brewhouse.html">Brewhouse</a></li>
+          <li><a href="../../pgFinishing/finishing.html">Finishing</a></li>
+          <li><a href="../material.html">Materials</a></li>
+          <li><a href="../admin.html">Admin</a></li>
+          <li><a href="./fin.html" id="logout">Admin Fin</a></li>
+        </ul>
+      </nav>
 
-    <div class="box" id="add">
-      <a style="display: block">  
-        <!-- <img src="" alt="">   -->
-        <h3>Update Brand Recipe</h3>
-        <p></p>
-      </a>
+      <!-- <div class="spacer"></div> -->
+
+      <div class="boxes">
+        <div class="box" id="add">
+          <a style="display: block">
+            <!-- <img src="" alt="">   -->
+            <h3>Update Brand Recipe</h3>
+            <p></p>
+          </a>
+        </div>
+
+        <div class="box" id="update">
+          <a style="display: block">
+            <!-- <img src="" alt="">   -->
+            <h3>View Brand Recipe</h3>
+            <p></p>
+          </a>
+        </div>
+      </div>
+      <!-- End Boxes   -->
     </div>
-    
+    <! -- End of container1 -->
 
-    <div class="box" id="update">
-      <a style="display: block">  
-        <!-- <img src="" alt="">   -->
-        <h3>View Brand Recipe</h3>
-        <p></p>
-      </a>
-    </div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
 
-   </div> <!-- End Boxes   -->
-       
-  </div><! -- End of container1 -->
+    <div class="container2">
+      <!-- start container2 -->
 
-  <div class="spacer"></div>
-  <div class="spacer"></div>
+      <div id="updateBoxes" class="boxxes">
+        <h1 class="headers">Update Brand Recipe</h1>
+        <form class="form" id="frmUpdate" action="">
+          <div class="input">
+            <select name="" id="brwBrandUpdate">
+              <option value=""></option>
+            </select>
+          </div>
 
-  <div class="container2"><!-- start container2 -->
+          <div class="input">
+            <select name="" id="finBrandUpdate"></select>
+          </div>
+        </form>
 
-
-
-    <div id="updateBoxes" class="boxxes">
-      <h1 class="headers">Update Brand Recipe</h1>
-      <form class="form" id="frmUpdate" action="">
-        
-        <div class="input">
-          <select name="" id="brwBrandUpdate">
-            <option value=""></option>
-          </select>
+        <div class="boxxes" id="updateLineageBoxChp">
+          <div class="button">
+            <button class="btn" id="btnUpdateClearChp">Clear</button>
+            <button class="btn" id="btnUpdateSubmitChp">Update</button>
+          </div>
+          <h3>Chip Recipe</h3>
+          <div id="updateFinRecipeChpTable"></div>
+          <div class="button">
+            <button class="btn" id="btnUpdateClearSch">Clear</button>
+            <button class="btn" id="btnUpdateSubmitSch">Update</button>
+          </div>
+          <h3>Schoene Recipe</h3>
+          <div id="updateFinRecipeSchTable"></div>
         </div>
 
-        <div class="input">
-          <select name="" id="finBrandUpdate">
-          </select>
+        <div class="boxxes" id="updateLineageBoxFin">
+          <div class="button">
+            <button class="btn" id="btnUpdateClearFin">Clear</button>
+            <button class="btn" id="btnUpdateSubmitFin">Update</button>
+          </div>
+          <h3>Finished Recipe</h3>
+          <div id="updateFinRecipeFinTable"></div>
         </div>
-
-      </form>
-
-      <div class="boxxes" id="updateLineageBoxChp">
-        <div class="button">
-          <button class="btn" id="btnUpdateClearChp">Clear</button>
-          <button class="btn" id="btnUpdateSubmitChp">Update</button>
-        </div>
-        <h3>Chip Recipe</h3>
-        <div id="updateFinRecipeChpTable"></div>
-        <div class="button">
-          <button class="btn" id="btnUpdateClearSch">Clear</button>
-          <button class="btn" id="btnUpdateSubmitSch">Update</button>
-        </div>
-        <h3>Schoene Recipe</h3>
-        <div id="updateFinRecipeSchTable"></div>
       </div>
 
-      <div class="boxxes" id="updateLineageBoxFin">
-        <div class="button">
-          <button class="btn" id="btnUpdateClearFin">Clear</button>
-          <button class="btn" id="btnUpdateSubmitFin">Update</button>
-        </div>
-        <h3>Finished Recipe</h3>
-        <div id="updateFinRecipeFinTable"></div>
-      </div>
+      <div id="viewBoxes" class="boxxes">
+        <h1 class="headers">View Brand Recipe</h1>
+        <form class="form" id="frmView" action="">
+          <div class="input">
+            <select name="" id="brwBrandView"></select>
+          </div>
 
+          <div class="input">
+            <select name="" id="finBrandView"></select>
+          </div>
+        </form>
+
+        <div class="boxxes" id="viewLineageBoxChp">
+          <h3>Chip Recipe</h3>
+          <div id="viewFinRecipeChpTable"></div>
+          <h3>Schoene Recipe</h3>
+          <div id="viewFinRecipeSchTable"></div>
+        </div>
+
+        <div class="boxxes" id="viewLineageBoxFin">
+          <h3>Finished Recipe</h3>
+          <div id="viewFinRecipeFinTable"></div>
+        </div>
+      </div>
     </div>
-    
+    <!-- end container2 -->
 
-
-    <div id="viewBoxes" class="boxxes">
-      <h1 class="headers">View Brand Recipe</h1>
-      <form class="form" id="frmView" action="">
-        
-        <div class="input">
-          <select name="" id="brwBrandView">
-          </select>
-        </div>
-
-        <div class="input">
-          <select name="" id="finBrandView">
-          </select>
-        </div>
-        
-      </form>
-
-      
-      <div class="boxxes" id="viewLineageBoxChp">
-        <h3>Chip Recipe</h3>
-        <div id="viewFinRecipeChpTable"></div>
-        <h3>Schoene Recipe</h3>
-        <div id="viewFinRecipeSchTable"></div>
-      </div>
-  
-      <div class="boxxes" id="viewLineageBoxFin">
-        <h3>Finished Recipe</h3>
-        <div id="viewFinRecipeFinTable"></div>
-      </div>
-
-      
-      
-
-    </div>
-  
-    
-    
-  </div><!-- end container2 -->
-
-  <!-- <script src="../../commonJS/index.js"></script> -->
-  <script src="../scripts/finBrandRecipe.js"></script>
-</body>
+    <!-- <script src="../../commonJS/index.js"></script> -->
+    <script src="../scripts/finBrandRecipe.js"></script>
+  </body>
 </html>

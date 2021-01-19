@@ -1,119 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-  <meta name="viewport" content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height">
-  <title>Fin Inv</title>
-  
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta
+      name="viewport"
+      content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height"
+    />
+    <title>Fin Inv</title>
 
-  <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
-  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
-  <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
+    <link
+      href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"
+    ></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <link rel="stylesheet" href="../../commonCSS/styles.css">
-  <link rel="stylesheet" href="../styles/invBrw.css">
+    <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../../commonCSS/styles.css" />
+    <link rel="stylesheet" href="../styles/invBrw.css" />
+  </head>
+  <body>
+    <div class="container1">
+      <! -- Start of Container1 -->
+      <header>
+        <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+        <h1>Finishing Inventory</h1>
+        <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+      </header>
+      <! -- Navigation -->
+      <nav class="main-nav">
+        <ul class="">
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../../pgBrewhouse/brewhouse.html">Brewhouse</a></li>
+          <li><a href="../../pgFinishing/finishing.html">Finishing</a></li>
+          <li><a href="../material.html">Materials</a></li>
+          <li><a href="../../pgAdmin/admin.html">Admin</a></li>
+          <li><a id="logout">Log Out</a></li>
+        </ul>
+      </nav>
 
+      <!-- <div class="spacer"></div> -->
 
-</head>
-<body>
-  <div class="container1"><! -- Start of Container1 -->
-    <header>
-      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
-      <h1>Finishing Inventory</h1>
-      <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
-       
-    </header>
-    <! -- Navigation -->
-    <nav class="main-nav">
-      <ul class="">
-        <li><a href="../../index.html">Home</a></li>
-        <li><a href="../../pgBrewhouse/brewhouse.html">Brewhouse</a></li>
-        <li><a href="../../pgFinishing/finishing.html">Finishing</a></li>
-        <li><a href="../material.html">Materials</a></li>
-        <li><a href="../../pgAdmin/admin.html">Admin</a></li>
-        <li><a id="logout">Log Out</a></li>
-      </ul>
-    </nav>
-  
-   <!-- <div class="spacer"></div> -->
-    
-   <div class="boxes">
-
-    <div class="box" id="viewWeekly">
-      <a style="display: block">  
-        <h3>View Weekly</h3>
-      </a>
-    </div>
-
-    <div class="box" id="viewMonthly">
-      <a style="display: block">  
-        <h3>View Monthly</h3>
-      </a>
-    </div>
-
-   </div> <!-- End Boxes   -->
-       
-  </div><! -- End of container1 -->
-
-  <div class="spacer"></div>
-  <div class="spacer"></div>
-
-  <div class="container2"><!-- start container2 -->
-
-    <div class="boxxes" id="invWeekly">
-      <form class="form" id="frmWeekly">
-        <h1>Weekly Inventory</h1>
-        <div class="input">
-          <select name="viewInvMatWeekly" id="selWeekly"></select>
+      <div class="boxes">
+        <div class="box" id="viewWeekly">
+          <a style="display: block">
+            <h3>View Weekly</h3>
+          </a>
         </div>
-      </form>
-      <div id="tableWeeklyDiv">
+
+        <div class="box" id="viewMonthly">
+          <a style="display: block">
+            <h3>View Monthly</h3>
+          </a>
+        </div>
+      </div>
+      <!-- End Boxes   -->
+    </div>
+    <! -- End of container1 -->
+
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+
+    <div class="container2">
+      <!-- start container2 -->
+
+      <div class="boxxes" id="invWeekly">
+        <form class="form" id="frmWeekly">
+          <h1>Weekly Inventory</h1>
+          <div class="input">
+            <select name="viewInvMatWeekly" id="selWeekly"></select>
+          </div>
+        </form>
+        <div id="tableWeeklyDiv">
           <div class="gridWeekly">
-            <div class="tables" id="tableHopWeekly"></div>  
-            <div class="tables" id="tableMatWeekly"></div>                
-            <div class="tables" id="tableGrnWeekly"></div>                
+            <div class="tables" id="tableHopWeekly"></div>
+            <div class="tables" id="tableMatWeekly"></div>
+            <div class="tables" id="tableGrnWeekly"></div>
           </div>
           <div>
             <div class="button btnLabel">
               <h3>Weekly Combined Finishing Inventory</h3>
-              <button class ="btn" id ="weeklyCombinedDownload-xlsx">Save XLSX</button>
-              <button class ="btn" id="weeklyCombinedPrint-table">Print Table</button>
+              <button class="btn" id="weeklyCombinedDownload-xlsx">
+                Save XLSX
+              </button>
+              <button class="btn" id="weeklyCombinedPrint-table">
+                Print Table
+              </button>
             </div>
             <div class="tables" id="tableCombinedWeekly"></div>
           </div>
+        </div>
       </div>
-    </div>
 
-    <div class="boxxes" id="invMonthly">
-      <form class="form" id="frmMonthly">
-        <h1>Monthly Inventory</h1>
-        <div class="input">
-          <select name="viewInvMatWeekly" id="selMonthly"></select>
-        </div>
-      </form>
-      <div id="tableMonthlyDiv">
-        <div class="gridMonthly">         
-          <div class="tables" id="tableHopMonthly"></div>            
-          <div class="tables" id="tableMatMonthly"></div>          
-          <div class="tables" id="tableGrnMonthly"></div>          
-        </div>
-        <div>
-          <div class="button btnLabel">
-            <h3>Monthly Combined Finishing Inventory</h3>
-            <button class ="btn" id ="monthlyCombinedDownload-xlsx">Save XLSX</button>
-            <button class ="btn" id="monthlyCombinedPrint-table">Print Table</button>
+      <div class="boxxes" id="invMonthly">
+        <form class="form" id="frmMonthly">
+          <h1>Monthly Inventory</h1>
+          <div class="input">
+            <select name="viewInvMatWeekly" id="selMonthly"></select>
           </div>
-          <div class="tables" id="tableCombinedMonthly"></div>
+        </form>
+        <div id="tableMonthlyDiv">
+          <div class="gridMonthly">
+            <div class="tables" id="tableHopMonthly"></div>
+            <div class="tables" id="tableMatMonthly"></div>
+            <div class="tables" id="tableGrnMonthly"></div>
+          </div>
+          <div>
+            <div class="button btnLabel">
+              <h3>Monthly Combined Finishing Inventory</h3>
+              <button class="btn" id="monthlyCombinedDownload-xlsx">
+                Save XLSX
+              </button>
+              <button class="btn" id="monthlyCombinedPrint-table">
+                Print Table
+              </button>
+            </div>
+            <div class="tables" id="tableCombinedMonthly"></div>
+          </div>
         </div>
       </div>
     </div>
+    <!-- end container2 -->
 
-  </div><!-- end container2 -->
-
-  <script src="../../commonJS/index.js"></script>
-  <script src="../scripts/invFin.js"></script>
-</body>
+    <script src="../../commonJS/index.js"></script>
+    <script src="../scripts/invFin.js"></script>
+  </body>
 </html>

@@ -5,13 +5,11 @@
   --shadow: 0 1px 5px rgba(104, 104, 104, 0.8)
 } */
 :root {
-  --primary: #E0C190;
-  --dark: #634E2C;
-  --light: #F5E5CB;
-  --shadow: 0 1px 5px rgba(104, 104, 104, 0.8)
+  --primary: #e0c190;
+  --dark: #634e2c;
+  --light: #f5e5cb;
+  --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
 }
-
-
 
 /* .tabulator-tableHolder {
   color:var(--dark);
@@ -28,13 +26,10 @@
   background-color: #E8DAC3;
 } */
 
-
-
 * {
   margin: 0;
   padding: 0;
 }
-
 
 html {
   box-sizing: border-box;
@@ -48,7 +43,7 @@ html {
 
 body {
   /* background: #ccc; */
-  background: #E8DAC3;
+  background: #e8dac3;
   padding: 25px;
   line-height: 1.4;
 }
@@ -62,7 +57,6 @@ body {
   max-width: 75px;
 }
 
-
 header h1 {
   font-family: helvetica;
   font-size: 3rem;
@@ -75,7 +69,7 @@ header h1 {
   grid-gap: 20px;
   padding: 0;
   list-style: none;
-  line-height: .5;
+  line-height: 0.5;
   grid-template-columns: repeat(6, 1fr);
 }
 
@@ -88,7 +82,7 @@ header h1 {
   text-align: center;
   text-transform: uppercase;
   font-size: 1rem;
-  box-shadow: var(--shadow);  
+  box-shadow: var(--shadow);
 }
 
 .spacer {
@@ -115,7 +109,7 @@ a {
   grid-template-columns: repeat(4, 1fr);
 }
 
-.boxes div a{
+.boxes div a {
   height: 75px;
 }
 
@@ -137,31 +131,31 @@ a {
   color: var(--light);
 }
 
-.tabulator { 
-  font-size: 18px; 
+.tabulator {
+  font-size: 18px;
 }
 
 @media (max-width: 850px) {
   .main-nav ul {
-  display: grid;
-  grid-gap: 20px;
-  padding: 0;
-  list-style: none;
-  grid-template-columns: repeat(3, 1fr);
-}
-  
+    display: grid;
+    grid-gap: 20px;
+    padding: 0;
+    list-style: none;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .boxes {
-  display: grid;
-  grid-gap: 25px;
-  padding: 25;
-  list-style: none;
-  grid-template-columns: repeat(2, 1fr);
-}
-  
+    display: grid;
+    grid-gap: 25px;
+    padding: 25;
+    list-style: none;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   header h1 {
-  font-family: helvetica;
-  font-size: 1.5rem;
-  text-align: center;
+    font-family: helvetica;
+    font-size: 1.5rem;
+    text-align: center;
   }
   .logo {
     max-width: 75px;
@@ -170,25 +164,25 @@ a {
 
 @media (max-width: 700px) {
   .main-nav ul {
-  display: grid;
-  grid-gap: 20px;
-  padding: 0;
-  list-style: none;
-  grid-template-columns: repeat(2, 1fr);
-}
-  
+    display: grid;
+    grid-gap: 20px;
+    padding: 0;
+    list-style: none;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .boxes {
-  display: grid;
-  grid-gap: 25px;
-  padding: 25;
-  list-style: none;
-  grid-template-columns: repeat(2, 1fr);
-}
-  
+    display: grid;
+    grid-gap: 25px;
+    padding: 25;
+    list-style: none;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   header h1 {
-  font-family: helvetica;
-  font-size: 1.5rem;
-  text-align: center;
+    font-family: helvetica;
+    font-size: 1.5rem;
+    text-align: center;
   }
   .logo {
     max-width: 50px;

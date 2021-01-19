@@ -3,7 +3,7 @@
   margin: 0 auto;
 }
 
-.sub-nav ul{
+.sub-nav ul {
   display: grid;
   grid-gap: 20px;
   padding: 0;
@@ -25,22 +25,24 @@
   border-radius: 10px;
 }
 
-.form input, select, option {
+.form input,
+select,
+option {
   text-align: center;
   margin: 5px;
   width: 100%;
   font-size: 20px;
   height: 44px;
   text-align-last: center;
-  border-radius: 10px; 
+  border-radius: 10px;
 }
 
 .button button {
   background-color: cornflowerblue;
   border: 1px solid green;
   color: white;
-  padding: 10px 24px; 
-  cursor: pointer; 
+  padding: 10px 24px;
+  cursor: pointer;
   width: 20%;
   margin: 5px;
   margin-top: 50px;
@@ -63,7 +65,6 @@
   margin: auto;
 }
 
-
 @media (max-width: 850px) {
   /* .form input, textarea, select, option { */
   /* width: 70%;   */
@@ -75,12 +76,12 @@
     grid-template-columns: repeat(2, 1fr);
   }
   .button button {
-  width: 35%;
+    width: 35%;
   }
   #note {
     width: 70%;
   }
-}  
+}
 @media (max-width: 700px) {
   .form {
     grid-template-columns: repeat(1, 1fr);
@@ -89,7 +90,7 @@
     grid-template-columns: repeat(1, 1fr);
   }
   .button button {
-  width: 45%;
+    width: 45%;
   }
   #note {
     width: 90%;
@@ -130,6 +131,7 @@
   visibility: visible;
 }
 
-.tabulator-print-header, tabulator-print-footer{
-  text-align:center;
+.tabulator-print-header,
+tabulator-print-footer {
+  text-align: center;
 }

@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Offline</title>
-</head>
-<body>
-  <h1>You are offline</h1>
-  <h3>Please reestablish an internet connection</h3>
-  
-  <button onclick="goBack()">Go Back</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Offline</title>
+  </head>
+  <body>
+    <h1>You are offline</h1>
+    <h3>Please reestablish an internet connection</h3>
 
-  <script>
-    function goBack() {
-      // window.history.back()
-      window.location.replace('index.html')
-    }
-  </script>
+    <button onclick="goBack()">Go Back</button>
 
-</body>
+    <script>
+      function goBack() {
+        window.history.back();
+        // window.location.replace('index.html');
+      }
+    </script>
+  </body>
 </html>

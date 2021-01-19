@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-  <meta name="viewport" content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height">
-  
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta
+      name="viewport"
+      content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height"
+    />
 
+    <title>Login</title>
+    <link rel="stylesheet" href="./login.css" />
+  </head>
+  <body>
+    <div class="box">
+      <h2>Login</h2>
+      <form action="" id="form">
+        <div class="inputBox">
+          <input type="text" id="username" required="" placeholder="username" />
+        </div>
 
-  <title>Login</title>
-  <link rel="stylesheet" href="./login.css">
-</head>
-<body>
-  <div class="box">
-    <h2>Login</h2>
-    <form action="" id="form">
-      
-      <div class="inputBox">
-        <input type="text" id="username" required="" placeholder="username">
-        
-      </div>
-      
-      <div class="inputBox">
-        <input type="password" id="password" required="" placeholder="password">
-        
-      </div>
-      <input type="submit" id="submit" value="Submit">
-    </form>
-  </div>
-  <script src="./login.js"></script>
-</body>
+        <div class="inputBox">
+          <input
+            type="password"
+            id="password"
+            required=""
+            placeholder="password"
+          />
+        </div>
+        <input type="submit" id="submit" value="Submit" />
+      </form>
+    </div>
+    <script src="./login.js"></script>
+  </body>
 </html>

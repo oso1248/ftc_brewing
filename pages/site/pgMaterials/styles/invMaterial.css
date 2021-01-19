@@ -3,17 +3,19 @@
   margin-bottom: 15px;
 }
 
-body, input {
-  font-size:20pt;
+body,
+input {
+  font-size: 20pt;
 }
 
-input, label {
-  vertical-align:middle;
+input,
+label {
+  vertical-align: middle;
   width: 100%;
   height: 50px;
 }
 
-input[type="file"] {
+input[type='file'] {
   display: none;
 }
 
@@ -32,7 +34,9 @@ input[type="file"] {
   border-radius: 10px;
 }
 
-.form input, select, option {
+.form input,
+select,
+option {
   text-align: center;
   margin: 5px;
   /* line-height: 5; */
@@ -40,7 +44,7 @@ input[type="file"] {
   font-size: 20px;
   height: 44px;
   text-align-last: center;
-  border-radius: 10px; 
+  border-radius: 10px;
 }
 
 .form {
@@ -51,8 +55,8 @@ input[type="file"] {
   background-color: cornflowerblue;
   border: 1px solid green;
   color: white;
-  padding: 10px 24px; 
-  cursor: pointer; 
+  padding: 10px 24px;
+  cursor: pointer;
   width: 45%;
   margin: 0px;
   margin-bottom: 10px;

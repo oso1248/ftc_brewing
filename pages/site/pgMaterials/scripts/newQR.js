@@ -1,6 +1,6 @@
 let DateTime = luxon.DateTime;
-import QrScanner from '../../dist/qr-scanner.min.mjs';
-QrScanner.WORKER_PATH = '../../dist/qr-scanner-worker.min.mjs';
+// import QrScanner from '../../dist/qr-scanner.min.mjs';
+// QrScanner.WORKER_PATH = '../../dist/qr-scanner-worker.min.mjs';
 
 String.prototype.toProperCase = function () {
   return this.replace(/\w\S*/g, function (txt) {
@@ -99,12 +99,7 @@ function commodityList() {
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          {
-            title: 'Commodity',
-            field: 'commodity',
-            hozAlign: 'left',
-            frozen: true,
-          },
+          { title: 'Commodity', field: 'commodity', hozAlign: 'left', frozen: true },
           { title: 'Location', field: 'location', hozAlign: 'left' },
           { title: 'Active', field: 'active', hozAlign: 'left' },
         ],

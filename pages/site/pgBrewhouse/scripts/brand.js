@@ -49,7 +49,8 @@ function viewBrandBrew() {
       viewBrandBrwTable = new Tabulator('#brndViewTbl', {
         printHeader: '<h1>Brew Brands<h1>',
         resizableColumns: false,
-        height: '330px',
+        height: '100%',
+        layoutColumnsOnNewData: true,
         layout: 'fitDataFill',
         data: tableData,
         columns: [
@@ -106,7 +107,8 @@ function stdHopTbl() {
       viewStdHopTable = new Tabulator('#stdHopTbl', {
         printHeader: '<h1>Standard Hops<h1>',
         resizableColumns: false,
-        height: '300px',
+        height: '100%',
+        layoutColumnsOnNewData: true,
         layout: 'fitDataFill',
         data: tableData,
         columns: [
@@ -155,7 +157,8 @@ function dryHopTbl() {
       viewDryHopTable = new Tabulator('#dryHopTbl', {
         printHeader: '<h1>Dry Hops<h1>',
         resizableColumns: false,
-        height: '300px',
+        height: '100%',
+        layoutColumnsOnNewData: true,
         layout: 'fitDataFill',
         data: tableData,
         columns: [
@@ -201,7 +204,8 @@ function sprSacTbl() {
       viewSprSacTable = new Tabulator('#sprSacTbl', {
         printHeader: '<h1>Super Sacks<h1>',
         resizableColumns: false,
-        height: '300px',
+        height: '100%',
+        layoutColumnsOnNewData: true,
         layout: 'fitDataFill',
         data: tableData,
         columns: [

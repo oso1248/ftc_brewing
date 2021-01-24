@@ -22,7 +22,8 @@ function setsTable() {
     .then((res) => {
       let tableData = res.data;
       hopsTable = new Tabulator('#invHopDaily', {
-        height: '330px',
+        height: '100%',
+        layoutColumnsOnNewData: true,
         layout: 'fitDataFill',
         data: tableData,
         columns: [

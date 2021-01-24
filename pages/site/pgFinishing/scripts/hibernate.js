@@ -299,17 +299,13 @@ function view() {
       hibernateTable = new Tabulator('#list', {
         printHeader: '<h1>Hibernation Log<h1>',
         resizableColumns: false,
-        height: '330px',
+        height: '100%',
+        layoutColumnsOnNewData: true,
         layout: 'fitDataFill',
         data: tableData,
         columns: [
           { title: 'Brand', field: 'brand', hozAlign: 'center', frozen: true },
-          {
-            title: 'Org Tk',
-            field: 'org_vessel',
-            hozAlign: 'center',
-            frozen: true,
-          },
+          { title: 'Org Tk', field: 'org_vessel', hozAlign: 'center', frozen: true },
           { title: 'Volume', field: 'org_vol', hozAlign: 'center' },
           { title: 'Chp Tk', field: 'int_vessel', hozAlign: 'center' },
           { title: 'Volume', field: 'int_vol', hozAlign: 'center' },

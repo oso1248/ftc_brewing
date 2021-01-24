@@ -8,9 +8,7 @@ async function type(data) {
   return data;
 }
 async function location(data) {
-  let rtn = await db('mtl_location')
-    .select('id')
-    .where('location', data.loc_id);
+  let rtn = await db('mtl_location').select('id').where('location', data.loc_id);
   let { id } = rtn[0];
   data['loc_id'] = id;
   return data;
@@ -28,49 +26,22 @@ function getAll(active) {
     return db('vessel AS ves')
       .join('vessel_type as typ', 'ves.type_id', '=', 'typ.id')
       .join('mtl_location as loc', 'ves.loc_id', '=', 'loc.id')
-      .select(
-        'ves.id',
-        'ves.vessel',
-        'ves.active',
-        'ves.note',
-        'loc.location',
-        'ves.volume',
-        'typ.type'
-      )
+      .select('ves.id', 'ves.vessel', 'ves.active', 'ves.note', 'loc.location', 'ves.volume', 'typ.type')
       .where('ves.active', '=', 'Yes')
       .orderBy('ves.vessel');
   } else {
     return db('vessel AS ves')
       .join('vessel_type as typ', 'ves.type_id', '=', 'typ.id')
       .join('mtl_location as loc', 'ves.loc_id', '=', 'loc.id')
-      .select(
-        'ves.id',
-        'ves.vessel',
-        'ves.active',
-        'ves.note',
-        'loc.location',
-        'ves.volume',
-        'typ.type'
-      )
-      .orderBy([
-        { column: 'ves.active', order: 'desc' },
-        { column: 'ves.vessel' },
-      ]);
+      .select('ves.id', 'ves.vessel', 'ves.active', 'ves.note', 'loc.location', 'ves.volume', 'typ.type')
+      .orderBy([{ column: 'ves.active', order: 'desc' }, { column: 'ves.vessel' }]);
   }
 }
 function getByName(name) {
   return db('vessel AS ves')
     .join('vessel_type as typ', 'ves.type_id', '=', 'typ.id')
     .join('mtl_location as loc', 'ves.loc_id', '=', 'loc.id')
-    .select(
-      'ves.id',
-      'ves.vessel',
-      'ves.active',
-      'ves.note',
-      'loc.location',
-      'ves.volume',
-      'typ.type'
-    )
+    .select('ves.id', 'ves.vessel', 'ves.active', 'ves.note', 'loc.location', 'ves.volume', 'typ.type')
     .where({ 'ves.vessel': name })
     .first();
 }
@@ -91,9 +62,7 @@ async function destroy(name) {
 
 //vessel types
 function getAllVesselTypes() {
-  return db('vessel_type AS ves')
-    .select('ves.id', 'ves.type')
-    .orderBy('ves.type');
+  return db('vessel_type AS ves').select('ves.id', 'ves.type').orderBy('ves.type');
 }
 
 // get vessel by type
@@ -102,15 +71,7 @@ function getByType(req) {
     return db('vessel AS ves')
       .join('mtl_location as loc', 'ves.loc_id', '=', 'loc.id')
       .join('vessel_type as type', 'ves.type_id', '=', 'type.id')
-      .select(
-        'ves.id',
-        'ves.vessel',
-        'ves.active',
-        'ves.note',
-        'loc.location',
-        'ves.volume',
-        'type.type'
-      )
+      .select('ves.id', 'ves.vessel', 'ves.active', 'ves.note', 'loc.location', 'ves.volume', 'type.type')
       .where('ves.active', '=', 'Yes')
       .andWhere('type.type', '=', req.type)
       .orderBy('ves.vessel');
@@ -118,20 +79,9 @@ function getByType(req) {
     return db('vessel AS ves')
       .join('mtl_location as loc', 'ves.loc_id', '=', 'loc.id')
       .join('vessel_type as type', 'ves.type_id', '=', 'type.id')
-      .select(
-        'ves.id',
-        'ves.vessel',
-        'ves.active',
-        'ves.note',
-        'loc.location',
-        'ves.volume',
-        'type.type'
-      )
+      .select('ves.id', 'ves.vessel', 'ves.active', 'ves.note', 'loc.location', 'ves.volume', 'type.type')
       .where('type.type', '=', req.type)
-      .orderBy([
-        { column: 'ves.active', order: 'desc' },
-        { column: 'ves.vessel' },
-      ]);
+      .orderBy([{ column: 'ves.active', order: 'desc' }, { column: 'ves.vessel' }]);
   }
 }
 

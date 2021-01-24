@@ -3,20 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <meta
-      name="viewport"
-      content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height"
-    />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height" />
     <title>Weekly Hop Inv</title>
 
-    <link
-      href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css"
-      rel="stylesheet"
-    />
-    <script
-      type="text/javascript"
-      src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"
-    ></script>
+    <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
     <script src="https://dmla.github.io/jsqrcode/src/qr_packed.js"></script>
@@ -30,15 +21,7 @@
       <ul class="">
         <li><a id="btnBack">Back</a></li>
         <li>
-          <label id="scanner" class="qrcode-text-btn"
-            ><a>Scan</a
-            ><input
-              type="file"
-              accept="image/*"
-              capture="environment"
-              onchange="openQRCamera(this);"
-              tabindex="-1"
-          /></label>
+          <label id="scanner" class="qrcode-text-btn"><a>Scan</a><input type="file" accept="image/*" capture="environment" onchange="openQRCamera(this);" tabindex="-1" /></label>
         </li>
       </ul>
     </nav>
@@ -57,69 +40,31 @@
         </div>
         <div class="tooltip input">
           <span class="tooltiptext">Per Pallet</span>
-          <input
-            type="number"
-            name="addPerPallet"
-            id="per_pallet"
-            placeholder="Per Pallet"
-          />
+          <input type="number" name="addPerPallet" id="per_pallet" placeholder="Per Pallet" />
         </div>
         <div class="tooltip input">
           <span class="tooltiptext">Pallet Count</span>
-          <input
-            type="number"
-            name="addPerPallet"
-            id="pallet_count"
-            placeholder="Pallets"
-          />
+          <input type="number" name="addPerPallet" id="pallet_count" placeholder="Pallets" />
         </div>
         <div class="tooltip input">
           <span class="tooltiptext">Per Unit</span>
-          <input
-            type="number"
-            name="addUnitTotal"
-            id="per_unit"
-            placeholder="Per Unit"
-          />
+          <input type="number" name="addUnitTotal" id="per_unit" placeholder="Per Unit" />
         </div>
         <div class="tooltip input">
           <span class="tooltiptext">Unit Count</span>
-          <input
-            type="number"
-            name="addCount"
-            id="unit_count"
-            placeholder="Units"
-          />
+          <input type="number" name="addCount" id="unit_count" placeholder="Units" />
         </div>
         <div class="tooltip input">
           <span class="tooltiptext">Loose Pounds</span>
-          <input
-            type="number"
-            name="addCount"
-            id="lbs"
-            placeholder="Loose Pounds"
-          />
+          <input type="number" name="addCount" id="lbs" placeholder="Loose Pounds" />
         </div>
         <div class="tooltip input">
           <span class="tooltiptext">Lot</span>
-          <input
-            type="text"
-            name="addLot"
-            id="lot"
-            placeholder="Lot"
-            required
-            list="lots"
-          />
+          <input type="text" name="addLot" id="lot" placeholder="Lot" required list="lots" />
           <datalist id="lots"></datalist>
         </div>
         <div class="input">
-          <textarea
-            name="updateNote"
-            id="note"
-            cols="21"
-            rows="5"
-            placeholder="Note"
-          ></textarea>
+          <textarea name="updateNote" id="note" cols="21" rows="5" placeholder="Note"></textarea>
         </div>
 
         <div class="button">

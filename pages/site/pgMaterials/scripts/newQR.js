@@ -1,4 +1,6 @@
 let DateTime = luxon.DateTime;
+import QrScanner from '../../dist/qr-scanner.min.mjs';
+QrScanner.WORKER_PATH = '../../dist/qr-scanner-worker.min.mjs';
 
 String.prototype.toProperCase = function () {
   return this.replace(/\w\S*/g, function (txt) {
@@ -143,7 +145,7 @@ function inventoryList() {
     })
     .catch((err) => console.log(err.detail));
 }
-async function deleteOnLoad() {
+function deleteOnLoad() {
   let data = {};
   data.startDate = DateTime.local().startOf('day').minus({ minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
   data.endDate = DateTime.local().endOf('day').minus({ minutes: 20 }).toFormat('yyyy-MM-dd HH:mm');
@@ -158,7 +160,7 @@ async function deleteOnLoad() {
     })
     .catch((err) => console.log(err));
 }
-async function deleteRow(commodity) {
+function deleteRow(commodity) {
   commodityTable
     .getRows()
     .filter((row) => row.getData().commodity == commodity)
@@ -299,26 +301,6 @@ async function deleteRowInv(ev) {
   await commodityList();
   await inventoryList();
   await deleteOnLoad();
-}
-
-// called from ./invMaterial.html
-function openQRCamera(node) {
-  let reader = new FileReader();
-  reader.onload = function () {
-    node.value = '';
-    qrcode.callback = function (res) {
-      if (res instanceof Error) {
-        alert(`No QR code found. Please make sure the QR code is within the camera's frame and try again.`);
-      } else {
-        // alert(res)
-        // document.getElementById('comm').value = res
-        document.getElementById(res).selected = true;
-        selectCommodity();
-      }
-    };
-    qrcode.decode(reader.result);
-  };
-  reader.readAsDataURL(node.files[0]);
 }
 
 document.getElementById('btnBack').addEventListener('click', () => {

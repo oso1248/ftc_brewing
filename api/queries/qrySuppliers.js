@@ -14,9 +14,7 @@ function getByName(name) {
 }
 
 async function change(name, changes) {
-  let response = await db('mtl_supplier')
-    .where({ company: name })
-    .update(changes);
+  let response = await db('mtl_supplier').where({ company: name }).update(changes);
   return getByName(name);
 }
 

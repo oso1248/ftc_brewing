@@ -88,7 +88,7 @@ function viewBrandBrew() {
       viewBrandBrwTable = new Tabulator('#viewBrandBrw', {
         printHeader: '<h1>Brew Brands<h1>',
         resizableColumns: false,
-        height: '330px',
+        height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
@@ -103,18 +103,14 @@ function viewBrandBrew() {
     })
     .catch((err) => console.log(err));
 }
-document
-  .getElementById('xlsxViewBrandBrwTable')
-  .addEventListener('click', () => {
-    viewBrandBrwTable.download('xlsx', 'brand_brw.xlsx', {
-      sheetName: 'Brands',
-    });
+document.getElementById('xlsxViewBrandBrwTable').addEventListener('click', () => {
+  viewBrandBrwTable.download('xlsx', 'brand_brw.xlsx', {
+    sheetName: 'Brands',
   });
-document
-  .getElementById('printViewBrandBrwTable')
-  .addEventListener('click', () => {
-    viewBrandBrwTable.print(false, true);
-  });
+});
+document.getElementById('printViewBrandBrwTable').addEventListener('click', () => {
+  viewBrandBrwTable.print(false, true);
+});
 
 // Fin
 document.getElementById('viewFinish').addEventListener('click', viewBrandFin);
@@ -131,7 +127,7 @@ function viewBrandFin() {
       viewBrandFinTable = new Tabulator('#viewBrandFin', {
         printHeader: '<h1>Finishing Brands<h1>',
         resizableColumns: false,
-        height: '330px',
+        height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
@@ -150,18 +146,14 @@ function viewBrandFin() {
     })
     .catch((err) => console.log(err));
 }
-document
-  .getElementById('xlsxViewBrandFinTable')
-  .addEventListener('click', () => {
-    viewBrandFinTable.download('xlsx', 'brand_fin.xlsx', {
-      sheetName: 'Brands',
-    });
+document.getElementById('xlsxViewBrandFinTable').addEventListener('click', () => {
+  viewBrandFinTable.download('xlsx', 'brand_fin.xlsx', {
+    sheetName: 'Brands',
   });
-document
-  .getElementById('printViewBrandFinTable')
-  .addEventListener('click', () => {
-    viewBrandFinTable.print(false, true);
-  });
+});
+document.getElementById('printViewBrandFinTable').addEventListener('click', () => {
+  viewBrandFinTable.print(false, true);
+});
 
 // Pck
 document.getElementById('viewPackage').addEventListener('click', viewBrandPck);
@@ -178,16 +170,11 @@ function viewBrandPck() {
       viewBrandPckTable = new Tabulator('#viewBrandPck', {
         printHeader: '<h1>Packaging Brands<h1>',
         resizableColumns: false,
-        height: '330px',
+        height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          {
-            title: 'Brand',
-            field: 'brndPck',
-            hozAlign: 'center',
-            frozen: true,
-          },
+          { title: 'Brand', field: 'brndPck', hozAlign: 'center', frozen: true },
           { title: 'Active', field: 'active', hozAlign: 'center' },
           { title: 'Finish', field: 'brndFin', hozAlign: 'center' },
           { title: 'Schoene', field: 'brndPck', hozAlign: 'center' },
@@ -197,18 +184,14 @@ function viewBrandPck() {
     })
     .catch((err) => console.log(err));
 }
-document
-  .getElementById('xlsxViewBrandPckTable')
-  .addEventListener('click', () => {
-    viewBrandPckTable.download('xlsx', 'brand_pck.xlsx', {
-      sheetName: 'Brands',
-    });
+document.getElementById('xlsxViewBrandPckTable').addEventListener('click', () => {
+  viewBrandPckTable.download('xlsx', 'brand_pck.xlsx', {
+    sheetName: 'Brands',
   });
-document
-  .getElementById('printViewBrandPckTable')
-  .addEventListener('click', () => {
-    viewBrandPckTable.print(false, true);
-  });
+});
+document.getElementById('printViewBrandPckTable').addEventListener('click', () => {
+  viewBrandPckTable.print(false, true);
+});
 
 // Details Brand
 document.getElementById('detailsBrands').onclick = detailBrands;
@@ -240,9 +223,7 @@ function detailBrands() {
   createList(api, dropDown, title);
 }
 // Brw
-document
-  .getElementById('brwBrandDetail')
-  .addEventListener('change', detailBrandBrew);
+document.getElementById('brwBrandDetail').addEventListener('change', detailBrandBrew);
 function detailBrandBrew() {
   document.getElementById('detailPckBrand').style.display = 'none';
   document.getElementById('detailFinBrand').style.display = 'none';
@@ -258,18 +239,7 @@ function detailBrandBrew() {
 }
 let detailBrandBrwTablePre;
 function detailBrandBrewPre(name) {
-  let labels = [
-    'Brand',
-    'Chip Tank',
-    'UniTank',
-    'Lines',
-    'Cooler',
-    'Seperators',
-    'ACP',
-    'Schoene Tank',
-    'Fill Tank',
-    'Note',
-  ];
+  let labels = ['Brand', 'Chip Tank', 'UniTank', 'Lines', 'Cooler', 'Seperators', 'ACP', 'Schoene Tank', 'Fill Tank', 'Note'];
   axios
     .post('/api/brand/detail/csxpre', { name: `${name}` })
     .then((res) => {
@@ -279,7 +249,7 @@ function detailBrandBrewPre(name) {
       detailBrandBrwTablePre = new Tabulator('#detailBrandBrwPre', {
         printHeader: '<h1>Pre CSX<h1>',
         resizableColumns: false,
-        height: '300px',
+        height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
@@ -290,29 +260,17 @@ function detailBrandBrewPre(name) {
     })
     .catch((err) => console.log(err));
 }
-document
-  .getElementById('xlsxDetailBrandBrwTablePre')
-  .addEventListener('click', () => {
-    detailBrandBrwTablePre.download('xlsx', 'pre_csx.xlsx', {
-      sheetName: 'Pre Csx',
-    });
+document.getElementById('xlsxDetailBrandBrwTablePre').addEventListener('click', () => {
+  detailBrandBrwTablePre.download('xlsx', 'pre_csx.xlsx', {
+    sheetName: 'Pre Csx',
   });
-document
-  .getElementById('printDetailBrandBrwTablePre')
-  .addEventListener('click', () => {
-    detailBrandBrwTablePre.print(false, true);
-  });
+});
+document.getElementById('printDetailBrandBrwTablePre').addEventListener('click', () => {
+  detailBrandBrwTablePre.print(false, true);
+});
 let detailBrandBrwTablePost;
 function detailBrandBrewPost(name) {
-  let labels = [
-    'Brand',
-    'Chip Tank',
-    'UniTank',
-    'Lines',
-    'Seperators',
-    'Schoene Tank',
-    'Note',
-  ];
+  let labels = ['Brand', 'Chip Tank', 'UniTank', 'Lines', 'Seperators', 'Schoene Tank', 'Note'];
   axios
     .post('/api/brand/detail/csxpost/', { name: `${name}` })
     .then((res) => {
@@ -322,7 +280,7 @@ function detailBrandBrewPost(name) {
       detailBrandBrwTablePost = new Tabulator('#detailBrandBrwPost', {
         printHeader: '<h1>Post CSX<h1>',
         resizableColumns: false,
-        height: '218px',
+        height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
@@ -333,23 +291,17 @@ function detailBrandBrewPost(name) {
     })
     .catch((err) => console.log(err));
 }
-document
-  .getElementById('xlsxDetailBrandBrwTablePost')
-  .addEventListener('click', () => {
-    detailBrandBrwTablePost.download('xlsx', 'post_csx.xlsx', {
-      sheetName: 'Post Csx',
-    });
+document.getElementById('xlsxDetailBrandBrwTablePost').addEventListener('click', () => {
+  detailBrandBrwTablePost.download('xlsx', 'post_csx.xlsx', {
+    sheetName: 'Post Csx',
   });
-document
-  .getElementById('printDetailBrandBrwTablePost')
-  .addEventListener('click', () => {
-    detailBrandBrwTablePost.print(false, true);
-  });
+});
+document.getElementById('printDetailBrandBrwTablePost').addEventListener('click', () => {
+  detailBrandBrwTablePost.print(false, true);
+});
 
 // Fin
-document
-  .getElementById('finBrandDetail')
-  .addEventListener('change', detailBrandFin);
+document.getElementById('finBrandDetail').addEventListener('change', detailBrandFin);
 async function detailBrandFin() {
   document.getElementById('detailPckBrand').style.display = 'none';
   document.getElementById('detailBrwBrand').style.display = 'none';
@@ -364,17 +316,7 @@ async function detailBrandFin() {
 }
 let detailBrandFinTablePre;
 function detailBrandFinPre(name) {
-  let labels = [
-    'Brand',
-    'Schoene Tank',
-    'System',
-    'Trap',
-    'Filter Beer Tank',
-    'Fill Tank',
-    'Injection',
-    'Control',
-    'Note',
-  ];
+  let labels = ['Brand', 'Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Fill Tank', 'Injection', 'Control', 'Note'];
   axios
     .post('/api/brand/detail/filpre/', { name: `${name}` })
     .then((res) => {
@@ -384,7 +326,7 @@ function detailBrandFinPre(name) {
       detailBrandFinTablePre = new Tabulator('#detailBrandFinPre', {
         printHeader: '<h1>Pre Filter<h1>',
         resizableColumns: false,
-        height: '272px',
+        height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
@@ -395,29 +337,17 @@ function detailBrandFinPre(name) {
     })
     .catch((err) => console.log(err));
 }
-document
-  .getElementById('xlsxDetailBrandFinTablePre')
-  .addEventListener('click', () => {
-    detailBrandFinTablePre.download('xlsx', 'pre_filter.xlsx', {
-      sheetName: 'Pre Filter',
-    });
+document.getElementById('xlsxDetailBrandFinTablePre').addEventListener('click', () => {
+  detailBrandFinTablePre.download('xlsx', 'pre_filter.xlsx', {
+    sheetName: 'Pre Filter',
   });
-document
-  .getElementById('printDetailBrandFinTablePre')
-  .addEventListener('click', () => {
-    detailBrandFinTablePre.print(false, true);
-  });
+});
+document.getElementById('printDetailBrandFinTablePre').addEventListener('click', () => {
+  detailBrandFinTablePre.print(false, true);
+});
 let detailBrandFinTablePost;
 function detailBrandFinPost(name) {
-  let labels = [
-    'Brand',
-    'Schoene Tank',
-    'System',
-    'Trap',
-    'Filter Beer Tank',
-    'Recover',
-    'Note',
-  ];
+  let labels = ['Brand', 'Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Recover', 'Note'];
   axios
     .post('/api/brand/detail/filpost/', { name: `${name}` })
     .then((res) => {
@@ -427,7 +357,7 @@ function detailBrandFinPost(name) {
       detailBrandFinTablePost = new Tabulator('#detailBrandFinPost', {
         printHeader: '<h1>Post FIlter<h1>',
         resizableColumns: false,
-        height: '218px',
+        height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
@@ -438,23 +368,17 @@ function detailBrandFinPost(name) {
     })
     .catch((err) => console.log(err));
 }
-document
-  .getElementById('xlsxDetailBrandFinTablePost')
-  .addEventListener('click', () => {
-    detailBrandFinTablePost.download('xlsx', 'post_filter.xlsx', {
-      sheetName: 'Post Filter',
-    });
+document.getElementById('xlsxDetailBrandFinTablePost').addEventListener('click', () => {
+  detailBrandFinTablePost.download('xlsx', 'post_filter.xlsx', {
+    sheetName: 'Post Filter',
   });
-document
-  .getElementById('printDetailBrandFinTablePost')
-  .addEventListener('click', () => {
-    detailBrandFinTablePost.print(false, true);
-  });
+});
+document.getElementById('printDetailBrandFinTablePost').addEventListener('click', () => {
+  detailBrandFinTablePost.print(false, true);
+});
 
 // Pck
-document
-  .getElementById('pckBrandDetail')
-  .addEventListener('change', detailBrandPck);
+document.getElementById('pckBrandDetail').addEventListener('change', detailBrandPck);
 async function detailBrandPck() {
   document.getElementById('detailBrwBrand').style.display = 'none';
   document.getElementById('detailFinBrand').style.display = 'none';
@@ -469,16 +393,7 @@ async function detailBrandPck() {
 }
 let detailBrandPckTablePre;
 function detailBrandPckPre(name) {
-  let labels = [
-    'Brand',
-    'Filter Beer Tank',
-    'Release Line',
-    'Package Line',
-    'Draft Line',
-    'Recover',
-    'Control',
-    'Note',
-  ];
+  let labels = ['Brand', 'Filter Beer Tank', 'Release Line', 'Package Line', 'Draft Line', 'Recover', 'Control', 'Note'];
   axios
     .post('/api/brand/detail/relpre/', { name: `${name}` })
     .then((res) => {
@@ -487,7 +402,7 @@ function detailBrandPckPre(name) {
       detailBrandPckTablePre = new Tabulator('#detailBrandPckPre', {
         printHeader: '<h1>Pre Release<h1>',
         resizableColumns: false,
-        height: '272px',
+        height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
@@ -498,29 +413,17 @@ function detailBrandPckPre(name) {
     })
     .catch((err) => console.log(err));
 }
-document
-  .getElementById('xlsxDetailBrandPckTablePre')
-  .addEventListener('click', () => {
-    detailBrandPckTablePre.download('xlsx', 'pre_release.xlsx', {
-      sheetName: 'Pre Release',
-    });
+document.getElementById('xlsxDetailBrandPckTablePre').addEventListener('click', () => {
+  detailBrandPckTablePre.download('xlsx', 'pre_release.xlsx', {
+    sheetName: 'Pre Release',
   });
-document
-  .getElementById('printDetailBrandPckTablePre')
-  .addEventListener('click', () => {
-    detailBrandPckTablePre.print(false, true);
-  });
+});
+document.getElementById('printDetailBrandPckTablePre').addEventListener('click', () => {
+  detailBrandPckTablePre.print(false, true);
+});
 let detailBrandPckTablePost;
 function detailBrandPckPost(name) {
-  let labels = [
-    'Brand',
-    'Filter Beer Tank',
-    'System Lines',
-    'Package',
-    'Draft',
-    'Recover',
-    'Note',
-  ];
+  let labels = ['Brand', 'Filter Beer Tank', 'System Lines', 'Package', 'Draft', 'Recover', 'Note'];
   axios
     .post('/api/brand/detail/relpost/', { name: `${name}` })
     .then((res) => {
@@ -529,7 +432,7 @@ function detailBrandPckPost(name) {
       detailBrandPckTablePost = new Tabulator('#detailBrandPckPost', {
         printHeader: '<h1>Post Release<h1>',
         resizableColumns: false,
-        height: '218px',
+        height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
@@ -540,18 +443,14 @@ function detailBrandPckPost(name) {
     })
     .catch((err) => console.log(err));
 }
-document
-  .getElementById('xlsxDetailBrandPckTablePost')
-  .addEventListener('click', () => {
-    detailBrandPckTablePost.download('xlsx', 'post_release.xlsx', {
-      sheetName: 'Post Release',
-    });
+document.getElementById('xlsxDetailBrandPckTablePost').addEventListener('click', () => {
+  detailBrandPckTablePost.download('xlsx', 'post_release.xlsx', {
+    sheetName: 'Post Release',
   });
-document
-  .getElementById('printDetailBrandPckTablePost')
-  .addEventListener('click', () => {
-    detailBrandPckTablePost.print(false, true);
-  });
+});
+document.getElementById('printDetailBrandPckTablePost').addEventListener('click', () => {
+  detailBrandPckTablePost.print(false, true);
+});
 
 //Recipe Brand
 document.getElementById('recipeBrands').onclick = recipeBrands;
@@ -583,9 +482,7 @@ function recipeBrands() {
   createList(api, dropDown, title);
 }
 // Chp
-document
-  .getElementById('chpBrandRecipe')
-  .addEventListener('change', recipeBrandChp);
+document.getElementById('chpBrandRecipe').addEventListener('change', recipeBrandChp);
 let recipeBrandChpTable;
 function recipeBrandChp() {
   document.getElementById('recipeChpBrand').style.display = 'block';
@@ -599,15 +496,7 @@ function recipeBrandChp() {
   recipeBrandChpDetail(name);
 }
 function recipeBrandChpDetail(name) {
-  let labels = [
-    'Brand',
-    'Diacetyl',
-    'Pentanedione',
-    'Acid Aldehyde',
-    'ABW',
-    'RDF',
-    'Note',
-  ];
+  let labels = ['Brand', 'Diacetyl', 'Pentanedione', 'Acid Aldehyde', 'ABW', 'RDF', 'Note'];
   axios
     .post('/api/brand/recipe/chp/', { name: `${name}` })
     .then((res) => {
@@ -616,7 +505,7 @@ function recipeBrandChpDetail(name) {
       recipeBrandChpTable = new Tabulator('#recipeBrandChp', {
         printHeader: '<h1>Chip Recipe<h1>',
         resizableColumns: false,
-        height: '300px',
+        height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
@@ -635,9 +524,7 @@ document.getElementById('printRecipeBrandChp').addEventListener('click', () => {
 });
 
 // Sch
-document
-  .getElementById('schBrandRecipe')
-  .addEventListener('change', recipeBrandSch);
+document.getElementById('schBrandRecipe').addEventListener('change', recipeBrandSch);
 let recipeBrandSchTable;
 function recipeBrandSch() {
   document.getElementById('recipeChpBrand').style.display = 'none';
@@ -660,7 +547,7 @@ function recipeBrandSchDetail(name) {
       recipeBrandSchTable = new Tabulator('#recipeBrandSch', {
         printHeader: '<h1>Schoene Recipe<h1>',
         resizableColumns: false,
-        height: '300px',
+        height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
@@ -681,9 +568,7 @@ document.getElementById('printRecipeBrandSch').addEventListener('click', () => {
 });
 
 // Fin
-document
-  .getElementById('finBrandRecipe')
-  .addEventListener('change', recipeBrandFin);
+document.getElementById('finBrandRecipe').addEventListener('change', recipeBrandFin);
 let recipeBrandFinTable;
 function recipeBrandFin() {
   document.getElementById('recipeChpBrand').style.display = 'none';
@@ -744,7 +629,7 @@ function recipeBrandFinDetail(name) {
       recipeBrandFinTable = new Tabulator('#recipeBrandFinTbl', {
         printHeader: '<h1>FIlter Release Recipe<h1>',
         resizableColumns: false,
-        height: '1025px',
+        height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
@@ -781,9 +666,7 @@ function injectionBrands() {
   let title = 'brndFin';
   createList(api, dropDown, title);
 }
-document
-  .getElementById('injectionBrand')
-  .addEventListener('change', injectionBrandFin);
+document.getElementById('injectionBrand').addEventListener('change', injectionBrandFin);
 let injectionTable;
 function injectionBrandFin() {
   let index = document.getElementById('injectionBrand').selectedIndex;
@@ -797,7 +680,7 @@ function injectionBrandFin() {
       injectionTable = new Tabulator('#injectionTable', {
         printHeader: '<h1>Injection Rates<h1>',
         resizableColumns: false,
-        height: '120x',
+        height: '100%',
         layout: 'fitDataFill',
         responsiveLayoutCollapseStartOpen: false,
         data: tableData,

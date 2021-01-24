@@ -118,9 +118,7 @@ function getByDateCombinedLogMonthly(data) {
 
 //Material weekly
 async function com(data) {
-  let rtn = await db('mtl_commodity')
-    .select('id')
-    .where('commodity', data['com_id']);
+  let rtn = await db('mtl_commodity').select('id').where('commodity', data['com_id']);
   let { id } = rtn[0];
   data['com_id'] = id;
   return data;
@@ -163,18 +161,7 @@ function getByDate(data) {
   return db('inv_mat_weekly as inv')
     .join('mtl_commodity as com', 'inv.com_id', '=', 'com.id')
     .join('mtl_uom as uom', 'com.uom_id', '=', 'uom.id')
-    .select(
-      'inv.id',
-      'com.commodity',
-      'com.sap',
-      'inv.total_per_unit',
-      'inv.total_count',
-      'inv.total_end',
-      'uom.uom',
-      'inv.username',
-      'inv.created_at',
-      'inv.note'
-    )
+    .select('inv.id', 'com.commodity', 'com.sap', 'inv.total_per_unit', 'inv.total_count', 'inv.total_end', 'uom.uom', 'inv.username', 'inv.created_at', 'inv.note')
     .where('inv.created_at', '>', data.startDate)
     .andWhere('inv.created_at', '<', data.endDate);
 }
@@ -204,18 +191,7 @@ function getByDateMonthly(data) {
   return db('inv_mat_monthly as inv')
     .join('mtl_commodity as com', 'inv.com_id', '=', 'com.id')
     .join('mtl_uom as uom', 'com.uom_id', '=', 'uom.id')
-    .select(
-      'inv.id',
-      'com.commodity',
-      'com.sap',
-      'inv.total_per_unit',
-      'inv.total_count',
-      'inv.total_end',
-      'uom.uom',
-      'inv.username',
-      'inv.created_at',
-      'inv.note'
-    )
+    .select('inv.id', 'com.commodity', 'com.sap', 'inv.total_per_unit', 'inv.total_count', 'inv.total_end', 'uom.uom', 'inv.username', 'inv.created_at', 'inv.note')
     .where('inv.created_at', '>', data.startDate)
     .andWhere('inv.created_at', '<', data.endDate);
 }
@@ -241,22 +217,19 @@ function getByIDHopWeekly(id) {
     .where({ 'inv.id': id });
 }
 function getHopWeeklyInvCombined(data) {
-  return (
-    db('inv_hop_weekly as inv')
-      .rightOuterJoin('mtl_commodity as com', function () {
-        this.on(function () {
-          this.on('inv.com_id', '=', 'com.id');
-          this.andOnVal('inv.created_at', '>', data.start);
-          this.andOnVal('inv.created_at', '<', data.end);
-        });
-      })
-      .join('mtl_type as typ', 'com.type_id', '=', 'typ.id')
-      .select('com.commodity', db.raw('SUM(inv.lbs) as lbs'))
-      .groupBy('com.commodity')
-      .where('typ.type', 'hop')
-      // .andWhere('com.active', 'Yes')
-      .orderBy('com.commodity')
-  );
+  return db('inv_hop_weekly as inv')
+    .rightOuterJoin('mtl_commodity as com', function () {
+      this.on(function () {
+        this.on('inv.com_id', '=', 'com.id');
+        this.andOnVal('inv.created_at', '>', data.start);
+        this.andOnVal('inv.created_at', '<', data.end);
+      });
+    })
+    .join('mtl_type as typ', 'com.type_id', '=', 'typ.id')
+    .select('com.commodity', db.raw('SUM(inv.lbs) as lbs'))
+    .groupBy('com.commodity')
+    .where('typ.type', 'hop')
+    .orderBy('com.commodity');
 }
 function getHopWeeklyInvHard(data) {
   return db('inv_hop_weekly as inv')
@@ -267,15 +240,7 @@ function getHopWeeklyInvHard(data) {
         this.andOnVal('inv.created_at', '<', data.endDate);
       });
     })
-    .select(
-      'inv.id',
-      'com.commodity',
-      'com.sap',
-      'inv.lot',
-      'inv.lbs',
-      'inv.username',
-      'inv.created_at'
-    )
+    .select('inv.id', 'com.commodity', 'com.sap', 'inv.lot', 'inv.lbs', 'inv.username', 'inv.created_at')
     .orderBy('com.commodity');
 }
 async function getInvHopWeeklyDate() {
@@ -315,15 +280,7 @@ function getHopMonthlyInvHard(data) {
         this.andOnVal('inv.created_at', '<', data.endDate);
       });
     })
-    .select(
-      'inv.id',
-      'com.commodity',
-      'com.sap',
-      'inv.lot',
-      'inv.lbs',
-      'inv.username',
-      'inv.created_at'
-    )
+    .select('inv.id', 'com.commodity', 'com.sap', 'inv.lot', 'inv.lbs', 'inv.username', 'inv.created_at')
     .orderBy('com.commodity');
 }
 async function getInvHopMonthlyDate() {
@@ -351,16 +308,10 @@ async function getInvHopDailyDate() {
   return rows;
 }
 async function deleteSets(time) {
-  await db('inv_hop_daily')
-    .del()
-    .where('created_at', '>', time.start)
-    .andWhere('created_at', '<', time.end);
+  await db('inv_hop_daily').del().where('created_at', '>', time.start).andWhere('created_at', '<', time.end);
 }
 async function deleteBrews(time) {
-  await db('inv_last_brews')
-    .del()
-    .where('created_at', '>', time.start)
-    .andWhere('created_at', '<', time.end);
+  await db('inv_last_brews').del().where('created_at', '>', time.start).andWhere('created_at', '<', time.end);
 }
 async function addSets(data) {
   await db('inv_hop_daily').insert(data);
@@ -456,19 +407,13 @@ async function getHopRollingInv(data) {
       if (invWeek[x].lbs === null) {
         invWeek[x].lbs = 0;
       }
-      invWeek[x].lbs =
-        parseFloat(invWeek[x].lbs) - sets[i].sets * hops[x].brand;
+      invWeek[x].lbs = parseFloat(invWeek[x].lbs) - sets[i].sets * hops[x].brand;
     }
   }
   return invWeek;
 }
 function getLastBrews(data) {
-  return db('inv_last_brews')
-    .select('bh1', 'bh2')
-    .where('created_at', '>=', data.startSets)
-    .andWhere('created_at', '<=', data.end)
-    .limit(1)
-    .orderBy('created_at', 'desc');
+  return db('inv_last_brews').select('bh1', 'bh2').where('created_at', '>=', data.startSets).andWhere('created_at', '<=', data.end).limit(1).orderBy('created_at', 'desc');
 }
 function getHopLots(data) {
   return db.raw(`
@@ -517,23 +462,10 @@ function finInjectionLogGet(data) {
   return db('fin_injection_log as inv')
     .join('brnd_fin as fin', 'inv.fin_id', '=', 'fin.id')
     .join('mtl_commodity as com', 'inv.com_id', '=', 'com.id')
-    .select(
-      'inv.fbt',
-      'fin.brand',
-      'inv.vol_fbt',
-      'com.commodity',
-      'inv.vol_ing',
-      'inv.lot',
-      'inv.username',
-      'inv.created_at'
-    )
+    .select('inv.fbt', 'fin.brand', 'inv.vol_fbt', 'com.commodity', 'inv.vol_ing', 'inv.lot', 'inv.username', 'inv.created_at')
     .where('inv.created_at', '>', data.start)
     .andWhere('inv.created_at', '<', data.end)
-    .orderBy([
-      { column: 'inv.created_at' },
-      { column: 'inv.fbt', order: 'desc' },
-      { column: 'com.commodity', order: 'asc' },
-    ]);
+    .orderBy([{ column: 'inv.created_at' }, { column: 'inv.fbt', order: 'desc' }, { column: 'com.commodity', order: 'asc' }]);
 }
 
 // material archive
@@ -548,25 +480,13 @@ async function addMatArchiveLog(data) {
 function getByIdArchive(id) {
   return db('mat_archive as inv')
     .join('mtl_commodity as com', 'inv.com_id', '=', 'com.id')
-    .select(
-      'com.commodity',
-      'inv.count_final',
-      'inv.total_end',
-      'inv.note',
-      'inv.username'
-    )
+    .select('com.commodity', 'inv.count_final', 'inv.total_end', 'inv.note', 'inv.username')
     .where({ 'inv.id': id });
 }
 function getMatArchiveByName(name) {
   return db('mat_archive as inv')
     .join('mtl_commodity as com', 'inv.com_id', '=', 'com.id')
-    .select(
-      'com.commodity',
-      'inv.count_final',
-      'inv.total_end',
-      'inv.note',
-      'inv.username'
-    )
+    .select('com.commodity', 'inv.count_final', 'inv.total_end', 'inv.note', 'inv.username')
     .where({ 'com.commodity': name });
 }
 function setComActiveNo(id) {
@@ -575,15 +495,7 @@ function setComActiveNo(id) {
 function getMatArchiveLog() {
   return db('mat_archive as arc')
     .join('mtl_commodity as com', 'com.id', '=', 'arc.com_id')
-    .select(
-      'arc.id',
-      'com.commodity',
-      'arc.count_final',
-      'arc.total_end',
-      'arc.username',
-      'arc.created_at',
-      'arc.note'
-    )
+    .select('arc.id', 'com.commodity', 'arc.count_final', 'arc.total_end', 'arc.username', 'arc.created_at', 'arc.note')
     .orderBy('com.commodity');
 }
 async function destroyArchive(id) {
@@ -598,30 +510,10 @@ async function addProcessWad(data) {
   return getProcessWadById(id);
 }
 function getProcessWadById(id) {
-  return db('fin_wad_add')
-    .select(
-      'id',
-      'brand',
-      'tank',
-      'vol_start',
-      'vol_stop',
-      'username',
-      'note',
-      'created_at'
-    )
-    .where({ id });
+  return db('fin_wad_add').select('id', 'brand', 'tank', 'vol_start', 'vol_stop', 'username', 'note', 'created_at').where({ id });
 }
 function getProcessWad() {
-  return db('fin_wad_add').select(
-    'id',
-    'brand',
-    'tank',
-    'vol_start',
-    'vol_stop',
-    'username',
-    'note',
-    'created_at'
-  );
+  return db('fin_wad_add').select('id', 'brand', 'tank', 'vol_start', 'vol_stop', 'username', 'note', 'created_at');
 }
 
 async function addProcessTrans(data) {
@@ -630,32 +522,10 @@ async function addProcessTrans(data) {
   return getProcessTransById(id);
 }
 function getProcessTransById(id) {
-  return db('fin_trans_add')
-    .select(
-      'id',
-      'brand_from',
-      'brand_to',
-      'tank_from',
-      'tank_to',
-      'volume',
-      'username',
-      'note',
-      'created_at'
-    )
-    .where({ id });
+  return db('fin_trans_add').select('id', 'brand_from', 'brand_to', 'tank_from', 'tank_to', 'volume', 'username', 'note', 'created_at').where({ id });
 }
 function getProcessTrans() {
-  return db('fin_trans_add').select(
-    'id',
-    'brand_from',
-    'brand_to',
-    'tank_from',
-    'tank_to',
-    'volume',
-    'username',
-    'note',
-    'created_at'
-  );
+  return db('fin_trans_add').select('id', 'brand_from', 'brand_to', 'tank_from', 'tank_to', 'volume', 'username', 'note', 'created_at');
 }
 
 async function addProcessLoss(data) {
@@ -664,20 +534,10 @@ async function addProcessLoss(data) {
   return getProcessLossById(id);
 }
 function getProcessLossById(id) {
-  return db('fin_loss_add')
-    .select('id', 'brand', 'tank', 'volume', 'username', 'note', 'created_at')
-    .where({ id });
+  return db('fin_loss_add').select('id', 'brand', 'tank', 'volume', 'username', 'note', 'created_at').where({ id });
 }
 function getProcessLoss() {
-  return db('fin_loss_add').select(
-    'id',
-    'brand',
-    'tank',
-    'volume',
-    'username',
-    'note',
-    'created_at'
-  );
+  return db('fin_loss_add').select('id', 'brand', 'tank', 'volume', 'username', 'note', 'created_at');
 }
 
 module.exports = {

@@ -145,9 +145,7 @@ document.getElementById('btnUpdateClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmUpdate').reset();
 });
-document
-  .getElementsByName('updateCompany')[0]
-  .addEventListener('change', selectSupplier);
+document.getElementsByName('updateCompany')[0].addEventListener('change', selectSupplier);
 function selectSupplier() {
   let company = document.getElementsByName('updateCompany')[0].value;
   let contact = document.getElementsByName('updateContact')[0];
@@ -166,9 +164,7 @@ function selectSupplier() {
     })
     .catch((err) => alert(err));
 }
-document
-  .getElementById('btnUpdateSubmit')
-  .addEventListener('click', sendUpdate);
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate);
 async function sendUpdate(ev) {
   ev.preventDefault();
   ev.stopPropagation();

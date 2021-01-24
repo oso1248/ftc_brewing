@@ -104,12 +104,7 @@ function commodityList() {
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          {
-            title: 'Commodity',
-            field: 'commodity',
-            hozAlign: 'left',
-            frozen: true,
-          },
+          { title: 'Commodity', field: 'commodity', hozAlign: 'left', frozen: true },
           { title: 'Location', field: 'location', hozAlign: 'left' },
           { title: 'Active', field: 'active', hozAlign: 'left' },
         ],
@@ -120,21 +115,13 @@ function commodityList() {
 let inventoryTable;
 function inventoryList() {
   let data = {};
-  data.startDate = DateTime.local()
-    .startOf('day')
-    .minus({ minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  data.endDate = DateTime.local()
-    .endOf('day')
-    .minus({ minutes: 29 })
-    .toFormat('yyyy-MM-dd HH:mm');
+  data.startDate = DateTime.local().startOf('day').minus({ minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
+  data.endDate = DateTime.local().endOf('day').minus({ minutes: 29 }).toFormat('yyyy-MM-dd HH:mm');
   axios
     .post(api + 'view', data)
     .then((res) => {
       for (let i = 0; i < res.data.length; i++) {
-        res.data[i].created_at = DateTime.fromISO(
-          res.data[i].created_at
-        ).toFormat('yyyy-MM-dd');
+        res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd');
       }
       let tableData = res.data;
       inventoryTable = new Tabulator('#invList', {
@@ -144,12 +131,7 @@ function inventoryList() {
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          {
-            title: 'Commodity',
-            field: 'commodity',
-            hozAlign: 'center',
-            frozen: true,
-          },
+          { title: 'Commodity', field: 'commodity', hozAlign: 'center', frozen: true },
           { title: 'SAP', field: 'sap', hozAlign: 'center' },
           { title: 'Pounds', field: 'lbs', hozAlign: 'center' },
           { title: 'Lot', field: 'lot', hozAlign: 'center' },
@@ -163,14 +145,8 @@ function inventoryList() {
 }
 function deleteOnLoad() {
   let data = {};
-  data.startDate = DateTime.local()
-    .startOf('day')
-    .minus({ minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  data.endDate = DateTime.local()
-    .endOf('day')
-    .minus({ minutes: 29 })
-    .toFormat('yyyy-MM-dd HH:mm');
+  data.startDate = DateTime.local().startOf('day').minus({ minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
+  data.endDate = DateTime.local().endOf('day').minus({ minutes: 29 }).toFormat('yyyy-MM-dd HH:mm');
   axios
     .post(api + 'view', data)
     .then((res) => {
@@ -304,11 +280,7 @@ function validateAdd(data) {
     data.note = data.note.toNonAlpha('').toProperCase();
   }
 
-  data.lbs =
-    (parseFloat(data.per_pallet) * parseFloat(data.pallet_count) +
-      parseFloat(data.unit_count)) *
-      parseFloat(data.per_unit) +
-    parseFloat(data.lbs);
+  data.lbs = (parseFloat(data.per_pallet) * parseFloat(data.pallet_count) + parseFloat(data.unit_count)) * parseFloat(data.per_unit) + parseFloat(data.lbs);
   delete data.pallet_count;
   delete data.per_pallet;
   delete data.per_unit;
@@ -332,11 +304,7 @@ async function deleteRowInv(ev) {
     return;
   }
 
-  if (
-    !confirm(
-      `Are you sure you want to delete\n\n ${selectedData[0].commodity} \n\nfrom the inventory?`
-    )
-  ) {
+  if (!confirm(`Are you sure you want to delete\n\n ${selectedData[0].commodity} \n\nfrom the inventory?`)) {
     return;
   }
   await axios

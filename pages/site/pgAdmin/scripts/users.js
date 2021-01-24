@@ -100,7 +100,6 @@ async function validateAdd(data) {
     failures.push({ input: 'permissions', msg: 'Required Field' });
     data.permissions = null;
   } else {
-    // data.permissions = parseInt(data.permissions)
     data.permissions = 1;
   }
   if (data.brewery === '') {
@@ -134,9 +133,7 @@ document.getElementById('btnUpdateClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmUpdate').reset();
 });
-document
-  .getElementById('btnUpdateSubmit')
-  .addEventListener('click', sendUpdate);
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate);
 async function sendUpdate(ev) {
   ev.preventDefault();
   ev.stopPropagation();
@@ -185,7 +182,6 @@ function validateUpdate(data) {
     failures.push({ input: 'brewery', msg: 'Required Field' });
     data.brewery_id = null;
   }
-
   return failures;
 }
 
@@ -212,12 +208,7 @@ function viewUsers() {
         resizableColumns: false,
         data: tableData,
         columns: [
-          {
-            title: 'Name',
-            field: 'username',
-            hozAlign: 'center',
-            frozen: true,
-          },
+          { title: 'Name', field: 'username', hozAlign: 'center', frozen: true },
           { title: 'Email', field: 'email', hozAlign: 'center' },
           { title: 'Permissions', field: 'permissions', hozAlign: 'center' },
           { title: 'Brewery', field: 'brewery', hozAlign: 'center' },
@@ -245,9 +236,7 @@ document.getElementById('btnDeleteClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmDelete').reset();
 });
-document
-  .getElementById('btnDeleteSubmit')
-  .addEventListener('click', sendDelete);
+document.getElementById('btnDeleteSubmit').addEventListener('click', sendDelete);
 function sendDelete(ev) {
   ev.preventDefault();
   ev.stopPropagation();

@@ -3,26 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <meta
-      name="viewport"
-      content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height"
-    />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height" />
     <title>Process Exceptions</title>
 
     <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
 
-    <script
-      type="text/javascript"
-      src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"
-    ></script>
-    <link
-      href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css"
-      rel="stylesheet"
-    />
-    <script
-      type="text/javascript"
-      src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"
-    ></script>
+    <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
+    <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="../../commonCSS/styles.css" />
@@ -96,14 +84,7 @@
           <select name="tank" id="wadSelTank"></select>
           <input name="vol_start" type="number" placeholder="Start Volume" />
           <input name="vol_stop" type="number" placeholder="Stop Volume" />
-          <textarea
-            name="note"
-            name=""
-            id="note"
-            cols="21"
-            rows="5"
-            placeholder="Note"
-          ></textarea>
+          <textarea name="note" name="" id="note" cols="21" rows="5" placeholder="Note"></textarea>
           <div class="button">
             <button class="btn" id="wadBtnClear">Clear</button>
             <button class="btn" id="wadBtnAdd">Submit</button>
@@ -119,14 +100,7 @@
           <select name="brand_to" id="transSelBrandTo"></select>
           <select name="tank_to" id="transSelTankTo"></select>
           <input name="volume" type="number" placeholder="Volume bbls" />
-          <textarea
-            name="note"
-            name="brand_to"
-            id="note"
-            cols="21"
-            rows="5"
-            placeholder="Note"
-          ></textarea>
+          <textarea name="note" name="brand_to" id="note" cols="21" rows="5" placeholder="Note"></textarea>
           <div class="button">
             <button class="btn" id="transBtnClear">Clear</button>
             <button class="btn" id="transBtnAdd">Submit</button>
@@ -140,13 +114,7 @@
           <select name="brand" id="lossSelBrand"></select>
           <select name="tank" id="lossSelTank"></select>
           <input name="volume" type="number" placeholder="Volume bbls" />
-          <textarea
-            name="note"
-            id="note"
-            cols="21"
-            rows="5"
-            placeholder="Note"
-          ></textarea>
+          <textarea name="note" id="note" cols="21" rows="5" placeholder="Note"></textarea>
           <div class="button">
             <button class="btn" id="lossBtnClear">Clear</button>
             <button class="btn" id="lossBtnAdd">Submit</button>
@@ -167,9 +135,7 @@
         <div name="tableView" class="tables" id="viewTrans">
           <h3 class="headers">Transfers</h3>
           <div class="button">
-            <button class="btn btntbl" id="transDownload-xlsx">
-              Save XSLX
-            </button>
+            <button class="btn btntbl" id="transDownload-xlsx">Save XSLX</button>
             <button class="btn btntbl" id="transPrint-table">Print</button>
           </div>
           <div id="transTable"></div>

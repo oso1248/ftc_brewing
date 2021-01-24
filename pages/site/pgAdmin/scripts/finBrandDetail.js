@@ -104,9 +104,7 @@ document.getElementById('btnUpdateClear').addEventListener('click', (ev) => {
     tableUpdateFinDetailPostRel.clearData();
   }
 });
-document
-  .getElementById('brwBrandUpdate')
-  .addEventListener('change', selectUpdate);
+document.getElementById('brwBrandUpdate').addEventListener('change', selectUpdate);
 async function selectUpdate() {
   document.getElementById('updateLineageBox').style.display = 'block';
   let methods = await method();
@@ -163,317 +161,236 @@ async function updateBrandLineage() {
 }
 let tableUpdateFinDetailPreCsx;
 async function updateFinDetailPreCsx(name, method) {
-  let labels = [
-    'Brand',
-    'Chip Tank',
-    'UniTank',
-    'Lines',
-    'Cooler',
-    'Seperators',
-    'ACP',
-    'Schoene Tank',
-    'Fill Tank',
-    'Note',
-  ];
+  let labels = ['Brand', 'Chip Tank', 'UniTank', 'Lines', 'Cooler', 'Seperators', 'ACP', 'Schoene Tank', 'Fill Tank', 'Note'];
   await axios
     .post('/api/brand/detail/csxpre', { name: name })
     .then((res) => {
       let data = res.data;
       let tableData = convert(data, labels);
-      tableUpdateFinDetailPreCsx = new Tabulator(
-        '#updateFinDetailPreCsxTable',
-        {
-          resizableColumns: false,
-          height: '330px',
-          layout: 'fitDataFill',
-          resizableColumns: false,
-          data: tableData,
-          columns: [
-            {
-              title: 'Object',
-              field: 'object',
-              hozAlign: 'center',
-              frozen: true,
+      tableUpdateFinDetailPreCsx = new Tabulator('#updateFinDetailPreCsxTable', {
+        resizableColumns: false,
+        height: '330px',
+        layout: 'fitDataFill',
+        resizableColumns: false,
+        data: tableData,
+        columns: [
+          {
+            title: 'Object',
+            field: 'object',
+            hozAlign: 'center',
+            frozen: true,
+          },
+          {
+            title: 'Method',
+            field: 'method',
+            hozAlign: 'left',
+            editor: 'autocomplete',
+            editorParams: {
+              showListOnEmpty: true,
+              freetext: true,
+              values: method,
             },
-            {
-              title: 'Method',
-              field: 'method',
-              hozAlign: 'left',
-              editor: 'autocomplete',
-              editorParams: {
-                showListOnEmpty: true,
-                freetext: true,
-                values: method,
-              },
-              formatter: 'textarea',
-            },
-          ],
-        }
-      );
+            formatter: 'textarea',
+          },
+        ],
+      });
     })
     .catch((err) => console.log(err));
 }
 let tableUpdateFinDetailPostCsx;
 async function updateFinDetailPostCsx(name, method) {
-  let labels = [
-    'Brand',
-    'Chip Tank',
-    'UniTank',
-    'Lines',
-    'Seperators',
-    'Schoene Tank',
-    'Note',
-  ];
+  let labels = ['Brand', 'Chip Tank', 'UniTank', 'Lines', 'Seperators', 'Schoene Tank', 'Note'];
   await axios
     .post('/api/brand/detail/csxpost', { name: name })
     .then((res) => {
       let data = res.data;
       let tableData = convert(data, labels);
-      tableUpdateFinDetailPostCsx = new Tabulator(
-        '#updateFinDetailPostCsxTable',
-        {
-          resizableColumns: false,
-          height: '330px',
-          layout: 'fitDataFill',
-          resizableColumns: false,
-          data: tableData,
-          columns: [
-            {
-              title: 'Object',
-              field: 'object',
-              hozAlign: 'center',
-              frozen: true,
+      tableUpdateFinDetailPostCsx = new Tabulator('#updateFinDetailPostCsxTable', {
+        resizableColumns: false,
+        height: '330px',
+        layout: 'fitDataFill',
+        resizableColumns: false,
+        data: tableData,
+        columns: [
+          {
+            title: 'Object',
+            field: 'object',
+            hozAlign: 'center',
+            frozen: true,
+          },
+          {
+            title: 'Method',
+            field: 'method',
+            hozAlign: 'left',
+            editor: 'autocomplete',
+            editorParams: {
+              showListOnEmpty: true,
+              freetext: true,
+              values: method,
             },
-            {
-              title: 'Method',
-              field: 'method',
-              hozAlign: 'left',
-              editor: 'autocomplete',
-              editorParams: {
-                showListOnEmpty: true,
-                freetext: true,
-                values: method,
-              },
-              formatter: 'textarea',
-            },
-          ],
-        }
-      );
+            formatter: 'textarea',
+          },
+        ],
+      });
     })
     .catch((err) => console.log(err));
 }
 let tableUpdateFinDetailPreFil;
 async function updateFinDetailPreFil(name, method) {
-  let labels = [
-    'Brand',
-    'Schoene Tank',
-    'System',
-    'Trap',
-    'Filter Beer Tank',
-    'Fill Tank',
-    'Injection',
-    'Control',
-    'Note',
-  ];
+  let labels = ['Brand', 'Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Fill Tank', 'Injection', 'Control', 'Note'];
   await axios
     .post('/api/brand/detail/filpre', { name: name })
     .then((res) => {
       let data = res.data;
       let tableData = convert(data, labels);
-      tableUpdateFinDetailPreFil = new Tabulator(
-        '#updateFinDetailPreFilTable',
-        {
-          resizableColumns: false,
-          height: '330px',
-          layout: 'fitDataFill',
-          resizableColumns: false,
-          data: tableData,
-          columns: [
-            {
-              title: 'Object',
-              field: 'object',
-              hozAlign: 'center',
-              frozen: true,
+      tableUpdateFinDetailPreFil = new Tabulator('#updateFinDetailPreFilTable', {
+        resizableColumns: false,
+        height: '330px',
+        layout: 'fitDataFill',
+        resizableColumns: false,
+        data: tableData,
+        columns: [
+          {
+            title: 'Object',
+            field: 'object',
+            hozAlign: 'center',
+            frozen: true,
+          },
+          {
+            title: 'Method',
+            field: 'method',
+            hozAlign: 'left',
+            editor: 'autocomplete',
+            editorParams: {
+              showListOnEmpty: true,
+              freetext: true,
+              values: method,
             },
-            {
-              title: 'Method',
-              field: 'method',
-              hozAlign: 'left',
-              editor: 'autocomplete',
-              editorParams: {
-                showListOnEmpty: true,
-                freetext: true,
-                values: method,
-              },
-              formatter: 'textarea',
-            },
-          ],
-        }
-      );
+            formatter: 'textarea',
+          },
+        ],
+      });
     })
     .catch((err) => console.log(err));
 }
 let tableUpdateFinDetailPostFil;
 async function updateFinDetailPostFil(name, method) {
-  let labels = [
-    'Brand',
-    'Schoene Tank',
-    'System',
-    'Trap',
-    'Filter Beer Tank',
-    'Recover',
-    'Note',
-  ];
+  let labels = ['Brand', 'Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Recover', 'Note'];
   await axios
     .post('/api/brand/detail/filpost', { name: name })
     .then((res) => {
       let data = res.data;
       let tableData = convert(data, labels);
-      tableUpdateFinDetailPostFil = new Tabulator(
-        '#updateFinDetailPostFilTable',
-        {
-          resizableColumns: false,
-          height: '330px',
-          layout: 'fitDataFill',
-          data: tableData,
-          columns: [
-            {
-              title: 'Object',
-              field: 'object',
-              hozAlign: 'center',
-              frozen: true,
+      tableUpdateFinDetailPostFil = new Tabulator('#updateFinDetailPostFilTable', {
+        resizableColumns: false,
+        height: '330px',
+        layout: 'fitDataFill',
+        data: tableData,
+        columns: [
+          {
+            title: 'Object',
+            field: 'object',
+            hozAlign: 'center',
+            frozen: true,
+          },
+          {
+            title: 'Method',
+            field: 'method',
+            hozAlign: 'left',
+            editor: 'autocomplete',
+            editorParams: {
+              showListOnEmpty: true,
+              freetext: true,
+              values: method,
             },
-            {
-              title: 'Method',
-              field: 'method',
-              hozAlign: 'left',
-              editor: 'autocomplete',
-              editorParams: {
-                showListOnEmpty: true,
-                freetext: true,
-                values: method,
-              },
-              formatter: 'textarea',
-            },
-          ],
-        }
-      );
+            formatter: 'textarea',
+          },
+        ],
+      });
     })
     .catch((err) => console.log(err));
 }
 let tableUpdateFinDetailPreRel;
 async function updateFinDetailPreRel(name, method) {
-  let labels = [
-    'Brand',
-    'Filter Beer Tank',
-    'Release Line',
-    'Package Line',
-    'Draft Line',
-    'Recover',
-    'Control',
-    'Note',
-  ];
+  let labels = ['Brand', 'Filter Beer Tank', 'Release Line', 'Package Line', 'Draft Line', 'Recover', 'Control', 'Note'];
   await axios
     .post('/api/brand/detail/relpre', { name: name })
     .then((res) => {
       let data = res.data;
       let tableData = convert(data, labels);
-      tableUpdateFinDetailPreRel = new Tabulator(
-        '#updateFinDetailPreRelTable',
-        {
-          resizableColumns: false,
-          height: '330px',
-          layout: 'fitDataFill',
-          resizableColumns: false,
-          data: tableData,
-          columns: [
-            {
-              title: 'Object',
-              field: 'object',
-              hozAlign: 'center',
-              frozen: true,
+      tableUpdateFinDetailPreRel = new Tabulator('#updateFinDetailPreRelTable', {
+        resizableColumns: false,
+        height: '330px',
+        layout: 'fitDataFill',
+        resizableColumns: false,
+        data: tableData,
+        columns: [
+          {
+            title: 'Object',
+            field: 'object',
+            hozAlign: 'center',
+            frozen: true,
+          },
+          {
+            title: 'Method',
+            field: 'method',
+            hozAlign: 'left',
+            editor: 'autocomplete',
+            editorParams: {
+              showListOnEmpty: true,
+              freetext: true,
+              values: method,
             },
-            {
-              title: 'Method',
-              field: 'method',
-              hozAlign: 'left',
-              editor: 'autocomplete',
-              editorParams: {
-                showListOnEmpty: true,
-                freetext: true,
-                values: method,
-              },
-              formatter: 'textarea',
-            },
-          ],
-        }
-      );
+            formatter: 'textarea',
+          },
+        ],
+      });
     })
     .catch((err) => console.log(err));
 }
 let tableUpdateFinDetailPostRel;
 async function updateFinDetailPostRel(name, method) {
-  let labels = [
-    'Brand',
-    'Filter Beer Tank',
-    'System Lines',
-    'Package',
-    'Draft',
-    'Recover',
-    'Note',
-  ];
+  let labels = ['Brand', 'Filter Beer Tank', 'System Lines', 'Package', 'Draft', 'Recover', 'Note'];
   await axios
     .post('/api/brand/detail/relpost', { name: name })
     .then((res) => {
       let data = res.data;
       let tableData = convert(data, labels);
-      tableUpdateFinDetailPostRel = new Tabulator(
-        '#updateFinDetailPostRelTable',
-        {
-          resizableColumns: false,
-          height: '330px',
-          layout: 'fitDataFill',
-          resizableColumns: false,
-          data: tableData,
-          columns: [
-            {
-              title: 'Object',
-              field: 'object',
-              hozAlign: 'center',
-              frozen: true,
+      tableUpdateFinDetailPostRel = new Tabulator('#updateFinDetailPostRelTable', {
+        resizableColumns: false,
+        height: '330px',
+        layout: 'fitDataFill',
+        resizableColumns: false,
+        data: tableData,
+        columns: [
+          {
+            title: 'Object',
+            field: 'object',
+            hozAlign: 'center',
+            frozen: true,
+          },
+          {
+            title: 'Method',
+            field: 'method',
+            hozAlign: 'left',
+            editor: 'autocomplete',
+            editorParams: {
+              showListOnEmpty: true,
+              freetext: true,
+              values: method,
             },
-            {
-              title: 'Method',
-              field: 'method',
-              hozAlign: 'left',
-              editor: 'autocomplete',
-              editorParams: {
-                showListOnEmpty: true,
-                freetext: true,
-                values: method,
-              },
-              formatter: 'textarea',
-            },
-          ],
-        }
-      );
+            formatter: 'textarea',
+          },
+        ],
+      });
     })
     .catch((err) => console.log(err));
 }
-document
-  .getElementById('btnUpdateSubmit')
-  .addEventListener('click', sendUpdate);
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate);
 async function sendUpdate(ev) {
   ev.preventDefault();
   ev.stopPropagation();
-  let tables = [
-    tableUpdateFinDetailPreCsx,
-    tableUpdateFinDetailPostCsx,
-    tableUpdateFinDetailPreFil,
-    tableUpdateFinDetailPostFil,
-    tableUpdateFinDetailPreRel,
-    tableUpdateFinDetailPostRel,
-  ];
+  let tables = [tableUpdateFinDetailPreCsx, tableUpdateFinDetailPostCsx, tableUpdateFinDetailPreFil, tableUpdateFinDetailPostFil, tableUpdateFinDetailPreRel, tableUpdateFinDetailPostRel];
   let tablesData = [];
   let tableData = [];
 
@@ -567,18 +484,7 @@ async function viewBrandLineage() {
 }
 let tableViewFinDetailPreCsx;
 async function viewFinDetailPreCsx(name) {
-  let labels = [
-    'Brand',
-    'Chip Tank',
-    'UniTank',
-    'Lines',
-    'Cooler',
-    'Seperators',
-    'ACP',
-    'Schoene Tank',
-    'Fill Tank',
-    'Note',
-  ];
+  let labels = ['Brand', 'Chip Tank', 'UniTank', 'Lines', 'Cooler', 'Seperators', 'ACP', 'Schoene Tank', 'Fill Tank', 'Note'];
   await axios
     .post('/api/brand/detail/csxpre', { name: name })
     .then((res) => {
@@ -604,15 +510,7 @@ async function viewFinDetailPreCsx(name) {
 }
 let tableViewFinDetailPostCsx;
 async function viewFinDetailPostCsx(name) {
-  let labels = [
-    'Brand',
-    'Chip Tank',
-    'UniTank',
-    'Lines',
-    'Seperators',
-    'Schoene Tank',
-    'Note',
-  ];
+  let labels = ['Brand', 'Chip Tank', 'UniTank', 'Lines', 'Seperators', 'Schoene Tank', 'Note'];
   await axios
     .post('/api/brand/detail/csxpost', { name: name })
     .then((res) => {
@@ -638,17 +536,7 @@ async function viewFinDetailPostCsx(name) {
 }
 let tableViewFinDetailPreFil;
 async function viewFinDetailPreFil(name) {
-  let labels = [
-    'Brand',
-    'Schoene Tank',
-    'System',
-    'Trap',
-    'Filter Beer Tank',
-    'Fill Tank',
-    'Injection',
-    'Control',
-    'Note',
-  ];
+  let labels = ['Brand', 'Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Fill Tank', 'Injection', 'Control', 'Note'];
   await axios
     .post('/api/brand/detail/filpre', { name: name })
     .then((res) => {
@@ -674,15 +562,7 @@ async function viewFinDetailPreFil(name) {
 }
 let tableViewFinDetailPostFil;
 async function viewFinDetailPostFil(name) {
-  let labels = [
-    'Brand',
-    'Schoene Tank',
-    'System',
-    'Trap',
-    'Filter Beer Tank',
-    'Recover',
-    'Note',
-  ];
+  let labels = ['Brand', 'Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Recover', 'Note'];
   await axios
     .post('/api/brand/detail/filpost', { name: name })
     .then((res) => {
@@ -708,16 +588,7 @@ async function viewFinDetailPostFil(name) {
 }
 let tableViewFinDetailPreRel;
 async function viewFinDetailPreRel(name) {
-  let labels = [
-    'Brand',
-    'Filter Beer Tank',
-    'Release Line',
-    'Package Line',
-    'Draft Line',
-    'Recover',
-    'Control',
-    'Note',
-  ];
+  let labels = ['Brand', 'Filter Beer Tank', 'Release Line', 'Package Line', 'Draft Line', 'Recover', 'Control', 'Note'];
   await axios
     .post('/api/brand/detail/relpre', { name: name })
     .then((res) => {
@@ -743,15 +614,7 @@ async function viewFinDetailPreRel(name) {
 }
 let tableViewFinDetailPostRel;
 async function viewFinDetailPostRel(name) {
-  let labels = [
-    'Brand',
-    'Filter Beer Tank',
-    'System Lines',
-    'Package',
-    'Draft',
-    'Recover',
-    'Note',
-  ];
+  let labels = ['Brand', 'Filter Beer Tank', 'System Lines', 'Package', 'Draft', 'Recover', 'Note'];
   await axios
     .post('/api/brand/detail/relpost', { name: name })
     .then((res) => {

@@ -72,7 +72,6 @@ async function sendAdd(ev) {
         document.getElementById('frmAdd').reset();
       })
       .catch((err) => alert(err));
-    // .catch(err => console.log(err))
   } else {
     let msg = 'Problems:\n';
     for (i = 0; i < fails.length; i++) {
@@ -94,7 +93,6 @@ async function validateAdd(data) {
       failures.push({ input: 'brand', msg: 'Taken' });
     }
   }
-
   if (data.brand === '') {
     failures.push({ input: 'brand', msg: 'Required Field' });
     data.brand = null;
@@ -140,9 +138,7 @@ document.getElementById('btnUpdateClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmUpdate').reset();
 });
-document
-  .getElementsByName('updateBrand')[0]
-  .addEventListener('change', selectBrand);
+document.getElementsByName('updateBrand')[0].addEventListener('change', selectBrand);
 function selectBrand() {
   let brand = document.getElementsByName('updateBrand')[0].value;
 
@@ -155,9 +151,7 @@ function selectBrand() {
     document.getElementsByName('updateNote')[0].value = data.data.note;
   });
 }
-document
-  .getElementById('btnUpdateSubmit')
-  .addEventListener('click', sendUpdate);
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate);
 async function sendUpdate(ev) {
   ev.preventDefault();
   ev.stopPropagation();
@@ -234,7 +228,8 @@ function view() {
       let tableData = res.data;
       brewTable = new Tabulator('#list', {
         resizableColumns: false,
-        height: '309px',
+        layoutColumnsOnNewData: true,
+        height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [

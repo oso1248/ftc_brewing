@@ -48,9 +48,7 @@ document.getElementById('btnUpdateClear').addEventListener('click', (ev) => {
   document.getElementById('frmUpdate').reset();
   hopTableUpdate.clearData();
 });
-document
-  .getElementById('brwBrandUpdate')
-  .addEventListener('change', selectBrwBrandUpdate);
+document.getElementById('brwBrandUpdate').addEventListener('change', selectBrwBrandUpdate);
 let hopTableUpdate;
 function selectBrwBrandUpdate() {
   let brwBrand = document.getElementById('brwBrandUpdate').value;
@@ -61,31 +59,19 @@ function selectBrwBrandUpdate() {
       res.data.unshift({ commodity: 'Brand', Units: `${brwBrand}` });
       hopTableUpdate = new Tabulator('#updateHop', {
         resizableColumns: false,
+        layoutColumnsOnNewData: true,
         height: '330px',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          {
-            title: 'Commodity',
-            field: 'commodity',
-            hozAlign: 'center',
-            frozen: true,
-          },
-          {
-            title: 'Units',
-            field: 'Units',
-            hozAlign: 'left',
-            editor: true,
-            validator: ['numeric'],
-          },
+          { title: 'Commodity', field: 'commodity', hozAlign: 'center', frozen: true },
+          { title: 'Units', field: 'Units', hozAlign: 'left', editor: true, validator: ['numeric'] },
         ],
       });
     })
     .catch((err) => console.log(err));
 }
-document
-  .getElementById('btnUpdateSubmit')
-  .addEventListener('click', sendUpdate);
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate);
 function sendUpdate(ev) {
   ev.preventDefault();
   ev.stopPropagation();
@@ -122,9 +108,7 @@ document.getElementById('btnViewClear').addEventListener('click', (ev) => {
   document.getElementById('frmView').reset();
   hopTableView.clearData();
 });
-document
-  .getElementById('brwBrandView')
-  .addEventListener('change', selectBrwBrandView);
+document.getElementById('brwBrandView').addEventListener('change', selectBrwBrandView);
 let hopTableView;
 function selectBrwBrandView() {
   let brwBrand = document.getElementById('brwBrandView').value;
@@ -135,16 +119,12 @@ function selectBrwBrandView() {
       res.data.unshift({ commodity: 'Brand', Units: `${brwBrand}` });
       hopTableView = new Tabulator('#viewHop', {
         resizableColumns: false,
+        layoutColumnsOnNewData: true,
         height: '330px',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          {
-            title: 'Commodity',
-            field: 'commodity',
-            hozAlign: 'center',
-            frozen: true,
-          },
+          { title: 'Commodity', field: 'commodity', hozAlign: 'center', frozen: true },
           { title: 'Units', field: 'Units', hozAlign: 'left' },
         ],
       });

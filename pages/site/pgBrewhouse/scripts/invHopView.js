@@ -43,17 +43,13 @@ function invDatesDay() {
       let invDate = data.data;
       return invDate.map((listItem) => {
         let invDate = createNode('option');
-        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc).toFormat(
-          'yyyy-MM-dd'
-        );
+        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc).toFormat('yyyy-MM-dd');
         append(invDates, invDate);
       });
     })
     .catch((err) => console.log(err.detail));
 }
-document
-  .getElementById('selDateDay')
-  .addEventListener('change', invDatesDaySelect);
+document.getElementById('selDateDay').addEventListener('change', invDatesDaySelect);
 function invDatesDaySelect() {
   let date = document.getElementById('selDateDay').value;
 
@@ -64,12 +60,8 @@ function invDatesDaySelect() {
 }
 let dailyTableMid;
 function loadTableDailyMid(date) {
-  let mids = DateTime.fromISO(date)
-    .minus({ hours: 0, minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  let days = DateTime.fromISO(date)
-    .plus({ hours: 7, minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
+  let mids = DateTime.fromISO(date).minus({ hours: 0, minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
+  let days = DateTime.fromISO(date).plus({ hours: 7, minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
   let timeSpan = {};
   timeSpan.startSets = mids;
   timeSpan.end = days;
@@ -87,12 +79,7 @@ function loadTableDailyMid(date) {
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          {
-            title: 'Hop',
-            field: 'commodity',
-            hozAlign: 'center',
-            frozen: true,
-          },
+          { title: 'Hop', field: 'commodity', hozAlign: 'center', frozen: true },
           { title: 'lbs', field: 'total', hozAlign: 'center' },
           { title: 'Name', field: 'username', hozAlign: 'left' },
         ],
@@ -102,12 +89,8 @@ function loadTableDailyMid(date) {
 }
 let dailyTableDay;
 function loadTableDailyDay(date) {
-  let days = DateTime.fromISO(date)
-    .plus({ hours: 7, minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  let afts = DateTime.fromISO(date)
-    .plus({ hours: 15, minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
+  let days = DateTime.fromISO(date).plus({ hours: 7, minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
+  let afts = DateTime.fromISO(date).plus({ hours: 15, minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
   let timeSpan = {};
   timeSpan.startSets = days;
   timeSpan.end = afts;
@@ -125,12 +108,7 @@ function loadTableDailyDay(date) {
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          {
-            title: 'Hop',
-            field: 'commodity',
-            hozAlign: 'center',
-            frozen: true,
-          },
+          { title: 'Hop', field: 'commodity', hozAlign: 'center', frozen: true },
           { title: 'lbs', field: 'total', hozAlign: 'center' },
           { title: 'Name', field: 'username', hozAlign: 'left' },
         ],
@@ -140,12 +118,8 @@ function loadTableDailyDay(date) {
 }
 let dailyTableAft;
 function loadTableDailyAft(date) {
-  let afts = DateTime.fromISO(date)
-    .plus({ hours: 15, minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  let ends = DateTime.fromISO(date)
-    .plus({ hours: 23, minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
+  let afts = DateTime.fromISO(date).plus({ hours: 15, minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
+  let ends = DateTime.fromISO(date).plus({ hours: 23, minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
   let timeSpan = {};
   timeSpan.startSets = afts;
   timeSpan.end = ends;
@@ -163,12 +137,7 @@ function loadTableDailyAft(date) {
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          {
-            title: 'Hop',
-            field: 'commodity',
-            hozAlign: 'center',
-            frozen: true,
-          },
+          { title: 'Hop', field: 'commodity', hozAlign: 'center', frozen: true },
           { title: 'lbs', field: 'total', hozAlign: 'center' },
           { title: 'Name', field: 'username', hozAlign: 'left' },
         ],
@@ -194,17 +163,13 @@ function invDatesWeek() {
       let invDate = data.data;
       return invDate.map((listItem) => {
         let invDate = createNode('option');
-        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc)
-          .plus({ days: 1 })
-          .toFormat('yyyy-MM-dd');
+        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc).plus({ days: 1 }).toFormat('yyyy-MM-dd');
         append(invDates, invDate);
       });
     })
     .catch((err) => console.log(err.detail));
 }
-document
-  .getElementById('selDateWeek')
-  .addEventListener('change', invDatesWeekSelect);
+document.getElementById('selDateWeek').addEventListener('change', invDatesWeekSelect);
 function invDatesWeekSelect() {
   let date = document.getElementById('selDateWeek').value;
 
@@ -218,12 +183,8 @@ function invDatesWeekSelect() {
 }
 let weeklyTableHard;
 function loadTableWeeklyHard(date) {
-  let start = DateTime.fromISO(date)
-    .minus({ hours: 8, minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  let end = DateTime.fromISO(date)
-    .minus({ hours: 0, minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
+  let start = DateTime.fromISO(date).minus({ hours: 8, minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
+  let end = DateTime.fromISO(date).minus({ hours: 0, minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
   let timeSpan = {};
   timeSpan.startDate = start;
   timeSpan.endDate = end;
@@ -237,12 +198,7 @@ function loadTableWeeklyHard(date) {
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          {
-            title: 'Hop',
-            field: 'commodity',
-            hozAlign: 'center',
-            frozen: true,
-          },
+          { title: 'Hop', field: 'commodity', hozAlign: 'center', frozen: true },
           { title: 'lbs', field: 'lbs', hozAlign: 'center' },
           { title: 'Lot', field: 'lot', hozAlign: 'center' },
           { title: 'Name', field: 'username', hozAlign: 'left' },
@@ -252,12 +208,8 @@ function loadTableWeeklyHard(date) {
     .catch((err) => console.log(err));
 }
 function loadTableWeeklyLastBrewsHard(date) {
-  let start = DateTime.fromISO(date)
-    .minus({ hours: 8, minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  let end = DateTime.fromISO(date)
-    .minus({ hours: 0, minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
+  let start = DateTime.fromISO(date).minus({ hours: 8, minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
+  let end = DateTime.fromISO(date).minus({ hours: 0, minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
   let timeSpan = {};
   timeSpan.startSets = start;
   timeSpan.end = end;
@@ -275,12 +227,8 @@ function loadTableWeeklyLastBrewsHard(date) {
 }
 let weeklyTableSets;
 function loadTableWeeklySets(date) {
-  let start = DateTime.fromISO(date)
-    .minus({ hours: 0, minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  let end = DateTime.fromISO(date)
-    .plus({ hours: 167, minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
+  let start = DateTime.fromISO(date).minus({ hours: 0, minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
+  let end = DateTime.fromISO(date).plus({ hours: 167, minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
   let timeSpan = {};
   timeSpan.startSets = start;
   timeSpan.end = end;
@@ -303,15 +251,9 @@ function loadTableWeeklySets(date) {
 }
 let weeklyTableRolling;
 function loadTableWeeklyRolling(date) {
-  let start = DateTime.fromISO(date)
-    .minus({ hours: 8, minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  let startSets = DateTime.fromISO(date)
-    .minus({ hours: 0, minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  let end = DateTime.fromISO(date)
-    .plus({ hours: 159, minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
+  let start = DateTime.fromISO(date).minus({ hours: 8, minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
+  let startSets = DateTime.fromISO(date).minus({ hours: 0, minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
+  let end = DateTime.fromISO(date).plus({ hours: 159, minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
 
   let timeSpan = {};
   timeSpan.start = start;
@@ -328,12 +270,7 @@ function loadTableWeeklyRolling(date) {
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          {
-            title: 'Hop',
-            field: 'commodity',
-            hozAlign: 'center',
-            frozen: true,
-          },
+          { title: 'Hop', field: 'commodity', hozAlign: 'center', frozen: true },
           { title: 'lbs', field: 'lbs', hozAlign: 'left' },
         ],
       });
@@ -341,12 +278,8 @@ function loadTableWeeklyRolling(date) {
     .catch((err) => console.log(err));
 }
 function loadTableWeeklyLastBrewsRolling(date) {
-  let start = DateTime.fromISO(date)
-    .minus({ hours: 0, minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  let end = DateTime.fromISO(date)
-    .plus({ hours: 167, minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
+  let start = DateTime.fromISO(date).minus({ hours: 0, minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
+  let end = DateTime.fromISO(date).plus({ hours: 167, minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
   let timeSpan = {};
   timeSpan.startSets = start;
   timeSpan.end = end;

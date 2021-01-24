@@ -1,21 +1,9 @@
 let DateTime = luxon.DateTime;
 
-let mids = DateTime.local()
-  .startOf('day')
-  .minus({ hours: 0.5 })
-  .toFormat('yyyy-MM-dd HH:mm');
-let days = DateTime.local()
-  .startOf('day')
-  .plus({ hours: 7.5 })
-  .toFormat('yyyy-MM-dd HH:mm');
-let afts = DateTime.local()
-  .startOf('day')
-  .plus({ hours: 15.5 })
-  .toFormat('yyyy-MM-dd HH:mm');
-let ends = DateTime.local()
-  .startOf('day')
-  .plus({ hours: 23.5 })
-  .toFormat('yyyy-MM-dd HH:mm');
+let mids = DateTime.local().startOf('day').minus({ hours: 0.5 }).toFormat('yyyy-MM-dd HH:mm');
+let days = DateTime.local().startOf('day').plus({ hours: 7.5 }).toFormat('yyyy-MM-dd HH:mm');
+let afts = DateTime.local().startOf('day').plus({ hours: 15.5 }).toFormat('yyyy-MM-dd HH:mm');
+let ends = DateTime.local().startOf('day').plus({ hours: 23.5 }).toFormat('yyyy-MM-dd HH:mm');
 let week = DateTime.local().startOf('week').toFormat('yyyy-MM-dd HH:mm');
 
 String.prototype.toNonAlpha = function (spaces) {
@@ -39,13 +27,7 @@ function setsTable() {
         data: tableData,
         columns: [
           { title: 'Brand', field: 'brand', hozAlign: 'center', frozen: true },
-          {
-            title: 'Sets Made',
-            field: 'sets',
-            hozAlign: 'left',
-            editor: true,
-            validator: ['integer'],
-          },
+          { title: 'Sets Made', field: 'sets', hozAlign: 'left', editor: true, validator: ['integer'] },
         ],
       });
     })

@@ -205,12 +205,7 @@ async function sendTrans(ev) {
       .post('/api/inventory/process/trans/add', data)
       .then((res) => {
         let data = res.data;
-        alert(
-          data[0].brand_from +
-            '  Transfer to  ' +
-            data[0].brand_to +
-            '\n\nAdded'
-        );
+        alert(data[0].brand_from + '  Transfer to  ' + data[0].brand_to + '\n\nAdded');
 
         form.reset();
       })
@@ -365,9 +360,7 @@ function wadAdditionTable() {
     .then((res) => {
       let tableData = res.data;
       tableData.map((elem) => {
-        elem.created_at = DateTime.fromISO(elem.created_at).toFormat(
-          'yyyy-MM-dd HH:mm'
-        );
+        elem.created_at = DateTime.fromISO(elem.created_at).toFormat('yyyy-MM-dd HH:mm');
       });
       wadTable = new Tabulator('#wadTable', {
         printHeader: '<h1>WAD Additions<h1>',
@@ -402,9 +395,7 @@ function transAdditionTable() {
     .then((res) => {
       let tableData = res.data;
       tableData.map((elem) => {
-        elem.created_at = DateTime.fromISO(elem.created_at).toFormat(
-          'yyyy-MM-dd HH:mm'
-        );
+        elem.created_at = DateTime.fromISO(elem.created_at).toFormat('yyyy-MM-dd HH:mm');
       });
       transTable = new Tabulator('#transTable', {
         printHeader: '<h1>Transfers<h1>',
@@ -439,9 +430,7 @@ function lossAdditionTable() {
     .then((res) => {
       let tableData = res.data;
       tableData.map((elem) => {
-        elem.created_at = DateTime.fromISO(elem.created_at).toFormat(
-          'yyyy-MM-dd HH:mm'
-        );
+        elem.created_at = DateTime.fromISO(elem.created_at).toFormat('yyyy-MM-dd HH:mm');
       });
       lossTable = new Tabulator('#lossTable', {
         printHeader: '<h1>Process Loss<h1>',

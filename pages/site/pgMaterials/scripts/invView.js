@@ -40,9 +40,7 @@ function weeklyDates() {
       let invDate = data.data.rows;
       return invDate.map((listItem) => {
         let invDate = createNode('option');
-        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc).toFormat(
-          'yyyy-MM-dd'
-        );
+        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc).toFormat('yyyy-MM-dd');
         append(invDates, invDate);
       });
     })
@@ -53,19 +51,14 @@ let weeklyTable;
 function weeklyMatTable() {
   let dt = document.getElementById('selWeekly').value;
   let data = {};
-  data.startDate = DateTime.fromISO(dt)
-    .startOf('day')
-    .minus({ days: 0 })
-    .toFormat('yyyy-MM-dd HH:mm');
+  data.startDate = DateTime.fromISO(dt).startOf('day').minus({ days: 0 }).toFormat('yyyy-MM-dd HH:mm');
   data.endDate = DateTime.fromISO(dt).endOf('day').toFormat('yyyy-MM-dd HH:mm');
 
   axios
     .post('/api/inventory/material/weekly/view', data)
     .then((res) => {
       for (let i = 0; i < res.data.length; i++) {
-        res.data[i].created_at = DateTime.fromISO(
-          res.data[i].created_at
-        ).toFormat('yyyy-MM-dd');
+        res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd');
       }
       let tableData = res.data;
       weeklyTable = new Tabulator('#tableWeekly', {
@@ -93,15 +86,11 @@ function weeklyMatTable() {
     .catch((err) => console.log(err.detail));
   document.getElementById('tableWeeklyDiv').style.display = 'block';
 }
-document
-  .getElementById('weeklyDownload-xlsx')
-  .addEventListener('click', weeklyExcel);
+document.getElementById('weeklyDownload-xlsx').addEventListener('click', weeklyExcel);
 function weeklyExcel() {
   weeklyTable.download('xlsx', 'weekly_inv.xlsx', { sheetName: 'inv' });
 }
-document
-  .getElementById('weeklyPrint-table')
-  .addEventListener('click', weeklyPrint);
+document.getElementById('weeklyPrint-table').addEventListener('click', weeklyPrint);
 function weeklyPrint() {
   weeklyTable.print(false, true);
 }
@@ -122,34 +111,25 @@ function monthlyDates() {
       let invDate = data.data.rows;
       return invDate.map((listItem) => {
         let invDate = createNode('option');
-        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc).toFormat(
-          'yyyy-MM-dd'
-        );
+        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc).toFormat('yyyy-MM-dd');
         append(invDates, invDate);
       });
     })
     .catch((err) => console.log(err.detail));
 }
-document
-  .getElementById('selMonthly')
-  .addEventListener('change', monthlyMatTable);
+document.getElementById('selMonthly').addEventListener('change', monthlyMatTable);
 let monthlyTable;
 function monthlyMatTable() {
   let dt = document.getElementById('selMonthly').value;
   let data = {};
-  data.startDate = DateTime.fromISO(dt)
-    .startOf('day')
-    .minus({ days: 0 })
-    .toFormat('yyyy-MM-dd HH:mm');
+  data.startDate = DateTime.fromISO(dt).startOf('day').minus({ days: 0 }).toFormat('yyyy-MM-dd HH:mm');
   data.endDate = DateTime.fromISO(dt).endOf('day').toFormat('yyyy-MM-dd HH:mm');
 
   axios
     .post('/api/inventory/material/monthly/view', data)
     .then((res) => {
       for (let i = 0; i < res.data.length; i++) {
-        res.data[i].created_at = DateTime.fromISO(
-          res.data[i].created_at
-        ).toFormat('yyyy-MM-dd');
+        res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd');
       }
       let tableData = res.data;
       monthlyTable = new Tabulator('#tableMonthly', {
@@ -177,15 +157,11 @@ function monthlyMatTable() {
     .catch((err) => console.log(err.detail));
   document.getElementById('tableMonthlyDiv').style.display = 'block';
 }
-document
-  .getElementById('monthlyDownload-xlsx')
-  .addEventListener('click', monthlyExcel);
+document.getElementById('monthlyDownload-xlsx').addEventListener('click', monthlyExcel);
 function monthlyExcel() {
   monthlyTable.download('xlsx', 'monthly_inv.xlsx', { sheetName: 'inv' });
 }
-document
-  .getElementById('monthlyPrint-table')
-  .addEventListener('click', monthlyPrint);
+document.getElementById('monthlyPrint-table').addEventListener('click', monthlyPrint);
 function monthlyPrint() {
   monthlyTable.print(false, true);
 }

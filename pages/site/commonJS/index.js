@@ -44,7 +44,6 @@ async function logout() {
       }
     })
     .catch((err) => {
-      // console.log(err)
       window.location.replace('/offLine.html');
     });
 }

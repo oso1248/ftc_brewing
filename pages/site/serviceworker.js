@@ -4,7 +4,7 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-var CACHE_STATIC = 'static-v027';
+var CACHE_STATIC = 'static-v029';
 
 self.addEventListener('install', function (event) {
   self.skipWaiting();
@@ -12,13 +12,7 @@ self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE_STATIC).then(function (cache) {
       console.log('Precaching App Shell');
-      cache.addAll([
-        '/login.html',
-        '/login.css',
-        '/offLine.html',
-        '/256.png',
-        '/barrel.jpg',
-      ]);
+      cache.addAll(['/login.html', '/login.css', '/offLine.html', '/256.png', '/barrel.jpg']);
     })
   );
 });
@@ -51,12 +45,7 @@ self.addEventListener('fetch', function (event) {
         }
         return fetch(event.request).then(function (response) {
           // console.log('From Network', event.request.method, response.status, event.request.url)
-          if (
-            (response.status === 200 || response.status === 0) &&
-            event.request.method !== 'POST' &&
-            event.request.method !== 'PATCH' &&
-            event.request.method !== 'DELETE'
-          ) {
+          if ((response.status === 200 || response.status === 0) && event.request.method !== 'POST' && event.request.method !== 'PATCH' && event.request.method !== 'DELETE') {
             return caches.open(CACHE_STATIC).then(function (cache) {
               // console.log('Put cache', event.request.method, event.request.url)
               cache.put(event.request.url, response.clone());

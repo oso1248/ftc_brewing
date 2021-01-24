@@ -27,7 +27,6 @@ function login(ev) {
       let { msg } = data;
       if (msg === 'pass') {
         window.location.href = '../index.html';
-        // window.location.replace('/')
       } else {
         alert('Invalid username or password');
       }

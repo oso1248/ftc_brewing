@@ -3,24 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <meta
-      name="viewport"
-      content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height"
-    />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height" />
     <title>Commodities</title>
 
-    <script
-      type="text/javascript"
-      src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"
-    ></script>
-    <link
-      href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css"
-      rel="stylesheet"
-    />
-    <script
-      type="text/javascript"
-      src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"
-    ></script>
+    <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
+    <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="../../commonCSS/styles.css" />
@@ -105,9 +93,7 @@
           </div>
           <div class="input">
             <select name="" id="inventory">
-              <option value="" disabled selected hidden>
-                Select Inventory
-              </option>
+              <option value="" disabled selected hidden>Select Inventory</option>
               <option value="Brw">Brw</option>
               <option value="Fin">Fin</option>
               <option value="Log">Log</option>
@@ -141,13 +127,7 @@
             <select name="" id="uom_id"></select>
           </div>
           <div class="input">
-            <textarea
-              name=""
-              id="note"
-              cols="21"
-              rows="5"
-              placeholder="Note"
-            ></textarea>
+            <textarea name="" id="note" cols="21" rows="5" placeholder="Note"></textarea>
           </div>
 
           <div class="button">
@@ -163,10 +143,7 @@
           <div class="input">
             <select name="updateCommodity" id="commodity"></select>
           </div>
-          <div class="tooltip input">
-            <span class="tooltiptext">SAP</span
-            ><input type="text" name="updateSap" id="sap" placeholder="SAP" />
-          </div>
+          <div class="tooltip input"><span class="tooltiptext">SAP</span><input type="text" name="updateSap" id="sap" placeholder="SAP" /></div>
           <div class="tooltip input">
             <span class="tooltiptext">Active</span>
             <select name="updateActive" id="active">
@@ -178,9 +155,7 @@
           <div class="tooltip input">
             <span class="tooltiptext">Inventory</span>
             <select name="updateInventory" id="inventory">
-              <option value="" disabled selected hidden>
-                Select Inventory
-              </option>
+              <option value="" disabled selected hidden>Select Inventory</option>
               <option id="Brw" value="Brw">Brw</option>
               <option id="Fin" value="Fin">Fin</option>
               <option id="Log" value="Log">Log</option>
@@ -209,44 +184,23 @@
 
           <div class="tooltip input">
             <span class="tooltiptext">Threshold</span>
-            <input
-              type="number"
-              name="updateThreshold"
-              id="threshold"
-              placeholder="Threshold"
-            />
+            <input type="number" name="updateThreshold" id="threshold" placeholder="Threshold" />
           </div>
 
           <div class="tooltip input">
             <span class="tooltiptext">Per Pallet</span>
-            <input
-              type="number"
-              name="updatePer_pallet"
-              id="per_pallet"
-              placeholder="Per Pallet"
-            />
+            <input type="number" name="updatePer_pallet" id="per_pallet" placeholder="Per Pallet" />
           </div>
           <div class="tooltip input">
             <span class="tooltiptext">Unit Total</span>
-            <input
-              type="number"
-              name="updateUnit_total"
-              id="unit_total"
-              placeholder="Unit Total"
-            />
+            <input type="number" name="updateUnit_total" id="unit_total" placeholder="Unit Total" />
           </div>
           <div class="tooltip input">
             <span class="tooltiptext">UOM</span>
             <select name="updateUom_id" id="uom_id"></select>
           </div>
           <div class="input">
-            <textarea
-              name="updateNote"
-              id="note"
-              cols="21"
-              rows="5"
-              placeholder="Note"
-            ></textarea>
+            <textarea name="updateNote" id="note" cols="21" rows="5" placeholder="Note"></textarea>
           </div>
           <div class="button">
             <button class="btn" id="btnUpdateClear">Clear</button>

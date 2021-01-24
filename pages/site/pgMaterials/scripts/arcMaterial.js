@@ -97,9 +97,7 @@ async function validateAdd(data) {
     data.com_id = null;
   } else {
     let query = '/api/inventory/material/archive/name/get';
-    let res = await axios
-      .post(query, { commodity: data.com_id })
-      .catch((err) => alert(err.detail));
+    let res = await axios.post(query, { commodity: data.com_id }).catch((err) => alert(err.detail));
     if (res.data.msg !== 'null') {
       failures.push({ input: 'commodity', msg: 'Already Archived' });
     }
@@ -135,9 +133,7 @@ function loadViewView() {
     .then((res) => {
       let tableData = res.data;
       for (let i = 0; i < res.data.length; i++) {
-        tableData[i].created_at = DateTime.fromISO(
-          tableData[i].created_at
-        ).toFormat('yyyy-MM-dd');
+        tableData[i].created_at = DateTime.fromISO(tableData[i].created_at).toFormat('yyyy-MM-dd');
       }
       tableView = new Tabulator('#ViewTable', {
         printHeader: '<h1>Archived Inventory<h1>',
@@ -185,9 +181,7 @@ function loadDeleteView() {
     .then((res) => {
       let tableData = res.data;
       for (let i = 0; i < res.data.length; i++) {
-        tableData[i].created_at = DateTime.fromISO(
-          tableData[i].created_at
-        ).toFormat('yyyy-MM-dd');
+        tableData[i].created_at = DateTime.fromISO(tableData[i].created_at).toFormat('yyyy-MM-dd');
       }
       deleteTable = new Tabulator('#DeleteTable', {
         resizableColumns: false,
@@ -223,11 +217,7 @@ async function deleteRowInv(ev) {
     return;
   }
 
-  if (
-    !confirm(
-      `Are you sure you want to delete\n\n ${selectedData[0].commodity} \n\nfrom the inventory?`
-    )
-  ) {
+  if (!confirm(`Are you sure you want to delete\n\n ${selectedData[0].commodity} \n\nfrom the inventory?`)) {
     return;
   }
 

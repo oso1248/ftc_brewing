@@ -28,9 +28,7 @@ function weeklyDates() {
       let invDate = data.data.rows;
       return invDate.map((listItem) => {
         let invDate = createNode('option');
-        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc)
-          .plus({ day: 0 })
-          .toFormat('yyyy-MM-dd');
+        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc).plus({ day: 0 }).toFormat('yyyy-MM-dd');
         append(invDates, invDate);
       });
     })
@@ -46,29 +44,21 @@ document.getElementById('selWeekly').addEventListener('change', () => {
 let weeklyHopTable;
 function weeklyHopTableFunc(dt) {
   let data = {};
-  data.startDate = DateTime.fromISO(dt)
-    .startOf('day')
-    .minus({ minutes: 510 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  data.endDate = DateTime.fromISO(dt)
-    .startOf('day')
-    .minus({ minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
+  data.startDate = DateTime.fromISO(dt).startOf('day').minus({ minutes: 510 }).toFormat('yyyy-MM-dd HH:mm');
+  data.endDate = DateTime.fromISO(dt).startOf('day').minus({ minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
 
   axios
     .post('/api/inventory/hop/weekly/view', data)
     .then((res) => {
       for (let i = 0; i < res.data.length; i++) {
-        res.data[i].created_at = DateTime.fromISO(
-          res.data[i].created_at
-        ).toFormat('yyyy-MM-dd');
+        res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd');
       }
       let tableData = res.data;
       weeklyHopTable = new Tabulator('#tableHopWeekly', {
         printHeader: '<h3>Weekly Hop Inventory<h3>',
-        resizableColumns: false,
         height: '309px',
         layout: 'fitDataFill',
+        resizableColumns: false,
         data: tableData,
         columns: [
           {
@@ -90,29 +80,21 @@ function weeklyHopTableFunc(dt) {
 let weeklyMatTable;
 function weeklyMatTableFunc(dt) {
   let data = {};
-  data.startDate = DateTime.fromISO(dt)
-    .startOf('day')
-    .minus({ minutes: 0 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  data.endDate = DateTime.fromISO(dt)
-    .startOf('day')
-    .plus({ minutes: 1439 })
-    .toFormat('yyyy-MM-dd HH:mm');
+  data.startDate = DateTime.fromISO(dt).startOf('day').minus({ minutes: 0 }).toFormat('yyyy-MM-dd HH:mm');
+  data.endDate = DateTime.fromISO(dt).startOf('day').plus({ minutes: 1439 }).toFormat('yyyy-MM-dd HH:mm');
 
   axios
     .post('/api/inventory/material/weekly/view', data)
     .then((res) => {
       for (let i = 0; i < res.data.length; i++) {
-        res.data[i].created_at = DateTime.fromISO(
-          res.data[i].created_at
-        ).toFormat('yyyy-MM-dd');
+        res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd');
       }
       let tableData = res.data;
       weeklyMatTable = new Tabulator('#tableMatWeekly', {
         printHeader: '<h3>Weekly Material Inventory<h3>',
-        resizableColumns: false,
         height: '309px',
         layout: 'fitDataFill',
+        resizableColumns: false,
         data: tableData,
         columns: [
           {
@@ -134,37 +116,23 @@ function weeklyMatTableFunc(dt) {
 let weeklyCombinedTable;
 function weeklyCombinedTableFunc(dt) {
   let data = {};
-  data.startHop = DateTime.fromISO(dt)
-    .startOf('day')
-    .minus({ minutes: 510 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  data.endHop = DateTime.fromISO(dt)
-    .startOf('day')
-    .minus({ minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  data.startMat = DateTime.fromISO(dt)
-    .startOf('day')
-    .minus({ minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  data.endMat = DateTime.fromISO(dt)
-    .startOf('day')
-    .plus({ minutes: 1439 })
-    .toFormat('yyyy-MM-dd HH:mm');
+  data.startHop = DateTime.fromISO(dt).startOf('day').minus({ minutes: 510 }).toFormat('yyyy-MM-dd HH:mm');
+  data.endHop = DateTime.fromISO(dt).startOf('day').minus({ minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
+  data.startMat = DateTime.fromISO(dt).startOf('day').minus({ minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
+  data.endMat = DateTime.fromISO(dt).startOf('day').plus({ minutes: 1439 }).toFormat('yyyy-MM-dd HH:mm');
 
   axios
     .post('/api/inventory/combined/weekly/log/view', data)
     .then((res) => {
       for (let i = 0; i < res.data.length; i++) {
-        res.data[i].created_at = DateTime.fromISO(
-          res.data[i].created_at
-        ).toFormat('yyyy-MM-dd');
+        res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd');
       }
       let tableData = res.data.rows;
       weeklyCombinedTable = new Tabulator('#tableCombinedWeekly', {
         printHeader: '<h3>Weekly Combined Inventory<h3>',
-        resizableColumns: false,
         height: '309px',
         layout: 'fitDataFill',
+        resizableColumns: false,
         data: tableData,
         columns: [
           {
@@ -188,18 +156,14 @@ function weeklyCombinedTableFunc(dt) {
     })
     .catch((err) => console.log(err.detail));
 }
-document
-  .getElementById('weeklyCombinedDownload-xlsx')
-  .addEventListener('click', () => {
-    weeklyCombinedTable.download('xlsx', 'weekly_inv.xlsx', {
-      sheetName: 'inv',
-    });
+document.getElementById('weeklyCombinedDownload-xlsx').addEventListener('click', () => {
+  weeklyCombinedTable.download('xlsx', 'weekly_inv.xlsx', {
+    sheetName: 'inv',
   });
-document
-  .getElementById('weeklyCombinedPrint-table')
-  .addEventListener('click', () => {
-    weeklyCombinedTable.print(false, true);
-  });
+});
+document.getElementById('weeklyCombinedPrint-table').addEventListener('click', () => {
+  weeklyCombinedTable.print(false, true);
+});
 
 // view monthly
 document.getElementById('viewMonthly').onclick = viewMonthly;
@@ -217,9 +181,7 @@ function monthlyDates() {
       let invDate = data.data.rows;
       return invDate.map((listItem) => {
         let invDate = createNode('option');
-        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc)
-          .plus({ month: 0 })
-          .toFormat('yyyy-MM-dd');
+        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc).plus({ month: 0 }).toFormat('yyyy-MM-dd');
         append(invDates, invDate);
       });
     })
@@ -235,29 +197,21 @@ document.getElementById('selMonthly').addEventListener('change', () => {
 let monthlyHopTable;
 function monthlyHopTableFunc(dt) {
   let data = {};
-  data.startDate = DateTime.fromISO(dt)
-    .startOf('day')
-    .minus({ minutes: 510 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  data.endDate = DateTime.fromISO(dt)
-    .startOf('day')
-    .minus({ minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
+  data.startDate = DateTime.fromISO(dt).startOf('day').minus({ minutes: 510 }).toFormat('yyyy-MM-dd HH:mm');
+  data.endDate = DateTime.fromISO(dt).startOf('day').minus({ minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
 
   axios
     .post('/api/inventory/hop/monthly/view', data)
     .then((res) => {
       for (let i = 0; i < res.data.length; i++) {
-        res.data[i].created_at = DateTime.fromISO(
-          res.data[i].created_at
-        ).toFormat('yyyy-MM-dd');
+        res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd');
       }
       let tableData = res.data;
       monthlyHopTable = new Tabulator('#tableHopMonthly', {
         printHeader: '<h3>Monthly Hop Inventory<h3>',
-        resizableColumns: false,
         height: '309px',
         layout: 'fitDataFill',
+        resizableColumns: false,
         data: tableData,
         columns: [
           {
@@ -279,29 +233,21 @@ function monthlyHopTableFunc(dt) {
 let monthlyMatTable;
 function monthlyMatTableFunc(dt) {
   let data = {};
-  data.startDate = DateTime.fromISO(dt)
-    .startOf('day')
-    .minus({ minutes: 0 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  data.endDate = DateTime.fromISO(dt)
-    .startOf('day')
-    .plus({ minutes: 1439 })
-    .toFormat('yyyy-MM-dd HH:mm');
+  data.startDate = DateTime.fromISO(dt).startOf('day').minus({ minutes: 0 }).toFormat('yyyy-MM-dd HH:mm');
+  data.endDate = DateTime.fromISO(dt).startOf('day').plus({ minutes: 1439 }).toFormat('yyyy-MM-dd HH:mm');
 
   axios
     .post('/api/inventory/material/monthly/view', data)
     .then((res) => {
       for (let i = 0; i < res.data.length; i++) {
-        res.data[i].created_at = DateTime.fromISO(
-          res.data[i].created_at
-        ).toFormat('yyyy-MM-dd');
+        res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd');
       }
       let tableData = res.data;
       monthlyMatTable = new Tabulator('#tableMatMonthly', {
         printHeader: '<h3>Monthly Material Inventory<h3>',
-        resizableColumns: false,
         height: '309px',
         layout: 'fitDataFill',
+        resizableColumns: false,
         data: tableData,
         columns: [
           {
@@ -323,36 +269,23 @@ function monthlyMatTableFunc(dt) {
 let monthlyCombinedTable;
 function monthlyCombinedTableFunc(dt) {
   let data = {};
-  data.startHop = DateTime.fromISO(dt)
-    .startOf('day')
-    .minus({ minutes: 510 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  data.endHop = DateTime.fromISO(dt)
-    .startOf('day')
-    .minus({ minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  data.startMat = DateTime.fromISO(dt)
-    .startOf('day')
-    .minus({ minutes: 30 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  data.endMat = DateTime.fromISO(dt)
-    .startOf('day')
-    .plus({ minutes: 1439 })
-    .toFormat('yyyy-MM-dd HH:mm');
+  data.startHop = DateTime.fromISO(dt).startOf('day').minus({ minutes: 510 }).toFormat('yyyy-MM-dd HH:mm');
+  data.endHop = DateTime.fromISO(dt).startOf('day').minus({ minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
+  data.startMat = DateTime.fromISO(dt).startOf('day').minus({ minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
+  data.endMat = DateTime.fromISO(dt).startOf('day').plus({ minutes: 1439 }).toFormat('yyyy-MM-dd HH:mm');
 
   axios
     .post('/api/inventory/combined/monthly/log/view', data)
     .then((res) => {
       for (let i = 0; i < res.data.length; i++) {
-        res.data[i].created_at = DateTime.fromISO(
-          res.data[i].created_at
-        ).toFormat('yyyy-MM-dd');
+        res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd');
       }
       let tableData = res.data.rows;
       monthlyCombinedTable = new Tabulator('#tableCombinedMonthly', {
         printHeader: '<h3>Monthly Combined Inventory<h3>',
         height: '309px',
         layout: 'fitDataFill',
+        resizableColumns: false,
         data: tableData,
         columns: [
           {
@@ -376,15 +309,11 @@ function monthlyCombinedTableFunc(dt) {
     })
     .catch((err) => console.log(err.detail));
 }
-document
-  .getElementById('monthlyCombinedDownload-xlsx')
-  .addEventListener('click', () => {
-    monthlyCombinedTable.download('xlsx', 'monthly_inv.xlsx', {
-      sheetName: 'inv',
-    });
+document.getElementById('monthlyCombinedDownload-xlsx').addEventListener('click', () => {
+  monthlyCombinedTable.download('xlsx', 'monthly_inv.xlsx', {
+    sheetName: 'inv',
   });
-document
-  .getElementById('monthlyCombinedPrint-table')
-  .addEventListener('click', () => {
-    monthlyCombinedTable.print(false, true);
-  });
+});
+document.getElementById('monthlyCombinedPrint-table').addEventListener('click', () => {
+  monthlyCombinedTable.print(false, true);
+});

@@ -157,9 +157,7 @@ function update() {
   title = 'location';
   createList(api, dropDown, title);
 }
-document
-  .getElementsByName('updateVessel')[0]
-  .addEventListener('change', selectBrand);
+document.getElementsByName('updateVessel')[0].addEventListener('change', selectBrand);
 function selectBrand() {
   let vessel = document.getElementsByName('updateVessel')[0].value;
 
@@ -175,9 +173,7 @@ document.getElementById('btnUpdateClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmUpdate').reset();
 });
-document
-  .getElementById('btnUpdateSubmit')
-  .addEventListener('click', sendUpdate);
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate);
 async function sendUpdate(ev) {
   ev.preventDefault();
   ev.stopPropagation();
@@ -252,12 +248,7 @@ function view() {
         responsiveLayoutCollapseStartOpen: false,
         data: tableData,
         columns: [
-          {
-            title: 'Vessel',
-            field: 'vessel',
-            hozAlign: 'center',
-            frozen: true,
-          },
+          { title: 'Vessel', field: 'vessel', hozAlign: 'center', frozen: true },
           { title: 'Active', field: 'active', hozAlign: 'center' },
           { title: 'Type', field: 'type', hozAlign: 'center' },
           { title: 'Volume', field: 'volume', hozAlign: 'center' },

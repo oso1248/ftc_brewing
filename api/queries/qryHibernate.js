@@ -15,25 +15,11 @@ async function add(data) {
 function getById(id) {
   return db('hibernated AS hib')
     .join('brnd_brw as brw', 'hib.brw_id', '=', 'brw.id')
-    .select(
-      'hib.org_vessel',
-      'hib.org_vol',
-      'hib.int_vessel',
-      'hib.int_vol',
-      'hib.end_vessel',
-      'hib.end_vol',
-      'brw.brand',
-      'hib.note',
-      'hib.created_at',
-      'hib.updated_at'
-    )
+    .select('hib.org_vessel', 'hib.org_vol', 'hib.int_vessel', 'hib.int_vol', 'hib.end_vessel', 'hib.end_vol', 'brw.brand', 'hib.note', 'hib.created_at', 'hib.updated_at')
     .where({ 'hib.id': id });
 }
 function getHibernatedTankList() {
-  return db('hibernated AS hib')
-    .select('hib.id', 'hib.int_vessel', 'hib.note')
-    .where('hib.end_vol', '=', 0)
-    .orderBy('hib.org_vessel', 'asc');
+  return db('hibernated AS hib').select('hib.id', 'hib.int_vessel', 'hib.note').where('hib.end_vol', '=', 0).orderBy('hib.org_vessel', 'asc');
 }
 async function update(id, changes) {
   return db('hibernated')

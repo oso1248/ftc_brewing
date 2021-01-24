@@ -52,10 +52,10 @@ function view() {
     .then((res) => {
       let tableData = res.data;
       brandTable = new Tabulator('#list', {
-        resizableColumns: false,
         height: '309px',
         layout: 'fitDataFill',
         resizableColumns: false,
+        layoutColumnsOnNewData: true,
         responsiveLayoutCollapseStartOpen: false,
         data: tableData,
         columns: [
@@ -183,16 +183,12 @@ function update() {
   title = 'brand';
   createList(api, dropDown, title);
 }
-document
-  .getElementById('btnUpdateClear')
-  .addEventListener('click', resetUpdate);
+document.getElementById('btnUpdateClear').addEventListener('click', resetUpdate);
 function resetUpdate(ev) {
   ev.preventDefault();
   document.getElementById('frmUpdate').reset();
 }
-document
-  .getElementById('btnUpdateSubmit')
-  .addEventListener('click', sendUpdate);
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate);
 async function sendUpdate(ev) {
   ev.preventDefault();
   ev.stopPropagation();
@@ -288,9 +284,7 @@ function ingredient() {
   createList(api, dropDown, title);
 }
 
-document
-  .getElementById('btnIngredientAddSubmit')
-  .addEventListener('click', sendBrandIngredientAdd);
+document.getElementById('btnIngredientAddSubmit').addEventListener('click', sendBrandIngredientAdd);
 function sendBrandIngredientAdd(ev) {
   ev.preventDefault();
   ev.stopPropagation();
@@ -320,17 +314,13 @@ function sendBrandIngredientAdd(ev) {
     })
     .catch((err) => alert(err));
 }
-document
-  .getElementById('btnIngredientAddClear')
-  .addEventListener('click', resetBrandIngredientAdd);
+document.getElementById('btnIngredientAddClear').addEventListener('click', resetBrandIngredientAdd);
 function resetBrandIngredientAdd(ev) {
   ev.preventDefault();
   document.getElementById('frmIngredientAdd').reset();
 }
 
-document
-  .getElementsByName('fin_idUpdate')[0]
-  .addEventListener('change', selectBrandIngredientUpdate);
+document.getElementsByName('fin_idUpdate')[0].addEventListener('change', selectBrandIngredientUpdate);
 let ingredientTable;
 function selectBrandIngredientUpdate() {
   console.log('update');
@@ -343,10 +333,10 @@ function selectBrandIngredientUpdate() {
     .then((res) => {
       let tableData = res.data;
       ingredientTable = new Tabulator('#injRateTable', {
-        resizableColumns: false,
         height: '120x',
         layout: 'fitDataFill',
         resizableColumns: false,
+        layoutColumnsOnNewData: true,
         responsiveLayoutCollapseStartOpen: false,
         data: tableData,
         columns: [
@@ -364,9 +354,7 @@ function selectBrandIngredientUpdate() {
     })
     .catch((err) => console.log(err));
 }
-document
-  .getElementById('btnIngredientUpdateSubmit')
-  .addEventListener('click', sendBrandIngredientUpdate);
+document.getElementById('btnIngredientUpdateSubmit').addEventListener('click', sendBrandIngredientUpdate);
 function sendBrandIngredientUpdate(ev) {
   ev.preventDefault();
   ev.stopPropagation();
@@ -387,18 +375,14 @@ function sendBrandIngredientUpdate(ev) {
     })
     .catch((err) => alert(err));
 }
-document
-  .getElementById('btnIngredientUpdateClear')
-  .addEventListener('click', resetBrandIngredientUpdate);
+document.getElementById('btnIngredientUpdateClear').addEventListener('click', resetBrandIngredientUpdate);
 function resetBrandIngredientUpdate(ev) {
   ev.preventDefault();
   document.getElementById('frmIngredientUpdate').reset();
   ingredientTable.destroy();
 }
 
-document
-  .getElementById('btnIngredientDeleteSubmit')
-  .addEventListener('click', sendBrandIngredientDelete);
+document.getElementById('btnIngredientDeleteSubmit').addEventListener('click', sendBrandIngredientDelete);
 function sendBrandIngredientDelete(ev) {
   ev.preventDefault();
   ev.stopPropagation();
@@ -419,9 +403,7 @@ function sendBrandIngredientDelete(ev) {
     })
     .catch((err) => alert(err));
 }
-document
-  .getElementById('btnIngredientDeleteClear')
-  .addEventListener('click', resetBrandIngredientDelete);
+document.getElementById('btnIngredientDeleteClear').addEventListener('click', resetBrandIngredientDelete);
 function resetBrandIngredientDelete(ev) {
   ev.preventDefault();
   document.getElementById('frmIngredientDelete').reset();

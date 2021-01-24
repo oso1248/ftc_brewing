@@ -9,21 +9,10 @@ document.getElementById('monthlyBoxes').style.display = 'none';
 function setCookie(cookieName, cookieValue, hoursToExpire, path, domain) {
   let date = new Date();
   date.setTime(date.getTime() + hoursToExpire * 60 * 60 * 1000);
-  document.cookie =
-    cookieName +
-    '=' +
-    cookieValue +
-    '; expires=' +
-    date.toGMTString() +
-    'path=' +
-    path +
-    'domain=' +
-    domain;
+  document.cookie = cookieName + '=' + cookieValue + '; expires=' + date.toGMTString() + 'path=' + path + 'domain=' + domain;
 }
 function getCookie(cookieName) {
-  var cookieValue = document.cookie.match(
-    '(^|;)\\s*' + cookieName + '\\s*=\\s*([^;]+)'
-  );
+  var cookieValue = document.cookie.match('(^|;)\\s*' + cookieName + '\\s*=\\s*([^;]+)');
   return cookieValue ? cookieValue.pop() : '';
 }
 function deleteCookie(cname) {
@@ -311,8 +300,7 @@ function combineTanksPumps(data, tanks) {
 
         data[0].com_id = pump[i].value;
         data[0].lot = pump[i + 1].value.toNonAlpha().toUpperCase();
-        data[0].vol_ing =
-          (pump[i + 3].value - pump[i + 2].value) / tanks.length;
+        data[0].vol_ing = (pump[i + 3].value - pump[i + 2].value) / tanks.length;
       }
     }
   }
@@ -336,36 +324,26 @@ function invFinInjectDatesWeek() {
       let invDate = data.data;
       return invDate.map((listItem) => {
         let invDate = createNode('option');
-        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc).toFormat(
-          'yyyy-MM-dd'
-        );
+        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc).toFormat('yyyy-MM-dd');
         append(invDates, invDate);
       });
     })
     .catch((err) => console.log(err.detail));
 }
 let tableWeekly;
-document
-  .getElementById('dateWeekly')
-  .addEventListener('change', finInjectionWeekly);
+document.getElementById('dateWeekly').addEventListener('change', finInjectionWeekly);
 function finInjectionWeekly() {
   let date = document.getElementById('dateWeekly').value;
   let timeSpan = {};
-  timeSpan.start = DateTime.fromISO(date)
-    .plus({ days: 0 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  timeSpan.end = DateTime.fromISO(date)
-    .endOf('week')
-    .toFormat('yyyy-MM-dd HH:mm');
+  timeSpan.start = DateTime.fromISO(date).plus({ days: 0 }).toFormat('yyyy-MM-dd HH:mm');
+  timeSpan.end = DateTime.fromISO(date).endOf('week').toFormat('yyyy-MM-dd HH:mm');
 
   axios
     .post('/api/inventory/fin/injection/log/get', timeSpan)
     .then((res) => {
       let tableData = res.data;
       tableData.map((elem) => {
-        elem.created_at = DateTime.fromISO(elem.created_at).toFormat(
-          'yyyy-MM-dd HH:mm'
-        );
+        elem.created_at = DateTime.fromISO(elem.created_at).toFormat('yyyy-MM-dd HH:mm');
       });
       tableWeekly = new Tabulator('#tableWeekly', {
         printHeader: '<h1>Weekly Ing Addition<h1>',
@@ -414,36 +392,26 @@ function invFinInjectDatesMonth() {
       let invDate = data.data;
       return invDate.map((listItem) => {
         let invDate = createNode('option');
-        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc).toFormat(
-          'yyyy-MM'
-        );
+        invDate.innerHTML = DateTime.fromISO(listItem.date_trunc).toFormat('yyyy-MM');
         append(invDates, invDate);
       });
     })
     .catch((err) => console.log(err.detail));
 }
 let tableMonthly;
-document
-  .getElementById('dateMonthly')
-  .addEventListener('change', finInjectionMonthly);
+document.getElementById('dateMonthly').addEventListener('change', finInjectionMonthly);
 function finInjectionMonthly() {
   let date = document.getElementById('dateMonthly').value;
   let timeSpan = {};
-  timeSpan.start = DateTime.fromISO(date)
-    .plus({ days: 0 })
-    .toFormat('yyyy-MM-dd HH:mm');
-  timeSpan.end = DateTime.fromISO(date)
-    .endOf('month')
-    .toFormat('yyyy-MM-dd HH:mm');
+  timeSpan.start = DateTime.fromISO(date).plus({ days: 0 }).toFormat('yyyy-MM-dd HH:mm');
+  timeSpan.end = DateTime.fromISO(date).endOf('month').toFormat('yyyy-MM-dd HH:mm');
 
   axios
     .post('/api/inventory/fin/injection/log/get', timeSpan)
     .then((res) => {
       let tableData = res.data;
       tableData.map((elem) => {
-        elem.created_at = DateTime.fromISO(elem.created_at).toFormat(
-          'yyyy-MM-dd HH:mm'
-        );
+        elem.created_at = DateTime.fromISO(elem.created_at).toFormat('yyyy-MM-dd HH:mm');
       });
       tableMonthly = new Tabulator('#tableMonthly', {
         printHeader: '<h1>Monthly Ing Addition<h1>',
@@ -467,11 +435,9 @@ function finInjectionMonthly() {
     .catch((err) => console.log(err));
   document.getElementById('monthlyBoxesBox').style.display = 'block';
 }
-document
-  .getElementById('monthlyDownload-xlsx')
-  .addEventListener('click', () => {
-    tableMonthly.download('xlsx', 'fin_inj_monthly.xlsx', { sheetName: 'Log' });
-  });
+document.getElementById('monthlyDownload-xlsx').addEventListener('click', () => {
+  tableMonthly.download('xlsx', 'fin_inj_monthly.xlsx', { sheetName: 'Log' });
+});
 document.getElementById('monthlyPrint-table').addEventListener('click', () => {
   tableMonthly.print(false, true);
 });

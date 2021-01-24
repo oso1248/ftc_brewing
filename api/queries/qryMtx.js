@@ -22,10 +22,7 @@ async function patchBrndHopUpdate(name, changes) {
   return db.transaction((trx) => {
     let queries = [];
     changes.forEach((data) => {
-      const query = db('mtx_hop_std')
-        .where('com_id', data.com_id)
-        .update(name, data.Pounds)
-        .transacting(trx);
+      const query = db('mtx_hop_std').where('com_id', data.com_id).update(name, data.Pounds).transacting(trx);
       queries.push(query);
     });
     Promise.all(queries).then(trx.commit).catch(trx.rollback);
@@ -54,10 +51,7 @@ async function patchBrndDryUpdate(name, changes) {
   return db.transaction((trx) => {
     let queries = [];
     changes.forEach((data) => {
-      const query = db('mtx_hop_dry')
-        .where('com_id', data.com_id)
-        .update(name, data.Pounds)
-        .transacting(trx);
+      const query = db('mtx_hop_dry').where('com_id', data.com_id).update(name, data.Pounds).transacting(trx);
       queries.push(query);
     });
     Promise.all(queries).then(trx.commit).catch(trx.rollback);
@@ -89,10 +83,7 @@ async function patchBrndSacUpdate(name, changes) {
   return db.transaction((trx) => {
     let queries = [];
     changes.forEach((data) => {
-      const query = db('mtx_sac_supr')
-        .where('com_id', data.com_id)
-        .update(name, data.Units)
-        .transacting(trx);
+      const query = db('mtx_sac_supr').where('com_id', data.com_id).update(name, data.Units).transacting(trx);
       queries.push(query);
     });
     Promise.all(queries).then(trx.commit).catch(trx.rollback);

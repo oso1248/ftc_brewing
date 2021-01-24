@@ -83,9 +83,7 @@ function updateView() {
   createListBrwBrand(api, dropDown, title);
 }
 //Select Brew Brand Update
-document
-  .getElementById('brwBrandUpdate')
-  .addEventListener('change', selectUpdateBrw);
+document.getElementById('brwBrandUpdate').addEventListener('change', selectUpdateBrw);
 function selectUpdateBrw() {
   document.getElementById('updateLineageBoxChp').style.display = 'block';
   document.getElementById('updateLineageBoxFin').style.display = 'none';
@@ -100,15 +98,7 @@ function selectUpdateBrw() {
 
 let tableUpdateBrandChp;
 async function chpBrandUpdate(name) {
-  let labels = [
-    'Brand',
-    'Diacetyl',
-    'Pentanedione',
-    'Acid Aldehyde',
-    'ABW',
-    'RDF',
-    'Note',
-  ];
+  let labels = ['Brand', 'Diacetyl', 'Pentanedione', 'Acid Aldehyde', 'ABW', 'RDF', 'Note'];
   await axios
     .post('/api/brand/recipe/chp', { name: name })
     .then((res) => {
@@ -122,13 +112,7 @@ async function chpBrandUpdate(name) {
         data: tableData,
         columns: [
           { title: 'Object', field: 'object', hozAlign: 'left', frozen: true },
-          {
-            title: 'Method',
-            field: 'method',
-            hozAlign: 'left',
-            formatter: 'textarea',
-            editor: true,
-          },
+          { title: 'Method', field: 'method', hozAlign: 'left', formatter: 'textarea', editor: true },
         ],
       });
     })
@@ -140,9 +124,7 @@ document.getElementById('btnUpdateClearChp').addEventListener('click', (ev) => {
     tableUpdateBrandChp.clearData();
   }
 });
-document
-  .getElementById('btnUpdateSubmitChp')
-  .addEventListener('click', sendUpdateChp);
+document.getElementById('btnUpdateSubmitChp').addEventListener('click', sendUpdateChp);
 async function sendUpdateChp(ev) {
   ev.preventDefault();
   ev.stopPropagation();
@@ -172,13 +154,7 @@ async function schBrandUpdate(name) {
         data: tableData,
         columns: [
           { title: 'Object', field: 'object', hozAlign: 'left', frozen: true },
-          {
-            title: 'Method',
-            field: 'method',
-            hozAlign: 'left',
-            formatter: 'textarea',
-            editor: true,
-          },
+          { title: 'Method', field: 'method', hozAlign: 'left', formatter: 'textarea', editor: true },
         ],
       });
     })
@@ -190,9 +166,7 @@ document.getElementById('btnUpdateClearSch').addEventListener('click', (ev) => {
     tableUpdateBrandSch.clearData();
   }
 });
-document
-  .getElementById('btnUpdateSubmitSch')
-  .addEventListener('click', sendUpdateSch);
+document.getElementById('btnUpdateSubmitSch').addEventListener('click', sendUpdateSch);
 async function sendUpdateSch(ev) {
   ev.preventDefault();
   ev.stopPropagation();
@@ -208,9 +182,7 @@ async function sendUpdateSch(ev) {
 }
 
 // Select Fin Brand Update
-document
-  .getElementById('finBrandUpdate')
-  .addEventListener('change', selectUpdateFin);
+document.getElementById('finBrandUpdate').addEventListener('change', selectUpdateFin);
 function selectUpdateFin() {
   document.getElementById('updateLineageBoxFin').style.display = 'block';
   document.getElementById('updateLineageBoxChp').style.display = 'none';
@@ -276,13 +248,7 @@ async function finBrandUpdate(name) {
         data: tableData,
         columns: [
           { title: 'Object', field: 'object', hozAlign: 'left', frozen: true },
-          {
-            title: 'Method',
-            field: 'method',
-            hozAlign: 'left',
-            formatter: 'textarea',
-            editor: true,
-          },
+          { title: 'Method', field: 'method', hozAlign: 'left', formatter: 'textarea', editor: true },
         ],
       });
     })
@@ -294,9 +260,7 @@ document.getElementById('btnUpdateClearFin').addEventListener('click', (ev) => {
     tableUpdateBrandFin.clearData();
   }
 });
-document
-  .getElementById('btnUpdateSubmitFin')
-  .addEventListener('click', sendUpdateFin);
+document.getElementById('btnUpdateSubmitFin').addEventListener('click', sendUpdateFin);
 async function sendUpdateFin(ev) {
   ev.preventDefault();
   ev.stopPropagation();
@@ -334,9 +298,7 @@ function viewView() {
 }
 
 //Select Brew Brand View
-document
-  .getElementById('brwBrandView')
-  .addEventListener('change', selectViewBrw);
+document.getElementById('brwBrandView').addEventListener('change', selectViewBrw);
 function selectViewBrw() {
   document.getElementById('viewLineageBoxChp').style.display = 'block';
   document.getElementById('viewLineageBoxFin').style.display = 'none';
@@ -350,15 +312,7 @@ function selectViewBrw() {
 }
 let tableViewBrandChp;
 async function chpBrandView(name) {
-  let labels = [
-    'Brand',
-    'Diacetyl',
-    'Pentanedione',
-    'Acid Aldehyde',
-    'ABW',
-    'RDF',
-    'Note',
-  ];
+  let labels = ['Brand', 'Diacetyl', 'Pentanedione', 'Acid Aldehyde', 'ABW', 'RDF', 'Note'];
   await axios
     .post('/api/brand/recipe/chp', { name: name })
     .then((res) => {
@@ -372,12 +326,7 @@ async function chpBrandView(name) {
         data: tableData,
         columns: [
           { title: 'Object', field: 'object', hozAlign: 'left', frozen: true },
-          {
-            title: 'Method',
-            field: 'method',
-            hozAlign: 'left',
-            formatter: 'textarea',
-          },
+          { title: 'Method', field: 'method', hozAlign: 'left', formatter: 'textarea' },
         ],
       });
     })
@@ -399,12 +348,7 @@ async function schBrandView(name) {
         data: tableData,
         columns: [
           { title: 'Object', field: 'object', hozAlign: 'left', frozen: true },
-          {
-            title: 'Method',
-            field: 'method',
-            hozAlign: 'left',
-            formatter: 'textarea',
-          },
+          { title: 'Method', field: 'method', hozAlign: 'left', formatter: 'textarea' },
         ],
       });
     })
@@ -412,9 +356,7 @@ async function schBrandView(name) {
 }
 
 // Select Fin Brand View
-document
-  .getElementById('finBrandView')
-  .addEventListener('change', selectViewFin);
+document.getElementById('finBrandView').addEventListener('change', selectViewFin);
 function selectViewFin() {
   document.getElementById('viewLineageBoxFin').style.display = 'block';
   document.getElementById('viewLineageBoxChp').style.display = 'none';
@@ -479,12 +421,7 @@ async function finBrandView(name) {
         data: tableData,
         columns: [
           { title: 'Object', field: 'object', hozAlign: 'left', frozen: true },
-          {
-            title: 'Method',
-            field: 'method',
-            hozAlign: 'left',
-            formatter: 'textarea',
-          },
+          { title: 'Method', field: 'method', hozAlign: 'left', formatter: 'textarea' },
         ],
       });
     })

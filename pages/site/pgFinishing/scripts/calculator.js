@@ -38,10 +38,7 @@ function blend(ev) {
   alc[3].value = Math.round(blendAve(vol, alc) * 100) / 100;
   cal[3].value = Math.round(blendAve(vol, cal) * 100) / 100;
   carb[3].value = Math.round(blendAve(vol, carb) * 100) / 100;
-  vol[3].value =
-    (parseFloat(vol[0].value) || 0) +
-    (parseFloat(vol[1].value) || 0) +
-    (parseFloat(vol[2].value) || 0);
+  vol[3].value = (parseFloat(vol[0].value) || 0) + (parseFloat(vol[1].value) || 0) + (parseFloat(vol[2].value) || 0);
 }
 function blendAve(vol, param) {
   let param1 = parseFloat(param[0].value) || 0;
@@ -50,8 +47,7 @@ function blendAve(vol, param) {
   let vol1 = parseFloat(vol[0].value) || 0;
   let vol2 = parseFloat(vol[1].value) || 0;
   let vol3 = parseFloat(vol[2].value) || 0;
-  let x =
-    (param1 * vol1 + param2 * vol2 + param3 * vol3) / (vol1 + vol2 + vol3);
+  let x = (param1 * vol1 + param2 * vol2 + param3 * vol3) / (vol1 + vol2 + vol3);
   return x;
 }
 
@@ -73,10 +69,7 @@ function topSub(ev) {
   let desireAbw = parseFloat(form[2].value);
   let tankCapacity = parseFloat(form[3].value);
 
-  let targetAbw =
-    (desireAbw * (initialVol + (tankCapacity - initialVol)) -
-      currentAbw * initialVol) /
-    (tankCapacity - initialVol);
+  let targetAbw = (desireAbw * (initialVol + (tankCapacity - initialVol)) - currentAbw * initialVol) / (tankCapacity - initialVol);
 
   form[4].value = targetAbw;
 }

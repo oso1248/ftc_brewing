@@ -85,24 +85,12 @@ function view() {
         layout: 'fitDataFill',
         responsiveLayout: 'collapse',
         resizableColumns: false,
+        layoutColumnsOnNewData: true,
         responsiveLayoutCollapseStartOpen: false,
         data: tableData,
         columns: [
-          {
-            formatter: 'responsiveCollapse',
-            width: 30,
-            minWidth: 30,
-            hozAlign: 'left',
-            resizable: false,
-            headerSort: false,
-          },
-          {
-            title: 'Location',
-            field: 'location',
-            width: 200,
-            hozAlign: 'left',
-            responsive: 0,
-          },
+          { formatter: 'responsiveCollapse', width: 30, minWidth: 30, hozAlign: 'left', resizable: false, headerSort: false },
+          { title: 'Location', field: 'location', width: 200, hozAlign: 'left', responsive: 0 },
           { title: 'Note', field: 'note', hozAlign: 'left', width: 250 },
         ],
       });
@@ -118,24 +106,12 @@ function view() {
         layout: 'fitDataFill',
         responsiveLayout: 'collapse',
         resizableColumns: false,
+        layoutColumnsOnNewData: true,
         responsiveLayoutCollapseStartOpen: false,
         data: tableData,
         columns: [
-          {
-            formatter: 'responsiveCollapse',
-            width: 30,
-            minWidth: 30,
-            hozAlign: 'left',
-            resizable: false,
-            headerSort: false,
-          },
-          {
-            title: 'Type',
-            field: 'type',
-            width: 200,
-            hozAlign: 'left',
-            responsive: 0,
-          },
+          { formatter: 'responsiveCollapse', width: 30, minWidth: 30, hozAlign: 'left', resizable: false, headerSort: false },
+          { title: 'Type', field: 'type', width: 200, hozAlign: 'left', responsive: 0 },
           { title: 'Note', field: 'note', hozAlign: 'left', width: 250 },
         ],
       });
@@ -151,24 +127,12 @@ function view() {
         layout: 'fitDataFill',
         responsiveLayout: 'collapse',
         resizableColumns: false,
+        layoutColumnsOnNewData: true,
         responsiveLayoutCollapseStartOpen: false,
         data: tableData,
         columns: [
-          {
-            formatter: 'responsiveCollapse',
-            width: 30,
-            minWidth: 30,
-            hozAlign: 'left',
-            resizable: false,
-            headerSort: false,
-          },
-          {
-            title: 'Enviro',
-            field: 'enviro',
-            width: 200,
-            hozAlign: 'left',
-            responsive: 0,
-          },
+          { formatter: 'responsiveCollapse', width: 30, minWidth: 30, hozAlign: 'left', resizable: false, headerSort: false },
+          { title: 'Enviro', field: 'enviro', width: 200, hozAlign: 'left', responsive: 0 },
           { title: 'Note', field: 'note', hozAlign: 'left', width: 250 },
         ],
       });
@@ -184,24 +148,12 @@ function view() {
         layout: 'fitDataFill',
         responsiveLayout: 'collapse',
         resizableColumns: false,
+        layoutColumnsOnNewData: true,
         responsiveLayoutCollapseStartOpen: false,
         data: tableData,
         columns: [
-          {
-            formatter: 'responsiveCollapse',
-            width: 30,
-            minWidth: 30,
-            hozAlign: 'left',
-            resizable: false,
-            headerSort: false,
-          },
-          {
-            title: 'Container',
-            field: 'container',
-            width: 200,
-            hozAlign: 'left',
-            responsive: 0,
-          },
+          { formatter: 'responsiveCollapse', width: 30, minWidth: 30, hozAlign: 'left', resizable: false, headerSort: false },
+          { title: 'Container', field: 'container', width: 200, hozAlign: 'left', responsive: 0 },
           { title: 'Note', field: 'note', hozAlign: 'left', width: 250 },
         ],
       });
@@ -217,24 +169,12 @@ function view() {
         layout: 'fitDataFill',
         responsiveLayout: 'collapse',
         resizableColumns: false,
+        layoutColumnsOnNewData: true,
         responsiveLayoutCollapseStartOpen: false,
         data: tableData,
         columns: [
-          {
-            formatter: 'responsiveCollapse',
-            width: 30,
-            minWidth: 30,
-            hozAlign: 'left',
-            resizable: false,
-            headerSort: false,
-          },
-          {
-            title: 'UOM',
-            field: 'uom',
-            width: 200,
-            hozAlign: 'left',
-            responsive: 0,
-          },
+          { formatter: 'responsiveCollapse', width: 30, minWidth: 30, hozAlign: 'left', resizable: false, headerSort: false },
+          { title: 'UOM', field: 'uom', width: 200, hozAlign: 'left', responsive: 0 },
           { title: 'Note', field: 'note', hozAlign: 'left', width: 250 },
         ],
       });
@@ -797,101 +737,41 @@ async function sendDeleteUOM(ev) {
 }
 
 //Clear forms add
-document
-  .getElementById('btnAddClearLocation')
-  .addEventListener('click', resetAddLocation);
-document
-  .getElementById('btnAddClearType')
-  .addEventListener('click', resetAddType);
-document
-  .getElementById('btnAddClearEnviro')
-  .addEventListener('click', resetAddEnviro);
-document
-  .getElementById('btnAddClearContainer')
-  .addEventListener('click', resetAddContainer);
-document
-  .getElementById('btnAddClearUOM')
-  .addEventListener('click', resetAddUOM);
+document.getElementById('btnAddClearLocation').addEventListener('click', resetAddLocation);
+document.getElementById('btnAddClearType').addEventListener('click', resetAddType);
+document.getElementById('btnAddClearEnviro').addEventListener('click', resetAddEnviro);
+document.getElementById('btnAddClearContainer').addEventListener('click', resetAddContainer);
+document.getElementById('btnAddClearUOM').addEventListener('click', resetAddUOM);
 //Clear forms update
-document
-  .getElementById('btnUpdateClearLocation')
-  .addEventListener('click', resetUpdateLocation);
-document
-  .getElementById('btnUpdateClearType')
-  .addEventListener('click', resetUpdateType);
-document
-  .getElementById('btnUpdateClearEnviro')
-  .addEventListener('click', resetUpdateEnviro);
-document
-  .getElementById('btnUpdateClearContainer')
-  .addEventListener('click', resetUpdateContainer);
-document
-  .getElementById('btnUpdateClearUOM')
-  .addEventListener('click', resetUpdateUOM);
+document.getElementById('btnUpdateClearLocation').addEventListener('click', resetUpdateLocation);
+document.getElementById('btnUpdateClearType').addEventListener('click', resetUpdateType);
+document.getElementById('btnUpdateClearEnviro').addEventListener('click', resetUpdateEnviro);
+document.getElementById('btnUpdateClearContainer').addEventListener('click', resetUpdateContainer);
+document.getElementById('btnUpdateClearUOM').addEventListener('click', resetUpdateUOM);
 //Clear forms delete
-document
-  .getElementById('btnDeleteClearLocation')
-  .addEventListener('click', resetDeleteLocation);
-document
-  .getElementById('btnDeleteClearType')
-  .addEventListener('click', resetDeleteType);
-document
-  .getElementById('btnDeleteClearEnviro')
-  .addEventListener('click', resetDeleteEnviro);
-document
-  .getElementById('btnDeleteClearContainer')
-  .addEventListener('click', resetDeleteContainer);
-document
-  .getElementById('btnDeleteClearUOM')
-  .addEventListener('click', resetDeleteUOM);
+document.getElementById('btnDeleteClearLocation').addEventListener('click', resetDeleteLocation);
+document.getElementById('btnDeleteClearType').addEventListener('click', resetDeleteType);
+document.getElementById('btnDeleteClearEnviro').addEventListener('click', resetDeleteEnviro);
+document.getElementById('btnDeleteClearContainer').addEventListener('click', resetDeleteContainer);
+document.getElementById('btnDeleteClearUOM').addEventListener('click', resetDeleteUOM);
 //Send forms add
-document
-  .getElementById('btnAddSubmitLocation')
-  .addEventListener('click', sendAddLocation);
-document
-  .getElementById('btnAddSubmitType')
-  .addEventListener('click', sendAddType);
-document
-  .getElementById('btnAddSubmitEnviro')
-  .addEventListener('click', sendAddEnviro);
-document
-  .getElementById('btnAddSubmitContainer')
-  .addEventListener('click', sendAddContainer);
-document
-  .getElementById('btnAddSubmitUOM')
-  .addEventListener('click', sendAddUom);
+document.getElementById('btnAddSubmitLocation').addEventListener('click', sendAddLocation);
+document.getElementById('btnAddSubmitType').addEventListener('click', sendAddType);
+document.getElementById('btnAddSubmitEnviro').addEventListener('click', sendAddEnviro);
+document.getElementById('btnAddSubmitContainer').addEventListener('click', sendAddContainer);
+document.getElementById('btnAddSubmitUOM').addEventListener('click', sendAddUom);
 //Send forms Update
-document
-  .getElementById('btnUpdateSubmitLocation')
-  .addEventListener('click', sendUpdateLocation);
-document
-  .getElementById('btnUpdateSubmitType')
-  .addEventListener('click', sendUpdateType);
-document
-  .getElementById('btnUpdateSubmitEnviro')
-  .addEventListener('click', sendUpdateEnviro);
-document
-  .getElementById('btnUpdateSubmitContainer')
-  .addEventListener('click', sendUpdateContainer);
-document
-  .getElementById('btnUpdateSubmitUOM')
-  .addEventListener('click', sendUpdateUom);
+document.getElementById('btnUpdateSubmitLocation').addEventListener('click', sendUpdateLocation);
+document.getElementById('btnUpdateSubmitType').addEventListener('click', sendUpdateType);
+document.getElementById('btnUpdateSubmitEnviro').addEventListener('click', sendUpdateEnviro);
+document.getElementById('btnUpdateSubmitContainer').addEventListener('click', sendUpdateContainer);
+document.getElementById('btnUpdateSubmitUOM').addEventListener('click', sendUpdateUom);
 // Send forms delete
-document
-  .getElementById('btnDeleteSubmitLocation')
-  .addEventListener('click', sendDeleteLocation);
-document
-  .getElementById('btnDeleteSubmitType')
-  .addEventListener('click', sendDeleteType);
-document
-  .getElementById('btnDeleteSubmitEnviro')
-  .addEventListener('click', sendDeleteEnviro);
-document
-  .getElementById('btnDeleteSubmitContainer')
-  .addEventListener('click', sendDeleteContainer);
-document
-  .getElementById('btnDeleteSubmitUOM')
-  .addEventListener('click', sendDeleteUOM);
+document.getElementById('btnDeleteSubmitLocation').addEventListener('click', sendDeleteLocation);
+document.getElementById('btnDeleteSubmitType').addEventListener('click', sendDeleteType);
+document.getElementById('btnDeleteSubmitEnviro').addEventListener('click', sendDeleteEnviro);
+document.getElementById('btnDeleteSubmitContainer').addEventListener('click', sendDeleteContainer);
+document.getElementById('btnDeleteSubmitUOM').addEventListener('click', sendDeleteUOM);
 // view
 document.getElementById('add').onclick = add;
 document.getElementById('update').onclick = update;

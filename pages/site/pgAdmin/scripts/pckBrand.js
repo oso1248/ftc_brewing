@@ -98,9 +98,7 @@ async function validateAdd(data) {
     failures.push({ input: 'brand', msg: 'Taken' });
   } else {
     let query = '/api/brand/pck/get/name';
-    let res = await axios
-      .post(query, { name: name })
-      .catch((err) => console.log(err));
+    let res = await axios.post(query, { name: name }).catch((err) => console.log(err));
     if (res.data.msg !== 'null') {
       failures.push({ input: 'brand', msg: 'Taken' });
     }
@@ -146,9 +144,7 @@ document.getElementById('btnUpdateClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmUpdate').reset();
 });
-document
-  .getElementsByName('updatePckBrnd')[0]
-  .addEventListener('change', selectBrand);
+document.getElementsByName('updatePckBrnd')[0].addEventListener('change', selectBrand);
 function selectBrand() {
   let brand = document.getElementsByName('updatePckBrnd')[0].value;
 
@@ -158,9 +154,7 @@ function selectBrand() {
     document.getElementsByName('updateNote')[0].value = data.data.note;
   });
 }
-document
-  .getElementById('btnUpdateSubmit')
-  .addEventListener('click', sendUpdate);
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate);
 async function sendUpdate(ev) {
   ev.preventDefault();
   ev.stopPropagation();
@@ -233,12 +227,7 @@ function view() {
         responsiveLayoutCollapseStartOpen: false,
         data: tableData,
         columns: [
-          {
-            title: 'Pck Brand',
-            field: 'brndPck',
-            hozAlign: 'center',
-            frozen: true,
-          },
+          { title: 'Pck Brand', field: 'brndPck', hozAlign: 'center', frozen: true },
           { title: 'Active', field: 'active', hozAlign: 'center' },
           { title: 'Fin Brand', field: 'brndFin', hozAlign: 'center' },
           { title: 'Brw Brand', field: 'brndBrw', hozAlign: 'center' },

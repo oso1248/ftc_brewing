@@ -49,9 +49,7 @@ document.getElementById('btnUpdateClear').addEventListener('click', (ev) => {
   hopTableUpdate.clearData();
 });
 let hopTableUpdate;
-document
-  .getElementById('brwBrandUpdate')
-  .addEventListener('change', selectBrwBrandUpdate);
+document.getElementById('brwBrandUpdate').addEventListener('change', selectBrwBrandUpdate);
 function selectBrwBrandUpdate() {
   let brwBrand = document.getElementById('brwBrandUpdate').value;
   axios
@@ -61,26 +59,19 @@ function selectBrwBrandUpdate() {
       res.data.unshift({ Hop: 'Brand', Pounds: `${brwBrand}` });
       hopTableUpdate = new Tabulator('#updateHop', {
         resizableColumns: false,
+        layoutColumnsOnNewData: true,
         height: '330px',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
           { title: 'Hop', field: 'Hop', hozAlign: 'center', frozen: true },
-          {
-            title: 'Pounds',
-            field: 'Pounds',
-            hozAlign: 'left',
-            editor: true,
-            validator: ['numeric'],
-          },
+          { title: 'Pounds', field: 'Pounds', hozAlign: 'left', editor: true, validator: ['numeric'] },
         ],
       });
     })
     .catch((err) => console.log(err));
 }
-document
-  .getElementById('btnUpdateSubmit')
-  .addEventListener('click', sendUpdate);
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate);
 async function sendUpdate(ev) {
   ev.preventDefault();
   ev.stopPropagation();
@@ -118,9 +109,7 @@ document.getElementById('btnViewClear').addEventListener('click', (ev) => {
   hopTableView.clearData();
 });
 let hopTableView;
-document
-  .getElementById('brwBrandView')
-  .addEventListener('change', selectBrwBrandView);
+document.getElementById('brwBrandView').addEventListener('change', selectBrwBrandView);
 function selectBrwBrandView() {
   let brwBrand = document.getElementById('brwBrandView').value;
   axios
@@ -130,6 +119,7 @@ function selectBrwBrandView() {
       res.data.unshift({ Hop: 'Brand', Pounds: `${brwBrand}` });
       hopTableView = new Tabulator('#viewHop', {
         resizableColumns: false,
+        layoutColumnsOnNewData: true,
         height: '330px',
         layout: 'fitDataFill',
         data: tableData,

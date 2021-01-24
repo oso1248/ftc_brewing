@@ -163,9 +163,7 @@ async function validateAdd(data) {
     failures.push({ input: 'commodity', msg: 'Taken' });
   } else {
     let query = '/api/commodity/name';
-    let res = await axios
-      .post(query, { name: data.commodity })
-      .catch((err) => alert(err));
+    let res = await axios.post(query, { name: data.commodity }).catch((err) => alert(err));
     if (res.data.msg !== 'null') {
       failures.push({ input: 'commodity', msg: 'Taken' });
     }
@@ -292,9 +290,7 @@ document.getElementById('btnUpdateClear').addEventListener('click', (ev) => {
   ev.preventDefault();
   document.getElementById('frmUpdate').reset();
 });
-document
-  .getElementsByName('updateCommodity')[0]
-  .addEventListener('change', selectCommodity);
+document.getElementsByName('updateCommodity')[0].addEventListener('change', selectCommodity);
 function selectCommodity() {
   let commodity = document.getElementsByName('updateCommodity')[0].value;
 
@@ -310,19 +306,14 @@ function selectCommodity() {
       document.getElementById(data.data.inventory).selected = 'selected';
       document.getElementsByName('updateSap')[0].value = data.data.sap;
       document.getElementsByName('updateActive')[0].value = data.data.active;
-      document.getElementsByName('updateThreshold')[0].value =
-        data.data.threshold;
-      document.getElementsByName('updatePer_pallet')[0].value =
-        data.data.per_pallet;
-      document.getElementsByName('updateUnit_total')[0].value =
-        data.data.unit_total;
+      document.getElementsByName('updateThreshold')[0].value = data.data.threshold;
+      document.getElementsByName('updatePer_pallet')[0].value = data.data.per_pallet;
+      document.getElementsByName('updateUnit_total')[0].value = data.data.unit_total;
       document.getElementsByName('updateNote')[0].value = data.data.note;
     })
     .catch((err) => alert(err));
 }
-document
-  .getElementById('btnUpdateSubmit')
-  .addEventListener('click', sendUpdate);
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate);
 async function sendUpdate(ev) {
   ev.preventDefault();
   ev.stopPropagation();

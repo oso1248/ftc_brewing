@@ -204,16 +204,12 @@ function update() {
   let type = 'tk_sch';
   createListType(api, dropDown, title, type);
 }
-document
-  .getElementById('btnUpdateClear')
-  .addEventListener('click', resetUpdate);
+document.getElementById('btnUpdateClear').addEventListener('click', resetUpdate);
 function resetUpdate(ev) {
   ev.preventDefault();
   document.getElementById('frmUpdate').reset();
 }
-document
-  .getElementById('btnUpdateSubmit')
-  .addEventListener('click', sendUpdate);
+document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate);
 async function sendUpdate(ev) {
   ev.preventDefault();
   ev.stopPropagation();
@@ -266,9 +262,7 @@ function validateUpdate(data) {
 
   return failures;
 }
-document
-  .getElementsByName('int_vessel')[0]
-  .addEventListener('change', selectTank);
+document.getElementsByName('int_vessel')[0].addEventListener('change', selectTank);
 function selectTank() {
   let index = document.getElementsByName('int_vessel')[0].selectedIndex;
   let options = document.getElementsByName('int_vessel')[0].options;
@@ -294,12 +288,8 @@ function view() {
     .post('/api/hibernate//hibernated/log/get')
     .then((res) => {
       for (let i = 0; i < res.data.length; i++) {
-        res.data[i].created_at = DateTime.fromISO(
-          res.data[i].created_at
-        ).toFormat('yyyy-MM-dd HH:mm');
-        res.data[i].updated_at = DateTime.fromISO(
-          res.data[i].updated_at
-        ).toFormat('yyyy-MM-dd HH:mm');
+        res.data[i].created_at = DateTime.fromISO(res.data[i].created_at).toFormat('yyyy-MM-dd HH:mm');
+        res.data[i].updated_at = DateTime.fromISO(res.data[i].updated_at).toFormat('yyyy-MM-dd HH:mm');
         if (res.data[i].created_at === res.data[i].updated_at) {
           res.data[i].updated_at = '';
         }

@@ -142,12 +142,7 @@ function loadViewView() {
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          {
-            title: 'Commodity',
-            field: 'commodity',
-            hozAlign: 'center',
-            frozen: true,
-          },
+          { title: 'Commodity', field: 'commodity', hozAlign: 'center', frozen: true },
           { title: 'Final Count', field: 'count_final', hozAlign: 'center' },
           { title: 'End Total', field: 'total_end', hozAlign: 'center' },
           { title: 'Username', field: 'username', hozAlign: 'center' },
@@ -190,12 +185,7 @@ function loadDeleteView() {
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          {
-            title: 'Commodity',
-            field: 'commodity',
-            hozAlign: 'center',
-            frozen: true,
-          },
+          { title: 'Commodity', field: 'commodity', hozAlign: 'center', frozen: true },
           { title: 'Final Count', field: 'count_final', hozAlign: 'center' },
           { title: 'End Total', field: 'total_end', hozAlign: 'center' },
           { title: 'Username', field: 'username', hozAlign: 'center' },

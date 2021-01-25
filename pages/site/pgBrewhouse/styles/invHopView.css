@@ -19,7 +19,6 @@ option {
   text-align: center;
   margin: 5px;
   margin-bottom: 40px;
-  /* line-height: 5; */
   width: 40%;
   font-size: 20px;
   height: 44px;
@@ -55,7 +54,6 @@ option {
   display: grid;
   grid-gap: 20px;
   padding: 0;
-  /* grid-template-areas: "tableMid tableDay tableAft"; */
   grid-template-columns: repeat(3, 1fr);
 }
 
@@ -105,15 +103,9 @@ option {
     font-size: 12px;
   }
   .tableDaily {
-    display: grid;
-    grid-gap: 20px;
-    padding: 0;
     grid-template-columns: repeat(1, 1fr);
   }
   .tableWeekly {
-    display: grid;
-    grid-gap: 20px;
-    padding: 0;
     grid-template-columns: repeat(1, 1fr);
   }
 }

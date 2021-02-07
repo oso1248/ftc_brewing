@@ -37,7 +37,7 @@ async function tiedInvDelete(data) {
     WHERE id = any (array(
             SELECT id 
             FROM craft_tied_inv
-            WHERE com_id = ${data.com_id} AND user_tied ID NULL
+            WHERE com_id = ${data.com_id} AND user_loaded IS NULL
             ORDER BY created_at DESC
             LIMIT ${data.count}));
   `);
@@ -237,7 +237,7 @@ function getUnTiedInv(data) {
       FROM craft_tied_inv AS inv
       JOIN mtl_commodity AS com ON com.id = inv.com_id
       JOIN mtl_container AS con ON con.id = com.container_id
-      WHERE inv.user_loaded IS NULL
+      WHERE inv.user_loaded IS NULL  OR inv.created_at >= '${data.start}'
       GROUP BY com.id) AS B ON B.id = A.id
     ORDER BY A.commodity
   `);

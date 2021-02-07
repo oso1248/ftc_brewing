@@ -69,7 +69,7 @@ function setAPI() {
   let month = DateTime.fromSQL(current).startOf('month').toFormat('yyyy-MM-dd HH:mm');
   let week = DateTime.fromSQL(current).startOf('week').toFormat('yyyy-MM-dd HH:mm');
 
-  if (week === month) {
+  if (week === month && current === month) {
     api = '/api/inventory/hop/same/';
     header.innerHTML = 'Monthly/Weekly Inventory';
   } else if (month === current) {

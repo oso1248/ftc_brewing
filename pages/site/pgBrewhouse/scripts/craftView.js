@@ -59,7 +59,7 @@ function loadTied() {
       tied = new Tabulator('#invTied', {
         resizableColumns: false,
         selectable: true,
-        height: '330px',
+        height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [

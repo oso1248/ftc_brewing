@@ -64,10 +64,7 @@ function setAPI() {
   let week = DateTime.fromSQL(day).startOf('week').toFormat('yyyy-MM-dd HH:mm');
   let month = DateTime.fromSQL(day).startOf('month').toFormat('yyyy-MM-dd HH:mm');
 
-  // api = '/api/inventory/material/same/';
-  // header.innerHTML = 'Monthly/Weekly Inventory';
-
-  if (week === month) {
+  if (week === month && day === month) {
     api = '/api/inventory/material/same/';
     header.innerHTML = 'Monthly/Weekly Inventory';
   } else if (day === month) {

@@ -1,6 +1,4 @@
 let DateTime = luxon.DateTime;
-// import QrScanner from '../../dist/qr-scanner.min.mjs';
-// QrScanner.WORKER_PATH = '../../dist/qr-scanner-worker.min.mjs';
 
 String.prototype.toProperCase = function () {
   return this.replace(/\w\S*/g, function (txt) {
@@ -60,14 +58,25 @@ function createListRows(api, parent, title, data) {
 // On Window Load
 let api;
 function setAPI() {
-  let current = DateTime.local().startOf('day').toFormat('yyyy-MM-dd HH:mm');
-  let month = DateTime.local().startOf('month').toFormat('yyyy-MM-dd HH:mm');
-  if (month === current) {
+  let header = document.getElementById('invHeader');
+
+  let day = DateTime.local().startOf('day').toFormat('yyyy-MM-dd HH:mm');
+  let week = DateTime.fromSQL(day).startOf('week').toFormat('yyyy-MM-dd HH:mm');
+  let month = DateTime.fromSQL(day).startOf('month').toFormat('yyyy-MM-dd HH:mm');
+
+  // api = '/api/inventory/material/same/';
+  // header.innerHTML = 'Monthly/Weekly Inventory';
+
+  if (week === month) {
+    api = '/api/inventory/material/same/';
+    header.innerHTML = 'Monthly/Weekly Inventory';
+  } else if (day === month) {
     api = '/api/inventory/material/monthly/';
+    header.innerHTML = 'Monthly Inventory';
   } else {
     api = '/api/inventory/material/weekly/';
+    header.innerHTML = 'Weekly Inventory';
   }
-  console.log(api);
 }
 function loadCommodities() {
   const commodities = document.getElementsByName('addCommodity')[0];
@@ -110,8 +119,8 @@ function commodityList() {
 let inventoryTable;
 function inventoryList() {
   let data = {};
-  data.startDate = DateTime.local().endOf('day').minus({ days: 1 }).toFormat('yyyy-MM-dd TTT');
-  data.endDate = DateTime.local().endOf('day').toFormat('yyyy-MM-dd TTT');
+  data.startDate = DateTime.local().startOf('day').toFormat('yyyy-MM-dd HH:mm');
+  data.endDate = DateTime.local().endOf('day').toFormat('yyyy-MM-dd HH:mm');
 
   axios
     .post(api + 'view', data)
@@ -138,12 +147,12 @@ function inventoryList() {
         ],
       });
     })
-    .catch((err) => console.log(err.detail));
+    .catch((err) => console.log(err));
 }
 function deleteOnLoad() {
   let data = {};
   data.startDate = DateTime.local().startOf('day').minus({ minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
-  data.endDate = DateTime.local().endOf('day').minus({ minutes: 20 }).toFormat('yyyy-MM-dd HH:mm');
+  data.endDate = DateTime.local().endOf('day').minus({ minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
   axios
     .post(api + 'view', data)
     .then((res) => {
@@ -198,7 +207,20 @@ document.getElementById('btnAddSubmit').addEventListener('click', sendAdd);
 async function sendAdd(ev) {
   ev.preventDefault();
   ev.stopPropagation();
-  console.log('add');
+
+  let data = await getData();
+
+  let fails = await validateAdd(data);
+  if (fails.length > 0) {
+    alertProblems(fails);
+    return;
+  }
+
+  let sendData = await formatData(data);
+
+  send(sendData, data);
+}
+function getData() {
   const form = document.getElementById('frmAdd');
   let data = {};
   let i;
@@ -207,34 +229,39 @@ async function sendAdd(ev) {
     let name = form.elements[i].value;
     data[id] = name;
   }
-  let fails = await validateAdd(data);
-
-  if (fails.length === 0) {
-    let total_end = (parseFloat(data.per_pallet) * parseFloat(data.pallets) + parseFloat(data.total_count)) * parseFloat(data.total_per_unit);
-    let total_count = parseFloat(data.per_pallet) * parseFloat(data.pallets) + parseFloat(data.total_count);
-
-    data.total_end = total_end;
-    data.total_count = total_count;
-    delete data['per_pallet'];
-    delete data['pallets'];
-
-    axios
-      .post(api, data)
-      .then((data) => {
-        let msg = `${data.data[0].commodity}\n ${data.data[0].total_end} ${data.data[0].uom}\n Added to Inventory`;
-        alert(msg);
-        deleteRow([data.data[0].commodity]);
-        inventoryList();
-        document.getElementById('frmAdd').reset();
-      })
-      .catch((err) => alert(err));
-  } else {
-    let msg = 'Problems:\n';
-    for (i = 0; i < fails.length; i++) {
-      msg = msg + '\n' + fails[i]['input'] + ' ' + fails[i]['msg'];
-    }
-    alert(msg);
+  return data;
+}
+function alertProblems(fails) {
+  let msg = 'Problems:\n';
+  for (i = 0; i < fails.length; i++) {
+    msg = msg + '\n' + fails[i].input + ' ' + fails[i].msg;
   }
+  alert(msg);
+}
+function formatData(data) {
+  let returnData = {};
+  let total_end = (parseFloat(data.per_pallet) * parseFloat(data.pallets) + parseFloat(data.total_count)) * parseFloat(data.total_per_unit);
+  let total_count = parseFloat(data.per_pallet) * parseFloat(data.pallets) + parseFloat(data.total_count);
+
+  returnData.total_end = total_end;
+  returnData.total_count = total_count;
+  returnData.total_per_unit = data.total_per_unit;
+  returnData.com_id = data.com_id;
+  returnData.note = data.note;
+
+  return returnData;
+}
+function send(data, params) {
+  axios
+    .post(api, data)
+    .then(async (returndata) => {
+      let msg = `${params.com_id}\ntotal: ${data.total_end}\nAdded to Inventory`;
+      alert(msg);
+      await inventoryList();
+      deleteOnLoad();
+      document.getElementById('frmAdd').reset();
+    })
+    .catch((err) => alert(err));
 }
 async function validateAdd(data) {
   let failures = [];
@@ -287,7 +314,7 @@ async function deleteRowInv(ev) {
   }
 
   await axios
-    .delete(api + selectedData[0].id)
+    .delete(api, { data: selectedData[0] })
     .then((data) => {
       alert(data.data.msg);
     })

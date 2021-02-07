@@ -42,6 +42,7 @@ const inventoryRouter = require('./routes/rtsInventory');
 const mtxRouter = require('./routes/rtsMtx');
 const vesselRouter = require('./routes/rtsVessel');
 const hibernateRouter = require('./routes/rtsHibernate');
+const craftRouter = require('./routes/rtsCraftInv');
 
 server.use(session(sessionConfig));
 
@@ -66,5 +67,6 @@ server.use('/api/inventory', inventoryRouter);
 server.use('/api/mtx', mtxRouter);
 server.use('/api/vessel', vesselRouter);
 server.use('/api/hibernate', hibernateRouter);
+server.use('/api/craft', craftRouter);
 
 module.exports = server;

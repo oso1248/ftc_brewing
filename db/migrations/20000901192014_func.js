@@ -149,6 +149,50 @@ exports.up = async function (knex) {
     END;
     $$;
   `);
+  await knex.raw(`
+    CREATE OR REPLACE FUNCTION delete_old_rows_craft_tied_inv() RETURNS TRIGGER
+    LANGUAGE plpgsql
+    AS
+    $$
+    BEGIN
+      DELETE FROM craft_tied_inv WHERE created_at < NOW() - INTERVAL '365 days';
+      RETURN NULL;
+    END;
+    $$;
+  `);
+  await knex.raw(`
+    CREATE OR REPLACE FUNCTION delete_old_rows_craft_trailer_inv() RETURNS TRIGGER
+    LANGUAGE plpgsql
+    AS
+    $$
+    BEGIN
+      DELETE FROM craft_trailer_inv WHERE created_at < NOW() - INTERVAL '365 days';
+      RETURN NULL;
+    END;
+    $$;
+  `);
+  await knex.raw(`
+    CREATE OR REPLACE FUNCTION delete_old_rows_craft_floor_inv() RETURNS TRIGGER
+    LANGUAGE plpgsql
+    AS
+    $$
+    BEGIN
+      DELETE FROM craft_floor_inv WHERE created_at < NOW() - INTERVAL '365 days';
+      RETURN NULL;
+    END;
+    $$;
+  `);
+  await knex.raw(`
+    CREATE OR REPLACE FUNCTION delete_old_rows_craft_trailer_number() RETURNS TRIGGER
+    LANGUAGE plpgsql
+    AS
+    $$
+    BEGIN
+      DELETE FROM craft_trailer_number WHERE created_at < NOW() - INTERVAL '365 days';
+      RETURN NULL;
+    END;
+    $$;
+  `);
 };
 
 exports.down = async function (knex) {
@@ -190,5 +234,17 @@ exports.down = async function (knex) {
   `);
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_old_rows_fin_loss_add() CASCADE;
+  `);
+  await knex.raw(`
+    DROP FUNCTION IF EXISTS delete_old_rows_craft_tied_inv() CASCADE;
+  `);
+  await knex.raw(`
+    DROP FUNCTION IF EXISTS delete_old_rows_craft_trailer_inv() CASCADE;
+  `);
+  await knex.raw(`
+    DROP FUNCTION IF EXISTS delete_old_rows_craft_floor_inv() CASCADE;
+  `);
+  await knex.raw(`
+    DROP FUNCTION IF EXISTS delete_old_rows_craft_trailer_number() CASCADE;
   `);
 };

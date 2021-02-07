@@ -126,8 +126,9 @@ router.patch('/material/weekly/:name', (req, res) => {
     })
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
-router.delete('/material/weekly/:id', (req, res) => {
-  db.destroy(req.params.id)
+router.delete('/material/weekly/', (req, res) => {
+  console.log(req.body);
+  db.destroy(req.body.id)
     .then((data) => {
       if (data.length === 0) {
         res.status(200).json({ msg: 'deleted' });
@@ -169,8 +170,8 @@ router.post('/material/monthly/view', (req, res) => {
     })
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
-router.delete('/material/monthly/:id', (req, res) => {
-  db.destroyMonthly(req.params.id)
+router.delete('/material/monthly/', (req, res) => {
+  db.destroyMonthly(req.body.id)
     .then((data) => {
       if (data.length === 0) {
         res.status(200).json({ msg: 'deleted' });
@@ -190,6 +191,34 @@ router.post('/material/monthly/date', (req, res) => {
       }
     })
     .catch((err) => res.status(500).json({ msg: err.detail }));
+});
+
+// mat inv same
+router.post('/material/same', (req, res) => {
+  req.body.username = req.session.user.username;
+  db.addInvMatSame(req.body)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => res.status(500).json({ msg: err.detail }));
+});
+router.post('/material/same/view', (req, res) => {
+  db.getMatSameInvHard(req.body)
+    .then((data) => {
+      if (data) {
+        res.status(200).json(data);
+      } else {
+        res.status(200).json({ msg: 'null' });
+      }
+    })
+    .catch((err) => res.status(500).json({ msg: err.detail }));
+});
+router.delete('/material/same', (req, res) => {
+  db.destroyMatInvSame(req.body)
+    .then((data) => {
+      res.status(200).json({ msg: 'deleted' });
+    })
+    .catch((err) => res.status(500).json({ msg: 'not deleted' }));
 });
 
 //hop inv weekly
@@ -241,8 +270,8 @@ router.post('/hop/weekly/dates', (req, res) => {
     })
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
-router.delete('/hop/weekly/:id', (req, res) => {
-  db.destroyHopInvWeekly(req.params.id)
+router.delete('/hop/weekly/', (req, res) => {
+  db.destroyHopInvWeekly(req.body.id)
     .then((data) => {
       if (data.length === 0) {
         res.status(200).json({ msg: 'deleted' });
@@ -280,8 +309,8 @@ router.post('/hop/monthly/dates', (req, res) => {
     })
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
-router.delete('/hop/monthly/:id', (req, res) => {
-  db.destroyHopInvMonthly(req.params.id)
+router.delete('/hop/monthly/', (req, res) => {
+  db.destroyHopInvMonthly(req.body.id)
     .then((data) => {
       if (data.length === 0) {
         res.status(200).json({ msg: 'deleted' });
@@ -290,6 +319,35 @@ router.delete('/hop/monthly/:id', (req, res) => {
       }
     })
     .catch((err) => res.status(500).json({ msg: err.detail }));
+});
+
+// hop inv same
+router.post('/hop/same', (req, res) => {
+  req.body.username = req.session.user.username;
+  db.addInvHopSame(req.body)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => res.status(500).json({ msg: err.detail }));
+});
+router.post('/hop/same/view', (req, res) => {
+  db.getHopSameInvHard(req.body)
+    .then((data) => {
+      if (data) {
+        res.status(200).json(data);
+      } else {
+        res.status(200).json({ msg: 'null' });
+      }
+    })
+    .catch((err) => res.status(500).json({ msg: err.detail }));
+});
+
+router.delete('/hop/same', (req, res) => {
+  db.destroyHopInvSame(req.body)
+    .then((data) => {
+      res.status(200).json({ msg: 'deleted' });
+    })
+    .catch((err) => res.status(500).json({ msg: 'not deleted' }));
 });
 
 //hop inv daily

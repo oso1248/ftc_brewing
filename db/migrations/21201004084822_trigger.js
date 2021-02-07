@@ -194,18 +194,18 @@ exports.up = async function (knex) {
     EXECUTE PROCEDURE update_timestamp();
   `);
   await knex.raw(`
-  CREATE TRIGGER update_timestamp
-  BEFORE UPDATE
-  ON vessel
-  FOR EACH ROW
-  EXECUTE PROCEDURE update_timestamp();
+    CREATE TRIGGER update_timestamp
+    BEFORE UPDATE
+    ON vessel
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_timestamp();
   `);
   await knex.raw(`
-  CREATE TRIGGER update_timestamp
-  BEFORE UPDATE
-  ON vessel_type
-  FOR EACH ROW
-  EXECUTE PROCEDURE update_timestamp();
+    CREATE TRIGGER update_timestamp
+    BEFORE UPDATE
+    ON vessel_type
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_timestamp();
   `);
 
   //inventory
@@ -282,6 +282,57 @@ exports.up = async function (knex) {
     CREATE TRIGGER trigger_delete_old_rows_fin_loss_add
     AFTER INSERT ON fin_loss_add
     EXECUTE PROCEDURE delete_old_rows_fin_wad_add();
+  `);
+
+  // craft inventory
+  await knex.raw(`
+    CREATE TRIGGER update_timestamp
+    BEFORE UPDATE
+    ON craft_tied_inv
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_timestamp();
+  `);
+  await knex.raw(`
+    CREATE TRIGGER update_timestamp
+    BEFORE UPDATE
+    ON craft_trailer_inv
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_timestamp();
+  `);
+  await knex.raw(`
+    CREATE TRIGGER update_timestamp
+    BEFORE UPDATE
+    ON craft_floor_inv
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_timestamp();
+  `);
+  await knex.raw(`
+    CREATE TRIGGER update_timestamp
+    BEFORE UPDATE
+    ON craft_trailer_number
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_timestamp();
+  `);
+
+  await knex.raw(`
+    CREATE TRIGGER trigger_delete_old_rows_craft_tied_inv
+    AFTER INSERT ON craft_tied_inv
+    EXECUTE PROCEDURE delete_old_rows_craft_tied_inv();
+  `);
+  await knex.raw(`
+    CREATE TRIGGER trigger_delete_old_rows_craft_trailer_inv
+    AFTER INSERT ON craft_trailer_inv
+    EXECUTE PROCEDURE delete_old_rows_craft_trailer_inv();
+  `);
+  await knex.raw(`
+    CREATE TRIGGER trigger_delete_old_rows_craft_floor_inv
+    AFTER INSERT ON craft_floor_inv
+    EXECUTE PROCEDURE delete_old_rows_craft_floor_inv();
+  `);
+  await knex.raw(`
+    CREATE TRIGGER trigger_delete_old_rows_craft_trailer_number
+    AFTER INSERT ON craft_trailer_number
+    EXECUTE PROCEDURE delete_old_rows_craft_trailer_number();
   `);
 };
 

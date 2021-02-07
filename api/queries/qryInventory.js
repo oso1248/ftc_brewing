@@ -203,6 +203,55 @@ function getInvDateMaterialMonthly() {
   `);
 }
 
+// mat same
+async function addInvMatSame(data) {
+  await com(data);
+
+  return db.transaction((trx) => {
+    let queries = [];
+    let query = db('inv_mat_weekly').insert(data);
+    queries.push(query);
+    query = db('inv_mat_monthly').insert(data);
+    queries.push(query);
+    Promise.all(queries).then(trx.commit).catch(trx.rollback);
+  });
+}
+function getMatSameInvHard(data) {
+  return db('inv_mat_monthly as inv')
+    .join('mtl_commodity as com', 'inv.com_id', '=', 'com.id')
+    .join('mtl_uom as uom', 'com.uom_id', '=', 'uom.id')
+    .select('inv.id', 'com.commodity', 'com.sap', 'inv.total_per_unit', 'inv.total_count', 'inv.total_end', 'uom.uom', 'inv.username', 'inv.created_at', 'inv.note')
+    .where('inv.created_at', '>', data.startDate)
+    .andWhere('inv.created_at', '<', data.endDate)
+    .orderBy('com.commodity');
+}
+async function destroyMatInvSame(data) {
+  data.com_id = data.commodity;
+  await com(data);
+  return db.raw(`
+    BEGIN;
+
+      DELETE
+      FROM inv_mat_monthly
+      WHERE id = ${data.id};
+
+      DELETE
+      FROM inv_mat_weekly
+      WHERE id = 
+        (SELECT id
+        FROM inv_mat_weekly
+        WHERE com_id = ${data.com_id} AND 
+              total_per_unit = ${data.total_per_unit} AND 
+              total_count = ${data.total_count} AND 
+              total_end = ${data.total_end} AND 
+              username = '${data.username}'
+        ORDER BY id DESC
+        LIMIT 1);
+
+    COMMIT;
+  `);
+}
+
 // hop inv weekly
 async function addInvHopWeekly(data) {
   await com(data);
@@ -294,6 +343,54 @@ async function getInvHopMonthlyDate() {
 async function destroyHopInvMonthly(id) {
   let remove = await db('inv_hop_monthly').where('id', id).del();
   return getByIDHopWeekly(id);
+}
+
+// hop same
+async function addInvHopSame(data) {
+  await com(data);
+
+  return db.transaction((trx) => {
+    let queries = [];
+    let query = db('inv_hop_weekly').insert(data);
+    queries.push(query);
+    query = db('inv_hop_monthly').insert(data);
+    queries.push(query);
+    Promise.all(queries).then(trx.commit).catch(trx.rollback);
+  });
+}
+function getHopSameInvHard(data) {
+  return db('inv_hop_monthly as inv')
+    .join('mtl_commodity as com', function () {
+      this.on(function () {
+        this.on('inv.com_id', '=', 'com.id');
+        this.andOnVal('inv.created_at', '>', data.startDate);
+        this.andOnVal('inv.created_at', '<', data.endDate);
+      });
+    })
+    .select('inv.id', 'com.commodity', 'com.sap', 'inv.lot', 'inv.lbs', 'inv.username', 'inv.created_at', 'inv.note')
+    .orderBy('com.commodity');
+}
+async function destroyHopInvSame(data) {
+  data.com_id = data.commodity;
+  await com(data);
+  return db.raw(`
+    BEGIN;
+
+      DELETE
+      FROM inv_hop_monthly
+      WHERE id = ${data.id};
+
+      DELETE
+      FROM inv_hop_weekly
+      WHERE id = 
+        (SELECT id
+        FROM inv_hop_weekly
+        WHERE com_id = ${data.com_id} AND lbs = ${data.lbs} AND lot = '${data.lot}' AND username = '${data.username}' AND note = '${data.note}'
+        ORDER BY id DESC
+        LIMIT 1);
+
+    COMMIT;
+  `);
 }
 
 //hop daily
@@ -553,6 +650,12 @@ module.exports = {
   getByID,
   getByDate,
   addInvHopWeekly,
+  addInvHopSame,
+  getHopSameInvHard,
+  destroyHopInvSame,
+  addInvMatSame,
+  getMatSameInvHard,
+  destroyMatInvSame,
   addInvHopDaily,
   getHopDaily,
   getInvHopDailyDate,

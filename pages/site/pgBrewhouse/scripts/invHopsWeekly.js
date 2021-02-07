@@ -63,12 +63,26 @@ function createListRows(api, parent, title, data) {
 // On window load
 let api;
 function setAPI() {
-  let current = DateTime.local().startOf('day').toFormat('yyyy-MM-dd HH:mm');
-  let month = DateTime.local().startOf('month').toFormat('yyyy-MM-dd HH:mm');
-  if (month === current) {
+  let header = document.getElementById('invHeader');
+
+  let current = DateTime.local().startOf('day').plus({ day: 1 }).toFormat('yyyy-MM-dd HH:mm');
+  let month = DateTime.fromSQL(current).startOf('month').toFormat('yyyy-MM-dd HH:mm');
+  let week = DateTime.fromSQL(current).startOf('week').toFormat('yyyy-MM-dd HH:mm');
+
+  console.log(current);
+  console.log(month);
+  console.log(week);
+  // api = '/api/inventory/hop/same/';
+  // header.innerHTML = 'Monthly/Weekly Inventory';
+  if (week === month) {
+    api = '/api/inventory/hop/same/';
+    header.innerHTML = 'Monthly/Weekly Inventory';
+  } else if (month === current) {
     api = '/api/inventory/hop/monthly/';
+    header.innerHTML = 'Monthly Inventory';
   } else {
     api = '/api/inventory/hop/weekly/';
+    header.innerHTML = 'Weekly Inventory';
   }
   console.log(api);
 }
@@ -206,6 +220,17 @@ async function sendAdd(ev) {
   ev.preventDefault();
   ev.stopPropagation();
 
+  let data = await getData();
+
+  let fails = await validateAdd(data);
+  if (fails.length > 0) {
+    alertProblems(fails);
+    return;
+  }
+
+  send(data);
+}
+function getData() {
   const form = document.getElementById('frmAdd');
   let data = {};
   let i;
@@ -214,27 +239,26 @@ async function sendAdd(ev) {
     let name = form.elements[i].value;
     data[id] = name;
   }
-
-  let fails = await validateAdd(data);
-
-  if (fails.length === 0) {
-    axios
-      .post(api, data)
-      .then((data) => {
-        let msg = `${data.data[0].commodity}\n ${data.data[0].lbs} ${data.data[0].uom}\n Added to Inventory`;
-        alert(msg);
-        deleteRow([data.data[0].commodity]);
-        inventoryList();
-        document.getElementById('frmAdd').reset();
-      })
-      .catch((err) => alert(err));
-  } else {
-    let msg = 'Problems:\n';
-    for (i = 0; i < fails.length; i++) {
-      msg = msg + '\n' + fails[i].input + ' ' + fails[i].msg;
-    }
-    alert(msg);
+  return data;
+}
+function alertProblems(fails) {
+  let msg = 'Problems:\n';
+  for (i = 0; i < fails.length; i++) {
+    msg = msg + '\n' + fails[i].input + ' ' + fails[i].msg;
   }
+  alert(msg);
+}
+function send(data) {
+  axios
+    .post(api, data)
+    .then((data) => {
+      let msg = `${data.data[0].commodity}\n ${data.data[0].lbs} ${data.data[0].uom}\n Added to Inventory`;
+      alert(msg);
+      deleteRow([data.data[0].commodity]);
+      inventoryList();
+      document.getElementById('frmAdd').reset();
+    })
+    .catch((err) => alert(err));
 }
 function validateAdd(data) {
   let failures = [];
@@ -288,6 +312,9 @@ function validateAdd(data) {
   }
   return failures;
 }
+function sendSameInv(data) {
+  axios.post('/api/inventory/hop/monthly/', data).catch((err) => alert(err));
+}
 
 // Delete
 document.getElementById('btnDeleteInv').addEventListener('click', deleteRowInv);
@@ -301,11 +328,13 @@ async function deleteRowInv(ev) {
     return;
   }
 
+  console.log(selectedData[0]);
+
   if (!confirm(`Are you sure you want to delete\n\n ${selectedData[0].commodity} \n\nfrom the inventory?`)) {
     return;
   }
   await axios
-    .delete(api + selectedData[0].id)
+    .delete(api, { data: selectedData[0] })
     .then((data) => {
       alert(data.data.msg);
     })
@@ -315,6 +344,7 @@ async function deleteRowInv(ev) {
   await inventoryList();
   await deleteOnLoad();
 }
+function deleteSameInv() {}
 
 // called from ./invHopsWeekly.js
 function openQRCamera(node) {

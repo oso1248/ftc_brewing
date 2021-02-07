@@ -15,8 +15,8 @@ function getCookie(cookieName) {
   var cookieValue = document.cookie.match('(^|;)\\s*' + cookieName + '\\s*=\\s*([^;]+)');
   return cookieValue ? cookieValue.pop() : '';
 }
-function deleteCookie(cname) {
-  document.cookie = cname + '=; max-age=0; expires=0';
+function deleteCookie(cookieName) {
+  document.cookie = cookieName + '=; max-age=0; expires=0';
 }
 String.prototype.toProperCase = function () {
   return this.replace(/\w\S*/g, function (txt) {

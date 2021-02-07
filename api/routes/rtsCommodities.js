@@ -45,6 +45,17 @@ router.post('/get/type/:type', (req, res) => {
     })
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
+router.post('/get/container/:container', (req, res) => {
+  db.getByContainer(req.body.active, req.params.container)
+    .then((data) => {
+      if (data) {
+        res.status(200).json(data);
+      } else {
+        res.status(200).json({ msg: 'null' });
+      }
+    })
+    .catch((err) => res.status(500).json({ msg: err.detail }));
+});
 router.patch('/:name', (req, res) => {
   db.change(req.params.name, req.body)
     .then((data) => {

@@ -135,6 +135,11 @@ a {
   font-size: 18px;
 }
 
+.headers {
+  margin: auto;
+  margin-top: 50px;
+}
+
 @media (max-width: 850px) {
   .main-nav ul {
     display: grid;

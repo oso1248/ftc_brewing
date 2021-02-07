@@ -1,0 +1,16 @@
+.tables {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .tables {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 750px) {
+  .tables {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

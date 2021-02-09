@@ -77,38 +77,58 @@ async function trailerInvAdd(data) {
   await com(data);
   return db.raw(`
     DO $$
+    DECLARE _loadCount bigint := ${data.count};
+    DECLARE _tiedCount bigint;
+    DECLARE _remainder bigint;
     BEGIN
-      FOR i IN 1..${data.count} LOOP
+      SELECT INTO _tiedCount COUNT(*)
+      FROM craft_tied_inv AS inv
+      WHERE inv.com_id = ${data.com_id} AND inv.user_loaded IS NULL;
+      
+      _remainder := _loadCount - _tiedCount;
+
+      FOR i IN 1.._loadCount LOOP
         INSERT INTO craft_trailer_inv (trailer_id, com_id, user_load)
         VALUES (${data.trailer_id}, ${data.com_id}, '${data.user_load}');
       END LOOP;
-
+    
       IF EXISTS
-        (SELECT com_id
-        FROM craft_tied_inv AS inv
-        WHERE inv.com_id = ${data.com_id} AND inv.user_loaded IS NULL)
-      THEN
-        UPDATE craft_tied_inv
-        SET user_loaded = '${data.user_load}'
-        WHERE id = any (array(
-            SELECT id 
-            FROM craft_tied_inv
-            WHERE com_id = ${data.com_id} AND user_loaded IS NULL
-            ORDER BY created_at ASC
-            LIMIT ${data.count}));
-      ELSIF EXISTS
         (SELECT com.id
         FROM mtl_commodity AS com
         JOIN mtl_container AS con ON con.id = com.container_id
         WHERE com.id = ${data.com_id} AND con.container = 'Super Sack')
-      THEN
-        FOR i IN 1..${data.count} LOOP
-          INSERT INTO craft_tied_inv (com_id, user_tied, user_loaded)
-          VALUES (${data.com_id}, '${data.user_load}', '${data.user_load}');
-        END LOOP;
-      END IF;
 
+      THEN
+        IF _tiedCount >= _loadCount
+        THEN
+          UPDATE craft_tied_inv
+          SET user_loaded = '${data.user_load}'
+          WHERE id = any (array(
+            SELECT id 
+            FROM craft_tied_inv
+            WHERE com_id = ${data.com_id} AND user_loaded IS NULL
+            ORDER BY created_at ASC
+            LIMIT _loadCount));
+
+        ELSE
+          UPDATE craft_tied_inv
+          SET user_loaded = '${data.user_load}'
+          WHERE id = any (array(
+            SELECT id 
+            FROM craft_tied_inv
+            WHERE com_id = ${data.com_id} AND user_loaded IS NULL
+            ORDER BY created_at ASC
+            LIMIT _loadCount));
+            
+          FOR i IN 1.._remainder LOOP
+            INSERT INTO craft_tied_inv (com_id, user_tied, user_loaded)
+            VALUES (${data.com_id}, '${data.user_load}', '${data.user_load}');
+          END LOOP;
+          
+        END IF;
+      END IF;
     END$$;
+
   `);
 }
 async function trailerInvDelete(data) {
@@ -222,7 +242,6 @@ function useFloorInv(data) {
 
 // material inventory less tied
 function getUnTiedInv(data) {
-  console.log(data);
   return db.raw(`
     SELECT A.commodity, COALESCE(A.sum, 0) - COALESCE(B.count, 0) AS count
     FROM

@@ -14,7 +14,7 @@ async function reload() {
   timeKeeper.innerHTML = 'Last Update: ' + today;
   console.log(today);
 }
-setInterval(reload, 1000 * 60 * 5);
+setInterval(reload, 1000 * 60 * 15);
 let trailerNumber;
 function getTrailerNumber() {
   return axios

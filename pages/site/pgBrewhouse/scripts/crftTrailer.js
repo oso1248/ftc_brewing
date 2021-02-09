@@ -230,12 +230,12 @@ function validateAdd(data) {
 document.getElementById('btnBack').addEventListener('click', () => {
   window.history.back();
 });
-window.addEventListener('DOMContentLoaded', async (ev) => {
+window.addEventListener('DOMContentLoaded', async () => {
   loadCommodities();
   let trailerCookie = getCookie('trailerNo');
   let check = await checkPreviousTrailer();
 
-  if (trailerCookie) {
+  if (check && trailerCookie) {
     startPreviousTrailer(trailerCookie);
   } else if (check && confirm(`Previous Trailer Found\n\nContinue Loading?`)) {
     startPreviousTrailer(check);

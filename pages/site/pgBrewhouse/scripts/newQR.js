@@ -170,6 +170,25 @@ function deleteRow(commodity) {
     .filter((row) => row.getData().commodity == commodity)
     .forEach((row) => row.delete());
 }
+let hopsTable;
+function setsTable() {
+  axios
+    .post('/api/brand/brw/get', { active: true })
+    .then((res) => {
+      let tableData = res.data;
+      hopsTable = new Tabulator('#invHopSets', {
+        height: '100%',
+        layoutColumnsOnNewData: true,
+        layout: 'fitDataFill',
+        data: tableData,
+        columns: [
+          { title: 'Brand', field: 'brand', hozAlign: 'center', frozen: true },
+          { title: 'Sets Made', field: 'sets', hozAlign: 'left', editor: true, validator: ['integer'] },
+        ],
+      });
+    })
+    .catch((err) => console.log(err));
+}
 
 // Add Form
 document.getElementById('btnAddClear').addEventListener('click', (ev) => {
@@ -306,6 +325,39 @@ function validateAdd(data) {
   }
   return failures;
 }
+document.getElementById('btnAddSets').addEventListener('click', sendSets);
+async function sendSets(ev) {
+  ev.preventDefault();
+  ev.stopPropagation();
+
+  let dateData = {};
+  dateData.startDate = DateTime.local().startOf('day').minus({ minutes: 30 }).toFormat('yyyy-MM-dd HH:mm');
+  dateData.endDate = DateTime.local().endOf('day').minus({ minutes: 29 }).toFormat('yyyy-MM-dd HH:mm');
+
+  tableData = hopsTable.getData();
+  let hopData = [];
+  for (let i = 0; i < tableData.length; i++) {
+    let set = {};
+    if (tableData[i].sets > 0) {
+      set.Brand = tableData[i].brand;
+      set.sets = tableData[i].sets;
+      hopData.push(set);
+    }
+  }
+
+  let sendData = [];
+  sendData.push(hopData);
+  sendData.push(dateData);
+
+  axios
+    .post(api + 'sets', sendData)
+    .then((data) => {
+      alert('Added');
+      setsTable();
+      inventoryList();
+    })
+    .catch((err) => alert(err));
+}
 
 // Delete
 document.getElementById('btnDeleteInv').addEventListener('click', deleteRowInv);
@@ -344,4 +396,5 @@ window.addEventListener('DOMContentLoaded', async (ev) => {
   await commodityList();
   await inventoryList();
   await deleteOnLoad();
+  await setsTable();
 });

@@ -282,6 +282,15 @@ router.delete('/hop/weekly/', (req, res) => {
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
 
+router.post('/hop/weekly/sets', (req, res) => {
+  let username = req.session.user.username;
+  db.addInvHopSetsWeekly(req.body, username)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => res.status(500).json({ msg: err.detail }));
+});
+
 // hop inv monthly
 router.post('/hop/monthly', (req, res) => {
   req.body.username = req.session.user.username;
@@ -321,6 +330,15 @@ router.delete('/hop/monthly/', (req, res) => {
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
 
+router.post('/hop/monthly/sets', (req, res) => {
+  let username = req.session.user.username;
+  db.addInvHopWSetsMonthly(req.body, username)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => res.status(500).json({ msg: err.detail }));
+});
+
 // hop inv same
 router.post('/hop/same', (req, res) => {
   req.body.username = req.session.user.username;
@@ -348,6 +366,15 @@ router.delete('/hop/same', (req, res) => {
       res.status(200).json({ msg: 'deleted' });
     })
     .catch((err) => res.status(500).json({ msg: 'not deleted' }));
+});
+
+router.post('/hop/same/sets', (req, res) => {
+  let username = req.session.user.username;
+  db.addInvHopWSetsCombined(req.body, username)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => res.status(500).json({ msg: err.detail }));
 });
 
 //hop inv daily

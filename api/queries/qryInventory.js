@@ -1,5 +1,13 @@
 const db = require('../dbConfig');
 
+function allReplace(obj) {
+  return obj
+    .substring(1, obj.length - 1)
+    .replace(/\[/g, '(')
+    .replace(/\]/g, ')')
+    .replace(/"/g, `'`);
+}
+
 function getByDateCombinedBrwWeekly(data) {
   return db.raw(`
   SELECT z.commodity, z.sap, SUM(z.total) AS total, z.uom, null AS complete
@@ -258,6 +266,68 @@ async function addInvHopWeekly(data) {
   const [{ id }] = await db('inv_hop_weekly').insert(data, ['id']);
   return getByIDHopWeekly(id);
 }
+
+async function addInvHopSetsWeekly(data, username) {
+  await deleteBucketHopsWeekly(data);
+
+  let { rows: hopData } = await baseBucketHops(username);
+
+  hopData = await totalBucketHops(data, hopData);
+
+  let sendData = [];
+  await deleteEmptyBucketHops(hopData, sendData);
+
+  sendData = await allReplace(JSON.stringify(sendData));
+
+  sendBucketHopsWeekly(sendData);
+}
+async function deleteBucketHopsWeekly(data) {
+  await db.raw(`
+    DELETE
+    FROM inv_hop_weekly
+    WHERE lot = 'bucket' AND created_at > '${data[1].startDate}' AND created_at < '${data[1].endDate}'
+  `);
+}
+async function sendBucketHopsWeekly(sendData) {
+  console.log('send');
+  await db.raw(`
+    INSERT INTO inv_hop_weekly (com_id, lbs, lot, username, note)
+    VALUES ${sendData};
+  `);
+}
+function baseBucketHops(username) {
+  return db.raw(`
+    SELECT hop.com_id, 0 AS lbs, 'bucket' AS lot, '${username}' AS username, null AS note
+    FROM mtx_hop_std as hop
+    JOIN mtl_commodity as com ON hop.com_id = com.id
+    WHERE com.type_id = 1
+    ORDER BY com_id ASC
+  `);
+}
+async function totalBucketHops(data, hopData) {
+  for (let i = 0; i < data[0].length; i++) {
+    let { rows: hops } = await db.raw(`
+      SELECT hop.com_id, "${data[0][i].Brand}" * ${data[0][i].sets} AS brand
+      FROM mtx_hop_std as hop
+      JOIN mtl_commodity as com ON hop.com_id = com.id
+      WHERE com.type_id = 1
+      ORDER BY com_id ASC
+    `);
+
+    for (let r = 0; r < hops.length; r++) {
+      hopData[r].lbs = parseInt(hopData[r].lbs) + parseInt(hops[r].brand);
+    }
+  }
+  return hopData;
+}
+function deleteEmptyBucketHops(hopData, sendData) {
+  hopData.map((row) => {
+    if (row.lbs > 0) {
+      sendData.push(Object.values(row));
+    }
+  });
+}
+
 function getByIDHopWeekly(id) {
   return db('inv_hop_weekly as inv')
     .join('mtl_commodity as com', 'inv.com_id', '=', 'com.id')
@@ -313,6 +383,35 @@ async function addInvHopMonthly(data) {
   const [{ id }] = await db('inv_hop_monthly').insert(data, ['id']);
   return getByIDHopMonthly(id);
 }
+
+async function addInvHopWSetsMonthly(data, username) {
+  await deleteBucketHopsMonthly(data);
+
+  let { rows: hopData } = await baseBucketHops(username);
+
+  hopData = await totalBucketHops(data, hopData);
+
+  let sendData = [];
+  await deleteEmptyBucketHops(hopData, sendData);
+
+  sendData = await allReplace(JSON.stringify(sendData));
+
+  sendBucketHopsMonthly(sendData);
+}
+async function deleteBucketHopsMonthly(data) {
+  await db.raw(`
+    DELETE
+    FROM inv_hop_monthly
+    WHERE lot = 'bucket' AND created_at > '${data[1].startDate}' AND created_at < '${data[1].endDate}'
+  `);
+}
+async function sendBucketHopsMonthly(sendData) {
+  await db.raw(`
+    INSERT INTO inv_hop_monthly (com_id, lbs, lot, username, note)
+    VALUES ${sendData};
+  `);
+}
+
 function getByIDHopMonthly(id) {
   return db('inv_hop_monthly as inv')
     .join('mtl_commodity as com', 'inv.com_id', '=', 'com.id')
@@ -389,6 +488,46 @@ async function destroyHopInvSame(data) {
         ORDER BY id DESC
         LIMIT 1);
 
+    COMMIT;
+  `);
+}
+
+async function addInvHopWSetsCombined(data, username) {
+  await deleteBucketHopsCombined(data);
+
+  let { rows: hopData } = await baseBucketHops(username);
+
+  hopData = await totalBucketHops(data, hopData);
+
+  let sendData = [];
+  await deleteEmptyBucketHops(hopData, sendData);
+
+  sendData = await allReplace(JSON.stringify(sendData));
+
+  sendBucketHopsCombined(sendData);
+}
+async function deleteBucketHopsCombined(data) {
+  console.log(data[1]);
+  await db.raw(`
+    BEGIN;
+      DELETE
+      FROM inv_hop_monthly
+      WHERE lot = 'bucket' AND created_at > '${data[1].startDate}' AND created_at < '${data[1].endDate}';
+
+      DELETE
+      FROM inv_hop_weekly
+      WHERE lot = 'bucket' AND created_at > '${data[1].startDate}' AND created_at < '${data[1].endDate}';
+    COMMIT;
+  `);
+}
+async function sendBucketHopsCombined(sendData) {
+  await db.raw(`
+    BEGIN;
+      INSERT INTO inv_hop_monthly (com_id, lbs, lot, username, note)
+      VALUES ${sendData};
+
+      INSERT INTO inv_hop_weekly (com_id, lbs, lot, username, note)
+      VALUES ${sendData};
     COMMIT;
   `);
 }
@@ -650,6 +789,7 @@ module.exports = {
   getByID,
   getByDate,
   addInvHopWeekly,
+  addInvHopSetsWeekly,
   addInvHopSame,
   getHopSameInvHard,
   destroyHopInvSame,
@@ -689,5 +829,7 @@ module.exports = {
   getProcessLoss,
   getHopMonthlyInvHard,
   addInvHopMonthly,
+  addInvHopWSetsMonthly,
+  addInvHopWSetsCombined,
   getInvHopMonthlyDate,
 };

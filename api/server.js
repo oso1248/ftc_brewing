@@ -43,6 +43,7 @@ const mtxRouter = require('./routes/rtsMtx');
 const vesselRouter = require('./routes/rtsVessel');
 const hibernateRouter = require('./routes/rtsHibernate');
 const craftRouter = require('./routes/rtsCraftInv');
+const oracleRouter = require('./routes/oracleDBrts');
 
 server.use(session(sessionConfig));
 
@@ -68,5 +69,6 @@ server.use('/api/mtx', mtxRouter);
 server.use('/api/vessel', vesselRouter);
 server.use('/api/hibernate', hibernateRouter);
 server.use('/api/craft', craftRouter);
+server.use('/api/oracle', oracleRouter);
 
 module.exports = server;

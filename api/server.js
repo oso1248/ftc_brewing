@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
-// const pg = require('pg')
+const pg = require('pg');
 const pgSession = require('connect-pg-simple');
 
 const server = express();
@@ -17,8 +17,8 @@ const sessionConfig = {
   secret: process.env.SECRET,
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 180,
-    secure: false, // set true for production for https
-    httpOnly: false, // no js access
+    secure: process.env.SECURECOOKIE || false, // set true for production for https
+    httpOnly: true, // no js access
     sameSite: true,
   },
 };

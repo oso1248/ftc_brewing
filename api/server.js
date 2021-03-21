@@ -9,6 +9,9 @@ server.use(express.json());
 
 const sessionConfig = {
   conString: process.env.DATABASE_URL || 'postgres://localhost/brew',
+  ssl: {
+    rejectUnauthorized: false,
+  },
   // store: new (pgSession(session))(),
   store: new (pgSession(session))(),
   name: 'BudApp',

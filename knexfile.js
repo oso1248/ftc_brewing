@@ -21,7 +21,7 @@ module.exports = {
       database: 'dsoqv0oii907c',
       port: 5432,
       host: 'ec2-54-205-183-19.compute-1.amazonaws.com',
-      ssl: true,
+      rejectUnauthorized: false,
     },
     pool: {
       min: 2,

@@ -17,7 +17,7 @@ const sessionConfig = {
   secret: process.env.SECRET,
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 180,
-    secure: process.env.SECURECOOKIE || false, // set true for production for https
+    secure: false, // set true for production for https
     httpOnly: true, // no js access
     sameSite: true,
   },

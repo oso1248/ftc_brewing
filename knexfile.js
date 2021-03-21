@@ -14,7 +14,15 @@ module.exports = {
   production: {
     client: 'pg',
     useNullAsDefault: true,
-    connection: process.env.DATABASE_URL,
+    // connection: process.env.DATABASE_URL,
+    connection: {
+      user: 'kgjcmznzcykrau',
+      password: 'd2bd6d314fbba1e197c7cbb2654d2f527213b3be3df38e43ce215dfb683bdee0',
+      database: 'dsoqv0oii907c',
+      port: 5432,
+      host: 'ec2-54-205-183-19.compute-1.amazonaws.com',
+      ssl: true,
+    },
     pool: {
       min: 2,
       max: 10,

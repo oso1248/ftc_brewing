@@ -12,7 +12,6 @@ const sessionConfig = {
   ssl: {
     rejectUnauthorized: false,
   },
-  // store: new (pgSession(session))(),
   store: new (pgSession(session))(),
   name: 'BudApp',
   resave: false,

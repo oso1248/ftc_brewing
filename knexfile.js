@@ -21,7 +21,7 @@ module.exports = {
     connection: pgconfig,
     pool: {
       min: 2,
-      max: 10,
+      max: 20,
     },
     migrations: {
       tablename: 'knex_migrations',

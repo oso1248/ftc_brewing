@@ -8,7 +8,8 @@ const server = express();
 server.use(express.json());
 
 const sessionConfig = {
-  conString: process.env.DATABASE_URL || 'postgres://localhost/brew',
+  // conString: process.env.DATABASE_URL || 'postgres://localhost/brew',
+  conString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },

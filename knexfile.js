@@ -1,3 +1,6 @@
+// const parse = require(process.env.DATABASE_URL || '').parse;
+// const pgconfig = parse(process.env.DATABASE_URL || '');
+// pgconfig.ssl = { rejectUnauthorized: false };
 module.exports = {
   development: {
     client: 'pg',
@@ -14,15 +17,7 @@ module.exports = {
   production: {
     client: 'pg',
     useNullAsDefault: true,
-    // connection: process.env.DATABASE_URL,
-    connection: {
-      user: 'kgjcmznzcykrau',
-      password: 'd2bd6d314fbba1e197c7cbb2654d2f527213b3be3df38e43ce215dfb683bdee0',
-      database: 'dsoqv0oii907c',
-      port: 5432,
-      host: 'ec2-54-205-183-19.compute-1.amazonaws.com',
-      rejectUnauthorized: false,
-    },
+    connection: process.env.DATABASE_URL + '?rejectUnauthorized=false',
     pool: {
       min: 2,
       max: 10,

@@ -25,7 +25,8 @@
     "express-session": "^1.17.1",
     "knex": "^0.21.5",
     "oracledb": "^5.1.0",
-    "pg": "^8.3.3"
+    "pg": "^8.3.3",
+    "pg-connection-string": "^2.4.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

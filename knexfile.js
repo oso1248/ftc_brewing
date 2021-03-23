@@ -1,6 +1,6 @@
-const parse = require('pg-connection-string').parse;
-const pgconfig = parse(process.env.DATABASE_URL);
-pgconfig.ssl = { rejectUnauthorized: false };
+// const parse = require('pg-connection-string').parse;
+// const pgconfig = parse(process.env.DATABASE_URL);
+// pgconfig.ssl = { rejectUnauthorized: false };
 
 module.exports = {
   development: {
@@ -18,7 +18,7 @@ module.exports = {
   production: {
     client: 'pg',
     useNullAsDefault: true,
-    connection: pgconfig,
+    connection: process.env.DATABASE_URL,
     pool: {
       min: 2,
       max: 20,

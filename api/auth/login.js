@@ -4,10 +4,7 @@ const bcrypt = require('bcryptjs');
 const router = express.Router();
 
 function getPass(name) {
-  return db('users')
-    .select('username', 'password', 'permissions')
-    .where({ username: name })
-    .first();
+  return db('users').select('username', 'password', 'permissions').where({ username: name }).first();
 }
 async function deleteSess(name) {
   await db.raw(`
@@ -20,6 +17,7 @@ async function deleteSess(name) {
 
 // -> /api/login
 router.post('/login', (req, res) => {
+  console.log('login');
   const { username, password } = req.body;
   if (!username || !password) {
     return res.status(400).json({ msg: 'username & password required' });
@@ -49,9 +47,7 @@ router.post('/logout', (req, res) => {
   deleteSess(req.session.user.username).then((data) => {
     req.session.destroy((error) => {
       if (error) {
-        res
-          .status(500)
-          .json({ msg: `You Can Checkout Anytime But You Can Never Leave` });
+        res.status(500).json({ msg: `You Can Checkout Anytime But You Can Never Leave` });
       } else {
         res.status(200).json({ msg: 'goodbye' });
       }

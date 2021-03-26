@@ -1,0 +1,129 @@
+.container2 {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.sub-nav ul {
+  display: grid;
+  grid-gap: 20px;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.headers {
+  margin: 0 auto;
+  text-align: center;
+}
+#note {
+  resize: none;
+  line-height: 1.4;
+  width: 40%;
+  margin: 5px;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.form input,
+select,
+option {
+  text-align: center;
+  margin: 5px;
+  width: 250px;
+  font-size: 20px;
+  height: 44px;
+  text-align-last: center;
+  border-radius: 10px;
+}
+
+.button button {
+  background-color: cornflowerblue;
+  border: 1px solid green;
+  color: white;
+  padding: 10px 24px;
+  cursor: pointer;
+  width: 20%;
+  margin: 5px;
+  margin-top: 50px;
+  border-radius: 10px;
+}
+
+.button button:hover {
+  background-color: #3e8e41;
+}
+
+.form {
+  text-align: center;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+@media (max-width: 850px) {
+  /* .form input, textarea, select, option { */
+  /* width: 70%;   */
+  /* } */
+  .form {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .sub-nav ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .button button {
+    width: 35%;
+  }
+  #note {
+    width: 70%;
+  }
+}
+@media (max-width: 700px) {
+  .form {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .sub-nav ul {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .button button {
+    width: 45%;
+  }
+  #note {
+    width: 90%;
+  }
+  .supplier {
+    font-size: 12px;
+  }
+}
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 125px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  width: 120px;
+  bottom: 90%;
+  left: 40%;
+  margin-left: -60px;
+  visibility: visible;
+}
+
+.tabulator-print-header,
+tabulator-print-footer {
+  text-align: center;
+}

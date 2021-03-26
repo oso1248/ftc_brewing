@@ -17,7 +17,6 @@ async function deleteSess(name) {
 
 // -> /api/login
 router.post('/login', (req, res) => {
-  console.log('login');
   const { username, password } = req.body;
   if (!username || !password) {
     return res.status(400).json({ msg: 'username & password required' });

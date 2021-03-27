@@ -29,14 +29,14 @@ async function getInventory(date) {
       FROM mtl_commodity as com
       LEFT JOIN inv_mat_weekly AS inv ON com.id = inv.com_id
       WHERE com.active = 'Yes'
-        AND (com.type_id = 6)
+        AND (com.type_id = 6 OR com.type_id = 3)
         AND (DATE_TRUNC('day',inv.created_at) >= '${date}' OR inv.created_at IS NULL)
     UNION ALL
       SELECT com.id, com.type_id, com.commodity, inv.lbs AS week0
       FROM mtl_commodity as com
       LEFT JOIN inv_hop_weekly AS inv ON com.id = inv.com_id
       WHERE com.active = 'Yes'
-        AND (com.type_id = 1 OR com.type_id = 6)
+        AND (com.type_id = 1 OR com.type_id = 6 OR com.type_id = 3)
         AND (inv.created_at > '${hopDate}' OR inv.created_at IS NULL)) AS z
     GROUP BY z.id, z.type_id, z.commodity
     ORDER BY z.type_id, z.commodity;
@@ -76,6 +76,7 @@ async function tallyWeeks(dates, brandList, weeklyInventory) {
 
       for (let commodityCounter = 0; commodityCounter < brandDetail.length; commodityCounter++) {
         weeklyInventory[commodityCounter]['week' + weekCounter] = weeklyInventory[commodityCounter]['week' + weekCounter] - brandDetail[commodityCounter].sum * weeklyBrews[brand];
+        weeklyInventory[commodityCounter]['week' + weekCounter] = weeklyInventory[commodityCounter]['week' + weekCounter].toFixed(2);
       }
     }
     await loadFollowingWeek(weeklyInventory, 'week' + weekCounter, 'week' + (weekCounter + 1));
@@ -108,17 +109,17 @@ async function getBrandDetails(brand) {
       (SELECT mtx.com_id, com.commodity, mtx."${brand}"
       FROM mtx_hop_std AS mtx 
       JOIN mtl_commodity AS com ON com.id = mtx.com_id
-      WHERE com.active = 'Yes' AND (com.type_id = 1 OR com.type_id = 6)
+      WHERE com.active = 'Yes' AND (com.type_id = 1 OR com.type_id = 6 OR com.type_id = 3)
       UNION ALL
       SELECT mtx.com_id, com.commodity, mtx."${brand}"
       FROM mtx_hop_dry AS mtx 
       JOIN mtl_commodity AS com ON com.id = mtx.com_id
-      WHERE com.active = 'Yes' AND (com.type_id = 1 OR com.type_id = 6)
+      WHERE com.active = 'Yes' AND (com.type_id = 1 OR com.type_id = 6 OR com.type_id = 3)
       UNION ALL
       SELECT mtx.com_id, com.commodity, mtx."${brand}"
       FROM mtx_sac_supr AS mtx
       JOIN mtl_commodity AS com ON com.id = mtx.com_id
-      WHERE com.active = 'Yes' AND (com.type_id = 1 OR com.type_id = 6)) AS z
+      WHERE com.active = 'Yes' AND (com.type_id = 1 OR com.type_id = 6 OR com.type_id = 3)) AS z
     JOIN mtl_commodity AS com ON com.id = z.com_id
     GROUP BY z.com_id, z.commodity, com.type_id
     ORDER BY com.type_id, z.commodity

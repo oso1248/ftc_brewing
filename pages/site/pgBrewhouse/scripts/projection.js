@@ -17,7 +17,7 @@ function projectionView() {
 }
 function viewProjection() {
   axios
-    .post('/api/project')
+    .post('/api/project/commodities')
     .then((res) => {
       let tableData = res.data;
 

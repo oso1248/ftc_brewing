@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height" />
+    <title>Coming Craft Brews</title>
+
+    <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
+    <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../../commonCSS/styles.css" />
+    <link rel="stylesheet" href="../styles/craftProjection.css" />
+  </head>
+  <body>
+    <div class="container1">
+      <!-- Start of Container1 -->
+      <header>
+        <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+        <h1>Craft Brews</h1>
+        <!-- <img class="logo" src="../../commonIMG/eagle.png" alt=""> -->
+      </header>
+      <! -- Navigation -->
+      <nav class="main-nav">
+        <ul class="">
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../../pgBrewhouse/brewhouse.html">Brewhouse</a></li>
+          <li><a href="../../pgFinishing/finishing.html">Finishing</a></li>
+          <li><a href="../../pgMaterials/material.html">Materials</a></li>
+          <li><a href="../../pgAdmin/admin.html">Admin</a></li>
+          <li><a id="logout">Log Out</a></li>
+        </ul>
+      </nav>
+
+      <!-- <div class="spacer"></div> -->
+
+      <div class="boxes"></div>
+      <!-- End Boxes   -->
+    </div>
+    <!-- End of Container1 -->
+
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+
+    <div id="class2" class="container2">
+      <!-- start container2 -->
+
+      <div id="brewsViewHide">
+        <div id="brndView" class="boxxes">
+          <!-- Brand View -->
+          <h1 class="headers">Brews</h1>
+          <div class="button btnLabel">
+            <button class="btn" id="xlsxProjection">Save XLSX</button>
+            <button class="btn" id="printProjection">Print Table</button>
+            <button class="btn" id="getDataProjection">Get Data</button>
+          </div>
+          <div id="projectionTbl"></div>
+        </div>
+        <p>Brew Counts Are Shown Day By Day From Brewplan</p>
+      </div>
+
+      <div class="spacer"></div>
+
+      <div id="brewsViewHide">
+        <div id="brndView" class="boxxes">
+          <!-- Brand View -->
+          <h1 class="headers" id="brandDetailTable"></h1>
+          <div class="button btnLabel">
+            <!-- <button class="btn" id="xlsxProjection">Save XLSX</button> -->
+            <!-- <button class="btn" id="printProjection">Print Table</button> -->
+            <!-- <button class="btn" id="getDataProjection">Get Data</button> -->
+          </div>
+          <div id="brandDetailTbl"></div>
+        </div>
+        <p id="brandMakeUPDescriptor"></p>
+      </div>
+
+      <div class="tables">
+        <div class="table">
+          <h2 class="">Chips Not Tied</h2>
+          <div id="invUnTied"></div>
+        </div>
+
+        <div class="table">
+          <h2 class="">Chips Tied</h2>
+          <div id="invTied"></div>
+        </div>
+
+        <div class="table">
+          <h2 class="">Trailer</h2>
+          <div id="invTrailer"></div>
+        </div>
+
+        <div class="table">
+          <h2 class="">3rd Floor</h2>
+          <div id="invFloor"></div>
+        </div>
+      </div>
+      <div class="spacer"></div>
+    </div>
+    <!-- end container2 -->
+
+    <script src="../../commonJS/index.js"></script>
+    <script src="../scripts/craftProjection.js"></script>
+  </body>
+</html>

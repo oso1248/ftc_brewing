@@ -12,12 +12,28 @@ function loadWeeks(weeks) {
   }
 }
 
-router.post('/', async (req, res) => {
+router.post('/commodities', async (req, res) => {
   let weeks = [];
 
   await loadWeeks(weeks);
 
-  db.getProjection(weeks)
+  db.getCommodityProjection(weeks)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => res.status(500).json({ msg: err.detail }));
+});
+
+router.post('/craft', async (req, res) => {
+  db.getCraftProjection()
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => res.status(500).json({ msg: err.detail }));
+});
+
+router.post('/craft/branddata', async (req, res) => {
+  db.getBrandData(req.body)
     .then((data) => {
       res.status(200).json(data);
     })

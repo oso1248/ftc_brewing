@@ -128,7 +128,7 @@ function inventoryList() {
       let tableData = res.data;
       inventoryTable = new Tabulator('#invList', {
         resizableColumns: false,
-        selectable: true,
+        selectable: 1,
         height: '330px',
         layout: 'fitDataFill',
         data: tableData,

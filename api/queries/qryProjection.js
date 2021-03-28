@@ -2,7 +2,8 @@ const db = require('../dbConfig');
 
 const { DateTime } = require('luxon');
 
-// Minor Functions used in main function
+// Commodity Projection
+// Minor Functions used in main commodity project function
 async function getBrands() {
   let { rows } = await db.raw(`
     SELECT brand
@@ -16,7 +17,7 @@ async function getInventory(date) {
   let hopDate = DateTime.fromSQL(date).minus({ hour: 8 }).toFormat('yyyy-MM-dd HH:mm');
 
   let { rows } = await db.raw(`
-    SELECT z.commodity, SUM(z.week0) AS week0
+    SELECT z.commodity, COALESCE(SUM(z.week0), 0) AS week0
     FROM
       (SELECT com.id, com.type_id, com.commodity, inv.total_end AS week0
       FROM mtl_commodity as com
@@ -45,14 +46,13 @@ async function getInventory(date) {
 }
 
 //Main Function
-async function getProjection(dates) {
+async function getCommodityProjection(dates) {
   let brandList = await getBrands();
   let weeklyInventory = await getInventory(dates[0]);
 
   await appendWeeks(weeklyInventory);
 
   await tallyWeeks(dates, brandList, weeklyInventory);
-
   return weeklyInventory;
 }
 
@@ -67,13 +67,12 @@ async function appendWeeks(weeklyInventory) {
 async function tallyWeeks(dates, brandList, weeklyInventory) {
   for (let weekCounter = 0; weekCounter < 8; weekCounter++) {
     let weeklyBrews = await weekBrews(dates[weekCounter], dates[weekCounter + 1]);
-    // console.log(weekCounter + '\n', weeklyBrews);
+    console.table(weeklyBrews);
     weeklyBrews = await convertArrayToJSON(weeklyBrews);
 
     for (let brandCounter = 0; brandCounter < brandList.length; brandCounter++) {
       let brand = brandList[brandCounter].brand;
       let brandDetail = await getBrandDetails(brandList[brandCounter].brand);
-
       for (let commodityCounter = 0; commodityCounter < brandDetail.length; commodityCounter++) {
         weeklyInventory[commodityCounter]['week' + weekCounter] = weeklyInventory[commodityCounter]['week' + weekCounter] - brandDetail[commodityCounter].sum * weeklyBrews[brand];
         weeklyInventory[commodityCounter]['week' + weekCounter] = weeklyInventory[commodityCounter]['week' + weekCounter].toFixed(2);
@@ -86,11 +85,12 @@ async function tallyWeeks(dates, brandList, weeklyInventory) {
 // Minor Function Used In Major Functions
 async function weekBrews(startDate, endDate) {
   const { rows } = await db.raw(`
-    SELECT brand, SUM(brews) AS brews
-    FROM brewplan
-    WHERE brew_date >= '${startDate}' AND brew_date < '${endDate}'
-    GROUP By brand
-    ORDER BY brand ASC
+    SELECT brw.brand, COALESCE(SUM(pln.brews), 0) as brews
+    FROM brnd_brw AS brw
+    LEFT JOIN brewplan AS pln ON brw.brand = pln.brand
+    WHERE pln.brew_date >= '${startDate}' AND pln.brew_date < '${endDate}' OR pln.brew_date IS NULL
+    GROUP BY brw.brand
+    ORDER BY brw.brand
   `);
   return rows;
 }
@@ -132,4 +132,118 @@ async function loadFollowingWeek(weeklyInventory, workWeek, nextWeek) {
   }
 }
 
-module.exports = { getProjection };
+// Craft Brews Projection
+async function getCraftProjection() {
+  let { rows } = await db.raw(`
+    SELECT day1.BRAND,
+      COALESCE(day1.brews, 0) AS day1,
+      COALESCE(day2.brews, 0) AS day2,
+      COALESCE(day3.brews, 0) AS day3,
+      COALESCE(day4.brews, 0) AS day4,
+      COALESCE(day5.brews, 0) AS day5,
+      COALESCE(day6.brews, 0) AS day6,
+      COALESCE(day7.brews, 0) AS day7
+    FROM
+      (SELECT brw.brand, SUM(pln.brews) AS brews
+      FROM brnd_brw AS brw
+      LEFT JOIN brewplan AS pln
+        ON brw.brand = pln.brand
+        AND pln.brew_date = CURRENT_DATE
+      WHERE brw.hop_crft = 'Yes' OR brw.supr_sac = 'Yes'
+      GROUP BY brw.brand) AS day1
+    LEFT JOIN
+      (SELECT brw.brand, SUM(pln.brews) AS brews
+      FROM brnd_brw AS brw
+      LEFT JOIN brewplan AS pln
+        ON brw.brand = pln.brand
+        AND pln.brew_date = CURRENT_DATE + 1
+      WHERE brw.hop_crft = 'Yes' OR brw.supr_sac = 'Yes'
+      GROUP BY brw.brand) AS day2
+    ON day1.brand = day2.brand
+    LEFT JOIN
+      (SELECT brw.brand, SUM(pln.brews) AS brews
+      FROM brnd_brw AS brw
+      LEFT JOIN brewplan AS pln
+        ON brw.brand = pln.brand
+        AND pln.brew_date = CURRENT_DATE + 2
+      WHERE brw.hop_crft = 'Yes' OR brw.supr_sac = 'Yes'
+      GROUP BY brw.brand) AS day3
+    ON day1.brand = day3.brand
+    LEFT JOIN
+      (SELECT brw.brand, SUM(pln.brews) AS brews
+      FROM brnd_brw AS brw
+      LEFT JOIN brewplan AS pln
+        ON brw.brand = pln.brand
+        AND pln.brew_date = CURRENT_DATE + 3
+      WHERE brw.hop_crft = 'Yes' OR brw.supr_sac = 'Yes'
+      GROUP BY brw.brand) AS day4
+    ON day1.brand = day4.brand
+    LEFT JOIN
+      (SELECT brw.brand, SUM(pln.brews) AS brews
+      FROM brnd_brw AS brw
+      LEFT JOIN brewplan AS pln
+        ON brw.brand = pln.brand
+        AND pln.brew_date = CURRENT_DATE + 4
+      WHERE brw.hop_crft = 'Yes' OR brw.supr_sac = 'Yes'
+      GROUP BY brw.brand) AS day5
+    ON day1.brand = day5.brand
+    LEFT JOIN
+      (SELECT brw.brand, SUM(pln.brews) AS brews
+      FROM brnd_brw AS brw
+      LEFT JOIN brewplan AS pln
+        ON brw.brand = pln.brand
+        AND pln.brew_date = CURRENT_DATE + 5
+      WHERE brw.hop_crft = 'Yes' OR brw.supr_sac = 'Yes'
+      GROUP BY brw.brand) AS day6
+    ON day1.brand = day6.brand
+    LEFT JOIN
+      (SELECT brw.brand, SUM(pln.brews) AS brews
+      FROM brnd_brw AS brw
+      LEFT JOIN brewplan AS pln
+        ON brw.brand = pln.brand
+        AND pln.brew_date = CURRENT_DATE + 6
+      WHERE brw.hop_crft = 'Yes' OR brw.supr_sac = 'Yes'
+      GROUP BY brw.brand) AS day7
+    ON day1.brand = day7.brand
+    ORDER BY day1.brand
+  `);
+  return rows;
+}
+async function getBrandData(data) {
+  let brandData = await getBrandDetailsMinimum(data[0]);
+  for (let commodity = 0; commodity < brandData.length; commodity++) {
+    for (let day = 0; day < 7; day++) {
+      if (day < 6) {
+        brandData[commodity]['day' + (day + 1)] = brandData[commodity]['day' + day];
+      }
+      brandData[commodity]['day' + day] = brandData[commodity]['day' + day] * data[day + 1];
+    }
+  }
+
+  return brandData;
+}
+async function getBrandDetailsMinimum(brand) {
+  let { rows } = await db.raw(`
+    SELECT z.commodity, SUM(z."${brand}") AS day0
+    FROM
+      (SELECT mtx.com_id, com.commodity, mtx."${brand}"
+      FROM mtx_hop_std AS mtx 
+      JOIN mtl_commodity AS com ON com.id = mtx.com_id
+      WHERE mtx."${brand}" > 0
+      UNION ALL
+      SELECT mtx.com_id, com.commodity, "${brand}"
+      FROM mtx_sac_supr AS mtx
+      JOIN mtl_commodity AS com ON com.id = mtx.com_id
+      WHERE mtx."${brand}" > 0) AS z
+    JOIN mtl_commodity AS com ON com.id = z.com_id
+    GROUP BY z.com_id, z.commodity, com.type_id
+    ORDER BY com.type_id, z.commodity
+  `);
+  return rows;
+}
+
+module.exports = {
+  getCommodityProjection,
+  getCraftProjection,
+  getBrandData,
+};

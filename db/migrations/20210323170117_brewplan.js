@@ -1,6 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.createTable('brewplan', (tbl) => {
-    tbl.increments();
+    // tbl.increments();
     tbl.string('brand', 64);
     tbl.string('house', 32);
     tbl.integer('brews', 8).unsigned();

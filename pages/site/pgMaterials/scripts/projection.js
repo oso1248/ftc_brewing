@@ -17,10 +17,9 @@ function projectionView() {
 }
 function viewProjection() {
   axios
-    .post('/api/project')
+    .post('/api/project/commodities')
     .then((res) => {
       let tableData = res.data;
-
       projectionTable = new Tabulator('#projectionTbl', {
         printHeader: '<h1>Commodity Projection<h1>',
         resizableColumns: false,

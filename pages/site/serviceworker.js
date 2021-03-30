@@ -4,7 +4,7 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-var CACHE_STATIC = 'static-v050';
+var CACHE_STATIC = 'static-v051';
 
 self.addEventListener('install', function (event) {
   self.skipWaiting();
@@ -12,7 +12,7 @@ self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE_STATIC).then(function (cache) {
       console.log('Precaching App Shell');
-      cache.addAll(['/login.html', '/login.css', '/offLine.html', '/256.png', '/barrel.jpg', '/index.html']);
+      cache.addAll(['/login.html', '/login.css', '/offLine.html', '/256.png', '/barrel.jpg']);
     })
   );
 });

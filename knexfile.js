@@ -1,6 +1,6 @@
-// const parse = require('pg-connection-string').parse;
-// const pgconfig = parse(process.env.DATABASE_URL);
-// pgconfig.ssl = { rejectUnauthorized: false };
+// postgres command to change timezone
+// heroku pg:psql -a bud-ftc
+// ALTER DATABASE dsoqv0oii907c  SET timezone = 'America/Boise';
 
 module.exports = {
   development: {

@@ -242,6 +242,22 @@ router.post('/detail/csxpre', (req, res) => {
     })
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
+router.patch('/detail/csxpre/update', async (req, res) => {
+  let data = req.body;
+  let user = {};
+  user.updated_by = req.session.user.username;
+  data.push(user);
+  db.patchCsxPre(data)
+    .then((data) => {
+      if (data) {
+        res.status(200).json(data);
+      } else {
+        res.status(200).json(data);
+      }
+    })
+    .catch((err) => res.status(500).json({ msg: err.detail }));
+});
+
 router.post('/detail/csxpost', (req, res) => {
   db.getDetailByNameCsxPost(req.body.name)
     .then((data) => {
@@ -253,6 +269,22 @@ router.post('/detail/csxpost', (req, res) => {
     })
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
+router.patch('/detail/csxpost/update', async (req, res) => {
+  let data = req.body;
+  let user = {};
+  user.updated_by = req.session.user.username;
+  data.push(user);
+  db.patchCsxPost(data)
+    .then((data) => {
+      if (data) {
+        res.status(200).json(data);
+      } else {
+        res.status(200).json(data);
+      }
+    })
+    .catch((err) => res.status(500).json({ msg: err.detail }));
+});
+
 router.post('/detail/filpre', (req, res) => {
   db.getDetailByNameFilPre(req.body.name)
     .then((data) => {
@@ -264,6 +296,22 @@ router.post('/detail/filpre', (req, res) => {
     })
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
+router.patch('/detail/fltrpre/update', async (req, res) => {
+  let data = req.body;
+  let user = {};
+  user.updated_by = req.session.user.username;
+  data.push(user);
+  db.patchFltrPre(data)
+    .then((data) => {
+      if (data) {
+        res.status(200).json(data);
+      } else {
+        res.status(200).json(data);
+      }
+    })
+    .catch((err) => res.status(500).json({ msg: err.detail }));
+});
+
 router.post('/detail/filpost', (req, res) => {
   db.getDetailByNameFilPost(req.body.name)
     .then((data) => {
@@ -275,6 +323,22 @@ router.post('/detail/filpost', (req, res) => {
     })
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
+router.patch('/detail/fltrpost/update', async (req, res) => {
+  let data = req.body;
+  let user = {};
+  user.updated_by = req.session.user.username;
+  data.push(user);
+  db.patchFltrPost(data)
+    .then((data) => {
+      if (data) {
+        res.status(200).json(data);
+      } else {
+        res.status(200).json(data);
+      }
+    })
+    .catch((err) => res.status(500).json({ msg: err.detail }));
+});
+
 router.post('/detail/relpre', (req, res) => {
   db.getDetailByNameRelPre(req.body.name)
     .then((data) => {
@@ -286,6 +350,22 @@ router.post('/detail/relpre', (req, res) => {
     })
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
+router.patch('/detail/relpre/update', async (req, res) => {
+  let data = req.body;
+  let user = {};
+  user.updated_by = req.session.user.username;
+  data.push(user);
+  db.patchRelPre(data)
+    .then((data) => {
+      if (data) {
+        res.status(200).json(data);
+      } else {
+        res.status(200).json(data);
+      }
+    })
+    .catch((err) => res.status(500).json({ msg: err.detail }));
+});
+
 router.post('/detail/relpost', (req, res) => {
   db.getDetailByNameRelPost(req.body.name)
     .then((data) => {
@@ -297,13 +377,17 @@ router.post('/detail/relpost', (req, res) => {
     })
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
-router.patch('/detail/updatedetail', (req, res) => {
-  db.patchDetail(req.body)
+router.patch('/detail/relpost/update', async (req, res) => {
+  let data = req.body;
+  let user = {};
+  user.updated_by = req.session.user.username;
+  data.push(user);
+  db.patchRelPost(data)
     .then((data) => {
       if (data) {
         res.status(200).json(data);
       } else {
-        res.status(200).json({ msg: 'null' });
+        res.status(200).json(data);
       }
     })
     .catch((err) => res.status(500).json({ msg: err.detail }));
@@ -343,7 +427,12 @@ router.post('/recipe/fin', (req, res) => {
     })
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
+
 router.patch('/detail/updaterecipe/:table', (req, res) => {
+  let data = req.body;
+  let user = {};
+  user.updated_by = req.session.user.username;
+  data.push(user);
   if (req.params.table === 'chip') {
     db.patchRecipeChp(req.body)
       .then((data) => {

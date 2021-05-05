@@ -6,7 +6,6 @@ const brnd_brw = [
     hop_dry: 'No',
     supr_sac: 'No',
     active: 'Yes',
-    note: '',
   },
   {
     brand: 'BH50',
@@ -15,7 +14,6 @@ const brnd_brw = [
     hop_dry: 'No',
     supr_sac: 'No',
     active: 'Yes',
-    note: '',
   },
   {
     brand: 'NL50',
@@ -24,7 +22,6 @@ const brnd_brw = [
     hop_dry: 'No',
     supr_sac: 'No',
     active: 'Yes',
-    note: '',
   },
   {
     brand: 'PT90',
@@ -33,7 +30,6 @@ const brnd_brw = [
     hop_dry: 'No',
     supr_sac: 'No',
     active: 'Yes',
-    note: '',
   },
   {
     brand: 'EL20',
@@ -42,7 +38,6 @@ const brnd_brw = [
     hop_dry: 'No',
     supr_sac: 'Yes',
     active: 'Yes',
-    note: '',
   },
   {
     brand: 'GI19',
@@ -51,30 +46,29 @@ const brnd_brw = [
     hop_dry: 'Yes',
     supr_sac: 'Yes',
     active: 'Yes',
-    note: '',
   },
 ];
 
 const brnd_fin = [
-  { brand: 'HBBL', brw_id: 1, active: 'Yes', injection: 'No', note: '' },
-  { brand: 'HBUD', brw_id: 2, active: 'Yes', injection: 'No', note: '' },
-  { brand: 'HBNL', brw_id: 3, active: 'Yes', injection: 'No', note: '' },
-  { brand: 'HBNS', brw_id: 3, active: 'Yes', injection: 'Yes', note: '' },
-  { brand: 'EBIN', brw_id: 3, active: 'Yes', injection: 'No', note: '' },
-  { brand: 'PTHD', brw_id: 4, active: 'Yes', injection: 'Yes', note: '' },
-  { brand: 'ELSP', brw_id: 5, active: 'Yes', injection: 'No', note: '' },
-  { brand: '9GNC', brw_id: 6, active: 'Yes', injection: 'No', note: '' },
+  { brand: 'HBBL', brw_id: 1, active: 'Yes', injection: 'No' },
+  { brand: 'HBUD', brw_id: 2, active: 'Yes', injection: 'No' },
+  { brand: 'HBNL', brw_id: 3, active: 'Yes', injection: 'No' },
+  { brand: 'HBNS', brw_id: 3, active: 'Yes', injection: 'Yes' },
+  { brand: 'EBIN', brw_id: 3, active: 'Yes', injection: 'No' },
+  { brand: 'PTHD', brw_id: 4, active: 'Yes', injection: 'Yes' },
+  { brand: 'ELSP', brw_id: 5, active: 'Yes', injection: 'No' },
+  { brand: '9GNC', brw_id: 6, active: 'Yes', injection: 'No' },
 ];
 
 const brnd_pck = [
-  { brand: 'BDL5', fin_id: 1, active: 'Yes', note: '' },
-  { brand: 'BUD5', fin_id: 2, active: 'Yes', note: '' },
-  { brand: 'ABN5', fin_id: 3, active: 'Yes', note: '' },
-  { brand: 'NLS5', fin_id: 4, active: 'Yes', note: '' },
-  { brand: 'NTI6', fin_id: 5, active: 'Yes', note: '' },
-  { brand: 'BLP6', fin_id: 6, active: 'Yes', note: '' },
-  { brand: 'ES18', fin_id: 7, active: 'Yes', note: '' },
-  { brand: 'GNX7', fin_id: 8, active: 'Yes', note: '' },
+  { brand: 'BDL5', fin_id: 1, active: 'Yes' },
+  { brand: 'BUD5', fin_id: 2, active: 'Yes' },
+  { brand: 'ABN5', fin_id: 3, active: 'Yes' },
+  { brand: 'NLS5', fin_id: 4, active: 'Yes' },
+  { brand: 'NTI6', fin_id: 5, active: 'Yes' },
+  { brand: 'BLP6', fin_id: 6, active: 'Yes' },
+  { brand: 'ES18', fin_id: 7, active: 'Yes' },
+  { brand: 'GNX7', fin_id: 8, active: 'Yes' },
 ];
 
 const fin_smpl = [
@@ -85,7 +79,6 @@ const fin_smpl = [
     co2o2: 'No',
     cc: 'No',
     taste: 'Yes',
-    note: '',
   },
   {
     fin_id: 2,
@@ -94,7 +87,6 @@ const fin_smpl = [
     co2o2: 'No',
     cc: 'No',
     taste: 'Yes',
-    note: '',
   },
   {
     fin_id: 3,
@@ -103,7 +95,6 @@ const fin_smpl = [
     co2o2: 'No',
     cc: 'No',
     taste: 'Yes',
-    note: '',
   },
   {
     fin_id: 4,
@@ -112,7 +103,6 @@ const fin_smpl = [
     co2o2: 'No',
     cc: 'No',
     taste: 'Yes',
-    note: '',
   },
   {
     fin_id: 5,
@@ -121,7 +111,6 @@ const fin_smpl = [
     co2o2: 'No',
     cc: 'No',
     taste: 'Yes',
-    note: '',
   },
   {
     fin_id: 6,
@@ -130,7 +119,6 @@ const fin_smpl = [
     co2o2: 'No',
     cc: 'No',
     taste: 'Yes',
-    note: '',
   },
   {
     fin_id: 7,
@@ -139,7 +127,6 @@ const fin_smpl = [
     co2o2: 'No',
     cc: 'No',
     taste: 'Yes',
-    note: '',
   },
   {
     fin_id: 8,
@@ -148,7 +135,6 @@ const fin_smpl = [
     co2o2: 'Yes',
     cc: 'No',
     taste: 'Yes',
-    note: '',
   },
 ];
 
@@ -460,30 +446,30 @@ const fin_params = [
 ];
 
 const sch_smpl = [
-  { brw_id: 1, alc: 'No', cc: 'No', taste: 'No', note: '' },
-  { brw_id: 2, alc: 'No', cc: 'No', taste: 'No', note: '' },
-  { brw_id: 3, alc: 'No', cc: 'No', taste: 'No', note: '' },
-  { brw_id: 4, alc: 'No', cc: 'No', taste: 'No', note: '' },
-  { brw_id: 5, alc: 'Yes', cc: 'No', taste: 'No', note: '' },
-  { brw_id: 6, alc: 'Yes', cc: 'No', taste: 'No', note: '' },
+  { brw_id: 1, alc: 'No', cc: 'No', taste: 'No' },
+  { brw_id: 2, alc: 'No', cc: 'No', taste: 'No' },
+  { brw_id: 3, alc: 'No', cc: 'No', taste: 'No' },
+  { brw_id: 4, alc: 'No', cc: 'No', taste: 'No' },
+  { brw_id: 5, alc: 'Yes', cc: 'No', taste: 'No' },
+  { brw_id: 6, alc: 'Yes', cc: 'No', taste: 'No' },
 ];
 
 const sch_params = [
-  { brw_id: 1, cc: '0', acp: '6', note: '' },
-  { brw_id: 2, cc: '0', acp: '11', note: '' },
-  { brw_id: 3, cc: '0', acp: '6', note: '' },
-  { brw_id: 4, cc: '0', acp: '6', note: '' },
-  { brw_id: 5, cc: '0', acp: 'NA', note: '' },
-  { brw_id: 6, cc: '0', acp: '17', note: '' },
+  { brw_id: 1, cc: '0', acp: '6' },
+  { brw_id: 2, cc: '0', acp: '11' },
+  { brw_id: 3, cc: '0', acp: '6' },
+  { brw_id: 4, cc: '0', acp: '6' },
+  { brw_id: 5, cc: '0', acp: 'NA' },
+  { brw_id: 6, cc: '0', acp: '17' },
 ];
 
 const chp_smpl = [
-  { brw_id: 1, alc: 'Yes', gc: 'Yes', taste: 'Yes', note: '' },
-  { brw_id: 2, alc: 'Yes', gc: 'Yes', taste: 'Yes', note: '' },
-  { brw_id: 3, alc: 'Yes', gc: 'Yes', taste: 'Yes', note: '' },
-  { brw_id: 4, alc: 'Yes', gc: 'Yes', taste: 'Yes', note: '' },
-  { brw_id: 5, alc: 'Yes', gc: 'Yes', taste: 'Yes', note: '' },
-  { brw_id: 6, alc: 'Yes', gc: 'Yes', taste: 'Yes', note: '' },
+  { brw_id: 1, alc: 'Yes', gc: 'Yes', taste: 'Yes' },
+  { brw_id: 2, alc: 'Yes', gc: 'Yes', taste: 'Yes' },
+  { brw_id: 3, alc: 'Yes', gc: 'Yes', taste: 'Yes' },
+  { brw_id: 4, alc: 'Yes', gc: 'Yes', taste: 'Yes' },
+  { brw_id: 5, alc: 'Yes', gc: 'Yes', taste: 'Yes' },
+  { brw_id: 6, alc: 'Yes', gc: 'Yes', taste: 'Yes' },
 ];
 
 const chp_params = [
@@ -494,7 +480,6 @@ const chp_params = [
     param_aa: '< 6',
     param_abw: '3.45',
     param_rdf: '75.94',
-    note: '',
   },
   {
     brw_id: 2,
@@ -503,7 +488,6 @@ const chp_params = [
     param_aa: '< 6',
     param_abw: '3.95',
     param_rdf: '68.75',
-    note: '',
   },
   {
     brw_id: 3,
@@ -512,7 +496,6 @@ const chp_params = [
     param_aa: '< 10',
     param_abw: '4.70',
     param_rdf: '87',
-    note: '',
   },
   {
     brw_id: 4,
@@ -521,7 +504,6 @@ const chp_params = [
     param_aa: '< 10',
     param_abw: '4.85',
     param_rdf: '89',
-    note: '',
   },
   {
     brw_id: 5,
@@ -530,7 +512,6 @@ const chp_params = [
     param_aa: '< 3.5',
     param_abw: '6.50',
     param_rdf: '68.5',
-    note: '',
   },
   {
     brw_id: 6,
@@ -539,7 +520,6 @@ const chp_params = [
     param_aa: '< 10',
     param_abw: '5.60',
     param_rdf: '68.50',
-    note: '',
   },
 ];
 
@@ -551,7 +531,6 @@ const rel_post = [
     tk_lin: 'Matrix Blend',
     tk_dft: 'Matrix Blend',
     recover: '',
-    note: '',
   },
   {
     fin_id: 2,
@@ -560,7 +539,6 @@ const rel_post = [
     tk_lin: 'Matrix Blend',
     tk_dft: 'Matrix Blend',
     recover: '',
-    note: '',
   },
   {
     fin_id: 3,
@@ -569,7 +547,6 @@ const rel_post = [
     tk_lin: 'Matrix Blend',
     tk_dft: 'Matrix Blend',
     recover: '',
-    note: '',
   },
   {
     fin_id: 4,
@@ -578,7 +555,6 @@ const rel_post = [
     tk_lin: 'CIP',
     tk_dft: 'CIP',
     recover: 'Condensate',
-    note: '',
   },
   {
     fin_id: 5,
@@ -587,7 +563,6 @@ const rel_post = [
     tk_lin: 'Matrix Blend',
     tk_dft: 'Matrix Blend',
     recover: 'GBeer',
-    note: '',
   },
   {
     fin_id: 6,
@@ -596,7 +571,6 @@ const rel_post = [
     tk_lin: 'Matrix Blend',
     tk_dft: 'Matrix Blend',
     recover: 'GBeer',
-    note: '',
   },
   {
     fin_id: 7,
@@ -605,7 +579,6 @@ const rel_post = [
     tk_lin: 'Rinse',
     tk_dft: 'Rinse',
     recover: 'Condensate',
-    note: '',
   },
   {
     fin_id: 8,
@@ -614,7 +587,6 @@ const rel_post = [
     tk_lin: 'Rinse',
     tk_dft: 'Rinse',
     recover: 'Condensate',
-    note: '',
   },
 ];
 
@@ -627,7 +599,6 @@ const rel_pre = [
     tk_dft: 'Matrix Blend',
     recover: 'GBeer',
     ctrl: 'Analyzer',
-    note: '',
   },
   {
     fin_id: 2,
@@ -637,7 +608,6 @@ const rel_pre = [
     tk_dft: 'Matrix Blend',
     recover: 'GBeer',
     ctrl: 'Analyzer',
-    note: '',
   },
   {
     fin_id: 3,
@@ -647,7 +617,6 @@ const rel_pre = [
     tk_dft: 'Matrix Blend',
     recover: 'GBeer',
     ctrl: 'Analyzer',
-    note: '',
   },
   {
     fin_id: 4,
@@ -657,7 +626,6 @@ const rel_pre = [
     tk_dft: 'In WIC',
     recover: 'Condensate',
     ctrl: 'Analyzer',
-    note: '',
   },
   {
     fin_id: 5,
@@ -667,7 +635,6 @@ const rel_pre = [
     tk_dft: 'Matrix Blend',
     recover: 'GBeer',
     ctrl: 'Analyzer',
-    note: '',
   },
   {
     fin_id: 6,
@@ -677,7 +644,6 @@ const rel_pre = [
     tk_dft: 'In WIC',
     recover: 'Condensate',
     ctrl: 'Analyzer',
-    note: '',
   },
   {
     fin_id: 7,
@@ -687,7 +653,6 @@ const rel_pre = [
     tk_dft: 'In WIC',
     recover: 'Condensate',
     ctrl: 'Alcolyzer',
-    note: '',
   },
   {
     fin_id: 8,
@@ -697,7 +662,6 @@ const rel_pre = [
     tk_dft: 'In WIC',
     recover: 'Condensate',
     ctrl: 'Alcolyzer',
-    note: '',
   },
 ];
 
@@ -709,7 +673,6 @@ const fltr_post = [
     tk_trp: 'NA',
     tk_fbt: 'Lab Data',
     recover: 'GBeer',
-    note: '',
   },
   {
     fin_id: 2,
@@ -718,7 +681,6 @@ const fltr_post = [
     tk_trp: 'NA',
     tk_fbt: 'Lab Data',
     recover: 'GBeer',
-    note: '',
   },
   {
     fin_id: 3,
@@ -727,7 +689,6 @@ const fltr_post = [
     tk_trp: 'NA',
     tk_fbt: 'Lab Data',
     recover: 'GBeer',
-    note: '',
   },
   {
     fin_id: 4,
@@ -736,7 +697,6 @@ const fltr_post = [
     tk_trp: 'NA',
     tk_fbt: 'Lab Data',
     recover: 'GBeer',
-    note: '',
   },
   {
     fin_id: 5,
@@ -745,7 +705,6 @@ const fltr_post = [
     tk_trp: 'NA',
     tk_fbt: 'Lab Data',
     recover: 'GBeer',
-    note: '',
   },
   {
     fin_id: 6,
@@ -754,7 +713,6 @@ const fltr_post = [
     tk_trp: 'NA',
     tk_fbt: 'Lab Data',
     recover: 'Condensate',
-    note: '',
   },
   {
     fin_id: 7,
@@ -763,7 +721,6 @@ const fltr_post = [
     tk_trp: 'NA',
     tk_fbt: 'Lab Data',
     recover: 'Condensate',
-    note: '',
   },
   {
     fin_id: 8,
@@ -772,7 +729,6 @@ const fltr_post = [
     tk_trp: 'NA',
     tk_fbt: 'Lab Data',
     recover: 'Condensate',
-    note: '',
   },
 ];
 
@@ -784,9 +740,7 @@ const fltr_pre = [
     tk_trp: 'Use',
     tk_fbt: 'Matrix Blend',
     tk_fill: 'On COE',
-    inj: 'NA',
     ctrl: 'Analyzer',
-    note: '',
   },
   {
     fin_id: 2,
@@ -795,9 +749,7 @@ const fltr_pre = [
     tk_trp: 'Use',
     tk_fbt: 'Matrix Blend',
     tk_fill: 'On COE',
-    inj: 'NA',
     ctrl: 'Analyzer',
-    note: '',
   },
   {
     fin_id: 3,
@@ -806,9 +758,7 @@ const fltr_pre = [
     tk_trp: 'Use',
     tk_fbt: 'Matrix Blend',
     tk_fill: 'On COE',
-    inj: 'NA',
     ctrl: 'Analyzer',
-    note: '',
   },
   {
     fin_id: 4,
@@ -817,9 +767,7 @@ const fltr_pre = [
     tk_trp: 'Use',
     tk_fbt: 'Matrix Blend',
     tk_fill: 'On COE',
-    inj: 'NA',
     ctrl: 'Analyzer',
-    note: '',
   },
   {
     fin_id: 5,
@@ -828,9 +776,7 @@ const fltr_pre = [
     tk_trp: 'Use',
     tk_fbt: 'Matrix Blend',
     tk_fill: 'On COx',
-    inj: 'Skid 1',
     ctrl: 'Analyzer',
-    note: '',
   },
   {
     fin_id: 6,
@@ -839,9 +785,7 @@ const fltr_pre = [
     tk_trp: 'Use',
     tk_fbt: 'Rinsed',
     tk_fill: 'On COE',
-    inj: 'Pre',
     ctrl: 'Analyzer',
-    note: '',
   },
   {
     fin_id: 7,
@@ -850,9 +794,7 @@ const fltr_pre = [
     tk_trp: 'NA',
     tk_fbt: 'Rinsed',
     tk_fill: 'On COE',
-    inj: 'NA',
     ctrl: 'Ratio',
-    note: '',
   },
   {
     fin_id: 8,
@@ -861,9 +803,7 @@ const fltr_pre = [
     tk_trp: 'Bypass',
     tk_fbt: 'Rinsed',
     tk_fill: 'On COE',
-    inj: 'NA',
     ctrl: 'Ratio',
-    note: '',
   },
 ];
 
@@ -875,7 +815,6 @@ const csx_post = [
     lines: 'Matrix Blend',
     seps: 'NA',
     tk_sch: 'Releasable',
-    note: '',
   },
   {
     brw_id: 2,
@@ -884,7 +823,6 @@ const csx_post = [
     lines: 'Matrix Blend',
     seps: 'NA',
     tk_sch: 'Releasable',
-    note: '',
   },
   {
     brw_id: 3,
@@ -893,7 +831,6 @@ const csx_post = [
     lines: 'Matrix Blend',
     seps: 'v',
     tk_sch: 'Releasable',
-    note: '',
   },
   {
     brw_id: 4,
@@ -902,7 +839,6 @@ const csx_post = [
     lines: 'WIC Out',
     seps: 'NA',
     tk_sch: 'Releasable',
-    note: '',
   },
   {
     brw_id: 5,
@@ -911,7 +847,6 @@ const csx_post = [
     lines: 'Rinse X2',
     seps: 'CIP',
     tk_sch: 'Lab Data',
-    note: '',
   },
   {
     brw_id: 6,
@@ -920,7 +855,6 @@ const csx_post = [
     lines: 'Rinse X2',
     seps: 'CIP',
     tk_sch: 'Lab Data',
-    note: '',
   },
 ];
 
@@ -935,7 +869,6 @@ const csx_pre = [
     acp: 'Yes',
     tk_sch: 'Empty',
     tk_fill: 'On COE',
-    note: '',
   },
   {
     brw_id: 2,
@@ -947,7 +880,6 @@ const csx_pre = [
     acp: 'Yes',
     tk_sch: 'Empty',
     tk_fill: 'On COE',
-    note: '',
   },
   {
     brw_id: 3,
@@ -959,7 +891,6 @@ const csx_pre = [
     acp: 'Yes',
     tk_sch: 'Empty',
     tk_fill: 'On COE',
-    note: '',
   },
   {
     brw_id: 4,
@@ -971,7 +902,6 @@ const csx_pre = [
     acp: 'Yes',
     tk_sch: 'Rinsed',
     tk_fill: 'On COE',
-    note: '',
   },
   {
     brw_id: 5,
@@ -983,7 +913,6 @@ const csx_pre = [
     acp: 'No',
     tk_sch: 'Rinsed',
     tk_fill: 'On COE',
-    note: '',
   },
   {
     brw_id: 6,
@@ -995,7 +924,6 @@ const csx_pre = [
     acp: 'Yes',
     tk_sch: 'Rinsed',
     tk_fill: 'On COE',
-    note: '',
   },
 ];
 
@@ -1006,7 +934,6 @@ const acx_post = [
     lines: 'Rinse',
     tk_chp: 'Aging',
     tk_uni: 'NA',
-    note: '',
   },
   {
     brw_id: 2,
@@ -1014,7 +941,6 @@ const acx_post = [
     lines: 'Rinse',
     tk_chp: 'Aging',
     tk_uni: 'NA',
-    note: '',
   },
   {
     brw_id: 3,
@@ -1022,7 +948,6 @@ const acx_post = [
     lines: 'Rinse',
     tk_chp: 'Aging',
     tk_uni: 'NA',
-    note: '',
   },
   {
     brw_id: 4,
@@ -1030,7 +955,6 @@ const acx_post = [
     lines: 'Rinse',
     tk_chp: 'Aging',
     tk_uni: 'NA',
-    note: '',
   },
   {
     brw_id: 5,
@@ -1038,7 +962,6 @@ const acx_post = [
     lines: 'Sterilize',
     tk_chp: 'NA',
     tk_uni: 'Fermenting',
-    note: '',
   },
   {
     brw_id: 6,
@@ -1046,7 +969,6 @@ const acx_post = [
     lines: 'Sterilize',
     tk_chp: 'NA',
     tk_uni: 'Fermenting',
-    note: '',
   },
 ];
 
@@ -1057,7 +979,6 @@ const acx_pre = [
     lines: 'Rinse',
     tk_chp: 'Stuffed',
     tk_fill: 'To Cellar',
-    note: '',
   },
   {
     brw_id: 2,
@@ -1065,7 +986,6 @@ const acx_pre = [
     lines: 'Rinse',
     tk_chp: 'Stuffed',
     tk_fill: 'To Cellar',
-    note: '',
   },
   {
     brw_id: 3,
@@ -1073,7 +993,6 @@ const acx_pre = [
     lines: 'Rinse',
     tk_chp: 'Gassed 1 HR',
     tk_fill: 'To Cellar',
-    note: '',
   },
   {
     brw_id: 4,
@@ -1081,7 +1000,6 @@ const acx_pre = [
     lines: 'Rinse',
     tk_chp: 'Gassed 6 HR',
     tk_fill: 'On Reg',
-    note: '',
   },
   {
     brw_id: 5,
@@ -1089,7 +1007,6 @@ const acx_pre = [
     lines: 'Rinse',
     tk_chp: 'NA',
     tk_fill: 'To Cellar',
-    note: '',
   },
   {
     brw_id: 6,
@@ -1097,7 +1014,6 @@ const acx_pre = [
     lines: 'Rinse',
     tk_chp: 'NA',
     tk_fill: 'To Cellar',
-    note: '',
   },
 ];
 

@@ -1,10 +1,12 @@
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./serviceworker.js').then(function () {
+  navigator.serviceWorker.register('./serviceworker.js', { scope: '.' }).then(function () {
     console.log('Service Worker Registered');
   });
 }
 
-var CACHE_STATIC = 'static-v051';
+// "start_url": "./index.html",
+
+var CACHE_STATIC = 'static-v052';
 
 self.addEventListener('install', function (event) {
   self.skipWaiting();
@@ -12,7 +14,7 @@ self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE_STATIC).then(function (cache) {
       console.log('Precaching App Shell');
-      cache.addAll(['/login.html', '/login.css', '/offLine.html', '/256.png', '/barrel.jpg']);
+      cache.addAll(['/login.html', '/login.css', '/offLine.html', '/256.png', '/barrel.jpg', '/pgBrewhouse/brewhouse.html']);
     })
   );
 });

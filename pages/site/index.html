@@ -34,11 +34,40 @@
       <h2 class="headers">Quick Links</h2>
 
       <div class="boxes">
-        <div class="box" id="google">
+        <div class="box" id="ltm">
           <a style="display: block">
-            <h3>Google</h3>
+            <h3>LTM</h3>
           </a>
         </div>
+
+        <div class="box" id="acadia">
+          <a style="display: block">
+            <h3>Acadia</h3>
+          </a>
+        </div>
+
+        <div class="box" id="interactionlog">
+          <a style="display: block">
+            <h3>Interaction Log</h3>
+          </a>
+        </div>
+
+        <div class="box" id="fcbhome">
+          <a style="display: block">
+            <h3>FCB Home</h3>
+          </a>
+        </div>
+
+        <div class="box" id="abweb">
+          <a style="display: block">
+            <h3>AB Web</h3>
+          </a>
+        </div>
+
+        <!-- <div class="box" id="link">
+          <a href="Macintoch%20HD/Users/adamcoulson/Downloads/commodities.xlsx" style="display: block"><h3>Link</h3></a>
+          </a>
+        </div> -->
       </div>
     </div>
     <! -- End of container1 -->
@@ -56,13 +85,49 @@
         } //
       }
 
-      document.getElementById('google').addEventListener('click', (ev) => {
+      document.getElementById('ltm').addEventListener('click', (ev) => {
         ev.preventDefault;
         ev.stopPropagation;
         if (isMobile()) {
           alert('Cannot Link From Mobile');
         } else {
-          window.open('https://www.google.com');
+          window.open('http://ws6bprfcl.corp.anheuser-busch.com/ltm/Login');
+        }
+      });
+      document.getElementById('acadia').addEventListener('click', (ev) => {
+        ev.preventDefault;
+        ev.stopPropagation;
+        if (isMobile()) {
+          alert('Cannot Link From Mobile');
+        } else {
+          window.open('https://ab-inbev.acadia.sysalli.com/documents/');
+        }
+      });
+      document.getElementById('interactionlog').addEventListener('click', (ev) => {
+        ev.preventDefault;
+        ev.stopPropagation;
+        if (isMobile()) {
+          alert('Cannot Link From Mobile');
+        } else {
+          window.open('https://interactionlog.ab-inbev.com/');
+        }
+      });
+      document.getElementById('fcbhome').addEventListener('click', (ev) => {
+        ev.preventDefault;
+        ev.stopPropagation;
+        if (isMobile()) {
+          alert('Cannot Link From Mobile');
+        } else {
+          window.open('http://share/sites/Supply/FTC/default.aspx');
+        }
+      });
+      document.getElementById('abweb').addEventListener('click', (ev) => {
+        ev.preventDefault;
+        ev.stopPropagation;
+        if (isMobile()) {
+          alert('Cannot Link From Mobile');
+        } else {
+          window.open('http://abweb/abweb2/default.aspx');
         }
       });
     </script>

@@ -239,22 +239,20 @@ function detailBrandBrew() {
 }
 let detailBrandBrwTablePre;
 function detailBrandBrewPre(name) {
-  let labels = ['Brand', 'Chip Tank', 'UniTank', 'Lines', 'Cooler', 'Seperators', 'ACP', 'Schoene Tank', 'Fill Tank', 'Note'];
   axios
     .post('/api/brand/detail/csxpre', { name: `${name}` })
     .then((res) => {
       let tableData = res.data;
-      tableData = convert2(tableData, labels);
-
       detailBrandBrwTablePre = new Tabulator('#detailBrandBrwPre', {
-        printHeader: '<h1>Pre CSX<h1>',
+        printHeader: `<h1>Pre CSX Brand: ${name}<h1>`,
         resizableColumns: false,
         height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          { title: 'Object', field: 'object', hozAlign: 'Left' },
-          { title: 'Method', field: 'method', hozAlign: 'Left' },
+          { title: 'Object', field: 'obj', hozAlign: 'left', frozen: true },
+          { title: 'Method', field: 'params', hozAlign: 'left', formatter: 'textarea' },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', formatter: 'textarea' },
         ],
       });
     })
@@ -268,24 +266,24 @@ document.getElementById('xlsxDetailBrandBrwTablePre').addEventListener('click', 
 document.getElementById('printDetailBrandBrwTablePre').addEventListener('click', () => {
   detailBrandBrwTablePre.print(false, true);
 });
+
 let detailBrandBrwTablePost;
 function detailBrandBrewPost(name) {
-  let labels = ['Brand', 'Chip Tank', 'UniTank', 'Lines', 'Seperators', 'Schoene Tank', 'Note'];
   axios
     .post('/api/brand/detail/csxpost/', { name: `${name}` })
     .then((res) => {
       let tableData = res.data;
-      tableData = convert2(tableData, labels);
 
       detailBrandBrwTablePost = new Tabulator('#detailBrandBrwPost', {
-        printHeader: '<h1>Post CSX<h1>',
+        printHeader: `<h1>Post CSX Brand: ${name}<h1>`,
         resizableColumns: false,
         height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          { title: 'Object', field: 'object', hozAlign: 'Left' },
-          { title: 'Method', field: 'method', hozAlign: 'Left' },
+          { title: 'Object', field: 'obj', hozAlign: 'left', frozen: true },
+          { title: 'Method', field: 'params', hozAlign: 'left', formatter: 'textarea' },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', formatter: 'textarea' },
         ],
       });
     })
@@ -316,22 +314,21 @@ async function detailBrandFin() {
 }
 let detailBrandFinTablePre;
 function detailBrandFinPre(name) {
-  let labels = ['Brand', 'Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Fill Tank', 'Injection', 'Control', 'Note'];
   axios
     .post('/api/brand/detail/filpre/', { name: `${name}` })
     .then((res) => {
       let tableData = res.data;
-      tableData = convert2(tableData, labels);
 
       detailBrandFinTablePre = new Tabulator('#detailBrandFinPre', {
-        printHeader: '<h1>Pre Filter<h1>',
+        printHeader: `<h1>Pre Filter Brand: ${name}<h1>`,
         resizableColumns: false,
         height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          { title: 'Object', field: 'object', hozAlign: 'Left' },
-          { title: 'Method', field: 'method', hozAlign: 'Left' },
+          { title: 'Object', field: 'obj', hozAlign: 'left', frozen: true },
+          { title: 'Method', field: 'params', hozAlign: 'left', formatter: 'textarea' },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', formatter: 'textarea' },
         ],
       });
     })
@@ -345,24 +342,24 @@ document.getElementById('xlsxDetailBrandFinTablePre').addEventListener('click', 
 document.getElementById('printDetailBrandFinTablePre').addEventListener('click', () => {
   detailBrandFinTablePre.print(false, true);
 });
+
 let detailBrandFinTablePost;
 function detailBrandFinPost(name) {
-  let labels = ['Brand', 'Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Recover', 'Note'];
   axios
     .post('/api/brand/detail/filpost/', { name: `${name}` })
     .then((res) => {
       let tableData = res.data;
-      tableData = convert2(tableData, labels);
 
       detailBrandFinTablePost = new Tabulator('#detailBrandFinPost', {
-        printHeader: '<h1>Post FIlter<h1>',
+        printHeader: `<h1>Post Filter Brand: ${name}<h1>`,
         resizableColumns: false,
         height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          { title: 'Object', field: 'object', hozAlign: 'Left' },
-          { title: 'Method', field: 'method', hozAlign: 'Left' },
+          { title: 'Object', field: 'obj', hozAlign: 'left', frozen: true },
+          { title: 'Method', field: 'params', hozAlign: 'left', formatter: 'textarea' },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', formatter: 'textarea' },
         ],
       });
     })
@@ -393,21 +390,21 @@ async function detailBrandPck() {
 }
 let detailBrandPckTablePre;
 function detailBrandPckPre(name) {
-  let labels = ['Brand', 'Filter Beer Tank', 'Release Line', 'Package Line', 'Draft Line', 'Recover', 'Control', 'Note'];
   axios
     .post('/api/brand/detail/relpre/', { name: `${name}` })
     .then((res) => {
       let tableData = res.data;
-      tableData = convert2(tableData, labels);
+
       detailBrandPckTablePre = new Tabulator('#detailBrandPckPre', {
-        printHeader: '<h1>Pre Release<h1>',
+        printHeader: `<h1>Post Filter Brand: ${name}<h1>`,
         resizableColumns: false,
         height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          { title: 'Object', field: 'object', hozAlign: 'Left' },
-          { title: 'Method', field: 'method', hozAlign: 'Left' },
+          { title: 'Object', field: 'obj', hozAlign: 'left', frozen: true },
+          { title: 'Method', field: 'params', hozAlign: 'left', formatter: 'textarea' },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', formatter: 'textarea' },
         ],
       });
     })
@@ -421,23 +418,24 @@ document.getElementById('xlsxDetailBrandPckTablePre').addEventListener('click', 
 document.getElementById('printDetailBrandPckTablePre').addEventListener('click', () => {
   detailBrandPckTablePre.print(false, true);
 });
+
 let detailBrandPckTablePost;
 function detailBrandPckPost(name) {
-  let labels = ['Brand', 'Filter Beer Tank', 'System Lines', 'Package', 'Draft', 'Recover', 'Note'];
   axios
     .post('/api/brand/detail/relpost/', { name: `${name}` })
     .then((res) => {
       let tableData = res.data;
-      tableData = convert2(tableData, labels);
+
       detailBrandPckTablePost = new Tabulator('#detailBrandPckPost', {
-        printHeader: '<h1>Post Release<h1>',
+        printHeader: `<h1>Post Filter Brand: ${name}<h1>`,
         resizableColumns: false,
         height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          { title: 'Object', field: 'object', hozAlign: 'Left' },
-          { title: 'Method', field: 'method', hozAlign: 'Left' },
+          { title: 'Object', field: 'obj', hozAlign: 'left', frozen: true },
+          { title: 'Method', field: 'params', hozAlign: 'left', formatter: 'textarea' },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', formatter: 'textarea' },
         ],
       });
     })
@@ -496,21 +494,21 @@ function recipeBrandChp() {
   recipeBrandChpDetail(name);
 }
 function recipeBrandChpDetail(name) {
-  let labels = ['Brand', 'Diacetyl', 'Pentanedione', 'Acid Aldehyde', 'ABW', 'RDF', 'Note'];
   axios
     .post('/api/brand/recipe/chp/', { name: `${name}` })
     .then((res) => {
       let tableData = res.data;
-      tableData = convert2(tableData, labels);
+
       recipeBrandChpTable = new Tabulator('#recipeBrandChp', {
-        printHeader: '<h1>Chip Recipe<h1>',
+        printHeader: `<h1>Chip Recipe Brand: ${name}<h1>`,
         resizableColumns: false,
         height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          { title: 'Parameter', field: 'object', hozAlign: 'Left' },
-          { title: 'Specification', field: 'method', hozAlign: 'Left' },
+          { title: 'Parameter', field: 'obj', hozAlign: 'center', frozen: true },
+          { title: 'Specification', field: 'params', hozAlign: 'left', editor: true, formatter: 'textarea', frozen: true },
+          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })
@@ -538,21 +536,21 @@ function recipeBrandSch() {
   recipeBrandSchDetail(name);
 }
 function recipeBrandSchDetail(name) {
-  let labels = ['Brand', 'Cell Count', 'ACP Rate', 'Note'];
   axios
     .post('/api/brand/recipe/sch', { name: `${name}` })
     .then((res) => {
       let tableData = res.data;
-      tableData = convert2(tableData, labels);
+
       recipeBrandSchTable = new Tabulator('#recipeBrandSch', {
-        printHeader: '<h1>Schoene Recipe<h1>',
+        printHeader: `<h1>Schoene Recipe Brand: ${name}<h1>`,
         resizableColumns: false,
         height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          { title: 'Parameter', field: 'object', hozAlign: 'Left' },
-          { title: 'Specification', field: 'method', hozAlign: 'Left' },
+          { title: 'Parameter', field: 'obj', hozAlign: 'center', frozen: true },
+          { title: 'Specification', field: 'params', hozAlign: 'left', editor: true, formatter: 'textarea', frozen: true },
+          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })
@@ -582,59 +580,21 @@ function recipeBrandFin() {
   recipeBrandFinDetail(name);
 }
 function recipeBrandFinDetail(name) {
-  let labels = [
-    'Brand',
-    'Ctrl Filter OG',
-    'Ctrl Filter Alc',
-    'Ctrl Filter Cal',
-    'Ctrl Filter Carb',
-    'Ctrl Filter RDF',
-    'Ctrl Filter Co2',
-    'Ctrl Filter CC',
-    'Ctrl Release OG',
-    'Ctrl Release Alc',
-    'Ctrl Release Cal',
-    'Ctrl Release Carb',
-    'Ctrl Release RDF',
-    'Ctrl Release Co2',
-    'Ctrl Release CC',
-    'Set Point OG',
-    'LOSL OG',
-    'LOSH OG',
-    'Set Point Alc',
-    'LOSL Alc',
-    'LOSH ALc',
-    'Set Point Cal',
-    'LOSL Cal',
-    'LOSH Cal',
-    'Set Point Carb',
-    'LOSL Carb',
-    'LOSH Carb',
-    'Set Point RDF',
-    'LOSL RDF',
-    'LOSH RDF',
-    'Set Point Co2',
-    'LOSL Co2',
-    'LOSH Co2',
-    'Set Point CC',
-    'LOSL CC',
-    'LOSH CC',
-    'Note',
-  ];
   axios
     .post('/api/brand/recipe/fin/', { name: `${name}` })
     .then((res) => {
       let tableData = res.data;
-      tableData = convert2(tableData, labels);
+
       recipeBrandFinTable = new Tabulator('#recipeBrandFinTbl', {
-        printHeader: '<h1>FIlter Release Recipe<h1>',
+        printHeader: `<h1>FIlter Release Recipe Brand: ${name}<h1>`,
         resizableColumns: false,
         height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          { title: 'Object', field: 'object', hozAlign: 'Left' },
-          { title: 'Method', field: 'method', hozAlign: 'Left' },
+          { title: 'Parameter', field: 'obj', hozAlign: 'center', frozen: true },
+          { title: 'Specification', field: 'params', hozAlign: 'left', editor: true, formatter: 'textarea', frozen: true },
+          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })

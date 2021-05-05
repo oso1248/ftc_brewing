@@ -37,7 +37,7 @@
       <!-- <div class="spacer"></div> -->
 
       <div class="boxes">
-        <div class="box" id="add">
+        <div class="box" id="update">
           <a style="display: block">
             <!-- <img src="" alt="">   -->
             <h3>Update Brand Recipe</h3>
@@ -45,7 +45,7 @@
           </a>
         </div>
 
-        <div class="box" id="update">
+        <div class="box" id="view">
           <a style="display: block">
             <!-- <img src="" alt="">   -->
             <h3>View Brand Recipe</h3>
@@ -67,9 +67,11 @@
         <h1 class="headers">Update Brand Recipe</h1>
         <form class="form" id="frmUpdate" action="">
           <div class="input">
-            <select name="" id="brwBrandUpdate">
-              <option value=""></option>
-            </select>
+            <select name="" id="chpBrandUpdate"></select>
+          </div>
+
+          <div class="input">
+            <select name="" id="schBrandUpdate"></select>
           </div>
 
           <div class="input">
@@ -77,28 +79,30 @@
           </div>
         </form>
 
-        <div class="boxxes" id="updateLineageBoxChp">
+        <div class="spacer"></div>
+
+        <div class="boxxes" id="chpUpdateBox">
+          <h3 id="chpRecipeHeader">Chip Recipe</h3>
+          <div id="chpUpdateTable"></div>
           <div class="button">
-            <button class="btn" id="btnUpdateClearChp">Clear</button>
             <button class="btn" id="btnUpdateSubmitChp">Update</button>
           </div>
-          <h3>Chip Recipe</h3>
-          <div id="updateFinRecipeChpTable"></div>
-          <div class="button">
-            <button class="btn" id="btnUpdateClearSch">Clear</button>
-            <button class="btn" id="btnUpdateSubmitSch">Update</button>
-          </div>
-          <h3>Schoene Recipe</h3>
-          <div id="updateFinRecipeSchTable"></div>
         </div>
 
-        <div class="boxxes" id="updateLineageBoxFin">
+        <div class="boxxes" id="schUpdateBox">
+          <h3 id="schRecipeHeader">Schoene Recipe</h3>
+          <div id="updateFinRecipeSchTable"></div>
           <div class="button">
-            <button class="btn" id="btnUpdateClearFin">Clear</button>
+            <button class="btn" id="btnUpdateSubmitSch">Update</button>
+          </div>
+        </div>
+
+        <div class="boxxes" id="finUpdateBox">
+          <h3 id="finRecipeHeader">Finished Recipe</h3>
+          <div id="updateFinRecipeFinTable"></div>
+          <div class="button">
             <button class="btn" id="btnUpdateSubmitFin">Update</button>
           </div>
-          <h3>Finished Recipe</h3>
-          <div id="updateFinRecipeFinTable"></div>
         </div>
       </div>
 
@@ -106,23 +110,30 @@
         <h1 class="headers">View Brand Recipe</h1>
         <form class="form" id="frmView" action="">
           <div class="input">
-            <select name="" id="brwBrandView"></select>
+            <select name="" id="chpBrandView"></select>
+          </div>
+
+          <div class="input">
+            <select name="" id="schBrandView"></select>
           </div>
 
           <div class="input">
             <select name="" id="finBrandView"></select>
           </div>
         </form>
-
-        <div class="boxxes" id="viewLineageBoxChp">
-          <h3>Chip Recipe</h3>
+        <div class="spacer"></div>
+        <div class="boxxes" id="chpViewBox">
+          <h3 id="chpViewHeader">Chip Recipe</h3>
           <div id="viewFinRecipeChpTable"></div>
-          <h3>Schoene Recipe</h3>
+        </div>
+
+        <div class="boxxes" id="schViewBox">
+          <h3 id="schViewHeader">Schoene Recipe</h3>
           <div id="viewFinRecipeSchTable"></div>
         </div>
 
-        <div class="boxxes" id="viewLineageBoxFin">
-          <h3>Finished Recipe</h3>
+        <div class="boxxes" id="finViewBox">
+          <h3 id="finViewHeader">Finished Recipe</h3>
           <div id="viewFinRecipeFinTable"></div>
         </div>
       </div>

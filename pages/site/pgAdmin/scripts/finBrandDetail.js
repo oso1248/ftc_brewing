@@ -23,59 +23,6 @@ function createListBrwBrand(api, parent, title) {
       console.error(err);
     });
 }
-function convert2(obj) {
-  let json = {};
-  let data = [];
-  let i = 1;
-  for (key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      json = {};
-      json['id'] = i;
-      json['db'] = Object.keys(obj)[i - 1];
-      json['object'] = key;
-      json['method'] = obj[key];
-      data.push(json);
-      i++;
-    }
-  }
-  return data;
-}
-function convert(obj, labels) {
-  // console.log(obj)
-  let id = obj.id;
-  delete obj['id'];
-  let json = {};
-  let data = [];
-  let i = 0;
-  for (key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      json = {};
-      json['id'] = i;
-      json['id_brnd'] = id;
-      json['db'] = key;
-      json['object'] = labels[i];
-      json['method'] = obj[key];
-      data.push(json);
-      i++;
-    }
-  }
-  // console.log(data)
-  return data;
-}
-function convertBrand(obj) {
-  let json = {};
-  let data = [];
-  let i = 1;
-  for (key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      json = {};
-      json['brand'] = key;
-      json['active'] = obj[key];
-      data.push(json);
-    }
-  }
-  return data;
-}
 
 // Update
 document.getElementById('add').onclick = updateView;
@@ -166,7 +113,7 @@ async function updateFinDetailPreCsx(name, method) {
       tableUpdateFinDetailPreCsx = new Tabulator('#updateFinDetailPreCsxTable', {
         resizableColumns: false,
         height: '100%',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         resizableColumns: false,
         data: tableData,
         columns: [
@@ -205,13 +152,13 @@ async function updateFinDetailPostCsx(name, method) {
       tableUpdateFinDetailPostCsx = new Tabulator('#updateFinDetailPostCsxTable', {
         resizableColumns: false,
         height: '100%',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         resizableColumns: false,
         data: tableData,
         columns: [
           { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
           { title: 'Method', field: 'params', hozAlign: 'left', editor: 'autocomplete', editorParams: { showListOnEmpty: true, freetext: true, values: method }, formatter: 'textarea', frozen: true },
-          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })
@@ -244,13 +191,13 @@ async function updateFinDetailPreFil(name, method) {
       tableUpdateFinDetailPreFil = new Tabulator('#updateFinDetailPreFilTable', {
         resizableColumns: false,
         height: '100%',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         resizableColumns: false,
         data: tableData,
         columns: [
           { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
           { title: 'Method', field: 'params', hozAlign: 'left', editor: 'autocomplete', editorParams: { showListOnEmpty: true, freetext: true, values: method }, formatter: 'textarea', frozen: true },
-          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })
@@ -273,7 +220,6 @@ document.getElementById('updateFinDetailPreFilTableBtn').addEventListener('click
 
 let tableUpdateFinDetailPostFil;
 async function updateFinDetailPostFil(name, method) {
-  let labels = ['Brand', 'Schoene Tank', 'System', 'Trap', 'Filter Beer Tank', 'Recover', 'Note'];
   let header = document.getElementById('postFltrHeader');
   header.innerHTML = `Post Filter Brand: ${name}`;
   await axios
@@ -284,7 +230,7 @@ async function updateFinDetailPostFil(name, method) {
       tableUpdateFinDetailPostFil = new Tabulator('#updateFinDetailPostFilTable', {
         resizableColumns: false,
         height: '100%',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         data: tableData,
         columns: [
           { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
@@ -322,13 +268,13 @@ async function updateFinDetailPreRel(name, method) {
       tableUpdateFinDetailPreRel = new Tabulator('#updateFinDetailPreRelTable', {
         resizableColumns: false,
         height: '100%',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         resizableColumns: false,
         data: tableData,
         columns: [
           { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
           { title: 'Method', field: 'params', hozAlign: 'left', editor: 'autocomplete', editorParams: { showListOnEmpty: true, freetext: true, values: method }, formatter: 'textarea', frozen: true },
-          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })
@@ -361,13 +307,13 @@ async function updateFinDetailPostRel(name, method) {
       tableUpdateFinDetailPostRel = new Tabulator('#updateFinDetailPostRelTable', {
         resizableColumns: false,
         height: '100%',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         resizableColumns: false,
         data: tableData,
         columns: [
           { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
           { title: 'Method', field: 'params', hozAlign: 'left', editor: 'autocomplete', editorParams: { showListOnEmpty: true, freetext: true, values: method }, formatter: 'textarea', frozen: true },
-          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })
@@ -460,7 +406,7 @@ async function viewFinDetailPreCsx(name) {
       tableViewFinDetailPreCsx = new Tabulator('#viewFinDetailPreCsxTable', {
         resizableColumns: false,
         height: '100%',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         data: tableData,
         columns: [
           { title: 'Object', field: 'obj', hozAlign: 'left', frozen: true },
@@ -481,7 +427,7 @@ async function viewFinDetailPostCsx(name) {
       tableViewFinDetailPostCsx = new Tabulator('#viewFinDetailPostCsxTable', {
         resizableColumns: false,
         height: '100%',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         data: tableData,
         columns: [
           { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
@@ -502,7 +448,7 @@ async function viewFinDetailPreFil(name) {
       tableViewFinDetailPreFil = new Tabulator('#viewFinDetailPreFilTable', {
         resizableColumns: false,
         height: '100%',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         data: tableData,
         columns: [
           { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },

@@ -23,43 +23,6 @@ function createListBrwBrand(api, parent, title) {
       console.error(err);
     });
 }
-function convert2(obj) {
-  let json = {};
-  let data = [];
-  let i = 1;
-  for (key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      json = {};
-      json['id'] = i;
-      json['db'] = Object.keys(obj)[i - 1];
-      json['object'] = key;
-      json['method'] = obj[key];
-      data.push(json);
-      i++;
-    }
-  }
-  return data;
-}
-function convert(obj, labels) {
-  let id = obj.id;
-  delete obj['id'];
-  let json = {};
-  let data = [];
-  let i = 0;
-  for (key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      json = {};
-      json['id'] = i;
-      json['id_brnd'] = id;
-      json['db'] = key;
-      json['object'] = labels[i];
-      json['method'] = obj[key];
-      data.push(json);
-      i++;
-    }
-  }
-  return data;
-}
 
 // Update
 document.getElementById('update').onclick = updateView;
@@ -115,12 +78,12 @@ async function chpBrandUpdate(name) {
       tableUpdateBrandChp = new Tabulator('#chpUpdateTable', {
         resizableColumns: false,
         height: '100%',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         data: tableData,
         columns: [
           { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
           { title: 'Method', field: 'params', hozAlign: 'left', editor: true, formatter: 'textarea', frozen: true },
-          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })
@@ -166,12 +129,12 @@ async function schBrandUpdate(name) {
       tableUpdateBrandSch = new Tabulator('#updateFinRecipeSchTable', {
         resizableColumns: false,
         height: '100%',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         data: tableData,
         columns: [
           { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
           { title: 'Method', field: 'params', hozAlign: 'left', editor: true, formatter: 'textarea', frozen: true },
-          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })
@@ -218,12 +181,12 @@ async function finBrandUpdate(name) {
       tableUpdateBrandFin = new Tabulator('#updateFinRecipeFinTable', {
         resizableColumns: false,
         height: '100%',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         data: tableData,
         columns: [
           { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
           { title: 'Method', field: 'params', hozAlign: 'left', editor: true, formatter: 'textarea', frozen: true },
-          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })
@@ -299,13 +262,13 @@ async function chpBrandView(name) {
 
       tableViewBrandChp = new Tabulator('#viewFinRecipeChpTable', {
         resizableColumns: false,
-        height: '1000x',
-        layout: 'fitDataFill',
+        height: '100%',
+        layout: 'fitDataStretch',
         data: tableData,
         columns: [
           { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
           { title: 'Method', field: 'params', hozAlign: 'left', editor: true, formatter: 'textarea', frozen: true },
-          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })
@@ -337,13 +300,13 @@ async function schBrandView(name) {
 
       tableViewBrandSch = new Tabulator('#viewFinRecipeSchTable', {
         resizableColumns: false,
-        height: '1000x',
-        layout: 'fitDataFill',
+        height: '100%',
+        layout: 'fitDataStretch',
         data: tableData,
         columns: [
           { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
           { title: 'Method', field: 'params', hozAlign: 'left', editor: true, formatter: 'textarea', frozen: true },
-          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })
@@ -375,13 +338,13 @@ async function finBrandView(name) {
 
       tableViewBrandFin = new Tabulator('#viewFinRecipeFinTable', {
         resizableColumns: false,
-        height: '1000x',
-        layout: 'fitDataFill',
+        height: '100%',
+        layout: 'fitDataStretch',
         data: tableData,
         columns: [
           { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
           { title: 'Method', field: 'params', hozAlign: 'left', editor: true, formatter: 'textarea', frozen: true },
-          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })

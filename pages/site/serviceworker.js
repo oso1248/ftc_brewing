@@ -6,7 +6,7 @@ if ('serviceWorker' in navigator) {
 
 // "start_url": "./index.html",
 
-var CACHE_STATIC = 'static-v052';
+var CACHE_STATIC = 'static-v053';
 
 self.addEventListener('install', function (event) {
   self.skipWaiting();

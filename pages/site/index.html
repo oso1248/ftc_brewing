@@ -85,9 +85,11 @@
         ev.preventDefault;
         ev.stopPropagation;
         if (md.mobile()) {
-          alert('Cannot Link From Mobile');
+          // alert('Cannot Link From Mobile');
+          alert(`Mobile:${md.mobile()} Phone:${md.phone()} Tablet: ${md.tablet()}`);
         } else {
-          window.open('http://ws6bprfcl.corp.anheuser-busch.com/ltm/Login');
+          alert(`Mobile:${md.mobile()} Phone:${md.phone()} Tablet: ${md.tablet()}`);
+          // window.open('http://ws6bprfcl.corp.anheuser-busch.com/ltm/Login');
         }
       });
       document.getElementById('acadia').addEventListener('click', (ev) => {

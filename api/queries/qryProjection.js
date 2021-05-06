@@ -67,7 +67,6 @@ async function appendWeeks(weeklyInventory) {
 async function tallyWeeks(dates, brandList, weeklyInventory) {
   for (let weekCounter = 0; weekCounter < 8; weekCounter++) {
     let weeklyBrews = await weekBrews(dates[weekCounter], dates[weekCounter + 1]);
-    console.table(weeklyBrews);
     weeklyBrews = await convertArrayToJSON(weeklyBrews);
 
     for (let brandCounter = 0; brandCounter < brandList.length; brandCounter++) {
@@ -211,12 +210,13 @@ async function getCraftProjection() {
 }
 async function getBrandData(data) {
   let brandData = await getBrandDetailsMinimum(data[0]);
+
   for (let commodity = 0; commodity < brandData.length; commodity++) {
     for (let day = 0; day < 7; day++) {
       if (day < 6) {
         brandData[commodity]['day' + (day + 1)] = brandData[commodity]['day' + day];
       }
-      brandData[commodity]['day' + day] = brandData[commodity]['day' + day] * data[day + 1];
+      brandData[commodity]['day' + day] = (brandData[commodity]['day' + day] * data[day + 1]).toFixed(2);
     }
   }
 

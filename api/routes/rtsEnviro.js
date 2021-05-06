@@ -60,4 +60,10 @@ router.delete('/:name', (req, res) => {
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
 
+router.post('/token', (req, res) => {
+  let username = req.session.user.username;
+
+  res.status(200).json({ key: `${process.env.TOKEN}`, user: username });
+});
+
 module.exports = router;

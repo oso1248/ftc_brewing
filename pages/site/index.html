@@ -7,8 +7,6 @@
     <link rel="apple-touch-icon" href="./256.png" />
     <link rel="stylesheet" href="./commonCSS/styles.css" />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.4.5/mobile-detect.min.js"></script>
-
     <title>Home</title>
   </head>
   <body>
@@ -79,23 +77,23 @@
     <script src="./serviceworker.js"></script>
 
     <script>
-      const md = new MobileDetect(window.navigator.userAgent);
+      function isMobileDevice() {
+        return typeof window.orientation !== 'undefined' || navigator.userAgent.indexOf('IEMobile') !== -1;
+      }
 
       document.getElementById('ltm').addEventListener('click', (ev) => {
         ev.preventDefault;
         ev.stopPropagation;
-        if (md.mobile()) {
-          // alert('Cannot Link From Mobile');
-          alert(`Mobile:${md.mobile()} Phone:${md.phone()} Tablet: ${md.tablet()}`);
+        if (isMobileDevice()) {
+          alert('Cannot Link From Mobile');
         } else {
-          alert(`Mobile:${md.mobile()} Phone:${md.phone()} Tablet: ${md.tablet()}`);
-          // window.open('http://ws6bprfcl.corp.anheuser-busch.com/ltm/Login');
+          window.open('http://ws6bprfcl.corp.anheuser-busch.com/ltm/Login');
         }
       });
       document.getElementById('acadia').addEventListener('click', (ev) => {
         ev.preventDefault;
         ev.stopPropagation;
-        if (md.mobile()) {
+        if (isMobileDevice()) {
           alert('Cannot Link From Mobile');
         } else {
           window.open('https://ab-inbev.acadia.sysalli.com/documents/');
@@ -104,7 +102,7 @@
       document.getElementById('interactionlog').addEventListener('click', (ev) => {
         ev.preventDefault;
         ev.stopPropagation;
-        if (md.mobile()) {
+        if (isMobileDevice()) {
           alert('Cannot Link From Mobile');
         } else {
           window.open('https://interactionlog.ab-inbev.com/');
@@ -113,7 +111,7 @@
       document.getElementById('fcbhome').addEventListener('click', (ev) => {
         ev.preventDefault;
         ev.stopPropagation;
-        if (md.mobile()) {
+        if (isMobileDevice()) {
           alert('Cannot Link From Mobile');
         } else {
           window.open('http://share/sites/Supply/FTC/default.aspx');
@@ -122,7 +120,7 @@
       document.getElementById('abweb').addEventListener('click', (ev) => {
         ev.preventDefault;
         ev.stopPropagation;
-        if (md.mobile()) {
+        if (isMobileDevice()) {
           alert('Cannot Link From Mobile');
         } else {
           window.open('http://abweb/abweb2/default.aspx');

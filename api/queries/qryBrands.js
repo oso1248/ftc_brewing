@@ -236,7 +236,7 @@ async function destroyPck(name) {
 async function getDetailByNameCsxPre(name) {
   let { rows } = await db.raw(`
     SELECT brnd.brand, pre.brw_id,
-	    UNNEST(ARRAY['Chip Tank', 'Uni Tank', 'Lines', 'Cooler', 'Seperators', 'ACP', 'Schoene Tank', 'On Fill', 'Last Updated']) AS obj,
+	    UNNEST(ARRAY['Chip Tank', 'Uni Tank', 'Lines', 'Pre-Cooler', 'Seperators', 'ACP', 'Schoene Tank', 'Fill Tank', 'Last Updated']) AS obj,
 	    UNNEST(ARRAY[pre.tk_chp, pre.tk_uni, pre.lines, pre.cooler, pre.seps, pre.acp, pre.tk_sch, pre.tk_fill, CAST(pre.updated_at::DATE AS text)]) AS params,
 	    UNNEST(ARRAY[pre.tk_chp_note, pre.tk_uni_note, pre.lines_note, pre.cooler_note, pre.seps_note, pre.acp_note, pre.tk_sch_note, pre.tk_fill_note, pre.updated_by]) AS notes
     FROM csx_pre AS pre

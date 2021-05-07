@@ -269,9 +269,9 @@ function ingredient() {
   let title = 'brndFin';
   createList(api, dropDown, title);
 
-  dropDown = document.getElementsByName('fin_idUpdate')[0];
-  dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`;
-  createList(api, dropDown, title);
+  // dropDown = document.getElementsByName('fin_idUpdate')[0];
+  // dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`;
+  // createList(api, dropDown, title);
 
   dropDown = document.getElementsByName('fin_idDelete')[0];
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`;
@@ -282,6 +282,33 @@ function ingredient() {
   api = '/api/commodity/get/type/injection';
   title = 'commodity';
   createList(api, dropDown, title);
+}
+
+document.getElementById('fin_idAdd').addEventListener('change', selectBrandIngredientAdd);
+let ingredientTable;
+function selectBrandIngredientAdd() {
+  let index = document.getElementsByName('fin_idAdd')[0].selectedIndex;
+  let options = document.getElementsByName('fin_idAdd')[0].options;
+  let id = options[index].id;
+
+  axios
+    .post('/api/commodity/ingredient/bridge/get/' + id)
+    .then((res) => {
+      let tableData = res.data;
+      ingredientTable = new Tabulator('#injRateTable', {
+        height: '100%',
+        layout: 'fitDataStretch',
+        resizableColumns: false,
+        layoutColumnsOnNewData: true,
+        responsiveLayoutCollapseStartOpen: false,
+        data: tableData,
+        columns: [
+          { title: 'Brand', field: 'brand', hozAlign: 'left', frozen: true },
+          { title: 'Commodity', field: 'commodity', hozAlign: 'left' },
+        ],
+      });
+    })
+    .catch((err) => console.log(err));
 }
 
 document.getElementById('btnIngredientAddSubmit').addEventListener('click', sendBrandIngredientAdd);
@@ -310,7 +337,8 @@ function sendBrandIngredientAdd(ev) {
     .post('/api/commodity/ingredient/bridge', data)
     .then((data) => {
       alert(data.data.commodity + ' has been added');
-      document.getElementById('frmIngredientAdd').reset();
+      document.getElementsByName('com_idAdd')[0].selectedIndex = 0;
+      selectBrandIngredientAdd();
     })
     .catch((err) => alert(err));
 }
@@ -320,10 +348,10 @@ function resetBrandIngredientAdd(ev) {
   document.getElementById('frmIngredientAdd').reset();
 }
 
-document.getElementsByName('fin_idUpdate')[0].addEventListener('change', selectBrandIngredientUpdate);
-let ingredientTable;
+/// Disabled + lines 272, 273, 274
+// document.getElementsByName('fin_idUpdate')[0].addEventListener('change', selectBrandIngredientUpdate);
+// let ingredientTable;
 function selectBrandIngredientUpdate() {
-  console.log('update');
   let index = document.getElementsByName('fin_idUpdate')[0].selectedIndex;
   let options = document.getElementsByName('fin_idUpdate')[0].options;
   let id = options[index].id;
@@ -333,7 +361,7 @@ function selectBrandIngredientUpdate() {
     .then((res) => {
       let tableData = res.data;
       ingredientTable = new Tabulator('#injRateTable', {
-        height: '120x',
+        height: '100%',
         layout: 'fitDataFill',
         resizableColumns: false,
         layoutColumnsOnNewData: true,
@@ -354,7 +382,7 @@ function selectBrandIngredientUpdate() {
     })
     .catch((err) => console.log(err));
 }
-document.getElementById('btnIngredientUpdateSubmit').addEventListener('click', sendBrandIngredientUpdate);
+// document.getElementById('btnIngredientUpdateSubmit').addEventListener('click', sendBrandIngredientUpdate);
 function sendBrandIngredientUpdate(ev) {
   ev.preventDefault();
   ev.stopPropagation();
@@ -375,7 +403,7 @@ function sendBrandIngredientUpdate(ev) {
     })
     .catch((err) => alert(err));
 }
-document.getElementById('btnIngredientUpdateClear').addEventListener('click', resetBrandIngredientUpdate);
+// document.getElementById('btnIngredientUpdateClear').addEventListener('click', resetBrandIngredientUpdate);
 function resetBrandIngredientUpdate(ev) {
   ev.preventDefault();
   document.getElementById('frmIngredientUpdate').reset();
@@ -400,6 +428,7 @@ function sendBrandIngredientDelete(ev) {
     .then((data) => {
       alert(data.data.msg);
       document.getElementById('frmIngredientDelete').reset();
+      selectBrandIngredientAdd();
     })
     .catch((err) => alert(err));
 }

@@ -298,7 +298,7 @@ document.getElementById('updateFinDetailPreRelTableBtn').addEventListener('click
 let tableUpdateFinDetailPostRel;
 async function updateFinDetailPostRel(name, method) {
   let header = document.getElementById('postRelHeader');
-  header.innerHTML = `Pre Release Brand: ${name}`;
+  header.innerHTML = `Post Release Brand: ${name}`;
   await axios
     .post('/api/brand/detail/relpost', { name: name })
     .then((res) => {

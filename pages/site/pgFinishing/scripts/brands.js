@@ -610,7 +610,7 @@ document.getElementById('printRecipeBrandFin').addEventListener('click', () => {
 });
 
 //Injection
-document.getElementById('injectionBrands').onclick = injectionBrands;
+// document.getElementById('injectionBrands').onclick = injectionBrands;
 function injectionBrands() {
   document.getElementById('injectionBoxes').style.display = 'block';
   document.getElementById('recipeBoxes').style.display = 'none';

@@ -86,10 +86,9 @@ async function updateBrandLineage() {
     .then((res) => {
       let tableData = [res.data];
       tableUpdateBrandLineage = new Tabulator('#updateLineageTable', {
-        resizableColumns: false,
         height: '100%',
         layout: 'fitDataFill',
-        resizableColumns: false,
+        resizableColumns: true,
         data: tableData,
         columns: [
           { title: 'Schoene', field: 'brndBrw', hozAlign: 'center', frozen: true },
@@ -111,15 +110,22 @@ async function updateFinDetailPreCsx(name, method) {
       let data = res.data;
       let tableData = data;
       tableUpdateFinDetailPreCsx = new Tabulator('#updateFinDetailPreCsxTable', {
-        resizableColumns: false,
         height: '100%',
-        layout: 'fitDataStretch',
-        resizableColumns: false,
+        layout: 'fitDataFill',
+        resizableColumns: true,
         data: tableData,
         columns: [
-          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
-          { title: 'Method', field: 'params', hozAlign: 'left', editor: 'autocomplete', editorParams: { showListOnEmpty: true, freetext: true, values: method }, formatter: 'textarea', frozen: true },
-          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
+          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true, resizable: false },
+          {
+            title: 'Method',
+            field: 'params',
+            hozAlign: 'left',
+            editor: 'autocomplete',
+            editorParams: { showListOnEmpty: true, freetext: true, values: method },
+            formatter: 'textarea',
+            resizable: false,
+          },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })
@@ -150,14 +156,21 @@ async function updateFinDetailPostCsx(name, method) {
       let data = res.data;
       let tableData = data;
       tableUpdateFinDetailPostCsx = new Tabulator('#updateFinDetailPostCsxTable', {
-        resizableColumns: false,
         height: '100%',
-        layout: 'fitDataStretch',
-        resizableColumns: false,
+        layout: 'fitDataFill',
+        resizableColumns: true,
         data: tableData,
         columns: [
-          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
-          { title: 'Method', field: 'params', hozAlign: 'left', editor: 'autocomplete', editorParams: { showListOnEmpty: true, freetext: true, values: method }, formatter: 'textarea', frozen: true },
+          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true, resizable: false },
+          {
+            title: 'Method',
+            field: 'params',
+            hozAlign: 'left',
+            editor: 'autocomplete',
+            editorParams: { showListOnEmpty: true, freetext: true, values: method },
+            formatter: 'textarea',
+            resizable: false,
+          },
           { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
@@ -189,14 +202,21 @@ async function updateFinDetailPreFil(name, method) {
       let data = res.data;
       let tableData = data;
       tableUpdateFinDetailPreFil = new Tabulator('#updateFinDetailPreFilTable', {
-        resizableColumns: false,
         height: '100%',
-        layout: 'fitDataStretch',
-        resizableColumns: false,
+        layout: 'fitDataFill',
+        resizableColumns: true,
         data: tableData,
         columns: [
-          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
-          { title: 'Method', field: 'params', hozAlign: 'left', editor: 'autocomplete', editorParams: { showListOnEmpty: true, freetext: true, values: method }, formatter: 'textarea', frozen: true },
+          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true, resizable: false },
+          {
+            title: 'Method',
+            field: 'params',
+            hozAlign: 'left',
+            editor: 'autocomplete',
+            editorParams: { showListOnEmpty: true, freetext: true, values: method },
+            formatter: 'textarea',
+            resizable: false,
+          },
           { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
@@ -228,14 +248,22 @@ async function updateFinDetailPostFil(name, method) {
       let data = res.data;
       let tableData = data;
       tableUpdateFinDetailPostFil = new Tabulator('#updateFinDetailPostFilTable', {
-        resizableColumns: false,
         height: '100%',
-        layout: 'fitDataStretch',
+        layout: 'fitDataFill',
+        resizableColumns: true,
         data: tableData,
         columns: [
-          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
-          { title: 'Method', field: 'params', hozAlign: 'left', editor: 'autocomplete', editorParams: { showListOnEmpty: true, freetext: true, values: method }, formatter: 'textarea', frozen: true },
-          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
+          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true, resizable: false },
+          {
+            title: 'Method',
+            field: 'params',
+            hozAlign: 'left',
+            editor: 'autocomplete',
+            editorParams: { showListOnEmpty: true, freetext: true, values: method },
+            formatter: 'textarea',
+            resizable: false,
+          },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })
@@ -266,14 +294,21 @@ async function updateFinDetailPreRel(name, method) {
       let data = res.data;
       let tableData = data;
       tableUpdateFinDetailPreRel = new Tabulator('#updateFinDetailPreRelTable', {
-        resizableColumns: false,
         height: '100%',
-        layout: 'fitDataStretch',
-        resizableColumns: false,
+        layout: 'fitDataFill',
+        resizableColumns: true,
         data: tableData,
         columns: [
-          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
-          { title: 'Method', field: 'params', hozAlign: 'left', editor: 'autocomplete', editorParams: { showListOnEmpty: true, freetext: true, values: method }, formatter: 'textarea', frozen: true },
+          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true, resizable: false },
+          {
+            title: 'Method',
+            field: 'params',
+            hozAlign: 'left',
+            editor: 'autocomplete',
+            editorParams: { showListOnEmpty: true, freetext: true, values: method },
+            formatter: 'textarea',
+            resizable: false,
+          },
           { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
@@ -305,14 +340,21 @@ async function updateFinDetailPostRel(name, method) {
       let data = res.data;
       let tableData = data;
       tableUpdateFinDetailPostRel = new Tabulator('#updateFinDetailPostRelTable', {
-        resizableColumns: false,
         height: '100%',
-        layout: 'fitDataStretch',
-        resizableColumns: false,
+        layout: 'fitDataFill',
+        resizableColumns: true,
         data: tableData,
         columns: [
-          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
-          { title: 'Method', field: 'params', hozAlign: 'left', editor: 'autocomplete', editorParams: { showListOnEmpty: true, freetext: true, values: method }, formatter: 'textarea', frozen: true },
+          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true, resizable: false },
+          {
+            title: 'Method',
+            field: 'params',
+            hozAlign: 'left',
+            editor: 'autocomplete',
+            editorParams: { showListOnEmpty: true, freetext: true, values: method },
+            formatter: 'textarea',
+            resizable: false,
+          },
           { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
@@ -381,10 +423,9 @@ async function viewBrandLineage() {
     .then((res) => {
       let tableData = [res.data];
       tableViewBrandLineage = new Tabulator('#viewLineageTable', {
-        resizableColumns: false,
         height: '100%',
         layout: 'fitDataFill',
-        resizableColumns: false,
+        resizableColumns: true,
         data: tableData,
         columns: [
           { title: 'Schoene', field: 'brndBrw', hozAlign: 'left', frozen: true },
@@ -404,13 +445,13 @@ async function viewFinDetailPreCsx(name) {
       let data = res.data;
       let tableData = data;
       tableViewFinDetailPreCsx = new Tabulator('#viewFinDetailPreCsxTable', {
-        resizableColumns: false,
         height: '100%',
-        layout: 'fitDataStretch',
+        layout: 'fitDataFill',
+        resizableColumns: true,
         data: tableData,
         columns: [
-          { title: 'Object', field: 'obj', hozAlign: 'left', frozen: true },
-          { title: 'Method', field: 'params', hozAlign: 'left', formatter: 'textarea' },
+          { title: 'Object', field: 'obj', hozAlign: 'left', frozen: true, resizable: false },
+          { title: 'Method', field: 'params', hozAlign: 'left', formatter: 'textarea', resizable: false },
           { title: 'Notes', field: 'notes', hozAlign: 'left', formatter: 'textarea' },
         ],
       });
@@ -425,14 +466,14 @@ async function viewFinDetailPostCsx(name) {
       let data = res.data;
       let tableData = data;
       tableViewFinDetailPostCsx = new Tabulator('#viewFinDetailPostCsxTable', {
-        resizableColumns: false,
         height: '100%',
-        layout: 'fitDataStretch',
+        layout: 'fitDataFill',
+        resizableColumns: true,
         data: tableData,
         columns: [
-          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
-          { title: 'Method', field: 'params', hozAlign: 'left', editor: 'autocomplete', editorParams: { showListOnEmpty: true, freetext: true, values: method }, formatter: 'textarea', frozen: true },
-          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
+          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true, resizable: false },
+          { title: 'Method', field: 'params', hozAlign: 'left', formatter: 'textarea', resizable: false },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })
@@ -446,14 +487,14 @@ async function viewFinDetailPreFil(name) {
       let data = res.data;
       let tableData = data;
       tableViewFinDetailPreFil = new Tabulator('#viewFinDetailPreFilTable', {
-        resizableColumns: false,
         height: '100%',
-        layout: 'fitDataStretch',
+        layout: 'fitDataFill',
+        resizableColumns: true,
         data: tableData,
         columns: [
-          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
-          { title: 'Method', field: 'params', hozAlign: 'left', editor: 'autocomplete', editorParams: { showListOnEmpty: true, freetext: true, values: method }, formatter: 'textarea', frozen: true },
-          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
+          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true, resizable: false },
+          { title: 'Method', field: 'params', hozAlign: 'left', formatter: 'textarea', resizable: false },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })
@@ -467,14 +508,14 @@ async function viewFinDetailPostFil(name) {
       let data = res.data;
       let tableData = data;
       tableViewFinDetailPostFil = new Tabulator('#viewFinDetailPostFilTable', {
-        resizableColumns: false,
         height: '100%',
-        layout: 'fitDataStretch',
+        layout: 'fitDataFill',
+        resizableColumns: true,
         data: tableData,
         columns: [
-          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
-          { title: 'Method', field: 'params', hozAlign: 'left', editor: 'autocomplete', editorParams: { showListOnEmpty: true, freetext: true, values: method }, formatter: 'textarea', frozen: true },
-          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
+          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true, resizable: false },
+          { title: 'Method', field: 'params', hozAlign: 'left', formatter: 'textarea', resizable: false },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })
@@ -488,14 +529,14 @@ async function viewFinDetailPreRel(name) {
       let data = res.data;
       let tableData = data;
       tableViewFinDetailPreRel = new Tabulator('#viewFinDetailPreRelTable', {
-        resizableColumns: false,
         height: '100%',
-        layout: 'fitDataStretch',
+        layout: 'fitDataFill',
+        resizableColumns: true,
         data: tableData,
         columns: [
-          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
-          { title: 'Method', field: 'params', hozAlign: 'left', editor: 'autocomplete', editorParams: { showListOnEmpty: true, freetext: true, values: method }, formatter: 'textarea', frozen: true },
-          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
+          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true, resizable: false },
+          { title: 'Method', field: 'params', hozAlign: 'left', formatter: 'textarea', resizable: false },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })
@@ -509,14 +550,14 @@ async function viewFinDetailPostRel(name) {
       let data = res.data;
       let tableData = data;
       tableViewFinDetailPostRel = new Tabulator('#viewFinDetailPostRelTable', {
-        resizableColumns: false,
         height: '100%',
-        layout: 'fitDataStretch',
+        layout: 'fitDataFill',
+        resizableColumns: true,
         data: tableData,
         columns: [
-          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true },
-          { title: 'Method', field: 'params', hozAlign: 'left', editor: 'autocomplete', editorParams: { showListOnEmpty: true, freetext: true, values: method }, formatter: 'textarea', frozen: true },
-          { title: 'Notes', field: 'notes', width: '82px', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
+          { title: 'Object', field: 'obj', hozAlign: 'center', frozen: true, resizable: false },
+          { title: 'Method', field: 'params', hozAlign: 'left', formatter: 'textarea', resizable: false },
+          { title: 'Notes', field: 'notes', hozAlign: 'left', editor: 'input', formatter: 'textarea' },
         ],
       });
     })

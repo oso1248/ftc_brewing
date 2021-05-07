@@ -4,7 +4,7 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-var CACHE_STATIC = 'static-v058';
+var CACHE_STATIC = 'static-v059';
 
 self.addEventListener('install', function (event) {
   self.skipWaiting();

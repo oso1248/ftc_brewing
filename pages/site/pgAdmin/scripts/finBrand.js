@@ -52,8 +52,8 @@ function view() {
     .then((res) => {
       let tableData = res.data;
       brandTable = new Tabulator('#list', {
-        height: '309px',
-        layout: 'fitDataFill',
+        height: '100%',
+        layout: 'fitDataStretch',
         resizableColumns: false,
         layoutColumnsOnNewData: true,
         responsiveLayoutCollapseStartOpen: false,
@@ -346,6 +346,9 @@ document.getElementById('btnIngredientAddClear').addEventListener('click', reset
 function resetBrandIngredientAdd(ev) {
   ev.preventDefault();
   document.getElementById('frmIngredientAdd').reset();
+  if (ingredientTable) {
+    ingredientTable.clearData();
+  }
 }
 
 /// Disabled + lines 272, 273, 274
@@ -362,7 +365,7 @@ function selectBrandIngredientUpdate() {
       let tableData = res.data;
       ingredientTable = new Tabulator('#injRateTable', {
         height: '100%',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         resizableColumns: false,
         layoutColumnsOnNewData: true,
         responsiveLayoutCollapseStartOpen: false,

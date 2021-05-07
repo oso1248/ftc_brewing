@@ -230,7 +230,7 @@ function view() {
         resizableColumns: false,
         layoutColumnsOnNewData: true,
         height: '100%',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         data: tableData,
         columns: [
           { title: 'Brand', field: 'brand', hozAlign: 'center' },

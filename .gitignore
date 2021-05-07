@@ -1,3 +1,6 @@
+#VS Code workspace dictionary
+.vscode
+
 # Logs
 logs
 *.log

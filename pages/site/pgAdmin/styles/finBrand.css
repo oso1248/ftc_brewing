@@ -53,6 +53,11 @@ option {
   background-color: #3e8e41;
 }
 
+.table {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
 @media (max-width: 850px) {
   .boxxes {
     grid-template-columns: repeat(1, 1fr);

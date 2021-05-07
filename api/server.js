@@ -1,30 +1,8 @@
 const express = require('express');
 const path = require('path');
-const session = require('express-session');
-const pg = require('pg');
-const pgSession = require('connect-pg-simple');
+const cookie = require('./cookies');
 
 const server = express();
-server.use(express.json());
-
-const sessionConfig = {
-  // conString: process.env.DATABASE_URL || 'postgres://localhost/brew',
-  conString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-  store: new (pgSession(session))(),
-  name: 'BudApp',
-  resave: false,
-  saveUninitialized: true, // set to false for prod GDPR laws
-  secret: process.env.SECRET,
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24 * 180,
-    secure: false, // set true for production for https
-    httpOnly: true, // no js access
-    sameSite: true,
-  },
-};
 
 const permissions1 = require('./auth/perm1');
 const permissions3 = require('./auth/perm3');
@@ -49,7 +27,8 @@ const craftRouter = require('./routes/rtsCraftInv');
 const oracleRouter = require('./routes/oracleDBrts');
 const projectionRouter = require('./routes/rtsProjection');
 
-server.use(session(sessionConfig));
+server.use(express.json());
+server.use(cookie.sessionConfig);
 
 server.use(express.static(path.join(__dirname, '../pages/site/login/')));
 server.use('/api/auth', loginRouter);

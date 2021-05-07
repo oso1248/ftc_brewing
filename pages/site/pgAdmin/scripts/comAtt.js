@@ -82,7 +82,7 @@ function view() {
       let tableData = res.data;
       var table = new Tabulator('#listLocation', {
         height: '309px',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         responsiveLayout: 'collapse',
         resizableColumns: false,
         layoutColumnsOnNewData: true,
@@ -103,7 +103,7 @@ function view() {
       let tableData = res.data;
       var table = new Tabulator('#listType', {
         height: '309px',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         responsiveLayout: 'collapse',
         resizableColumns: false,
         layoutColumnsOnNewData: true,
@@ -124,7 +124,7 @@ function view() {
       let tableData = res.data;
       var table = new Tabulator('#listEnviro', {
         height: '309px',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         responsiveLayout: 'collapse',
         resizableColumns: false,
         layoutColumnsOnNewData: true,
@@ -145,7 +145,7 @@ function view() {
       let tableData = res.data;
       var table = new Tabulator('#listContainer', {
         height: '309px',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         responsiveLayout: 'collapse',
         resizableColumns: false,
         layoutColumnsOnNewData: true,
@@ -166,7 +166,7 @@ function view() {
       let tableData = res.data;
       var table = new Tabulator('#listUOM', {
         height: '309px',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         responsiveLayout: 'collapse',
         resizableColumns: false,
         layoutColumnsOnNewData: true,
@@ -431,7 +431,6 @@ async function validateAddContainer(ev) {
   return failures;
 }
 async function sendAddUom(ev) {
-  console.log('add');
   ev.preventDefault();
   ev.stopPropagation();
   let fails = await validateAddUom();
@@ -653,7 +652,6 @@ function resetDeleteUOM(ev) {
 async function sendDeleteLocation(ev) {
   ev.preventDefault();
   ev.stopPropagation();
-  console.log('delete');
   let name = document.getElementsByName('deleteLocation')[0].value;
   if (name === '') {
     alert('Location Needed');
@@ -670,7 +668,6 @@ async function sendDeleteLocation(ev) {
 async function sendDeleteType(ev) {
   ev.preventDefault();
   ev.stopPropagation();
-  console.log('delete');
   let name = document.getElementsByName('deleteType')[0].value;
   if (name === '') {
     alert('Type Needed');
@@ -687,7 +684,6 @@ async function sendDeleteType(ev) {
 async function sendDeleteEnviro(ev) {
   ev.preventDefault();
   ev.stopPropagation();
-  console.log('delete');
   let name = document.getElementsByName('deleteEnviro')[0].value;
   if (name === '') {
     alert('Enviro Needed');
@@ -704,7 +700,6 @@ async function sendDeleteEnviro(ev) {
 async function sendDeleteContainer(ev) {
   ev.preventDefault();
   ev.stopPropagation();
-  console.log('delete');
   let name = document.getElementsByName('deleteContainer')[0].value;
   if (name === '') {
     alert('Container Needed');
@@ -721,7 +716,6 @@ async function sendDeleteContainer(ev) {
 async function sendDeleteUOM(ev) {
   ev.preventDefault();
   ev.stopPropagation();
-  console.log('delete');
   let name = document.getElementsByName('deleteUOM')[0].value;
   if (name === '') {
     alert('UOM Needed');

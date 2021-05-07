@@ -60,8 +60,8 @@ function selectBrwBrandUpdate() {
       hopTableUpdate = new Tabulator('#updateHop', {
         resizableColumns: false,
         layoutColumnsOnNewData: true,
-        height: '330px',
-        layout: 'fitDataFill',
+        height: '100%',
+        layout: 'fitDataStretch',
         data: tableData,
         columns: [
           { title: 'Hop', field: 'Hop', hozAlign: 'center', frozen: true },
@@ -120,8 +120,8 @@ function selectBrwBrandView() {
       hopTableView = new Tabulator('#viewHop', {
         resizableColumns: false,
         layoutColumnsOnNewData: true,
-        height: '330px',
-        layout: 'fitDataFill',
+        height: '100%',
+        layout: 'fitDataStretch',
         data: tableData,
         columns: [
           { title: 'Hop', field: 'Hop', hozAlign: 'center', frozen: true },

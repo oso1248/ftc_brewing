@@ -1,30 +1,9 @@
-/* :root {
-  --primary: #ddd;
-  --dark: #333;
-  --light: #fff;
-  --shadow: 0 1px 5px rgba(104, 104, 104, 0.8)
-} */
 :root {
   --primary: #e0c190;
   --dark: #634e2c;
   --light: #f5e5cb;
   --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
 }
-
-/* .tabulator-tableHolder {
-  color:var(--dark);
-  background-color: var(--light);
-}
-
-.tabulator-row-odd{
-  color:var(--dark);
-  background-color: var(--light);
-}
-
-.tabulator-row-even{
-  color:var(--dark);
-  background-color: #E8DAC3;
-} */
 
 * {
   margin: 0;
@@ -191,5 +170,11 @@ a {
   }
   .logo {
     max-width: 50px;
+  }
+}
+
+@media only screen and (hover: none) and (pointer: coarse) {
+  .btnMobile {
+    display: none;
   }
 }

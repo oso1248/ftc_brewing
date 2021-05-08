@@ -8,18 +8,18 @@ const brewery = [
 
 const user = [
   {
+    username: 'ea92284',
+    password: '$2a$06$iVjBMuxQct7LrsmEqOLmbezpBoO7L8h0Tc2PLk6LvX2ORefSk3mLi',
+    email: 'adam.coulson@anheuser-busch.com',
+    permissions: 5,
+    brewery_id: 2,
+  },
+  {
     username: 'patrick',
     password: '$2a$06$hxCTGG5Hu6drA6sIeb76pu74XOwHsWaVgcZKyoDMY7y7V4VMmGRA.',
     email: 'patrick@bud.com',
     permissions: 5,
     brewery_id: 1,
-  },
-  {
-    username: 'adam',
-    password: '$2a$06$Zv0olDgxHsy38Upq5ESckO551Q1WxB/RT/SJ9tg/a562b2E1XCoH.',
-    email: 'adam@bud.com',
-    permissions: 5,
-    brewery_id: 2,
   },
   {
     username: 'greg',

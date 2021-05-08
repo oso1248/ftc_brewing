@@ -6,7 +6,7 @@ module.exports = {
   development: {
     client: 'pg',
     useNullAsDefault: true,
-    connection: process.env.DATABASE_URL,
+    connection: 'postgres://localhost/brew',
     migrations: {
       directory: './db/migrations',
     },

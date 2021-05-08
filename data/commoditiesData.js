@@ -52,7 +52,7 @@ const mtl_supplier = [
   {
     company: 'Anheuser Busch',
     contact: 'Bud Brewer',
-    email: 'bb@anheuser-busch.com',
+    email: 'bud.brewer@anheuser-busch.com',
     phone: '970-490-4500',
     address: '123 Bud',
     note: '',

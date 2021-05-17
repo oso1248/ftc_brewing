@@ -59,16 +59,13 @@ function view() {
         responsiveLayoutCollapseStartOpen: false,
         data: tableData,
         columns: [
-          {
-            title: 'Fin Brand',
-            field: 'brndFin',
-            hozAlign: 'center',
-            frozen: true,
-          },
-          { title: 'Active', field: 'active', hozAlign: 'center' },
-          { title: 'Injection', field: 'injection', hozAlign: 'center' },
-          { title: 'Brw Brand', field: 'brndBrw', hozAlign: 'center' },
-          { title: 'Pck Brand', field: 'brndPck', hozAlign: 'center' },
+          { title: 'Fin Brand', field: 'brand_fin', hozAlign: 'left', frozen: true },
+          { title: 'Active', field: 'active', hozAlign: 'left' },
+          { title: 'Injection', field: 'injection', hozAlign: 'left' },
+          { title: 'Updated', field: 'updated_at', hozAlign: 'left' },
+          { title: 'Updated By', field: 'updated_by', hozAlign: 'left' },
+          { title: 'Brw Brand', field: 'brand_brw', hozAlign: 'left' },
+          { title: 'Pck Brand', field: 'brand_pck', hozAlign: 'left' },
           { title: 'Note', field: 'note', hozAlign: 'left' },
         ],
       });
@@ -118,7 +115,8 @@ async function sendAdd(ev) {
     axios
       .post('/api/brand/fin', data)
       .then((data) => {
-        alert(data.data.brndFin + ' has been added');
+        alert(`${data.data[0].brand} Has Been Added`);
+        document.getElementById('frmAdd').reset();
       })
       .catch((err) => alert(err));
   } else {
@@ -131,23 +129,21 @@ async function sendAdd(ev) {
 }
 async function validateAdd(data) {
   let failures = [];
-  let name = data.brand;
-  if (!data.brand) {
-    failures.push({ input: 'brand', msg: 'Taken' });
-  } else {
-    let query = '/api/brand/fin/get/name';
-    let res = await axios.post(query, { name: name });
-    if (res.data.msg !== 'null') {
-      failures.push({ input: 'brand', msg: 'Taken' });
-    }
-  }
-
-  if (data.brand === '') {
-    failures.push({ input: 'brand', msg: 'Required Field' });
+  if (!data.brand || data.brand === '') {
+    failures.push({ input: 'brand', msg: 'Required' });
     data.brand = null;
   } else if (!data.brand.testLengthFour()) {
     failures.push({ input: 'brand', msg: '4 Characters Only' });
+    data.brand = null;
+  } else {
+    let query = '/api/brand/fin/get/name';
+    let res = await axios.post(query, { name: data.brand }).catch((err) => alert(err));
+    console.log(res.data);
+    if (res.data.length !== 0) {
+      failures.push({ input: res.data[0].brand_fin, msg: 'Taken' });
+    }
   }
+
   if (data.brw_id === '') {
     failures.push({ input: 'brew brand', msg: 'Required Field' });
     data.brw_id = null;
@@ -174,7 +170,7 @@ function update() {
   let dropDown = document.getElementsByName('fin_id')[0];
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Fin Brand</option>`;
   let api = '/api/brand/fin/get';
-  let title = 'brndFin';
+  let title = 'brand_fin';
   createList(api, dropDown, title);
 
   dropDown = document.getElementsByName('brw_id')[0];
@@ -209,7 +205,7 @@ async function sendUpdate(ev) {
     axios
       .patch('/api/brand/fin/' + brand, data)
       .then((data) => {
-        alert(data.data.brndFin + ' has been updated');
+        alert(`${data.data[0].brand} Has Been Updated`);
         document.getElementById('frmUpdate').reset();
       })
       .catch((err) => alert(err));
@@ -247,12 +243,15 @@ document.getElementsByName('fin_id')[0].addEventListener('change', selectBrand);
 function selectBrand() {
   let brand = document.getElementsByName('fin_id')[0].value;
 
-  axios.post('/api/brand/fin/get/name', { name: brand }).then((data) => {
-    document.getElementsByName('brw_id')[0].value = data.data.brndBrw;
-    document.getElementsByName('active')[0].value = data.data.active;
-    document.getElementsByName('injection')[0].value = data.data.injection;
-    document.getElementsByName('note')[0].value = data.data.note;
-  });
+  axios
+    .post('/api/brand/fin/get/name', { name: brand })
+    .then((data) => {
+      document.getElementsByName('brw_id')[0].value = data.data[0].brand_brw;
+      document.getElementsByName('active')[0].value = data.data[0].act_fin;
+      document.getElementsByName('injection')[0].value = data.data[0].injection;
+      document.getElementsByName('note')[0].value = data.data[0].note;
+    })
+    .catch((err) => alert(err));
 }
 
 //Routes ingredient
@@ -266,7 +265,7 @@ function ingredient() {
   let dropDown = document.getElementsByName('fin_idAdd')[0];
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`;
   let api = '/api/brand/fin/ingredient/get';
-  let title = 'brndFin';
+  let title = 'brand_fin';
   createList(api, dropDown, title);
 
   // dropDown = document.getElementsByName('fin_idUpdate')[0];
@@ -297,7 +296,7 @@ function selectBrandIngredientAdd() {
       let tableData = res.data;
       ingredientTable = new Tabulator('#injRateTable', {
         height: '100%',
-        layout: 'fitDataStretch',
+        layout: 'fitDataFill',
         resizableColumns: false,
         layoutColumnsOnNewData: true,
         responsiveLayoutCollapseStartOpen: false,
@@ -308,7 +307,7 @@ function selectBrandIngredientAdd() {
         ],
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => alert(err));
 }
 
 document.getElementById('btnIngredientAddSubmit').addEventListener('click', sendBrandIngredientAdd);
@@ -319,7 +318,7 @@ function sendBrandIngredientAdd(ev) {
   let data = {};
   let index = document.getElementsByName('fin_idAdd')[0].selectedIndex;
   let options = document.getElementsByName('fin_idAdd')[0].options;
-  data.fin_id = options[index].id;
+  data.fin_id = options[index].value;
   if (data.fin_id == '') {
     alert('Finishing brand required');
     return;
@@ -327,7 +326,7 @@ function sendBrandIngredientAdd(ev) {
 
   index = document.getElementsByName('com_idAdd')[0].selectedIndex;
   options = document.getElementsByName('com_idAdd')[0].options;
-  data.com_id = options[index].id;
+  data.com_id = options[index].value;
   if (data.com_id == '') {
     alert('Ingredient required');
     return;
@@ -336,7 +335,7 @@ function sendBrandIngredientAdd(ev) {
   axios
     .post('/api/commodity/ingredient/bridge', data)
     .then((data) => {
-      alert(data.data.commodity + ' has been added');
+      alert(`${data.data[0].commodity}\n Added To \n${data.data[0].brand}`);
       document.getElementsByName('com_idAdd')[0].selectedIndex = 0;
       selectBrandIngredientAdd();
     })
@@ -429,7 +428,7 @@ function sendBrandIngredientDelete(ev) {
   axios
     .delete('/api/commodity/ingredient/bridge/' + data.fin_id)
     .then((data) => {
-      alert(data.data.msg);
+      alert(`${data.data[0].count} Ingredients\n Deleted From\n${data.data[0].brand}`);
       document.getElementById('frmIngredientDelete').reset();
       selectBrandIngredientAdd();
     })

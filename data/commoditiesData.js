@@ -18,16 +18,16 @@ const mtl_type = [
 ];
 
 const mtl_location = [
-  { location: 'Grains', note: '' },
-  { location: 'Brewhouse I', note: '' },
-  { location: 'Hops', note: '' },
-  { location: 'Chips', note: '' },
-  { location: 'Chip Annex', note: '' },
-  { location: 'Fermenting', note: '' },
-  { location: 'Finishing', note: '' },
-  { location: 'CIP', note: '' },
-  { location: 'Brewing Center', note: '' },
-  { location: 'Brewhouse II', note: '' },
+  { location: 'Location 1', note: '' },
+  { location: 'Location 2', note: '' },
+  { location: 'Location 3', note: '' },
+  { location: 'Location 4', note: '' },
+  { location: 'Location 5', note: '' },
+  { location: 'Location 6', note: '' },
+  { location: 'Location 7', note: '' },
+  { location: 'Location 8', note: '' },
+  { location: 'Location 9', note: '' },
+  { location: 'Location 10', note: '' },
 ];
 
 const mtl_enviro = [
@@ -50,42 +50,42 @@ const mtl_container = [
 
 const mtl_supplier = [
   {
-    company: 'Anheuser Busch',
-    contact: 'Bud Brewer',
-    email: 'bud.brewer@anheuser-busch.com',
-    phone: '970-490-4500',
+    company: 'Supplier 1',
+    contact: 'Contact 1',
+    email: 'contact1@supplier1.com',
+    phone: '123-234-3456',
     address: '123 Bud',
     note: '',
   },
   {
-    company: 'Budweiser',
-    contact: 'Mich Brewer',
-    email: 'mb@anheuser-busch.com',
-    phone: '970-490-4660',
+    company: 'Supplier 2',
+    contact: 'Contact 2',
+    email: 'contact2@supplier2.com',
+    phone: '234-345-4567',
     address: '123 Mich',
     note: '',
   },
   {
-    company: 'Owens Illinois',
-    contact: 'Lime Brewer',
-    email: 'lv@oi.com',
-    phone: '970-490-5899',
+    company: 'Supplier 3',
+    contact: 'Contact 3',
+    email: 'contact53supplier3.com',
+    phone: '345-567-5678',
     address: '123 Lime',
     note: '',
   },
   {
-    company: 'Metal Container',
-    contact: 'Ultra Brewer',
-    email: 'ub@metal-container.com',
-    phone: '970-490-5738',
+    company: 'Supplier 4',
+    contact: 'Contact 4',
+    email: 'contact4supplier4.com',
+    phone: '456-678-6789',
     address: '123 Ultra',
     note: '',
   },
   {
-    company: 'Alpha Laval',
-    contact: 'Space Brewer',
-    email: 'sb@alpha-laval.com',
-    phone: '970-490-5703',
+    company: 'Supplier 5',
+    contact: 'Contact 5',
+    email: 'contact5@supplier5.com',
+    phone: '567-789-7890',
     address: '123 Space',
     note: '',
   },
@@ -93,9 +93,9 @@ const mtl_supplier = [
 
 const mtl_commodidity = [
   {
-    commodity: 'Herkules Pre Iso',
+    commodity: 'Hop 1',
     active: 'Yes',
-    sap: '1493222',
+    sap: '12345678',
     inventory: 'Fin',
     threshold: 4,
     per_pallet: 40,
@@ -110,9 +110,9 @@ const mtl_commodidity = [
   },
 
   {
-    commodity: 'Briess C20 50',
+    commodity: 'Malt 2',
     active: 'Yes',
-    sap: '1397607',
+    sap: '23456789',
     inventory: 'Brw',
     threshold: 200,
     per_pallet: 40,
@@ -127,9 +127,9 @@ const mtl_commodidity = [
   },
 
   {
-    commodity: 'Carahell 800',
+    commodity: 'Super Sack 1',
     active: 'Yes',
-    sap: '1815958',
+    sap: '34567890',
     inventory: 'Brw',
     threshold: 5,
     per_pallet: 1,
@@ -144,9 +144,9 @@ const mtl_commodidity = [
   },
 
   {
-    commodity: 'Cascade',
+    commodity: 'Hop 2',
     active: 'Yes',
-    sap: '1752767',
+    sap: '45678901',
     inventory: 'Brw',
     threshold: 25,
     per_pallet: 25,
@@ -161,9 +161,9 @@ const mtl_commodidity = [
   },
 
   {
-    commodity: 'Palisade',
+    commodity: 'Hop 3',
     active: 'Yes',
-    sap: '1753301',
+    sap: '56789012',
     inventory: 'Brw',
     threshold: 25,
     per_pallet: 25,
@@ -178,9 +178,9 @@ const mtl_commodidity = [
   },
 
   {
-    commodity: 'Eclipse',
+    commodity: 'Chemical 1',
     active: 'Yes',
-    sap: '1602671',
+    sap: '67890123',
     inventory: 'Fin',
     threshold: 20,
     per_pallet: 20,
@@ -195,9 +195,9 @@ const mtl_commodidity = [
   },
 
   {
-    commodity: 'Cane Sugar Liquid',
+    commodity: 'Inject 1',
     active: 'Yes',
-    sap: '1786708',
+    sap: '78901234',
     inventory: 'Fin',
     threshold: 10,
     per_pallet: 1,
@@ -212,9 +212,9 @@ const mtl_commodidity = [
   },
 
   {
-    commodity: 'Citra',
+    commodity: 'Hop 4',
     active: 'Yes',
-    sap: '1753037',
+    sap: '89012345',
     inventory: 'Brw',
     threshold: 25,
     per_pallet: 25,
@@ -229,9 +229,9 @@ const mtl_commodidity = [
   },
 
   {
-    commodity: 'Strawberry Sky Juice',
+    commodity: 'Inject 2',
     active: 'Yes',
-    sap: '1847147',
+    sap: '90123456',
     inventory: 'Fin',
     threshold: 1,
     per_pallet: 1,
@@ -246,9 +246,9 @@ const mtl_commodidity = [
   },
 
   {
-    commodity: 'Tahoma Stab',
+    commodity: 'Hop 5',
     active: 'Yes',
-    sap: '1752766',
+    sap: '01234567',
     inventory: 'Brw',
     threshold: 25,
     per_pallet: 25,
@@ -263,9 +263,9 @@ const mtl_commodidity = [
   },
 
   {
-    commodity: 'Cane Sugar 2000',
+    commodity: 'Super Sack 2',
     active: 'Yes',
-    sap: '1767161',
+    sap: '11234567',
     inventory: 'Fin',
     threshold: 5,
     per_pallet: 1,
@@ -280,9 +280,9 @@ const mtl_commodidity = [
   },
 
   {
-    commodity: 'Citric Acid',
+    commodity: 'Inject 3',
     active: 'Yes',
-    sap: '1361423',
+    sap: '22345678',
     inventory: 'Fin',
     threshold: 5,
     per_pallet: 1,
@@ -297,9 +297,9 @@ const mtl_commodidity = [
   },
 
   {
-    commodity: 'Strawberry Lemonade',
+    commodity: 'Inject 4',
     active: 'Yes',
-    sap: '1823183',
+    sap: '33456789',
     inventory: 'Fin',
     threshold: 5,
     per_pallet: 1,

@@ -184,9 +184,9 @@ function loadForm(commodity) {
   axios
     .post('/api/commodity/name', { name: `${commodity}` })
     .then((data) => {
-      document.getElementById('per_pallet').value = data.data.per_pallet;
-      document.getElementById('total_per_unit').value = data.data.unit_total;
-      document.getElementById('note').value = data.data.note;
+      document.getElementById('per_pallet').value = data.data[0].per_pallet;
+      document.getElementById('total_per_unit').value = data.data[0].unit_total;
+      document.getElementById('note').value = data.data[0].note;
 
       document.getElementById('pallets').value = '';
       document.getElementById('total_count').value = '';

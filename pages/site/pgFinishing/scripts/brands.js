@@ -94,10 +94,13 @@ function viewBrandBrew() {
         columns: [
           { title: 'Brand', field: 'brand', hozAlign: 'center', frozen: true },
           { title: 'Active', field: 'active', hozAlign: 'center' },
-          { title: 'Hops', field: 'hop_std', hozAlign: 'center' },
+          { title: 'Standard Hops', field: 'hop_std', hozAlign: 'center' },
           { title: 'Craft Hops', field: 'hop_crft', hozAlign: 'center' },
           { title: 'Dry Hops', field: 'hop_dry', hozAlign: 'center' },
-          { title: 'Super Sacks', field: 'supr_sac', hozAlign: 'left' },
+          { title: 'Super Sacks', field: 'supr_sac', hozAlign: 'center' },
+          { title: 'Updated', field: 'updated_at', hozAlign: 'left' },
+          { title: 'Updated By', field: 'updated_by', hozAlign: 'left' },
+          { title: 'Note', field: 'note', hozAlign: 'left', formatter: 'textarea' },
         ],
       });
     })
@@ -128,19 +131,17 @@ function viewBrandFin() {
         printHeader: '<h1>Finishing Brands<h1>',
         resizableColumns: false,
         height: '100%',
-        layout: 'fitDataFill',
+        layout: 'fitDataStretch',
         data: tableData,
         columns: [
-          {
-            title: 'Brand',
-            field: 'brndFin',
-            hozAlign: 'center',
-            frozen: true,
-          },
-          { title: 'Active', field: 'active', hozAlign: 'center' },
-          { title: 'Schoene', field: 'brndBrw', hozAlign: 'center' },
-          { title: 'Package', field: 'brndPck', hozAlign: 'center' },
-          { title: 'Note', field: 'note', hozAlign: 'left' },
+          { title: 'Fin Brand', field: 'brand_fin', hozAlign: 'left', frozen: true },
+          { title: 'Active', field: 'active', hozAlign: 'left' },
+          { title: 'Injection', field: 'injection', hozAlign: 'left' },
+          { title: 'Updated', field: 'updated_at', hozAlign: 'left' },
+          { title: 'Updated By', field: 'updated_by', hozAlign: 'left' },
+          { title: 'Brw Brand', field: 'brand_brw', hozAlign: 'left' },
+          { title: 'Pck Brand', field: 'brand_pck', hozAlign: 'left' },
+          { title: 'Note', field: 'note', hozAlign: 'left', formatter: 'textarea' },
         ],
       });
     })
@@ -174,11 +175,13 @@ function viewBrandPck() {
         layout: 'fitDataFill',
         data: tableData,
         columns: [
-          { title: 'Brand', field: 'brndPck', hozAlign: 'center', frozen: true },
-          { title: 'Active', field: 'active', hozAlign: 'center' },
-          { title: 'Finish', field: 'brndFin', hozAlign: 'center' },
-          { title: 'Schoene', field: 'brndPck', hozAlign: 'center' },
-          { title: 'Note', field: 'note', hozAlign: 'left' },
+          { title: 'Pck Brand', field: 'brand_pck', hozAlign: 'left', frozen: true },
+          { title: 'Active', field: 'active', hozAlign: 'left' },
+          { title: 'Updated', field: 'updated_at', hozAlign: 'left' },
+          { title: 'Updated By', field: 'updated_by', hozAlign: 'left' },
+          { title: 'Fin Brand', field: 'brand_fin', hozAlign: 'left' },
+          { title: 'Brw Brand', field: 'brand_brw', hozAlign: 'left' },
+          { title: 'Note', field: 'note', hozAlign: 'left', formatter: 'textarea' },
         ],
       });
     })
@@ -213,13 +216,13 @@ function detailBrands() {
   dropDown = document.getElementById('finBrandDetail');
   dropDown.innerHTML = `<option value="" disabled selected hidden>Filters</option>`;
   api = '/api/brand/fin/get';
-  title = 'brndFin';
+  title = 'brand_fin';
   createList(api, dropDown, title);
 
   dropDown = document.getElementById('pckBrandDetail');
   dropDown.innerHTML = `<option value="" disabled selected hidden>Releasing</option>`;
   api = '/api/brand/fin/get';
-  title = 'brndFin';
+  title = 'brand_fin';
   createList(api, dropDown, title);
 }
 // Brw
@@ -476,7 +479,7 @@ function recipeBrands() {
   dropDown = document.getElementById('finBrandRecipe');
   dropDown.innerHTML = `<option value="" disabled selected hidden>Filtered</option>`;
   api = '/api/brand/fin/get';
-  title = 'brndFin';
+  title = 'brand_fin';
   createList(api, dropDown, title);
 }
 // Chp
@@ -623,7 +626,7 @@ function injectionBrands() {
   let dropDown = document.getElementById('injectionBrand');
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Brand</option>`;
   let api = '/api/brand/fin/ingredient/get';
-  let title = 'brndFin';
+  let title = 'brand_fin';
   createList(api, dropDown, title);
 }
 document.getElementById('injectionBrand').addEventListener('change', injectionBrandFin);

@@ -4,51 +4,53 @@ function allReplace(obj) {
   return obj.replace(/\[/g, '(').replace(/\]/g, ')').replace(/"/g, `'`);
 }
 
-// SELECT brnd.brand, post.fin_id,
-// 	UNNEST(ARRAY[post.tk_sch, post.lines, post.tk_trp, post.tk_fbt, post.recover]) AS params
-// FROM fltr_post AS post
-// JOIN brnd_fin AS brnd ON brnd.id = post.fin_id
-// WHERE post.fin_id = 1
-
 //Brand brw
 async function addBrw(data) {
-  const [{ brand, id }] = await db('brnd_brw').insert(data, ['brand', 'id']);
-  let res = await db('csx_pre').insert({ brw_id: id });
-  res = await db('csx_post').insert({ brw_id: id });
-  res = await db('chp_params').insert({ brw_id: id });
-  res = await db('chp_smpl').insert({ brw_id: id });
-  res = await db('sch_params').insert({ brw_id: id });
-  res = await db('sch_smpl').insert({ brw_id: id });
-  res = await db('acx_pre').insert({ brw_id: id });
-  res = await db('acx_post').insert({ brw_id: id });
-
-  await db.schema.table('mtx_hop_dry', function (table) {
-    table.decimal(brand, 50, 2).notNullable().defaultTo(0);
-  });
-  await db.schema.table('mtx_hop_std', function (table) {
-    table.decimal(brand, 50, 2).notNullable().defaultTo(0);
-  });
-  await db.schema.table('mtx_sac_supr', function (table) {
-    table.decimal(brand, 50, 2).notNullable().defaultTo(0);
-  });
-  await db.schema.table('mtx_material', function (table) {
-    table.decimal(brand, 50, 2).notNullable().defaultTo(0);
-  });
-  return getByNameBrw(brand);
+  // // function in database add id to tables csx_pre, csx_post, chp_params, chp_smpl, sch_params, sch_smpl, acx_pre, acx_post
+  // add column of brand name to tables mtx_hop_dry, mtx_hop_std, mtx_supr_sac, mtx_material
+  let { rows } = await db.raw(`
+    INSERT
+    INTO brnd_brw (brand, hop_std, hop_crft, hop_dry, supr_sac, active, note, updated_by)
+    VALUES ('${data.brand}', '${data.hop_std}', '${data.hop_crft}', '${data.hop_dry}', '${data.supr_sac}', '${data.active}', '${data.note}', '${data.updated_by}')
+    RETURNING brand;
+  `);
+  return rows;
 }
-function getAllBrw(active) {
+async function getAllBrw(active) {
   if (active) {
-    return db('brnd_brw AS brw').where('active', '=', 'Yes').orderBy('brand');
+    let { rows } = await db.raw(`
+      SELECT id, brand, hop_std, hop_crft, hop_dry, supr_sac, active, note, CAST(updated_at::DATE AS text), updated_by
+      FROM brnd_brw
+      WHERE active = 'Yes'
+      ORDER BY active DESC, brand ASC;
+    `);
+    return rows;
   } else {
-    return db('brnd_brw AS brw').orderBy([{ column: 'active', order: 'desc' }, { column: 'brand' }]);
+    let { rows } = await db.raw(`
+      SELECT id, brand, hop_std, hop_crft, hop_dry, supr_sac, active, note, CAST(updated_at::DATE AS text), updated_by
+      FROM brnd_brw
+      WHERE active = 'Yes' OR active = 'No'
+      ORDER BY active DESC, brand ASC;
+    `);
+    return rows;
   }
 }
-function getByNameBrw(name) {
-  return db('brnd_brw').where({ brand: name }).first();
+async function getByNameBrw(name) {
+  let { rows } = await db.raw(`
+    SELECT id, brand, hop_std, hop_crft, hop_dry, supr_sac, active, note, CAST(updated_at::DATE AS text), updated_by
+    FROM brnd_brw
+    WHERE brand = '${name}'
+  `);
+  return rows;
 }
 async function changeBrw(name, changes) {
-  let response = await db('brnd_brw').where({ brand: name }).update(changes);
-  return getByNameBrw(name);
+  let { rows } = await db.raw(`
+    UPDATE brnd_brw
+    SET hop_std = '${changes.hop_std}', hop_crft = '${changes.hop_crft}', hop_dry = '${changes.hop_dry}', supr_sac = '${changes.supr_sac}', active = '${changes.active}', note = '${changes.note}', updated_by = '${changes.updated_by}'
+    WHERE brand = '${name}'
+    RETURNING brand;
+  `);
+  return rows;
 }
 async function destroyBrw(name) {
   let remove = await db('brnd_brw').where('brand', name).del();
@@ -93,93 +95,86 @@ function getAllBrwSac(active) {
 }
 
 //Brand fin
-async function brwId(data) {
-  let rtn = await db('brnd_brw').select('id').where('brand', data['brw_id']);
-  let { id } = rtn[0];
-  data['brw_id'] = id;
-  return data;
-}
 async function addFin(data) {
-  await brwId(data);
-  const [{ brand, id }] = await db('brnd_fin').insert(data, ['brand', 'id']);
-  let res = await db('fin_smpl').insert({ fin_id: id });
-  res = await db('fin_params').insert({ fin_id: id });
-  res = await db('rel_pre').insert({ fin_id: id });
-  res = await db('rel_post').insert({ fin_id: id });
-  res = await db('fltr_pre').insert({ fin_id: id });
-  res = await db('fltr_post').insert({ fin_id: id });
-
-  return getByNameFin(brand);
+  let { rows } = await db.raw(`
+    INSERT INTO
+    brnd_fin (brand, injection, active, note, brw_id, updated_by)
+    VALUES ('${data.brand}', '${data.injection}', '${data.active}', '${data.note}', (SELECT id FROM brnd_brw WHERE brand = '${data.brw_id}'), '${data.updated_by}')
+    RETURNING brand
+  `);
+  return rows;
 }
-function getAllFin(active) {
+async function getAllFin(active) {
   if (active) {
-    return db('brnd_fin AS fin')
-      .join('brnd_brw AS brw', 'fin.brw_id', '=', 'brw.id')
-      .leftOuterJoin('brnd_pck as pck', 'pck.fin_id', '=', 'fin.id')
-      .select(
-        'fin.brand AS brndFin',
-        'fin.active AS active',
-        'pck.brand AS brndPck',
-        'pck.active AS pckActive',
-        'brw.brand AS brndBrw',
-        'brw.active AS brwActive',
-        'fin.injection AS injection',
-        'fin.note'
-      )
-      .where('fin.active', '=', 'Yes')
-      .orderBy('fin.brand');
+    let { rows } = await db.raw(`
+      SELECT brw.id AS brw_id, brw.brand AS brand_brw, fin.id AS fin_id, fin.brand AS brand_fin, pck.id AS pck_id, pck.brand AS brand_pck, fin.injection, fin.active, fin.note, CAST(fin.updated_at::DATE AS text), fin.updated_by
+      FROM brnd_fin AS fin
+      LEFT OUTER JOIN brnd_brw AS brw ON brw.id = fin.brw_id
+      LEFT OUTER JOIN brnd_pck AS pck ON pck.fin_id = fin.id
+      WHERE fin.active = 'Yes'
+      ORDER BY fin.active DESC, fin.brand ASC;
+    `);
+    return rows;
   } else {
-    return db('brnd_fin AS fin')
-      .join('brnd_brw AS brw', 'fin.brw_id', '=', 'brw.id')
-      .leftOuterJoin('brnd_pck as pck', 'pck.fin_id', '=', 'fin.id')
-      .select(
-        'fin.brand AS brndFin',
-        'fin.active AS active',
-        'pck.brand AS brndPck',
-        'pck.active AS pckActive',
-        'brw.brand AS brndBrw',
-        'brw.active AS brwActive',
-        'fin.injection AS injection',
-        'fin.note'
-      )
-      .orderBy([{ column: 'fin.active', order: 'desc' }, { column: 'fin.brand' }]);
+    let { rows } = await db.raw(`
+      SELECT brw.id AS brw_id, brw.brand AS brand_brw, fin.id AS fin_id, fin.brand AS brand_fin, pck.id AS pck_id, pck.brand AS brand_pck, fin.injection, fin.active, fin.note, CAST(fin.updated_at::DATE AS text), fin.updated_by
+      FROM brnd_fin AS fin
+      LEFT OUTER JOIN brnd_brw AS brw ON brw.id = fin.brw_id
+      LEFT OUTER JOIN brnd_pck AS pck ON pck.fin_id = fin.id
+      WHERE fin.active = 'Yes' OR fin.active = 'No'
+      ORDER BY fin.active DESC, fin.brand ASC;
+    `);
+    return rows;
   }
 }
-function getAllFinIngredient(active) {
+async function getAllFinIngredient(active) {
   if (active) {
-    return db('brnd_fin AS fin').select('fin.id', 'fin.brand AS brndFin').where('fin.active', '=', 'Yes').andWhere('fin.injection', '=', 'Yes').orderBy('fin.brand');
+    let { rows } = await db.raw(`
+      SELECT id, brand AS brand_fin
+      FROM brnd_fin
+      WHERE injection = 'Yes' AND(active = 'Yes')
+      ORDER BY brand;
+    `);
+    return rows;
   } else {
-    return db('brnd_fin AS fin').select('fin.id', 'fin.brand AS brndFin').where('fin.injection', '=', 'Yes').orderBy('fin.brand');
+    let { rows } = await db.raw(`
+      SELECT id, brand AS brand_fin
+      FROM brnd_fin
+      WHERE injection = 'Yes' AND(active = 'Yes' OR active = 'No')
+      ORDER BY brand;
+    `);
+    return rows;
   }
 }
-function getBrandFinIngredient(brand) {
-  return db('brnd_fin as fin')
-    .join('fin_injection_bridge AS bridge', 'fin.id', '=', 'bridge.fin_id')
-    .join('mtl_commodity AS com', 'com.id', '=', 'bridge.com_id')
-    .select('bridge.fin_id', 'bridge.com_id', 'fin.brand', 'com.commodity', 'bridge.rate')
-    .where('fin.brand', '=', brand);
+async function getBrandFinIngredient(brand) {
+  let { rows } = await db.raw(`
+    SELECT fin.id AS fin_id, fin.brand AS brand_fin, com.id AS com_id, com.commodity, brg.rate
+    FROM brnd_fin AS fin
+    JOIN fin_injection_bridge AS brg ON brg.fin_id = fin.id
+    JOIN mtl_commodity AS com ON com.id = brg.com_id
+    WHERE fin.brand = '${brand}';
+  `);
+  return rows;
 }
-function getByNameFin(name) {
-  return db('brnd_fin AS fin')
-    .join('brnd_brw AS brw', 'fin.brw_id', '=', 'brw.id')
-    .leftOuterJoin('brnd_pck as pck', 'pck.fin_id', '=', 'fin.id')
-    .select(
-      'fin.brand AS brndFin',
-      'fin.active AS active',
-      'brw.brand AS brndBrw',
-      'brw.active AS brwActive',
-      'pck.brand AS brndPck',
-      'pck.active AS pckActive',
-      'fin.injection AS injection',
-      'fin.note'
-    )
-    .where({ 'fin.brand': name })
-    .first();
+async function getByNameFin(name) {
+  let { rows } = await db.raw(`
+    SELECT fin.brand AS brand_fin, fin.active AS act_fin, fin.injection, fin.note, brw.brand AS brand_brw, brw.active AS act_brw, pck.brand AS brand_pck, pck.active AS act_pck
+    FROM brnd_fin AS fin
+    JOIN brnd_brw AS brw ON brw.id = fin.brw_id
+    LEFT OUTER JOIN brnd_pck AS pck ON pck.fin_id = fin.id
+    WHERE fin.brand = '${name}';
+  `);
+  return rows;
 }
 async function changeFin(name, changes) {
-  await brwId(changes);
-  let response = await db('brnd_fin').where({ brand: name }).update(changes);
-  return getByNameFin(name);
+  let { rows } = await db.raw(`
+    UPDATE brnd_fin
+    SET (brw_id, active, injection, note, updated_by) =
+     ((SELECT id FROM brnd_brw WHERE brand = '${changes.brw_id}'), '${changes.active}', '${changes.injection}', '${changes.note}', '${changes.updated_by}')
+    WHERE brand = '${name}'
+    RETURNING brand;
+  `);
+  return rows;
 }
 async function destroyFin(name) {
   let remove = await db('brnd_fin').where('brand', name).del();
@@ -187,45 +182,57 @@ async function destroyFin(name) {
 }
 
 //Brand pck
-async function finId(data) {
-  let rtn = await db('brnd_fin').select('id').where('brand', data['fin_id']);
-  let { id } = rtn[0];
-  data['fin_id'] = id;
-  return data;
-}
 async function addPck(data) {
-  await finId(data);
-  const [{ brand }] = await db('brnd_pck').insert(data, ['brand']);
-  return getByNamePck(brand);
+  let { rows } = await db.raw(`
+    INSERT INTO
+    brnd_pck (fin_id, brand, active, note, updated_by)
+    VALUES((SELECT id FROM brnd_fin WHERE brand = '${data.fin_id}'), '${data.brand}', '${data.active}', '${data.note}', '${data.updated_by}')
+    RETURNING brand
+  `);
+  return rows;
 }
-function getAllPck(active) {
+async function getAllPck(active) {
   if (active) {
-    return db('brnd_fin AS fin')
-      .join('brnd_brw AS brw', 'fin.brw_id', '=', 'brw.id')
-      .join('brnd_pck as pck', 'pck.fin_id', '=', 'fin.id')
-      .select('pck.brand AS brndPck', 'pck.active as active', 'fin.brand AS brndFin', 'brw.brand AS brndBrw', 'pck.note')
-      .where('pck.active', '=', 'Yes')
-      .orderBy('pck.brand');
+    let { rows } = await db.raw(`
+      SELECT brw.id AS brw_id, brw.brand AS brand_brw, fin.id AS fin_id, fin.brand AS brand_fin, pck.id AS pck_id, pck.brand AS brand_pck, pck.active, pck.note, CAST(pck.updated_at::DATE AS text), pck.updated_by
+      FROM brnd_fin AS fin
+      LEFT OUTER JOIN brnd_brw AS brw ON brw.id = fin.brw_id
+      LEFT OUTER JOIN brnd_pck AS pck ON pck.fin_id = fin.id
+      WHERE pck.active = 'Yes'
+      ORDER BY pck.active DESC, pck.brand ASC;
+    `);
+    return rows;
   } else {
-    return db('brnd_fin AS fin')
-      .join('brnd_brw AS brw', 'fin.brw_id', '=', 'brw.id')
-      .join('brnd_pck as pck', 'pck.fin_id', '=', 'fin.id')
-      .select('pck.brand AS brndPck', 'pck.active as active', 'fin.brand AS brndFin', 'brw.brand AS brndBrw', 'pck.note')
-      .orderBy([{ column: 'pck.active', order: 'desc' }, { column: 'pck.brand' }]);
+    let { rows } = await db.raw(`
+      SELECT brw.id AS brw_id, brw.brand AS brand_brw, fin.id AS fin_id, fin.brand AS brand_fin, pck.id AS pck_id, pck.brand AS brand_pck, pck.active, pck.note, CAST(pck.updated_at::DATE AS text), pck.updated_by
+      FROM brnd_fin AS fin
+      LEFT OUTER JOIN brnd_brw AS brw ON brw.id = fin.brw_id
+      LEFT OUTER JOIN brnd_pck AS pck ON pck.fin_id = fin.id
+      WHERE pck.active = 'Yes' OR pck.active = 'No'
+      ORDER BY pck.active DESC, pck.brand ASC;
+    `);
+    return rows;
   }
 }
-function getByNamePck(name) {
-  return db('brnd_fin AS fin')
-    .join('brnd_brw AS brw', 'fin.brw_id', '=', 'brw.id')
-    .join('brnd_pck as pck', 'pck.fin_id', '=', 'fin.id')
-    .select('brw.brand AS brndBrw', 'fin.brand AS brndFin', 'pck.brand AS brndPck', 'pck.active AS active', 'pck.note')
-    .where({ 'pck.brand': name })
-    .first();
+async function getByNamePck(name) {
+  let { rows } = await db.raw(`
+    SELECT brw.brand AS brand_brw, fin.brand AS brand_fin, pck.brand AS brand_pck, pck.active, pck.note
+    FROM brnd_fin AS fin
+    JOIN brnd_brw AS brw ON fin.brw_id = brw.id
+    JOIN brnd_pck AS pck ON pck.fin_id = fin.id
+    WHERE pck.brand = '${name}'
+  `);
+  return rows;
 }
 async function changePck(name, changes) {
-  await finId(changes);
-  let response = await db('brnd_pck').where({ brand: name }).update(changes);
-  return getByNamePck(name);
+  let { rows } = await db.raw(`
+    UPDATE brnd_pck
+    SET (fin_id, active, note, updated_by) = 
+      ((SELECT id FROM brnd_fin WHERE brand = '${changes.fin_id}'), '${changes.active}', '${changes.note}', '${changes.updated_by}')
+    WHERE brand = '${name}'
+    RETURNING brand
+  `);
+  return rows;
 }
 async function destroyPck(name) {
   let remove = await db('brnd_pck').where('brand', name).del();
@@ -539,15 +546,6 @@ function patchFinInjection(changes) {
 function getAllMethod() {
   return db('methods_cold').orderBy('method');
 }
-
-// return db.transaction((trx) => {
-//   let queries = [];
-//   changes.forEach((data) => {
-//     const query = db('rel_post').where('fin_id', data.id_brnd).update(data.db, data.method).transacting(trx);
-//     queries.push(query);
-//   });
-//   Promise.all(queries).then(trx.commit).catch(trx.rollback);
-// });
 
 module.exports = {
   addBrw,

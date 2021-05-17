@@ -1,12 +1,11 @@
-const { DateTime } = require('luxon');
-
 // knex seed:run --specific brewplan.js
+const { DateTime } = require('luxon');
 
 Array.prototype.sample = function () {
   return this[Math.floor(Math.random() * this.length)];
 };
 
-const brw1 = ['BH40', 'BH50', 'PT90'];
+const brw1 = ['BG10', 'BH50', 'PT90'];
 const brw2 = ['NL50', 'EL20', 'GI19'];
 
 function getBrews(min, max) {

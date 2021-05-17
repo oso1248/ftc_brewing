@@ -9,6 +9,8 @@
     <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet" />
     <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
+
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="../../commonCSS/styles.css" />
     <link rel="stylesheet" href="../styles/users.css" />
@@ -25,10 +27,10 @@
       <nav class="main-nav">
         <ul class="">
           <li><a href="../../index.html">Home</a></li>
-          <li><a href="../../pgBrewhouse/brewhouse.html">Brewhouse</a></li>
-          <li><a href="../../pgFinishing/finishing.html">Finishing</a></li>
-          <li><a href="../../pgMaterials/material.html">Materials</a></li>
-          <li><a href="../admin.html">Admin</a></li>
+          <li style="display: none" id="perm2brw"><a href="../../pgBrewhouse/brewhouse.html">Brewhouse</a></li>
+          <li style="display: none" id="perm2fin"><a href="../../pgFinishing/finishing.html">Finishing</a></li>
+          <li style="display: none" id="perm3"><a href="../../pgMaterials/material.html">Materials</a></li>
+          <li style="display: none" id="perm4"><a href="../admin.html">Admin</a></li>
           <li><a id="logout">Log Out</a></li>
         </ul>
       </nav>
@@ -58,6 +60,12 @@
           </a>
         </div>
 
+        <div class="box" id="manpower">
+          <a href="./manpower.html" style="display: block">
+            <h3>Manpower</h3>
+          </a>
+        </div>
+
         <div class="box" id="delete">
           <a style="display: block">
             <h3>Delete User</h3>
@@ -73,86 +81,90 @@
 
     <div class="container2">
       <!-- start container2 -->
+      <div id="divAdd">
+        <form class="form" id="frmAdd" action="">
+          <h1>Add User</h1>
+          <div class="input">
+            <input type="text" id="username" placeholder="username" />
+          </div>
 
-      <form class="form" id="frmAdd" action="">
-        <h1>Add User</h1>
-        <div class="input">
-          <input type="text" id="username" placeholder="username" />
-        </div>
+          <div class="input">
+            <input type="text" id="email" placeholder="email" />
+          </div>
+          <div class="input">
+            <input type="text" id="password" placeholder="password" />
+          </div>
+          <div class="input">
+            <select name="" id="permissions">
+              <option value="" disabled selected hidden>Permission Level</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <div class="input">
+            <select name="breweryAdd" id="brewery_id">
+              <option value="" disabled selected hidden>Select Brewery</option>
+              <!-- append breweries -->
+            </select>
+          </div>
 
-        <div class="input">
-          <input type="text" id="email" placeholder="email" />
-        </div>
-        <div class="input">
-          <input type="text" id="password" placeholder="password" />
-        </div>
-        <div class="input">
-          <select name="" id="permissions">
-            <option value="" disabled selected hidden>Permission Level</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-        </div>
-        <div class="input">
-          <select name="breweryAdd" id="brewery_id">
-            <option value="" disabled selected hidden>Select Brewery</option>
-            <!-- append breweries -->
-          </select>
-        </div>
+          <div class="button">
+            <button class="btn" id="btnAddClear">Clear</button>
+            <button class="btn" id="btnAddSubmit">Add</button>
+          </div>
+        </form>
+      </div>
+      <div id="divUpdate">
+        <form class="form" id="frmUpdate" action="">
+          <h1>Update User</h1>
+          <div class="input">
+            <select name="updateUsers" id="username">
+              <!-- users appended here  -->
+            </select>
+          </div>
+          <div class="input">
+            <select name="updatePermissions" id="permissions">
+              <option value="" disabled selected hidden>Permissions</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <div class="input">
+            <select name="updateBreweries" id="brewery_id">
+              <!-- append breweries -->
+            </select>
+          </div>
 
-        <div class="button">
-          <button class="btn" id="btnAddClear">Clear</button>
-          <button class="btn" id="btnAddSubmit">Add</button>
-        </div>
-      </form>
+          <div class="button">
+            <button class="btn" id="btnUpdateClear">Clear</button>
+            <button class="btn" id="btnUpdateSubmit">Update</button>
+          </div>
+        </form>
+      </div>
+      <div id="divDelete">
+        <form class="form" id="frmDelete" action="">
+          <h1>Delete User</h1>
+          <div class="input">
+            <select name="deleteUsers" id="username">
+              <!-- users appended here  -->
+            </select>
+          </div>
 
-      <form class="form" id="frmUpdate" action="">
-        <h1>Update User</h1>
-        <div class="input">
-          <select name="updateUsers" id="username">
-            <!-- users appended here  -->
-          </select>
-        </div>
-        <div class="input">
-          <select name="updatePermissions" id="permissions">
-            <option value="" disabled selected hidden>Permissions</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-        </div>
-        <div class="input">
-          <select name="updateBreweries" id="brewery_id">
-            <!-- append breweries -->
-          </select>
-        </div>
-
-        <div class="button">
-          <button class="btn" id="btnUpdateClear">Clear</button>
-          <button class="btn" id="btnUpdateSubmit">Update</button>
-        </div>
-      </form>
-
-      <form class="form" id="frmDelete" action="">
-        <h1>Delete User</h1>
-        <div class="input">
-          <select name="deleteUsers" id="username">
-            <!-- users appended here  -->
-          </select>
-        </div>
-
-        <div class="button">
-          <button class="btn" id="btnDeleteClear">Clear</button>
-          <button class="btn" id="btnDeleteSubmit">Delete</button>
-        </div>
-      </form>
-
-      <div id="list"></div>
+          <div class="button">
+            <button class="btn" id="btnDeleteClear">Clear</button>
+            <button class="btn" id="btnDeleteSubmit">Delete</button>
+          </div>
+        </form>
+      </div>
+      <div id="divView">
+        <div id="list"></div>
+      </div>
     </div>
     <!-- end container2 -->
 

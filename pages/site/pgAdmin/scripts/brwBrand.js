@@ -34,6 +34,9 @@ String.prototype.toProperCase = function () {
 String.prototype.toNonAlpha = function () {
   return this.replace(/[^0-9a-z]/gi, '');
 };
+String.prototype.testLengthFour = function () {
+  return /^[^\s]{4}$/.test(this);
+};
 
 //Add
 document.getElementById('add').onclick = add;
@@ -68,7 +71,7 @@ async function sendAdd(ev) {
     axios
       .post('/api/brand/brw', data)
       .then((data) => {
-        alert(data.data.brand + ' has been added');
+        alert(`${data.data[0].brand} Has Been Added`);
         document.getElementById('frmAdd').reset();
       })
       .catch((err) => alert(err));
@@ -81,21 +84,19 @@ async function sendAdd(ev) {
   }
 }
 async function validateAdd(data) {
-  console.log('hello');
   let failures = [];
-  let name = data.brand;
-  if (!data.brand) {
-    failures.push({ input: 'brand', msg: 'Taken' });
+  if (!data.brand || data.brand === '') {
+    failures.push({ input: 'brand', msg: 'Required' });
+    data.brand = null;
+  } else if (!data.brand.testLengthFour()) {
+    failures.push({ input: 'brand', msg: '4 Characters Only' });
+    data.brand = null;
   } else {
     let query = '/api/brand/brw/name';
-    let res = await axios.post(query, { name: name });
-    if (res.data.msg !== 'null') {
-      failures.push({ input: 'brand', msg: 'Taken' });
+    let res = await axios.post(query, { name: data.brand }).catch((err) => alert(err));
+    if (res.data.length !== 0) {
+      failures.push({ input: res.data[0].brand, msg: 'Taken' });
     }
-  }
-  if (data.brand === '') {
-    failures.push({ input: 'brand', msg: 'Required Field' });
-    data.brand = null;
   }
   if (data.hop_std === '') {
     failures.push({ input: 'standard hops', msg: 'Required Field' });
@@ -142,14 +143,17 @@ document.getElementsByName('updateBrand')[0].addEventListener('change', selectBr
 function selectBrand() {
   let brand = document.getElementsByName('updateBrand')[0].value;
 
-  axios.post('/api/brand/brw/name', { name: brand }).then((data) => {
-    document.getElementsByName('updateStandard')[0].value = data.data.hop_std;
-    document.getElementsByName('updateCraft')[0].value = data.data.hop_crft;
-    document.getElementsByName('updateDry')[0].value = data.data.hop_dry;
-    document.getElementsByName('updateSuper')[0].value = data.data.supr_sac;
-    document.getElementsByName('updateActive')[0].value = data.data.active;
-    document.getElementsByName('updateNote')[0].value = data.data.note;
-  });
+  axios
+    .post('/api/brand/brw/name', { name: brand })
+    .then((data) => {
+      document.getElementsByName('updateStandard')[0].value = data.data[0].hop_std;
+      document.getElementsByName('updateCraft')[0].value = data.data[0].hop_crft;
+      document.getElementsByName('updateDry')[0].value = data.data[0].hop_dry;
+      document.getElementsByName('updateSuper')[0].value = data.data[0].supr_sac;
+      document.getElementsByName('updateActive')[0].value = data.data[0].active;
+      document.getElementsByName('updateNote')[0].value = data.data[0].note;
+    })
+    .catch((err) => alert(err));
 }
 document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate);
 async function sendUpdate(ev) {
@@ -171,7 +175,7 @@ async function sendUpdate(ev) {
     axios
       .patch('/api/brand/brw/' + brand, data)
       .then((data) => {
-        alert(data.data.brand + ' has been updated');
+        alert(`${data.data[0].brand} Has Been Updated`);
         document.getElementById('frmUpdate').reset();
       })
       .catch((err) => alert(err));
@@ -233,15 +237,17 @@ function view() {
         layout: 'fitDataStretch',
         data: tableData,
         columns: [
-          { title: 'Brand', field: 'brand', hozAlign: 'center' },
+          { title: 'Brand', field: 'brand', hozAlign: 'center', frozen: true },
           { title: 'Active', field: 'active', hozAlign: 'center' },
           { title: 'Standard Hops', field: 'hop_std', hozAlign: 'center' },
           { title: 'Craft Hops', field: 'hop_crft', hozAlign: 'center' },
           { title: 'Dry Hops', field: 'hop_dry', hozAlign: 'center' },
           { title: 'Super Sacks', field: 'supr_sac', hozAlign: 'center' },
-          { title: 'Note', field: 'note', hozAlign: 'left' },
+          { title: 'Updated', field: 'updated_at', hozAlign: 'left' },
+          { title: 'Updated By', field: 'updated_by', hozAlign: 'left' },
+          { title: 'Note', field: 'note', hozAlign: 'left', formatter: 'textarea' },
         ],
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => alert(err));
 }

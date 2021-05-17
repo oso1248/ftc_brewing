@@ -84,7 +84,7 @@ function loadCommodities() {
   const commodities = document.getElementsByName('addCommodity')[0];
   commodities.innerHTML = `<option value="" disabled selected hidden>Select Commodity</option>`;
   axios
-    .post('/api/commodity/get/type/hop', { active: false })
+    .post('/api/commodity/get/type/hop', { active: true })
     .then((data) => {
       let commodity = data.data;
       return commodity.map((listItem) => {
@@ -100,7 +100,7 @@ function loadCommodities() {
 let commodityTable;
 function commodityList() {
   axios
-    .post('/api/commodity/get/type/hop', { active: false })
+    .post('/api/commodity/get/type/hop', { active: true })
     .then((res) => {
       let tableData = res.data;
 
@@ -132,7 +132,7 @@ function inventoryList() {
       let tableData = res.data;
       inventoryTable = new Tabulator('#invList', {
         resizableColumns: false,
-        selectable: true,
+        selectable: 1,
         height: '330px',
         layout: 'fitDataFill',
         data: tableData,
@@ -203,20 +203,23 @@ async function selectCommodity() {
   loadLots(commodity);
 }
 function loadForm(commodity) {
-  axios.post('/api/commodity/name', { name: `${commodity}` }).then((data) => {
-    document.getElementById('per_pallet').value = data.data.per_pallet;
-    document.getElementById('per_unit').value = data.data.unit_total;
-    document.getElementById('note').value = data.data.note;
+  axios
+    .post('/api/commodity/name', { name: `${commodity}` })
+    .then((data) => {
+      document.getElementById('per_pallet').value = data.data[0].per_pallet;
+      document.getElementById('per_unit').value = data.data[0].unit_total;
+      document.getElementById('note').value = data.data[0].note;
 
-    document.getElementById('pallet_count').value = '';
-    document.getElementById('lbs').value = '';
-    document.getElementById('lot').value = '';
+      document.getElementById('pallet_count').value = '';
+      document.getElementById('lbs').value = '';
+      document.getElementById('lot').value = '';
 
-    if (data.data.active === 'No') {
-      let msg = `${data.data.commodity} is Active No.\nOnly Add to Inventory if Needed.`;
-      alert(msg);
-    }
-  });
+      if (data.data.active === 'No') {
+        let msg = `${data.data.commodity} is Active No.\nOnly Add to Inventory if Needed.`;
+        alert(msg);
+      }
+    })
+    .catch((err) => console.log(err));
 }
 async function loadLots(commodity) {
   let dropDown = document.getElementById('lots');

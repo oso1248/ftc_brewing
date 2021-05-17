@@ -17,6 +17,13 @@ exports.up = async function (knex) {
 
   //commodities
   await knex.raw(`
+    CREATE TRIGGER insert_commodity_trigger
+    AFTER INSERT
+    ON mtl_commodity
+    FOR EACH ROW
+    EXECUTE PROCEDURE insert_commodity();
+  `);
+  await knex.raw(`
     CREATE TRIGGER update_timestamp
     BEFORE UPDATE
     ON mtl_uom
@@ -66,7 +73,21 @@ exports.up = async function (knex) {
     EXECUTE PROCEDURE update_timestamp();
   `);
 
-  //fin_data
+  //brands
+  await knex.raw(`
+    CREATE TRIGGER insert_brw_brand_trigger
+    AFTER INSERT
+    ON brnd_brw
+    FOR EACH ROW
+    EXECUTE PROCEDURE insert_brw_brand();
+  `);
+  await knex.raw(`
+    CREATE TRIGGER insert_fin_brand_trigger
+    AFTER INSERT
+    ON brnd_fin
+    FOR EACH ROW
+    EXECUTE PROCEDURE insert_fin_brand();
+  `);
   await knex.raw(`
     CREATE TRIGGER update_timestamp
     BEFORE UPDATE

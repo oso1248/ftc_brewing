@@ -143,7 +143,7 @@ async function sendAdd(ev) {
     axios
       .post('/api/commodity', data)
       .then((data) => {
-        alert(data.data.commodity + ' has been added');
+        alert(`${data.data[0].commodity} Has Been Added`);
         document.getElementById('frmAdd').reset();
       })
       .catch((err) => alert(err));
@@ -297,19 +297,19 @@ function selectCommodity() {
   axios
     .post('/api/commodity/name', { name: `${commodity}` })
     .then((data) => {
-      document.getElementById(data.data.location).selected = 'selected';
-      document.getElementById(data.data.type).selected = 'selected';
-      document.getElementById(data.data.company).selected = 'selected';
-      document.getElementById(data.data.enviro).selected = 'selected';
-      document.getElementById(data.data.container).selected = 'selected';
-      document.getElementById(data.data.uom).selected = 'selected';
-      document.getElementById(data.data.inventory).selected = 'selected';
-      document.getElementsByName('updateSap')[0].value = data.data.sap;
-      document.getElementsByName('updateActive')[0].value = data.data.active;
-      document.getElementsByName('updateThreshold')[0].value = data.data.threshold;
-      document.getElementsByName('updatePer_pallet')[0].value = data.data.per_pallet;
-      document.getElementsByName('updateUnit_total')[0].value = data.data.unit_total;
-      document.getElementsByName('updateNote')[0].value = data.data.note;
+      document.getElementById(data.data[0].location).selected = 'selected';
+      document.getElementById(data.data[0].type).selected = 'selected';
+      document.getElementById(data.data[0].company).selected = 'selected';
+      document.getElementById(data.data[0].enviro).selected = 'selected';
+      document.getElementById(data.data[0].container).selected = 'selected';
+      document.getElementById(data.data[0].uom).selected = 'selected';
+      document.getElementById(data.data[0].inventory).selected = 'selected';
+      document.getElementsByName('updateSap')[0].value = data.data[0].sap;
+      document.getElementsByName('updateActive')[0].value = data.data[0].active;
+      document.getElementsByName('updateThreshold')[0].value = data.data[0].threshold;
+      document.getElementsByName('updatePer_pallet')[0].value = data.data[0].per_pallet;
+      document.getElementsByName('updateUnit_total')[0].value = data.data[0].unit_total;
+      document.getElementsByName('updateNote')[0].value = data.data[0].note;
     })
     .catch((err) => alert(err));
 }
@@ -332,7 +332,7 @@ async function sendUpdate(ev) {
     axios
       .patch('/api/commodity/' + name, data)
       .then((data) => {
-        alert(data.data.commodity + ' updated');
+        alert(`${data.data[0].commodity} Has Been Updated`);
         document.getElementById('frmUpdate').reset();
       })
       .catch((err) => alert(err));
@@ -439,7 +439,7 @@ function loadView() {
       commodityTable = new Tabulator('#list', {
         printHeader: '<h1>Commodity List<h1>',
         resizableColumns: false,
-        height: '330px',
+        height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
@@ -449,18 +449,20 @@ function loadView() {
             hozAlign: 'center',
             frozen: true,
           },
-          { title: 'SAP', field: 'sap', hozAlign: 'center' },
-          { title: 'Active', field: 'active', hozAlign: 'center' },
-          { title: 'Inventory', field: 'inventory', hozAlign: 'center' },
-          { title: 'Location', field: 'location', hozAlign: 'center' },
-          { title: 'Company', field: 'company', hozAlign: 'center' },
-          { title: 'Type', field: 'type', hozAlign: 'center' },
-          { title: 'Container', field: 'container', hozAlign: 'center' },
-          { title: 'Environmental', field: 'enviro', hozAlign: 'center' },
-          { title: 'Threshold', field: 'threshold', hozAlign: 'center' },
-          { title: 'Per Pallet', field: 'per_pallet', hozAlign: 'center' },
-          { title: 'Unit Total', field: 'unit_total', hozAlign: 'center' },
-          { title: 'UOM', field: 'uom', hozAlign: 'center' },
+          { title: 'SAP', field: 'sap', hozAlign: 'left' },
+          { title: 'Active', field: 'active', hozAlign: 'left' },
+          { title: 'Inventory', field: 'inventory', hozAlign: 'left' },
+          { title: 'Location', field: 'location', hozAlign: 'left' },
+          { title: 'Company', field: 'company', hozAlign: 'left' },
+          { title: 'Type', field: 'type', hozAlign: 'left' },
+          { title: 'Container', field: 'container', hozAlign: 'left' },
+          { title: 'Environmental', field: 'enviro', hozAlign: 'left' },
+          { title: 'Threshold', field: 'threshold', hozAlign: 'left' },
+          { title: 'Per Pallet', field: 'per_pallet', hozAlign: 'left' },
+          { title: 'Unit Total', field: 'unit_total', hozAlign: 'left' },
+          { title: 'UOM', field: 'uom', hozAlign: 'left' },
+          { title: 'Updated', field: 'updated_at', hozAlign: 'left' },
+          { title: 'Updated By', field: 'updated_by', hozAlign: 'left' },
           { title: 'Note', field: 'note', hozAlign: 'left' },
         ],
       });

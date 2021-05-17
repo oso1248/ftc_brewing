@@ -59,7 +59,10 @@ function viewBrandBrew() {
           { title: 'Standard Hops', field: 'hop_std', hozAlign: 'center' },
           { title: 'Craft Hops', field: 'hop_crft', hozAlign: 'center' },
           { title: 'Dry Hops', field: 'hop_dry', hozAlign: 'center' },
-          { title: 'Super Sacks', field: 'supr_sac', hozAlign: 'left' },
+          { title: 'Super Sacks', field: 'supr_sac', hozAlign: 'center' },
+          { title: 'Updated', field: 'updated_at', hozAlign: 'left' },
+          { title: 'Updated By', field: 'updated_by', hozAlign: 'left' },
+          { title: 'Note', field: 'note', hozAlign: 'left' },
         ],
       });
     })

@@ -5,6 +5,7 @@ const router = express.Router();
 // -> /api/commodity
 
 router.post('/', (req, res) => {
+  req.body.updated_by = req.session.user.username;
   db.add(req.body)
     .then((data) => {
       res.status(200).json(data);
@@ -57,6 +58,7 @@ router.post('/get/container/:container', (req, res) => {
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
 router.patch('/:name', (req, res) => {
+  req.body.updated_by = req.session.user.username;
   db.change(req.params.name, req.body)
     .then((data) => {
       if (data) {

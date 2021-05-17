@@ -1,6 +1,19 @@
 document.getElementById('submit').addEventListener('click', login);
 const api = '/api/auth/login';
 
+function setCookie(cookieName, cookieValue, hoursToExpire, path, domain) {
+  let date = new Date();
+  date.setTime(date.getTime() + hoursToExpire * 60 * 60 * 1000);
+  document.cookie = cookieName + '=' + cookieValue + '; expires=' + date.toGMTString() + 'path=' + path + 'domain=' + domain;
+}
+function getCookie(cookieName) {
+  var cookieValue = document.cookie.match('(^|;)\\s*' + cookieName + '\\s*=\\s*([^;]+)');
+  return cookieValue ? cookieValue.pop() : '';
+}
+function deleteCookie(cookieName) {
+  document.cookie = cookieName + '=; max-age=0; expires=0';
+}
+
 function login(ev) {
   ev.preventDefault();
   ev.stopPropagation();
@@ -24,8 +37,9 @@ function login(ev) {
   })
     .then((res) => res.json())
     .then((data) => {
-      let { msg } = data;
+      let { msg, permissions } = data;
       if (msg === 'pass') {
+        setCookie('perm', permissions, '4321');
         window.location.href = '../index.html';
       } else {
         alert('Invalid username or password');

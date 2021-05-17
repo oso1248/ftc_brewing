@@ -27,4 +27,33 @@ async function destroy(name) {
   return getByName(name);
 }
 
-module.exports = { add, getAll, getByName, change, destroy };
+async function addManpower(data) {
+  let { rows } = await db.raw(`
+    INSERT INTO manpower (brewer, position, shift, note, updated_by)
+    VALUES  ('${data.brewer}', '${data.position}', '${data.shift}', '${data.note}', '${data.updated_by}')
+    RETURNING brewer, position
+  `);
+  return rows;
+}
+
+async function getManpower(data) {
+  let { rows } = await db.raw(`
+    SELECT id, brewer, position, note, shift
+    FROM manpower
+    WHERE shift = '${data.shift}' AND created_at >= '${data.start}' AND created_at <= '${data.stop}'
+    ORDER BY brewer;
+  `);
+  return rows;
+}
+
+async function deleteManpower(id) {
+  let { rows } = await db.raw(`
+    DELETE
+    FROM manpower
+    WHERE id = ${id}
+    RETURNING brewer, position
+  `);
+  return rows;
+}
+
+module.exports = { add, getAll, getByName, change, destroy, addManpower, getManpower, deleteManpower };

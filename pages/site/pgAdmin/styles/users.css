@@ -50,6 +50,12 @@ tabulator-print-footer {
   text-align: center;
 }
 
+#tables {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
 @media (max-width: 850px) {
   .form input,
   textarea,
@@ -62,6 +68,11 @@ tabulator-print-footer {
   }
   #note {
     width: 70%;
+  }
+  #tables {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (max-width: 700px) {
@@ -79,5 +90,10 @@ tabulator-print-footer {
   }
   .supplier {
     font-size: 12px;
+  }
+  #tables {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(1, 1fr);
   }
 }

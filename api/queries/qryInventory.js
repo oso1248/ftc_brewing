@@ -289,7 +289,6 @@ async function deleteBucketHopsWeekly(data) {
   `);
 }
 async function sendBucketHopsWeekly(sendData) {
-  console.log('send');
   await db.raw(`
     INSERT INTO inv_hop_weekly (com_id, lbs, lot, username, note)
     VALUES ${sendData};
@@ -507,7 +506,6 @@ async function addInvHopWSetsCombined(data, username) {
   sendBucketHopsCombined(sendData);
 }
 async function deleteBucketHopsCombined(data) {
-  console.log(data[1]);
   await db.raw(`
     BEGIN;
       DELETE

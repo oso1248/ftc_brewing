@@ -1,7 +1,16 @@
-document.getElementById('frmAdd').style.display = 'none';
-document.getElementById('frmUpdate').style.display = 'none';
-document.getElementById('frmDelete').style.display = 'none';
-document.getElementById('list').style.display = 'none';
+let DateTime = luxon.DateTime;
+let timeNow;
+
+document.getElementById('divAdd').style.display = 'none';
+document.getElementById('divUpdate').style.display = 'none';
+document.getElementById('divDelete').style.display = 'none';
+document.getElementById('divView').style.display = 'none';
+
+String.prototype.toProperCase = function () {
+  return this.replace(/\w\S*/g, function (txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+};
 
 function createNode(element) {
   return document.createElement(element);
@@ -30,10 +39,10 @@ function createList(api, parent, title) {
 // Add
 document.getElementById('add').onclick = add;
 function add() {
-  document.getElementById('frmUpdate').style.display = 'none';
-  document.getElementById('frmDelete').style.display = 'none';
-  document.getElementById('list').style.display = 'none';
-  document.getElementById('frmAdd').style.display = 'block';
+  document.getElementById('divUpdate').style.display = 'none';
+  document.getElementById('divView').style.display = 'none';
+  document.getElementById('divDelete').style.display = 'none';
+  document.getElementById('divAdd').style.display = 'block';
 
   let dropDown = document.getElementById('brewery_id');
   dropDown.innerHTML = `<option value="" id="updateBrewery" disabled selected hidden>Select Brewery</option>`;
@@ -43,7 +52,7 @@ function add() {
 }
 document.getElementById('btnAddClear').addEventListener('click', (ev) => {
   ev.preventDefault();
-  document.getElementById('frmAdd').reset();
+  document.getElementById('divAdd').reset();
 });
 document.getElementById('btnAddSubmit').addEventListener('click', sendAdd);
 async function sendAdd(ev) {
@@ -59,6 +68,7 @@ async function sendAdd(ev) {
   }
 
   let fails = await validateAdd(data);
+  console.table(data);
   if (fails.length === 0) {
     axios
       .post('/api/user', data)
@@ -112,10 +122,10 @@ async function validateAdd(data) {
 // Update
 document.getElementById('update').onclick = update;
 function update() {
-  document.getElementById('frmAdd').style.display = 'none';
-  document.getElementById('frmDelete').style.display = 'none';
-  document.getElementById('list').style.display = 'none';
-  document.getElementById('frmUpdate').style.display = 'block';
+  document.getElementById('divAdd').style.display = 'none';
+  document.getElementById('divView').style.display = 'none';
+  document.getElementById('divDelete').style.display = 'none';
+  document.getElementById('divUpdate').style.display = 'block';
 
   let dropDown = document.getElementsByName('updateUsers')[0];
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select User</option>`;
@@ -131,14 +141,14 @@ function update() {
 }
 document.getElementById('btnUpdateClear').addEventListener('click', (ev) => {
   ev.preventDefault();
-  document.getElementById('frmUpdate').reset();
+  document.getElementById('divUpdate').reset();
 });
 document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate);
 async function sendUpdate(ev) {
   ev.preventDefault();
   ev.stopPropagation();
 
-  let form = document.getElementById('frmUpdate');
+  let form = document.getElementById('divUpdate');
   let data = {};
   let i;
   for (i = 1; i < form.length - 2; i++) {
@@ -188,10 +198,10 @@ function validateUpdate(data) {
 // View
 document.getElementById('view').onclick = view;
 function view() {
-  document.getElementById('frmAdd').style.display = 'none';
-  document.getElementById('frmDelete').style.display = 'none';
-  document.getElementById('frmUpdate').style.display = 'none';
-  document.getElementById('list').style.display = 'block';
+  document.getElementById('divAdd').style.display = 'none';
+  document.getElementById('divDelete').style.display = 'none';
+  document.getElementById('divUpdate').style.display = 'none';
+  document.getElementById('divView').style.display = 'block';
 
   viewUsers();
 }
@@ -203,7 +213,7 @@ function viewUsers() {
       let tableData = res.data;
 
       userTable = new Tabulator('#list', {
-        height: '309px',
+        height: '100%',
         layout: 'fitDataFill',
         resizableColumns: false,
         data: tableData,
@@ -218,13 +228,15 @@ function viewUsers() {
     .catch((err) => console.log(err.detail));
 }
 
+// Manpower
+
 // Delete
 document.getElementById('delete').onclick = del;
 function del() {
-  document.getElementById('frmAdd').style.display = 'none';
-  document.getElementById('frmUpdate').style.display = 'none';
-  document.getElementById('frmDelete').style.display = 'block';
-  document.getElementById('list').style.display = 'none';
+  document.getElementById('divAdd').style.display = 'none';
+  document.getElementById('divView').style.display = 'none';
+  document.getElementById('divUpdate').style.display = 'none';
+  document.getElementById('divDelete').style.display = 'block';
 
   let dropDown = document.getElementsByName('deleteUsers')[0];
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select User</option>`;
@@ -234,7 +246,7 @@ function del() {
 }
 document.getElementById('btnDeleteClear').addEventListener('click', (ev) => {
   ev.preventDefault();
-  document.getElementById('frmDelete').reset();
+  document.getElementById('divDelete').reset();
 });
 document.getElementById('btnDeleteSubmit').addEventListener('click', sendDelete);
 function sendDelete(ev) {

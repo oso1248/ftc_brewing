@@ -30,7 +30,7 @@ router.post('/login', (req, res) => {
           permissions: user.permissions,
         };
 
-        res.status(200).json({ msg: 'pass' });
+        res.status(200).json({ msg: 'pass', permissions: req.session.user.permissions });
       } else {
         res.status(400).json({ msg: 'invalid credentials' });
       }
@@ -52,6 +52,24 @@ router.post('/logout', (req, res) => {
       }
     });
   });
+});
+
+// Manpower
+async function getManpower(data) {
+  let { rows } = await db.raw(`
+    SELECT id, brewer, position, note, shift
+    FROM manpower
+    WHERE shift = '${data.shift}' AND created_at >= '${data.start}' AND created_at <= '${data.stop}'
+    ORDER BY brewer;
+  `);
+  return rows;
+}
+router.post('/manpower/get', (req, res) => {
+  getManpower(req.body)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => res.status(500).json({ msg: err.detail }));
 });
 
 module.exports = router;

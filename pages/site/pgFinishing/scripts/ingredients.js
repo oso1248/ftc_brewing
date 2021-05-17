@@ -132,7 +132,7 @@ function add() {
 
   dropDown.innerHTML = `<option value="Selected" hidden disabled selected>Select Brand</option>`;
   let api = '/api/brand/fin/ingredient/get';
-  let title = 'brndFin';
+  let title = 'brand_fin';
   createList(api, dropDown, title);
 
   dropDown = document.getElementById('fbt1List');
@@ -346,9 +346,9 @@ function finInjectionWeekly() {
         elem.created_at = DateTime.fromISO(elem.created_at).toFormat('yyyy-MM-dd HH:mm');
       });
       tableWeekly = new Tabulator('#tableWeekly', {
-        printHeader: '<h1>Weekly Ing Addition<h1>',
+        printHeader: `<h1>Weekly Ing Addition: ${date}<h1>`,
         resizableColumns: false,
-        height: '500px',
+        height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [
@@ -414,9 +414,9 @@ function finInjectionMonthly() {
         elem.created_at = DateTime.fromISO(elem.created_at).toFormat('yyyy-MM-dd HH:mm');
       });
       tableMonthly = new Tabulator('#tableMonthly', {
-        printHeader: '<h1>Monthly Ing Addition<h1>',
+        printHeader: `<h1>Monthly Ing Addition: ${date}<h1>`,
         resizableColumns: false,
-        height: '500px',
+        height: '100%',
         layout: 'fitDataFill',
         data: tableData,
         columns: [

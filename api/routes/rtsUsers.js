@@ -57,4 +57,31 @@ router.delete('/:name', (req, res) => {
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
 
+router.post('/manpower/add', (req, res) => {
+  req.body.updated_by = req.session.user.username;
+  db.addManpower(req.body)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => res.status(500).json({ msg: err.detail }));
+});
+router.post('/manpower/get', (req, res) => {
+  db.getManpower(req.body)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => res.status(500).json({ msg: err.detail }));
+});
+router.delete('/manpower/delete', (req, res) => {
+  db.deleteManpower(req.body.id)
+    .then((data) => {
+      if (!data) {
+        res.status(200).json({ msg: 'deleted' });
+      } else {
+        res.status(200).json(data);
+      }
+    })
+    .catch((err) => res.status(500).json({ msg: err.detail }));
+});
+
 module.exports = router;

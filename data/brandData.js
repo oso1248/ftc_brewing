@@ -1,6 +1,6 @@
 const brnd_brw = [
   {
-    brand: 'BH40',
+    brand: 'BB10',
     hop_std: 'Yes',
     hop_crft: 'No',
     hop_dry: 'No',
@@ -8,7 +8,7 @@ const brnd_brw = [
     active: 'Yes',
   },
   {
-    brand: 'BH50',
+    brand: 'BC10',
     hop_std: 'Yes',
     hop_crft: 'No',
     hop_dry: 'No',
@@ -16,7 +16,7 @@ const brnd_brw = [
     active: 'Yes',
   },
   {
-    brand: 'NL50',
+    brand: 'BD10',
     hop_std: 'Yes',
     hop_crft: 'No',
     hop_dry: 'No',
@@ -24,7 +24,7 @@ const brnd_brw = [
     active: 'Yes',
   },
   {
-    brand: 'PT90',
+    brand: 'BE10',
     hop_std: 'Yes',
     hop_crft: 'No',
     hop_dry: 'No',
@@ -32,7 +32,7 @@ const brnd_brw = [
     active: 'Yes',
   },
   {
-    brand: 'EL20',
+    brand: 'BF10',
     hop_std: 'Yes',
     hop_crft: 'Yes',
     hop_dry: 'No',
@@ -40,7 +40,7 @@ const brnd_brw = [
     active: 'Yes',
   },
   {
-    brand: 'GI19',
+    brand: 'BG10',
     hop_std: 'Yes',
     hop_crft: 'Yes',
     hop_dry: 'Yes',
@@ -50,25 +50,25 @@ const brnd_brw = [
 ];
 
 const brnd_fin = [
-  { brand: 'HBBL', brw_id: 1, active: 'Yes', injection: 'No' },
-  { brand: 'HBUD', brw_id: 2, active: 'Yes', injection: 'No' },
-  { brand: 'HBNL', brw_id: 3, active: 'Yes', injection: 'No' },
-  { brand: 'HBNS', brw_id: 3, active: 'Yes', injection: 'Yes' },
-  { brand: 'EBIN', brw_id: 3, active: 'Yes', injection: 'No' },
-  { brand: 'PTHD', brw_id: 4, active: 'Yes', injection: 'Yes' },
-  { brand: 'ELSP', brw_id: 5, active: 'Yes', injection: 'No' },
-  { brand: '9GNC', brw_id: 6, active: 'Yes', injection: 'No' },
+  { brand: 'FB10', brw_id: 1, active: 'Yes', injection: 'No' },
+  { brand: 'FC10', brw_id: 2, active: 'Yes', injection: 'No' },
+  { brand: 'FD10', brw_id: 3, active: 'Yes', injection: 'No' },
+  { brand: 'FD20', brw_id: 3, active: 'Yes', injection: 'Yes' },
+  { brand: 'FB30', brw_id: 3, active: 'Yes', injection: 'No' },
+  { brand: 'FE10', brw_id: 4, active: 'Yes', injection: 'Yes' },
+  { brand: 'BF10', brw_id: 5, active: 'Yes', injection: 'No' },
+  { brand: 'FG10', brw_id: 6, active: 'Yes', injection: 'No' },
 ];
 
 const brnd_pck = [
-  { brand: 'BDL5', fin_id: 1, active: 'Yes' },
-  { brand: 'BUD5', fin_id: 2, active: 'Yes' },
-  { brand: 'ABN5', fin_id: 3, active: 'Yes' },
-  { brand: 'NLS5', fin_id: 4, active: 'Yes' },
-  { brand: 'NTI6', fin_id: 5, active: 'Yes' },
-  { brand: 'BLP6', fin_id: 6, active: 'Yes' },
-  { brand: 'ES18', fin_id: 7, active: 'Yes' },
-  { brand: 'GNX7', fin_id: 8, active: 'Yes' },
+  { brand: 'BP10', fin_id: 1, active: 'Yes' },
+  { brand: 'PC10', fin_id: 2, active: 'Yes' },
+  { brand: 'PD10', fin_id: 3, active: 'Yes' },
+  { brand: 'PD20', fin_id: 4, active: 'Yes' },
+  { brand: 'PD30', fin_id: 5, active: 'Yes' },
+  { brand: 'PE10', fin_id: 6, active: 'Yes' },
+  { brand: 'PF10', fin_id: 7, active: 'Yes' },
+  { brand: 'PG10', fin_id: 8, active: 'Yes' },
 ];
 
 const fin_smpl = [

@@ -11,6 +11,68 @@ exports.up = async function (knex) {
     END;
     $$;
   `);
+  // commodity insert
+  await knex.raw(`
+    CREATE OR REPLACE FUNCTION insert_commodity() RETURNS TRIGGER
+    LANGUAGE plpgsql
+    AS
+    $$
+    BEGIN
+      INSERT INTO mtx_hop_dry (com_id) VALUES (new.id);
+      INSERT INTO mtx_hop_std (com_id) VALUES (new.id);
+      INSERT INTO mtx_material (com_id) VALUES (new.id);
+      INSERT INTO mtx_sac_supr (com_id) VALUES (new.id);
+    RETURN NULL;
+    END;
+    $$;
+  `);
+  // brands
+  await knex.raw(`
+    CREATE OR REPLACE FUNCTION insert_brw_brand() RETURNS TRIGGER
+    LANGUAGE plpgsql
+    AS
+    $$
+    DECLARE 
+	    col_name TEXT;
+    BEGIN
+	    col_name  = new.brand;
+
+      INSERT INTO csx_pre (brw_id) VALUES (new.id);
+      INSERT INTO csx_post (brw_id) VALUES (new.id);
+      INSERT INTO chp_params (brw_id) VALUES (new.id);
+      INSERT INTO chp_smpl (brw_id) VALUES (new.id);
+      INSERT INTO sch_params (brw_id) VALUES (new.id);
+      INSERT INTO sch_smpl (brw_id) VALUES (new.id);
+      INSERT INTO acx_pre (brw_id) VALUES (new.id);
+      INSERT INTO acx_post (brw_id) VALUES (new.id);
+      
+      EXECUTE 'ALTER TABLE mtx_hop_dry ADD COLUMN "' || col_name || '" NUMERIC(50,2) NOT NULL DEFAULT 0';
+      EXECUTE 'ALTER TABLE mtx_hop_std ADD COLUMN "' || col_name || '" NUMERIC(50,2) NOT NULL DEFAULT 0';
+      EXECUTE 'ALTER TABLE mtx_material ADD COLUMN "' || col_name || '" NUMERIC(50,2) NOT NULL DEFAULT 0';
+      EXECUTE 'ALTER TABLE mtx_sac_supr ADD COLUMN "' || col_name || '" NUMERIC(50,2) NOT NULL DEFAULT 0';
+	  
+    RETURN NULL;
+    END;
+    $$;
+  `);
+  await knex.raw(`
+    CREATE OR REPLACE FUNCTION insert_fin_brand() RETURNS TRIGGER
+    LANGUAGE plpgsql
+    AS
+    $$
+    BEGIN
+
+      INSERT INTO fin_smpl (fin_id) VALUES (new.id);
+      INSERT INTO fin_params (fin_id) VALUES (new.id);
+      INSERT INTO rel_pre (fin_id) VALUES (new.id);
+      INSERT INTO rel_post (fin_id) VALUES (new.id);
+      INSERT INTO fltr_pre (fin_id) VALUES (new.id);
+      INSERT INTO fltr_post (fin_id) VALUES (new.id);
+      
+    RETURN NULL;
+    END;
+    $$;
+  `);
   // inv_mat_weekly delete old records
   await knex.raw(`
     CREATE OR REPLACE FUNCTION delete_old_rows_inv_mat_weekly() RETURNS TRIGGER
@@ -198,6 +260,15 @@ exports.up = async function (knex) {
 exports.down = async function (knex) {
   await knex.raw(`
     DROP FUNCTION IF EXISTS update_timestamp() CASCADE;
+  `);
+  await knex.raw(`
+    DROP FUNCTION IF EXISTS insert_commodity() CASCADE;
+  `);
+  await knex.raw(`
+    DROP FUNCTION IF EXISTS insert_fin_brand() CASCADE;
+  `);
+  await knex.raw(`
+    DROP FUNCTION IF EXISTS insert_brw_brand() CASCADE;
   `);
   await knex.raw(`
     DROP FUNCTION IF EXISTS delete_old_rows_inv_mat_weekly() CASCADE;

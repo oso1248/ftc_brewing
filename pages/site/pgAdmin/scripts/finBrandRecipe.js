@@ -36,7 +36,7 @@ function updateView() {
 
   let dropDown = document.getElementById('finBrandUpdate');
   let api = '/api/brand/fin/get/';
-  let title = 'brndFin';
+  let title = 'brand_fin';
   dropDown.innerHTML = `<option value="" disabled selected hidden>Finished</option>`;
   createListBrwBrand(api, dropDown, title);
 
@@ -219,7 +219,7 @@ function viewView() {
   document.getElementById('chpViewBox').style.display = 'none';
 
   let api = '/api/brand/fin/get/';
-  let title = 'brndFin';
+  let title = 'brand_fin';
   let dropDown = document.getElementById('finBrandView');
   dropDown.innerHTML = `<option value="" disabled selected hidden>Finished</option>`;
   createListBrwBrand(api, dropDown, title);

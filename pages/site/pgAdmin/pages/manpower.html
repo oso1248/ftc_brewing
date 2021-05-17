@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height" />
+
+    <title>Bug Report</title>
+
+    <link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href="../../commonCSS/styles.css" />
+    <link rel="stylesheet" href="../styles/manpower.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <nav class="main-nav">
+      <ul class="">
+        <li><a id="btnBack">Back</a></li>
+      </ul>
+    </nav>
+    <div class="spacer"></div>
+    <div class="container2">
+      <div id="divManpower">
+        <form class="form" id="frmManpower" action="">
+          <h3>Manpower Update</h3>
+          <div class="tooltip input">
+            <span class="tooltiptext"></span>
+            <input type="text" name="" id="brewer" placeholder="Brewer" />
+          </div>
+          <div class="tooltip input">
+            <span class="tooltiptext"></span>
+            <input type="text" name="" id="position" placeholder="Position" />
+          </div>
+          <div class="input">
+            <select name="" id="shift">
+              <option value="" disabled selected hidden>Shift</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+            </select>
+          </div>
+          <div class="input">
+            <textarea name="note" id="note" cols="21" rows="5" placeholder="Note"></textarea>
+          </div>
+          <div class="button">
+            <button class="btn" id="btnManAddClear">Clear</button>
+            <button class="btn" id="btnManAddSubmit">Upload</button>
+          </div>
+        </form>
+        <div class="spacer"></div>
+        <div class="spacer"></div>
+        <div id="tables">
+          <div id="midShift">
+            <h3 id="timeMids">Mids</h3>
+            <div id="tblMid"></div>
+            <div class="button">
+              <button class="btn" id="deleteMid">Delete</button>
+            </div>
+          </div>
+          <div class="spacer"></div>
+          <div class="spacer"></div>
+
+          <div id="dayShift">
+            <h3 id="timeDays">Days</h3>
+            <div id="tblDay"></div>
+            <div class="button">
+              <button class="btn" id="deleteDay">Delete</button>
+            </div>
+          </div>
+          <div class="spacer"></div>
+          <div class="spacer"></div>
+
+          <div id="aftShift">
+            <h3 id="timeAfts">Afts</h3>
+            <div id="tblAft"></div>
+            <div class="button">
+              <button class="btn" id="deleteAft">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../scripts/manpower.js"></script>
+  </body>
+</html>

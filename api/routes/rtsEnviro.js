@@ -62,7 +62,6 @@ router.delete('/:name', (req, res) => {
 
 router.post('/token', (req, res) => {
   let username = req.session.user.username;
-
   res.status(200).json({ key: `${process.env.TOKEN}`, user: username });
 });
 

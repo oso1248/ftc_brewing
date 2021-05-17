@@ -9,11 +9,9 @@ exports.seed = function (knex) {
     .then(() => {
       return knex('mtx_sac_supr').del();
     })
-
     .then(() => {
       return knex('mtx_material').del();
     })
-
     .then(() => {
       return knex('mtx_material').insert(data.mtx_material);
     })

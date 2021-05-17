@@ -6,6 +6,7 @@ const router = express.Router();
 
 //brw
 router.post('/brw', (req, res) => {
+  req.body.updated_by = req.session.user.username;
   db.addBrw(req.body)
     .then((data) => {
       res.status(200).json(data);
@@ -35,6 +36,7 @@ router.post('/brw/name', (req, res) => {
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
 router.patch('/brw/:name', (req, res) => {
+  req.body.updated_by = req.session.user.username;
   db.changeBrw(req.params.name, req.body)
     .then((data) => {
       if (data) {
@@ -104,6 +106,7 @@ router.post('/brw/get/sac', (req, res) => {
 
 //fin
 router.post('/fin', (req, res) => {
+  req.body.updated_by = req.session.user.username;
   db.addFin(req.body)
     .then((data) => {
       res.status(200).json(data);
@@ -133,6 +136,7 @@ router.post('/fin/get/name', (req, res) => {
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
 router.patch('/fin/:name', (req, res) => {
+  req.body.updated_by = req.session.user.username;
   db.changeFin(req.params.name, req.body)
     .then((data) => {
       if (data) {
@@ -179,6 +183,7 @@ router.post('/fin/ingredient/brand/get', (req, res) => {
 
 //pck
 router.post('/pck', (req, res) => {
+  req.body.updated_by = req.session.user.username;
   db.addPck(req.body)
     .then((data) => {
       res.status(200).json(data);
@@ -208,6 +213,7 @@ router.post('/pck/get/name', (req, res) => {
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
 router.patch('/pck/:name', (req, res) => {
+  req.body.updated_by = req.session.user.username;
   db.changePck(req.params.name, req.body)
     .then((data) => {
       if (data) {

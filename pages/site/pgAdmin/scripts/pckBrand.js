@@ -49,7 +49,7 @@ function add() {
   let dropDown = document.getElementById('fin_id');
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Fin Brand</option>`;
   api = '/api/brand/fin/get';
-  title = 'brndFin';
+  title = 'brand_fin';
   createList(api, dropDown, title);
 }
 document.getElementById('btnAddClear').addEventListener('click', (ev) => {
@@ -63,8 +63,8 @@ async function sendAdd(ev) {
 
   var form = document.getElementById('frmAdd');
   let data = {};
-  let i;
-  for (i = 0; i < form.length - 2; i++) {
+
+  for (let i = 0; i < form.length - 2; i++) {
     let id = form.elements[i].id;
     let name = form.elements[i].value.toProperCase();
     if (id == 'fin_id') {
@@ -80,7 +80,8 @@ async function sendAdd(ev) {
     axios
       .post('/api/brand/pck', data)
       .then((data) => {
-        alert(data.data.brndPck + ' has been added');
+        console.log(data.data);
+        alert(`${data.data[0].brand} Has Been Added`);
       })
       .catch((err) => alert(err));
   } else {
@@ -95,7 +96,7 @@ async function validateAdd(data) {
   let failures = [];
   let name = data.brand;
   if (!data.brand) {
-    failures.push({ input: 'brand', msg: 'Taken' });
+    failures.push({ input: 'brand', msg: 'Required' });
   } else {
     let query = '/api/brand/pck/get/name';
     let res = await axios.post(query, { name: name }).catch((err) => console.log(err));
@@ -131,13 +132,13 @@ function update() {
   let dropDown = document.getElementsByName('updatePckBrnd')[0];
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Pck Brand</option>`;
   let api = '/api/brand/pck/get';
-  let title = 'brndPck';
+  let title = 'brand_pck';
   createList(api, dropDown, title);
 
   dropDown = document.getElementsByName('updateFinBrnd')[0];
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Fin Brand</option>`;
   api = '/api/brand/fin/get';
-  title = 'brndFin';
+  title = 'brand_fin';
   createList(api, dropDown, title);
 }
 document.getElementById('btnUpdateClear').addEventListener('click', (ev) => {
@@ -148,11 +149,14 @@ document.getElementsByName('updatePckBrnd')[0].addEventListener('change', select
 function selectBrand() {
   let brand = document.getElementsByName('updatePckBrnd')[0].value;
 
-  axios.post('/api/brand/pck/get/name', { name: brand }).then((data) => {
-    document.getElementsByName('updateFinBrnd')[0].value = data.data.brndFin;
-    document.getElementsByName('updateActive')[0].value = data.data.active;
-    document.getElementsByName('updateNote')[0].value = data.data.note;
-  });
+  axios
+    .post('/api/brand/pck/get/name', { name: brand })
+    .then((data) => {
+      document.getElementsByName('updateFinBrnd')[0].value = data.data[0].brand_fin;
+      document.getElementsByName('updateActive')[0].value = data.data[0].active;
+      document.getElementsByName('updateNote')[0].value = data.data[0].note;
+    })
+    .catch((err) => alert(err));
 }
 document.getElementById('btnUpdateSubmit').addEventListener('click', sendUpdate);
 async function sendUpdate(ev) {
@@ -174,7 +178,7 @@ async function sendUpdate(ev) {
     axios
       .patch('/api/brand/pck/' + brand, data)
       .then((data) => {
-        alert(data.data.brndPck + ' has been updated');
+        alert(`${data.data[0].brand} Has Been Updated`);
         document.getElementById('frmUpdate').reset();
       })
       .catch((err) => alert(err));
@@ -222,18 +226,20 @@ function view() {
       let tableData = res.data;
       brandTable = new Tabulator('#list', {
         resizableColumns: false,
-        height: '309px',
+        height: '100%',
         layout: 'fitDataFill',
         responsiveLayoutCollapseStartOpen: false,
         data: tableData,
         columns: [
-          { title: 'Pck Brand', field: 'brndPck', hozAlign: 'center', frozen: true },
-          { title: 'Active', field: 'active', hozAlign: 'center' },
-          { title: 'Fin Brand', field: 'brndFin', hozAlign: 'center' },
-          { title: 'Brw Brand', field: 'brndBrw', hozAlign: 'center' },
-          { title: 'Note', field: 'note', hozAlign: 'left' },
+          { title: 'Pck Brand', field: 'brand_pck', hozAlign: 'left', frozen: true },
+          { title: 'Active', field: 'active', hozAlign: 'left' },
+          { title: 'Updated', field: 'updated_at', hozAlign: 'left' },
+          { title: 'Updated By', field: 'updated_by', hozAlign: 'left' },
+          { title: 'Fin Brand', field: 'brand_fin', hozAlign: 'left' },
+          { title: 'Brw Brand', field: 'brand_brw', hozAlign: 'left' },
+          { title: 'Note', field: 'note', hozAlign: 'left', formatter: 'textarea' },
         ],
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => alert(err));
 }

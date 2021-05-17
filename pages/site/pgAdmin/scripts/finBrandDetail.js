@@ -34,7 +34,7 @@ function updateView() {
 
   let dropDown = document.getElementById('brwBrandUpdate');
   let api = '/api/brand/fin/get/';
-  let title = 'brndFin';
+  let title = 'brand_fin';
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Finishing Brand</option>`;
   createListBrwBrand(api, dropDown, title);
 }
@@ -384,7 +384,7 @@ function viewView() {
   document.getElementById('viewLineageBox').style.display = 'none';
 
   let api = '/api/brand/fin/get/';
-  let title = 'brndFin';
+  let title = 'brand_fin';
   let dropDown = document.getElementById('brwBrandView');
   dropDown.innerHTML = `<option value="" disabled selected hidden>Select Finishing Brand</option>`;
   createListBrwBrand(api, dropDown, title);

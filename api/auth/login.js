@@ -29,7 +29,7 @@ router.post('/login', (req, res) => {
           username: user.username,
           permissions: user.permissions,
         };
-
+        console.log(`\n\n logged in \n\n`);
         res.status(200).json({ msg: 'pass', permissions: req.session.user.permissions });
       } else {
         res.status(400).json({ msg: 'invalid credentials' });

@@ -39,7 +39,7 @@ function login(ev) {
     .then((data) => {
       let { msg, permissions } = data;
       if (msg === 'pass') {
-        setCookie('perm', permissions, '4321', '/');
+        // setCookie('perm', permissions, '4321', '/');
         window.location.href = '../index.html';
       } else {
         alert('Invalid username or password');

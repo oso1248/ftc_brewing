@@ -1,5 +1,3 @@
-// const perm5 = require('../../../api/auth/perm5');
-
 function setCookie(cookieName, cookieValue, hoursToExpire, path, domain) {
   let date = new Date();
   date.setTime(date.getTime() + hoursToExpire * 60 * 60 * 1000);
@@ -27,11 +25,8 @@ async function logout() {
             cache.delete('/pgAdmin/admin.html');
             cache.delete('/pgMaterials/material.html');
           });
-        alert(getCookie('perm'));
         deleteCookie('BudApp');
         deleteCookie('perm');
-        // document.cookie = 'BudApp=; Max-Age=-99999999;';
-        // document.cookie = 'perm=; Max-Age=-99999999;';
         window.location.replace('/login.html');
         return;
       } else if (window.location != '/login.html') {
@@ -46,7 +41,6 @@ async function logout() {
           });
         deleteCookie('BudApp');
         deleteCookie('perm');
-        // document.cookie = 'BudApp=; Max-Age=-99999999;';
         window.location.replace('/login.html');
         return;
       } else {
@@ -61,7 +55,6 @@ async function logout() {
           });
         deleteCookie('BudApp');
         deleteCookie('perm');
-        // document.cookie = 'BudApp=; Max-Age=-99999999;';
         window.location.replace('/login.html');
       }
     })
@@ -78,25 +71,21 @@ let perm2brw = document.getElementById('perm2brw');
 let perm2fin = document.getElementById('perm2fin');
 
 if (perm >= 5 && perm5 && perm4 && perm3 && perm2brw && perm2fin) {
-  console.log('5');
   perm5.style.display = 'block';
   perm4.style.display = 'block';
   perm3.style.display = 'block';
   perm2brw.style.display = 'block';
   perm2fin.style.display = 'block';
 } else if (perm >= 4 && perm4 && perm3 && perm2brw && perm2fin) {
-  console.log('4');
   perm4.style.display = 'block';
   perm3.style.display = 'block';
   perm2brw.style.display = 'block';
   perm2fin.style.display = 'block';
 } else if (perm >= 3 && perm3 && perm2brw && perm2fin) {
-  console.log('3');
   perm3.style.display = 'block';
   perm2brw.style.display = 'block';
   perm2fin.style.display = 'block';
 } else if (perm >= 2 && perm2brw && perm2fin) {
-  console.log('2');
   perm2brw.style.display = 'block';
   perm2fin.style.display = 'block';
 }

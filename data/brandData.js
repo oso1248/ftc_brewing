@@ -1017,7 +1017,7 @@ const acx_pre = [
   },
 ];
 
-methods_cold = [
+const methods_cold = [
   { method: 'Yes', object: 'yn' },
   { method: 'No', object: 'yn' },
   { method: 'NA', object: 'yn' },

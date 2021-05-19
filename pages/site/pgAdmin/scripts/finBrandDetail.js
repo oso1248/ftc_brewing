@@ -57,12 +57,12 @@ async function selectUpdate() {
   let methods = await method();
   await updateBrandLineage();
   let data = tableUpdateBrandLineage.getData()[0];
-  await updateFinDetailPreCsx(data.brndBrw, methods);
-  await updateFinDetailPostCsx(data.brndBrw, methods);
-  await updateFinDetailPreFil(data.brndFin, methods);
-  await updateFinDetailPostFil(data.brndFin, methods);
-  await updateFinDetailPreRel(data.brndFin, methods);
-  await updateFinDetailPostRel(data.brndFin, methods);
+  await updateFinDetailPreCsx(data.brand_brw, methods);
+  await updateFinDetailPostCsx(data.brand_brw, methods);
+  await updateFinDetailPreFil(data.brand_fin, methods);
+  await updateFinDetailPostFil(data.brand_fin, methods);
+  await updateFinDetailPreRel(data.brand_fin, methods);
+  await updateFinDetailPostRel(data.brand_fin, methods);
 }
 async function method() {
   let res = await axios
@@ -84,17 +84,19 @@ async function updateBrandLineage() {
   await axios
     .post('/api/brand/fin/get/name', { name: name })
     .then((res) => {
-      let tableData = [res.data];
+      let tableData = [res.data[0]];
       tableUpdateBrandLineage = new Tabulator('#updateLineageTable', {
         height: '100%',
         layout: 'fitDataFill',
         resizableColumns: true,
         data: tableData,
         columns: [
-          { title: 'Schoene', field: 'brndBrw', hozAlign: 'center', frozen: true },
-          { title: 'Finished', field: 'brndFin', hozAlign: 'center' },
-          { title: 'Package', field: 'brndPck', hozAlign: 'center' },
-          { title: 'Active', field: 'active', hozAlign: 'left' },
+          { title: 'Schoene', field: 'brand_brw', hozAlign: 'left', frozen: true },
+          { title: 'Active', field: 'act_brw', hozAlign: 'left' },
+          { title: 'Finished', field: 'brand_fin', hozAlign: 'left' },
+          { title: 'Active', field: 'act_fin', hozAlign: 'left' },
+          { title: 'Package', field: 'brand_pck', hozAlign: 'left' },
+          { title: 'Active', field: 'act_pck', hozAlign: 'left' },
         ],
       });
     })
@@ -200,6 +202,7 @@ async function updateFinDetailPreFil(name, method) {
     .post('/api/brand/detail/filpre', { name: name })
     .then((res) => {
       let data = res.data;
+      console.table(data);
       let tableData = data;
       tableUpdateFinDetailPreFil = new Tabulator('#updateFinDetailPreFilTable', {
         height: '100%',

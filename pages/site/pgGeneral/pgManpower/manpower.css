@@ -4,7 +4,7 @@
   grid-template-columns: repeat(3, 1fr);
 }
 .table {
-  margin-top: 50px;
+  margin-top: 20px;
   display: block;
 }
 

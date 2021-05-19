@@ -5,8 +5,8 @@ Array.prototype.sample = function () {
   return this[Math.floor(Math.random() * this.length)];
 };
 
-const brw1 = ['BG10', 'BH50', 'PT90'];
-const brw2 = ['NL50', 'EL20', 'GI19'];
+const brw1 = ['BB10', 'BC10', 'BD10'];
+const brw2 = ['BE10', 'BF10', 'BG10'];
 
 function getBrews(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;

@@ -1,6 +1,11 @@
 let DateTime = luxon.DateTime;
 let timeNow;
 
+function getCookie(cookieName) {
+  var cookieValue = document.cookie.match('(^|;)\\s*' + cookieName + '\\s*=\\s*([^;]+)');
+  return cookieValue ? cookieValue.pop() : '';
+}
+
 // on window load
 async function reload() {
   let timeKeeper = document.getElementById('time');
@@ -31,7 +36,7 @@ function loadManpower1() {
       man1 = new Tabulator('#manpower1', {
         resizableColumns: false,
         height: '100%',
-        layout: 'fitColumns',
+        layout: 'fitDataStretch',
         data: tableData,
         columns: [
           { title: 'Brewer', field: 'brewer', hozAlign: 'left', frozen: true },
@@ -61,7 +66,7 @@ function loadManpower2() {
       man2 = new Tabulator('#manpower2', {
         resizableColumns: false,
         height: '100%',
-        layout: 'fitColumns',
+        layout: 'fitDataStretch',
         data: tableData,
         columns: [
           { title: 'Brewer', field: 'brewer', hozAlign: 'left', frozen: true },
@@ -91,7 +96,7 @@ function loadManpower3() {
       man3 = new Tabulator('#manpower3', {
         resizableColumns: false,
         height: '100%',
-        layout: 'fitColumns',
+        layout: 'fitDataStretch',
         data: tableData,
         columns: [
           { title: 'Brewer', field: 'brewer', hozAlign: 'left', frozen: true },

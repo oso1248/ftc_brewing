@@ -2,108 +2,57 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <meta
-      name="viewport"
-      content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height"
-    />
+
+    <meta name="viewport" content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height" />
     <title>Weekly Inv</title>
 
-    <link
-      href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css"
-      rel="stylesheet"
-    />
-    <script
-      type="text/javascript"
-      src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"
-    ></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
-    <script src="https://dmla.github.io/jsqrcode/src/qr_packed.js"></script>
+    <script type="text/javascript" src="../../dist/xlsx.min.js"></script>
+    <link href="../../dist/tabulator.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../dist/tabulator.min.js"></script>
+    <script src="../../dist/luxon.min.js"></script>
+    <script src="../../dist/axios.min.js"></script>
+    <script src="../../dist/qr_packed.min.js"></script>
 
     <link rel="stylesheet" href="../../commonCSS/styles.css" />
     <link rel="stylesheet" href="../styles/invMaterial.css" />
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <nav class="main-nav">
       <ul class="">
-        <!-- <li><a id="btnBack" href="./invMaterialMain.html">Back</a></li> -->
         <li><a id="btnBack">Back</a></li>
         <li>
-          <label id="scanner" class="qrcode-text-btn"
-            ><a>Scan</a
-            ><input
-              type="file"
-              accept="image/*"
-              capture="environment"
-              onchange="openQRCamera(this);"
-              tabindex="-1"
-          /></label>
+          <label id="scanner" class="qrcode-text-btn"><a>Scan</a><input type="file" accept="image/*" capture="environment" onchange="openQRCamera(this);" tabindex="-1" /></label>
         </li>
       </ul>
     </nav>
 
-    <div class="qrhead">
-      <!-- <input id="comm" type=text size=16 placeholder="Commodity" class=qrcode-text> -->
-    </div>
+    <div class="qrhead"></div>
 
     <div class="container2">
       <form class="form" id="frmAdd" action="">
         <h3>Add to Inventory</h3>
         <div class="input">
-          <select name="addCommodity" id="com_id">
-            <!-- appended here  -->
-          </select>
+          <select name="addCommodity" id="com_id"></select>
         </div>
         <div class="tooltip input">
           <span class="tooltiptext">Per Pallet</span>
-          <input
-            type="number"
-            name="addPerPallet"
-            id="per_pallet"
-            placeholder="Per Pallet"
-          />
+          <input type="number" name="addPerPallet" id="per_pallet" placeholder="Per Pallet" />
         </div>
         <div class="tooltip input">
           <span class="tooltiptext">Pallet Count</span>
-          <input
-            type="number"
-            name="addPerPallet"
-            id="pallets"
-            placeholder="Pallets"
-          />
+          <input type="number" name="addPerPallet" id="pallets" placeholder="Pallets" />
         </div>
         <div class="tooltip input">
           <span class="tooltiptext">UOM Per Unit</span>
-          <input
-            type="number"
-            name="addUnitTotal"
-            id="total_per_unit"
-            placeholder="Unit Total"
-          />
+          <input type="number" name="addUnitTotal" id="total_per_unit" placeholder="Unit Total" />
         </div>
         <div class="tooltip input">
           <span class="tooltiptext">Individual Count</span>
-          <input
-            type="number"
-            name="addCount"
-            id="total_count"
-            placeholder="Count"
-          />
+          <input type="number" name="addCount" id="total_count" placeholder="Count" />
         </div>
-        <!-- <div class="tooltip input">
-      <span class="tooltiptext">End Count</span>
-      <input type="text" name="addEnd" id="total_end" Placeholder="End Count">
-    </div> -->
+
         <div class="input">
-          <textarea
-            name="updateNote"
-            id="note"
-            cols="21"
-            rows="5"
-            placeholder="Note"
-          ></textarea>
+          <textarea name="updateNote" id="note" cols="21" rows="5" placeholder="Note"></textarea>
         </div>
 
         <div class="button">

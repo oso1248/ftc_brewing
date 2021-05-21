@@ -202,7 +202,6 @@ async function updateFinDetailPreFil(name, method) {
     .post('/api/brand/detail/filpre', { name: name })
     .then((res) => {
       let data = res.data;
-      console.table(data);
       let tableData = data;
       tableUpdateFinDetailPreFil = new Tabulator('#updateFinDetailPreFilTable', {
         height: '100%',
@@ -411,12 +410,12 @@ async function selectView() {
 
   await viewBrandLineage();
   let data = tableViewBrandLineage.getData()[0];
-  await viewFinDetailPreCsx(data.brndBrw);
-  await viewFinDetailPostCsx(data.brndBrw);
-  await viewFinDetailPreFil(data.brndFin);
-  await viewFinDetailPostFil(data.brndFin);
-  await viewFinDetailPreRel(data.brndFin);
-  await viewFinDetailPostRel(data.brndFin);
+  await viewFinDetailPreCsx(data.brand_brw);
+  await viewFinDetailPostCsx(data.brand_brw);
+  await viewFinDetailPreFil(data.brand_fin);
+  await viewFinDetailPostFil(data.brand_fin);
+  await viewFinDetailPreRel(data.brand_fin);
+  await viewFinDetailPostRel(data.brand_fin);
 }
 let tableViewBrandLineage;
 async function viewBrandLineage() {
@@ -424,17 +423,19 @@ async function viewBrandLineage() {
   await axios
     .post('/api/brand/fin/get/name', { name: name })
     .then((res) => {
-      let tableData = [res.data];
+      let tableData = [res.data[0]];
       tableViewBrandLineage = new Tabulator('#viewLineageTable', {
         height: '100%',
         layout: 'fitDataFill',
         resizableColumns: true,
         data: tableData,
         columns: [
-          { title: 'Schoene', field: 'brndBrw', hozAlign: 'left', frozen: true },
-          { title: 'Finished', field: 'brndFin', hozAlign: 'left' },
-          { title: 'Package', field: 'brndPck', hozAlign: 'left' },
-          { title: 'Active', field: 'active', hozAlign: 'left' },
+          { title: 'Schoene', field: 'brand_brw', hozAlign: 'left', frozen: true },
+          { title: 'Active', field: 'act_brw', hozAlign: 'left' },
+          { title: 'Finished', field: 'brand_fin', hozAlign: 'left' },
+          { title: 'Active', field: 'act_fin', hozAlign: 'left' },
+          { title: 'Package', field: 'brand_pck', hozAlign: 'left' },
+          { title: 'Active', field: 'act_pck', hozAlign: 'left' },
         ],
       });
     })

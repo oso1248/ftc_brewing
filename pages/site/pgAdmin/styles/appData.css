@@ -1,0 +1,75 @@
+:root {
+  --primary: #e0c190;
+  --dark: #634e2c;
+  --light: #f5e5cb;
+  --background: #e8dac3;
+  --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
+  --button: cornflowerblue;
+  --buttonHover: #3e8e41;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  box-sizing: border-box;
+  color: var(--dark);
+  font-family: helvetica;
+}
+body {
+  background: var(--background);
+  padding: 25px;
+}
+
+.form {
+  width: 20rem;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+
+.formElements {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.formButtons {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 0.5rem;
+}
+.form input,
+select,
+option {
+  text-align: center;
+  font-size: 1.25rem;
+  height: 1.75rem;
+  text-align-last: center;
+  border-radius: 10px;
+}
+
+.form textarea {
+  text-align: center;
+  font-size: 1.25rem;
+  height: 8rem;
+  text-align-last: center;
+  border-radius: 10px;
+}
+
+.formButtons button {
+  background-color: var(--button);
+  border: 1px solid green;
+  color: white;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  height: 1.5rem;
+}
+
+.formButtons button:hover {
+  background-color: var(--buttonHover);
+}
+
+.paragraph {
+  margin: 0 auto;
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width, height=device-height" />
+    <title>Users</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+    <link href="../../dist/tabulator.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../dist/tabulator.min.js"></script>
+    <script src="../../dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../styles/appData.css" />
+  </head>
+  <body>
+    <section>
+      <p class="paragraph">WARNING: Only use this button on the initial start up of the database.</p>
+      <p class="paragraph">REQUIRED: Correctly laid out excel workbook.</p>
+
+      <form class="form">
+        <div class="formButtons">
+          <input class="imput" id="upload" type="file" name="files[]" accept=".xlsm, .xls, .xlsx" hidden />
+          <button class="btn" onclick="event.preventDefault();document.getElementById('upload').click()">Choose File</button>
+        </div>
+      </form>
+    </section>
+    <script src="../scripts/appData.js"></script>
+  </body>
+</html>

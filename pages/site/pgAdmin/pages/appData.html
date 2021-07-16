@@ -19,9 +19,19 @@
       <form class="form">
         <div class="formButtons">
           <input class="imput" id="upload" type="file" name="files[]" accept=".xlsm, .xls, .xlsx" hidden />
-          <button class="btn" onclick="event.preventDefault();document.getElementById('upload').click()">Choose File</button>
+          <button class="btn" id="chooseFile" onclick="event.preventDefault();document.getElementById('upload').click()">Choose File</button>
+          <button class="btn" id="sendSuppliers">Upload Suppliers</button>
+          <button class="btn" id="sendCommodities">Upload Commodities</button>
+          <button class="btn" id="sendBrwBrands">Upload Brew Brands</button>
+          <button class="btn" id="sendFinBrands">Upload Fin Brands</button>
+          <button class="btn" id="sendPackBrands">Upload Pack Brands</button>
+          <button class="btn" id="sendStandardHops">Upload Standard Hops</button>
+          <button class="btn" id="sendDryHops">Upload Dry Hops</button>
+          <button class="btn" id="sendSuperSacks">Upload Super Sacks</button>
+          <button class="btn" id="goHome">Home</button>
         </div>
       </form>
+      <h1 id="endMessage">All Done</h1>
     </section>
     <script src="../scripts/appData.js"></script>
   </body>

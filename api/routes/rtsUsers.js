@@ -13,6 +13,7 @@ router.post('/', (req, res) => {
     .catch((err) => res.status(500).json({ msg: err.detail }));
 });
 router.post('/get', (req, res) => {
+  console.log(`get`);
   db.getAll()
     .then((data) => {
       if (data) {

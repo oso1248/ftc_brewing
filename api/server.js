@@ -27,6 +27,7 @@ const vesselRouter = require('./routes/rtsVessel');
 const hibernateRouter = require('./routes/rtsHibernate');
 const craftRouter = require('./routes/rtsCraftInv');
 const projectionRouter = require('./routes/rtsProjection');
+const startupRouter = require('./routes/rtsAppData');
 
 server.use(express.json());
 server.use(cookie.sessionConfig);
@@ -54,5 +55,6 @@ server.use('/api/vessel', vesselRouter);
 server.use('/api/hibernate', hibernateRouter);
 server.use('/api/craft', craftRouter);
 server.use('/api/project', projectionRouter);
+server.use('/api/startup', startupRouter);
 
 module.exports = server;
